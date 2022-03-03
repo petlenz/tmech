@@ -39,7 +39,7 @@ Basis rearrangement
 General basis rearrangement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 .. _basis_change-func-ref:
-.. doxygenfunction:: basis_change(_Tensor &&)
+.. doxygenfunction:: template<typename _Sequence, typename _Tensor, typename, typename> constexpr auto basis_change(_Tensor &&__tensor)
    :project: tmech
 
 .. _basis_change-func-ref:
