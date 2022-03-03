@@ -1,3 +1,16 @@
+// Copyright 2022 Peter Lenz
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ------------------------------------------------------------------------
 #ifndef REAL_CONSTANT_BONES_H
 #define REAL_CONSTANT_BONES_H
 
@@ -8,43 +21,28 @@ class real : public variable_base<real<_T, _L, _R, _Exp>>
 public:
     using data_type = _T;
 
-    real(){
-        std::stringstream strout;
-        strout << "0." << _L << _R << "e" << _Exp;
-        strout >> _value;
-    }
+    real();
 
-    real(real const& data):
-        _value(data._value)
-    {}
+    real(real const& __data);
 
     template<typename _Data>
-    constexpr inline auto& operator()(_Data const& __data) const{
-        return get_value(__data);
-    }
+    constexpr inline auto& operator()(_Data const& __data) const;
 
-    inline std::string get_string()const{
-        return std::to_string(_value);
-    }
+    inline std::string get_string()const;
 
-    constexpr inline std::ostream& print(std::ostream & os)const{
-        os<<_value;
-        return os;
-    }
+    constexpr inline std::ostream& print(std::ostream & __os)const;
 
     template<typename _Data>
-    auto value(_Data) = delete;
+    constexpr inline auto value(_Data) = delete;
 
     template<typename _Data>
-    auto update(_Data) = delete;
+    constexpr inline auto update(_Data) = delete;
 
-    auto reset() = delete;
+    constexpr inline auto reset() = delete;
 
 private:
     template<typename _Data>
-    constexpr inline auto const& get_value(_Data const& /*__data*/)const{
-        return _value;
-    }
+    constexpr inline auto const& get_value(_Data const& /*__data*/)const;
 
     data_type _value;
 };

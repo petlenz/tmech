@@ -11,44 +11,48 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // ------------------------------------------------------------------------
-#ifndef NEGATIVE_BONES_H
-#define NEGATIVE_BONES_H
+#ifndef FUNCTION_WRAPPER_BONES_H
+#define FUNCTION_WRAPPER_BONES_H
 
 namespace detail {
 
-template<typename _Expr>
-class negative : public variable_base<negative<_Expr>>
+template <typename _Expr, typename _Func>
+class function_wrapper : public variable_base<function_wrapper<_Expr, _Func>>
 {
-    friend class variable_base<negative<_Expr>>;
+    friend class variable_base<function_wrapper<_Expr, _Func>>;
 public:
-    using data_type = typename _Expr::data_type;
+    using data_type = decltype (_Func::apply(typename _Expr::data_type()));
 
-    negative();
+    explicit function_wrapper();
 
-    template<typename _Data>
-    constexpr inline auto operator()(_Data const& __data);
+    template<typename Data>
+    constexpr inline auto const& operator()(Data const& __data);
 
     constexpr inline std::ostream& print(std::ostream & __os)const;
 
     template<typename _Data>
-    constexpr inline  auto value(_Data) = delete;
+    auto value(_Data) = delete;
 
     template<typename _Data>
-    constexpr inline  auto update(_Data) = delete;
+    auto update(_Data) = delete;
 
-    constexpr inline  auto reset() = delete;
+    auto reset() = delete;
 
 private:
-    template<typename _Data>
-    constexpr inline auto get_value(_Data const& __data);
-
     template<typename _Data>
     constexpr inline auto update_imp(_Data const& __data);
 
     constexpr inline auto reset_imp();
 
+    template<typename _Data>
+    constexpr inline auto const& get_value(_Data const& __data)const;
+
+    static data_type _value;
     _Expr _expr;
 };
 
+template <typename _Expr, typename _Func>
+typename function_wrapper<_Expr, _Func>::data_type function_wrapper<_Expr, _Func>::_value;
+
 }
-#endif // NEGATIVE_BONES_H
+#endif // FUNCTION_WRAPPER_BONES_H

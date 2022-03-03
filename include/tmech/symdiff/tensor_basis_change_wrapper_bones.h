@@ -1,3 +1,16 @@
+// Copyright 2022 Peter Lenz
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ------------------------------------------------------------------------
 #ifndef TENSOR_BASIS_CHANGE_WRAPPER_BONES_H
 #define TENSOR_BASIS_CHANGE_WRAPPER_BONES_H
 
@@ -15,71 +28,39 @@ public:
     static_assert (detail::is_tensor<typename _Expr::data_type>::value,
     "tensor_basis_change_wrapper: expression data_type is not a tensor");
 
-    constexpr tensor_basis_change_wrapper() {}
+    constexpr tensor_basis_change_wrapper();
 
     template<typename Data>
-    constexpr inline auto operator()(Data const& x){
-        reset_imp();
-        update_imp(x);
-        return get_value(x);
-    }
+    constexpr inline auto operator()(Data const& __data);
 
-    constexpr inline std::ostream& print(std::ostream & os)const{
-        if constexpr (std::is_same_v<_Sequence, tmech::sequence<2,1>> && tensor_info_lhs::rank() == 2){
-            print_trans(os);
-        }else{
-            print_general(os);
-        }
-        return os;
-    }
+    constexpr inline std::ostream& print(std::ostream & __data)const;
 
     template<typename _Data>
-    auto value(_Data) = delete;
+    constexpr inline auto value(_Data) = delete;
 
     template<typename _Data>
-    auto update(_Data) = delete;
+    constexpr inline auto update(_Data) = delete;
 
-    auto reset() = delete;
+    constexpr inline auto reset() = delete;
 
 private:
     template<typename _Data>
-    constexpr inline auto get_value(_Data const& x)const{
-        return tmech::basis_change<_Sequence>(static_cast<const variable_base<_Expr>&>(_expr).value(x));
-    }
+    constexpr inline auto get_value(_Data const& __data)const;
 
     template<typename _Data>
-    constexpr inline auto update_imp(_Data const& x){
-        static_cast<variable_base<_Expr>&>(_expr).update(x);
-    }
+    constexpr inline auto update_imp(_Data const& __data);
 
-    constexpr inline auto reset_imp(){
-        static_cast<variable_base<_Expr>&>(_expr).reset();
-    }
+    constexpr inline auto reset_imp();
 
-    constexpr inline auto print_trans(std::ostream & os)const{
-        os<<"trans(";
-        _expr.print(os);
-        os<<")";
-    }
+    constexpr inline auto print_trans(std::ostream & __os)const;
 
-    constexpr inline auto print_general(std::ostream & os)const{
-        os<<"basis_change<";
-        print_sequence(os, _Sequence());
-        os<<">(";
-        _expr.print(os);
-        os<<")";
-    }
+    constexpr inline auto print_general(std::ostream & __os)const;
 
-    template<std::size_t First, std::size_t ...Numbers>
-    static constexpr auto print_sequence(std::ostream & os, tmech::sequence<First, Numbers...>){
-        os<<First<<",";
-        print_sequence(os, tmech::sequence<Numbers...>());
-    }
+    template<std::size_t _First, std::size_t ..._Numbers>
+    static constexpr auto print_sequence(std::ostream & __os, tmech::sequence<_First, _Numbers...>);
 
-    template<std::size_t Last>
-    static constexpr auto print_sequence(std::ostream & os, tmech::sequence<Last>){
-        os<<Last;
-    }
+    template<std::size_t _Last>
+    static constexpr auto print_sequence(std::ostream & __os, tmech::sequence<_Last>);
 
     _Expr _expr;
 };

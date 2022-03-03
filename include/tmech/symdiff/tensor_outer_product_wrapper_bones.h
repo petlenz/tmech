@@ -1,3 +1,16 @@
+// Copyright 2022 Peter Lenz
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ------------------------------------------------------------------------
 #ifndef TENSOR_OUTER_PRODUCT_WRAPPER_BONES_H
 #define TENSOR_OUTER_PRODUCT_WRAPPER_BONES_H
 
@@ -20,100 +33,43 @@ public:
     static_assert (detail::is_tensor<typename _ExprRHS::data_type>::value,
     "tensor_outer_product_wrapper: rhs expression data type is not a tensor");
 
-    tensor_outer_product_wrapper() {}
-
-    template<typename Data>
-    constexpr inline auto operator()(Data const& x){
-        reset_imp();
-        update_imp(x);
-        return get_value(x);
-    }
-
-    constexpr inline std::ostream& print(std::ostream & os)const{
-        if constexpr (std::is_same_v<_SeqLHS, tmech::sequence<1,2>> && std::is_same_v<_SeqRHS, tmech::sequence<3,4>>){
-            print_otimes(os);
-        }else if constexpr (std::is_same_v<_SeqLHS, tmech::sequence<1,3>> && std::is_same_v<_SeqRHS, tmech::sequence<2,4>>){
-            print_otimesu(os);
-        }else if constexpr (std::is_same_v<_SeqLHS, tmech::sequence<1,4>> && std::is_same_v<_SeqRHS, tmech::sequence<2,3>>){
-            print_otimesl(os);
-        }else{
-            print_general(os);
-        }
-        return os;
-    }
+    tensor_outer_product_wrapper();
 
     template<typename _Data>
-    auto value(_Data) = delete;
+    constexpr inline auto operator()(_Data const& __x);
+
+    constexpr inline std::ostream& print(std::ostream & __os)const;
 
     template<typename _Data>
-    auto update(_Data) = delete;
+    constexpr auto value(_Data) = delete;
 
-    auto reset() = delete;
+    template<typename _Data>
+    constexpr auto update(_Data) = delete;
+
+    constexpr auto reset() = delete;
 
 private:
     template<typename _Data>
-    constexpr inline auto get_value(_Data const& __data)const{
-        return tmech::outer_product<_SeqLHS, _SeqRHS>(static_cast<const variable_base<_ExprLHS>&>(_lhs).value(__data),
-                                                      static_cast<const variable_base<_ExprRHS>&>(_rhs).value(__data));
-    }
+    constexpr inline auto get_value(_Data const& __data)const;
 
     template<typename _Data>
-    constexpr inline auto update_imp(_Data const& __data){
-        static_cast<variable_base<_ExprLHS>&>(_lhs).update(__data);
-        static_cast<variable_base<_ExprRHS>&>(_rhs).update(__data);
-    }
+    constexpr inline auto update_imp(_Data const& __data);
 
-    constexpr inline auto reset_imp(){
-        static_cast<variable_base<_ExprLHS>&>(_lhs).reset();
-        static_cast<variable_base<_ExprRHS>&>(_rhs).reset();
-    }
+    constexpr inline auto reset_imp();
 
-    constexpr inline auto print_general(std::ostream & os)const{
-        os<<"outer<<";
-        print_sequence(os, _SeqLHS());
-        os<<">,<";
-        print_sequence(os, _SeqRHS());
-        os<<">>(";
-        _lhs.print(os);
-        os<<", ";
-        _rhs.print(os);
-        os<<")";
-    }
+    constexpr inline auto print_general(std::ostream & __os)const;
 
-    constexpr inline auto print_otimes(std::ostream & os)const{
-        os<<"otimes(";
-        _lhs.print(os);
-        os<<", ";
-        _rhs.print(os);
-        os<<")";
-    }
+    constexpr inline auto print_otimes(std::ostream & __os)const;
 
-    constexpr inline auto print_otimesu(std::ostream & os)const{
-        os<<"otimesu(";
-        _lhs.print(os);
-        os<<", ";
-        _rhs.print(os);
-        os<<")";
-    }
+    constexpr inline auto print_otimesu(std::ostream & __os)const;
 
-    constexpr inline auto print_otimesl(std::ostream & os)const{
-        os<<"otimesl(";
-        _lhs.print(os);
-        os<<", ";
-        _rhs.print(os);
-        os<<")";
-    }
+    constexpr inline auto print_otimesl(std::ostream & __os)const;
 
     template<std::size_t First, std::size_t ...Numbers>
-    static constexpr auto print_sequence(std::ostream & os, tmech::sequence<First, Numbers...>){
-        os<<First<<",";
-        print_sequence(os, tmech::sequence<Numbers...>());
-    }
+    static constexpr auto print_sequence(std::ostream & __os, tmech::sequence<First, Numbers...>);
 
     template<std::size_t Last>
-    static constexpr auto print_sequence(std::ostream & os, tmech::sequence<Last>){
-        os<<Last;
-    }
+    static constexpr auto print_sequence(std::ostream & __os, tmech::sequence<Last>);
 
     _ExprLHS _lhs;
     _ExprRHS _rhs;

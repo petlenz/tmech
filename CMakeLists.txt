@@ -173,12 +173,17 @@ set(TMECH_SYMDIFF_HEADER
     ${TMECH_SYMDIFF_INCLUDE_DIR}/symdiff_type_traits.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/std_functions_implementation.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/std_functions_wrapper_bones.h
-    ${TMECH_SYMDIFF_INCLUDE_DIR}/function_wrapper.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/function_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/function_wrapper_meat.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/negative_bones.h
-    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_inv.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_inv_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_inv_meat.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/tmech_function_wrapper.h
-    include/tmech/symdiff/tmech_functions_forward.h
-    include/tmech/symdiff/tmech_functions_implementation.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/negative_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tmech_functions_forward.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tmech_functions_implementation.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_function_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_function_wrapper_meat.h
     )
 
 # add the library that runs

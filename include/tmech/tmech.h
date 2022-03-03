@@ -355,18 +355,23 @@ namespace symdiff {
 #include "symdiff/constant_bones.h"
 #include "symdiff/constant_meat.h"
 
-#include "symdiff/function_wrapper.h"
+#include "symdiff/function_wrapper_bones.h"
+#include "symdiff/function_wrapper_meat.h"
+
+#include "symdiff/tensor_function_wrapper_bones.h"
+#include "symdiff/tensor_function_wrapper_meat.h"
+
 
 #include "symdiff/negative_bones.h"
-
+#include "symdiff/negative_meat.h"
 #include "symdiff/tensor_outer_product_wrapper_bones.h"
 #include "symdiff/tensor_outer_product_wrapper_meat.h"
 #include "symdiff/tensor_inner_product_wrapper_bones.h"
 #include "symdiff/tensor_inner_product_wrapper_meat.h"
 #include "symdiff/tensor_basis_change_wrapper_bones.h"
 #include "symdiff/tensor_basis_change_wrapper_meat.h"
-#include "symdiff/tensor_inv.h"
-
+#include "symdiff/tensor_inv_bones.h"
+#include "symdiff/tensor_inv_meat.h"
 } // NAMESPACE SYMDIFF
 
 

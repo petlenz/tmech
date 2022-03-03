@@ -11,29 +11,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // ------------------------------------------------------------------------
-#ifndef VARIABLE_BONES_H
-#define VARIABLE_BONES_H
+#ifndef TENSOR_INV_BONES_H
+#define TENSOR_INV_BONES_H
 
+namespace detail {
 
-template <typename T, std::size_t VarID>
-class variable : public variable_base<variable<T, VarID>>
+template <typename _Expr, typename ..._Sequences>
+class inv_tensor : public variable_base<inv_tensor<_Expr, _Sequences...>>
 {
-    friend class variable_base<variable<T, VarID>>;
+    friend class variable_base<inv_tensor<_Expr, _Sequences...>>;
 public:
-    using data_type = T;
+    using data_type = typename _Expr::data_type;
 
-    constexpr variable();
+    inv_tensor();
 
-    constexpr variable(std::string const& __var_name);
-
-    constexpr variable(std::string && __var_name);
-
-    ~variable();
-
-    template<typename _Data, typename std::enable_if_t<std::tuple_size_v<_Data> != 0> * = nullptr>
-    constexpr inline auto const& operator()(_Data const& __data) const;
-
-    constexpr inline auto get_string()const;
+    template<typename _Data>
+    constexpr inline auto const& operator()(_Data const& __data);
 
     constexpr inline std::ostream& print(std::ostream & __os)const;
 
@@ -46,14 +39,22 @@ public:
     constexpr auto reset() = delete;
 
 private:
-    template<typename _Data, typename std::enable_if_t<std::tuple_size_v<_Data> != 0> * = nullptr>
+    template<typename _Data>
     constexpr inline auto const& get_value(_Data const& __data)const;
 
-    static std::string _var_name;
+    template<typename _Data>
+    constexpr inline auto update_imp(_Data const& __data);
+
+    constexpr inline auto reset_imp();
+
+    static data_type _data;
+    _Expr _expr;
 };
 
-template <typename _T, std::size_t _VarID>
-std::string variable<_T, _VarID>::_var_name{};
+template <typename _Expr, typename ..._Sequences>
+typename inv_tensor<_Expr, _Sequences...>::data_type inv_tensor<_Expr, _Sequences...>::_data;
+
+}
 
 
-#endif // VARIABLE_BONES_H
+#endif // TENSOR_INV_BONES_H

@@ -1,3 +1,16 @@
+// Copyright 2022 Peter Lenz
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ------------------------------------------------------------------------
 #ifndef TENSOR_INNER_PRODUCT_WRAPPER_BONES_H
 #define TENSOR_INNER_PRODUCT_WRAPPER_BONES_H
 
@@ -36,74 +49,37 @@ public:
     static_assert (detail::is_tensor<typename _ExprRHS::data_type>::value,
     "tensor_inner_product_wrapper: rhs expression data type is not a tensor");
 
-
-    tensor_inner_product_wrapper() {}
+    tensor_inner_product_wrapper();
 
     template<typename Data>
-    constexpr inline auto const& operator()(Data const& x){
-        reset_imp();
-        update_imp(x);
-        return get_value(x);
-    }
+    constexpr inline auto const& operator()(Data const& __data);
 
-    constexpr inline std::ostream& print(std::ostream & os)const{
-        print_general(os);
-        return os;
-    }
+    constexpr inline std::ostream& print(std::ostream & __os)const;
 
     template<typename _Data>
-    auto value(_Data) = delete;
+    constexpr inline auto value(_Data) = delete;
 
     template<typename _Data>
-    auto update(_Data) = delete;
+    constexpr inline auto update(_Data) = delete;
 
-    auto reset() = delete;
+    constexpr inline auto reset() = delete;
 
 private:
     template<typename _Data>
-    constexpr inline auto const& get_value(_Data const& x)const{
-        return _data;
-    }
+    constexpr inline auto const& get_value(_Data const& /*__data*/)const;
 
     template<typename _Data>
-    constexpr inline auto update_imp(_Data const& x){
-        static_cast<variable_base<_ExprLHS>&>(_lhs).update(x);
-        static_cast<variable_base<_ExprRHS>&>(_rhs).update(x);
-        if(!this->_update){
-            _data = tmech::inner_product<_SeqLHS, _SeqRHS>(static_cast<const variable_base<_ExprLHS>&>(_lhs).value(x),
-                                                           static_cast<const variable_base<_ExprRHS>&>(_rhs).value(x));
-            this->_update = true;
-        }
-    }
+    constexpr inline auto update_imp(_Data const& __data);
 
-    constexpr inline auto reset_imp(){
-        static_cast<variable_base<_ExprLHS>&>(_lhs).reset();
-        static_cast<variable_base<_ExprRHS>&>(_rhs).reset();
-        this->_update = false;
-    }
+    constexpr inline auto reset_imp();
 
-    constexpr inline auto print_general(std::ostream & os)const{
-        os<<"inner_product<<";
-        print_sequence(os, _SeqLHS());
-        os<<">,<";
-        print_sequence(os, _SeqRHS());
-        os<<">>(";
-        _lhs.print(os);
-        os<<", ";
-        _rhs.print(os);
-        os<<")";
-    }
+    constexpr inline auto print_general(std::ostream & __os)const;
 
-    template<std::size_t First, std::size_t ...Numbers>
-    static constexpr auto print_sequence(std::ostream & os, tmech::sequence<First, Numbers...>){
-        os<<First<<",";
-        print_sequence(os, tmech::sequence<Numbers...>());
-    }
+    template<std::size_t _First, std::size_t ..._Numbers>
+    static constexpr auto print_sequence(std::ostream & __os, tmech::sequence<_First, _Numbers...>);
 
-    template<std::size_t Last>
-    static constexpr auto print_sequence(std::ostream & os, tmech::sequence<Last>){
-        os<<Last;
-    }
+    template<std::size_t _Last>
+    static constexpr auto print_sequence(std::ostream & __os, tmech::sequence<_Last>);
 
     static data_type _data;
     _ExprLHS _lhs;
@@ -112,7 +88,8 @@ private:
 
 
 template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqRHS>
-typename tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, _SeqRHS>::data_type tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, _SeqRHS>::_data;
+typename tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, _SeqRHS>::data_type
+tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, _SeqRHS>::_data;
 }
 
 #endif // TENSOR_INNER_PRODUCT_WRAPPER_BONES_H
