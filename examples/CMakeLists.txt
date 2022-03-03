@@ -1,0 +1,12 @@
+macro(add_tmech_example TARGET_NAME)
+    add_executable(${TARGET_NAME} ${ARGN})
+    target_link_libraries(${TARGET_NAME} PRIVATE tmech)
+    #maybe_target_pedantic_warnings(${TARGET_NAME})
+endmacro()
+
+add_subdirectory(adaptor)
+add_subdirectory(base_rearrangement)
+add_subdirectory(contractions)
+add_subdirectory(eigenvalues)
+add_subdirectory(tensor_inverse)
+add_subdirectory(tensor_products)

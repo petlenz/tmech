@@ -1,0 +1,101 @@
+#ifndef FORWARD_DEFINITIONS_H
+#define FORWARD_DEFINITIONS_H
+
+template <typename _Derived>
+class variable_base;
+
+template <typename _T, std::size_t _VarID>
+class variable;
+
+template <typename _T, std::size_t _ID>
+class constant;
+
+template<typename _T, long long int _L, long long int _R, long long int _Exp>
+class real;
+
+template<typename _T>
+class scalar_one;
+
+template<typename _T>
+class scalar_zero;
+
+template<typename _T>
+class tensor_one;
+
+template<typename _T>
+class tensor_zero;
+
+namespace detail {
+template<typename _Expr>
+class negative;
+
+template <typename _LHS, typename _RHS, typename _Op>
+class binary_expression_wrapper;
+
+template <typename _Expr>
+class squeezer;
+
+template <typename _T, std::size_t _Dim, std::size_t _Rank>
+struct get_tensor;
+
+template<typename _Tensor>
+struct get_tensor_info;
+
+template <typename _Tensor>
+struct get_tensor_type;
+
+template <typename _T>
+struct get_identity_tensor;
+
+template <typename _T>
+struct get_zero_tensor;
+
+template <typename _T>
+struct is_tensor;
+
+template <typename _T>
+struct is_scalar;
+
+template <typename _Type>
+struct get_fundamental_one;
+
+template <typename _LHS, typename _RHS>
+struct get_fundamental_zero;
+
+template <typename _Type, bool _isTensor>
+struct get_fundamental_one_detail;
+
+template <typename _LHS, bool _is_LHS_Tensor, typename _RHS, bool _is_RHS_Tensor>
+struct get_fundamental_zero_detail;
+
+template <typename _T>
+struct print_operator;
+
+template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqRHS>
+class tensor_inner_product_wrapper;
+
+template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqRHS>
+class tensor_outer_product_wrapper;
+
+template <typename _Expr, typename _Sequence>
+class tensor_basis_change_wrapper;
+
+template <typename _Expr, typename _Func>
+class function_wrapper;
+
+template <typename _Expr, typename _Func>
+class tensor_function_wrapper;
+
+template <typename Base, typename Exp, bool IsFundamental>
+class diff_pow;
+
+template <typename Tensor>
+class inv_tensor;
+
+template <typename _Expr>
+class symdiff_expression_wrapper;
+
+} // NAMESPACE DETAIL
+
+
+#endif // FORWARD_DEFINITIONS_H

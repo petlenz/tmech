@@ -1,0 +1,2 @@
+add_tmech_example(example_abaqus_standard_3D abaqus_standard_3D.cpp)
+add_tmech_example(example_abaqus_explicit_3D abaqus_explicit_3D.cpp)

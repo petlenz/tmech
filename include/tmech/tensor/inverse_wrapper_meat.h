@@ -1,0 +1,299 @@
+// Copyright 2021 Peter Lenz
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ------------------------------------------------------------------------
+#ifndef INVERSE_WRAPPER_MEAT_H
+#define INVERSE_WRAPPER_MEAT_H
+
+namespace detail {
+
+/**
+* @name Constructors
+*/
+//@{
+/**
+* @brief Default constructor
+*/
+template <typename _Tensor, typename ..._Sequences>
+constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(_Tensor __data):
+    data(),
+    tensor_data(__data)
+{}
+
+/**
+ * @brief Copy constructor
+ */
+template <typename _Tensor, typename ..._Sequences>
+constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(inverse_wrapper const& __data):
+    data(),
+    tensor_data(__data.tensor_data)
+{}
+//@}
+
+template <typename _Tensor, typename ..._Sequences>
+template<typename ...Indicies>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::operator ()(Indicies... __indices)const{
+    return data(__indices...);
+}
+
+/**
+* @name Dimension and rank
+*/
+//@{
+/**
+* @brief Returns the dimension.
+*/
+template <typename _Tensor, typename ..._Sequences>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::dimension(){
+    return data_type_tensor::dimension();
+}
+/**
+ * @brief Returns the rank.
+ */
+template <typename _Tensor, typename ..._Sequences>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::rank(){
+    return data_type_tensor::rank();
+}
+//@}
+
+template <typename _Tensor, typename ..._Sequences>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::raw_data()const{
+    return data.raw_data();
+}
+
+template <typename _Tensor, typename ..._Sequences>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate(){
+    if(!this->_is_init){
+        evaluate_imp(data);
+        this->_is_init = true;
+    }
+}
+
+template <typename _Tensor, typename ..._Sequences>
+template<typename _Result>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate(_Result const& __result){
+    evaluate_imp(__result);
+}
+
+template <typename _Tensor, typename ..._Sequences>
+template<typename _Result>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Result const& __result){
+    constexpr auto HasRawData{std::experimental::is_detected<tmech::detail::has_raw_data, data_type_tensor>::value};
+    constexpr auto HasEvaluate{std::experimental::is_detected<tmech::detail::has_evaluate, data_type_tensor>::value};
+
+    if constexpr (rank() == 4){
+        if constexpr (std::tuple_size_v<_Tuple> == 2){
+            using tuple1 = typename std::remove_reference<decltype (std::get<0>(_Tuple()))>::type;
+            using tuple2 = typename std::remove_reference<decltype (std::get<1>(_Tuple()))>::type;
+            using sequence = decltype(tmech::detail::make_single_sequence(tuple1(), tuple2()));
+
+            constexpr auto SIZE{(dimension() == 2 ? 3 : 6)};
+            value_type _ptr[SIZE*SIZE], _ptr_inv[SIZE*SIZE]{0};
+            //convert to voigt
+            convert_tensor_to_voigt<std::tuple<tuple1, tuple2>>(tensor_data, _ptr);
+
+            //last three columns due to symmetry
+            for(int i{0}; i<SIZE; ++i){
+                for(int j{dimension()}; j<SIZE; ++j){
+                    _ptr[i*SIZE+j] *= 2;
+                }
+            }
+
+            //determine inv
+            evaluate_imp(_ptr_inv, _ptr);
+
+            //convert back last three columns due to symmetry
+            for(int i{0}; i<SIZE; ++i){
+                for(int j{dimension()}; j<SIZE; ++j){
+                    _ptr_inv[i*SIZE+j] *= 0.5;
+                }
+            }
+
+            //convert back to a tensor
+            const adaptor<value_type, dimension(), 4, voigt<dimension(), false>> adap(_ptr_inv);
+            if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
+                const_cast<_Result&>(__result) = adap;
+            }else{
+                const_cast<_Result&>(__result).template change_basis_view<sequence>() = adap;
+            }
+
+        }else{
+            //full
+            //convert to <1,2,3,4>
+            tmech::tensor<value_type, dimension(), rank()> data_local;
+            if constexpr (std::tuple_size_v<_Tuple> == 1){
+                using sequence = typename std::remove_reference<decltype (std::get<0>(_Tuple()))>::type;
+                if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
+                    data_local = tensor_data;
+                }else{
+                    data_local = basis_change<sequence>(tensor_data);
+                }
+            }else{
+                data_local = tensor_data;
+            }
+
+            //determine inv
+            evaluate_imp(__result.raw_data(), data_local.raw_data());
+
+            if constexpr (std::tuple_size_v<_Tuple> == 1){
+                using sequence = typename std::remove_reference<decltype (std::get<0>(_Tuple()))>::type;
+                if constexpr (!std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
+                    const_cast<_Result&>(__result).template change_basis_view<sequence>() = eval(__result);
+                }
+            }
+        }
+    }else if constexpr (rank() == 2){
+        if constexpr (HasRawData){
+            if constexpr(HasEvaluate){
+                if constexpr (std::is_reference_v<_Tensor>){
+                    const_cast<_Tensor&>(tensor_data).evaluate();
+                }else{
+                    tensor_data.evaluate();
+                }
+            }
+            evaluate_imp(__result.raw_data(), tensor_data.raw_data());
+        }else{
+            data = tensor_data;
+            evaluate_imp(__result.raw_data(), data.raw_data());
+        }
+    }
+}
+
+
+template <typename _Tensor, typename ..._Sequences>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(value_type const* __result, value_type const * __data){
+    constexpr auto DIM{dimension()};
+    constexpr auto RANK{rank()};
+
+    if constexpr (DIM == 1){
+        const_cast<value_type&>(__result[0]) = static_cast<value_type>(1.)/__data[0];
+        return ;
+    }
+
+    if constexpr (RANK == 2) {
+        if constexpr (DIM == 2) {
+            invert_2_2(const_cast<value_type*>(__result), __data[0], __data[1],
+                                 __data[2], __data[3]);
+            return ;
+        }
+        if constexpr (DIM == 3) {
+            invert_3_3(const_cast<value_type*>(__result), __data[0], __data[1], __data[2],
+                                 __data[3], __data[4], __data[5],
+                                 __data[6], __data[7], __data[8]);
+            return ;
+        }
+    }
+
+    if constexpr (RANK == 4){
+        if constexpr (std::tuple_size_v<_Tuple> != 2){
+            //full
+            lu_detail<DIM*DIM>(__data);
+            inv_lu<DIM*DIM>(const_cast<value_type*>(__result), __data);
+        }else{
+            //minior symmetric
+            constexpr size_type SIZE{(dimension() == 2 ? 3 : 6)};
+            lu_detail<SIZE>(__data);
+            inv_lu<SIZE>(const_cast<value_type*>(__result), __data);
+        }
+    }
+}
+
+template <typename _Tensor, typename ..._Sequences>
+template<std::size_t Rows>
+constexpr auto inverse_wrapper<_Tensor, _Sequences...>::lu_detail(value_type const*  __A){
+    for(std::size_t i{0};i<Rows;++i){
+        const value_type Akk = 1.0/__A[i*Rows+i];
+        for(std::size_t j{i+1};j<Rows;++j){
+            const_cast<value_type&>(__A[j*Rows+i]) *=Akk;
+        }
+
+        for(std::size_t j{i+1};j<Rows;++j){
+            for(std::size_t k{i+1};k<Rows;++k){
+                const_cast<value_type&>(__A[j*Rows+k]) -= __A[j*Rows+i]*__A[i*Rows+k];
+            }
+        }
+    }
+}
+
+template <typename _Tensor, typename ..._Sequences>
+template<std::size_t Rows>
+constexpr auto inverse_wrapper<_Tensor, _Sequences...>::inv_lu(value_type * __Ainv, value_type const * const __Afac){
+
+    for (std::size_t i{0}; i < Rows*Rows; ++i){
+        __Ainv[i] = static_cast<value_type>(0);
+    }
+
+    for (std::size_t i{0}; i < Rows; ++i){
+        __Ainv[i*Rows + i] = static_cast<value_type>(1.0);
+    }
+
+    value_type temp_data[Rows];
+
+    for (std::size_t j{0}; j < Rows; ++j){
+        for (std::size_t i{0}; i < Rows; ++i){
+            temp_data[i] = __Ainv[i*Rows + j];
+        }
+        for (std::size_t i{0}; i < Rows; ++i){
+            for (std::size_t k{0}; k < i; ++k){
+                temp_data[i] -= __Afac[i*Rows+k] * temp_data[k];
+            }
+        }
+        for (std::size_t i{Rows}; i >= 1; --i) {
+            const std::size_t ii{i-1};
+            for (std::size_t k{ii+1}; k < Rows; ++k){
+                temp_data[ii] -= __Afac[ii*Rows+k] * temp_data[k];
+            }
+            temp_data[ii] = temp_data[ii] / __Afac[ii*Rows+ii];
+        }
+        for (std::size_t i{0}; i < Rows; ++i){
+            __Ainv[i*Rows + j] = temp_data[i];
+        }
+    }
+}
+
+template <typename _Tensor, typename ..._Sequences>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::invert_2_2(value_type * result, value_type const A11, value_type const A12,
+                                                             value_type const A21, value_type const A22){
+    const auto det{A11*A22 - A12*A21};
+    const auto invdet{1.0/det};
+
+    result[0] =  A22 * invdet;
+    result[1] = -A12 * invdet;
+    result[2] = -A21 * invdet;
+    result[3] =  A11 * invdet;
+}
+
+template <typename _Tensor, typename ..._Sequences>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::invert_3_3(value_type * result, value_type const A0, value_type const A1, value_type const A2,
+                                                             value_type const A3, value_type const A4, value_type const A5,
+                                                             value_type const A6, value_type const A7, value_type const A8){
+    const auto det{A0*(A4*A8-A5*A7)
+                + A1*(A5*A6-A3*A8)
+                + A2*(A3*A7-A4*A6)};
+
+    const auto invdet{1.0/det};
+
+    result[0] = (A4*A8-A5*A7) * invdet;
+    result[1] = (A2*A7-A1*A8) * invdet;
+    result[2] = (A1*A5-A2*A4) * invdet;
+
+    result[3] = (A5*A6-A3*A8) * invdet;
+    result[4] = (A0*A8-A2*A6) * invdet;
+    result[5] = (A2*A3-A0*A5) * invdet;
+
+    result[6] = (A3*A7-A4*A6) * invdet;
+    result[7] = (A1*A6-A0*A7) * invdet;
+    result[8] = (A0*A4-A1*A3) * invdet;
+}
+
+} // NAMESPACE DETAIL
+#endif // INVERSE_WRAPPER_MEAT_H

@@ -1,0 +1,4 @@
+tmech: C++ library for tensor algebra and analysis in physiks
+Copyright 2021 Peter Lenz
+
+This product includes software developed by Peter Lenz

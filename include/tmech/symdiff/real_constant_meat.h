@@ -1,0 +1,4 @@
+#ifndef REAL_CONSTANT_MEAT_H
+#define REAL_CONSTANT_MEAT_H
+
+#endif // REAL_CONSTANT_MEAT_H

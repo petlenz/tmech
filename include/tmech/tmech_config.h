@@ -1,0 +1,10 @@
+#ifndef TMECH_CONFIG_H
+#define TMECH_CONFIG_H
+
+#define TMECH_VERSION_MAJOR 1
+#define TMECH_VERSION_MINOR 0
+#define TMECH_VERSION_PATCH 0
+
+//Rank 8 Dim 3
+#define TMECH_MAX_STATIC_SIZE 6561ul
+#endif // TMECH_CONFIG_H

@@ -1,0 +1,4 @@
+#ifndef SCALAR_ZERO_MEAT_H
+#define SCALAR_ZERO_MEAT_H
+
+#endif // SCALAR_ZERO_MEAT_H

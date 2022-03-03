@@ -1,0 +1,56 @@
+// Copyright 2021 Peter Lenz
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ------------------------------------------------------------------------
+#ifndef CROSS_PRODUCT_WRAPPER_BONES_H
+#define CROSS_PRODUCT_WRAPPER_BONES_H
+
+namespace detail {
+
+/**
+* @class cross_product_wrapper
+* @brief Cross product of two frist-order tensor.
+*
+* @tparam LHS Left hand side tensor expression
+* @tparam RHS Right hand side tensor expression
+*/
+template<typename _LHS, typename _RHS>
+class cross_product_wrapper : public tensor_base<cross_product_wrapper<_LHS, _RHS>>
+{
+    using data_type_RHS  = typename std::remove_const<typename std::remove_reference<_RHS>::type>::type;
+    using data_type_LHS  = typename std::remove_const<typename std::remove_reference<_LHS>::type>::type;
+    using value_type_LHS = typename data_type_LHS::value_type;
+    using value_type_RHS = typename data_type_RHS::value_type;
+
+public:
+    using value_type = typename result_type<value_type_LHS, value_type_RHS>::value_type;
+    using size_type  = std::size_t;
+
+    constexpr cross_product_wrapper(_LHS lhs, _RHS rhs);
+
+    constexpr cross_product_wrapper(cross_product_wrapper const& data);
+
+    constexpr inline auto operator()(size_type const idx)const;
+
+    static constexpr inline auto dimension();
+
+    static constexpr inline auto rank();
+
+    constexpr inline auto evaluate();
+
+private:
+    _LHS _lhs;
+    _RHS _rhs;
+};
+
+} // NAMESPACE DETAIL
+#endif // CROSS_PRODUCT_WRAPPER_BONES_H
