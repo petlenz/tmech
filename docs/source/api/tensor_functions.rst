@@ -227,7 +227,7 @@ Polar decomposition
 ===================
 
 .. _polar_decomposition-func-ref:
-.. doxygenfunction:: polar_decomposition
+.. doxygenfunction:: polar_decomposition(_Tensor && __tensor, bool const __newton_method, typename std::decay<_Tensor>::type::value_type const __tol, std::size_t const __max_steps)
    :project: tmech
    
 Exponential map
