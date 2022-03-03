@@ -50,10 +50,10 @@ public:
     }
 
     template<typename DerivedOut>
-    friend std::ostream & operator<<(std::ostream &os, const tensor_base<DerivedOut>& tensor);
+    friend std::ostream & operator<<(std::ostream &os, const tensor_base<_Derived>& tensor);
 
     static constexpr inline auto size(){
-        return detail::get_tensor_size<Derived::dimension(), Derived::rank()>::size;
+        return detail::get_tensor_size<_Derived::dimension(), _Derived::rank()>::size;
     }
 
     //if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
@@ -71,7 +71,7 @@ protected:
 template<typename _Derived>
 std::ostream & operator<<(std::ostream &os, const tensor_base<_Derived>& __tensor)
 {
-    tensor<typename Derived::value_type, Derived::dimension(), Derived::rank()> temp{__tensor};
+    tensor<typename _Derived::value_type, _Derived::dimension(), _Derived::rank()> temp{__tensor};
     temp.print(os);
     return os;
 }
