@@ -27,7 +27,7 @@ tensor expressions.
 `tmech` requires a modern C++ compiler supporting C++17. The following C++
 compilers are supported:
 
-- On Unix platforms, gcc 4.9 or a recent version of Clang
+- On Unix platforms, gcc 5 or a recent version of Clang
 - On Windows platforms not tested
 
 Licensing
