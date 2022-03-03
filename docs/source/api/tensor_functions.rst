@@ -68,7 +68,7 @@ General outer product
 Dyadic product
 ^^^^^^^^^^^^^^ 
 .. _otimes-func-ref:
-.. doxygenfunction:: otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
+.. doxygenfunction:: tmech::otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
    :project: tmech
    
 Lower dyadic product
