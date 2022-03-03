@@ -42,6 +42,9 @@ General basis rearrangement
 .. doxygenfunction:: basis_change(_Tensor &&__tensor)
    :project: tmech
 
+.. _basis_change-func-ref:
+.. doxygenfunction:: basis_change(_Tensor &&__tensor)
+   :project: tmech
 Transposition
 ^^^^^^^^^^^^^
 .. _trans-func-ref:
@@ -65,19 +68,19 @@ General outer product
 Dyadic product
 ^^^^^^^^^^^^^^ 
 .. _otimes-func-ref:
-.. doxygenfunction:: otimes(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs);
+.. doxygenfunction:: otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
    :project: tmech
    
 Lower dyadic product
 ^^^^^^^^^^^^^^^^^^^^ 
 .. _otimesl-func-ref:
-.. doxygenfunction:: otimesl(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs);
+.. doxygenfunction:: otimesl(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
    :project: tmech
 
 Upper dyadic product
 ^^^^^^^^^^^^^^^^^^^^ 
 .. _otimesu-func-ref:
-.. doxygenfunction:: otimesu(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs);
+.. doxygenfunction:: otimesu(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
    :project: tmech
    
 Inner product
@@ -85,19 +88,19 @@ Inner product
 General inner product
 ^^^^^^^^^^^^^^^^^^^^^ 
 .. _inner_product-func-ref:
-.. doxygenfunction:: inner_product(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs);
+.. doxygenfunction:: inner_product(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
    :project: tmech
 
 Double contraction
 ^^^^^^^^^^^^^^^^^^ 
 .. _double_contraction-func-ref:
-.. doxygenfunction:: dcontract(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs);
+.. doxygenfunction:: dcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
    :project: tmech
 
 Fourth contraction
 ^^^^^^^^^^^^^^^^^^ 
 .. _fourth_contraction-func-ref:
-.. doxygenfunction:: ddcontract(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs);
+.. doxygenfunction:: ddcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
    :project: tmech
 
 Invers of a tensor
@@ -107,14 +110,14 @@ Second order tensors and fourth order tensors with minior-symmetry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _inv-func-ref:
-.. doxygenfunction:: inv(_Tensor &&__tensor)
+.. doxygenfunction:: inv(_Tensor && __tensor)
    :project: tmech
 
 Fully anisotropic tensors
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _invf-func-ref:
-.. doxygenfunction:: invf(_Tensor &&__tensor)
+.. doxygenfunction:: invf(_Tensor && __tensor)
    :project: tmech
    
 Volumetric and deviatoric parts
@@ -123,14 +126,14 @@ Volumetric and deviatoric parts
 Volumetric part
 ^^^^^^^^^^^^^^^
 .. _vol-func-ref:
-.. doxygenfunction:: vol(_Tensor &&__tensor)
+.. doxygenfunction:: vol(_Tensor && __tensor)
    :project: tmech
 
 Deviatoric part
 ^^^^^^^^^^^^^^^
 
 .. _dev-func-ref:
-.. doxygenfunction:: dev(_Tensor &&__tensor)
+.. doxygenfunction:: dev(_Tensor && __tensor)
    :project: tmech
 
 Symmetric and skew-symmetric parts
@@ -139,13 +142,13 @@ Symmetric and skew-symmetric parts
 Symmetric part
 ^^^^^^^^^^^^^^
 .. _sym-func-ref:
-.. doxygenfunction:: sym(_Tensor &&__tensor)
+.. doxygenfunction:: sym(_Tensor && __tensor)
    :project: tmech
 
 Skew-symmetric part
 ^^^^^^^^^^^^^^^^^^^
 .. _skew-func-ref:
-.. doxygenfunction:: skew(_Tensor &&__tensor)
+.. doxygenfunction:: skew(_Tensor && __tensor)
    :project: tmech
    
 Isotropic tensor functions
