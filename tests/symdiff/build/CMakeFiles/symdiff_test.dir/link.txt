@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/symdiff_test.dir/main.cpp.o CMakeFiles/symdiff_test.dir/usr/src/gtest/src/gtest-all.cc.o CMakeFiles/symdiff_test.dir/usr/src/gmock/src/gmock-all.cc.o -o symdiff_test  -lpthread 

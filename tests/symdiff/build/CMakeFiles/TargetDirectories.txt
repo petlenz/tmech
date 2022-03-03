@@ -1,3 +1,0 @@
-/home/peter/SynologyDrive/Drive/tmech/tests/symdiff/build/CMakeFiles/symdiff_test.dir
-/home/peter/SynologyDrive/Drive/tmech/tests/symdiff/build/CMakeFiles/edit_cache.dir
-/home/peter/SynologyDrive/Drive/tmech/tests/symdiff/build/CMakeFiles/rebuild_cache.dir
