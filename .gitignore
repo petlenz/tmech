@@ -35,4 +35,4 @@
 # Build directory
 build/
 
-.user
+*.user
