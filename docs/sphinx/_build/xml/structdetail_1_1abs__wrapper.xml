@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1abs__wrapper" kind="struct" language="C++" prot="public">
+    <compoundname>detail::abs_wrapper</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1abs__wrapper_1a0d86e0e10f33dd1e564da673ded2f9a7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::abs_wrapper::apply</definition>
+        <argsstring>(T const &amp;value)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::abs_wrapper::apply</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="59" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="59" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail_1_1abs__wrapper_1ab7596dbfe6401c1fef3bc6494f584b5a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string detail::abs_wrapper::get_string</definition>
+        <argsstring>()</argsstring>
+        <name>get_string</name>
+        <qualifiedname>detail::abs_wrapper::get_string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="62" column="31" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="62" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="57" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="57" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1abs__wrapper_1a0d86e0e10f33dd1e564da673ded2f9a7" prot="public" virt="non-virtual"><scope>detail::abs_wrapper</scope><name>apply</name></member>
+      <member refid="structdetail_1_1abs__wrapper_1ab7596dbfe6401c1fef3bc6494f584b5a" prot="public" virt="non-virtual"><scope>detail::abs_wrapper</scope><name>get_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

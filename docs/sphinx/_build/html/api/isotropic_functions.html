@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Isotropic functions &mdash; tmech  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tmech
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALLATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USAGE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expression.html">Expressions and lazy evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_as_array.html">Tensors as arrays</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QUICK REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html">Basic arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#basis-rearrangement">Basis rearrangement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#outer-product">Outer product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#inner-product">Inner product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#invers-of-a-tensor">Invers of a tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#volumetric-and-deviatoric-parts">Volumetric and deviatoric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#symmetric-and-skew-symmetric-parts">Symmetric and skew-symmetric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#isotropic-tensor-functions">Isotropic tensor functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#positive-negative-decomposition">Positive-negative decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#eigen-decomposition">Eigen-decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#sign-decomposition">Sign decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#polar-decomposition">Polar decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#id1">Exponential map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_diff.html">Numerical differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compare_operators.html">Compare Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptor.html">Adapting pointers of raw memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convert_to_voigt.html">Converting to Voigt’s notation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_tmech.html">Tensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_tmech.html#wrapper">Wrapper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE SYMDIFF</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_symdiff.html">Variable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_symdiff.html#wrappers">Wrappers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tmech</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Isotropic functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/isotropic_functions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="isotropic-functions">
+<h1>Isotropic functions<a class="headerlink" href="#isotropic-functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="isotropic-scalar-valued-function">
+<h2>Isotropic scalar-valued function<a class="headerlink" href="#isotropic-scalar-valued-function" title="Permalink to this headline">¶</a></h2>
+<p>In three-dimensional space, a scalar function of a symmetric tensor in terms of principal values (eigenvalues) is defined as</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\phi(\Second{X}) = \hat{\phi}(\lambda_1,\lambda_2,\lambda_3)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2020-02-02&gt; patch level 2
+L3 programming layer &lt;2020-02-14&gt;
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+No file math.aux.
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;argument&gt; \split&#64;tag \begin {split}\phi (\Second 
+                                                  {X}) = \hat {\phi }(\lambd...
+l.68 ...(\lambda_1,\lambda_2,\lambda_3)\end{split}
+                                                  
+! Undefined control sequence.
+&lt;argument&gt; \split&#64;tag \begin {split}\phi (\Second 
+                                                  {X}) = \hat {\phi }(\lambd...
+l.68 ...(\lambda_1,\lambda_2,\lambda_3)\end{split}
+                                                  
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 444 bytes).
+Transcript written on math.log.
+</p>
+</div>
+<p>where <img class="math" src="../_images/math/6616fa8d47cbc5c2a9c85a6f64997687fb02fef4.svg" alt="\lambda_i"/> are the eigenvalues of <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\Second{X}</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2020-02-02&gt; patch level 2
+L3 programming layer &lt;2020-02-14&gt;
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+&lt;recently read&gt; \Second 
+                        
+l.67 \fontsize{12}{14}\selectfont $\Second
+                                          {X}$
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 240 bytes).
+Transcript written on math.log.
+</p>
+</div>
+.</p>
+</div>
+<div class="section" id="derivative-of-an-isotropic-scalar-function">
+<h2>Derivative of an isotropic scalar function<a class="headerlink" href="#derivative-of-an-isotropic-scalar-function" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="isotropic-tensor-valued-function">
+<h2>Isotropic tensor-valued function<a class="headerlink" href="#isotropic-tensor-valued-function" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Peter Lenz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

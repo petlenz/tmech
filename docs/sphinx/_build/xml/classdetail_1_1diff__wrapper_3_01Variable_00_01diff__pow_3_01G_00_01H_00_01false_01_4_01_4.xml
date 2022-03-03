@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Variable</type>
+      </param>
+      <param>
+        <type>typename G</type>
+      </param>
+      <param>
+        <type>typename H</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a8224703a79c107ccef2f3f3ae19e415c" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; Variable, G &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_dG =  typename squeezer&lt;typename diff_wrapper&lt;Variable, G&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dG</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_dG</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="137" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1ae436307ce3cabd361333eaba0586a324" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; Variable, H &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_dH =  typename squeezer&lt;typename diff_wrapper&lt;Variable, H&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dH</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_dH</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="138" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a65592d6afb9637ea74b389472462db7b" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; H, <ref refid="classreal" kindref="compound">real</ref>&lt; typename H::data_type, 1, 0, 1 &gt;, op_sub &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_Hn =  typename squeezer&lt;binary_expression_wrapper&lt;H, real&lt;typename H::data_type, 1, 0, 1&gt;, op_sub&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_Hn</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_Hn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="139" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a8d22a3ca28017578c632002a4a17f463" prot="private" static="no">
+        <type><ref refid="classdetail_1_1function__wrapper" kindref="compound">function_wrapper</ref>&lt; G, <ref refid="structdetail_1_1log__wrapper" kindref="compound">log_wrapper</ref> &gt;</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_Log =  function_wrapper&lt;G, log_wrapper&gt;</definition>
+        <argsstring></argsstring>
+        <name>_Log</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_Log</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="140" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a72cfd2dbc9b48e902e11976f54abcd3d" prot="private" static="no">
+        <type><ref refid="classdetail_1_1diff__pow" kindref="compound">diff_pow</ref>&lt; G, _Hn, false &gt;</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_Pow =  diff_pow&lt;G, _Hn, false&gt;</definition>
+        <argsstring></argsstring>
+        <name>_Pow</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_Pow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="141" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1aa70a89dece8b2670f0593c4446b9fae1" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _dH, <ref refid="classdetail_1_1function__wrapper" kindref="compound">_Log</ref>, op_mul &gt; &gt;::squeezedType, G, op_mul &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_RHS1 =  typename squeezer&lt;binary_expression_wrapper&lt;typename squeezer&lt;binary_expression_wrapper&lt;_dH, _Log, op_mul&gt; &gt;::squeezedType, G, op_mul&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_RHS1</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_RHS1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="142" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1aaae531c6ce40549727c7e78b083c4d88" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; H, _dG, op_mul &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_RHS2 =  typename squeezer&lt;binary_expression_wrapper&lt;H, _dG, op_mul&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_RHS2</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_RHS2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="143" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a151b7214f7176c4fff3e18b242a3668e" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _RHS1, _RHS2, op_add &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_RHS =  typename squeezer&lt;binary_expression_wrapper&lt;_RHS1, _RHS2, op_add&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_RHS</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::_RHS</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="144" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1af5dcdf1f6d1a945dca8619ffba38a0b8" prot="public" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; <ref refid="classdetail_1_1diff__pow" kindref="compound">_Pow</ref>, _RHS, op_mul &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::deriv_type =  typename squeezer&lt;binary_expression_wrapper&lt;_Pow, _RHS, op_mul&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="146" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="135" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="136" bodyend="147"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a8224703a79c107ccef2f3f3ae19e415c" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_dG</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1ae436307ce3cabd361333eaba0586a324" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_dH</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a65592d6afb9637ea74b389472462db7b" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_Hn</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a8d22a3ca28017578c632002a4a17f463" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_Log</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a72cfd2dbc9b48e902e11976f54abcd3d" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_Pow</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1a151b7214f7176c4fff3e18b242a3668e" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_RHS</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1aa70a89dece8b2670f0593c4446b9fae1" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_RHS1</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1aaae531c6ce40549727c7e78b083c4d88" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>_RHS2</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01Variable_00_01diff__pow_3_01G_00_01H_00_01false_01_4_01_4_1af5dcdf1f6d1a945dca8619ffba38a0b8" prot="public" virt="non-virtual"><scope>detail::diff_wrapper&lt; Variable, diff_pow&lt; G, H, false &gt; &gt;</scope><name>deriv_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

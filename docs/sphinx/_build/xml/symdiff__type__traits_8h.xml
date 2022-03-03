@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="symdiff__type__traits_8h" kind="file" language="C++">
+    <compoundname>symdiff_type_traits.h</compoundname>
+    <includedby refid="tmech_8h" local="yes">/home/peter/SynologyDrive/Drive/tmech/include/tmech/tmech.h</includedby>
+    <innerclass refid="structdetail_1_1result__type__tensor__expression" prot="public">detail::result_type_tensor_expression</innerclass>
+    <innerclass refid="structdetail_1_1result__type__tensor__expression_3_01__LHS_00_01__RHS_00_01true_00_01false_01_4" prot="public">detail::result_type_tensor_expression&lt; _LHS, _RHS, true, false &gt;</innerclass>
+    <innerclass refid="structdetail_1_1result__type__tensor__expression_3_01__LHS_00_01__RHS_00_01false_00_01true_01_4" prot="public">detail::result_type_tensor_expression&lt; _LHS, _RHS, false, true &gt;</innerclass>
+    <innerclass refid="structdetail_1_1result__type" prot="public">detail::result_type</innerclass>
+    <innernamespace refid="namespacedetail">detail</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SYMDIFF_TYPE_TRAITS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SYMDIFF_TYPE_TRAITS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_LHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_RHS,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_IsTensorLHS,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_IsTensorRHS&gt;</highlight></codeline>
+<codeline lineno="7" refid="structdetail_1_1result__type__tensor__expression" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structdetail_1_1result__type__tensor__expression" kindref="compound">result_type_tensor_expression</ref>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>data_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>tmech::detail::result_type&lt;_LHS,<sp/>_RHS&gt;::value_type;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_LHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_RHS&gt;</highlight></codeline>
+<codeline lineno="12" refid="structdetail_1_1result__type__tensor__expression_3_01__LHS_00_01__RHS_00_01true_00_01false_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structdetail_1_1result__type__tensor__expression" kindref="compound">result_type_tensor_expression</ref>&lt;_LHS,<sp/>_RHS,<sp/>true,<sp/>false&gt;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>data_type<sp/>=<sp/>_LHS;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_LHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_RHS&gt;</highlight></codeline>
+<codeline lineno="18" refid="structdetail_1_1result__type__tensor__expression_3_01__LHS_00_01__RHS_00_01false_00_01true_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structdetail_1_1result__type__tensor__expression" kindref="compound">result_type_tensor_expression</ref>&lt;_LHS,<sp/>_RHS,<sp/>false,<sp/>true&gt;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>data_type<sp/>=<sp/>_RHS;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_LHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_RHS&gt;</highlight></codeline>
+<codeline lineno="24" refid="structdetail_1_1result__type" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structdetail_1_1result__type" kindref="compound">result_type</ref>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>data_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structdetail_1_1result__type__tensor__expression" kindref="compound">result_type_tensor_expression&lt;_LHS, _RHS, is_tensor&lt;_LHS&gt;::value</ref>,<sp/><ref refid="structdetail_1_1is__tensor" kindref="compound">is_tensor&lt;_RHS&gt;::value</ref>&gt;::data_type;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>SYMDIFF_TYPE_TRAITS_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1negative__part" kind="struct" language="C++" prot="public">
+    <compoundname>detail::negative_part</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1negative__part_1a0c382de630445dd0c866801dac33d27d" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::negative_part::apply</definition>
+        <argsstring>(T const &amp;value)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::negative_part::apply</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" line="70" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail_1_1negative__part_1afc1dfd218f1be0f4d4024778f9e8ddf3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::negative_part::derivative</definition>
+        <argsstring>(T const &amp;value)</argsstring>
+        <name>derivative</name>
+        <qualifiedname>detail::negative_part::derivative</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" line="75" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" bodystart="75" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" line="68" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" bodystart="68" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1negative__part_1a0c382de630445dd0c866801dac33d27d" prot="public" virt="non-virtual"><scope>detail::negative_part</scope><name>apply</name></member>
+      <member refid="structdetail_1_1negative__part_1afc1dfd218f1be0f4d4024778f9e8ddf3" prot="public" virt="non-virtual"><scope>detail::negative_part</scope><name>derivative</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

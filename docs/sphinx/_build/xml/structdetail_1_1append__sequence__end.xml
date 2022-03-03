@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1append__sequence__end" kind="struct" language="C++" prot="public">
+    <compoundname>detail::append_sequence_end</compoundname>
+    <basecompoundref refid="structdetail_1_1append__sequence__end__h" prot="public" virt="non-virtual">detail::append_sequence_end_h&lt; _SeqFirst, _SeqSecond &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename _SeqFirst</type>
+      </param>
+      <param>
+        <type>typename _SeqSecond</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>detail::append_sequence_end_h&lt; _SeqFirst, _SeqSecond &gt;</label>
+        <link refid="structdetail_1_1append__sequence__end__h"/>
+      </node>
+      <node id="1">
+        <label>detail::append_sequence_end&lt; _SeqFirst, _SeqSecond &gt;</label>
+        <link refid="structdetail_1_1append__sequence__end"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>detail::append_sequence_end_h&lt; _SeqFirst, _SeqSecond &gt;</label>
+        <link refid="structdetail_1_1append__sequence__end__h"/>
+      </node>
+      <node id="1">
+        <label>detail::append_sequence_end&lt; _SeqFirst, _SeqSecond &gt;</label>
+        <link refid="structdetail_1_1append__sequence__end"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="956" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="958" bodyend="958"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

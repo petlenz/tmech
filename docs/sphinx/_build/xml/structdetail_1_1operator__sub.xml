@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1operator__sub" kind="struct" language="C++" prot="public">
+    <compoundname>detail::operator_sub</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1operator__sub_1a5b2a691648c7b5b0808a6dd0f68d31cf" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::operator_sub::apply</definition>
+        <argsstring>(T1 &amp;&amp;lhs, T2 &amp;&amp;rhs)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::operator_sub::apply</qualifiedname>
+        <param>
+          <type>T1 &amp;&amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>T2 &amp;&amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/expression_operators.h" line="57" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/expression_operators.h" bodystart="57" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/expression_operators.h" line="40" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/expression_operators.h" bodystart="40" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1operator__sub_1a5b2a691648c7b5b0808a6dd0f68d31cf" prot="public" virt="non-virtual"><scope>detail::operator_sub</scope><name>apply</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

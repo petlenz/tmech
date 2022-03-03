@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__fundamental__zero__detail_3_01__LHS_00_01true_00_01__RHS_00_01false_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_fundamental_zero_detail&lt; _LHS, true, _RHS, false &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _LHS</type>
+      </param>
+      <param>
+        <type>typename _RHS</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1get__fundamental__zero__detail_3_01__LHS_00_01true_00_01__RHS_00_01false_01_4_1aadb1bf3e7cc35d2043a9753218f50821" prot="public" static="no">
+        <type><ref refid="classtensor__zero" kindref="compound">tensor_zero</ref>&lt; _LHS &gt;</type>
+        <definition>using detail::get_fundamental_zero_detail&lt; _LHS, true, _RHS, false &gt;::type =  tensor_zero&lt;_LHS&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::get_fundamental_zero_detail&lt; _LHS, true, _RHS, false &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="337" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="337" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="335" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="336" bodyend="338"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__fundamental__zero__detail_3_01__LHS_00_01true_00_01__RHS_00_01false_01_4_1aadb1bf3e7cc35d2043a9753218f50821" prot="public" virt="non-virtual"><scope>detail::get_fundamental_zero_detail&lt; _LHS, true, _RHS, false &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

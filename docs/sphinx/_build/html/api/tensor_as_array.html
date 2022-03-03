@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tensors as arrays &mdash; tmech  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic arithmetic" href="tensor_functions.html" />
+    <link rel="prev" title="Expressions and lazy evaluation" href="expression.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tmech
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALLATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USAGE</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expression.html">Expressions and lazy evaluation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tensors as arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#internal-memory-layout">Internal memory layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance">Performance</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">QUICK REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html">Basic arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#basis-rearrangement">Basis rearrangement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#outer-product">Outer product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#inner-product">Inner product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#invers-of-a-tensor">Invers of a tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#volumetric-and-deviatoric-parts">Volumetric and deviatoric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#symmetric-and-skew-symmetric-parts">Symmetric and skew-symmetric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#isotropic-tensor-functions">Isotropic tensor functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#positive-negative-decomposition">Positive-negative decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#eigen-decomposition">Eigen-decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#sign-decomposition">Sign decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#polar-decomposition">Polar decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#id1">Exponential map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_diff.html">Numerical differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compare_operators.html">Compare Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptor.html">Adapting pointers of raw memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convert_to_voigt.html">Converting to Voigt’s notation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_tmech.html">Tensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_tmech.html#wrapper">Wrapper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE SYMDIFF</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_symdiff.html">Variable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_symdiff.html#wrappers">Wrappers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tmech</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Tensors as arrays</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/tensor_as_array.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tensors-as-arrays">
+<h1>Tensors as arrays<a class="headerlink" href="#tensors-as-arrays" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="internal-memory-layout">
+<h2>Internal memory layout<a class="headerlink" href="#internal-memory-layout" title="Permalink to this headline">¶</a></h2>
+<p>A tensor of <cite>tmech</cite> consists of a contiguous one-dimensional array combined with an indexing scheme that maps
+unsigned integers to the location of an element in the array. The number of indices is defined by the
+<cite>rank</cite> and the range of the indices by the <cite>dimension</cite> of a tensor.
+The scheme used to map indices into a location in the array is given by this formula</p>
+<div class="math">
+<p><img src="../_images/math/9eb440c320f7ec2f33ccd11962a6b8c07d264cb8.svg" alt="i = \sum_{j=0}^{R-1} i_j D^{R-1-j},"/></p>
+</div><p>where <img class="math" src="../_images/math/8ff82f8c9faa1f9091713712a73ebce2d65b2016.svg" alt="R"/> denotes the rank, <img class="math" src="../_images/math/ece260e74460f8b7142b74a9241418a9160b45c3.svg" alt="D"/> the dimension, <img class="math" src="../_images/math/41ce993e9d5f2f140e7a0e9dc05a93803ce73dcd.svg" alt="i_j"/> is the <img class="math" src="../_images/math/b96cda780a4d8aaf93aad95a36ba92b46bb2f854.svg" alt="j"/> is the index
+for array indexing.
+This produces the following storing scheme for second order tensor</p>
+<div class="math">
+<p><img src="../_images/math/5fbda578e5c03da858c38c91f3b5a5df4ee95a3f.svg" alt="\begin{bmatrix}
+11&amp;
+12&amp;
+13&amp;
+21&amp;
+22&amp;
+23&amp;
+31&amp;
+32&amp;
+33
+\end{bmatrix}"/></p>
+</div><p>and for fourth order tensor</p>
+<div class="math">
+<p><img src="../_images/math/493c2521485b2f01ade83c61c8087c3122fa2304.svg" alt="&amp;\left[ 1111 ~1112 ~1113 ~1121 ~1122 ~1123 ~1131 ~1132 ~1133~
+1211 ~1212 ~1213 ~1221 ~1222 ~1223 ~1231 ~1232 ~1233\right.\\
+&amp;\left. 1311 ~1312 ~1313 ~1321 ~1322 ~1323 ~1331 ~1332 ~1333~
+2111 ~2112 ~2113 ~2121 ~2122 ~2123 ~2131 ~2132 ~2133\right.\\
+&amp;\left. 2211 ~2212 ~2213 ~2221 ~2222 ~2223 ~2231 ~2232 ~2233~
+2311 ~2312 ~2313 ~2321 ~2322 ~2323 ~2331 ~2332 ~2333\right.\\
+&amp;\left. 3111 ~3112 ~3113 ~3121 ~3122 ~3123 ~3131 ~3132 ~3133~
+3211 ~3212 ~3213 ~3221 ~3222 ~3223 ~3231 ~3232 ~3233\right. \\
+&amp;\left. 3311 ~3312 ~3313 ~3321 ~3322 ~3323 ~3331 ~3332 ~3333\right]."/></p>
+</div></div>
+<div class="section" id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
+<p>For tensors up to the rank equal to 8 and dimension 3 the memory is stack-allocated which makes them more efficient.
+For higher rank tensors the memory is heap-allocated.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tensor_functions.html" class="btn btn-neutral float-right" title="Basic arithmetic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="expression.html" class="btn btn-neutral float-left" title="Expressions and lazy evaluation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Peter Lenz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

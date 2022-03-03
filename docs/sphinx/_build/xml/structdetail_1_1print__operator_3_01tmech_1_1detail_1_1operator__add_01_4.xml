@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1print__operator_3_01tmech_1_1detail_1_1operator__add_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::print_operator&lt; tmech::detail::operator_add &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1print__operator_3_01tmech_1_1detail_1_1operator__add_01_4_1a3c3f62f63ecc3d24a58ce69aceb18513" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string detail::print_operator&lt; tmech::detail::operator_add &gt;::print</definition>
+        <argsstring>()</argsstring>
+        <name>print</name>
+        <qualifiedname>detail::print_operator&lt; tmech::detail::operator_add &gt;::print</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="402" column="31" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="402" bodyend="404"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="401" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="401" bodyend="405"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1print__operator_3_01tmech_1_1detail_1_1operator__add_01_4_1a3c3f62f63ecc3d24a58ce69aceb18513" prot="public" virt="non-virtual"><scope>detail::print_operator&lt; tmech::detail::operator_add &gt;</scope><name>print</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

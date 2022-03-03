@@ -1,0 +1,561 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1positive__negative__decomposition__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::positive_negative_decomposition_wrapper</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1af299690514058297e96e08fd1bc35809" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::positive_negative_decomposition_wrapper&lt; Tensor &gt;::positive_negative_decomposition_wrapper</definition>
+        <argsstring>(data_type_tensor const &amp;data)</argsstring>
+        <name>positive_negative_decomposition_wrapper</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::positive_negative_decomposition_wrapper</qualifiedname>
+        <param>
+          <type>data_type_tensor const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Default constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="28" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_meat.h" bodystart="27" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1aea291ff9d10481151891614980514079" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::positive_negative_decomposition_wrapper&lt; Tensor &gt;::positive_negative_decomposition_wrapper</definition>
+        <argsstring>(positive_negative_decomposition_wrapper const &amp;data)</argsstring>
+        <name>positive_negative_decomposition_wrapper</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::positive_negative_decomposition_wrapper</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1positive__negative__decomposition__wrapper" kindref="compound">positive_negative_decomposition_wrapper</ref> const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copy constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="30" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_meat.h" bodystart="44" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a9434b91de5606313d68ec83094f41781" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; Tensor &gt;::evaluate_Gij</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate_Gij</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::evaluate_Gij</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="95" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_meat.h" bodystart="80" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a332114511fd82f5955a2eeabc44f6880" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; Tensor &gt;::derivative_details</definition>
+        <argsstring>(Data &amp;data)</argsstring>
+        <name>derivative_details</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::derivative_details</qualifiedname>
+        <param>
+          <type>Data &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="98" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_meat.h" bodystart="102" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a0eeb29f0644c8f3400b644a431a3f204" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; Tensor &gt;::decompose_details</definition>
+        <argsstring>(Data &amp;data)</argsstring>
+        <name>decompose_details</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::decompose_details</qualifiedname>
+        <param>
+          <type>Data &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="101" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_meat.h" bodystart="123" bodyend="148"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1positive__negative__decomposition__wrapper_1a5702b99406da63dbec73fc3bce8d6f0f" prot="private" static="no">
+        <type>typename std::remove_const&lt; typename std::remove_reference&lt; _Tensor &gt;::type &gt;::type</type>
+        <definition>using detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::data_type_tensor =  typename std::remove_const&lt;typename std::remove_reference&lt;_Tensor&gt;::type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>data_type_tensor</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::data_type_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="22" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1positive__negative__decomposition__wrapper_1abed2fdfa90f1860a9963acf4ad386fdf" prot="public" static="no">
+        <type>typename data_type_tensor::value_type</type>
+        <definition>using detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::value_type =  typename data_type_tensor::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="24" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1positive__negative__decomposition__wrapper_1acba06aa720f9428b8bc8fd889d665587" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="25" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1positive__negative__decomposition__wrapper_1a6c2059ab63cc1885e63eb5bbd98e1a10" prot="public" static="no">
+        <type><ref refid="classdetail_1_1positive__negative__decomposition__wrapper" kindref="compound">positive_negative_decomposition_wrapper</ref>&lt; _Tensor &gt;</type>
+        <definition>using detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::this_type =  positive_negative_decomposition_wrapper&lt;_Tensor&gt;</definition>
+        <argsstring></argsstring>
+        <name>this_type</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::this_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="26" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classdetail_1_1positive__negative__decomposition__wrapper_1a4f9db0fee6e9a8cb170d7f12b2c6afa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class positive_negative_decomposition_pos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>positive_negative_decomposition_pos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::positive_negative_decomposition_pos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1positive__negative__decomposition__pos__wrapper" kindref="compound">positive_negative_decomposition_pos_wrapper</ref>&lt; <ref refid="classdetail_1_1positive__negative__decomposition__wrapper" kindref="compound">this_type</ref>, <ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="44" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classdetail_1_1positive__negative__decomposition__wrapper_1a0ef7faa7157e182dd02a8e1519145a39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class positive_negative_decomposition_neg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>positive_negative_decomposition_neg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::positive_negative_decomposition_neg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1positive__negative__decomposition__neg__wrapper" kindref="compound">positive_negative_decomposition_neg_wrapper</ref>&lt; <ref refid="classdetail_1_1positive__negative__decomposition__wrapper" kindref="compound">this_type</ref>, <ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="44" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classdetail_1_1positive__negative__decomposition__wrapper_1ac28b1287aefb89eadeecb6668c740e28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class positive_negative_decomposition_dpos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>positive_negative_decomposition_dpos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::positive_negative_decomposition_dpos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1positive__negative__decomposition__dpos__wrapper" kindref="compound">positive_negative_decomposition_dpos_wrapper</ref>&lt; <ref refid="classdetail_1_1positive__negative__decomposition__wrapper" kindref="compound">this_type</ref>, <ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="44" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classdetail_1_1positive__negative__decomposition__wrapper_1a362a4bd51329739a471f3041a8d03dff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class positive_negative_decomposition_dneg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>positive_negative_decomposition_dneg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::positive_negative_decomposition_dneg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1positive__negative__decomposition__dneg__wrapper" kindref="compound">positive_negative_decomposition_dneg_wrapper</ref>&lt; <ref refid="classdetail_1_1positive__negative__decomposition__wrapper" kindref="compound">this_type</ref>, <ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="44" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1a4582d0a66a5c3cef2833c256d5470ca4" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::is_pos</definition>
+        <argsstring></argsstring>
+        <name>is_pos</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::is_pos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="103" column="10" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1a26cbd02a62a8b3de2a3200d1d7a62503" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::is_neg</definition>
+        <argsstring></argsstring>
+        <name>is_neg</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::is_neg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="104" column="10" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1a070944eb69e325d16b0d6929886eb71f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::is_dpos</definition>
+        <argsstring></argsstring>
+        <name>is_dpos</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::is_dpos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="105" column="10" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1ac9bbaa8aca80105eae1d3dd6c6166c9f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::is_dneg</definition>
+        <argsstring></argsstring>
+        <name>is_dneg</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::is_dneg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="106" column="10" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1ab50e6b2219fd7f1507be9815ba760fd2" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 2 &gt;</type>
+        <definition>tensor&lt;value_type, data_type_tensor::dimension(), 2&gt; detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::data_pos</definition>
+        <argsstring></argsstring>
+        <name>data_pos</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::data_pos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="107" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1a92877e75eab98ca015e421a9b9e5769c" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 2 &gt;</type>
+        <definition>tensor&lt;value_type, data_type_tensor::dimension(), 2&gt; detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::data_neg</definition>
+        <argsstring></argsstring>
+        <name>data_neg</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::data_neg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="108" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1a47e3c76b7ebc06820e2b78464ef45e5e" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 4 &gt;</type>
+        <definition>tensor&lt;value_type, data_type_tensor::dimension(), 4&gt; detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::deriv_pos</definition>
+        <argsstring></argsstring>
+        <name>deriv_pos</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::deriv_pos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="109" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1a6dc8aea7eecd0cca500e7bce27121e43" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 4 &gt;</type>
+        <definition>tensor&lt;value_type, data_type_tensor::dimension(), 4&gt; detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::deriv_neg</definition>
+        <argsstring></argsstring>
+        <name>deriv_neg</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::deriv_neg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="110" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1aabfa3a20c3d5724aa3bc17946ad3d4ae" prot="private" static="no" mutable="no">
+        <type>std::array&lt; std::array&lt; value_type, data_type_tensor::dimension()&gt;, data_type_tensor::dimension()&gt;</type>
+        <definition>std::array&lt;std::array&lt;value_type, data_type_tensor::dimension()&gt;, data_type_tensor::dimension()&gt; detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::Gij</definition>
+        <argsstring></argsstring>
+        <name>Gij</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::Gij</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="111" column="16" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1positive__negative__decomposition__wrapper_1adfc2496f5c45e71b64307ae250a27702" prot="private" static="no" mutable="no">
+        <type><ref refid="classdetail_1_1eigen__decomposition__wrapper" kindref="compound">eigen_decomposition_wrapper</ref>&lt; _Tensor &gt;</type>
+        <definition>eigen_decomposition_wrapper&lt;_Tensor&gt; detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::eigen_decomposition</definition>
+        <argsstring></argsstring>
+        <name>eigen_decomposition</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::eigen_decomposition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="112" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a572ce1db361e9207d9fb0b0c5548a637" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::positive</definition>
+        <argsstring>() const</argsstring>
+        <name>positive</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::positive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="32" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1ab5e4834b3e3d798a7bb2d872291e9b1e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::negative</definition>
+        <argsstring>() const</argsstring>
+        <name>negative</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::negative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="36" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="36" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a610d13d7534eb53ad37ea5d783a80b98" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::dpositive</definition>
+        <argsstring>() const</argsstring>
+        <name>dpositive</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::dpositive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="40" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="40" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a146e90776c25a9706a3bac1c85ad60f4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::dnegative</definition>
+        <argsstring>() const</argsstring>
+        <name>dnegative</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::dnegative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="44" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="44" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1acf8253f67d5b82c74771a8c7ee4efb3c" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::evaluate_positive</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate_positive</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::evaluate_positive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="54" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="54" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1ae5433cd61c842863ac144ca0b59a9ff6" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::evaluate_negative</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate_negative</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::evaluate_negative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="62" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="62" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1af546dbe8a1889fc26ff0e3e3fba3bb19" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::evaluate_dpositive</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate_dpositive</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::evaluate_dpositive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="70" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="70" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a018e3845d24dd1249eb6fda7b27a3169" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::evaluate_dnegative</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate_dnegative</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::evaluate_dnegative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="79" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="79" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1positive__negative__decomposition__wrapper_1a801b155981b997160a042f7aef835671" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::positive_negative_decomposition_wrapper&lt; _Tensor &gt;::decompose_eigen</definition>
+        <argsstring>()</argsstring>
+        <name>decompose_eigen</name>
+        <qualifiedname>detail::positive_negative_decomposition_wrapper::decompose_eigen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="88" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="88" bodyend="92"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" line="20" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/positive_negative_decomposition_wrapper_bones.h" bodystart="21" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a92877e75eab98ca015e421a9b9e5769c" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>data_neg</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1ab50e6b2219fd7f1507be9815ba760fd2" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>data_pos</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a5702b99406da63dbec73fc3bce8d6f0f" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>data_type_tensor</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a0eeb29f0644c8f3400b644a431a3f204" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>decompose_details</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a801b155981b997160a042f7aef835671" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>decompose_eigen</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a6dc8aea7eecd0cca500e7bce27121e43" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>deriv_neg</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a47e3c76b7ebc06820e2b78464ef45e5e" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>deriv_pos</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a332114511fd82f5955a2eeabc44f6880" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>derivative_details</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a146e90776c25a9706a3bac1c85ad60f4" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>dnegative</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a610d13d7534eb53ad37ea5d783a80b98" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>dpositive</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1adfc2496f5c45e71b64307ae250a27702" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>eigen_decomposition</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a018e3845d24dd1249eb6fda7b27a3169" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>evaluate_dnegative</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1af546dbe8a1889fc26ff0e3e3fba3bb19" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>evaluate_dpositive</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a9434b91de5606313d68ec83094f41781" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>evaluate_Gij</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1ae5433cd61c842863ac144ca0b59a9ff6" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>evaluate_negative</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1acf8253f67d5b82c74771a8c7ee4efb3c" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>evaluate_positive</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1aabfa3a20c3d5724aa3bc17946ad3d4ae" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>Gij</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1ac9bbaa8aca80105eae1d3dd6c6166c9f" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>is_dneg</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a070944eb69e325d16b0d6929886eb71f" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>is_dpos</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a26cbd02a62a8b3de2a3200d1d7a62503" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>is_neg</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a4582d0a66a5c3cef2833c256d5470ca4" prot="private" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>is_pos</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1ab5e4834b3e3d798a7bb2d872291e9b1e" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>negative</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a572ce1db361e9207d9fb0b0c5548a637" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>positive</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a362a4bd51329739a471f3041a8d03dff" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>positive_negative_decomposition_dneg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1ac28b1287aefb89eadeecb6668c740e28" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>positive_negative_decomposition_dpos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 4 &gt; &gt;</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a0ef7faa7157e182dd02a8e1519145a39" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>positive_negative_decomposition_neg_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a4f9db0fee6e9a8cb170d7f12b2c6afa8" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>positive_negative_decomposition_pos_wrapper&lt; this_type, tensor&lt; value_type, data_type_tensor::dimension(), 2 &gt; &gt;</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1af299690514058297e96e08fd1bc35809" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>positive_negative_decomposition_wrapper</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1aea291ff9d10481151891614980514079" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>positive_negative_decomposition_wrapper</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1acba06aa720f9428b8bc8fd889d665587" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>size_type</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1a6c2059ab63cc1885e63eb5bbd98e1a10" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>this_type</name></member>
+      <member refid="classdetail_1_1positive__negative__decomposition__wrapper_1abed2fdfa90f1860a9963acf4ad386fdf" prot="public" virt="non-virtual"><scope>detail::positive_negative_decomposition_wrapper</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

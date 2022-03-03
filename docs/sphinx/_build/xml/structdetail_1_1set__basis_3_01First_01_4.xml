@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1set__basis_3_01First_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::set_basis&lt; First &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename First</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1set__basis_3_01First_01_4_1a749b716d9702c4f8dac3f52eadc0f2b7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Tensor</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::set_basis&lt; First &gt;::set</definition>
+        <argsstring>(Tensor &amp;basis, Tuple const &amp;tuple, T const value)</argsstring>
+        <name>set</name>
+        <qualifiedname>detail::set_basis&lt; First &gt;::set</qualifiedname>
+        <param>
+          <type>Tensor &amp;</type>
+          <declname>basis</declname>
+        </param>
+        <param>
+          <type>Tuple const &amp;</type>
+          <declname>tuple</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_sym_wrapper_bones.h" line="82" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_sym_wrapper_bones.h" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail_1_1set__basis_3_01First_01_4_1ac8aafa2eab80a06a48239b3039909656" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Tensor</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::set_basis&lt; First &gt;::add</definition>
+        <argsstring>(Tensor &amp;basis, Tuple const &amp;tuple, T const value)</argsstring>
+        <name>add</name>
+        <qualifiedname>detail::set_basis&lt; First &gt;::add</qualifiedname>
+        <param>
+          <type>Tensor &amp;</type>
+          <declname>basis</declname>
+        </param>
+        <param>
+          <type>Tuple const &amp;</type>
+          <declname>tuple</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_sym_wrapper_bones.h" line="87" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_sym_wrapper_bones.h" bodystart="87" bodyend="89"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_sym_wrapper_bones.h" line="79" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_sym_wrapper_bones.h" bodystart="80" bodyend="90"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1set__basis_3_01First_01_4_1ac8aafa2eab80a06a48239b3039909656" prot="public" virt="non-virtual"><scope>detail::set_basis&lt; First &gt;</scope><name>add</name></member>
+      <member refid="structdetail_1_1set__basis_3_01First_01_4_1a749b716d9702c4f8dac3f52eadc0f2b7" prot="public" virt="non-virtual"><scope>detail::set_basis&lt; First &gt;</scope><name>set</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

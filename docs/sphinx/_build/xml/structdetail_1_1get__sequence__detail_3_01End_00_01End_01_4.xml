@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__sequence__detail_3_01End_00_01End_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_sequence_detail&lt; End, End &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>End</declname>
+        <defname>End</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1get__sequence__detail_3_01End_00_01End_01_4_1ac1da335545df4b026445d71d8880adbd" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t ...</type>
+            <declname>NumbersResult</declname>
+            <defname>NumbersResult</defname>
+          </param>
+          <param>
+            <type>std::size_t ...</type>
+            <declname>Numbers</declname>
+            <defname>Numbers</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::get_sequence_detail&lt; End, End &gt;::apply</definition>
+        <argsstring>(sequence&lt; NumbersResult... &gt;, sequence&lt; Numbers... &gt;)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::get_sequence_detail&lt; End, End &gt;::apply</qualifiedname>
+        <param>
+          <type><ref refid="structsequence" kindref="compound">sequence</ref>&lt; NumbersResult... &gt;</type>
+        </param>
+        <param>
+          <type><ref refid="structsequence" kindref="compound">sequence</ref>&lt; Numbers... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="458" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="458" bodyend="460"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="455" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="456" bodyend="461"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__sequence__detail_3_01End_00_01End_01_4_1ac1da335545df4b026445d71d8880adbd" prot="public" virt="non-virtual"><scope>detail::get_sequence_detail&lt; End, End &gt;</scope><name>apply</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

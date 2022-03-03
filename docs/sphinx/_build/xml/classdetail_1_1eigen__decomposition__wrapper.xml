@@ -1,0 +1,855 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1eigen__decomposition__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::eigen_decomposition_wrapper</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a99bfd3aad07863a5ea81a82e00849238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::eigen_decomposition_wrapper&lt; Tensor &gt;::eigen_decomposition_wrapper</definition>
+        <argsstring>(eigen_decomposition_wrapper const &amp;data)</argsstring>
+        <name>eigen_decomposition_wrapper</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigen_decomposition_wrapper</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1eigen__decomposition__wrapper" kindref="compound">eigen_decomposition_wrapper</ref> const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copy constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="52" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="42" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a909522cd3c8e6611a17c79f683ded0c8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::decompose</definition>
+        <argsstring>()</argsstring>
+        <name>decompose</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::decompose</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="54" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="179" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a763014b007363485613b12c7a6840c91" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::decompose_eigenbasis</definition>
+        <argsstring>()</argsstring>
+        <name>decompose_eigenbasis</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::decompose_eigenbasis</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="56" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="56" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a56b474d2da5aa4a438ec67e21309bbb7" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::eigenvalues</definition>
+        <argsstring>() const</argsstring>
+        <name>eigenvalues</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigenvalues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="58" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="191" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a01297c4780132da0850f11345a5f8e98" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::eigenvectors</definition>
+        <argsstring>() const</argsstring>
+        <name>eigenvectors</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigenvectors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="60" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="196" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a2e81dd100db63a42da763a3f4b57d388" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::eigenbasis</definition>
+        <argsstring>() const</argsstring>
+        <name>eigenbasis</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigenbasis</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="62" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a7f88f8b4abfd16a7c267886ce9919db5" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::all_eigenvalues_repeated</definition>
+        <argsstring>() const</argsstring>
+        <name>all_eigenvalues_repeated</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::all_eigenvalues_repeated</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="64" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="78" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1ab4e5d7c54f14fd4b0ac6456efdd17b8e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::pair_eigenvalues_repeated</definition>
+        <argsstring>() const</argsstring>
+        <name>pair_eigenvalues_repeated</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::pair_eigenvalues_repeated</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="66" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a8b5d1682c0f6d58b7172d2baef393cd7" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::non_repeated_eigenvalues_index</definition>
+        <argsstring>() const</argsstring>
+        <name>non_repeated_eigenvalues_index</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::non_repeated_eigenvalues_index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="68" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="88" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1af014fd8cd0dbd3c8cabfaf75ba19b14c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::evaluate_eigenbasis</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate_eigenbasis</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::evaluate_eigenbasis</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="70" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="155" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a2520f7ccce9cbc67d90b6c1d4d7d0124" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::get_repeated_eigenvalues</definition>
+        <argsstring>()</argsstring>
+        <name>get_repeated_eigenvalues</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::get_repeated_eigenvalues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="85" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="109" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a15a0b4b9c0634da45b9a2935383cb4c1" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::evaluate_detail_2D</definition>
+        <argsstring>(bool eigenvectors, value_type const _a00, value_type const _a01, value_type const _a10, value_type const _a11)</argsstring>
+        <name>evaluate_detail_2D</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::evaluate_detail_2D</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>eigenvectors</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a00</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a01</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a10</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a11</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="87" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="201" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1af8853ca41d0a25701e4f08bfa55ca69a" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::evaluate_detail_3D</definition>
+        <argsstring>(bool eigenvectors, value_type const _a00, value_type const _a01, value_type const _a02, value_type const _a11, value_type const _a12, value_type const _a22)</argsstring>
+        <name>evaluate_detail_3D</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::evaluate_detail_3D</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>eigenvectors</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a00</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a01</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a02</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a11</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a12</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>_a22</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="89" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="277" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a0d53dc0e02a25153503b37606d7bd23b" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::compute_orthogonal_complement</definition>
+        <argsstring>(tensor1 const &amp;W, tensor1 &amp;U, tensor1 &amp;V) const</argsstring>
+        <name>compute_orthogonal_complement</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::compute_orthogonal_complement</qualifiedname>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor1</ref> const &amp;</type>
+          <declname>W</declname>
+        </param>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor1</ref> &amp;</type>
+          <declname>U</declname>
+        </param>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor1</ref> &amp;</type>
+          <declname>V</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="91" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="401" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a58c9894582f3cee22c8ca076cb9ae74f" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::compute_eigenvector0</definition>
+        <argsstring>(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22, value_type const eval0, tensor1 &amp;evec0) const</argsstring>
+        <name>compute_eigenvector0</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::compute_eigenvector0</qualifiedname>
+        <param>
+          <type>value_type const</type>
+          <declname>a00</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a01</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a02</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a11</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a12</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a22</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>eval0</declname>
+        </param>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor1</ref> &amp;</type>
+          <declname>evec0</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="93" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="420" bodyend="460"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1aea4750340748c08f932ab948b789fe40" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::compute_eigenvector1</definition>
+        <argsstring>(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22, tensor1 const &amp;evec0, value_type const eval1, tensor1 &amp;evec1) const</argsstring>
+        <name>compute_eigenvector1</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::compute_eigenvector1</qualifiedname>
+        <param>
+          <type>value_type const</type>
+          <declname>a00</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a01</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a02</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a11</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a12</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>a22</declname>
+        </param>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor1</ref> const &amp;</type>
+          <declname>evec0</declname>
+        </param>
+        <param>
+          <type>value_type const</type>
+          <declname>eval1</declname>
+        </param>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor1</ref> &amp;</type>
+          <declname>evec1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="95" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="463" bodyend="550"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a4f01ca918c1171713dcb31197f3c9a5b" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::sort_eigenvalues</definition>
+        <argsstring>(int sortType, bool isRotation, bool eigenvectors)</argsstring>
+        <name>sort_eigenvalues</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::sort_eigenvalues</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>sortType</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isRotation</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>eigenvectors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="97" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="553" bodyend="624"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1ac1e5a7fa3e00c9b4882117f110cb57f8" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::cross</definition>
+        <argsstring>(value_type *data, value_type const *const data_lhs, value_type const *const data_rhs)</argsstring>
+        <name>cross</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::cross</qualifiedname>
+        <param>
+          <type>value_type *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>value_type const *const</type>
+          <declname>data_lhs</declname>
+        </param>
+        <param>
+          <type>value_type const *const</type>
+          <declname>data_rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="99" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="394" bodyend="398"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1ae8a73ae8267db37315cbb9587ad1ad97" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::dot</definition>
+        <argsstring>(value_type const *const data_lhs, value_type const *const data_rhs)</argsstring>
+        <name>dot</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::dot</qualifiedname>
+        <param>
+          <type>value_type const *const</type>
+          <declname>data_lhs</declname>
+        </param>
+        <param>
+          <type>value_type const *const</type>
+          <declname>data_rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="101" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="389" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1ace64c527b27e46f9cac786387cbee187" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; Tensor &gt;::mul</definition>
+        <argsstring>(value_type *data, value_type const *const data_lhs, value_type const *const data_rhs)</argsstring>
+        <name>mul</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::mul</qualifiedname>
+        <param>
+          <type>value_type *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>value_type const *const</type>
+          <declname>data_lhs</declname>
+        </param>
+        <param>
+          <type>value_type const *const</type>
+          <declname>data_rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="103" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_meat.h" bodystart="381" bodyend="386"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1eigen__decomposition__wrapper_1a3c0df9a8abde6b2cc58bd059466978b8" prot="private" static="no">
+        <type>typename std::remove_const&lt; typename std::remove_reference&lt; _Tensor &gt;::type &gt;::type</type>
+        <definition>using detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::data_type_tensor =  typename std::remove_const&lt;typename std::remove_reference&lt;_Tensor&gt;::type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>data_type_tensor</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::data_type_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="33" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1eigen__decomposition__wrapper_1ac12baedcab73157cb6374f680dc962a5" prot="public" static="no">
+        <type>typename data_type_tensor::value_type</type>
+        <definition>using detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::value_type =  typename data_type_tensor::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="42" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1eigen__decomposition__wrapper_1ada009a07f51e3ee184bf0a41fe6e72b6" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="43" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1eigen__decomposition__wrapper_1ac35121c733469519d72d04d60840be3e" prot="public" static="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 1 &gt;</type>
+        <definition>using detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::tensor1 =  tensor&lt;value_type, data_type_tensor::dimension(), 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>tensor1</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::tensor1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="44" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1eigen__decomposition__wrapper_1ad9952e26374b40f9a1379d72a74396f0" prot="public" static="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, data_type_tensor::dimension(), 2 &gt;</type>
+        <definition>using detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::tensor2 =  tensor&lt;value_type, data_type_tensor::dimension(), 2&gt;</definition>
+        <argsstring></argsstring>
+        <name>tensor2</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::tensor2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="45" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a8fea4d217c54719c9c6abb2292432ff4" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::Dim</definition>
+        <argsstring></argsstring>
+        <name>Dim</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::Dim</qualifiedname>
+        <initializer>{data_type_tensor::dimension()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="34" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1ad3eb404cd5492f46ec8d1bc0211d02d5" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::Rank</definition>
+        <argsstring></argsstring>
+        <name>Rank</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::Rank</qualifiedname>
+        <initializer>{data_type_tensor::rank()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="35" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classdetail_1_1eigen__decomposition__wrapper_1a5effce9c8743080aaa748e3dac9c2519" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class eigen_decomposition_basis_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>eigen_decomposition_basis_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigen_decomposition_basis_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1eigen__decomposition__basis__wrapper" kindref="compound">eigen_decomposition_basis_wrapper</ref>&lt; <ref refid="classdetail_1_1eigen__decomposition__wrapper" kindref="compound">eigen_decomposition_wrapper</ref>&lt; _Tensor &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="35" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classdetail_1_1eigen__decomposition__wrapper_1a50e5696118f7751895ea1442b053acf4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class eigen_decomposition_vectors_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>eigen_decomposition_vectors_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigen_decomposition_vectors_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1eigen__decomposition__vectors__wrapper" kindref="compound">eigen_decomposition_vectors_wrapper</ref>&lt; <ref refid="classdetail_1_1eigen__decomposition__wrapper" kindref="compound">eigen_decomposition_wrapper</ref>&lt; _Tensor &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="35" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classdetail_1_1eigen__decomposition__wrapper_1ad584a4ffada4e307365bb8a946a5212c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class eigen_decomposition_values_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>eigen_decomposition_values_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigen_decomposition_values_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1eigen__decomposition__values__wrapper" kindref="compound">eigen_decomposition_values_wrapper</ref>&lt; <ref refid="classdetail_1_1eigen__decomposition__wrapper" kindref="compound">eigen_decomposition_wrapper</ref>&lt; _Tensor &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="35" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a97e407b54f4e9aad607edf431f92edfa" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor2</ref></type>
+        <definition>tensor2 detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="106" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a5bff1f9b20af6d77aaded685bf21e834" prot="private" static="no" mutable="no">
+        <type>std::array&lt; value_type, Dim &gt;</type>
+        <definition>std::array&lt;value_type, Dim&gt; detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_eigval</definition>
+        <argsstring></argsstring>
+        <name>_eigval</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_eigval</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="107" column="16" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a7b3c3e696abd9cd563fb5bd825ced614" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classtensor" kindref="compound">tensor1</ref>, Dim &gt;</type>
+        <definition>std::array&lt;tensor1, Dim&gt; detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_eigvectors</definition>
+        <argsstring></argsstring>
+        <name>_eigvectors</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_eigvectors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="108" column="19" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a3702e6f175647d5a97b1412467301d2f" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classtensor" kindref="compound">tensor2</ref>, Dim &gt;</type>
+        <definition>std::array&lt;tensor2, Dim&gt; detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_eig_basis</definition>
+        <argsstring></argsstring>
+        <name>_eig_basis</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_eig_basis</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="109" column="19" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a876d63ecb49d612d36bf3daa16190ece" prot="private" static="no" mutable="no">
+        <type>std::array&lt; size_type, Dim &gt;</type>
+        <definition>std::array&lt;size_type, Dim&gt; detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_non_repeated_eigenvalues</definition>
+        <argsstring></argsstring>
+        <name>_non_repeated_eigenvalues</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_non_repeated_eigenvalues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="110" column="16" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1afea0d0238ac9fe2cf9b468c8c62a7f29" prot="private" static="no" mutable="no">
+        <type>std::array&lt; size_type, Dim &gt;</type>
+        <definition>std::array&lt;size_type, Dim&gt; detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_permut</definition>
+        <argsstring></argsstring>
+        <name>_permut</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_permut</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="111" column="17" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a347953a444afd994a8f9a421df274b96" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_all_repeated_eigenvalues</definition>
+        <argsstring></argsstring>
+        <name>_all_repeated_eigenvalues</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_all_repeated_eigenvalues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="112" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a6440d90440e06e80e70d3e89f06e5c44" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_pair_repeated_eigenvalues</definition>
+        <argsstring></argsstring>
+        <name>_pair_repeated_eigenvalues</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_pair_repeated_eigenvalues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="113" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1eigen__decomposition__wrapper_1a469f8ba68c9effe933359c419ec64061" prot="private" static="no" mutable="no">
+        <type>_Tensor</type>
+        <definition>_Tensor detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::_data_base</definition>
+        <argsstring></argsstring>
+        <name>_data_base</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::_data_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="114" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a3aa650716aeff5fd64fc78a1851a26c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::eigen_decomposition_wrapper</definition>
+        <argsstring>(_Tensor const &amp;data)</argsstring>
+        <name>eigen_decomposition_wrapper</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::eigen_decomposition_wrapper</qualifiedname>
+        <param>
+          <type>_Tensor const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="50" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1ad525940a641d758b5cd6045325e184a8" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr size_type</type>
+        <definition>constexpr size_type detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::number_non_repeated_eigenvalues</definition>
+        <argsstring>() const</argsstring>
+        <name>number_non_repeated_eigenvalues</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::number_non_repeated_eigenvalues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="72" column="32" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="72" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1eigen__decomposition__wrapper_1a13c779afd737f8c97aa65a9e100d8a45" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::eigen_decomposition_wrapper&lt; _Tensor &gt;::permutation</definition>
+        <argsstring>() const</argsstring>
+        <name>permutation</name>
+        <qualifiedname>detail::eigen_decomposition_wrapper::permutation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="80" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="80" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" line="31" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/eigen_decomposition_bones.h" bodystart="32" bodyend="115"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a347953a444afd994a8f9a421df274b96" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_all_repeated_eigenvalues</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a97e407b54f4e9aad607edf431f92edfa" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_data</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a469f8ba68c9effe933359c419ec64061" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_data_base</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a3702e6f175647d5a97b1412467301d2f" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_eig_basis</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a5bff1f9b20af6d77aaded685bf21e834" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_eigval</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a7b3c3e696abd9cd563fb5bd825ced614" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_eigvectors</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a876d63ecb49d612d36bf3daa16190ece" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_non_repeated_eigenvalues</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a6440d90440e06e80e70d3e89f06e5c44" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_pair_repeated_eigenvalues</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1afea0d0238ac9fe2cf9b468c8c62a7f29" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>_permut</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a7f88f8b4abfd16a7c267886ce9919db5" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>all_eigenvalues_repeated</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a58c9894582f3cee22c8ca076cb9ae74f" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>compute_eigenvector0</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1aea4750340748c08f932ab948b789fe40" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>compute_eigenvector1</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a0d53dc0e02a25153503b37606d7bd23b" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>compute_orthogonal_complement</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ac1e5a7fa3e00c9b4882117f110cb57f8" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>cross</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a3c0df9a8abde6b2cc58bd059466978b8" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>data_type_tensor</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a909522cd3c8e6611a17c79f683ded0c8" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>decompose</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a763014b007363485613b12c7a6840c91" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>decompose_eigenbasis</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a8fea4d217c54719c9c6abb2292432ff4" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>Dim</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ae8a73ae8267db37315cbb9587ad1ad97" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>dot</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a5effce9c8743080aaa748e3dac9c2519" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigen_decomposition_basis_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ad584a4ffada4e307365bb8a946a5212c" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigen_decomposition_values_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a50e5696118f7751895ea1442b053acf4" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigen_decomposition_vectors_wrapper&lt; eigen_decomposition_wrapper&lt; _Tensor &gt; &gt;</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a3aa650716aeff5fd64fc78a1851a26c0" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigen_decomposition_wrapper</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a99bfd3aad07863a5ea81a82e00849238" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigen_decomposition_wrapper</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a2e81dd100db63a42da763a3f4b57d388" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigenbasis</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a56b474d2da5aa4a438ec67e21309bbb7" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigenvalues</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a01297c4780132da0850f11345a5f8e98" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>eigenvectors</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a15a0b4b9c0634da45b9a2935383cb4c1" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>evaluate_detail_2D</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1af8853ca41d0a25701e4f08bfa55ca69a" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>evaluate_detail_3D</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1af014fd8cd0dbd3c8cabfaf75ba19b14c" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>evaluate_eigenbasis</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a2520f7ccce9cbc67d90b6c1d4d7d0124" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>get_repeated_eigenvalues</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ace64c527b27e46f9cac786387cbee187" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>mul</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a8b5d1682c0f6d58b7172d2baef393cd7" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>non_repeated_eigenvalues_index</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ad525940a641d758b5cd6045325e184a8" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>number_non_repeated_eigenvalues</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ab4e5d7c54f14fd4b0ac6456efdd17b8e" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>pair_eigenvalues_repeated</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a13c779afd737f8c97aa65a9e100d8a45" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>permutation</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ad3eb404cd5492f46ec8d1bc0211d02d5" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>Rank</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ada009a07f51e3ee184bf0a41fe6e72b6" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>size_type</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1a4f01ca918c1171713dcb31197f3c9a5b" prot="private" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>sort_eigenvalues</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ac35121c733469519d72d04d60840be3e" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>tensor1</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ad9952e26374b40f9a1379d72a74396f0" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>tensor2</name></member>
+      <member refid="classdetail_1_1eigen__decomposition__wrapper_1ac12baedcab73157cb6374f680dc962a5" prot="public" virt="non-virtual"><scope>detail::eigen_decomposition_wrapper</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

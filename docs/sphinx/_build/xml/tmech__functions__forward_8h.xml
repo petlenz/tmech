@@ -1,0 +1,515 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="tmech__functions__forward_8h" kind="file" language="C++">
+    <compoundname>tmech_functions_forward.h</compoundname>
+    <includedby refid="tmech_8h" local="yes">/home/peter/SynologyDrive/Drive/tmech/include/tmech/tmech.h</includedby>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="tmech__functions__forward_8h_1ab4bf99817f1ddc9096b9541284819a9e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _VariableLHS</type>
+          </param>
+          <param>
+            <type>typename _VariableRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto otimes</definition>
+        <argsstring>(_VariableLHS, _VariableRHS)</argsstring>
+        <name>otimes</name>
+        <param>
+          <type>_VariableLHS</type>
+        </param>
+        <param>
+          <type>_VariableRHS</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="5" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="7" bodyend="19" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="5" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1ab852b9f3caff1ac5b8c446cd653835dc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _VariableLHS</type>
+          </param>
+          <param>
+            <type>typename _VariableRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto otimesl</definition>
+        <argsstring>(_VariableLHS, _VariableRHS)</argsstring>
+        <name>otimesl</name>
+        <param>
+          <type>_VariableLHS</type>
+        </param>
+        <param>
+          <type>_VariableRHS</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="8" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="24" bodyend="36" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="8" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1aafe2036104e4628d81a32d5cbb3b1d19" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _SequenceLHS</type>
+          </param>
+          <param>
+            <type>typename _SequenceRHS</type>
+          </param>
+          <param>
+            <type>typename _VariableLHS</type>
+          </param>
+          <param>
+            <type>typename _VariableRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto outer_product</definition>
+        <argsstring>(_VariableLHS, _VariableRHS)</argsstring>
+        <name>outer_product</name>
+        <param>
+          <type>_VariableLHS</type>
+        </param>
+        <param>
+          <type>_VariableRHS</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="14" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="58" bodyend="60" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="14" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a9185290f5a5291db330153419b261ed5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _VariableLHS</type>
+          </param>
+          <param>
+            <type>typename _VariableRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto dcontract</definition>
+        <argsstring>(_VariableLHS, _VariableRHS)</argsstring>
+        <name>dcontract</name>
+        <param>
+          <type>_VariableLHS</type>
+        </param>
+        <param>
+          <type>_VariableRHS</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="17" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="65" bodyend="83" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="17" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a3bd9565a89d123d76aa6990d68e58bf2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _SequenceLHS</type>
+          </param>
+          <param>
+            <type>typename _SequenceRHS</type>
+          </param>
+          <param>
+            <type>typename _VariableLHS</type>
+          </param>
+          <param>
+            <type>typename _VariableRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto inner_product</definition>
+        <argsstring>(_VariableLHS, _VariableRHS)</argsstring>
+        <name>inner_product</name>
+        <param>
+          <type>_VariableLHS</type>
+        </param>
+        <param>
+          <type>_VariableRHS</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="20" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="88" bodyend="90" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="20" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a9ba4fa7ad16baf839968e94507aca730" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Sequence</type>
+          </param>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto basis_change</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>basis_change</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="23" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="94" bodyend="96" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="23" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a0cf6c2025aed5471ce7fb131396c4bc3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto trans</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>trans</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="26" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="100" bodyend="110" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="26" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a74bc00e43a53cc35e48593fb5eb28c32" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto trace</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>trace</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="29" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="114" bodyend="120" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="29" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1ade9770bde66377aebe1a0daa4bd6e249" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto det</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>det</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="32" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="124" bodyend="130" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="32" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a21465fd8e21eb91c0885332664628052" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto dev</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>dev</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="35" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="134" bodyend="143" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="35" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a241b7a60e488cd795315b18cdc64378f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto vol</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>vol</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="38" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="167" bodyend="176" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="38" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a96209b500676580354872c5eb33794fe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto sym</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>sym</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="41" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="147" bodyend="153" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="41" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a429413a3479a997db6626be3d967ac66" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto skew</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>skew</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="44" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="157" bodyend="163" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="44" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a697e4bed1c6c52fb8cf6fed7489b4c59" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto adj</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>adj</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="47" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="180" bodyend="186" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="47" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a620655894906a29a08be617cfeefe822" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto cof</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>cof</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="50" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="190" bodyend="196" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="50" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tmech__functions__forward_8h_1a41fcfeda6be1b3968065898638878d5d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Expression</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto inv</definition>
+        <argsstring>(_Expression)</argsstring>
+        <name>inv</name>
+        <param>
+          <type>_Expression</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" line="53" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_implementation.h" bodystart="200" bodyend="206" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h" declline="53" declcolumn="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>TMECH_FUNCTIONS_FORWARD_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TMECH_FUNCTIONS_FORWARD_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>otimes(_VariableLHS,<sp/>_VariableRHS);</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>otimesl(_VariableLHS,<sp/>_VariableRHS);</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>otimesl(_VariableLHS,<sp/>_VariableRHS);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>outer_product(_VariableLHS,<sp/>_VariableRHS);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dcontract(_VariableLHS,<sp/>_VariableRHS);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_VariableRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inner_product(_VariableLHS,<sp/>_VariableRHS);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Sequence,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>basis_change(_Expression);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>trans(_Expression);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>trace(_Expression);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>det(_Expression);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dev(_Expression);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vol(_Expression);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sym(_Expression);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>skew(_Expression);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>adj(_Expression);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cof(_Expression);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Expression,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inv(_Expression);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>TMECH_FUNCTIONS_FORWARD_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tmech_functions_forward.h"/>
+  </compounddef>
+</doxygen>

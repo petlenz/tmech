@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structis__tensor__type_3_01detail_1_1exp__derivative__tensor__wrapper_3_01__Father_00_01__Tensor_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>is_tensor_type&lt; detail::exp_derivative_tensor_wrapper&lt; _Father, _Tensor &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Father</type>
+      </param>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structis__tensor__type_3_01detail_1_1exp__derivative__tensor__wrapper_3_01__Father_00_01__Tensor_01_4_01_4_1a0b7a1f02b78a7b3a50adba6bca03cf83" prot="public" static="no">
+        <type>std::true_type</type>
+        <definition>using is_tensor_type&lt; detail::exp_derivative_tensor_wrapper&lt; _Father, _Tensor &gt; &gt;::type =  std::true_type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>is_tensor_type&lt; detail::exp_derivative_tensor_wrapper&lt; _Father, _Tensor &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="238" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structis__tensor__type_3_01detail_1_1exp__derivative__tensor__wrapper_3_01__Father_00_01__Tensor_01_4_01_4_1ac72d4d66bd568f7813e1edac4ac4c2bd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_tensor_type&lt; detail::exp_derivative_tensor_wrapper&lt; _Father, _Tensor &gt; &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>is_tensor_type&lt; detail::exp_derivative_tensor_wrapper&lt; _Father, _Tensor &gt; &gt;::value</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="239" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="236" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="237" bodyend="240"/>
+    <listofallmembers>
+      <member refid="structis__tensor__type_3_01detail_1_1exp__derivative__tensor__wrapper_3_01__Father_00_01__Tensor_01_4_01_4_1a0b7a1f02b78a7b3a50adba6bca03cf83" prot="public" virt="non-virtual"><scope>is_tensor_type&lt; detail::exp_derivative_tensor_wrapper&lt; _Father, _Tensor &gt; &gt;</scope><name>type</name></member>
+      <member refid="structis__tensor__type_3_01detail_1_1exp__derivative__tensor__wrapper_3_01__Father_00_01__Tensor_01_4_01_4_1ac72d4d66bd568f7813e1edac4ac4c2bd" prot="public" virt="non-virtual"><scope>is_tensor_type&lt; detail::exp_derivative_tensor_wrapper&lt; _Father, _Tensor &gt; &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

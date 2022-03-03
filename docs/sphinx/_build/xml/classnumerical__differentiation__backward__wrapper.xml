@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classnumerical__differentiation__backward__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>numerical_differentiation_backward_wrapper</compoundname>
+    <includes local="no">numerical_differentiation_central_sym_wrapper_bones.h</includes>
+    <briefdescription>
+<para>Class for the numerical differentiation of scalar, second order and fourth order tensor valued functions. The differentiation is based on the backward scheme, see e.g. <ulink url="https://en.wikipedia.org/wiki/Numerical_differentiation">numerical differentiation</ulink>, <ulink url="https://en.wikipedia.org/wiki/Finite_difference">finite difference</ulink>. Note, that the differentiation rule given in <ulink url="https://onlinelibrary.wiley.com/doi/abs/10.1002/zamm.200410242">O. Kintzel</ulink>. is used. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Scalar valued functions of second-order tensors <formula id="1">\[ \frac{\partial \phi}{\partial C_{ij}} = \frac{\phi[\SecondT{C}] - \phi[\SecondT{C}_{ij}^\epsilon]}{\epsilon} + \mathcal{O}(\epsilon), \]</formula> where <formula id="2">$\SecondT{C}_{ij}^\epsilon= \SecondT{C} - \epsilon ~\Ei\otimes\Ej$</formula>.</para>
+<para>Second-order valued tensor functions wrt. a second order tensor <formula id="3">\[ \frac{\partial \SecondT{S}}{\partial C_{ij}} = \frac{\SecondT{S}[\SecondT{C}] - \SecondT{S}[\SecondT{C}_{ij}^\epsilon]}{\epsilon} + \mathcal{O}(\epsilon), \]</formula> where <formula id="4">$\SecondT{C}_{ij}^{+\epsilon}= \SecondT{C} +\frac{\epsilon}{2} ~\Ei\otimes\Ej$</formula></para>
+<para>Fourth-order valued tensor functions wrt. a second order tensor <formula id="5">\[ \frac{\partial \FourthT{S}}{\partial C_{ij}} = \frac{\FourthT{S}[\SecondT{C}] - \FourthT{S}[\SecondT{C}_{ij}^\epsilon]}{\epsilon} + \mathcal{O}(\epsilon), \]</formula> where <formula id="2">$\SecondT{C}_{ij}^\epsilon= \SecondT{C} - \epsilon ~\Ei\otimes\Ej$</formula></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data type of the function, which should be differentiate wrt. a tensor. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data type of the point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_sym_wrapper_bones.h" line="201" column="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__function__wrapper_3_01__Variable_00_01cof__wrapper_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper&lt; _Variable, tensor_function_wrapper&lt; _Variable, cof_wrapper &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Variable</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__function__wrapper_3_01__Variable_00_01cof__wrapper_01_4_01_4_1a3cd069db498347a3c25afcbb9d32e7e3" prot="private" static="no">
+        <type><ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; <ref refid="classdetail_1_1function__wrapper" kindref="compound">function_wrapper</ref>&lt; _Variable, <ref refid="structdetail_1_1det__wrapper" kindref="compound">det_wrapper</ref> &gt;, decltype(trans(<ref refid="classdetail_1_1inv__tensor" kindref="compound">inv_tensor</ref>&lt; _Variable &gt;())), op_mul &gt;</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, tensor_function_wrapper&lt; _Variable, cof_wrapper &gt; &gt;::function =  binary_expression_wrapper&lt;function_wrapper&lt;_Variable, det_wrapper&gt;, decltype (trans(inv_tensor&lt;_Variable&gt;())), op_mul&gt;</definition>
+        <argsstring></argsstring>
+        <name>function</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, tensor_function_wrapper&lt; _Variable, cof_wrapper &gt; &gt;::function</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="524" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="524" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__function__wrapper_3_01__Variable_00_01cof__wrapper_01_4_01_4_1a1141ffa4c83830444119b8c1006ba2e1" prot="public" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; _Variable, <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">function</ref> &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, tensor_function_wrapper&lt; _Variable, cof_wrapper &gt; &gt;::deriv_type =  typename squeezer&lt; typename diff_wrapper&lt;_Variable, function&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, tensor_function_wrapper&lt; _Variable, cof_wrapper &gt; &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="526" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="526" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="522" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="523" bodyend="527"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__function__wrapper_3_01__Variable_00_01cof__wrapper_01_4_01_4_1a1141ffa4c83830444119b8c1006ba2e1" prot="public" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, tensor_function_wrapper&lt; _Variable, cof_wrapper &gt; &gt;</scope><name>deriv_type</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__function__wrapper_3_01__Variable_00_01cof__wrapper_01_4_01_4_1a3cd069db498347a3c25afcbb9d32e7e3" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, tensor_function_wrapper&lt; _Variable, cof_wrapper &gt; &gt;</scope><name>function</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1symmetric__part__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::symmetric_part_wrapper</compoundname>
+    <basecompoundref refid="classtensor__base" prot="public" virt="non-virtual">tensor_base&lt; symmetric_part_wrapper&lt; Tensor &gt; &gt;</basecompoundref>
+    <includes local="no">symmetric_part_wrapper_bones.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <memberdef kind="function" id="classdetail_1_1symmetric__part__wrapper_1a22de7362d8d5113b4f939d7a33856757" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::symmetric_part_wrapper&lt; Tensor &gt;::symmetric_part_wrapper</definition>
+        <argsstring>(data_type_tensor const &amp;data)</argsstring>
+        <name>symmetric_part_wrapper</name>
+        <qualifiedname>detail::symmetric_part_wrapper::symmetric_part_wrapper</qualifiedname>
+        <param>
+          <type>data_type_tensor const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Default constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="35" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_meat.h" bodystart="27" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1symmetric__part__wrapper_1afbd7b28a994e62bd5ea1c4d224cc0237" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::symmetric_part_wrapper&lt; Tensor &gt;::symmetric_part_wrapper</definition>
+        <argsstring>(symmetric_part_wrapper const &amp;data)</argsstring>
+        <name>symmetric_part_wrapper</name>
+        <qualifiedname>detail::symmetric_part_wrapper::symmetric_part_wrapper</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1symmetric__part__wrapper" kindref="compound">symmetric_part_wrapper</ref> const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copy constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="37" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_meat.h" bodystart="35" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1symmetric__part__wrapper_1a0c8535c6d7d978c305f18895b762d905" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::symmetric_part_wrapper&lt; Tensor &gt;::operator()</definition>
+        <argsstring>(size_type const i, size_type const j) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::symmetric_part_wrapper::operator()</qualifiedname>
+        <param>
+          <type>size_type const</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="39" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_meat.h" bodystart="41" bodyend="49"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Dimension and rank</header>
+      <memberdef kind="function" id="classdetail_1_1symmetric__part__wrapper_1a60407b2563eddd3d442e643d0cb1bff7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::symmetric_part_wrapper&lt; Tensor &gt;::evaluate</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::symmetric_part_wrapper::evaluate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="45" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_meat.h" bodystart="73" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1symmetric__part__wrapper_1a85eb72c48f6ac318d669a0688fe08481" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::symmetric_part_wrapper&lt; Tensor &gt;::dimension</definition>
+        <argsstring>()</argsstring>
+        <name>dimension</name>
+        <qualifiedname>detail::symmetric_part_wrapper::dimension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the dimension of the expression. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="41" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_meat.h" bodystart="59" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1symmetric__part__wrapper_1a2600ff1d23732dfa663bee0b06ec9753" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::symmetric_part_wrapper&lt; Tensor &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>detail::symmetric_part_wrapper::rank</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the rank of the expression. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="43" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_meat.h" bodystart="67" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1symmetric__part__wrapper_1af3c0bfdcc2ff01b8cf6857942fd61efd" prot="private" static="no">
+        <type>typename std::remove_const&lt; typename std::remove_reference&lt; Tensor &gt;::type &gt;::type</type>
+        <definition>using detail::symmetric_part_wrapper&lt; Tensor &gt;::data_type_tensor =  typename std::remove_const&lt;typename std::remove_reference&lt;Tensor&gt;::type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>data_type_tensor</name>
+        <qualifiedname>detail::symmetric_part_wrapper::data_type_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="30" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1symmetric__part__wrapper_1a404d4e7ccff361693bc2f33bece468b5" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::symmetric_part_wrapper&lt; Tensor &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::symmetric_part_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="32" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1symmetric__part__wrapper_1a646305aed779a9616180c2ff5c74a0d2" prot="public" static="no">
+        <type>typename data_type_tensor::value_type</type>
+        <definition>using detail::symmetric_part_wrapper&lt; Tensor &gt;::value_type =  typename data_type_tensor::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::symmetric_part_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="33" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1symmetric__part__wrapper_1a4d5c66c17bf2f136ead67c329dfcc00e" prot="private" static="no" mutable="no">
+        <type>Tensor</type>
+        <definition>Tensor detail::symmetric_part_wrapper&lt; Tensor &gt;::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>detail::symmetric_part_wrapper::_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="48" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wrapper for the determination of the inverse of a tensor expression. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the inverse should be determined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::symmetric_part_wrapper&lt; Tensor &gt;</label>
+        <link refid="classdetail_1_1symmetric__part__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; symmetric_part_wrapper&lt; Tensor &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::symmetric_part_wrapper&lt; Tensor &gt;</label>
+        <link refid="classdetail_1_1symmetric__part__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; symmetric_part_wrapper&lt; Tensor &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" line="28" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/symmetric_part_wrapper_bones.h" bodystart="29" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a4d5c66c17bf2f136ead67c329dfcc00e" prot="private" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>_data</name></member>
+      <member refid="classtensor__base_1ad3589a7250ab005ef2c3276cca2e525b" prot="protected" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>_is_init</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>convert</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1af3c0bfdcc2ff01b8cf6857942fd61efd" prot="private" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>data_type_tensor</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a85eb72c48f6ac318d669a0688fe08481" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>dimension</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a60407b2563eddd3d442e643d0cb1bff7" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a0c8535c6d7d978c305f18895b762d905" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>operator()</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>operator-</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a2600ff1d23732dfa663bee0b06ec9753" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>rank</name></member>
+      <member refid="classtensor__base_1a869aa22037b95b0024b6e5731a61c90f" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>size</name></member>
+      <member refid="classtensor__base_1a869aa22037b95b0024b6e5731a61c90f" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>size</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a404d4e7ccff361693bc2f33bece468b5" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>size_type</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a22de7362d8d5113b4f939d7a33856757" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>symmetric_part_wrapper</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1afbd7b28a994e62bd5ea1c4d224cc0237" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>symmetric_part_wrapper</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classdetail_1_1symmetric__part__wrapper_1a646305aed779a9616180c2ff5c74a0d2" prot="public" virt="non-virtual"><scope>detail::symmetric_part_wrapper</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

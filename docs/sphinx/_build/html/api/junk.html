@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Single contraction &mdash; tmech  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tmech
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALLATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USAGE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expression.html">Expressions and lazy evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_as_array.html">Tensors as arrays</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QUICK REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html">Basic arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#basis-rearrangement">Basis rearrangement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#outer-product">Outer product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#inner-product">Inner product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#invers-of-a-tensor">Invers of a tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#volumetric-and-deviatoric-parts">Volumetric and deviatoric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#symmetric-and-skew-symmetric-parts">Symmetric and skew-symmetric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#isotropic-tensor-functions">Isotropic tensor functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#positive-negative-decomposition">Positive-negative decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#eigen-decomposition">Eigen-decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#sign-decomposition">Sign decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#polar-decomposition">Polar decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_functions.html#id1">Exponential map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_diff.html">Numerical differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compare_operators.html">Compare Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptor.html">Adapting pointers of raw memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convert_to_voigt.html">Converting to Voigt’s notation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_tmech.html">Tensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_tmech.html#wrapper">Wrapper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE SYMDIFF</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_symdiff.html">Variable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_symdiff.html#wrappers">Wrappers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tmech</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Single contraction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/junk.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="single-contraction">
+<h1>Single contraction<a class="headerlink" href="#single-contraction" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/21118cd37b85d8cf4931acca6c45e075242c2135.svg" alt="\SecondT{A}\SecondT{B}&amp;=A_{ik}B_{kj}\BasisSecond{i}{j}\\
+\SecondT{A}\FourthT{C}&amp;=A_{in}C_{njkl}\BasisFourth{i}{j}{k}{l}\\
+\FourthT{C}\SecondT{A}&amp;=C_{ijkn}A_{nl}\BasisFourth{i}{j}{k}{l}"/></p>
+</div></div>
+<div class="section" id="double-contraction">
+<h1>Double contraction<a class="headerlink" href="#double-contraction" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/ec80d8d970fbf13f0311b8ff3e88f1c24035fc1d.svg" alt="\SecondT{A}:\SecondT{B}&amp;=A_{ij}B_{ij}\\
+\SecondT{A}:\FourthT{C}&amp;=A_{kl}C_{klij}\BasisSecond{i}{j}\\
+\FourthT{C}:\SecondT{A}&amp;=C_{ijkl}A_{kl}\BasisSecond{i}{j}\\
+\FourthT{C}:\FourthT{A}&amp;=C_{ijkl}A_{klmn}\BasisFourth{i}{j}{m}{n}"/></p>
+</div></div>
+<div class="section" id="inner-product-two-fourth-order-tensors">
+<h1>Inner product two fourth order tensors<a class="headerlink" href="#inner-product-two-fourth-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/e5b4bfe807fa577a3e7c717eeb1b0969bdb56e9a.svg" alt="\FourthT{A}::\FourthT{B}&amp;=C_{ijkl}A_{ijkl}"/></p>
+</div></div>
+<div class="section" id="inner-and-outer-contraction-of-second-and-fourth-order-tensors">
+<h1>Inner and outer contraction of second and fourth order tensors<a class="headerlink" href="#inner-and-outer-contraction-of-second-and-fourth-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/53762ab617c419e2c788b85976bf8fb4bb66892f.svg" alt="\FourthT{A}\contractio\SecondT{B}&amp;=A_{ijkl}B_{jk}\BasisSecond{i}{l}\\
+\SecondT{A}\contractio\FourthT{C}&amp;=A_{il}C_{ijkl}\BasisSecond{j}{k}\\
+\FourthT{A}\contractoi\SecondT{B}&amp;=A_{ijmn}B_{in}\BasisSecond{j}{m}= \SecondT{A}\contractio\FourthT{C}\\
+\SecondT{A}\contractoi\FourthT{C}&amp;=A_{jm}C_{ijmn}\BasisSecond{i}{n}=\FourthT{A}\contractio\SecondT{B}"/></p>
+</div></div>
+<div class="section" id="inner-and-outer-contraction-of-fourth-order-tensors">
+<h1>Inner and outer contraction of fourth order tensors<a class="headerlink" href="#inner-and-outer-contraction-of-fourth-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/1ea4f81389e711f6b8a7b32732d1b321e784c0c7.svg" alt="\FourthT{A}\contractio\FourthT{B}&amp;=A_{ijmn}B_{jlrm}\BasisFourth{i}{l}{r}{n}\\
+\FourthT{A}\contractoi\FourthT{B}&amp;=A_{ijmn}B_{kins}\BasisFourth{k}{j}{m}{s}"/></p>
+</div></div>
+<div class="section" id="inner-and-outer-double-contraction-of-sixth-and-fourth-order-tensors">
+<h1>Inner and outer double contraction of sixth and fourth order tensors<a class="headerlink" href="#inner-and-outer-double-contraction-of-sixth-and-fourth-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/027fd85c54e0879157bfa535a17c08c5198fb93e.svg" alt="\SixthT{A}\dcontractio\FourthT{B}&amp;=A_{ijmnkl}B_{jmnk}\BasisSecond{i}{l}\\
+\FourthT{B}\dcontractio\SixthT{A}&amp;=B_{ijkl}A_{ijmnkl}\BasisSecond{m}{n}\\
+\FourthT{B}\dcontractoi\SixthT{A}&amp;=B_{jmnk}A_{ijmnkl}\BasisSecond{i}{l}\\
+\SixthT{A}\dcontractoi\FourthT{B}&amp;=A_{ijmnkl}A_{ijkl}\BasisSecond{m}{n}"/></p>
+</div></div>
+<div class="section" id="inner-and-outer-double-contraction-of-two-sixth-order-tensors">
+<h1>Inner and outer double contraction of two sixth-order tensors<a class="headerlink" href="#inner-and-outer-double-contraction-of-two-sixth-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/1b0c0d05c993935698655bf576573f6000ad9ddf.svg" alt="\SixthT{A}\dcontractio\SixthT{B}&amp;=A_{ijmnkl}B_{jmopnk}\BasisFourth{i}{l}{o}{p}\\
+\SixthT{A}\dcontractoi\SixthT{B}&amp;=A_{ijmnkl}B_{oijklp}\BasisFourth{i}{l}{o}{p}"/></p>
+</div></div>
+<div class="section" id="inner-and-outer-double-contraction-of-eight-and-fourth-order-tensors">
+<h1>Inner and outer double contraction of eight and fourth-order tensors<a class="headerlink" href="#inner-and-outer-double-contraction-of-eight-and-fourth-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/00fc8f702a090d3e04d3872357e4345f1df39f54.svg" alt="\EightT{A}\dcontractio\FourthT{B}&amp;=A_{ijklmnqr}B_{klmn}\BasisFourth{i}{j}{k}{l}\\
+\FourthT{B}\dcontractio\EightT{A}&amp;=B_{ijqr}A_{ijklmnqr}\BasisFourth{k}{l}{m}{n}\\
+\FourthT{B}\dcontractoi\EightT{A}&amp;=B_{ijklmnqr}A_{ijqr}\BasisFourth{k}{l}{m}{n}\\
+\EightT{A}\dcontractoi\FourthT{B}&amp;=A_{klmn}B_{ijklmnqr}\BasisFourth{i}{j}{k}{l}"/></p>
+</div></div>
+<div class="section" id="inner-and-outer-double-contraction-of-eight-and-sixth-order-tensors">
+<h1>Inner and outer double contraction of eight and sixth-order tensors<a class="headerlink" href="#inner-and-outer-double-contraction-of-eight-and-sixth-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/6d050628fa919a9b303a5c35f37a13faea70d1ee.svg" alt="\EightT{A}\dcontractio\SixthT{B}&amp;=A_{ijklmnqr}B_{klopmn}\BasisSixth{i}{j}{q}{r}{o}{p}\\
+\SixthT{B}\dcontractio\EightT{A}&amp;=B_{oijqrp}A_{ijklmnqr}\BasisSixth{o}{p}{k}{l}{m}{n}\\
+\SixthT{B}\dcontractoi\EightT{A}&amp;=B_{klopmn}A_{ijklmnqr}\BasisSixth{o}{p}{i}{j}{q}{r}\\
+\EightT{A}\dcontractoi\SixthT{B}&amp;=A_{ijklmnqr}B_{oijqrp}\BasisSixth{i}{j}{q}{r}{o}{p}"/></p>
+</div></div>
+<div class="section" id="inner-and-outer-double-contraction-of-two-eight-order-tensors">
+<h1>Inner and outer double contraction of two eight-order tensors<a class="headerlink" href="#inner-and-outer-double-contraction-of-two-eight-order-tensors" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/f932d084aad4c4c7152fc3338057bbea7cbfff18.svg" alt="\EightT{A}\dcontractio\EightT{B}&amp;=A_{ijklmnop}B_{klqrstmn}\BasisEigth{i}{j}{o}{p}{q}{r}{s}{t}\\
+\EightT{A}\dcontractoi\EightT{B}&amp;=A_{ijklmnop}B_{qrijopst}\BasisEigth{i}{j}{o}{p}{q}{r}{s}{t}"/></p>
+</div></div>
+<div class="section" id="fourth-order-tensor-product">
+<h1>Fourth order tensor product<a class="headerlink" href="#fourth-order-tensor-product" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/4c17045778c62f76ea4f0574b31c6015b4380053.svg" alt="\FourthT{C} &amp;= \SecondT{A}\otimes\SecondT{B} = A_{ij} B_{kl}\BasisFourth{i}{j}{k}{l}\\
+\FourthT{C} &amp;= \SecondT{A}\times\SecondT{B}= A_{ij} B_{kl}\BasisFourth{i}{k}{l}{j}\\
+\FourthT{C} &amp;= \SecondT{A}\boxtimes\SecondT{B}= A_{ij} B_{kl}\BasisFourth{i}{k}{j}{l}"/></p>
+</div></div>
+<div class="section" id="sixth-order-tensor-product">
+<h1>Sixth order tensor product<a class="headerlink" href="#sixth-order-tensor-product" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/134e26ccb4d5da604c4c8dc6fcca6d57d96cb390.svg" alt="\SixthT{C} &amp;= \SecondT{A}\otimes\FourthT{B} = A_{ij} B_{klmn}\BasisSixth{i}{j}{k}{l}{m}{n}\\
+\SixthT{C} &amp;= \FourthT{A}\otimes\SecondT{B} = A_{ijkl} B_{mn}\BasisSixth{i}{j}{k}{l}{m}{n}\\
+\SixthT{C} &amp;= \SecondT{A}\times\FourthT{B}= A_{ij} B_{klmn}\BasisSixth{i}{k}{l}{m}{n}{j}\\
+\SixthT{C} &amp;= \FourthT{A}\times\SecondT{B}= A_{ijkl} B_{mn}\BasisSixth{i}{m}{j}{k}{n}{l}\\
+\SixthT{C} &amp;= \SecondT{A}\boxtimes\FourthT{B}= A_{ij} B_{klmn}\BasisSixth{i}{k}{l}{m}{j}{n}\\
+\SixthT{C} &amp;= \FourthT{A}\boxtimes\SecondT{B}= A_{ijkl} B_{mn}\BasisSixth{i}{m}{j}{k}{l}{n}"/></p>
+</div></div>
+<div class="section" id="scalar-valued-function-of-a-second-order-tensor">
+<h1>Scalar-valued function of a second-order tensor<a class="headerlink" href="#scalar-valued-function-of-a-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/a12155247515bd8de0d145cf1b2e546b0a622d26.svg" alt="\Delta f = \frac{d}{ds}f(\mathbf{A} + s\Delta\mathbf{A})|_{s=0} = \frac{d}{ds}f({A}_{ij} + s\Delta{A}_{ij})|_{s=0} = \frac{\partial f}{\partial A_{ij}}\Delta A_{ij} = f,{\mathbf{A}}:\Delta\mathbf{A}"/></p>
+</div><p>where</p>
+<div class="math">
+<p><img src="../_images/math/d4017e1ff1c64f4fb88924e677e0379f3b5d262f.svg" alt="f,{\mathbf{A}} = \frac{\partial f}{\partial \mathbf{A}} = \frac{\partial f}{\partial A_{ij}} \mathbf{e}_i \otimes \mathbf{e}_j"/></p>
+</div></div>
+<div class="section" id="second-order-valued-tensor-function-of-a-second-order-tensor">
+<h1>Second-order-valued tensor function of a second-order tensor<a class="headerlink" href="#second-order-valued-tensor-function-of-a-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/cdf760537a8bac0b5a0264925ba878b5aa1e443a.svg" alt="\SecondT{A} = \SecondT{A}(\SecondT{C}):\Delta \SecondT{C} = \frac{d}{ds}\SecondT{A}(\SecondT{C} + s\Delta\SecondT{C})|_{s=0} = \SecondT{A}_{,\SecondT{C}} \contractio\Delta \SecondT{C}"/></p>
+</div><p>where</p>
+<div class="math">
+<p><img src="../_images/math/26001719877084d6177bd937beccab09a5dda1f2.svg" alt="\SecondT{A}_{,\SecondT{C}} = \frac{\partial \SecondT{A}}{\partial \SecondT{C}}
+= \frac{\partial A_{ij}}{\partial C_{kl}} \BasisFourth{i}{k}{l}{j}"/></p>
+</div><p>This has the advantage <img class="math" src="../_images/math/f8b42cb932691a44aca388837808fc83aab65f9e.svg" alt="\SecondT{F}[\SecondT{D}] = \SecondT{A}\SecondT{B}[\SecondT{C}[\SecondT{D}]]"/>.</p>
+<div class="math">
+<p><img src="../_images/math/118801cd96b3f5686d362bde19c49e22fdb249a1.svg" alt="\SecondT{F}_{,\SecondT{D}} = (\SecondT{A}\SecondT{B})_{,\SecondT{C}}\contractio \SecondT{C}_{,\SecondT{D}}"/></p>
+</div></div>
+<div class="section" id="fourth-order-valued-tensor-function-of-a-fourth-order-tensor">
+<h1>Fourth-order-valued tensor function of a fourth-order tensor<a class="headerlink" href="#fourth-order-valued-tensor-function-of-a-fourth-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/4095625a8b11475339576ba38b25117fc4862a5b.svg" alt="\FourthT{A} = \FourthT{A}(\FourthT{C}):\Delta \FourthT{C} = \frac{d}{ds}\FourthT{A}(\FourthT{C} + s\Delta\FourthT{C})|_{s=0} = \FourthT{A}_{,\FourthT{C}} \dcontractio\Delta \FourthT{C}"/></p>
+</div><p>where</p>
+<div class="math">
+<p><img src="../_images/math/171a56d1ff5a18d2182d6517cbdf4f333831cdaa.svg" alt="\FourthT{A}_{,\FourthT{C}} = \frac{\partial \FourthT{A}}{\partial \FourthT{C}}
+= \frac{\partial A_{ijkl}}{\partial C_{mnop}} \BasisEigth{i}{k}{m}{n}{o}{p}{l}{j}"/></p>
+</div><p>This has the advantage <img class="math" src="../_images/math/4f8c2624c510e0715f235c802156fc3a90d1d164.svg" alt="\FourthT{F}[\FourthT{D}] = \FourthT{A}:\FourthT{B}[\FourthT{C}[\FourthT{D}]]"/>.</p>
+<div class="math">
+<p><img src="../_images/math/aa6ca11b73b8619608e032fc2e6398373a7963da.svg" alt="\FourthT{F}_{,\FourthT{D}} = (\FourthT{A}:\FourthT{B})_{,\FourthT{C}}\dcontractio \FourthT{C}_{,\FourthT{D}}"/></p>
+</div></div>
+<div class="section" id="fourth-order-valued-tensor-function-of-a-second-order-tensor">
+<h1>Fourth-order-valued tensor function of a second-order tensor<a class="headerlink" href="#fourth-order-valued-tensor-function-of-a-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/a4af891b93229f4d825bd188afc669d36fa5af72.svg" alt="\FourthT{A} = \FourthT{A}(\SecondT{C}):\Delta \SecondT{C} = \frac{d}{ds}\FourthT{A}(\SecondT{C} + s\Delta\SecondT{C})|_{s=0} = \FourthT{A}_{,\SecondT{C}} \contractio\Delta \SecondT{C}"/></p>
+</div><p>where</p>
+<div class="math">
+<p><img src="../_images/math/4e37c618f7e100c8506a42684db6088157c54f48.svg" alt="\FourthT{A}_{,\SecondT{C}} = \frac{\partial \FourthT{A}}{\partial \SecondT{C}}
+= \frac{\partial A_{ijkl}}{\partial C_{mn}} \BasisSixth{i}{k}{m}{n}{l}{j}"/></p>
+</div><p>This has the advantage <img class="math" src="../_images/math/f5b075ddc5c318018437e0a7c582a4a1d1ef39ce.svg" alt="\FourthT{F}[\SecondT{D}] = \FourthT{A}:\FourthT{B}[\SecondT{C}[\SecondT{D}]]"/>.</p>
+<div class="math">
+<p><img src="../_images/math/2978d70bfb3155e2c55efc3fd6b4b2ff6e73d4f6.svg" alt="\SecondT{F}_{,\SecondT{D}} = (\FourthT{A}:\FourthT{B})_{,\SecondT{C}}\contractio \SecondT{C}_{,\SecondT{D}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-a-second-order-tensor">
+<h1>Derivation of a second order tensor<a class="headerlink" href="#derivation-of-a-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/836a93f3ad1645c48e18110d23cf41030cd83fa5.svg" alt="\SecondT{A}_{,\SecondT{A}} = \SecondT{I}\otimes\SecondT{I}\\
+\SecondT{A}^T_{,\SecondT{A}} = \SecondT{I}\boxtimes\SecondT{I}"/></p>
+</div></div>
+<div class="section" id="derivation-of-otimes-tensor-product">
+<h1>Derivation of otimes tensor product<a class="headerlink" href="#derivation-of-otimes-tensor-product" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/87a99001e190da44f83276ec82db97618d83b8a6.svg" alt="\frac{\partial \SecondT{A} \otimes \SecondT{B}}{\partial \SecondT{C}} &amp;= \frac{\partial A_{ij} B_{kl}}{\partial C_{mn}} \BasisSixth{i}{j}{m}{n}{k}{l}\\
+&amp;=(D_{imnj} B_{kl} + A_{ij} E_{kmnl}) \BasisSixth{i}{j}{m}{n}{k}{l}\\
+&amp; = (\SecondT{A}_{,\SecondT{C}})^R \otimes \SecondT{B} + \SecondT{A} \otimes {}^R (\SecondT{B}_{,\SecondT{C}})"/></p>
+</div></div>
+<div class="section" id="derivation-of-times-tensor-product">
+<h1>Derivation of times tensor product<a class="headerlink" href="#derivation-of-times-tensor-product" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/3bc17d9b4b9004d27949d0b5935eed61f06999ca.svg" alt="\frac{\partial \SecondT{A} \times \SecondT{B}}{\partial \SecondT{C}} &amp;=
+\frac{\partial A_{ij} B_{kl}}{\partial C_{mn}}
+\BasisSixth{i}{k}{m}{n}{l}{j} \\
+&amp;= (D_{imnj} B_{kl} + A_{ij} E_{kmnl}) \BasisSixth{i}{k}{m}{n}{l}{j}\\
+&amp;= \SecondT{A}_{,\SecondT{C}} \times \SecondT{B} + \SecondT{A} \times \SecondT{B}_{,\SecondT{C}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-squad-times-tensor-product">
+<h1>Derivation of squad times tensor product<a class="headerlink" href="#derivation-of-squad-times-tensor-product" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/604131bdc47371cd8d6b82ff8e4795910736dca4.svg" alt="\frac{\partial \SecondT{A} \boxtimes \SecondT{B}}{\partial \SecondT{C}} &amp;=\frac{\partial A_{ij} B_{kl}}{\partial C_{mn}}\BasisSixth{i}{k}{m}{n}{j}{l} \\
+&amp;= (D_{imnj}B_{kl} + A_{ij} E_{kmnl}) \BasisSixth{i}{k}{m}{n}{j}{l}  \\
+&amp;=  \SecondT{A}_{,\SecondT{C}} \boxtimes \SecondT{B} + \SecondT{A} \boxtimes \SecondT{B}_{,\SecondT{C}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-the-double-product-second-and-second-order-tensor">
+<h1>Derivation of the double product second and second order tensor<a class="headerlink" href="#derivation-of-the-double-product-second-and-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/85fc0fc7b49c270012015dde19c4ac6398f9f0d4.svg" alt="\frac{\partial \SecondT{A}:\SecondT{B}}{\partial \SecondT{C}}
+&amp;= \frac{\partial A_{ij} B_{ij}}{\partial C_{mn}}\BasisSecond{m}{n}\\
+&amp;=(D_{imnj} B_{ij} + A_{ij} E_{imnj})\BasisSecond{i}{j} \\
+&amp;=\FourthT{A}_{,\SecondT{C}} \contractoi \SecondT{B} + \FourthT{A} \contractio \SecondT{B}_{,\SecondT{C}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-the-double-product-fourth-and-second-order-tensor">
+<h1>Derivation of the double product fourth and second order tensor<a class="headerlink" href="#derivation-of-the-double-product-fourth-and-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/1f54fa750b12e75483ef45e7950f4782a5fe3a44.svg" alt="\frac{\partial \FourthT{A}:\SecondT{B}}{\partial \SecondT{C}}
+&amp;= \frac{\partial A_{ijkl} B_{kl}}{\partial C_{mn}}\BasisFourth{i}{m}{n}{j}\\
+&amp;=(D_{ijmnkl} B_{kl} + A_{ijkl} E_{kmnl})\BasisFourth{i}{m}{n}{j} \\
+&amp;=\FourthT{A}_{,\SecondT{C}} : \SecondT{B} + \FourthT{A} : (\SecondT{B}_{,\SecondT{C}} )^R"/></p>
+</div><div class="math">
+<p><img src="../_images/math/28fbedad07e6b2be73bce75b200d500c866c39d9.svg" alt="\frac{\partial \SecondT{B}:\FourthT{A}}{\partial \SecondT{C}}
+&amp;= \frac{\partial B_{kl} A_{klij} }{\partial C_{mn}}\BasisFourth{i}{m}{n}{j}\\
+&amp;=(E_{kmnl} A_{klij} + B_{kl} D_{klmnij})\BasisFourth{i}{m}{n}{j} \\
+&amp;={}^R(\SecondT{B}_{,\SecondT{C}}) : \FourthT{A} + \SecondT{B} : \FourthT{A}_{,\SecondT{C}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-the-double-product-fourth-and-fourth-order-tensor">
+<h1>Derivation of the double product fourth and fourth order tensor<a class="headerlink" href="#derivation-of-the-double-product-fourth-and-fourth-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/f152b8095bf285b347e1f5157524950cb782c0b8.svg" alt="\frac{\partial \FourthT{A}:\FourthT{B}}{\partial \SecondT{C}}
+&amp;= \frac{\partial A_{ijkl} B_{klmn}}{\partial C_{op}}\BasisSixth{i}{j}{o}{p}{m}{n}\\
+&amp;=(D_{ijopkl} B_{klmn} + A_{ijkl} E_{klopmn})\BasisSixth{i}{j}{o}{p}{m}{n}\\
+&amp;=\FourthT{A}_{,\SecondT{C}} : \FourthT{B} + \FourthT{A}: \FourthT{B}_{,\SecondT{C}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-the-scalar-product-fourth-and-fourth-order-tensor">
+<h1>Derivation of the scalar product fourth and fourth order tensor<a class="headerlink" href="#derivation-of-the-scalar-product-fourth-and-fourth-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/bf76fab3554090cef5c4b38f582cd62410fb35a9.svg" alt="\frac{\partial \FourthT{A}::\FourthT{B}}{\partial \SecondT{C}}
+&amp;= \frac{\partial A_{ijkl} B_{ijkl}}{\partial C_{mn}}\BasisSecond{m}{n}\\
+&amp;=(D_{ijmnkl} B_{ijkl} + A_{ijkl} E_{ijmnkl})\BasisSecond{m}{n}\\
+&amp;=\FourthT{A}_{,\SecondT{C}} \dcontractoi \FourthT{B} + \FourthT{A} \dcontractio \FourthT{B}_{,\SecondT{C}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-the-inner-product-of-two-fourth-order-tensor">
+<h1>Derivation of the inner product of two fourth-order tensor<a class="headerlink" href="#derivation-of-the-inner-product-of-two-fourth-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/5338ad75e37927fa595ff779ec321897ac8b61b8.svg" alt="\frac{\partial \FourthT{A}::\FourthT{B}}{\partial \FourthT{C}}
+&amp;= \frac{\partial A_{ijkl} B_{ijkl}}{\partial C_{opqr}}\BasisFourth{o}{p}{q}{r}\\
+&amp;=(D_{ijopqrkl} B_{ijkl} + A_{ijkl} E_{ijopqrkl})\BasisSixth{i}{j}{o}{p}{m}{n}\\
+&amp;=\FourthT{A}_{,\SecondT{C}} \dcontractoi \FourthT{B} + \FourthT{A} \dcontractio \FourthT{B}_{,\SecondT{C}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-a-symmetric-second-order-tensor">
+<h1>Derivation of a symmetric second order tensor<a class="headerlink" href="#derivation-of-a-symmetric-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/48a0c167c1727c0214c1823603c3cea81eea1d92.svg" alt="\SecondT{A}_{,\SecondT{A}} = \frac{\partial\left(\frac{1}{2}\left(\SecondT{A} + \SecondT{A}^T\right)\right)}{\partial \SecondT{A}} = \frac{1}{2}\left(\SecondT{I}\otimes\SecondT{I} + \SecondT{I}\boxtimes\SecondT{I}\right) = \FourthT{S}"/></p>
+</div></div>
+<div class="section" id="derivation-of-a-skew-symmetric-second-order-tensor">
+<h1>Derivation of a skew symmetric second order tensor<a class="headerlink" href="#derivation-of-a-skew-symmetric-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/a078edc48cb81934cc0015cf49c5579d1908addc.svg" alt="\SecondT{A}_{,\SecondT{A}} = \frac{\partial\left(\frac{1}{2}\left(\SecondT{A} - \SecondT{A}^T\right)\right)}{\partial \SecondT{A}} = \frac{1}{2}\left(\SecondT{I}\otimes\SecondT{I} - \SecondT{I}\boxtimes\SecondT{I}\right)= \FourthT{A}"/></p>
+</div></div>
+<div class="section" id="derivation-of-a-scalar-valued-function">
+<h1>Derivation of a scalar-valued function<a class="headerlink" href="#derivation-of-a-scalar-valued-function" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/0322eb970dacd346266f483fe33254cb3dbea2e6.svg" alt="\phi[\SecondT{A}]_{,\SecondT{A}} =
+\frac{\partial \phi}{\partial \SecondT{A}} = \frac{\partial \phi}{\partial A_{ij}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-second-order-tensor-functions">
+<h1>Derivation of second order tensor functions<a class="headerlink" href="#derivation-of-second-order-tensor-functions" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/0e11cc1b97ee10cfaaf6dfc3765f15df5ac516e4.svg" alt="\SecondT{F}[\SecondT{A}[\SecondT{X}]]_{,\SecondT{X}} =
+\frac{\partial \SecondT{F}[\SecondT{A}[\SecondT{X}]]}{\partial \SecondT{A}} \contractio \frac{\partial \SecondT{A}[\SecondT{X}]}{\partial \SecondT{X}}"/></p>
+</div></div>
+<div class="section" id="derivation-of-symmetric-second-order-tensor-functions">
+<h1>Derivation of symmetric second order tensor functions<a class="headerlink" href="#derivation-of-symmetric-second-order-tensor-functions" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/2985bbe81e64bee5e7c8837eb2e20cd2ca9a48d5.svg" alt="\SecondT{A} = \SecondT{A}^T
+
+and"/></p>
+</div><div class="math">
+<p><img src="../_images/math/2245604f9c42f85b363a5e8a2e0dfc57cf95f99a.svg" alt="\SecondT{X} = \SecondT{X}^T"/></p>
+</div><div class="math">
+<p><img src="../_images/math/f1f91ad8207e8e105f5bf9b6ff6f85566396fb5e.svg" alt="\SecondT{F}[\SecondT{A}[\SecondT{X}]]_{,\SecondT{X}} =\left(
+\frac{\partial \SecondT{F}[\SecondT{A}[\SecondT{X}]]}{\partial \SecondT{A}} \contractio \frac{\partial \SecondT{A}[\SecondT{X}]}{\partial \SecondT{X}}\right)\contractio\FourthT{I}^{sym}"/></p>
+</div></div>
+<div class="section" id="derivation-of-skew-symmetric-second-order-tensor-functions">
+<h1>Derivation of skew symmetric second order tensor functions<a class="headerlink" href="#derivation-of-skew-symmetric-second-order-tensor-functions" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/d83fe3b2e6dd1426c317b450e89befe1a218a743.svg" alt="\SecondT{A} = -\SecondT{A}^T
+
+ and"/></p>
+</div><div class="math">
+<p><img src="../_images/math/f71cd3a7da3bad219ee8ed5abe90139b0954df0d.svg" alt="\SecondT{X} = -\SecondT{X}^T"/></p>
+</div><div class="math">
+<p><img src="../_images/math/d88002f9333591591fd9fda08682f3a0f84cf446.svg" alt="\SecondT{F}[\SecondT{A}[\SecondT{X}]]_{,\SecondT{X}} =\left(
+\frac{\partial \SecondT{F}[\SecondT{A}[\SecondT{X}]]}{\partial \SecondT{A}} \contractio \frac{\partial \SecondT{A}[\SecondT{X}]}{\partial \SecondT{X}}\right)\contractio\FourthT{I}^{skew}"/></p>
+</div></div>
+<div class="section" id="inverse">
+<h1>Inverse<a class="headerlink" href="#inverse" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/26b582670ba6516f756b4ea06d7da6663df60de0.svg" alt="\SecondT{A} \SecondT{A}\inv = \SecondT{A}\inv \SecondT{A} = \eye"/></p>
+</div></div>
+<div class="section" id="determinante">
+<h1>Determinante<a class="headerlink" href="#determinante" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/8eb6bdfcf0e04422fd788a6fd8cc30d175521838.svg" alt="\partial_{\SecondT{A}} \text{det}(\SecondT{A}) = \text{det}(\SecondT{A})\SecondT{A}^{-T}"/></p>
+</div></div>
+<div class="section" id="euclidean-norm">
+<h1>Euclidean norm<a class="headerlink" href="#euclidean-norm" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/65ebae9b2cc7af5192051a3236c4fe46f2342fe8.svg" alt="\partial_{\SecondT{A}} ||\SecondT{A}|| = \partial_{\SecondT{A}} \sqrt{\SecondT{A}:\SecondT{A}} = \frac{1}{||\SecondT{A}||} \SecondT{A}"/></p>
+</div></div>
+<div class="section" id="principal-invariants-of-a-second-order-tensor">
+<h1>Principal invariants of a second order tensor<a class="headerlink" href="#principal-invariants-of-a-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/7c4db4790cf5fbf92dfaf131e77da57c0779d996.svg" alt="I_A &amp;=\text{tr}(\SecondT{A}) =  \SecondT{A}:\SecondT{I} \\
+II_A &amp;= \frac{1}{2}\left(\text{tr}(\SecondT{A})^2 - \text{tr}(\SecondT{A}^2)\right) \\
+III_A &amp;=  \text{det}(\SecondT{A})"/></p>
+</div></div>
+<div class="section" id="derivatives-of-the-principal-invariants-of-a-second-order-tensor">
+<h1>Derivatives of the principal invariants of a second order tensor<a class="headerlink" href="#derivatives-of-the-principal-invariants-of-a-second-order-tensor" title="Permalink to this headline">¶</a></h1>
+<div class="math">
+<p><img src="../_images/math/376810ded89c0fdd911d271609ae3c2f49be7cb0.svg" alt="\partial_{\SecondT{A}} I_A &amp;= \partial_{\SecondT{A}}\text{tr}(\SecondT{A}) = \partial_{\SecondT{A}} \SecondT{A}:\SecondT{I} = \SecondT{I}\\
+\partial_{\SecondT{A}} II_A &amp;= \partial_{\SecondT{A}}\frac{1}{2}\left(\text{tr}(\SecondT{A})^2 - \text{tr}(\SecondT{A}^2)\right) = I_A\SecondT{I} - \SecondT{A}\\
+\partial_{\SecondT{A}}  III_A &amp;= \partial_{\SecondT{A}} det(\SecondT{A}) = \text{det}(\SecondT{A})\SecondT{A}^{-T}"/></p>
+</div></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Peter Lenz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

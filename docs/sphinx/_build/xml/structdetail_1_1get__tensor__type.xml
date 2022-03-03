@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__tensor__type" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_tensor_type</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1get__tensor__type_1a110c0cd8cd3427068939937d6759043b" prot="public" static="no">
+        <type><ref refid="structdetail_1_1get__tensor__info" kindref="compound">get_tensor_info</ref>&lt; Tensor &gt;</type>
+        <definition>using detail::get_tensor_type&lt; Tensor &gt;::t_info =  get_tensor_info&lt;Tensor&gt;</definition>
+        <argsstring></argsstring>
+        <name>t_info</name>
+        <qualifiedname>detail::get_tensor_type::t_info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="185" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail_1_1get__tensor__type_1acf8a4052e48e267780da414dce53b0be" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1get__tensor" kindref="compound">get_tensor</ref>&lt; typename t_info::value_type, t_info::dimension(), t_info::rank()&gt;::type</type>
+        <definition>using detail::get_tensor_type&lt; Tensor &gt;::type =  typename get_tensor&lt;typename t_info::value_type, t_info::dimension(), t_info::rank()&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::get_tensor_type::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="186" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="183" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="184" bodyend="187"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__tensor__type_1a110c0cd8cd3427068939937d6759043b" prot="public" virt="non-virtual"><scope>detail::get_tensor_type</scope><name>t_info</name></member>
+      <member refid="structdetail_1_1get__tensor__type_1acf8a4052e48e267780da414dce53b0be" prot="public" virt="non-virtual"><scope>detail::get_tensor_type</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01cos__wrapper_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, cos_wrapper &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Variable</type>
+      </param>
+      <param>
+        <type>typename _Expr</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01cos__wrapper_01_4_01_4_1afab7d7ed369e3bd3361471ec199d3b82" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; _Variable, _Expr &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, cos_wrapper &gt; &gt;::_dExpr =  typename squeezer&lt;typename diff_wrapper&lt;_Variable, _Expr&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dExpr</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, cos_wrapper &gt; &gt;::_dExpr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="210" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01cos__wrapper_01_4_01_4_1a6486c4e66f09dfb47745c52ce1d9de0b" prot="public" static="no">
+        <type><ref refid="classdetail_1_1negative" kindref="compound">negative</ref>&lt; typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _dExpr, <ref refid="classdetail_1_1function__wrapper" kindref="compound">function_wrapper</ref>&lt; _Expr, <ref refid="structdetail_1_1sin__wrapper" kindref="compound">sin_wrapper</ref> &gt;, op_mul &gt; &gt;::squeezedType &gt;</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, cos_wrapper &gt; &gt;::deriv_type =  negative&lt;typename squeezer&lt;binary_expression_wrapper&lt;_dExpr, function_wrapper&lt;_Expr, sin_wrapper&gt;, op_mul&gt; &gt;::squeezedType&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, cos_wrapper &gt; &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="212" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="208" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="209" bodyend="213"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01cos__wrapper_01_4_01_4_1afab7d7ed369e3bd3361471ec199d3b82" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, cos_wrapper &gt; &gt;</scope><name>_dExpr</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01cos__wrapper_01_4_01_4_1a6486c4e66f09dfb47745c52ce1d9de0b" prot="public" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, cos_wrapper &gt; &gt;</scope><name>deriv_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1swape__element__squence" kind="struct" language="C++" prot="public">
+    <compoundname>detail::swape_element_squence</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Input</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Arg1</declname>
+        <defname>Arg1</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Arg2</declname>
+        <defname>Arg2</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="862" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="862" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

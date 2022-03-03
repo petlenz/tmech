@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__tensor__size_3_01DIM_00_01RANK_00_01RANK_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_tensor_size&lt; DIM, RANK, RANK &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>DIM</declname>
+        <defname>DIM</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>RANK</declname>
+        <defname>RANK</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structdetail_1_1get__tensor__size_3_01DIM_00_01RANK_00_01RANK_01_4_1ae1918d1f7461a7dd75f91aec029f43cc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t detail::get_tensor_size&lt; DIM, RANK, RANK &gt;::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>detail::get_tensor_size&lt; DIM, RANK, RANK &gt;::size</qualifiedname>
+        <initializer>= DIM</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="322" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="322" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="321" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="321" bodyend="323"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__tensor__size_3_01DIM_00_01RANK_00_01RANK_01_4_1ae1918d1f7461a7dd75f91aec029f43cc" prot="public" virt="non-virtual"><scope>detail::get_tensor_size&lt; DIM, RANK, RANK &gt;</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

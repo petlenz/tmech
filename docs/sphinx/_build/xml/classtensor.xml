@@ -1,0 +1,1369 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classtensor" kind="class" language="C++" prot="public">
+    <compoundname>tensor</compoundname>
+    <basecompoundref refid="classtensor__base" prot="public" virt="non-virtual">tensor_base&lt; tensor&lt; T, Dim, Rank &gt; &gt;</basecompoundref>
+    <includes local="no">tensor_bones.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Dim</declname>
+        <defname>Dim</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Rank</declname>
+        <defname>Rank</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <memberdef kind="function" id="classtensor_1a57c05e7aedc268a549fb71c2fc4ba828" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tensor&lt; T, Dim, Rank &gt;::tensor</definition>
+        <argsstring>()</argsstring>
+        <name>tensor</name>
+        <qualifiedname>tensor::tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Allocates a Dim-dimensional Rank-tensor. All elements are set to zero. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="43" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="260" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1aa0dbcbddaa8467e3a848fabc6c39ced4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tensor&lt; T, Dim, Rank &gt;::tensor</definition>
+        <argsstring>(tensor const &amp;_tensor)</argsstring>
+        <name>tensor</name>
+        <qualifiedname>tensor::tensor</qualifiedname>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor</ref> const &amp;</type>
+          <declname>_tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Allocates a Dim-dimensional Rank-tensor. Elements are copyed from _tensor</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>_tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor to be copyed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="45" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="272" bodyend="279"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Extended copy semantic</header>
+      <memberdef kind="function" id="classtensor_1a48c3f34fe7c54a1615a55ab8fe26e823" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Derived</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>tensor&lt; T, Dim, Rank &gt;::tensor</definition>
+        <argsstring>(tensor_base&lt; Derived &gt; const &amp;tensor_base)</argsstring>
+        <name>tensor</name>
+        <qualifiedname>tensor::tensor</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; Derived &gt; const &amp;</type>
+          <declname>tensor_base</declname>
+          <defname>_tensor_base</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The extended copy constructor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="48" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="305" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ac7610636857c881089def80a79d0104d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::ostream &amp;</type>
+        <definition>constexpr std::ostream &amp; tensor&lt; T, Dim, Rank &gt;::print</definition>
+        <argsstring>(std::ostream &amp;os) const</argsstring>
+        <name>print</name>
+        <qualifiedname>tensor::print</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="100" column="35" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="312" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ad356019726a83049136e241a6b7f4b71" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::fill</definition>
+        <argsstring>(value_type const value) noexcept</argsstring>
+        <name>fill</name>
+        <qualifiedname>tensor::fill</qualifiedname>
+        <param>
+          <type>value_type const</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="102" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="318" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a6b1d665c2f2447dd03e42764de015fdb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto const &amp;</type>
+        <definition>auto const  &amp; tensor&lt; T, Dim, Rank &gt;::randu</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>randu</name>
+        <qualifiedname>tensor::randu</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="104" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="323" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a9f17114519156c09b134bcc4af8c89df" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto const &amp;</type>
+        <definition>auto const  &amp; tensor&lt; T, Dim, Rank &gt;::randn</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>randn</name>
+        <qualifiedname>tensor::randn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="106" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="332" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a9d0949d79d42d3d5a2c04b24b83b36ee" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>tensor::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="120" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="341" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1aefdfd37ac8aea685ce532cd9155d62b1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto &amp;</type>
+        <definition>constexpr auto &amp; tensor&lt; T, Dim, Rank &gt;::data</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>tensor::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="122" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="346" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ae1366ad2f1e441927fc66b6deae1fc36" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Sequence</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::change_basis_view</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>change_basis_view</name>
+        <qualifiedname>tensor::change_basis_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="125" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="352" bodyend="354"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Constructors from initializer list</header>
+      <memberdef kind="function" id="classtensor_1a010fd65801eeff5aae794d9152374946" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tensor&lt; T, Dim, Rank &gt;::tensor</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; const &amp;data)</argsstring>
+        <name>tensor</name>
+        <qualifiedname>tensor::tensor</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; value_type &gt; const &amp;</type>
+          <declname>data</declname>
+          <defname>l</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Allocates a Dim-dimensional Rank-tensor. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>l</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The elements of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="50" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="291" bodyend="293"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Deconstructor</header>
+      <memberdef kind="function" id="classtensor_1aa7d9685df242fca80b8c60bca3c4d528" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tensor&lt; T, Dim, Rank &gt;::~tensor</definition>
+        <argsstring>()</argsstring>
+        <name>~tensor</name>
+        <qualifiedname>tensor::~tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Deallocates a Dim-dimensional Rank-tensor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="52" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="246" bodyend="248"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>In-place arithmetic operators</header>
+      <memberdef kind="function" id="classtensor_1a9f04aea81a77290c879701d3dfea87c3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator=</definition>
+        <argsstring>(tensor const &amp;tensor) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tensor::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor</ref> const &amp;</type>
+          <declname>tensor</declname>
+        </param>
+        <briefdescription>
+<para>Assigns tensors to each other. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This is a special case of the templated operator=. Its purpose is to prevent a default operator= from hiding the templated operator=. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="61" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="76" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a8f58f6fc7858fcd0fca0e139eaab7751" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator*=</definition>
+        <argsstring>(value_type const value) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>tensor::operator*=</qualifiedname>
+        <param>
+          <type>value_type const</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place tensor element-wise scalar multiplication. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of element-wise scalar multiplication. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="78" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a7b62b782fcdb978255f67f9806d68b8b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator/=</definition>
+        <argsstring>(value_type const value) noexcept</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>tensor::operator/=</qualifiedname>
+        <param>
+          <type>value_type const</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place tensor element-wise scalar division. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of element-wise scalar division. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="80" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="69" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a3e7ae95ed60cc2c3bab21a06f51ae1df" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator+=</definition>
+        <argsstring>(_Tensor &amp;&amp;__rhs) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>tensor::operator+=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place tensor subtraction. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor expression of subtraction. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" line="27" column="36" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="27" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ab2e03414f2b2cfae6a83edc93ed9f1ed" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator-=</definition>
+        <argsstring>(_Tensor &amp;&amp;__rhs) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>tensor::operator-=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place tensor addition. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor expression of addtion. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" line="38" column="36" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="38" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ae133de1206058b5a7e36f7005126e021" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator*=</definition>
+        <argsstring>(_Tensor &amp;&amp;__rhs) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>tensor::operator*=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place tensor single contraction. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor expression of single contraction. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" line="49" column="36" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="49" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a5cb00eb8cef72487aca244b0fabbd574" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Derived</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator=</definition>
+        <argsstring>(tensor_base&lt; Derived &gt; const &amp;tensor_base) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tensor::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; Derived &gt; const &amp;</type>
+          <declname>tensor_base</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" line="85" column="36" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="85" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a0710c3f02a4bc1b0011eb7a04c65d11c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator=</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tensor::operator=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" line="107" column="8" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="107" bodyend="126"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Data</header>
+      <memberdef kind="function" id="classtensor_1a80108db6ba9aea2a21a581e42ebce927" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Indicies</declname>
+            <defname>Indicies</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto &amp;</type>
+        <definition>constexpr auto &amp; tensor&lt; T, Dim, Rank &gt;::operator()</definition>
+        <argsstring>(Indicies const ... indices) noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>tensor::operator()</qualifiedname>
+        <param>
+          <type>Indicies const ...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a reference of the element at the specified position in the tensor. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indicies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a list of indices specifying the position in the tensor. Indices must be unsigned integers, the number of indices must be equal to the rank of the expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="86" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="152" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1aeb9f226da69d30054949d9abbbf04d45" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>tensor::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns an iterator to the first element of the tensor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="108" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="162" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a56682cc2b7c05b42aa1bfa1aa260c2c6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>tensor::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns an iterator to the element following the last element of the tensor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="110" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="171" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a58d12841616430d6374c051016b5fa20" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>tensor::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a constant iterator to the first element of the tensor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="112" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="179" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a175af0c62c12d667fcd0acfcf8ee0e28" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>tensor::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a constant iterator to the element following the last element of the tensor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="114" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="188" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ab9645d11bc116bfc95b55a8b06df248e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto *</type>
+        <definition>constexpr auto * tensor&lt; T, Dim, Rank &gt;::raw_data</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>raw_data</name>
+        <qualifiedname>tensor::raw_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a pointer to the memory of the array. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="116" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="196" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a360c3442a65afaaae5a15aadcb9df53e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto const *</type>
+        <definition>constexpr auto const  * tensor&lt; T, Dim, Rank &gt;::raw_data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>raw_data</name>
+        <qualifiedname>tensor::raw_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a constant pointer to the memory of the array. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="118" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="204" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a167bb6a2cc57837dd2261e12070a54a0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Indicies</declname>
+            <defname>Indicies</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator()</definition>
+        <argsstring>(Indicies const ... indices) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>tensor::operator()</qualifiedname>
+        <param>
+          <type>Indicies const ...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a constant reference of the element at the specified position in the tensor. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indicies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a list of indices specifying the position in the tensor. Indices must be unsigned integers, the number of indices must be equal to the rank of the expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" line="139" column="36" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="139" bodyend="143"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Dimension and rank</header>
+      <memberdef kind="function" id="classtensor_1a03eb809ab576225c627435286e7cc6d9" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::rank</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rank</name>
+        <qualifiedname>tensor::rank</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the rank of the tensor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="94" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="225" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a961b144a73c0fc3cb597729143975c57" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::dimension</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>dimension</name>
+        <qualifiedname>tensor::dimension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the dimension of the tensor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="96" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="217" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1acd07bd19059621328973fdd61c7180f3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::size</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>tensor::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the size of the underlying array. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="98" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="233" bodyend="235"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classtensor_1a97a9bc6d85bed389f3467a613543e9c4" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1get__tensor__array__type" kindref="compound">detail::get_tensor_array_type</ref>&lt; T, Size, dynamic_memory &gt;::data_type</type>
+        <definition>using tensor&lt; T, Dim, Rank &gt;::value_data_type =  typename detail::get_tensor_array_type&lt;T, Size, dynamic_memory&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>value_data_type</name>
+        <qualifiedname>tensor::value_data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="31" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtensor_1aeaf0967576b72a90bb7d29eae63a214a" prot="public" static="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; T, Dim, Rank &gt;</type>
+        <definition>using tensor&lt; T, Dim, Rank &gt;::data_type =  tensor&lt;T, Dim, Rank&gt;</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>tensor::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="32" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtensor_1aab5bde62d7b4100fcf0942810f8d64dd" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1get__complex__entry__type" kindref="compound">detail::get_complex_entry_type</ref>&lt; T &gt;::type</type>
+        <definition>using tensor&lt; T, Dim, Rank &gt;::entry_type =  typename detail::get_complex_entry_type&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>entry_type</name>
+        <qualifiedname>tensor::entry_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="33" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtensor_1a88d33604f2f149a3de508a3524bfb8e6" prot="public" static="no">
+        <type>T</type>
+        <definition>using tensor&lt; T, Dim, Rank &gt;::value_type =  T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>tensor::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="34" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtensor_1a1abde07400cb870082f8f01791ff19b0" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using tensor&lt; T, Dim, Rank &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>tensor::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="35" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classtensor_1a9c7a1c6984491d411f503bf02e724469" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t tensor&lt; T, Dim, Rank &gt;::Size</definition>
+        <argsstring></argsstring>
+        <name>Size</name>
+        <qualifiedname>tensor::Size</qualifiedname>
+        <initializer>{<ref refid="structdetail_1_1get__tensor__size" kindref="compound">detail::get_tensor_size</ref>&lt;Dim, Rank&gt;<ref refid="classtensor_1acd07bd19059621328973fdd61c7180f3" kindref="member">::size</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="29" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtensor_1ab2ad45ace4683ec375ff290f2b77545c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool tensor&lt; T, Dim, Rank &gt;::dynamic_memory</definition>
+        <argsstring></argsstring>
+        <name>dynamic_memory</name>
+        <qualifiedname>tensor::dynamic_memory</qualifiedname>
+        <initializer>{((Size &gt; TMECH_MAX_STATIC_SIZE) ? false : true)}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="30" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classtensor_1a730bb8c0fcf0b3656009a70eb79ecce1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class tensor</definition>
+        <argsstring></argsstring>
+        <name>tensor</name>
+        <qualifiedname>tensor::tensor</qualifiedname>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="130" column="18" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classtensor_1a370a699a9ce812344017bccd861ddb0e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator==</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__lhs, _TensorRHS &amp;&amp;__rhs)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>tensor::operator==</qualifiedname>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="89" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="496" bodyend="508"/>
+      </memberdef>
+      <memberdef kind="friend" id="classtensor_1a29ca4e4129dbf364cdcef026fd31e8a2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator!=</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__lhs, _TensorRHS &amp;&amp;__rhs)</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>tensor::operator!=</qualifiedname>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="92" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_meat.h" bodystart="514" bodyend="516"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtensor_1a0c04cc0869e0314ff4a14ee43c2c412d" prot="private" static="no" mutable="no">
+        <type>value_data_type</type>
+        <definition>value_data_type tensor&lt; T, Dim, Rank &gt;::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>tensor::_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="159" column="21" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtensor_1a5cb00eb8cef72487aca244b0fabbd574" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Derived</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator=</definition>
+        <argsstring>(tensor_base&lt; Derived &gt; const &amp;tensor_base) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tensor::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; Derived &gt; const &amp;</type>
+          <declname>tensor_base</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="64" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a0710c3f02a4bc1b0011eb7a04c65d11c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator=</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tensor::operator=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="67" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a3e7ae95ed60cc2c3bab21a06f51ae1df" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator+=</definition>
+        <argsstring>(_Tensor &amp;&amp;__rhs) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>tensor::operator+=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="70" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ab2e03414f2b2cfae6a83edc93ed9f1ed" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator-=</definition>
+        <argsstring>(_Tensor &amp;&amp;__rhs) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>tensor::operator-=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="73" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1ae133de1206058b5a7e36f7005126e021" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; <ref refid="structis__tensor__type" kindref="compound">is_tensor_type</ref>&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator*=</definition>
+        <argsstring>(_Tensor &amp;&amp;__rhs) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>tensor::operator*=</qualifiedname>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="76" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a167bb6a2cc57837dd2261e12070a54a0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Indicies</declname>
+            <defname>Indicies</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; tensor&lt; T, Dim, Rank &gt;::operator()</definition>
+        <argsstring>(Indicies const ... indices) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>tensor::operator()</qualifiedname>
+        <param>
+          <type>Indicies const ...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="83" column="33"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classtensor_1aef4d5842f2c3d5f979a97c7d2378723a" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>DynamicMemory</declname>
+            <defname>DynamicMemory</defname>
+            <defval>dynamic_memory</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; DynamicMemory &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::check_size</definition>
+        <argsstring>()</argsstring>
+        <name>check_size</name>
+        <qualifiedname>tensor::check_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="133" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1aef4d5842f2c3d5f979a97c7d2378723a" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>DynamicMemory</declname>
+            <defname>DynamicMemory</defname>
+            <defval>dynamic_memory</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt;!DynamicMemory &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::check_size</definition>
+        <argsstring>()</argsstring>
+        <name>check_size</name>
+        <qualifiedname>tensor::check_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="136" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="136" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a6bc4ac633ddd0b4b86a7d6c1d9c43eca" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>DynamicMemory</declname>
+            <defname>DynamicMemory</defname>
+            <defval>dynamic_memory</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; DynamicMemory &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::check_size_fill_zeros</definition>
+        <argsstring>()</argsstring>
+        <name>check_size_fill_zeros</name>
+        <qualifiedname>tensor::check_size_fill_zeros</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="143" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="143" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a6bc4ac633ddd0b4b86a7d6c1d9c43eca" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>DynamicMemory</declname>
+            <defname>DynamicMemory</defname>
+            <defval>dynamic_memory</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt;!DynamicMemory &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::check_size_fill_zeros</definition>
+        <argsstring>()</argsstring>
+        <name>check_size_fill_zeros</name>
+        <qualifiedname>tensor::check_size_fill_zeros</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="146" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="146" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a8f9a73a8a93598810308558f89e7024a" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>DynamicMemory</declname>
+            <defname>DynamicMemory</defname>
+            <defval>dynamic_memory</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; DynamicMemory &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::delete_data</definition>
+        <argsstring>()</argsstring>
+        <name>delete_data</name>
+        <qualifiedname>tensor::delete_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="154" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor_1a8f9a73a8a93598810308558f89e7024a" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>DynamicMemory</declname>
+            <defname>DynamicMemory</defname>
+            <defval>dynamic_memory</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt;!DynamicMemory &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor&lt; T, Dim, Rank &gt;::delete_data</definition>
+        <argsstring>()</argsstring>
+        <name>delete_data</name>
+        <qualifiedname>tensor::delete_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="157" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="157" bodyend="157"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Dense multidimensional tensor. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the tensor holding the elements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Dimension of the underlying physical problem. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Rank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Rank of the tensor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>tensor&lt; T, Dim, Rank &gt;</label>
+        <link refid="classtensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; tensor&lt; T, Dim, Rank &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>tensor&lt; T, Dim, Rank &gt;</label>
+        <link refid="classtensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; tensor&lt; T, Dim, Rank &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" line="26" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_bones.h" bodystart="27" bodyend="160"/>
+    <listofallmembers>
+      <member refid="classtensor_1a0c04cc0869e0314ff4a14ee43c2c412d" prot="private" virt="non-virtual"><scope>tensor</scope><name>_data</name></member>
+      <member refid="classtensor__base_1ad3589a7250ab005ef2c3276cca2e525b" prot="protected" virt="non-virtual"><scope>tensor</scope><name>_is_init</name></member>
+      <member refid="classtensor_1aeb9f226da69d30054949d9abbbf04d45" prot="public" virt="non-virtual"><scope>tensor</scope><name>begin</name></member>
+      <member refid="classtensor_1a58d12841616430d6374c051016b5fa20" prot="public" virt="non-virtual"><scope>tensor</scope><name>begin</name></member>
+      <member refid="classtensor_1ae1366ad2f1e441927fc66b6deae1fc36" prot="public" virt="non-virtual"><scope>tensor</scope><name>change_basis_view</name></member>
+      <member refid="classtensor_1aef4d5842f2c3d5f979a97c7d2378723a" prot="private" virt="non-virtual"><scope>tensor</scope><name>check_size</name></member>
+      <member refid="classtensor_1aef4d5842f2c3d5f979a97c7d2378723a" prot="private" virt="non-virtual"><scope>tensor</scope><name>check_size</name></member>
+      <member refid="classtensor_1a6bc4ac633ddd0b4b86a7d6c1d9c43eca" prot="private" virt="non-virtual"><scope>tensor</scope><name>check_size_fill_zeros</name></member>
+      <member refid="classtensor_1a6bc4ac633ddd0b4b86a7d6c1d9c43eca" prot="private" virt="non-virtual"><scope>tensor</scope><name>check_size_fill_zeros</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>tensor</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>tensor</scope><name>convert</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>tensor</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>tensor</scope><name>convert</name></member>
+      <member refid="classtensor_1a9d0949d79d42d3d5a2c04b24b83b36ee" prot="public" virt="non-virtual"><scope>tensor</scope><name>data</name></member>
+      <member refid="classtensor_1aefdfd37ac8aea685ce532cd9155d62b1" prot="public" virt="non-virtual"><scope>tensor</scope><name>data</name></member>
+      <member refid="classtensor_1aeaf0967576b72a90bb7d29eae63a214a" prot="public" virt="non-virtual"><scope>tensor</scope><name>data_type</name></member>
+      <member refid="classtensor_1a8f9a73a8a93598810308558f89e7024a" prot="private" virt="non-virtual"><scope>tensor</scope><name>delete_data</name></member>
+      <member refid="classtensor_1a8f9a73a8a93598810308558f89e7024a" prot="private" virt="non-virtual"><scope>tensor</scope><name>delete_data</name></member>
+      <member refid="classtensor_1a961b144a73c0fc3cb597729143975c57" prot="public" virt="non-virtual"><scope>tensor</scope><name>dimension</name></member>
+      <member refid="classtensor_1ab2ad45ace4683ec375ff290f2b77545c" prot="public" virt="non-virtual"><scope>tensor</scope><name>dynamic_memory</name></member>
+      <member refid="classtensor_1a56682cc2b7c05b42aa1bfa1aa260c2c6" prot="public" virt="non-virtual"><scope>tensor</scope><name>end</name></member>
+      <member refid="classtensor_1a175af0c62c12d667fcd0acfcf8ee0e28" prot="public" virt="non-virtual"><scope>tensor</scope><name>end</name></member>
+      <member refid="classtensor_1aab5bde62d7b4100fcf0942810f8d64dd" prot="public" virt="non-virtual"><scope>tensor</scope><name>entry_type</name></member>
+      <member refid="classtensor_1ad356019726a83049136e241a6b7f4b71" prot="public" virt="non-virtual"><scope>tensor</scope><name>fill</name></member>
+      <member refid="classtensor_1a29ca4e4129dbf364cdcef026fd31e8a2" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator!=</name></member>
+      <member refid="classtensor_1a167bb6a2cc57837dd2261e12070a54a0" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator()</name></member>
+      <member refid="classtensor_1a80108db6ba9aea2a21a581e42ebce927" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator()</name></member>
+      <member refid="classtensor_1a167bb6a2cc57837dd2261e12070a54a0" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator()</name></member>
+      <member refid="classtensor_1ae133de1206058b5a7e36f7005126e021" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator*=</name></member>
+      <member refid="classtensor_1a8f58f6fc7858fcd0fca0e139eaab7751" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator*=</name></member>
+      <member refid="classtensor_1ae133de1206058b5a7e36f7005126e021" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator*=</name></member>
+      <member refid="classtensor_1a3e7ae95ed60cc2c3bab21a06f51ae1df" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator+=</name></member>
+      <member refid="classtensor_1a3e7ae95ed60cc2c3bab21a06f51ae1df" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator+=</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator-</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator-</name></member>
+      <member refid="classtensor_1ab2e03414f2b2cfae6a83edc93ed9f1ed" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator-=</name></member>
+      <member refid="classtensor_1ab2e03414f2b2cfae6a83edc93ed9f1ed" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator-=</name></member>
+      <member refid="classtensor_1a7b62b782fcdb978255f67f9806d68b8b" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator/=</name></member>
+      <member refid="classtensor_1a9f04aea81a77290c879701d3dfea87c3" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator=</name></member>
+      <member refid="classtensor_1a5cb00eb8cef72487aca244b0fabbd574" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator=</name></member>
+      <member refid="classtensor_1a0710c3f02a4bc1b0011eb7a04c65d11c" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator=</name></member>
+      <member refid="classtensor_1a5cb00eb8cef72487aca244b0fabbd574" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator=</name></member>
+      <member refid="classtensor_1a0710c3f02a4bc1b0011eb7a04c65d11c" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator=</name></member>
+      <member refid="classtensor_1a370a699a9ce812344017bccd861ddb0e" prot="public" virt="non-virtual"><scope>tensor</scope><name>operator==</name></member>
+      <member refid="classtensor_1ac7610636857c881089def80a79d0104d" prot="public" virt="non-virtual"><scope>tensor</scope><name>print</name></member>
+      <member refid="classtensor_1a9f17114519156c09b134bcc4af8c89df" prot="public" virt="non-virtual"><scope>tensor</scope><name>randn</name></member>
+      <member refid="classtensor_1a6b1d665c2f2447dd03e42764de015fdb" prot="public" virt="non-virtual"><scope>tensor</scope><name>randu</name></member>
+      <member refid="classtensor_1a03eb809ab576225c627435286e7cc6d9" prot="public" virt="non-virtual"><scope>tensor</scope><name>rank</name></member>
+      <member refid="classtensor_1ab9645d11bc116bfc95b55a8b06df248e" prot="public" virt="non-virtual"><scope>tensor</scope><name>raw_data</name></member>
+      <member refid="classtensor_1a360c3442a65afaaae5a15aadcb9df53e" prot="public" virt="non-virtual"><scope>tensor</scope><name>raw_data</name></member>
+      <member refid="classtensor_1acd07bd19059621328973fdd61c7180f3" prot="public" virt="non-virtual"><scope>tensor</scope><name>size</name></member>
+      <member refid="classtensor_1a9c7a1c6984491d411f503bf02e724469" prot="public" virt="non-virtual"><scope>tensor</scope><name>Size</name></member>
+      <member refid="classtensor_1a1abde07400cb870082f8f01791ff19b0" prot="public" virt="non-virtual"><scope>tensor</scope><name>size_type</name></member>
+      <member refid="classtensor_1a730bb8c0fcf0b3656009a70eb79ecce1" prot="private" virt="non-virtual"><scope>tensor</scope><name>tensor</name></member>
+      <member refid="classtensor_1a57c05e7aedc268a549fb71c2fc4ba828" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor</name></member>
+      <member refid="classtensor_1aa0dbcbddaa8467e3a848fabc6c39ced4" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor</name></member>
+      <member refid="classtensor_1a48c3f34fe7c54a1615a55ab8fe26e823" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor</name></member>
+      <member refid="classtensor_1a010fd65801eeff5aae794d9152374946" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>tensor</scope><name>tensor_base</name></member>
+      <member refid="classtensor_1a97a9bc6d85bed389f3467a613543e9c4" prot="public" virt="non-virtual"><scope>tensor</scope><name>value_data_type</name></member>
+      <member refid="classtensor_1a88d33604f2f149a3de508a3524bfb8e6" prot="public" virt="non-virtual"><scope>tensor</scope><name>value_type</name></member>
+      <member refid="classtensor_1aa7d9685df242fca80b8c60bca3c4d528" prot="public" virt="non-virtual"><scope>tensor</scope><name>~tensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

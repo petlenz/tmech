@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01binary__expression__wrapper_3_01__LH4b75ad8a8c6c107f3d0be97dfb70404e" kind="class" language="C++" prot="public">
+    <compoundname>detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _LHS</type>
+      </param>
+      <param>
+        <type>typename _RHS</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01binary__expression__wrapper_3_01__LH4b75ad8a8c6c107f3d0be97dfb70404e_1a1d1e63d124c1f86d57b5e6ed6b5d523c" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _LHS, _RHS, op_mul &gt;, <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _RHS, _LHS, op_mul &gt;, op_add &gt;::data_type</type>
+        <definition>using detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;::data_type =  typename binary_expression_wrapper&lt; binary_expression_wrapper&lt;_LHS, _RHS, op_mul&gt;, binary_expression_wrapper&lt;_RHS, _LHS, op_mul&gt;, op_add&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="280" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01binary__expression__wrapper_3_01__LH4b75ad8a8c6c107f3d0be97dfb70404e_1aed58046d630c3813ab352c2e2bbae0de" prot="private" static="no">
+        <type>typename <ref refid="structdetail_1_1get__value__type" kindref="compound">get_value_type</ref>&lt; data_type &gt;::value_type</type>
+        <definition>using detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;::value_type =  typename get_value_type&lt;data_type&gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="284" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01binary__expression__wrapper_3_01__LH4b75ad8a8c6c107f3d0be97dfb70404e_1a6fb041a5c3187f48edf49356d84f5b0d" prot="public" static="no">
+        <type><ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; <ref refid="classreal" kindref="compound">real</ref>&lt; value_type, 2, 0, 1 &gt;, <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _LHS, _RHS, op_mul &gt;, op_mul &gt;</type>
+        <definition>using detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;::squeezedType =  binary_expression_wrapper&lt;real&lt;value_type,2,0,1&gt;, binary_expression_wrapper&lt;_LHS, _RHS, op_mul&gt;, op_mul&gt;</definition>
+        <argsstring></argsstring>
+        <name>squeezedType</name>
+        <qualifiedname>detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;::squeezedType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="286" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="286" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="275" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="279" bodyend="287"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01binary__expression__wrapper_3_01__LH4b75ad8a8c6c107f3d0be97dfb70404e_1a1d1e63d124c1f86d57b5e6ed6b5d523c" prot="private" virt="non-virtual"><scope>detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01binary__expression__wrapper_3_01__LH4b75ad8a8c6c107f3d0be97dfb70404e_1a6fb041a5c3187f48edf49356d84f5b0d" prot="public" virt="non-virtual"><scope>detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;</scope><name>squeezedType</name></member>
+      <member refid="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01binary__expression__wrapper_3_01__LH4b75ad8a8c6c107f3d0be97dfb70404e_1aed58046d630c3813ab352c2e2bbae0de" prot="private" virt="non-virtual"><scope>detail::squeezer&lt; binary_expression_wrapper&lt; binary_expression_wrapper&lt; _LHS, _RHS, op_mul &gt;, binary_expression_wrapper&lt; _RHS, _LHS, op_mul &gt;, op_add &gt; &gt;</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

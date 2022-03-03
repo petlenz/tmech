@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1bubble__sort__sequence__swap__h_3_01__First_00_01__Second_00_01false_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>_First</declname>
+        <defname>_First</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_Second</declname>
+        <defname>_Second</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structdetail_1_1bubble__sort__sequence__swap__h_3_01__First_00_01__Second_00_01false_01_4_1a61f26af94b29963432d32d3e827d58ff" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;::first</definition>
+        <argsstring></argsstring>
+        <name>first</name>
+        <qualifiedname>detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;::first</qualifiedname>
+        <initializer>= _Second</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="974" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="974" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdetail_1_1bubble__sort__sequence__swap__h_3_01__First_00_01__Second_00_01false_01_4_1a09d5981fe66951e73ae4a3573f908587" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;::second</definition>
+        <argsstring></argsstring>
+        <name>second</name>
+        <qualifiedname>detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;::second</qualifiedname>
+        <initializer>= _First</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="975" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="975" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdetail_1_1bubble__sort__sequence__swap__h_3_01__First_00_01__Second_00_01false_01_4_1aa609b3b55d2dc870aec6cb79fa1cf1b1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;::sorted</definition>
+        <argsstring></argsstring>
+        <name>sorted</name>
+        <qualifiedname>detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;::sorted</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="976" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="976" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="972" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="973" bodyend="977"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1bubble__sort__sequence__swap__h_3_01__First_00_01__Second_00_01false_01_4_1a61f26af94b29963432d32d3e827d58ff" prot="public" virt="non-virtual"><scope>detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;</scope><name>first</name></member>
+      <member refid="structdetail_1_1bubble__sort__sequence__swap__h_3_01__First_00_01__Second_00_01false_01_4_1a09d5981fe66951e73ae4a3573f908587" prot="public" virt="non-virtual"><scope>detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;</scope><name>second</name></member>
+      <member refid="structdetail_1_1bubble__sort__sequence__swap__h_3_01__First_00_01__Second_00_01false_01_4_1aa609b3b55d2dc870aec6cb79fa1cf1b1" prot="public" virt="non-virtual"><scope>detail::bubble_sort_sequence_swap_h&lt; _First, _Second, false &gt;</scope><name>sorted</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

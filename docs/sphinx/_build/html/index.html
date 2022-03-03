@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; tmech  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Install" href="api/install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> tmech
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALLATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USAGE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/expression.html">Expressions and lazy evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_as_array.html">Tensors as arrays</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QUICK REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html">Basic arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#basis-rearrangement">Basis rearrangement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#outer-product">Outer product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#inner-product">Inner product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#invers-of-a-tensor">Invers of a tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#volumetric-and-deviatoric-parts">Volumetric and deviatoric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#symmetric-and-skew-symmetric-parts">Symmetric and skew-symmetric parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#isotropic-tensor-functions">Isotropic tensor functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#positive-negative-decomposition">Positive-negative decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#eigen-decomposition">Eigen-decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#sign-decomposition">Sign decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#polar-decomposition">Polar decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#id1">Exponential map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/numerical_diff.html">Numerical differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/compare_operators.html">Compare Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/adaptor.html">Adapting pointers of raw memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/convert_to_voigt.html">Converting to Voigt’s notation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/api_tmech.html">Tensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_tmech.html#wrapper">Wrapper</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API REFERENCE SYMDIFF</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/api_symdiff.html">Variable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_symdiff.html#wrappers">Wrappers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">tmech</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p><cite>tmech</cite> is a C++ library meant for numerical analysis with higher-order
+tensor expressions.</p>
+<p><cite>tmech</cite> provides</p>
+<ul class="simple">
+<li><p>an extensible expression system enabling <strong>lazy evaluation</strong>.</p></li>
+<li><p>tmech is a high quality tensor algebra library for the C++ language, aiming towards a good balance between speed and ease of use.</p></li>
+<li><p>Integer and floating point numbers are fully supported, complex numbers are supported only for basic arithmetic operations.</p></li>
+<li><p>Provides high-level syntax and functionality for easy use.</p></li>
+<li><p>Can be used for solid mechanics, fluid mechanics, …</p></li>
+<li><p>an extensible expression system enabling <strong>lazy broadcasting</strong>.</p></li>
+<li><p>isotropic tensor functions.</p></li>
+<li><p>compile-time differentiation of scalar and tensorial expressions</p></li>
+<li><p>many more…</p></li>
+</ul>
+<p><cite>tmech</cite> requires a modern C++ compiler supporting C++17. The following C++
+compilers are supported:</p>
+<ul class="simple">
+<li><p>On Unix platforms, gcc 4.9 or a recent version of Clang</p></li>
+<li><p>On Windows platforms not tested</p></li>
+</ul>
+</div>
+<div class="section" id="licensing">
+<h1>Licensing<a class="headerlink" href="#licensing" title="Permalink to this headline">¶</a></h1>
+<p>This software is licensed under the Apache License, Version 2.0. See the LICENSE file
+for details.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">INSTALLATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/install.html">Install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/install.html#from-source-with-cmake">From source with cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/install.html#including-tmech-in-your-project">Including tmech in your project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/changelog.html#id1">0.0.0</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">USAGE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/getting_started.html#first-example">First example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/getting_started.html#compiling-the-first-example">Compiling the first example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/getting_started.html#building-with-cmake">Building with cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/getting_started.html#second-example-single-contraction">Second example: single contraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/getting_started.html#third-example-index-access">Third example: index access</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/expression.html">Expressions and lazy evaluation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/expression.html#expressions">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/expression.html#id1">Lazy evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/expression.html#aliasing-temporary-evaluation">Aliasing: temporary evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/expression.html#accessing-elements">Accessing elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/expression.html#expression-interface">Expression interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_as_array.html">Tensors as arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_as_array.html#internal-memory-layout">Internal memory layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_as_array.html#performance">Performance</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">QUICK REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html">Basic arithmetic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#addition">Addition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#subtraction">Subtraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#single-contraction">Single contraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#scalar-update">Scalar update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#basis-rearrangement">Basis rearrangement</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#general-basis-rearrangement">General basis rearrangement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#transposition">Transposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#left-basis-transposition">Left basis transposition</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#outer-product">Outer product</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#general-outer-product">General outer product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#dyadic-product">Dyadic product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#lower-dyadic-product">Lower dyadic product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#upper-dyadic-product">Upper dyadic product</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#inner-product">Inner product</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#general-inner-product">General inner product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#double-contraction">Double contraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#fourth-contraction">Fourth contraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#invers-of-a-tensor">Invers of a tensor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#second-order-tensors-and-fourth-order-tensors-with-minior-symmetry">Second order tensors and fourth order tensors with minior-symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#fully-anisotropic-tensors">Fully anisotropic tensors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#volumetric-and-deviatoric-parts">Volumetric and deviatoric parts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#volumetric-part">Volumetric part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#deviatoric-part">Deviatoric part</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#symmetric-and-skew-symmetric-parts">Symmetric and skew-symmetric parts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#symmetric-part">Symmetric part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#skew-symmetric-part">Skew-symmetric part</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#isotropic-tensor-functions">Isotropic tensor functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#general-function">General function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#square-root">Square root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#exponential-map">Exponential map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#logarithmic-map">Logarithmic map</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#positive-negative-decomposition">Positive-negative decomposition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#general-method">General method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#only-positive-part">Only positive part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensor_functions.html#only-negative-part">Only negative part</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#eigen-decomposition">Eigen-decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#sign-decomposition">Sign decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#polar-decomposition">Polar decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/tensor_functions.html#id1">Exponential map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/numerical_diff.html">Numerical differentiation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/numerical_diff.html#nonsymmetric-input-and-result">Nonsymmetric input and result</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/numerical_diff.html#symmetric-input-and-result">Symmetric input and result</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/compare_operators.html">Compare Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/adaptor.html">Adapting pointers of raw memory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/adaptor.html#adapting-raw-pointers-voigt-s-notation">Adapting raw pointers Voigt’s notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adaptor.html#adapting-raw-pointers-full-representation">Adapting raw pointers full representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/convert_to_voigt.html">Converting to Voigt’s notation</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">API REFERENCE TMECH</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/api_tmech.html">Tensors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/api_tmech.html#tensor">Tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_tmech.html#adaptor">Adaptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_tmech.html#identity">Identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_tmech.html#zeros">Zeros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_tmech.html#random-normal">Random normal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_tmech.html#random-uniform">Random uniform</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_tmech.html#wrapper">Wrapper</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">API REFERENCE SYMDIFF</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/api_symdiff.html">Variable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_symdiff.html#wrappers">Wrappers</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api/install.html" class="btn btn-neutral float-right" title="Install" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Peter Lenz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

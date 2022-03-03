@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__value__type" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_value_type</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1get__value__type_1adb5a6da219766712b777cd3599544e90" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1get__value__type__detail" kindref="compound">get_value_type_detail</ref>&lt; _T, <ref refid="structdetail_1_1is__tensor" kindref="compound">is_tensor</ref>&lt; _T &gt;::value &gt;::value_type</type>
+        <definition>using detail::get_value_type&lt; _T &gt;::value_type =  typename get_value_type_detail&lt;_T, is_tensor&lt;_T&gt;::value&gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::get_value_type::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="179" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="177" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="178" bodyend="180"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__value__type_1adb5a6da219766712b777cd3599544e90" prot="public" virt="non-virtual"><scope>detail::get_value_type</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

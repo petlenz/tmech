@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__tensor__times__expression_3_01Variable_00_01LHS_00_01RHS_00_01true_00_01true_00_01false_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_tensor_times_expression&lt; Variable, LHS, RHS, true, true, false &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Variable</type>
+      </param>
+      <param>
+        <type>typename LHS</type>
+      </param>
+      <param>
+        <type>typename RHS</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1get__tensor__times__expression_3_01Variable_00_01LHS_00_01RHS_00_01true_00_01true_00_01false_01_4_1a613598c5205a05b0b58bdb6b8209e13a" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1get__tensor__times__expression" kindref="compound">get_tensor_times_expression</ref>&lt; Variable, RHS, LHS, true, false, true &gt;::deriv_type</type>
+        <definition>using detail::get_tensor_times_expression&lt; Variable, LHS, RHS, true, true, false &gt;::deriv_type =  typename get_tensor_times_expression&lt;Variable, RHS, LHS, true, false, true&gt;::deriv_type</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::get_tensor_times_expression&lt; Variable, LHS, RHS, true, true, false &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="88" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="86" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="87" bodyend="89"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__tensor__times__expression_3_01Variable_00_01LHS_00_01RHS_00_01true_00_01true_00_01false_01_4_1a613598c5205a05b0b58bdb6b8209e13a" prot="public" virt="non-virtual"><scope>detail::get_tensor_times_expression&lt; Variable, LHS, RHS, true, true, false &gt;</scope><name>deriv_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

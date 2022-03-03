@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1binary__expression__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::binary_expression_wrapper</compoundname>
+    <basecompoundref refid="classvariable__base" prot="public" virt="non-virtual">variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename _LHS</type>
+      </param>
+      <param>
+        <type>typename _RHS</type>
+      </param>
+      <param>
+        <type>typename _Op</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1binary__expression__wrapper_1af304348ac4b1954043044454409814a2" prot="public" static="no">
+        <type>_LHS</type>
+        <definition>using detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::lhs_expression =  _LHS</definition>
+        <argsstring></argsstring>
+        <name>lhs_expression</name>
+        <qualifiedname>detail::binary_expression_wrapper::lhs_expression</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="14" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1binary__expression__wrapper_1a1570663e53b479ce39c69c0d82726a8c" prot="public" static="no">
+        <type>_RHS</type>
+        <definition>using detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::rhs_expression =  _RHS</definition>
+        <argsstring></argsstring>
+        <name>rhs_expression</name>
+        <qualifiedname>detail::binary_expression_wrapper::rhs_expression</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="15" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1binary__expression__wrapper_1afd6d072399e6fc3455e67ea89af2cc3a" prot="public" static="no">
+        <type>_Op</type>
+        <definition>using detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::binary_operator =  _Op</definition>
+        <argsstring></argsstring>
+        <name>binary_operator</name>
+        <qualifiedname>detail::binary_expression_wrapper::binary_operator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="16" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1binary__expression__wrapper_1aaa20b6f0699213d9dccff61169a251b9" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1result__type" kindref="compound">detail::result_type</ref>&lt; typename _LHS::data_type, typename _RHS::data_type &gt;::data_type</type>
+        <definition>using detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::data_type =  typename detail::result_type&lt;typename _LHS::data_type, typename _RHS::data_type&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::binary_expression_wrapper::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="17" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classdetail_1_1binary__expression__wrapper_1ae965af78321dd6e2dc51ea1b46cea09b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;</name>
+        <qualifiedname>detail::binary_expression_wrapper::variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classvariable__base" kindref="compound">variable_base</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _LHS, _RHS, _Op &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="1" column="0" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1binary__expression__wrapper_1acd0f70bd3bbe0bad4b48bb29343b7b44" prot="private" static="no" mutable="no">
+        <type>lhs_expression</type>
+        <definition>lhs_expression detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::_lhs</definition>
+        <argsstring></argsstring>
+        <name>_lhs</name>
+        <qualifiedname>detail::binary_expression_wrapper::_lhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="45" column="20" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1binary__expression__wrapper_1a15791fc840c2d18a106b3d5e97ecf113" prot="private" static="no" mutable="no">
+        <type>rhs_expression</type>
+        <definition>rhs_expression detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::_rhs</definition>
+        <argsstring></argsstring>
+        <name>_rhs</name>
+        <qualifiedname>detail::binary_expression_wrapper::_rhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="46" column="20" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1a5af0dfd116dcb5a42efb183cd7f92da2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::binary_expression_wrapper</definition>
+        <argsstring>()</argsstring>
+        <name>binary_expression_wrapper</name>
+        <qualifiedname>detail::binary_expression_wrapper::binary_expression_wrapper</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="19" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_meat.h" bodystart="7" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1adb42e4fcea16bc9fc255b98b0cbe9a43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::~binary_expression_wrapper</definition>
+        <argsstring>()</argsstring>
+        <name>~binary_expression_wrapper</name>
+        <qualifiedname>detail::binary_expression_wrapper::~binary_expression_wrapper</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="21" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_meat.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1af4363c55df3818dbd2df28e9dbdc9148" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::operator()</definition>
+        <argsstring>(_Data const &amp;x)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::binary_expression_wrapper::operator()</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="24" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_meat.h" bodystart="18" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1a97d9e63ba25c59d50d1e19e582cdd4be" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::ostream &amp;</type>
+        <definition>constexpr std::ostream &amp; detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::print</definition>
+        <argsstring>(std::ostream &amp;os) const</argsstring>
+        <name>print</name>
+        <qualifiedname>detail::binary_expression_wrapper::print</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="26" column="35" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_meat.h" bodystart="25" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1a5f14c9cee079dc3f1d5ff70a61e4ee3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::value</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>value</name>
+        <qualifiedname>detail::binary_expression_wrapper::value</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="29" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1a720f160c11d93c9970040afe7026435f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::update</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>update</name>
+        <qualifiedname>detail::binary_expression_wrapper::update</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="32" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1a6aab6b44a4bf36117cb433b9872d8367" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::reset</definition>
+        <argsstring>()=delete</argsstring>
+        <name>reset</name>
+        <qualifiedname>detail::binary_expression_wrapper::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="34" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1a1e2eef0d5f41127d5a71c5666bbb2063" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::get_value</definition>
+        <argsstring>(_Data const &amp;x) const</argsstring>
+        <name>get_value</name>
+        <qualifiedname>detail::binary_expression_wrapper::get_value</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="38" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_meat.h" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1acca8cbceb564e9b1d4addba1f73685e4" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::update_imp</definition>
+        <argsstring>(_Data const &amp;x)</argsstring>
+        <name>update_imp</name>
+        <qualifiedname>detail::binary_expression_wrapper::update_imp</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="41" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_meat.h" bodystart="39" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1binary__expression__wrapper_1abf14b03c21793b2edafccea31f059583" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;::reset_imp</definition>
+        <argsstring>()</argsstring>
+        <name>reset_imp</name>
+        <qualifiedname>detail::binary_expression_wrapper::reset_imp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="43" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_meat.h" bodystart="45" bodyend="48"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;</label>
+        <link refid="classdetail_1_1binary__expression__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt;</label>
+        <link refid="classdetail_1_1binary__expression__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" line="9" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/binary_expression_wrapper_bones.h" bodystart="11" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1binary__expression__wrapper_1acd0f70bd3bbe0bad4b48bb29343b7b44" prot="private" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>_lhs</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a15791fc840c2d18a106b3d5e97ecf113" prot="private" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>_rhs</name></member>
+      <member refid="classvariable__base_1a30d0635dfb734e22c329677f7beb9d4f" prot="protected" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>_update</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a5af0dfd116dcb5a42efb183cd7f92da2" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>binary_expression_wrapper</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1afd6d072399e6fc3455e67ea89af2cc3a" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>binary_operator</name></member>
+      <member refid="classvariable__base_1a08062ec90dcff407477c4281a2949c06" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>convert</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1aaa20b6f0699213d9dccff61169a251b9" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a1e2eef0d5f41127d5a71c5666bbb2063" prot="private" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>get_value</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1af304348ac4b1954043044454409814a2" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>lhs_expression</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1af4363c55df3818dbd2df28e9dbdc9148" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1a1bce76f282394521dece5e217c3acbea" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a97d9e63ba25c59d50d1e19e582cdd4be" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>print</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a6aab6b44a4bf36117cb433b9872d8367" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>reset</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1abf14b03c21793b2edafccea31f059583" prot="private" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>reset_imp</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a1570663e53b479ce39c69c0d82726a8c" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>rhs_expression</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a720f160c11d93c9970040afe7026435f" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>update</name></member>
+      <member refid="classvariable__base_1a76d5b56fe2476b728e4b6d873d4cd801" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;::"><scope>detail::binary_expression_wrapper</scope><name>update</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1acca8cbceb564e9b1d4addba1f73685e4" prot="private" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>update_imp</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1a5f14c9cee079dc3f1d5ff70a61e4ee3d" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>value</name></member>
+      <member refid="classvariable__base_1a03e782ff9786edabe13abfc2adef95e5" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;::"><scope>detail::binary_expression_wrapper</scope><name>value</name></member>
+      <member refid="classvariable__base_1a00c523e7c5d602121591ca8dc8d0accd" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>variable_base</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1ae965af78321dd6e2dc51ea1b46cea09b" prot="private" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>variable_base&lt; binary_expression_wrapper&lt; _LHS, _RHS, _Op &gt; &gt;</name></member>
+      <member refid="classdetail_1_1binary__expression__wrapper_1adb42e4fcea16bc9fc255b98b0cbe9a43" prot="public" virt="non-virtual"><scope>detail::binary_expression_wrapper</scope><name>~binary_expression_wrapper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

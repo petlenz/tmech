@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__sequence__iter__start__detail" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_sequence_iter_start_detail</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>Iter</declname>
+        <defname>Iter</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Start</declname>
+        <defname>Start</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>End</declname>
+        <defname>End</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1get__sequence__iter__start__detail_1af62a77a9c17206b9bd663c30955bc6b4" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>Next</declname>
+            <defname>Next</defname>
+          </param>
+          <param>
+            <type>std::size_t ...</type>
+            <declname>Numbers</declname>
+            <defname>Numbers</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::get_sequence_iter_start_detail&lt; Iter, Start, End &gt;::apply</definition>
+        <argsstring>(sequence&lt; Next, Numbers... &gt;)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::get_sequence_iter_start_detail::apply</qualifiedname>
+        <param>
+          <type><ref refid="structsequence" kindref="compound">sequence</ref>&lt; Next, Numbers... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="467" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="467" bodyend="469"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="464" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="465" bodyend="471"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__sequence__iter__start__detail_1af62a77a9c17206b9bd663c30955bc6b4" prot="public" virt="non-virtual"><scope>detail::get_sequence_iter_start_detail</scope><name>apply</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1append__sequence__end__h_3_01sequence_3_01Numbers_8_8_8_01_4_00_01sequence_3_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::append_sequence_end_h&lt; sequence&lt; Numbers... &gt;, sequence&lt;&gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>Numbers</declname>
+        <defname>Numbers</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1append__sequence__end__h_3_01sequence_3_01Numbers_8_8_8_01_4_00_01sequence_3_4_01_4_1aba2a54fc6e1ca6e232cb9ae8a8624166" prot="public" static="no">
+        <type><ref refid="structsequence" kindref="compound">sequence</ref>&lt; Numbers... &gt;</type>
+        <definition>using detail::append_sequence_end_h&lt; sequence&lt; Numbers... &gt;, sequence&lt;&gt; &gt;::type =  sequence&lt;Numbers...&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::append_sequence_end_h&lt; sequence&lt; Numbers... &gt;, sequence&lt;&gt; &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="942" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="942" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="940" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="941" bodyend="943"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1append__sequence__end__h_3_01sequence_3_01Numbers_8_8_8_01_4_00_01sequence_3_4_01_4_1aba2a54fc6e1ca6e232cb9ae8a8624166" prot="public" virt="non-virtual"><scope>detail::append_sequence_end_h&lt; sequence&lt; Numbers... &gt;, sequence&lt;&gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

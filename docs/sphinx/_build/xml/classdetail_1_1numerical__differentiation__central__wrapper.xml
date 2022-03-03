@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1numerical__differentiation__central__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::numerical_differentiation_central_wrapper</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1numerical__differentiation__central__wrapper_1a91f9ded45f8ddc72f61a317f0b3a7e6b" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::numerical_differentiation_central_wrapper::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::numerical_differentiation_central_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="149" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classdetail_1_1numerical__differentiation__central__wrapper_1a3a8c614393baf2187930527ffc68edba" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+          <param>
+            <type>typename Direction</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::numerical_differentiation_central_wrapper::differentiation</definition>
+        <argsstring>(Function &amp;__func, Direction const &amp;__A, Result &amp;__result, T const __eps)</argsstring>
+        <name>differentiation</name>
+        <qualifiedname>detail::numerical_differentiation_central_wrapper::differentiation</qualifiedname>
+        <param>
+          <type>Function &amp;</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>Direction const &amp;</type>
+          <declname>__A</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="152" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="152" bodyend="177"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classdetail_1_1numerical__differentiation__central__wrapper_1a17f2a8bed4376f8687b2ef1b65cc8664" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+          <param>
+            <type>typename Direction</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::numerical_differentiation_central_wrapper::diff_0_0</definition>
+        <argsstring>(Function &amp;__func, Direction const &amp;__A, Result &amp;__result, T const __eps)</argsstring>
+        <name>diff_0_0</name>
+        <qualifiedname>detail::numerical_differentiation_central_wrapper::diff_0_0</qualifiedname>
+        <param>
+          <type>Function &amp;</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>Direction const &amp;</type>
+          <declname>__A</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="181" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="181" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1numerical__differentiation__central__wrapper_1ad5ba9a2c46e1270de2786dc946de2101" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+          <param>
+            <type>typename Direction</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::numerical_differentiation_central_wrapper::diff_0_2</definition>
+        <argsstring>(Function &amp;__func, Direction const &amp;__A, Result &amp;__result, T const __eps)</argsstring>
+        <name>diff_0_2</name>
+        <qualifiedname>detail::numerical_differentiation_central_wrapper::diff_0_2</qualifiedname>
+        <param>
+          <type>Function &amp;</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>Direction const &amp;</type>
+          <declname>__A</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="189" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="189" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1numerical__differentiation__central__wrapper_1a94678479ff4309efd801be5931ae6fbe" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+          <param>
+            <type>typename Direction</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::numerical_differentiation_central_wrapper::diff_2_2</definition>
+        <argsstring>(Function &amp;__func, Direction const &amp;__A, Result &amp;__result, T const __eps)</argsstring>
+        <name>diff_2_2</name>
+        <qualifiedname>detail::numerical_differentiation_central_wrapper::diff_2_2</qualifiedname>
+        <param>
+          <type>Function &amp;</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>Direction const &amp;</type>
+          <declname>__A</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="208" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="208" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1numerical__differentiation__central__wrapper_1a09a7bb76baa3df19d0e458244cf5123b" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+          <param>
+            <type>typename Direction</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::numerical_differentiation_central_wrapper::diff_4_2</definition>
+        <argsstring>(Function &amp;__func, Direction const &amp;__A, Result &amp;__result, T const __eps)</argsstring>
+        <name>diff_4_2</name>
+        <qualifiedname>detail::numerical_differentiation_central_wrapper::diff_4_2</qualifiedname>
+        <param>
+          <type>Function &amp;</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>Direction const &amp;</type>
+          <declname>__A</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="231" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="231" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1numerical__differentiation__central__wrapper_1a32d355819fe1a78f1b9befd46b3af6fc" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+          <param>
+            <type>typename Direction</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::numerical_differentiation_central_wrapper::diff_4_4</definition>
+        <argsstring>(Function &amp;__func, Direction const &amp;__A, Result &amp;__result, T const __eps)</argsstring>
+        <name>diff_4_4</name>
+        <qualifiedname>detail::numerical_differentiation_central_wrapper::diff_4_4</qualifiedname>
+        <param>
+          <type>Function &amp;</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>Direction const &amp;</type>
+          <declname>__A</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="259" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="259" bodyend="288"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" line="146" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/numerical_differentiation_central_wrapper_bones.h" bodystart="147" bodyend="289"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1numerical__differentiation__central__wrapper_1a17f2a8bed4376f8687b2ef1b65cc8664" prot="private" virt="non-virtual"><scope>detail::numerical_differentiation_central_wrapper</scope><name>diff_0_0</name></member>
+      <member refid="classdetail_1_1numerical__differentiation__central__wrapper_1ad5ba9a2c46e1270de2786dc946de2101" prot="private" virt="non-virtual"><scope>detail::numerical_differentiation_central_wrapper</scope><name>diff_0_2</name></member>
+      <member refid="classdetail_1_1numerical__differentiation__central__wrapper_1a94678479ff4309efd801be5931ae6fbe" prot="private" virt="non-virtual"><scope>detail::numerical_differentiation_central_wrapper</scope><name>diff_2_2</name></member>
+      <member refid="classdetail_1_1numerical__differentiation__central__wrapper_1a09a7bb76baa3df19d0e458244cf5123b" prot="private" virt="non-virtual"><scope>detail::numerical_differentiation_central_wrapper</scope><name>diff_4_2</name></member>
+      <member refid="classdetail_1_1numerical__differentiation__central__wrapper_1a32d355819fe1a78f1b9befd46b3af6fc" prot="private" virt="non-virtual"><scope>detail::numerical_differentiation_central_wrapper</scope><name>diff_4_4</name></member>
+      <member refid="classdetail_1_1numerical__differentiation__central__wrapper_1a3a8c614393baf2187930527ffc68edba" prot="public" virt="non-virtual"><scope>detail::numerical_differentiation_central_wrapper</scope><name>differentiation</name></member>
+      <member refid="classdetail_1_1numerical__differentiation__central__wrapper_1a91f9ded45f8ddc72f61a317f0b3a7e6b" prot="public" virt="non-virtual"><scope>detail::numerical_differentiation_central_wrapper</scope><name>size_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

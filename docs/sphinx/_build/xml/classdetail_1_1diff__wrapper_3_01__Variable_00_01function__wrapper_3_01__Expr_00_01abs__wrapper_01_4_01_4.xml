@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01abs__wrapper_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Variable</type>
+      </param>
+      <param>
+        <type>typename _Expr</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01abs__wrapper_01_4_01_4_1a4106a29b745d424f1b964d4e8a0d6e75" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; _Variable, _Expr &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;::_dExpr =  typename squeezer&lt; typename diff_wrapper&lt; _Variable, _Expr &gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dExpr</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;::_dExpr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="154" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01abs__wrapper_01_4_01_4_1ab944d2c41df22266947ce6cf00e201c7" prot="private" static="no">
+        <type><ref refid="classdetail_1_1function__wrapper" kindref="compound">function_wrapper</ref>&lt; _Expr, <ref refid="structdetail_1_1sign__wrapper" kindref="compound">sign_wrapper</ref> &gt;</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;::sign_expr =  function_wrapper&lt;_Expr, sign_wrapper&gt;</definition>
+        <argsstring></argsstring>
+        <name>sign_expr</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;::sign_expr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="155" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01abs__wrapper_01_4_01_4_1ac575fe6fdb2cf6c7214a83de4de77351" prot="public" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _dExpr, <ref refid="classdetail_1_1function__wrapper" kindref="compound">sign_expr</ref>, op_mul &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;::deriv_type =  typename squeezer&lt;binary_expression_wrapper&lt;_dExpr, sign_expr, op_mul&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="157" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="152" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="153" bodyend="158"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01abs__wrapper_01_4_01_4_1a4106a29b745d424f1b964d4e8a0d6e75" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;</scope><name>_dExpr</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01abs__wrapper_01_4_01_4_1ac575fe6fdb2cf6c7214a83de4de77351" prot="public" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;</scope><name>deriv_type</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01abs__wrapper_01_4_01_4_1ab944d2c41df22266947ce6cf00e201c7" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, abs_wrapper &gt; &gt;</scope><name>sign_expr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

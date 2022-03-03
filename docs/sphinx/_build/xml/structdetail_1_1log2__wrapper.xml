@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1log2__wrapper" kind="struct" language="C++" prot="public">
+    <compoundname>detail::log2_wrapper</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1log2__wrapper_1ab229b5edff00c7677b2c1826da1cad86" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::log2_wrapper::apply</definition>
+        <argsstring>(T const &amp;value)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::log2_wrapper::apply</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="29" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="29" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail_1_1log2__wrapper_1a59c9a3a2485afa76dd0c05be283ad8bd" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string detail::log2_wrapper::get_string</definition>
+        <argsstring>()</argsstring>
+        <name>get_string</name>
+        <qualifiedname>detail::log2_wrapper::get_string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="32" column="31" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="27" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="27" bodyend="35"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1log2__wrapper_1ab229b5edff00c7677b2c1826da1cad86" prot="public" virt="non-virtual"><scope>detail::log2_wrapper</scope><name>apply</name></member>
+      <member refid="structdetail_1_1log2__wrapper_1a59c9a3a2485afa76dd0c05be283ad8bd" prot="public" virt="non-virtual"><scope>detail::log2_wrapper</scope><name>get_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

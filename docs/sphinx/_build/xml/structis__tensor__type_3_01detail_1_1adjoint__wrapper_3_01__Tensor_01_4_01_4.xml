@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structis__tensor__type_3_01detail_1_1adjoint__wrapper_3_01__Tensor_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>is_tensor_type&lt; detail::adjoint_wrapper&lt; _Tensor &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structis__tensor__type_3_01detail_1_1adjoint__wrapper_3_01__Tensor_01_4_01_4_1a6072b0143e683c29f56fddde4f78b001" prot="public" static="no">
+        <type>std::true_type</type>
+        <definition>using is_tensor_type&lt; detail::adjoint_wrapper&lt; _Tensor &gt; &gt;::type =  std::true_type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>is_tensor_type&lt; detail::adjoint_wrapper&lt; _Tensor &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="77" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structis__tensor__type_3_01detail_1_1adjoint__wrapper_3_01__Tensor_01_4_01_4_1af3309b2761b1dfedca17fd08ecfc85e5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_tensor_type&lt; detail::adjoint_wrapper&lt; _Tensor &gt; &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>is_tensor_type&lt; detail::adjoint_wrapper&lt; _Tensor &gt; &gt;::value</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="78" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="75" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="76" bodyend="79"/>
+    <listofallmembers>
+      <member refid="structis__tensor__type_3_01detail_1_1adjoint__wrapper_3_01__Tensor_01_4_01_4_1a6072b0143e683c29f56fddde4f78b001" prot="public" virt="non-virtual"><scope>is_tensor_type&lt; detail::adjoint_wrapper&lt; _Tensor &gt; &gt;</scope><name>type</name></member>
+      <member refid="structis__tensor__type_3_01detail_1_1adjoint__wrapper_3_01__Tensor_01_4_01_4_1af3309b2761b1dfedca17fd08ecfc85e5" prot="public" virt="non-virtual"><scope>is_tensor_type&lt; detail::adjoint_wrapper&lt; _Tensor &gt; &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__zero__detail" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_zero_detail</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _T</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>_IsTensor</declname>
+        <defname>_IsTensor</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1get__zero__detail_1a0ac745698afad24221dab10a41e2fe7a" prot="public" static="no">
+        <type><ref refid="classscalar__zero" kindref="compound">scalar_zero</ref>&lt; _T &gt;</type>
+        <definition>using detail::get_zero_detail&lt; _T, _IsTensor &gt;::type =  scalar_zero&lt;_T&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::get_zero_detail::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="362" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="362" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="360" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="361" bodyend="363"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__zero__detail_1a0ac745698afad24221dab10a41e2fe7a" prot="public" virt="non-virtual"><scope>detail::get_zero_detail</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

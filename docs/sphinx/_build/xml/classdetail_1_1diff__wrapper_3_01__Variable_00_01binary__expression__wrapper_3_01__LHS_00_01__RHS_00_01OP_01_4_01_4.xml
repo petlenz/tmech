@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper_3_01__Variable_00_01binary__expression__wrapper_3_01__LHS_00_01__RHS_00_01OP_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Variable</type>
+      </param>
+      <param>
+        <type>typename _LHS</type>
+      </param>
+      <param>
+        <type>typename _RHS</type>
+      </param>
+      <param>
+        <type>typename OP</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01binary__expression__wrapper_3_01__LHS_00_01__RHS_00_01OP_01_4_01_4_1a6f6f36c192b841bc6653b62e78169ba7" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; _Variable, _LHS &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;::_dL =  typename squeezer&lt;typename diff_wrapper&lt;_Variable, _LHS&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dL</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;::_dL</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="19" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01binary__expression__wrapper_3_01__LHS_00_01__RHS_00_01OP_01_4_01_4_1a78c41391a1dcf85d1981a09503e67c07" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; _Variable, _RHS &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;::_dR =  typename squeezer&lt;typename diff_wrapper&lt;_Variable, _RHS&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dR</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;::_dR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="20" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01binary__expression__wrapper_3_01__LHS_00_01__RHS_00_01OP_01_4_01_4_1a9a87bb811fe9d1df84c8321d816ccf9b" prot="public" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _dL, _dR, OP &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;::deriv_type =  typename squeezer&lt; binary_expression_wrapper&lt;_dL, _dR, OP&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="22" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="17" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="18" bodyend="23"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01binary__expression__wrapper_3_01__LHS_00_01__RHS_00_01OP_01_4_01_4_1a6f6f36c192b841bc6653b62e78169ba7" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;</scope><name>_dL</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01binary__expression__wrapper_3_01__LHS_00_01__RHS_00_01OP_01_4_01_4_1a78c41391a1dcf85d1981a09503e67c07" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;</scope><name>_dR</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01binary__expression__wrapper_3_01__LHS_00_01__RHS_00_01OP_01_4_01_4_1a9a87bb811fe9d1df84c8321d816ccf9b" prot="public" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, binary_expression_wrapper&lt; _LHS, _RHS, OP &gt; &gt;</scope><name>deriv_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

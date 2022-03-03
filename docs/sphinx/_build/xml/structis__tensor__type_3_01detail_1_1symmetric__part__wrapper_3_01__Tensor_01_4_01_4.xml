@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structis__tensor__type_3_01detail_1_1symmetric__part__wrapper_3_01__Tensor_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>is_tensor_type&lt; detail::symmetric_part_wrapper&lt; _Tensor &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structis__tensor__type_3_01detail_1_1symmetric__part__wrapper_3_01__Tensor_01_4_01_4_1a008ddab2e541817d4e494c6107395b7c" prot="public" static="no">
+        <type>std::true_type</type>
+        <definition>using is_tensor_type&lt; detail::symmetric_part_wrapper&lt; _Tensor &gt; &gt;::type =  std::true_type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>is_tensor_type&lt; detail::symmetric_part_wrapper&lt; _Tensor &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="119" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structis__tensor__type_3_01detail_1_1symmetric__part__wrapper_3_01__Tensor_01_4_01_4_1afeff30a68b3db47f21bc3bf6c0ab4cd5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool is_tensor_type&lt; detail::symmetric_part_wrapper&lt; _Tensor &gt; &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>is_tensor_type&lt; detail::symmetric_part_wrapper&lt; _Tensor &gt; &gt;::value</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="120" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="117" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="118" bodyend="121"/>
+    <listofallmembers>
+      <member refid="structis__tensor__type_3_01detail_1_1symmetric__part__wrapper_3_01__Tensor_01_4_01_4_1a008ddab2e541817d4e494c6107395b7c" prot="public" virt="non-virtual"><scope>is_tensor_type&lt; detail::symmetric_part_wrapper&lt; _Tensor &gt; &gt;</scope><name>type</name></member>
+      <member refid="structis__tensor__type_3_01detail_1_1symmetric__part__wrapper_3_01__Tensor_01_4_01_4_1afeff30a68b3db47f21bc3bf6c0ab4cd5" prot="public" virt="non-virtual"><scope>is_tensor_type&lt; detail::symmetric_part_wrapper&lt; _Tensor &gt; &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

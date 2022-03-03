@@ -1,0 +1,682 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1inner__product__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::inner_product_wrapper</compoundname>
+    <basecompoundref refid="classtensor__base" prot="public" virt="non-virtual">tensor_base&lt; inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename LHS</type>
+      </param>
+      <param>
+        <type>typename RHS</type>
+      </param>
+      <param>
+        <type>typename SequenceLHS</type>
+      </param>
+      <param>
+        <type>typename SequenceRHS</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1ade1fdd9ac70afab0e32f9678259ba0d4" prot="private" static="no">
+        <type>typename std::remove_const&lt; typename std::remove_reference&lt; RHS &gt;::type &gt;::type</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::data_type_RHS =  typename std::remove_const&lt;typename std::remove_reference&lt;RHS&gt;::type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>data_type_RHS</name>
+        <qualifiedname>detail::inner_product_wrapper::data_type_RHS</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="23" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a59231d79f900a3bbf15edd8d85c1ede1" prot="private" static="no">
+        <type>typename std::remove_const&lt; typename std::remove_reference&lt; LHS &gt;::type &gt;::type</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::data_type_LHS =  typename std::remove_const&lt;typename std::remove_reference&lt;LHS&gt;::type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>data_type_LHS</name>
+        <qualifiedname>detail::inner_product_wrapper::data_type_LHS</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="24" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a6ef05cc24a229297efb40617ad25dda7" prot="private" static="no">
+        <type>typename data_type_LHS::value_type</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::value_type_LHS =  typename data_type_LHS::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type_LHS</name>
+        <qualifiedname>detail::inner_product_wrapper::value_type_LHS</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="25" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a275c3dc6b73c037251c2161a5da433d9" prot="private" static="no">
+        <type>typename data_type_RHS::value_type</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::value_type_RHS =  typename data_type_RHS::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type_RHS</name>
+        <qualifiedname>detail::inner_product_wrapper::value_type_RHS</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="26" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1aefdcaf2918a35d23fc3b41d63166837f" prot="private" static="no">
+        <type>min_value_squence_t&lt; SequenceLHS, 1 &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::sequence_inner_lhs =  min_value_squence_t&lt;SequenceLHS, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>sequence_inner_lhs</name>
+        <qualifiedname>detail::inner_product_wrapper::sequence_inner_lhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="27" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a34de9421e36cd211d11eb56f34ebf2da" prot="private" static="no">
+        <type>min_value_squence_t&lt; SequenceRHS, 1 &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::sequence_inner_rhs =  min_value_squence_t&lt;SequenceRHS, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>sequence_inner_rhs</name>
+        <qualifiedname>detail::inner_product_wrapper::sequence_inner_rhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="28" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1ad0618bf23e63a2a3f4cb4ea187756f21" prot="private" static="no">
+        <type>bubble_sort_sequence_t&lt; sequence_inner_lhs &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::sorted_sequence_lhs =  bubble_sort_sequence_t&lt;sequence_inner_lhs&gt;</definition>
+        <argsstring></argsstring>
+        <name>sorted_sequence_lhs</name>
+        <qualifiedname>detail::inner_product_wrapper::sorted_sequence_lhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="163" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a9a276433efc909224680e0ebb51a0aaa" prot="private" static="no">
+        <type>bubble_sort_sequence_t&lt; sequence_inner_rhs &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::sorted_sequence_rhs =  bubble_sort_sequence_t&lt;sequence_inner_rhs&gt;</definition>
+        <argsstring></argsstring>
+        <name>sorted_sequence_rhs</name>
+        <qualifiedname>detail::inner_product_wrapper::sorted_sequence_rhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="164" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1afd1311a5ff9a3a406b311e716f115e9a" prot="private" static="no">
+        <type>set_difference_sequence_t&lt; sequence_t&lt; RankLHS-1 &gt;, sorted_sequence_lhs &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::sequence_outer_lhs =  set_difference_sequence_t&lt;sequence_t&lt;RankLHS-1&gt;, sorted_sequence_lhs&gt;</definition>
+        <argsstring></argsstring>
+        <name>sequence_outer_lhs</name>
+        <qualifiedname>detail::inner_product_wrapper::sequence_outer_lhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="165" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1ae5c249e72c4f66250256c4fa06babafa" prot="private" static="no">
+        <type>set_difference_sequence_t&lt; sequence_t&lt; RankRHS-1 &gt;, sorted_sequence_rhs &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::sequence_outer_rhs =  set_difference_sequence_t&lt;sequence_t&lt;RankRHS-1&gt;, sorted_sequence_rhs&gt;</definition>
+        <argsstring></argsstring>
+        <name>sequence_outer_rhs</name>
+        <qualifiedname>detail::inner_product_wrapper::sequence_outer_rhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="166" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a53e65e73f6a2160a10086bcef3b2c1f2" prot="private" static="no">
+        <type>add_value_sequence_t&lt; append_sequence_end_t&lt; sequence_outer_lhs, sequence_inner_lhs &gt;, 1 &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::new_basis_lhs =  add_value_sequence_t&lt;append_sequence_end_t&lt;sequence_outer_lhs, sequence_inner_lhs&gt;,1&gt;</definition>
+        <argsstring></argsstring>
+        <name>new_basis_lhs</name>
+        <qualifiedname>detail::inner_product_wrapper::new_basis_lhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="167" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a46f1ada8d39160b380ee8be837196be1" prot="private" static="no">
+        <type>add_value_sequence_t&lt; append_sequence_end_t&lt; sequence_inner_rhs, sequence_outer_rhs &gt;, 1 &gt;</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::new_basis_rhs =  add_value_sequence_t&lt;append_sequence_end_t&lt;sequence_inner_rhs, sequence_outer_rhs&gt;,1&gt;</definition>
+        <argsstring></argsstring>
+        <name>new_basis_rhs</name>
+        <qualifiedname>detail::inner_product_wrapper::new_basis_rhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="168" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a14969172e2690cb3fffcba5f86c0a99a" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1result__type" kindref="compound">result_type</ref>&lt; value_type_LHS, value_type_RHS &gt;::value_type</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::value_type =  typename result_type&lt;value_type_LHS, value_type_RHS&gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::inner_product_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="30" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1inner__product__wrapper_1a91093fb75b9aa2efa21fd2081b359dd1" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::inner_product_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="31" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1a97fb60a81f8120a870b711398d5379fe" prot="private" static="no" mutable="no">
+        <type>LHS</type>
+        <definition>LHS detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::_lhs</definition>
+        <argsstring></argsstring>
+        <name>_lhs</name>
+        <qualifiedname>detail::inner_product_wrapper::_lhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="151" column="9" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1a08eeff74c479e7315a26fb6db68b5d59" prot="private" static="no" mutable="no">
+        <type>RHS</type>
+        <definition>RHS detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::_rhs</definition>
+        <argsstring></argsstring>
+        <name>_rhs</name>
+        <qualifiedname>detail::inner_product_wrapper::_rhs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="152" column="9" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1aac395a602e50398184434c48f47d74bf" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, dimension(), rank()&gt;</type>
+        <definition>tensor&lt;value_type, dimension(), rank()&gt; detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>detail::inner_product_wrapper::_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="153" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1a1c77797bb2cc9740ecffd070738f7687" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, dimension(), data_type_LHS::rank()&gt;</type>
+        <definition>tensor&lt;value_type, dimension(), data_type_LHS::rank()&gt; detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::_lhs_temp</definition>
+        <argsstring></argsstring>
+        <name>_lhs_temp</name>
+        <qualifiedname>detail::inner_product_wrapper::_lhs_temp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="154" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1ac9960091df3ef60f851812f2521c24b4" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, dimension(), data_type_RHS::rank()&gt;</type>
+        <definition>tensor&lt;value_type, dimension(), data_type_RHS::rank()&gt; detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::_rhs_temp</definition>
+        <argsstring></argsstring>
+        <name>_rhs_temp</name>
+        <qualifiedname>detail::inner_product_wrapper::_rhs_temp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="155" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1a99712bb15fd1d11ba6aa964b8ac80bc1" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::RankLHS</definition>
+        <argsstring></argsstring>
+        <name>RankLHS</name>
+        <qualifiedname>detail::inner_product_wrapper::RankLHS</qualifiedname>
+        <initializer>{data_type_LHS::rank()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="157" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1a8d606d812da803d639a96d2b503c1734" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::RankRHS</definition>
+        <argsstring></argsstring>
+        <name>RankRHS</name>
+        <qualifiedname>detail::inner_product_wrapper::RankRHS</qualifiedname>
+        <initializer>{data_type_RHS::rank()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="158" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1acf22c080dc9b008fd540241c4ad90052" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::SizeLHS</definition>
+        <argsstring></argsstring>
+        <name>SizeLHS</name>
+        <qualifiedname>detail::inner_product_wrapper::SizeLHS</qualifiedname>
+        <initializer>{SequenceLHS::size()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="159" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1a8b11b7f783d1a8f4b191d7d264e92e6c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::SizeRHS</definition>
+        <argsstring></argsstring>
+        <name>SizeRHS</name>
+        <qualifiedname>detail::inner_product_wrapper::SizeRHS</qualifiedname>
+        <initializer>{SequenceRHS::size()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="160" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1inner__product__wrapper_1ae343356b430b9c0b761944eb9eaaddf3" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::SizeOuterLoop</definition>
+        <argsstring></argsstring>
+        <name>SizeOuterLoop</name>
+        <qualifiedname>detail::inner_product_wrapper::SizeOuterLoop</qualifiedname>
+        <initializer>{(RankLHS + RankRHS) - (SizeLHS + SizeRHS)}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="161" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a51932a974904900551fa458d32fd8db6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::inner_product_wrapper</definition>
+        <argsstring>(LHS __lhs, RHS __rhs)</argsstring>
+        <name>inner_product_wrapper</name>
+        <qualifiedname>detail::inner_product_wrapper::inner_product_wrapper</qualifiedname>
+        <param>
+          <type>LHS</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>RHS</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="40" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="40" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a7f4a69861326fd23acf3ab6e6d6c9cdc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::inner_product_wrapper</definition>
+        <argsstring>(inner_product_wrapper const &amp;__data)</argsstring>
+        <name>inner_product_wrapper</name>
+        <qualifiedname>detail::inner_product_wrapper::inner_product_wrapper</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1inner__product__wrapper" kindref="compound">inner_product_wrapper</ref> const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="48" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="48" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a002287ecb7f6057cb29e705495ace81d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Indicies</declname>
+            <defname>Indicies</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::operator()</definition>
+        <argsstring>(Indicies ... __indicies) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::inner_product_wrapper::operator()</qualifiedname>
+        <param>
+          <type>Indicies ...</type>
+          <declname>__indicies</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="57" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="57" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1aeb0a7d7d543b37329c4dfce8a75eff5a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::evaluate</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::inner_product_wrapper::evaluate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="69" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="69" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a80c8e767442787ee05de623091b222dc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Result</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::evaluate</definition>
+        <argsstring>(_Result &amp;__result) noexcept</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::inner_product_wrapper::evaluate</qualifiedname>
+        <param>
+          <type>_Result &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="77" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="77" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a6a0b1c8a3139100688a890bb4557d837" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Result</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::evaluate_imp</definition>
+        <argsstring>(_Result const &amp;__result) noexcept</argsstring>
+        <name>evaluate_imp</name>
+        <qualifiedname>detail::inner_product_wrapper::evaluate_imp</qualifiedname>
+        <param>
+          <type>_Result const &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="82" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="82" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a1875a0d3488999ce7b720dddf7afde9b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::data</definition>
+        <argsstring>() const</argsstring>
+        <name>data</name>
+        <qualifiedname>detail::inner_product_wrapper::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="126" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="126" bodyend="128"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a64e0a83111745477dbf823f9454334b6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::dimension</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>dimension</name>
+        <qualifiedname>detail::inner_product_wrapper::dimension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="61" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="61" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1ab5d0000d13f098791c8815870bfa51ac" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::rank</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rank</name>
+        <qualifiedname>detail::inner_product_wrapper::rank</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="65" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="65" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1afec78b7f1c2ef720121543e871c9bd3c" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _LHS</type>
+          </param>
+          <param>
+            <type>typename _RHS</type>
+          </param>
+          <param>
+            <type>typename _RESULT</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::evaluate_implementation</definition>
+        <argsstring>(_RESULT const &amp;__result, _LHS const &amp;__lhs, _RHS const &amp;__rhs) const noexcept</argsstring>
+        <name>evaluate_implementation</name>
+        <qualifiedname>detail::inner_product_wrapper::evaluate_implementation</qualifiedname>
+        <param>
+          <type>_RESULT const &amp;</type>
+          <declname>__result</declname>
+        </param>
+        <param>
+          <type>_LHS const &amp;</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>_RHS const &amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="132" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="132" bodyend="138"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classdetail_1_1inner__product__wrapper_1a07eb076b003d6f897cbcbb5f5b6cc969" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_type</type>
+            <declname>_Size</declname>
+            <defname>_Size</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;::get_size</definition>
+        <argsstring>()</argsstring>
+        <name>get_size</name>
+        <qualifiedname>detail::inner_product_wrapper::get_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="141" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="141" bodyend="147"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;</label>
+        <link refid="classdetail_1_1inner__product__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt;</label>
+        <link refid="classdetail_1_1inner__product__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; inner_product_wrapper&lt; LHS, RHS, SequenceLHS, SequenceRHS &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" line="21" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/inner_product_wrapper_bones.h" bodystart="22" bodyend="169"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1inner__product__wrapper_1aac395a602e50398184434c48f47d74bf" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>_data</name></member>
+      <member refid="classtensor__base_1ad3589a7250ab005ef2c3276cca2e525b" prot="protected" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>_is_init</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a97fb60a81f8120a870b711398d5379fe" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>_lhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a1c77797bb2cc9740ecffd070738f7687" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>_lhs_temp</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a08eeff74c479e7315a26fb6db68b5d59" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>_rhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1ac9960091df3ef60f851812f2521c24b4" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>_rhs_temp</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>convert</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a1875a0d3488999ce7b720dddf7afde9b" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>data</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a59231d79f900a3bbf15edd8d85c1ede1" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>data_type_LHS</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1ade1fdd9ac70afab0e32f9678259ba0d4" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>data_type_RHS</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a64e0a83111745477dbf823f9454334b6" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>dimension</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1aeb0a7d7d543b37329c4dfce8a75eff5a" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a80c8e767442787ee05de623091b222dc" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a6a0b1c8a3139100688a890bb4557d837" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>evaluate_imp</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1afec78b7f1c2ef720121543e871c9bd3c" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>evaluate_implementation</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a07eb076b003d6f897cbcbb5f5b6cc969" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>get_size</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a51932a974904900551fa458d32fd8db6" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>inner_product_wrapper</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a7f4a69861326fd23acf3ab6e6d6c9cdc" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>inner_product_wrapper</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a53e65e73f6a2160a10086bcef3b2c1f2" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>new_basis_lhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a46f1ada8d39160b380ee8be837196be1" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>new_basis_rhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a002287ecb7f6057cb29e705495ace81d" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>operator()</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>operator-</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1ab5d0000d13f098791c8815870bfa51ac" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>rank</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a99712bb15fd1d11ba6aa964b8ac80bc1" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>RankLHS</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a8d606d812da803d639a96d2b503c1734" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>RankRHS</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1aefdcaf2918a35d23fc3b41d63166837f" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>sequence_inner_lhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a34de9421e36cd211d11eb56f34ebf2da" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>sequence_inner_rhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1afd1311a5ff9a3a406b311e716f115e9a" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>sequence_outer_lhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1ae5c249e72c4f66250256c4fa06babafa" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>sequence_outer_rhs</name></member>
+      <member refid="classtensor__base_1a869aa22037b95b0024b6e5731a61c90f" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>size</name></member>
+      <member refid="classtensor__base_1a869aa22037b95b0024b6e5731a61c90f" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>size</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a91093fb75b9aa2efa21fd2081b359dd1" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>size_type</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1acf22c080dc9b008fd540241c4ad90052" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>SizeLHS</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1ae343356b430b9c0b761944eb9eaaddf3" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>SizeOuterLoop</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a8b11b7f783d1a8f4b191d7d264e92e6c" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>SizeRHS</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1ad0618bf23e63a2a3f4cb4ea187756f21" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>sorted_sequence_lhs</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a9a276433efc909224680e0ebb51a0aaa" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>sorted_sequence_rhs</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a14969172e2690cb3fffcba5f86c0a99a" prot="public" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>value_type</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a6ef05cc24a229297efb40617ad25dda7" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>value_type_LHS</name></member>
+      <member refid="classdetail_1_1inner__product__wrapper_1a275c3dc6b73c037251c2161a5da433d9" prot="private" virt="non-virtual"><scope>detail::inner_product_wrapper</scope><name>value_type_RHS</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

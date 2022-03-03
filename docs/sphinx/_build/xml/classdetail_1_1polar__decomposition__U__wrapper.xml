@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1polar__decomposition__U__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::polar_decomposition_U_wrapper</compoundname>
+    <basecompoundref refid="classtensor__base" prot="public" virt="non-virtual">tensor_base&lt; polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename _Base</type>
+      </param>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1polar__decomposition__U__wrapper_1acf11d54243e2483626adb5501969cd8b" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="23" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1polar__decomposition__U__wrapper_1aa9e2dd7aba72abe250c89ea7cef3bec2" prot="public" static="no">
+        <type>typename _Tensor::value_type</type>
+        <definition>using detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::value_type =  typename _Tensor::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="24" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1polar__decomposition__U__wrapper_1ac750e98d91db475a15d482922d498942" prot="private" static="no" mutable="no">
+        <type>_Tensor const  &amp;</type>
+        <definition>_Tensor const&amp; detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::_U</definition>
+        <argsstring></argsstring>
+        <name>_U</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::_U</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="43" column="19" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1polar__decomposition__U__wrapper_1aafa8caf3206163c6849c4b5ba1438d61" prot="private" static="no" mutable="no">
+        <type>_Base const  &amp;</type>
+        <definition>_Base const&amp; detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::_base</definition>
+        <argsstring></argsstring>
+        <name>_base</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="44" column="17" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1a374800fce4f39240592339b58b343d04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::polar_decomposition_U_wrapper</definition>
+        <argsstring>(_Base const &amp;__base, _Tensor const &amp;__U)</argsstring>
+        <name>polar_decomposition_U_wrapper</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::polar_decomposition_U_wrapper</qualifiedname>
+        <param>
+          <type>_Base const &amp;</type>
+          <declname>__base</declname>
+        </param>
+        <param>
+          <type>_Tensor const &amp;</type>
+          <declname>__U</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="26" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1a7aa78f9a9160212cb419dd45ddc7e2b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::polar_decomposition_U_wrapper</definition>
+        <argsstring>(polar_decomposition_U_wrapper const &amp;__data)</argsstring>
+        <name>polar_decomposition_U_wrapper</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::polar_decomposition_U_wrapper</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1polar__decomposition__U__wrapper" kindref="compound">polar_decomposition_U_wrapper</ref> const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="28" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="26" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1a786f104ca81a04916f1ab7fd01bde3c9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::operator()</definition>
+        <argsstring>(size_type const i, size_type const j) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::operator()</qualifiedname>
+        <param>
+          <type>size_type const</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="30" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1a5221207f97ec144a6b8ea2fdcbd967ed" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::raw_data</definition>
+        <argsstring>() const</argsstring>
+        <name>raw_data</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::raw_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="36" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1ab1f64ec960538d3c0efb9dcf30a18fd2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::evaluate</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::evaluate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="38" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="47" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1a984b25472c21cfea208b965bba2f1407" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::derivative</definition>
+        <argsstring>() const</argsstring>
+        <name>derivative</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::derivative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="40" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="57" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1ae4e0db7419cd5aa939f79db8fce8c1ce" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::dimension</definition>
+        <argsstring>()</argsstring>
+        <name>dimension</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::dimension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="32" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="37" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1polar__decomposition__U__wrapper_1a7f54841dd03b3365a912efd4ccc3585c" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>detail::polar_decomposition_U_wrapper::rank</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="34" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_meat.h" bodystart="42" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;</label>
+        <link refid="classdetail_1_1polar__decomposition__U__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt;</label>
+        <link refid="classdetail_1_1polar__decomposition__U__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; polar_decomposition_U_wrapper&lt; _Base, _Tensor &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" line="20" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/polar_decomposition_U_wrapper_bones.h" bodystart="21" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1aafa8caf3206163c6849c4b5ba1438d61" prot="private" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>_base</name></member>
+      <member refid="classtensor__base_1ad3589a7250ab005ef2c3276cca2e525b" prot="protected" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>_is_init</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1ac750e98d91db475a15d482922d498942" prot="private" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>_U</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1ac3424b59bec904bf6eaec3d3969c44ee" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a385cf61f63ebb826ceb8b454111268a8" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>convert</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1a984b25472c21cfea208b965bba2f1407" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>derivative</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1ae4e0db7419cd5aa939f79db8fce8c1ce" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>dimension</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1ab1f64ec960538d3c0efb9dcf30a18fd2" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1a786f104ca81a04916f1ab7fd01bde3c9" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>operator()</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>operator-</name></member>
+      <member refid="classtensor__base_1ad81a18a37838d7fb4f0cc8285db684ae" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1a374800fce4f39240592339b58b343d04" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>polar_decomposition_U_wrapper</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1a7aa78f9a9160212cb419dd45ddc7e2b7" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>polar_decomposition_U_wrapper</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1a7f54841dd03b3365a912efd4ccc3585c" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>rank</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1a5221207f97ec144a6b8ea2fdcbd967ed" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>raw_data</name></member>
+      <member refid="classtensor__base_1a869aa22037b95b0024b6e5731a61c90f" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>size</name></member>
+      <member refid="classtensor__base_1a869aa22037b95b0024b6e5731a61c90f" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>size</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1acf11d54243e2483626adb5501969cd8b" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>size_type</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1aa5c232cd2dc1e0126a906b4c25cfdcf5" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1abf742a0335034d3c8d2574e9ea4d6f3d" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classdetail_1_1polar__decomposition__U__wrapper_1aa9e2dd7aba72abe250c89ea7cef3bec2" prot="public" virt="non-virtual"><scope>detail::polar_decomposition_U_wrapper</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

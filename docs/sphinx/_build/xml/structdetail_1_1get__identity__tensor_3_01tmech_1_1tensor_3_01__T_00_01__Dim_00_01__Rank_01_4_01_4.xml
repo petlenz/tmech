@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1get__identity__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::get_identity_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_Dim</declname>
+        <defname>_Dim</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_Rank</declname>
+        <defname>_Rank</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1get__identity__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4_1adfd9c1417f755a8015534d8e4b74b683" prot="public" static="no">
+        <type><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor</ref>&lt; _T, _Dim, 2 &gt;</type>
+        <definition>using detail::get_identity_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;::data_type =  tmech::tensor&lt;_T, _Dim, 2&gt;</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::get_identity_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="195" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail_1_1get__identity__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4_1adb7bd8335f8ebaf3cbd153e563f55249" prot="public" static="no">
+        <type><ref refid="classtmech_1_1eye" kindref="compound">tmech::eye</ref>&lt; _T, _Dim, 2 &gt;</type>
+        <definition>using detail::get_identity_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;::type =  tmech::eye&lt;_T, _Dim, 2&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::get_identity_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="196" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="193" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="194" bodyend="197"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1get__identity__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4_1adfd9c1417f755a8015534d8e4b74b683" prot="public" virt="non-virtual"><scope>detail::get_identity_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="structdetail_1_1get__identity__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4_1adb7bd8335f8ebaf3cbd153e563f55249" prot="public" virt="non-virtual"><scope>detail::get_identity_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

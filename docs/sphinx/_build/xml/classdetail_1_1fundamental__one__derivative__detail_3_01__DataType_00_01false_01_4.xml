@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1fundamental__one__derivative__detail_3_01__DataType_00_01false_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::fundamental_one_derivative_detail&lt; _DataType, false &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _DataType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1fundamental__one__derivative__detail_3_01__DataType_00_01false_01_4_1a03d29a3f2b723961f221ca2c26895010" prot="public" static="no">
+        <type><ref refid="classscalar__one" kindref="compound">scalar_one</ref>&lt; _DataType &gt;</type>
+        <definition>using detail::fundamental_one_derivative_detail&lt; _DataType, false &gt;::type =  scalar_one&lt;_DataType&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::fundamental_one_derivative_detail&lt; _DataType, false &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="278" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="278" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="275" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="276" bodyend="279"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1fundamental__one__derivative__detail_3_01__DataType_00_01false_01_4_1a03d29a3f2b723961f221ca2c26895010" prot="public" virt="non-virtual"><scope>detail::fundamental_one_derivative_detail&lt; _DataType, false &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

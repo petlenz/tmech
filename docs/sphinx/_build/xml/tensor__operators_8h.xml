@@ -1,0 +1,920 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="tensor__operators_8h" kind="file" language="C++">
+    <compoundname>tensor_operators.h</compoundname>
+    <includes local="no">utility</includes>
+    <includes local="no">type_traits</includes>
+    <includedby refid="tmech_8h" local="yes">/home/peter/SynologyDrive/Drive/tmech/include/tmech/tmech.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h</label>
+        <link refid="tensor__operators_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>type_traits</label>
+      </node>
+      <node id="2">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="tensor__operators_8h_1a1f10c7a1cb7091cb6fa74638c0f883b3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _TensorLHS &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _TensorRHS &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator+</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>Addition of two tensors of same rank and dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="69">\[ C_{ijkl...} = A_{ijkl...} + B_{ijkl...} \]</formula> <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,b,c;</highlight></codeline>
+<codeline><highlight class="normal">a.randn();<sp/>b.randn();</highlight></codeline>
+<codeline><highlight class="normal">c<sp/>=<sp/>a<sp/>+<sp/>b;</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="39" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="39" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1a0a3c02d25153c5383ca81ed57fbca5e2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _TensorLHS &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _TensorRHS &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator-</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>Subtraction of two tensors of same rank and dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="70">\[ C_{ijkl...} = A_{ijkl...} - B_{ijkl...} \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,b,c;</highlight></codeline>
+<codeline><highlight class="normal">a.randn();<sp/>b.randn();</highlight></codeline>
+<codeline><highlight class="normal">c<sp/>=<sp/>a<sp/>-<sp/>b;</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="80" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="80" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1a9d31b16c5975498b30f8aef4660dd658" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _TensorLHS &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _TensorRHS &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator*</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>Single contraction of two tensors. Assume that the left hand side tensor is of rank m and the right hand side tensor of rank n. The resulting tensor is of rank m+n-2. The most right index of the left hand side tensor is contracted with the most left index of the right hand tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="71">\[ C_{i_{1},...,i_{m+n-2}} = A_{i_{1},...,i_{m-1},k} - B_{k,i_{2},...,i_{n}} \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,b,c;</highlight></codeline>
+<codeline><highlight class="normal">a.randn();<sp/>b.randn();</highlight></codeline>
+<codeline><highlight class="normal">c<sp/>=<sp/>a<sp/>*<sp/>b;</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="126" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="126" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1a7c732a7a1ff0b0a69618bd84a1973c75" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Scalar</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; std::is_fundamental&lt; typename std::decay&lt; _Scalar &gt;::type &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator*</definition>
+        <argsstring>(_Scalar &amp;&amp;__scalar, _Tensor &amp;&amp;__tensor)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>_Scalar &amp;&amp;</type>
+          <declname>__scalar</declname>
+        </param>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Scalar update of a tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="72">\[ C_{ijkl...} = a*C_{ijkl...} \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,b;</highlight></codeline>
+<codeline><highlight class="normal">a.randn();</highlight></codeline>
+<codeline><highlight class="normal">b<sp/>=<sp/>2.0*a;</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar type. Must be a std::fundamental </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="171" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="171" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1af463772a23583fbfbde814199cfd4943" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Scalar</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; std::is_fundamental&lt; typename std::decay&lt; _Scalar &gt;::type &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator*</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor, _Scalar &amp;&amp;__scalar)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>_Scalar &amp;&amp;</type>
+          <declname>__scalar</declname>
+        </param>
+        <briefdescription>
+<para>Scalar update of a tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="73">\[ C_{ijkl...} = C_{ijkl...}*a \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,b;</highlight></codeline>
+<codeline><highlight class="normal">a.randn();</highlight></codeline>
+<codeline><highlight class="normal">b<sp/>=<sp/>a*2.0;</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar type. Must be a std::fundamental </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="202" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="202" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1ad9041c7a7a35561a96fab7689b7aa648" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Scalar</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; std::is_fundamental&lt; typename std::decay&lt; _Scalar &gt;::type &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator/</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor, _Scalar &amp;&amp;__scalar)</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>_Scalar &amp;&amp;</type>
+          <declname>__scalar</declname>
+        </param>
+        <briefdescription>
+<para>Tensor division by a scalar. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="74">\[ C_{ijkl...} = C_{ijkl...}/a \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,b;</highlight></codeline>
+<codeline><highlight class="normal">a.randn();</highlight></codeline>
+<codeline><highlight class="normal">b<sp/>=<sp/>a/2.0;</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar type. Must be a std::fundamental </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="233" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="233" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1af535c3029c1aa3c0262b60700b6b1635" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _ScalarComplex</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; tmech::detail::is_complex_t&lt; typename std::decay&lt; _Tensor &gt;::type::value_type &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; tmech::detail::is_complex_t&lt; _ScalarComplex &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator*</definition>
+        <argsstring>(_ScalarComplex const &amp;__scalar_complex, _Tensor &amp;&amp;__tensor)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>_ScalarComplex const &amp;</type>
+          <declname>__scalar_complex</declname>
+        </param>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Complex scalar update of a tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="72">\[ C_{ijkl...} = a*C_{ijkl...} \]</formula></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar type. Must be a std::complex </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="261" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="261" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1addd089f7b062cfe92b9a4188bc4558ed" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _ScalarComplex</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; tmech::detail::is_complex_t&lt; typename std::decay&lt; _Tensor &gt;::type::value_type &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; tmech::detail::is_complex_t&lt; _ScalarComplex &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator*</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor, _ScalarComplex __scalar_complex)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>_ScalarComplex</type>
+          <declname>__scalar_complex</declname>
+        </param>
+        <briefdescription>
+<para>Complex scalar update of a tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="73">\[ C_{ijkl...} = C_{ijkl...}*a \]</formula></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar type. Must be a std::complex </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="287" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="287" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__operators_8h_1af8c4c5cc1b3bf3879f2dde8b8d63d6c4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _ScalarComplex</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; tmech::detail::is_complex_t&lt; typename std::decay&lt; _Tensor &gt;::type::value_type &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; tmech::detail::is_complex_t&lt; _ScalarComplex &gt;::value &gt;::type *</type>
+            <defval>nullptr</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if_t&lt; tmech::is_tensor_type&lt; typename std::decay&lt; _Tensor &gt;::type &gt;::value &gt; *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto operator/</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor, _ScalarComplex __scalar_complex)</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>_ScalarComplex</type>
+          <declname>__scalar_complex</declname>
+        </param>
+        <briefdescription>
+<para>Tensor division by a complex scalar. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="74">\[ C_{ijkl...} = C_{ijkl...}/a \]</formula></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar type. Must be a std::fundamental </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" line="313" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h" bodystart="313" bodyend="322"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>2022<sp/>Peter<sp/>Lenz</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0<sp/>(the<sp/>&quot;License&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>you<sp/>may<sp/>not<sp/>use<sp/>this<sp/>file<sp/>except<sp/>in<sp/>compliance<sp/>with<sp/>the<sp/>License.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>You<sp/>may<sp/>obtain<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>License<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>http://www.apache.org/licenses/LICENSE-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Unless<sp/>required<sp/>by<sp/>applicable<sp/>law<sp/>or<sp/>agreed<sp/>to<sp/>in<sp/>writing,<sp/>software</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>distributed<sp/>under<sp/>the<sp/>License<sp/>is<sp/>distributed<sp/>on<sp/>an<sp/>&quot;AS<sp/>IS&quot;<sp/>BASIS,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>WITHOUT<sp/>WARRANTIES<sp/>OR<sp/>CONDITIONS<sp/>OF<sp/>ANY<sp/>KIND,<sp/>either<sp/>express<sp/>or<sp/>implied.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See<sp/>the<sp/>License<sp/>for<sp/>the<sp/>specific<sp/>language<sp/>governing<sp/>permissions<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>limitations<sp/>under<sp/>the<sp/>License.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>TENSOR_OPERATORS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TENSOR_OPERATORS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;type_traits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_TensorLHS&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_TensorRHS&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator+(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs){</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorTypeLHS<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_TensorLHS&gt;::type;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorTypeRHS<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_TensorRHS&gt;::type;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isLvalueLHS{std::is_lvalue_reference_v&lt;_TensorLHS&gt;};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isLvalueRHS{std::is_lvalue_reference_v&lt;_TensorRHS&gt;};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//check<sp/>rank<sp/>of<sp/>both</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(TensorTypeLHS::rank()<sp/>==<sp/>TensorTypeRHS::rank(),<sp/></highlight><highlight class="stringliteral">&quot;operator<sp/>+:<sp/>no<sp/>matching<sp/>rank&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//check<sp/>size<sp/>of<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(TensorTypeLHS::dimension()<sp/>==<sp/>TensorTypeRHS::dimension(),<sp/></highlight><highlight class="stringliteral">&quot;operator<sp/>+:<sp/>no<sp/>matching<sp/>dimensions&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(isLvalueLHS<sp/>&amp;&amp;<sp/>isLvalueLHS){</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS const&amp;, TensorTypeRHS const&amp;, tmech::detail::operator_add&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(!isLvalueLHS<sp/>&amp;&amp;<sp/>isLvalueLHS){</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS, TensorTypeRHS const&amp;, tmech::detail::operator_add&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(isLvalueLHS<sp/>&amp;&amp;<sp/>!isLvalueLHS){</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS const&amp;, TensorTypeRHS, tmech::detail::operator_add&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS, TensorTypeRHS, tmech::detail::operator_add&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_TensorLHS&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_TensorRHS&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator-(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs){</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorTypeLHS<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_TensorLHS&gt;::type;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorTypeRHS<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_TensorRHS&gt;::type;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isLvalueLHS{std::is_lvalue_reference_v&lt;_TensorLHS&gt;};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isLvalueRHS{std::is_lvalue_reference_v&lt;_TensorRHS&gt;};</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//check<sp/>rank<sp/>of<sp/>both</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(TensorTypeLHS::rank()<sp/>==<sp/>TensorTypeRHS::rank(),<sp/></highlight><highlight class="stringliteral">&quot;operator<sp/>-:<sp/>no<sp/>matching<sp/>rank&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//check<sp/>size<sp/>of<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(TensorTypeLHS::dimension()<sp/>==<sp/>TensorTypeRHS::dimension(),<sp/></highlight><highlight class="stringliteral">&quot;operator<sp/>-:<sp/>no<sp/>matching<sp/>dimensions&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(isLvalueLHS<sp/>&amp;&amp;<sp/>isLvalueLHS){</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS const&amp;, TensorTypeRHS const&amp;, tmech::detail::operator_sub&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(!isLvalueLHS<sp/>&amp;&amp;<sp/>isLvalueLHS){</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS, TensorTypeRHS const&amp;, tmech::detail::operator_sub&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(isLvalueLHS<sp/>&amp;&amp;<sp/>!isLvalueLHS){</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS const&amp;, TensorTypeRHS, tmech::detail::operator_sub&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorTypeLHS, TensorTypeRHS, tmech::detail::operator_sub&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_TensorLHS&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_TensorRHS&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator*(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs){</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorTypeLHS<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_TensorLHS&gt;::type;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorTypeRHS<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_TensorRHS&gt;::type;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>_SequenceLHS<sp/>=<sp/>tmech::sequence&lt;TensorTypeLHS::rank()&gt;;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>_SequenceRHS<sp/>=<sp/>tmech::sequence&lt;1&gt;;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isLvalueLHS{std::is_lvalue_reference_v&lt;_TensorLHS&gt;};</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isLvalueRHS{std::is_lvalue_reference_v&lt;_TensorRHS&gt;};</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//check<sp/>size<sp/>of<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(TensorTypeLHS::dimension()<sp/>==<sp/>TensorTypeRHS::dimension(),<sp/></highlight><highlight class="stringliteral">&quot;operator<sp/>-:<sp/>no<sp/>matching<sp/>dimensions&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(isLvalueLHS<sp/>&amp;&amp;<sp/>isLvalueLHS){</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1inner__product__wrapper" kindref="compound">tmech::detail::inner_product_wrapper&lt;TensorTypeLHS const&amp;, TensorTypeRHS const&amp;, _SequenceLHS, _SequenceRHS&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(!isLvalueLHS<sp/>&amp;&amp;<sp/>isLvalueLHS){</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1inner__product__wrapper" kindref="compound">tmech::detail::inner_product_wrapper&lt;TensorTypeLHS, TensorTypeRHS const&amp;, _SequenceLHS, _SequenceRHS&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(isLvalueLHS<sp/>&amp;&amp;<sp/>!isLvalueLHS){</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1inner__product__wrapper" kindref="compound">tmech::detail::inner_product_wrapper&lt;TensorTypeLHS const&amp;, TensorTypeRHS, _SequenceLHS, _SequenceRHS&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1inner__product__wrapper" kindref="compound">tmech::detail::inner_product_wrapper&lt;TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS&gt;</ref>(std::forward&lt;_TensorLHS&gt;(__tensor_lhs),<sp/>std::forward&lt;_TensorRHS&gt;(__tensor_rhs));</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Scalar,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;std::is_fundamental&lt;typename<sp/>std::decay&lt;_Scalar&gt;::type&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator*(_Scalar<sp/>&amp;&amp;<sp/>__scalar,<sp/>_Tensor<sp/>&amp;&amp;<sp/>__tensor){</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>scalar<sp/>=<sp/>tmech::detail::scalar&lt;typename<sp/>TensorType::value_type&gt;;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_lvalue_reference_v&lt;_Tensor&gt;){</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;const TensorType&amp;, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(std::forward&lt;_Scalar&gt;(__scalar)));</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorType, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(std::forward&lt;_Scalar&gt;(__scalar)));</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Scalar,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;std::is_fundamental&lt;typename<sp/>std::decay&lt;_Scalar&gt;::type&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator*(_Tensor<sp/>&amp;&amp;<sp/>__tensor,<sp/>_Scalar<sp/>&amp;&amp;<sp/>__scalar){</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>scalar<sp/>=<sp/>tmech::detail::scalar&lt;typename<sp/>TensorType::value_type&gt;;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_lvalue_reference_v&lt;_Tensor&gt;){</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;const TensorType&amp;, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(std::forward&lt;_Scalar&gt;(__scalar)));</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorType, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(std::forward&lt;_Scalar&gt;(__scalar)));</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Scalar,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;std::is_fundamental&lt;typename<sp/>std::decay&lt;_Scalar&gt;::type&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator/(_Tensor<sp/>&amp;&amp;<sp/>__tensor,<sp/>_Scalar<sp/>&amp;&amp;<sp/>__scalar){</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>scalar<sp/>=<sp/>tmech::detail::scalar&lt;typename<sp/>TensorType::value_type&gt;;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_lvalue_reference_v&lt;_Tensor&gt;){</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;const TensorType&amp;, scalar, tmech::detail::operator_div&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(std::forward&lt;_Scalar&gt;(__scalar)));</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorType, scalar, tmech::detail::operator_div&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(std::forward&lt;_Scalar&gt;(__scalar)));</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="242"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_ScalarComplex,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;tmech::detail::is_complex_t&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type::value_type&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;tmech::detail::is_complex_t&lt;_ScalarComplex&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator*(_ScalarComplex<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>__scalar_complex,<sp/>_Tensor<sp/>&amp;&amp;<sp/>__tensor){</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>scalar<sp/>=<sp/>tmech::detail::scalar&lt;_ScalarComplex&gt;;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_lvalue_reference_v&lt;_Tensor&gt;){</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;const TensorType&amp;, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(__scalar_complex));</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorType, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(__scalar_complex));</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="270"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_ScalarComplex,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;tmech::detail::is_complex_t&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type::value_type&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;tmech::detail::is_complex_t&lt;_ScalarComplex&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator*(_Tensor<sp/>&amp;&amp;<sp/>__tensor,<sp/>_ScalarComplex<sp/>__scalar_complex){</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>scalar<sp/>=<sp/>tmech::detail::scalar&lt;_ScalarComplex&gt;;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_lvalue_reference_v&lt;_Tensor&gt;){</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;const TensorType&amp;, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(__scalar_complex));</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorType, scalar, tmech::detail::operator_mul&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(__scalar_complex));</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="296"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_ScalarComplex,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;tmech::detail::is_complex_t&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type::value_type&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if&lt;tmech::detail::is_complex_t&lt;_ScalarComplex&gt;::value&gt;::type*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::enable_if_t&lt;tmech::is_tensor_type&lt;typename<sp/>std::decay&lt;_Tensor&gt;::type&gt;::value&gt;<sp/>*<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operator/(_Tensor<sp/>&amp;&amp;<sp/>__tensor,<sp/>_ScalarComplex<sp/>__scalar_complex){</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TensorType<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type;</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>scalar<sp/>=<sp/>tmech::detail::scalar&lt;_ScalarComplex&gt;;</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_lvalue_reference_v&lt;_Tensor&gt;){</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;const TensorType&amp;, scalar, tmech::detail::operator_div&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(__scalar_complex));</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtmech_1_1detail_1_1tensor__binary__expression__wrapper" kindref="compound">tmech::detail::tensor_binary_expression_wrapper&lt;TensorType, scalar, tmech::detail::operator_div&gt;</ref>(std::forward&lt;_Tensor&gt;(__tensor),<sp/>scalar(__scalar_complex));</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="322"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>TENSOR_OPERATORS_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_operators.h"/>
+  </compounddef>
+</doxygen>

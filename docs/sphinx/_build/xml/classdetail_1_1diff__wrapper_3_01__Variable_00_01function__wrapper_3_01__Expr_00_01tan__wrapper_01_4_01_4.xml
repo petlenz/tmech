@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01tan__wrapper_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Variable</type>
+      </param>
+      <param>
+        <type>typename _Expr</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01tan__wrapper_01_4_01_4_1a48a37e440c73a8eac04e54a0bb739b95" prot="private" static="no">
+        <type>typename _Expr::data_type</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;::data_type =  typename _Expr::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="231" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01tan__wrapper_01_4_01_4_1a8340ca1cdf9ff45ba6daed0bdff58c17" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; _Variable, _Expr &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;::_dExpr =  typename squeezer&lt;typename diff_wrapper&lt;_Variable, _Expr&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dExpr</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;::_dExpr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="232" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01tan__wrapper_01_4_01_4_1a6bcb2548148655c8d74a1e46893147ca" prot="public" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1binary__expression__wrapper" kindref="compound">binary_expression_wrapper</ref>&lt; _dExpr, <ref refid="classdetail_1_1diff__pow" kindref="compound">diff_pow</ref>&lt; <ref refid="classdetail_1_1function__wrapper" kindref="compound">function_wrapper</ref>&lt; _Expr, <ref refid="structdetail_1_1sec__wrapper" kindref="compound">sec_wrapper</ref> &gt;, <ref refid="classreal" kindref="compound">real</ref>&lt; data_type, 2, 0, 1 &gt;, true &gt;, op_mul &gt; &gt;::squeezedType</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;::deriv_type =  typename squeezer&lt;binary_expression_wrapper&lt;_dExpr, diff_pow&lt;function_wrapper&lt;_Expr, sec_wrapper&gt;, real&lt;data_type, 2,0,1&gt;, true&gt;, op_mul&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="234" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="229" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="230" bodyend="235"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01tan__wrapper_01_4_01_4_1a8340ca1cdf9ff45ba6daed0bdff58c17" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;</scope><name>_dExpr</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01tan__wrapper_01_4_01_4_1a48a37e440c73a8eac04e54a0bb739b95" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01function__wrapper_3_01__Expr_00_01tan__wrapper_01_4_01_4_1a6bcb2548148655c8d74a1e46893147ca" prot="public" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, function_wrapper&lt; _Expr, tan_wrapper &gt; &gt;</scope><name>deriv_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

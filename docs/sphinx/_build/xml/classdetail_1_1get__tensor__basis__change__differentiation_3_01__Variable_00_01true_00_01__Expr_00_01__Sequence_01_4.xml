@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Variable</type>
+      </param>
+      <param>
+        <type>typename _Expr</type>
+      </param>
+      <param>
+        <type>typename _Sequence</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a62fe971186690d1abc83757dca4c5974" prot="private" static="no">
+        <type>typename _Expr::data_type</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_expr_data_type =  typename _Expr::data_type</definition>
+        <argsstring></argsstring>
+        <name>_expr_data_type</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_expr_data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="472" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="472" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a90f6ea841270f71f911817a1a58f1d25" prot="private" static="no">
+        <type>typename _Variable::data_type</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_var_data_type =  typename _Variable::data_type</definition>
+        <argsstring></argsstring>
+        <name>_var_data_type</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_var_data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="473" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="473" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1aa5f345a85f857a24f265fafd14a7245e" prot="private" static="no">
+        <type><ref refid="structdetail_1_1get__tensor__info" kindref="compound">get_tensor_info</ref>&lt; _expr_data_type &gt;</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_expr_tensor_info =  get_tensor_info&lt;_expr_data_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>_expr_tensor_info</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_expr_tensor_info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="474" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="474" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a4493433086f510cb0caa5a119fd6b5ec" prot="private" static="no">
+        <type><ref refid="structdetail_1_1get__tensor__info" kindref="compound">get_tensor_info</ref>&lt; _var_data_type &gt;</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_var_tensor_info =  get_tensor_info&lt;_var_data_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>_var_tensor_info</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_var_tensor_info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="475" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="475" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1ac292dc33f648b42e8c70b3d09bdd2936" prot="private" static="no">
+        <type>tmech::detail::add_value_sequence_t&lt; tmech::detail::sequence_t&lt; _RankArgument-1 &gt;, _RankResult-1 &gt;</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_res_seq =  tmech::detail::add_value_sequence_t&lt;tmech::detail::sequence_t&lt;_RankArgument-1&gt;, _RankResult-1&gt;</definition>
+        <argsstring></argsstring>
+        <name>_res_seq</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_res_seq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="481" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="481" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a9f5468e0f55e814957758b9797a0fa13" prot="private" static="no">
+        <type>tmech::detail::append_sequence_end_t&lt; _Sequence, _res_seq &gt;</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_expr_seq =  tmech::detail::append_sequence_end_t&lt;_Sequence, _res_seq&gt;</definition>
+        <argsstring></argsstring>
+        <name>_expr_seq</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_expr_seq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="482" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="482" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1ad8c891c8b9f54d319cebaae977b9d5ad" prot="private" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; _Variable, _Expr &gt;::deriv_type &gt;::squeezedType</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_dExpr =  typename squeezer&lt;typename diff_wrapper&lt;_Variable, _Expr&gt;::deriv_type &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>_dExpr</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_dExpr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="484" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="484" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1ab3cd806a18a5f353db6d005fd13dfac9" prot="public" static="no">
+        <type>typename <ref refid="classdetail_1_1squeezer" kindref="compound">squeezer</ref>&lt; <ref refid="classdetail_1_1tensor__basis__change__wrapper" kindref="compound">tensor_basis_change_wrapper</ref>&lt; _dExpr, _expr_seq &gt; &gt;::squeezedType</type>
+        <definition>using detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::type =  typename squeezer&lt; tensor_basis_change_wrapper&lt;_dExpr, _expr_seq&gt; &gt;::squeezedType</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="487" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="487" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a99ed29ffa812ac5c45c57c29a27e5767" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_RankExpr</definition>
+        <argsstring></argsstring>
+        <name>_RankExpr</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_RankExpr</qualifiedname>
+        <initializer>{_expr_tensor_info::rank()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="477" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="477" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1acbc387446a74ec7b3bf3bf715989132d" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_RankArgument</definition>
+        <argsstring></argsstring>
+        <name>_RankArgument</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_RankArgument</qualifiedname>
+        <initializer>{_var_tensor_info::rank()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="478" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="478" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1aaba796639868407ea302054501285178" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_RankResult</definition>
+        <argsstring></argsstring>
+        <name>_RankResult</name>
+        <qualifiedname>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;::_RankResult</qualifiedname>
+        <initializer>{_RankArgument + _RankExpr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="479" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="479" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="470" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="471" bodyend="488"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1ad8c891c8b9f54d319cebaae977b9d5ad" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_dExpr</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a62fe971186690d1abc83757dca4c5974" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_expr_data_type</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a9f5468e0f55e814957758b9797a0fa13" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_expr_seq</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1aa5f345a85f857a24f265fafd14a7245e" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_expr_tensor_info</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1acbc387446a74ec7b3bf3bf715989132d" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_RankArgument</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a99ed29ffa812ac5c45c57c29a27e5767" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_RankExpr</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1aaba796639868407ea302054501285178" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_RankResult</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1ac292dc33f648b42e8c70b3d09bdd2936" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_res_seq</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a90f6ea841270f71f911817a1a58f1d25" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_var_data_type</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1a4493433086f510cb0caa5a119fd6b5ec" prot="private" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>_var_tensor_info</name></member>
+      <member refid="classdetail_1_1get__tensor__basis__change__differentiation_3_01__Variable_00_01true_00_01__Expr_00_01__Sequence_01_4_1ab3cd806a18a5f353db6d005fd13dfac9" prot="public" virt="non-virtual"><scope>detail::get_tensor_basis_change_differentiation&lt; _Variable, true, _Expr, _Sequence &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

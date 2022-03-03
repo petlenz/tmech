@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1result__type__tensor__expression" kind="struct" language="C++" prot="public">
+    <compoundname>detail::result_type_tensor_expression</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _LHS</type>
+      </param>
+      <param>
+        <type>typename _RHS</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>_IsTensorLHS</declname>
+        <defname>_IsTensorLHS</defname>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>_IsTensorRHS</declname>
+        <defname>_IsTensorRHS</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1result__type__tensor__expression_1a9153f08e9e09e7c18c4b8e77f82d026c" prot="public" static="no">
+        <type>typename tmech::detail::result_type&lt; _LHS, _RHS &gt;::value_type</type>
+        <definition>using detail::result_type_tensor_expression&lt; _LHS, _RHS, _IsTensorLHS, _IsTensorRHS &gt;::data_type =  typename tmech::detail::result_type&lt;_LHS, _RHS&gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::result_type_tensor_expression::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" line="8" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" line="7" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" bodystart="7" bodyend="9"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1result__type__tensor__expression_1a9153f08e9e09e7c18c4b8e77f82d026c" prot="public" virt="non-virtual"><scope>detail::result_type_tensor_expression</scope><name>data_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
