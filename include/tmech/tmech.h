@@ -202,21 +202,6 @@ class adaptor;
 #include "tensor/numerical_differentiation_central_sym_wrapper_bones.h"
 #include "tensor/numerical_differentiation_central_sym_wrapper_meat.h"
 
-//#include "numerical_differentiation_forward_wrapper_bones.h"
-//#include "numerical_differentiation_forward_wrapper_meat.h"
-
-//#include "numerical_differentiation_backward_wrapper_bones.h"
-//#include "numerical_differentiation_backward_wrapper_meat.h"
-
-//#include "numerical_differentiation_central_sym_wrapper_bones.h"
-//#include "numerical_differentiation_central_sym_wrapper_meat.h"
-
-//#include "numerical_differentiation_forward_sym_wrapper_bones.h"
-//#include "numerical_differentiation_forward_sym_wrapper_meat.h"
-
-//#include "numerical_differentiation_backward_sym_wrapper_bones.h"
-//#include "numerical_differentiation_backward_sym_wrapper_meat.h"
-
 //tensor contractions
 #include "tensor/meta_inner_product_wrapper_bones.h"
 #include "tensor/inner_product_wrapper_bones.h"
@@ -225,14 +210,6 @@ class adaptor;
 //tensor products
 #include "tensor/outer_product_wrapper_bones.h"
 #include "tensor/outer_product_wrapper_meat.h"
-
-//#include "otimes_wrapper_bones.h"
-//#include "otimes_wrapper_meat.h"
-//#include "times_wrapper_bones.h"
-//#include "times_wrapper_meat.h"
-//#include "boxtimes_wrapper_bones.h"
-//#include "boxtimes_wrapper_meat.h"
-//
 
 //special tensor function wrapper
 #include "tensor/negative_tensor_wrapper_bones.h"
@@ -250,39 +227,6 @@ class adaptor;
 //basis rearrangement
 #include "tensor/basis_change_wrapper_bones.h"
 #include "tensor/basis_change_wrapper_meat.h"
-
-//#include "basis_ll_bones.h"
-//#include "basis_ll_meat.h"
-//#include "basis_rr_bones.h"
-//#include "basis_rr_meat.h"
-//#include "basis_rl_bones.h"
-//#include "basis_rl_meat.h"
-//#include "basis_lr_bones.h"
-//#include "basis_lr_meat.h"
-//#include "basis_mr_bones.h"
-//#include "basis_mr_meat.h"
-//
-
-//transposition
-//#include "transpose_inner_wrapper_bones.h"
-//#include "transpose_inner_wrapper_meat.h"
-//#include "transpose_left_right_inner_wrapper_bones.h"
-//#include "transpose_left_right_inner_wrapper_meat.h"
-//#include "transpose_left_right_wrapper_bones.h"
-//#include "transpose_left_right_wrapper_meat.h"
-//#include "transpose_left_wrapper_bones.h"
-//#include "transpose_left_wrapper_meat.h"
-//#include "transpose_minor_wrapper_bones.h"
-//#include "transpose_minor_wrapper_meat.h"
-//#include "transpose_outer_wrapper_bones.h"
-//#include "transpose_outer_wrapper_meat.h"
-//#include "transpose_right_wrapper_bones.h"
-//#include "transpose_right_wrapper_meat.h"
-//#include "transpose_wrapper_bones.h"
-//#include "transpose_wrapper_meat.h"
-//
-
-
 
 #include "tensor/cofactor_wrapper_bones.h"
 #include "tensor/cofactor_wrapper_meat.h"
@@ -351,19 +295,12 @@ class adaptor;
 
 
 
-namespace symdiff {
-namespace detail {
-//forward
-template <typename _T>
-struct is_scalar;
 
-template <typename _T>
-struct is_tensor;
-
-template <typename _T>
-struct get_tensor_one;
+namespace tmech {
+#include "symdiff/tmech_functions_forward.h"
 }
 
+namespace symdiff {
 #include "symdiff/forward_definitions.h"
 #include "symdiff/symdiff_functions_forward.h"
 #include "symdiff/symdiff_type_traits.h"
@@ -375,14 +312,10 @@ struct get_tensor_one;
 #include "symdiff/std_functions_implementation.h"
 
 namespace tmech {
-#include "symdiff/tmech_functions_forward.h"
 #include "symdiff/tmech_functions_implementation.h"
 }
 
 namespace symdiff {
-
-
-
 
 #include "symdiff/variable_base_bones.h"
 #include "symdiff/variable_base_meat.h"

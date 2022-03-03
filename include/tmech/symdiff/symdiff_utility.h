@@ -265,8 +265,9 @@ template <typename _DataType>
 class fundamental_tensor_one_derivative_detail<_DataType, 4ul>
 {
     using I = tensor_one<_DataType>;
+    using II = tensor_outer_product_wrapper<I, I, tmech::sequence<1,2>, tmech::sequence<3,4>>;
 public:
-    using type = decltype (tmech::basis_change<tmech::sequence<1,5,2,6,3,7,4,8>>(tmech::otimes(tmech::otimes(I(),I()), tmech::otimes(I(),I()))));
+    using type = tensor_outer_product_wrapper<II, II, tmech::sequence<1,5,2,6>, tmech::sequence< 3,7,4,8>>;
 };
 
 

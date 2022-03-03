@@ -213,17 +213,7 @@ OPTION(BUILD_BENCHMARK "tmech benchmark" OFF)
 OPTION(DOWNLOAD_GTEST "build gtest from downloaded sources" OFF)
 OPTION(DOWNLOAD_GBENCHMARK "download google benchmark and build from source" OFF)
 
-if(BUILD_TESTS)
-    add_subdirectory(tests)
-endif()
 
-#if(BUILD_BENCHMARK)
-#    add_subdirectory(benchmark)
-#endif()
-
-if(BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif()
 
 # Adding the install interface generator expression makes sure that the include
 # files are installed to the proper location (provided by GNUIcd build && ctestnstallDirs)
@@ -271,5 +261,17 @@ endif()
 
 
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}")
+
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
+
+#if(BUILD_BENCHMARK)
+#    add_subdirectory(benchmark)
+#endif()
+
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 
 include(CPack)

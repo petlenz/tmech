@@ -1,6 +1,15 @@
 #ifndef FORWARD_DEFINITIONS_H
 #define FORWARD_DEFINITIONS_H
 
+template <typename _T>
+struct is_scalar;
+
+template <typename _T>
+struct is_tensor;
+
+template <typename _T>
+struct get_tensor_one;
+
 template <typename _Derived>
 class variable_base;
 
