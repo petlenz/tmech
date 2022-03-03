@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="dir_32deb5240f793b63951d059044d0a39c" kind="dir">
+    <compoundname>/home/peter/SynologyDrive/Drive/tmech/include/tmech</compoundname>
+    <innerdir refid="dir_9fc6f1d09ce432263ff9888da4501ddd">/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff</innerdir>
+    <innerdir refid="dir_6b06e6a7a8ad4cd86934fd94b9371f84">/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor</innerdir>
+    <innerfile refid="tmech_8h">tmech.h</innerfile>
+    <innerfile refid="tmech__config_8h">tmech_config.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/"/>
+  </compounddef>
+</doxygen>

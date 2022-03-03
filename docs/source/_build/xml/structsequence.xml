@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structsequence" kind="struct" language="C++" prot="public">
+    <compoundname>sequence</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>_Idx</declname>
+        <defname>_Idx</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structsequence_1ab3ee13745da7193e8e240096b80a6af0" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr size_t</type>
+        <definition>static constexpr size_t sequence&lt; _Idx &gt;::size</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>sequence::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="279" column="29" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="279" bodyend="279"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="278" column="13" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="278" bodyend="280"/>
+    <listofallmembers>
+      <member refid="structsequence_1ab3ee13745da7193e8e240096b80a6af0" prot="public" virt="non-virtual"><scope>sequence</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

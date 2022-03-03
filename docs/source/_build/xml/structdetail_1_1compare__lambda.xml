@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1compare__lambda" kind="struct" language="C++" prot="public">
+    <compoundname>detail::compare_lambda</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1compare__lambda_1acb1453a47cfd02c9cb066edb0d2c05ec" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _LHS</type>
+          </param>
+          <param>
+            <type>typename _RHS</type>
+          </param>
+          <param>
+            <type>typename _Func</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static bool detail::compare_lambda::check</definition>
+        <argsstring>(_LHS const &amp;__lhs, _RHS const &amp;__rhs, _Func _func)</argsstring>
+        <name>check</name>
+        <qualifiedname>detail::compare_lambda::check</qualifiedname>
+        <param>
+          <type>_LHS const &amp;</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>_RHS const &amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <param>
+          <type>_Func</type>
+          <declname>_func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_lambda.h" line="9" column="24" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_lambda.h" bodystart="9" bodyend="32"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structdetail_1_1compare__lambda_1a2cf77ff95f05e1085d120fbd44210d96" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>_Size</declname>
+            <defname>_Size</defname>
+          </param>
+          <param>
+            <type>typename _LHS</type>
+          </param>
+          <param>
+            <type>typename _RHS</type>
+          </param>
+          <param>
+            <type>typename _Func</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>static constexpr bool detail::compare_lambda::check_detail</definition>
+        <argsstring>(_LHS *__lhs, _RHS *__rhs, _Func _func)</argsstring>
+        <name>check_detail</name>
+        <qualifiedname>detail::compare_lambda::check_detail</qualifiedname>
+        <param>
+          <type>_LHS *</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>_RHS *</type>
+          <declname>__rhs</declname>
+        </param>
+        <param>
+          <type>_Func</type>
+          <declname>_func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_lambda.h" line="36" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_lambda.h" bodystart="36" bodyend="43"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_lambda.h" line="6" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_lambda.h" bodystart="7" bodyend="44"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1compare__lambda_1acb1453a47cfd02c9cb066edb0d2c05ec" prot="public" virt="non-virtual"><scope>detail::compare_lambda</scope><name>check</name></member>
+      <member refid="structdetail_1_1compare__lambda_1a2cf77ff95f05e1085d120fbd44210d96" prot="private" virt="non-virtual"><scope>detail::compare_lambda</scope><name>check_detail</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1squeezer_3_01tensor__inner__product__wrapper_3_01__ExprLHS_00_01tensor__outer__pra9ead97c59b2e97f8e74f6e8a0236b58" kind="class" language="C++" prot="public">
+    <compoundname>detail::squeezer&lt; tensor_inner_product_wrapper&lt; _ExprLHS, tensor_outer_product_wrapper&lt; tensor_one&lt; _Type &gt;, tensor_one&lt; _Type &gt;, tmech::sequence&lt; 1, 3 &gt;, tmech::sequence&lt; 2, 4 &gt; &gt;, tmech::sequence&lt; 1, 2 &gt;, tmech::sequence&lt; 1, 2 &gt; &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Type</type>
+      </param>
+      <param>
+        <type>typename _ExprLHS</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01tensor__inner__product__wrapper_3_01__ExprLHS_00_01tensor__outer__pra9ead97c59b2e97f8e74f6e8a0236b58_1a6308fdda1778d3073ca6d01959559523" prot="public" static="no">
+        <type>_ExprLHS</type>
+        <definition>using detail::squeezer&lt; tensor_inner_product_wrapper&lt; _ExprLHS, tensor_outer_product_wrapper&lt; tensor_one&lt; _Type &gt;, tensor_one&lt; _Type &gt;, tmech::sequence&lt; 1, 3 &gt;, tmech::sequence&lt; 2, 4 &gt; &gt;, tmech::sequence&lt; 1, 2 &gt;, tmech::sequence&lt; 1, 2 &gt; &gt; &gt;::squeezedType =  _ExprLHS</definition>
+        <argsstring></argsstring>
+        <name>squeezedType</name>
+        <qualifiedname>detail::squeezer&lt; tensor_inner_product_wrapper&lt; _ExprLHS, tensor_outer_product_wrapper&lt; tensor_one&lt; _Type &gt;, tensor_one&lt; _Type &gt;, tmech::sequence&lt; 1, 3 &gt;, tmech::sequence&lt; 2, 4 &gt; &gt;, tmech::sequence&lt; 1, 2 &gt;, tmech::sequence&lt; 1, 2 &gt; &gt; &gt;::squeezedType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="346" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="346" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="339" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="344" bodyend="347"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1squeezer_3_01tensor__inner__product__wrapper_3_01__ExprLHS_00_01tensor__outer__pra9ead97c59b2e97f8e74f6e8a0236b58_1a6308fdda1778d3073ca6d01959559523" prot="public" virt="non-virtual"><scope>detail::squeezer&lt; tensor_inner_product_wrapper&lt; _ExprLHS, tensor_outer_product_wrapper&lt; tensor_one&lt; _Type &gt;, tensor_one&lt; _Type &gt;, tmech::sequence&lt; 1, 3 &gt;, tmech::sequence&lt; 2, 4 &gt; &gt;, tmech::sequence&lt; 1, 2 &gt;, tmech::sequence&lt; 1, 2 &gt; &gt; &gt;</scope><name>squeezedType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1is__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::is_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_Dim</declname>
+        <defname>_Dim</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_Rank</declname>
+        <defname>_Rank</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structdetail_1_1is__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4_1a92268083e456a69b44bdc70b87fa7fea" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool detail::is_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>detail::is_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;::value</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="225" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="223" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="224" bodyend="226"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1is__tensor_3_01tmech_1_1tensor_3_01__T_00_01__Dim_00_01__Rank_01_4_01_4_1a92268083e456a69b44bdc70b87fa7fea" prot="public" virt="non-virtual"><scope>detail::is_tensor&lt; tmech::tensor&lt; _T, _Dim, _Rank &gt; &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

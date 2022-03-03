@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01__Expr_00_01__Expr_00_01op__div_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::squeezer&lt; binary_expression_wrapper&lt; _Expr, _Expr, op_div &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Expr</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01__Expr_00_01__Expr_00_01op__div_01_4_01_4_1a011103bdbe6f55ca5c701aabf27c0265" prot="private" static="no">
+        <type>typename _Expr::data_type</type>
+        <definition>using detail::squeezer&lt; binary_expression_wrapper&lt; _Expr, _Expr, op_div &gt; &gt;::_data_type =  typename _Expr::data_type</definition>
+        <argsstring></argsstring>
+        <name>_data_type</name>
+        <qualifiedname>detail::squeezer&lt; binary_expression_wrapper&lt; _Expr, _Expr, op_div &gt; &gt;::_data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="225" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01__Expr_00_01__Expr_00_01op__div_01_4_01_4_1aff7e44c102bc60c29e3c7c82ec01f6f8" prot="public" static="no">
+        <type><ref refid="classscalar__one" kindref="compound">scalar_one</ref>&lt; _data_type &gt;</type>
+        <definition>using detail::squeezer&lt; binary_expression_wrapper&lt; _Expr, _Expr, op_div &gt; &gt;::squeezedType =  scalar_one&lt;_data_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>squeezedType</name>
+        <qualifiedname>detail::squeezer&lt; binary_expression_wrapper&lt; _Expr, _Expr, op_div &gt; &gt;::squeezedType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="228" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="223" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="224" bodyend="229"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01__Expr_00_01__Expr_00_01op__div_01_4_01_4_1a011103bdbe6f55ca5c701aabf27c0265" prot="private" virt="non-virtual"><scope>detail::squeezer&lt; binary_expression_wrapper&lt; _Expr, _Expr, op_div &gt; &gt;</scope><name>_data_type</name></member>
+      <member refid="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01__Expr_00_01__Expr_00_01op__div_01_4_01_4_1aff7e44c102bc60c29e3c7c82ec01f6f8" prot="public" virt="non-virtual"><scope>detail::squeezer&lt; binary_expression_wrapper&lt; _Expr, _Expr, op_div &gt; &gt;</scope><name>squeezedType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01real_3_01__T_00_010_00_010_00_01__E_09f7ac4bb6807518b944387f52d3147d" kind="class" language="C++" prot="public">
+    <compoundname>detail::squeezer&lt; binary_expression_wrapper&lt; real&lt; _T, 0, 0, _E &gt;, _Expr, op_mul &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _T</type>
+      </param>
+      <param>
+        <type>long long int</type>
+        <declname>_E</declname>
+        <defname>_E</defname>
+      </param>
+      <param>
+        <type>typename _Expr</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01real_3_01__T_00_010_00_010_00_01__E_09f7ac4bb6807518b944387f52d3147d_1a484a29f8330b3cbbdd18c2dd3f5028c7" prot="private" static="no">
+        <type>typename _Expr::data_type</type>
+        <definition>using detail::squeezer&lt; binary_expression_wrapper&lt; real&lt; _T, 0, 0, _E &gt;, _Expr, op_mul &gt; &gt;::data_type =  typename _Expr::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::squeezer&lt; binary_expression_wrapper&lt; real&lt; _T, 0, 0, _E &gt;, _Expr, op_mul &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="42" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01real_3_01__T_00_010_00_010_00_01__E_09f7ac4bb6807518b944387f52d3147d_1abc0f2a2669572ba436da4cce7f5cf34f" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1get__zero" kindref="compound">get_zero</ref>&lt; data_type &gt;::type</type>
+        <definition>using detail::squeezer&lt; binary_expression_wrapper&lt; real&lt; _T, 0, 0, _E &gt;, _Expr, op_mul &gt; &gt;::squeezedType =  typename get_zero&lt;data_type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>squeezedType</name>
+        <qualifiedname>detail::squeezer&lt; binary_expression_wrapper&lt; real&lt; _T, 0, 0, _E &gt;, _Expr, op_mul &gt; &gt;::squeezedType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="44" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" line="40" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/squeezer.h" bodystart="41" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01real_3_01__T_00_010_00_010_00_01__E_09f7ac4bb6807518b944387f52d3147d_1a484a29f8330b3cbbdd18c2dd3f5028c7" prot="private" virt="non-virtual"><scope>detail::squeezer&lt; binary_expression_wrapper&lt; real&lt; _T, 0, 0, _E &gt;, _Expr, op_mul &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1squeezer_3_01binary__expression__wrapper_3_01real_3_01__T_00_010_00_010_00_01__E_09f7ac4bb6807518b944387f52d3147d_1abc0f2a2669572ba436da4cce7f5cf34f" prot="public" virt="non-virtual"><scope>detail::squeezer&lt; binary_expression_wrapper&lt; real&lt; _T, 0, 0, _E &gt;, _Expr, op_mul &gt; &gt;</scope><name>squeezedType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

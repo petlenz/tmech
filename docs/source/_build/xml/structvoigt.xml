@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structvoigt" kind="struct" language="C++" prot="public">
+    <compoundname>voigt</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>_Dim</declname>
+        <defname>_Dim</defname>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>_ShearStrain</declname>
+        <defname>_ShearStrain</defname>
+        <defval>false</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structvoigt_1abace91d049707920c6182f9c44540dcc" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using voigt&lt; _Dim, _ShearStrain &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>voigt::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" line="209" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structvoigt_1a2557e4184f88127c4786be8a53cda300" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto voigt&lt; _Dim, _ShearStrain &gt;::apply</definition>
+        <argsstring>(T const *const __ptr, size_type const __i, size_type const __j)</argsstring>
+        <name>apply</name>
+        <qualifiedname>voigt::apply</qualifiedname>
+        <param>
+          <type>T const *const</type>
+          <declname>__ptr</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__i</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" line="217" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" bodystart="217" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="structvoigt_1a382980bc53c07abcf140facf16f9bb26" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto voigt&lt; _Dim, _ShearStrain &gt;::apply</definition>
+        <argsstring>(T const *const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l)</argsstring>
+        <name>apply</name>
+        <qualifiedname>voigt::apply</qualifiedname>
+        <param>
+          <type>T const *const</type>
+          <declname>__ptr</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__i</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__j</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__k</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__l</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" line="227" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" bodystart="227" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="structvoigt_1af400f8218a013744961f10227ad2f194" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename __T</type>
+          </param>
+          <param>
+            <type>typename __Tensor</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto voigt&lt; _Dim, _ShearStrain &gt;::assign_tensor</definition>
+        <argsstring>(__T *__ptr, __Tensor const &amp;__input)</argsstring>
+        <name>assign_tensor</name>
+        <qualifiedname>voigt::assign_tensor</qualifiedname>
+        <param>
+          <type>__T *</type>
+          <declname>__ptr</declname>
+        </param>
+        <param>
+          <type>__Tensor const &amp;</type>
+          <declname>__input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" line="234" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" bodystart="234" bodyend="254"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structvoigt_1a4a60e2b1139ea7c1d5a833dd54a7cad2" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>static constexpr auto voigt&lt; _Dim, _ShearStrain &gt;::vt2</definition>
+        <argsstring>()</argsstring>
+        <name>vt2</name>
+        <qualifiedname>voigt::vt2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" line="257" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" bodystart="257" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="structvoigt_1adb77fdc1f68a979853658fec357981da" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>static constexpr auto voigt&lt; _Dim, _ShearStrain &gt;::t2v</definition>
+        <argsstring>()</argsstring>
+        <name>t2v</name>
+        <qualifiedname>voigt::t2v</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" line="265" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" bodystart="265" bodyend="271"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" line="207" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/adaptor_wrapper_bones.h" bodystart="208" bodyend="272"/>
+    <listofallmembers>
+      <member refid="structvoigt_1a2557e4184f88127c4786be8a53cda300" prot="public" virt="non-virtual"><scope>voigt</scope><name>apply</name></member>
+      <member refid="structvoigt_1a382980bc53c07abcf140facf16f9bb26" prot="public" virt="non-virtual"><scope>voigt</scope><name>apply</name></member>
+      <member refid="structvoigt_1af400f8218a013744961f10227ad2f194" prot="public" virt="non-virtual"><scope>voigt</scope><name>assign_tensor</name></member>
+      <member refid="structvoigt_1abace91d049707920c6182f9c44540dcc" prot="public" virt="non-virtual"><scope>voigt</scope><name>size_type</name></member>
+      <member refid="structvoigt_1adb77fdc1f68a979853658fec357981da" prot="private" virt="non-virtual"><scope>voigt</scope><name>t2v</name></member>
+      <member refid="structvoigt_1a4a60e2b1139ea7c1d5a833dd54a7cad2" prot="private" virt="non-virtual"><scope>voigt</scope><name>vt2</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

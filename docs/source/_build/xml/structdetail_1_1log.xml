@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1log" kind="struct" language="C++" prot="public">
+    <compoundname>detail::log</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1log_1a622ee14607965164ec22ced66d2259c6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::log::apply</definition>
+        <argsstring>(T const &amp;value)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::log::apply</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" line="34" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail_1_1log_1a7ce0c7d671b46955b9e6d6d9ff118725" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::log::derivative</definition>
+        <argsstring>(T const &amp;value)</argsstring>
+        <name>derivative</name>
+        <qualifiedname>detail::log::derivative</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" line="39" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" bodystart="39" bodyend="41"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" line="32" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/isotropic_tensor_functions_bones.h" bodystart="32" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1log_1a622ee14607965164ec22ced66d2259c6" prot="public" virt="non-virtual"><scope>detail::log</scope><name>apply</name></member>
+      <member refid="structdetail_1_1log_1a7ce0c7d671b46955b9e6d6d9ff118725" prot="public" virt="non-virtual"><scope>detail::log</scope><name>derivative</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

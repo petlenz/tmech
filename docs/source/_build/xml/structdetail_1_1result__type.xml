@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1result__type" kind="struct" language="C++" prot="public">
+    <compoundname>detail::result_type</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _LHS</type>
+      </param>
+      <param>
+        <type>typename _RHS</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1result__type_1a708049165edff472c4d5c991031d1e9a" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1result__type__tensor__expression" kindref="compound">result_type_tensor_expression</ref>&lt; _LHS, _RHS, <ref refid="structdetail_1_1is__tensor" kindref="compound">is_tensor</ref>&lt; _LHS &gt;::value, <ref refid="structdetail_1_1is__tensor" kindref="compound">is_tensor</ref>&lt; _RHS &gt;::value &gt;::data_type</type>
+        <definition>using detail::result_type&lt; _LHS, _RHS &gt;::data_type =  typename result_type_tensor_expression&lt;_LHS, _RHS, is_tensor&lt;_LHS&gt;::value, is_tensor&lt;_RHS&gt;::value&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::result_type::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" line="25" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail_1_1result__type_1ace7a9f3caa18a39ad8d1186bdb0f0c55" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1result__type" kindref="compound">result_type</ref>&lt; typename LHS::value_type, typename RHS::value_type &gt;::value_type</type>
+        <definition>using detail::result_type&lt; _LHS, _RHS &gt;::value_type =  typename result_type&lt;typename LHS::value_type, typename RHS::value_type&gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::result_type::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" line="132" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail_1_1result__type_1aaa962e5b796e5fbd2ec6720f64a683a6" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1result__type" kindref="compound">result_type</ref>&lt; LHS, RHS &gt;::value_type</type>
+        <definition>using detail::result_type&lt; _LHS, _RHS &gt;::type =  typename result_type&lt;LHS, RHS&gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::result_type::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" line="133" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail_1_1result__type_1a76869b94fdf67b3873bda957dedad8f0" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1result__type" kindref="compound">result_type</ref>&lt; typename LHS::value_type, typename RHS::value_type &gt;::pointer</type>
+        <definition>using detail::result_type&lt; _LHS, _RHS &gt;::pointer =  typename result_type&lt;typename LHS::value_type, typename RHS::value_type&gt;::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>detail::result_type::pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" line="134" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail_1_1result__type_1a9c569dd8765463bb503bfde42b4f7171" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1result__type" kindref="compound">result_type</ref>&lt; typename LHS::value_type, typename RHS::value_type &gt;::const_pointer</type>
+        <definition>using detail::result_type&lt; _LHS, _RHS &gt;::const_pointer =  typename result_type&lt;typename LHS::value_type, typename RHS::value_type&gt;::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>detail::result_type::const_pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" line="135" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/traits.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" line="24" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_type_traits.h" bodystart="24" bodyend="26"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1result__type_1a9c569dd8765463bb503bfde42b4f7171" prot="public" virt="non-virtual"><scope>detail::result_type</scope><name>const_pointer</name></member>
+      <member refid="structdetail_1_1result__type_1a708049165edff472c4d5c991031d1e9a" prot="public" virt="non-virtual"><scope>detail::result_type</scope><name>data_type</name></member>
+      <member refid="structdetail_1_1result__type_1a76869b94fdf67b3873bda957dedad8f0" prot="public" virt="non-virtual"><scope>detail::result_type</scope><name>pointer</name></member>
+      <member refid="structdetail_1_1result__type_1aaa962e5b796e5fbd2ec6720f64a683a6" prot="public" virt="non-virtual"><scope>detail::result_type</scope><name>type</name></member>
+      <member refid="structdetail_1_1result__type_1ace7a9f3caa18a39ad8d1186bdb0f0c55" prot="public" virt="non-virtual"><scope>detail::result_type</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

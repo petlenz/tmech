@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__one_3_01__T_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper&lt; _Variable, tensor_one&lt; _T &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _Variable</type>
+      </param>
+      <param>
+        <type>typename _T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__one_3_01__T_01_4_01_4_1abd0826411a2612805f3b5e8c97bb6cc6" prot="private" static="no">
+        <type>typename _Variable::data_type</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, tensor_one&lt; _T &gt; &gt;::data_type =  typename _Variable::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, tensor_one&lt; _T &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="285" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="285" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__one_3_01__T_01_4_01_4_1a4d72f9acb5c45a9bbe696fcd58ad425b" prot="public" static="no">
+        <type>typename <ref refid="structdetail_1_1get__fundamental__zero" kindref="compound">get_fundamental_zero</ref>&lt; data_type, _T &gt;::type</type>
+        <definition>using detail::diff_wrapper&lt; _Variable, tensor_one&lt; _T &gt; &gt;::deriv_type =  typename get_fundamental_zero&lt; data_type, _T &gt;::type</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper&lt; _Variable, tensor_one&lt; _T &gt; &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="287" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="287" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="283" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="284" bodyend="288"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__one_3_01__T_01_4_01_4_1abd0826411a2612805f3b5e8c97bb6cc6" prot="private" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, tensor_one&lt; _T &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1diff__wrapper_3_01__Variable_00_01tensor__one_3_01__T_01_4_01_4_1a4d72f9acb5c45a9bbe696fcd58ad425b" prot="public" virt="non-virtual"><scope>detail::diff_wrapper&lt; _Variable, tensor_one&lt; _T &gt; &gt;</scope><name>deriv_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

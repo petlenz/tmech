@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_012ul_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 2ul &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _DataType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_012ul_01_4_1aa588ccea07c3a790428f4e7b5bdf394b" prot="private" static="no">
+        <type><ref refid="classtensor__one" kindref="compound">tensor_one</ref>&lt; _DataType &gt;</type>
+        <definition>using detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 2ul &gt;::I =  tensor_one&lt;_DataType&gt;</definition>
+        <argsstring></argsstring>
+        <name>I</name>
+        <qualifiedname>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 2ul &gt;::I</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="258" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_012ul_01_4_1a3b140dd805c76676227252866a3ca7c8" prot="public" static="no">
+        <type><ref refid="classdetail_1_1tensor__outer__product__wrapper" kindref="compound">tensor_outer_product_wrapper</ref>&lt; <ref refid="classtensor__one" kindref="compound">I</ref>, <ref refid="classtensor__one" kindref="compound">I</ref>, tmech::sequence&lt; 1, 3 &gt;, tmech::sequence&lt; 2, 4 &gt; &gt;</type>
+        <definition>using detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 2ul &gt;::type =  tensor_outer_product_wrapper&lt;I, I, tmech::sequence&lt;1,3&gt;, tmech::sequence&lt;2,4&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 2ul &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="260" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="256" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="257" bodyend="261"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_012ul_01_4_1aa588ccea07c3a790428f4e7b5bdf394b" prot="private" virt="non-virtual"><scope>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 2ul &gt;</scope><name>I</name></member>
+      <member refid="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_012ul_01_4_1a3b140dd805c76676227252866a3ca7c8" prot="public" virt="non-virtual"><scope>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 2ul &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

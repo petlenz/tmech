@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_014ul_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 4ul &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _DataType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_014ul_01_4_1af233da5281cff447a3d35447067072c3" prot="private" static="no">
+        <type><ref refid="classtensor__one" kindref="compound">tensor_one</ref>&lt; _DataType &gt;</type>
+        <definition>using detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 4ul &gt;::I =  tensor_one&lt;_DataType&gt;</definition>
+        <argsstring></argsstring>
+        <name>I</name>
+        <qualifiedname>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 4ul &gt;::I</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="267" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_014ul_01_4_1a225703cc225a530a5375c1a33022a083" prot="public" static="no">
+        <type>decltype(tmech::basis_change&lt; tmech::sequence&lt; 1, 5, 2, 6, 3, 7, 4, 8 &gt; &gt;(tmech::otimes(tmech::otimes(<ref refid="classtensor__one" kindref="compound">I</ref>(), <ref refid="classtensor__one" kindref="compound">I</ref>()), tmech::otimes(<ref refid="classtensor__one" kindref="compound">I</ref>(), <ref refid="classtensor__one" kindref="compound">I</ref>()))))</type>
+        <definition>using detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 4ul &gt;::type =  decltype (tmech::basis_change&lt;tmech::sequence&lt;1,5,2,6,3,7,4,8&gt; &gt;(tmech::otimes(tmech::otimes(I(),I()), tmech::otimes(I(),I()))))</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 4ul &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="269" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" line="265" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/symdiff_utility.h" bodystart="266" bodyend="270"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_014ul_01_4_1af233da5281cff447a3d35447067072c3" prot="private" virt="non-virtual"><scope>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 4ul &gt;</scope><name>I</name></member>
+      <member refid="classdetail_1_1fundamental__tensor__one__derivative__detail_3_01__DataType_00_014ul_01_4_1a225703cc225a530a5375c1a33022a083" prot="public" virt="non-virtual"><scope>detail::fundamental_tensor_one_derivative_detail&lt; _DataType, 4ul &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

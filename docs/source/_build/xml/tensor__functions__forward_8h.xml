@@ -1,0 +1,2803 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="tensor__functions__forward_8h" kind="file" language="C++">
+    <compoundname>tensor_functions_forward.h</compoundname>
+    <includedby refid="tmech_8h" local="yes">/home/peter/SynologyDrive/Drive/tmech/include/tmech/tmech.h</includedby>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ab435affa52d55a68f9d857bc6be949d7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename _T</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto almost_equal</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs, _T const __eps)</argsstring>
+        <name>almost_equal</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <param>
+          <type>_T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+<para>Compares two tensor expressions if they are almost equal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,<sp/>b;</highlight></codeline>
+<codeline><highlight class="normal">a<sp/>=<sp/>b<sp/>=<sp/>tmech::rand&lt;double,<sp/>3,<sp/>2&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(tmech::almost_equal(a,b,5e-7)){</highlight></codeline>
+<codeline><highlight class="normal">std::cout&lt;&lt;</highlight><highlight class="stringliteral">&quot;True\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal">std::cout&lt;&lt;</highlight><highlight class="stringliteral">&quot;False\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="37" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="37" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a73cdc8ec84a59a13a0f27ff975125a2f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto otimesu</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>otimesu</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>The <formula id="13">$\overline{\otimes}$</formula> product between two second-order tensors is defined as. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="14">\[ \FourthT{C} = \SecondT{A} \overline{\otimes} \SecondT{B} = A_{ij} B_{kl} \SecondT{e}_i \otimes \SecondT{e}_k \otimes \SecondT{e}_j \otimes \SecondT{e}_l \]</formula> and represents a transposition of the two inner bases.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="54" column="16" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="54" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a57ae5e76d46f8f69656271f3b320f34f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto otimesl</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>otimesl</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>The <formula id="15">$\underline{\otimes}$</formula> product between two second-order tensors is defined as. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="16">\[ \FourthT{C} = \SecondT{A} \underline{\otimes} \SecondT{B} = A_{ij} B_{kl} \SecondT{e}_i \otimes \SecondT{e}_l \otimes \SecondT{e}_j \otimes \SecondT{e}_k. \]</formula></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="70" column="16" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="70" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ad18ae7c3053c78ed1e6f787ad6cca32f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto otimes</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>otimes</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>The dyadic product between a tensor object of order n and a tensor object of order m is a tensor of order m + n. The dyadic product between two first-order tensors is defined as. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="17">\[ A_{i_{1},...,i_{n},i_{n+1},...,i_{m}} = a_{i_{i},...,i_{n}} b_{i_{n+1},...,i_{m}} \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,4&gt;</ref><sp/>C{tmech::times(A,B)};</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,6&gt;</ref><sp/>D{tmech::times(C,B)};</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,8&gt;</ref><sp/>E{tmech::times(C,C)};</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="94" column="16" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="94" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ae434efe4996e6e9face6cfb074e79ee2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto dcontract</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>dcontract</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>A double contraction between two tensors objects contracts the two most right and left indices. The result of a double contraction between a tensor of order n and a tensor of order m is a tensor of order m + n - 4. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,4&gt;</ref><sp/>A;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();<sp/>B.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c{tmech::dcontract(A,B)};</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="115" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="115" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a0d4d3b9ca912de9fd4a00984dc00202d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto ddcontract</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>ddcontract</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>A fourth contraction between two tensors objects contracts the fourth most right and left indices. The result of a double contraction between a tensor of order n and a tensor of order m is a tensor of order m + n - 8. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,4&gt;</ref><sp/>A;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();<sp/>B.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c{tmech::ddcontract(A,B)};</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="136" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="136" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a8e7308c59ddf9f963a80cc50363dc1b5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _SequenceLHS</type>
+          </param>
+          <param>
+            <type>typename _SequenceRHS</type>
+          </param>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto outer_product</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>outer_product</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>General outer product. Controlled by template parameters _SequenceLHS and _SequenceRHS. Bases contained in sequence _SequenceLHS are used for ordered element acces in __lhs tensor expression. Bases contained in sequence _SequenceRHS are used for ordered element acces in __rhs tensor expression. Both togther peform outer product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/>SeqL<sp/>=<sp/>tmech::sequence&lt;1,2&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>SeqR<sp/>=<sp/>tmech::sequence&lt;3,4&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//Bases<sp/>1,2<sp/>of<sp/>the<sp/>new<sp/>tensor<sp/>C</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//are<sp/>given<sp/>by<sp/>a<sp/>and<sp/>bases<sp/>3,4<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//given<sp/>by<sp/>b.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,<sp/>b;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>C;</highlight></codeline>
+<codeline><highlight class="normal">C<sp/>=<sp/>tmech::outer_product&lt;SeqL,<sp/>SeqR&gt;(a,b);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_SequenceLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side sequence, which contains numbers of bases to peform the outer product. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_SequenceRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side sequence, which contains numbers of bases to peform the outer product. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="166" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="166" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ab823f96592e7ff514d2cddcd1d93b6b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _SequenceLHS</type>
+          </param>
+          <param>
+            <type>typename _SequenceRHS</type>
+          </param>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto inner_product</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>inner_product</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>General inner product. Controlled by template parameters _SequenceLHS and _SequenceRHS. Bases contained in sequence _SequenceLHS are used for ordered element acces in _DerivedLHS tensor expression. Bases contained in sequence _SequenceRHS are used for ordered element acces in _DerivedRHS tensor expression. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/>SeqL<sp/>=<sp/>tmech::sequence&lt;3,4&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>SeqR<sp/>=<sp/>tmech::sequence&lt;1,2&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//Double<sp/>contraction<sp/>of<sp/>two<sp/>4th<sp/>order<sp/>tensors</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>A,<sp/>B,<sp/>C;</highlight></codeline>
+<codeline><highlight class="normal">C<sp/>=<sp/>tmech::inner_product&lt;SeqL,<sp/>SeqR&gt;(A,B);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//Double<sp/>contraction<sp/>of<sp/>a<sp/>4th<sp/>and<sp/>a<sp/>2th<sp/>order<sp/>tensor</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>a,<sp/>c;</highlight></codeline>
+<codeline><highlight class="normal">c<sp/>=<sp/>tmech::inner_product&lt;SeqL,<sp/>SeqR&gt;(C,a);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_SequenceLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side sequence, which contains the numbers of bases used for contraction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_SequenceRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side sequence, which contains the numbers of bases used for contraction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="197" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="197" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1aff7e4eee6e0c3c16fd21985aba7ebbd8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto cross</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>cross</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>Cross product of two first-order tensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_TensorLHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_TensorRHS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tensor_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reft hand side tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="208" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="208" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a3c673c9d43c7430f3570f19720539014" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TensorLHS</type>
+          </param>
+          <param>
+            <type>typename _TensorRHS</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto dot</definition>
+        <argsstring>(_TensorLHS &amp;&amp;__tensor_lhs, _TensorRHS &amp;&amp;__tensor_rhs)</argsstring>
+        <name>dot</name>
+        <param>
+          <type>_TensorLHS &amp;&amp;</type>
+          <declname>__tensor_lhs</declname>
+        </param>
+        <param>
+          <type>_TensorRHS &amp;&amp;</type>
+          <declname>__tensor_rhs</declname>
+        </param>
+        <briefdescription>
+<para>The dot product between two first-order tensors is defined as. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="18">\[ \mathbf{a} \cdot \mathbf{b} = \text{dot}\left(\mathbf{a},\mathbf{b}\right) = a_ib_i \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,1&gt;</ref><sp/>a{1,2,3},<sp/>b{4,5,6};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dot{tmech::dot(a,b)};</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data_base_lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left hand side tensor object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_base_rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right hand side tensor object. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="226" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="226" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a4443af8c771a066b717b3b47142c6da8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _T</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr _T</type>
+        <definition>constexpr _T sign</definition>
+        <argsstring>(_T const value)</argsstring>
+        <name>sign</name>
+        <param>
+          <type>_T const</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sign of a scalar value. Only for fundamental types such as double, float, ... . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar for sign determination. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="237" column="21" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="237" declcolumn="21"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a00b515d2ae73d26d86ed9556e24f2930" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _TupleSequence</type>
+            <defval>void</defval>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename _T</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto convert_tensor_to_voigt</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor, _T *__ptr)</argsstring>
+        <name>convert_tensor_to_voigt</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>_T *</type>
+          <declname>__ptr</declname>
+        </param>
+        <briefdescription>
+<para>Converts a tensor into Voigt&apos;s notation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="244" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="244" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a2ad8bde72f076a1ef9007cd53a10aff6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Sequence</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto basis_change</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>basis_change</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>General basis rearrangement. Controlled by template parameter _Sequence, which contains the new order of bases. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//Basis<sp/>1,2,3,4<sp/>is<sp/>swaped<sp/>to<sp/>3,4,1,2.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::basis_change&lt;tmech::sequence&lt;3,4,1,2&gt;&gt;(A);</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::basis_change&lt;tmech::sequence&lt;3,4,1,2&gt;&gt;(A+2*A);</highlight></codeline>
+</programlisting> Self assignment <programlisting filename=".cpp"><codeline><highlight class="comment">//Basis<sp/>1,2,3,4<sp/>is<sp/>swaped<sp/>to<sp/>3,4,1,2.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>A;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::eval(tmech::basis_change&lt;tmech::sequence&lt;3,4,1,2&gt;&gt;(A));</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::eval(tmech::basis_change&lt;tmech::sequence&lt;3,4,1,2&gt;&gt;(A+2*A));</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Sequence</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A tmech::sequence&lt;&gt;, which contains the new order of bases </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Derived</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the basis rearrangement is to be formed </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="271" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="271" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a954849a9f6640e0a04e3429796a39a11" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto trace</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>trace</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Trace of a second-order tensor. <formula id="19">$\text{tr}\left(\SecondT{A}\right) = A_{ii} $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Derived</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the trace is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="281" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="281" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a59d041e398d1d98ca640bfa75c168d4b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto abs</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>abs</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Absolute value of each entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A;</highlight></codeline>
+<codeline><highlight class="normal">A.fill(-1);</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::abs(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="295" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="295" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ab22e18f5e07858b2f088a1bf2be4f6e7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto eval</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>eval</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Temporary evaluation. Evaluates a tensor expression into a temporary object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::eval(tmech::trans(A));</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression to be temporary evaluated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="309" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="309" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1af5623cbe1e471ab2a0046aa2a365e2d7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto trans</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>trans</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Wrapper function for transposition for a second-order tensor and major transposition of a fourth-order tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The transpose of a second-order tensor in index notation <formula id="20">$(A_{ij})^T = A_{ji}$</formula>.\ The transpose of a fourth-order tensor in index notation <formula id="21">$(A_{ijkl})^T = A_{klij}$</formula>. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::trans(A);</highlight></codeline>
+</programlisting> <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::eval(tmech::trans(A));</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the transposition is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="331" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="331" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a56998be42df31a501861296f22e0c98d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto transl</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>transl</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Transposition of the left base a fourth-order tensor <formula id="22">$(A_{ijkl})^{l} = A_{jikl}$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,4&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::transl(A);</highlight></codeline>
+</programlisting> <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,4&gt;</ref><sp/>A;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::eval(tmech::transl(A));</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the left transpose part is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="349" column="16" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="349" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1adf87627ca1798413070a578e9f5abbdc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto skew</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>skew</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Skew-symmetric part of a second-order tensor <formula id="23">$\text{skew}\left(\SecondT{A}\right) = \frac{1}{2}\left(\SecondT{A} - \SecondT{A}^T \right) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::skew(A);</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the skew-symmetric part is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="363" column="16" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="363" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1aec7d5ef1e4b4345ea59f33ff5a18b262" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto sym</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>sym</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Symmetric part of a second-order tensor <formula id="24">$\text{sym}\left(\SecondT{A}\right) = \frac{1}{2}\left(\SecondT{A} + \SecondT{A}^T \right) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::sym(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the symmetric part is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="378" column="16" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="378" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1af8fe28951bd0cfd709d76597cee698a3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto vol</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>vol</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Volumetric part of a second-order tensor <formula id="25">$\text{vol}(\SecondT{A}) = \frac{1}{d}\text{trace}(\SecondT{A})\SecondT{I} $</formula>, where <formula id="26">$d$</formula> is the dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::vol(A);</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the volumetric part is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="393" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="393" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a025e2ea43aa2979ddacda5f8ecd194ab" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto dev</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>dev</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Deviatoric part of a second-order tensor <formula id="27">$\SecondT{A} = \text{vol}(\SecondT{A}) + \text{dev}(\SecondT{A}) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::dev(A);</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the deviatoric part is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="407" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="407" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a992d186141ce843f34640b59342f740d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto cof</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>cof</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Cofactors of a second-order tensor <formula id="28">$\text{dev}\left(\mathbf{A}\right) = \left(\mathbf{A} - \text{vol}\left(\mathbf{A}\right)\right) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::cof(A);</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the cofactors are to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="421" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="421" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1aca9a3c53daaf43f9a3ef23bcc7a996a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto adj</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>adj</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Adjoint of a second-order tensor <formula id="28">$\text{dev}\left(\mathbf{A}\right) = \left(\mathbf{A} - \text{vol}\left(\mathbf{A}\right)\right) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::adj(A);</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the adjoint is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="435" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="435" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a8ece8e536c42db89d01759cb42a2c00d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>_Sequences</declname>
+            <defname>_Sequences</defname>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto inv</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>inv</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Inverse of a second- and a fourth-order tensor. The inverse of a second order tensor is defined by <formula id="29">$ \SecondT{A}^{-1}\SecondT{A} = \SecondT{I}$</formula>, where <formula id="30">$\SecondT{I}$</formula> is the second order identity tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::inv(A);</highlight></codeline>
+</programlisting></para>
+<para>The inverse of a fourth order tensor depends on the minior-symmetry. Using the following differentiation rule <formula id="31">$\FourthT{C}_{ijkl} = \frac{\partial \SecondT{a}_{ij} }{\partial \SecondT{b}_{kl}}$</formula> yields a minior-symmetry in the first and in the second pair of indicies <formula id="32">$ i,j$</formula> and <formula id="33">$k,l$</formula>, respectively. In this case the inverse is defined by <formula id="34">$ (\FourthT{A}^{-1})_{ijmn}\FourthT{A}_{mnkl} =\frac{1}{2}\left(\SecondT{I}_{ik}\SecondT{I}_{jl} + \SecondT{I}_{il}\SecondT{I}_{jk} \right) $</formula>. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//the<sp/>sequences<sp/>are<sp/>indicating<sp/>the<sp/>pairs<sp/>of<sp/>minior-symmetry</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::inv&lt;tmech::sequence&lt;1,2&gt;,<sp/>tmech::sequence&lt;3,4&gt;&gt;(A);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>rule<sp/>above<sp/>is<sp/>the<sp/>most<sp/>used<sp/>one,<sp/>therefore<sp/>the<sp/>following<sp/>is<sp/>sufficient.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>correct<sp/>indicies<sp/>are<sp/>set<sp/>inside<sp/>the<sp/>function.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::inv(A);</highlight></codeline>
+</programlisting></para>
+<para>Using the following differentiation rule <formula id="35">$\FourthT{C}_{iklj} = \frac{\partial \SecondT{a}_{ij} }{\partial \SecondT{b}_{kl}}$</formula>, yields a minior symmetry in the outer and in the inner pair of indicies <formula id="36">$i,j$</formula> and <formula id="33">$k,l$</formula>, respectively. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//the<sp/>sequences<sp/>are<sp/>indicating<sp/>the<sp/>pairs<sp/>of<sp/>minior-symmetry</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::inv&lt;tmech::sequence&lt;1,4&gt;,<sp/>tmech::sequence&lt;2,3&gt;&gt;(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the inverse is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="475" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="475" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a7d6748b84344f1268af2ed33e93ba212" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>_Sequences</declname>
+            <defname>_Sequences</defname>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto invf</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>invf</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Inverse of a second- and a full anisotropic fourth-order tensor. The inverse of a second order tensor is defined by <formula id="29">$ \SecondT{A}^{-1}\SecondT{A} = \SecondT{I}$</formula>, where <formula id="30">$\SecondT{I}$</formula> is the second order identity tensor. In the case of a second oder tensor the ouput is the same as from the function inv. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::invf(A);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//or</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::inv(A);</highlight></codeline>
+</programlisting></para>
+<para>This function assumes, that a fourth order tensor has no minior-symmetry and is therefore fully anisotropic. In this case the inverse is defined by <formula id="37">$ (\FourthT{A}^{-1})_{ijmn}\FourthT{A}_{mnkl} =\SecondT{I}_{ij}\SecondT{I}_{kl}$</formula>. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::invf&lt;tmech::sequence&lt;1,2,3,4&gt;&gt;(A);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>rule<sp/>above<sp/>is<sp/>the<sp/>most<sp/>used<sp/>one,<sp/>therefore<sp/>the<sp/>following<sp/>is<sp/>sufficient.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>correct<sp/>indicies<sp/>are<sp/>set<sp/>inside<sp/>the<sp/>function.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::invf(A);</highlight></codeline>
+</programlisting></para>
+<para>Using other kind of differentiation rules as <formula id="31">$\FourthT{C}_{ijkl} = \frac{\partial \SecondT{a}_{ij} }{\partial \SecondT{b}_{kl}}$</formula> must be indicated, due to the internal storage scheme. For example using <formula id="35">$\FourthT{C}_{iklj} = \frac{\partial \SecondT{a}_{ij} }{\partial \SecondT{b}_{kl}}$</formula>. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 4&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::invf&lt;tmech::sequence&lt;1,3,4,2&gt;&gt;(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the inverse is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="516" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="516" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ab6e205e41fca79542988715b1e881421" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto sign</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor, typename std::decay&lt; _Tensor &gt;::type::value_type __eps=5e-7, std::size_t __max_iter=10)</argsstring>
+        <name>sign</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>typename std::decay&lt; _Tensor &gt;::type::value_type</type>
+          <declname>__eps</declname>
+          <defval>5e-7</defval>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>__max_iter</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>Sign tensor decomposition of a second-order tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="38">\[ \SecondT{A} = \SecondT{S}\SecondT{N}, \quad \SecondT{S} = \text{sign}(\SecondT{A}), \quad \SecondT{N} = \sqrt{\SecondT{A}\SecondT{A}}\]</formula> The decomposition is based on a Newton iteration as describet <ulink url="https://www.sciencedirect.com/science/article/pii/002437959490393X">here</ulink>. <formula id="39">\[ \SecondT{X}_{k+1} =\frac{1}{2}\left(\SecondT{X}_{k} + \SecondT{X}_{k}^{-1}\right), \quad \text{with} \quad \SecondT{X}_{0} = \SecondT{A} \]</formula> which converges quadratically to <formula id="40">$\text{sign}(\SecondT{A})$</formula> for any <formula id="41">$\SecondT{A}$</formula> having no pure imaginary eigenvalues. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::sign(A);</highlight></codeline>
+</programlisting> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression from which the inverse is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__eps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance for Newton iteration </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__max_iter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum of Newton iterations </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="540" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="540" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a191f1bb62340aa3271dd179095d204b9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Function</type>
+          </param>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto isotropic_tensor_function</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>isotropic_tensor_function</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Isotropic tensor function of a symmetric second-order tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="42">$ \SecondT{Y} = \sum_{i=1}^m y_i \SecondT{E}_i$</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sqrt{</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><sp/>T&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>apply(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>value){</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::sqrt(value);}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><sp/>T&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>derivative(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>value){</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1./(2.*std::sqrt(value));}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A.randn();</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::isotropic_tensor_function&lt;sqrt&gt;(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="567" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="567" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1aebfc6d1f45ac7ec41577100f2331bee3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto sqrt</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>sqrt</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Square root of a positive semi-definite symmetric second-order tensor <formula id="43">$ \text{sqrt}(\SecondT{A}) = \sqrt{\SecondT{A}}$</formula>. The square is given by spectral decomposition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="44">\[ \sqrt{\SecondT{A}} = \sum_{i}^m \sqrt{\lambda_i} \SecondT{E}_i, \]</formula> where <formula id="45">$m$</formula> is the number of non repeated eigenvalues <formula id="46">$\lambda_i$</formula> and <formula id="47">$\SecondT{E}_i$</formula> is the corresponding eigenbase.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::sqrt(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="590" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="590" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ac2ea32877f43b2fdae9644ec7556e7fe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto exp_sym</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>exp_sym</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Exponential map <formula id="48">$ \text{exp}(\SecondT{A})$</formula> of a positive semi-definite symmetric second-order tensor. The exponential map is given by spectral decomposition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="49">\[ \sqrt{\SecondT{A}} = \sum_{i}^m \exp{\lambda_i} \SecondT{E}_i, \]</formula> where <formula id="45">$m$</formula> is the number of non repeated eigenvalues <formula id="46">$\lambda_i$</formula> and <formula id="47">$\SecondT{E}_i$</formula> is the corresponding eigenbase.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::exp_sym(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="611" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="611" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a1f1a00e2869f82fd19bd4f8ee83aed05" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto log</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>log</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Logarithmic map <formula id="50">$ \text{log}(\SecondT{A})$</formula> of a positive semi-definite symmetric second-order tensor. The Logarithmic map is given by spectral decomposition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="51">\[ \sqrt{\SecondT{A}} = \sum_{i}^m \log{\lambda_i} \SecondT{E}_i, \]</formula> where <formula id="45">$m$</formula> is the number of non repeated eigenvalues <formula id="46">$\lambda_i$</formula> and <formula id="47">$\SecondT{E}_i$</formula> is the corresponding eigenbase.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::log(A);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="632" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="632" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a93c167f3bc3ce432a768dae75b8c6fcc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto positive</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>positive</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>The positive part <formula id="52">$ \SecondT{A}^{+} = \SecondT{A} - \SecondT{A}^{-}$</formula> of a positive semi-definite symmetric second-order tensor is given by spectral decomposition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="53">\[ \SecondT{A}^{+} = \sum_{i}^m \text{pos}(\lambda_i) \SecondT{E}_i,\quad \text{with} \quad \text{pos}(\lambda_i)= \begin{cases} \lambda_i ~\text{if}~ \lambda_i &gt; 0\\ 0 ~\text{if}~ \lambda_i &lt; 0 \end{cases} \]</formula> where <formula id="45">$m$</formula> is the number of non repeated eigenvalues <formula id="46">$\lambda_i$</formula> and <formula id="47">$\SecondT{E}_i$</formula> is the corresponding eigenbase. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::positive(A);</highlight></codeline>
+</programlisting> If both parts <formula id="54">$\SecondT{A}^{+}$</formula> and <formula id="55">$\SecondT{A}^{-}$</formula> are needed use <computeroutput>positive_negative_decomposition()</computeroutput>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="659" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="659" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a3f2b02f435abddd8c6d6f7ea44f398e8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto negative</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>negative</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>The negative part <formula id="56">$ \SecondT{A}^{-} = \SecondT{A} - \SecondT{A}^{+}$</formula> of a positive semi-definite symmetric second-order tensor is given by spectral decomposition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="57">\[ {\SecondT{A}}^{-} = \sum_{i}^m \text{neg}(\lambda_i) \SecondT{E}_i,\quad \text{with} \quad \text{neg}(\lambda_i)= \begin{cases} \lambda_i ~\text{if}~ \lambda_i &lt; 0\\ 0 ~\text{if}~ \lambda_i &gt; 0 \end{cases} \]</formula> where <formula id="45">$m$</formula> is the number of non repeated eigenvalues <formula id="46">$\lambda_i$</formula> and <formula id="47">$\SecondT{E}_i$</formula> is the corresponding eigenbase. <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal">B<sp/>=<sp/>tmech::negative(A);</highlight></codeline>
+</programlisting> If both parts <formula id="54">$\SecondT{A}^{+}$</formula> and <formula id="55">$\SecondT{A}^{-}$</formula> are needed use <computeroutput>positive_negative_decomposition()</computeroutput>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="686" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="686" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a8a8699abd343b001dbdbc7b1b1f8d3ff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto positive_negative_decomposition</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>positive_negative_decomposition</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Positive and negative decomposition part <formula id="58">$ \SecondT{A} = \SecondT{A}^{+} + \SecondT{A}^{-}$</formula> of a positive semi-definite symmetric second-order tensor is given by spectral decomposition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="59">\[ \SecondT{A}^{+} = \sum_{i}^m \text{pos}(\lambda_i) \SecondT{E}_i,\quad \text{with} \quad \text{pos}(\lambda_i)= \begin{cases} \lambda_i ~\text{if}~ \lambda_i &gt; 0\\ 0 ~\text{if}~ \lambda_i &lt; 0 \end{cases}\\ {\SecondT{A}}^{-} = \sum_{i}^m \text{neg}(\lambda_i) \SecondT{E}_i,\quad \text{with} \quad \text{neg}(\lambda_i)= \begin{cases} \lambda_i ~\text{if}~ \lambda_i &lt; 0\\ 0 ~\text{if}~ \lambda_i &gt; 0 \end{cases} \]</formula> where <formula id="45">$m$</formula> is the number of non repeated eigenvalues <formula id="46">$\lambda_i$</formula> and <formula id="47">$\SecondT{E}_i$</formula> is the corresponding eigenbase.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>B;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>A_pos_neg<sp/>=<sp/>tmech::positive_negative_decomposition(A);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>A_pos<sp/>=<sp/>A_pos_neg.positive();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>A_neg<sp/>=<sp/>A_pos_neg.negative();</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="723" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="723" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ada7038a705b72395bdd95124ac02ebd4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto exp</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>exp</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Exponential map of a nonsymmetric second order tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="60">\[ \text{exp}\SecondT{A} = \sum_{n=0}^\infty \frac{1}{n!} \SecondT{A}^n \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A{9.064107e-01,<sp/>-4.649874e-01,<sp/><sp/>4.431378e-01,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1.557860e+00,<sp/><sp/>2.493285e-01,<sp/>-3.458549e-01,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1.747649e+00,<sp/>-3.824761e-01,<sp/>-8.110930e-01};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref>Aexp{2.333496383103521e+00,<sp/><sp/>-9.424245337660712e-01,<sp/><sp/><sp/>6.174107765089896e-01,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2.458154759604529e+00,<sp/><sp/><sp/>7.615487934000856e-01,<sp/><sp/><sp/>1.403592316302926e-01,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1.701192794766057e+00,<sp/><sp/>-7.849258234991792e-01,<sp/><sp/><sp/>8.233614408596337e-01};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/>std::cout&lt;&lt;std::boolalpha</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;tmech::almost_equal(Aexp,<sp/>tmech::exp(A),<sp/>5e-7)&lt;&lt;std::endl;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight><highlight class="comment">//check<sp/>the<sp/>derivative</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>func_exp<sp/>=<sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classtensor" kindref="compound">tensor</ref>){</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tmech::exp(<ref refid="classtensor" kindref="compound">tensor</ref>);};</highlight></codeline>
+<codeline><highlight class="normal"><sp/>std::cout&lt;&lt;std::boolalpha</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;tmech::almost_equal(tmech::num_diff_central&lt;tmech::sequence&lt;1,2,3,4&gt;&gt;(func_exp,A),<sp/>tmech::exp(A).derivative(),<sp/>5e-7)&lt;&lt;std::endl;</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="752" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="752" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1ae7d7cfd387ac1c434476b2298e23f289" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto polar_decomposition</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor, bool const __newton_method, typename std::decay&lt; _Tensor &gt;::type::value_type const __tol, std::size_t const __max_steps)</argsstring>
+        <name>polar_decomposition</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>bool const</type>
+          <declname>__newton_method</declname>
+        </param>
+        <param>
+          <type>typename std::decay&lt; _Tensor &gt;::type::value_type const</type>
+          <declname>__tol</declname>
+        </param>
+        <param>
+          <type>std::size_t const</type>
+          <declname>__max_steps</declname>
+        </param>
+        <briefdescription>
+<para>Polar decomposition of a positive semi-definite symmetric second-order tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="61">\[ \SecondT{F}=\SecondT{R}\SecondT{U} = \SecondT{V}\SecondT{R} \]</formula> where <formula id="7">$\SecondT{R}$</formula> is an orthogonal tensor also knwon as the rotation tensor, <formula id="9">$\SecondT{U}$</formula> and <formula id="10">$\SecondT{V}$</formula> are symmetric tensors called the right and the left stretch tensor, respectively. This function provides two different method to determine <formula id="9">$\SecondT{U}$</formula>, <formula id="10">$\SecondT{V}$</formula> and <formula id="7">$\SecondT{R}$</formula>. The frist method uses spectral decomposition <formula id="62">\[ \SecondT{U} = \sqrt{\SecondT{F}^T\SecondT{F}}, \quad \SecondT{R} = \SecondT{F}\SecondT{U}^{-1}, \quad \SecondT{V} = \SecondT{R}\SecondT{U}\SecondT{R}^T, \]</formula> <programlisting filename=".cpp"><codeline><highlight class="comment">//use<sp/>the<sp/>spectral<sp/>decomposition</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>F;</highlight></codeline>
+<codeline><highlight class="normal">F.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>F_polar<sp/>=<sp/>tmech::polar_decomposition(F);</highlight></codeline>
+<codeline><highlight class="normal">F<sp/>=<sp/>F_polar.R()*F_polar.U();</highlight></codeline>
+<codeline><highlight class="normal">F<sp/>=<sp/>F_polar.V()*F_polar.R();</highlight></codeline>
+</programlisting></para>
+<para>The second one is based on a <ulink url="https://en.wikipedia.org/wiki/Polar_decomposition">Newton iteration</ulink> <formula id="63">\[ \SecondT{R}_{k+1} =\frac{1}{2} \left( \SecondT{R}_k + \SecondT{R}_k^{-T}\right), \quad \text{with}\quad \SecondT{R}_0 = \SecondT{F} \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//use<sp/>the<sp/>newton<sp/>iteration</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>F;</highlight></codeline>
+<codeline><highlight class="normal">F.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>F_polar<sp/>=<sp/>tmech::polar_decomposition(F,<sp/></highlight><highlight class="comment">//<sp/>tensor<sp/>to<sp/>decompose</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="comment">//use<sp/>newton<sp/>iteration</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>5e-7,<sp/></highlight><highlight class="comment">//<sp/>tolerance</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>5<sp/></highlight><highlight class="comment">//<sp/>number<sp/>of<sp/>max<sp/>steps</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline><highlight class="normal">F<sp/>=<sp/>F_polar.R()*F_polar.U();</highlight></codeline>
+<codeline><highlight class="normal">F<sp/>=<sp/>F_polar.V()*F_polar.R();</highlight></codeline>
+</programlisting></para>
+<para>The following derivatives are also important <formula id="64">\[ \frac{\partial \SecondT{U}}{\partial \SecondT{F}}, \quad \frac{\partial \SecondT{V}}{\partial \SecondT{F}}, \quad \frac{\partial \SecondT{R}}{\partial \SecondT{F}} \]</formula> explicit results are given <ulink url="https://doi.org/10.1023/A:1007663620943">here</ulink> <programlisting filename=".cpp"><codeline><highlight class="comment">//use<sp/>the<sp/>spectral<sp/>decomposition</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>F;</highlight></codeline>
+<codeline><highlight class="normal">F.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>F_polar<sp/>=<sp/>tmech::polar_decomposition(F);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dR<sp/>=<sp/>F_polar.R().derivative();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dU<sp/>=<sp/>F_polar.U().derivative();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dV<sp/>=<sp/>F_polar.V().derivative();</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression, from which the polar decomposition is to be computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__newton_method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True if Newton iteration should be used </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance for Newton iteration </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__max_steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of Newton iterations </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="819" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="819" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a8938a2238e483658e39dc4a320d2914b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Tensor</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto eigen_decomposition</definition>
+        <argsstring>(_Tensor &amp;&amp;__tensor)</argsstring>
+        <name>eigen_decomposition</name>
+        <param>
+          <type>_Tensor &amp;&amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <briefdescription>
+<para>Eigendecomposition of a positive semi-definite symmetric second-order tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="65">\[ \SecondT{Y} = \sum_{i=1}^m \lambda_i \FirstT{e}_i \otimes \FirstT{e}_i = \sum_{i=1}^m \lambda_i \SecondT{E}_i,\]</formula> where <formula id="45">$m$</formula> is the number of non repeated eigenvalues, <formula id="46">$\lambda_i$</formula> are the corresponding eigenvalues, <formula id="66">$\FirstT{e}_i$</formula> eigenvectors and <formula id="47">$\SecondT{E}_i$</formula> eigenbasen.</para>
+<para>Using eigenbases to get the inverse <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>A_inv;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>A_eig<sp/>=<sp/>tmech::eigen_decomposition(A);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">[eigenvalues,<sp/>eigenbasis]{A_eig.decompose_eigenbasis()};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>idx{A_eig.non_repeated_eigenvalues_index()};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(std::size_t<sp/>i{0};<sp/>i&lt;A_eig.number_non_repeated_eigenvalues();<sp/>++i){</highlight></codeline>
+<codeline><highlight class="normal">A_inv<sp/>+=<sp/>(1.0/eigenvalues[idx[i]])*eigenbasis[idx[i]];</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">std::cout&lt;&lt;std::boolalpha&lt;&lt;tmech::almost_equal(tmech::inv(A),<sp/>A_inv,<sp/>5e-7)&lt;&lt;std::endl;</highlight></codeline>
+</programlisting></para>
+<para>Using eigenvectors to get the inverse <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double, 3, 2&gt;</ref><sp/>A,<sp/>A_inv;</highlight></codeline>
+<codeline><highlight class="normal">A<sp/>=<sp/>tmech::sym(<ref refid="classtmech_1_1randn" kindref="compound">tmech::randn&lt;double,3,2&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>A_eig<sp/>=<sp/>tmech::eigen_decomposition(A);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">[eigenvalues,<sp/>eigenvectors]{A_eig.decompose()};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>idx{A_eig.non_repeated_eigenvalues_index()};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(std::size_t<sp/>i{0};<sp/>i&lt;A_eig.number_non_repeated_eigenvalues();<sp/>++i){</highlight></codeline>
+<codeline><highlight class="normal">A_inv<sp/>+=<sp/>(1.0/eigenvalues[idx[i]])*tmech::otimes(eigenvectors[idx[i]],eigenvectors[idx[i]]);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">std::cout&lt;&lt;std::boolalpha&lt;&lt;tmech::almost_equal(tmech::inv(A),<sp/>A_inv,<sp/>5e-7)&lt;&lt;std::endl;</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>__tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor expression, from which the eigen decomposition is to be computed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="857" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="857" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a1df36d7bf09fb190782fa4dcc580fbdb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Derived</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto det</definition>
+        <argsstring>(tensor_base&lt; Derived &gt;const &amp;__A)</argsstring>
+        <name>det</name>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; Derived &gt;const &amp;</type>
+          <declname>__A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="865" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_implementation.h" bodystart="588" bodyend="604" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="865" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1afe57cd0ef25500578a4f326e97300634" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Derived</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt; std::is_integral&lt; T &gt;::value, bool &gt;::type</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto pow</definition>
+        <argsstring>(tensor_base&lt; Derived &gt;const &amp;base, T const exp)</argsstring>
+        <name>pow</name>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; Derived &gt;const &amp;</type>
+          <declname>base</declname>
+        </param>
+        <param>
+          <type>T const</type>
+          <declname>exp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="868" column="23" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="868" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a7ef0d44c8c9b347cef2b04919d584d4d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Derived</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto norm</definition>
+        <argsstring>(tensor_base&lt; Derived &gt; const &amp;data_base)</argsstring>
+        <name>norm</name>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; Derived &gt; const &amp;</type>
+          <declname>data_base</declname>
+        </param>
+        <briefdescription>
+<para>The (2)-norm of a tensor is defined for a first-, second- and fourth-order tensor as. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="67">\[ ||\mathbf{a}|| &amp;= \sqrt{\text{dot}\left(\mathbf{a},\mathbf{a}\right)} = \sqrt{a_ia_i} \\ ||\mathbf{A}|| &amp;= \sqrt{\mathbf{A}:\mathbf{A}}= \sqrt{A_{ij}A_{ij}} \\ ||\mathbb{A}|| &amp;= \sqrt{\mathbb{A}::\mathbb{A}}= \sqrt{A_{ijkl}A_{ijkl}} \]</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data_base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tensor object from which the (2)-norm is to be formed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="881" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_implementation.h" bodystart="620" bodyend="630" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="881" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1aa02441076b7d96db23232314476b9c40" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Position</type>
+            <defval>void</defval>
+          </param>
+          <param>
+            <type>typename _Function</type>
+          </param>
+          <param>
+            <type>typename _Point</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto num_diff_central</definition>
+        <argsstring>(_Function __func, _Point const &amp;__x, double const __h=1e-7)</argsstring>
+        <name>num_diff_central</name>
+        <param>
+          <type>_Function</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>_Point const &amp;</type>
+          <declname>__x</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>__h</declname>
+          <defval>1e-7</defval>
+        </param>
+        <briefdescription>
+<para>Numerical differentiation based on central difference scheme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="68">\[ f&apos;(x) \approx \frac{f(x+h) - f(x-h)}{2h} \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>X;</highlight></codeline>
+<codeline><highlight class="normal">X.randn();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>func<sp/>=<sp/>[&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>F){</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1.5*(tmech::trace(tmech::trans(F)*F)<sp/>-<sp/>3);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dFunc<sp/>=<sp/>tmech::num_diff_central(func,<sp/>X);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dFunc_<sp/>=<sp/>[&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>F){</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tmech::num_diff_central(func,<sp/>F);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ddFunc<sp/>=<sp/>tmech::num_diff_central&lt;tmech::sequence&lt;1,2,3,4&gt;&gt;(func,<sp/>X);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input type/function f(x), used for the numerical differentiation. This type/function needs to provide an overloaded access operator(x). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A given point, at which the function is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__dx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Is </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="910" column="13" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="910" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a338661db5f2b201676ecad3c6aefaa45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _SymDirection</type>
+          </param>
+          <param>
+            <type>typename _SymResult</type>
+            <defval>std::tuple&lt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename _Function</type>
+          </param>
+          <param>
+            <type>typename _Point</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto num_diff_sym_central</definition>
+        <argsstring>(_Function __func, _Point const &amp;__x, double const __h=1e-7)</argsstring>
+        <name>num_diff_sym_central</name>
+        <param>
+          <type>_Function</type>
+          <declname>__func</declname>
+        </param>
+        <param>
+          <type>_Point const &amp;</type>
+          <declname>__x</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>__h</declname>
+          <defval>1e-7</defval>
+        </param>
+        <briefdescription>
+<para>Symmetric numerical differentiation based on central difference scheme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="68">\[ f&apos;(x) \approx \frac{f(x+h) - f(x-h)}{2h} \]</formula></para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//symmetry<sp/>of<sp/>the<sp/>input</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Sym2x2<sp/>=<sp/>std::tuple&lt;tmech::sequence&lt;1,2&gt;,tmech::sequence&lt;2,1&gt;&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//symmetry<sp/>of<sp/>the<sp/>result</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Sym4x4<sp/>=<sp/>std::tuple&lt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmech::sequence&lt;1,2,3,4&gt;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmech::sequence&lt;2,1,3,4&gt;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmech::sequence&lt;1,2,4,3&gt;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmech::sequence&lt;2,1,4,3&gt;&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtmech_1_1tensor" kindref="compound">tmech::tensor&lt;double,3,2&gt;</ref><sp/>X;</highlight></codeline>
+<codeline><highlight class="normal">X<sp/>=<sp/>tmech::sym(tmech::rand&lt;double,3,2&gt;());</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//first<sp/>deriv</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>func<sp/>=<sp/>[&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>F){</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1.5*(tmech::trace(tmech::trans(F)*F)<sp/>-<sp/>3);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dfunc_res<sp/>=<sp/>tmech::num_diff_sym_central&lt;Sym2x2&gt;(func,<sp/>X);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//second<sp/>deriv</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dfunc<sp/>=<sp/>[&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>F){</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tmech::num_diff_sym_central&lt;Sym2x2&gt;(func,<sp/>F);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ddfunc_res<sp/>=<sp/>tmech::num_diff_sym_central&lt;Sym2x2,<sp/>Sym4x4&gt;(dfunc,<sp/>X);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input type/function f(x), used for the numerical differentiation. This type/function needs to provide an overloaded access operator(x). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A given point, at which the function is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>__dx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Is </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="949" column="13" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="949" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a1803555aa774fe89729b1243575e865f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto convert_3D_to_2D</definition>
+        <argsstring>(tensor&lt; T, 3, 2 &gt; const &amp;A)</argsstring>
+        <name>convert_3D_to_2D</name>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; T, 3, 2 &gt; const &amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="952" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_implementation.h" bodystart="708" bodyend="716" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="952" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1a4cf250c907f3b26dc0a0d53cb3667c67" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto convert_3D_to_2D</definition>
+        <argsstring>(tensor&lt; T, 3, 4 &gt; const &amp;A)</argsstring>
+        <name>convert_3D_to_2D</name>
+        <param>
+          <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; T, 3, 4 &gt; const &amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="955" column="23" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_implementation.h" bodystart="719" bodyend="731" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="955" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__functions__forward_8h_1afa20112b26d24c3f484d10ff80923875" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename System</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Data</declname>
+            <defname>Data</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto general_newton_raphson_iterate</definition>
+        <argsstring>(System &amp;A, std::tuple&lt; Data... &gt; &amp;x, typename System::value_type const tol=1e-8, std::size_t const max_iter=20)</argsstring>
+        <name>general_newton_raphson_iterate</name>
+        <param>
+          <type>System &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>std::tuple&lt; Data... &gt; &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>typename System::value_type const</type>
+          <declname>tol</declname>
+          <defval>1e-8</defval>
+        </param>
+        <param>
+          <type>std::size_t const</type>
+          <declname>max_iter</declname>
+          <defval>20</defval>
+        </param>
+        <briefdescription>
+<para>General Newton-Rapson method for scalar and tensor expressions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" line="958" column="13" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_implementation.h" bodystart="740" bodyend="755" declfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h" declline="958" declcolumn="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>2021<sp/>Peter<sp/>Lenz</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0<sp/>(the<sp/>&quot;License&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>you<sp/>may<sp/>not<sp/>use<sp/>this<sp/>file<sp/>except<sp/>in<sp/>compliance<sp/>with<sp/>the<sp/>License.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>You<sp/>may<sp/>obtain<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>License<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>http://www.apache.org/licenses/LICENSE-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Unless<sp/>required<sp/>by<sp/>applicable<sp/>law<sp/>or<sp/>agreed<sp/>to<sp/>in<sp/>writing,<sp/>software</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>distributed<sp/>under<sp/>the<sp/>License<sp/>is<sp/>distributed<sp/>on<sp/>an<sp/>&quot;AS<sp/>IS&quot;<sp/>BASIS,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>WITHOUT<sp/>WARRANTIES<sp/>OR<sp/>CONDITIONS<sp/>OF<sp/>ANY<sp/>KIND,<sp/>either<sp/>express<sp/>or<sp/>implied.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See<sp/>the<sp/>License<sp/>for<sp/>the<sp/>specific<sp/>language<sp/>governing<sp/>permissions<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>limitations<sp/>under<sp/>the<sp/>License.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>TENSOR_FUNCTIONS_FORWARD_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TENSOR_FUNCTIONS_FORWARD_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>almost_equal(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs,<sp/>_T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>__eps);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>otimesu(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>otimesl(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>otimes(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>dcontract(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>ddcontract(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>outer_product(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SequenceRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inner_product(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cross(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorLHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TensorRHS,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dot(_TensorLHS<sp/>&amp;&amp;<sp/>__tensor_lhs,<sp/>_TensorRHS<sp/>&amp;&amp;<sp/>__tensor_rhs);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>_T<sp/>sign(_T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_TupleSequence<sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>convert_tensor_to_voigt(_Tensor<sp/>&amp;&amp;<sp/>__tensor,<sp/>_T<sp/>*<sp/>__ptr);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Sequence,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>basis_change(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>trace(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>abs(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>eval(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>trans(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transl(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight></codeline>
+<codeline lineno="362"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>skew(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sym(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"></highlight></codeline>
+<codeline lineno="392"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vol(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"></highlight></codeline>
+<codeline lineno="406"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dev(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"></highlight></codeline>
+<codeline lineno="420"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="421"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cof(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="422"><highlight class="normal"></highlight></codeline>
+<codeline lineno="434"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>adj(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"></highlight></codeline>
+<codeline lineno="474"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>..._Sequences,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inv(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="476"><highlight class="normal"></highlight></codeline>
+<codeline lineno="515"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>..._Sequences,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>invf(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"></highlight></codeline>
+<codeline lineno="539"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="540"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sign(_Tensor<sp/>&amp;&amp;<sp/>__tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type::value_type<sp/>__eps<sp/>=<sp/>5e-7,<sp/>std::size_t<sp/>__max_iter<sp/>=<sp/>10);</highlight></codeline>
+<codeline lineno="541"><highlight class="normal"></highlight></codeline>
+<codeline lineno="542"><highlight class="normal"></highlight></codeline>
+<codeline lineno="566"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Function,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="567"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>isotropic_tensor_function(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="568"><highlight class="normal"></highlight></codeline>
+<codeline lineno="569"><highlight class="normal"></highlight></codeline>
+<codeline lineno="589"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="590"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sqrt(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="591"><highlight class="normal"></highlight></codeline>
+<codeline lineno="610"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="611"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>exp_sym(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="612"><highlight class="normal"></highlight></codeline>
+<codeline lineno="631"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="632"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>log(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="633"><highlight class="normal"></highlight></codeline>
+<codeline lineno="658"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="659"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>positive(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="660"><highlight class="normal"></highlight></codeline>
+<codeline lineno="685"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="686"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>negative(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="687"><highlight class="normal"></highlight></codeline>
+<codeline lineno="722"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="723"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>positive_negative_decomposition(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="724"><highlight class="normal"></highlight></codeline>
+<codeline lineno="725"><highlight class="normal"></highlight></codeline>
+<codeline lineno="751"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="752"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>exp(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="753"><highlight class="normal"></highlight></codeline>
+<codeline lineno="818"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="819"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>polar_decomposition(_Tensor<sp/>&amp;&amp;<sp/>__tensor,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>__newton_method,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>std::decay&lt;_Tensor&gt;::type::value_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>__tol,<sp/>std::size_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>__max_steps);</highlight></codeline>
+<codeline lineno="820"><highlight class="normal"></highlight></codeline>
+<codeline lineno="856"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Tensor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>&gt;</highlight></codeline>
+<codeline lineno="857"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>eigen_decomposition(_Tensor<sp/>&amp;&amp;<sp/>__tensor);</highlight></codeline>
+<codeline lineno="858"><highlight class="normal"></highlight></codeline>
+<codeline lineno="859"><highlight class="normal"></highlight></codeline>
+<codeline lineno="860"><highlight class="normal"></highlight></codeline>
+<codeline lineno="861"><highlight class="normal"></highlight></codeline>
+<codeline lineno="862"><highlight class="normal"></highlight></codeline>
+<codeline lineno="863"><highlight class="normal"></highlight></codeline>
+<codeline lineno="864"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Derived&gt;</highlight></codeline>
+<codeline lineno="865"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>det(<ref refid="classtensor__base" kindref="compound">tensor_base&lt;Derived&gt;</ref></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>__A);</highlight></codeline>
+<codeline lineno="866"><highlight class="normal"></highlight></codeline>
+<codeline lineno="867"><highlight class="normal">template&lt;typename<sp/>Derived,<sp/>typename<sp/>T,<sp/>typename<sp/>std::enable_if&lt;std::is_integral&lt;T&gt;::value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;::type<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="868"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pow(<ref refid="classtensor__base" kindref="compound">tensor_base&lt;Derived&gt;</ref></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>base,<sp/>T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exp);</highlight></codeline>
+<codeline lineno="869"><highlight class="normal"></highlight></codeline>
+<codeline lineno="880"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Derived&gt;</highlight></codeline>
+<codeline lineno="881"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>norm(<ref refid="classtensor__base" kindref="compound">tensor_base&lt;Derived&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>data_base);</highlight></codeline>
+<codeline lineno="882"><highlight class="normal"></highlight></codeline>
+<codeline lineno="883"><highlight class="normal"></highlight></codeline>
+<codeline lineno="909"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Position<sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Function,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="910"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>num_diff_central(_Function<sp/>__func,<sp/>_Point<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>__x,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>__h<sp/>=<sp/>1e-7);</highlight></codeline>
+<codeline lineno="911"><highlight class="normal"></highlight></codeline>
+<codeline lineno="912"><highlight class="normal"></highlight></codeline>
+<codeline lineno="948"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SymDirection,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_SymResult<sp/>=<sp/>std::tuple&lt;&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Function,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>_Po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="949"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>num_diff_sym_central(_Function<sp/>__func,<sp/>_Point<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>__x,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>__h<sp/>=<sp/>1e-7);</highlight></codeline>
+<codeline lineno="950"><highlight class="normal"></highlight></codeline>
+<codeline lineno="951"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="952"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>convert_3D_to_2D(<ref refid="classtensor" kindref="compound">tensor&lt;T, 3, 2&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>A);</highlight></codeline>
+<codeline lineno="953"><highlight class="normal"></highlight></codeline>
+<codeline lineno="954"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="955"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>convert_3D_to_2D(<ref refid="classtensor" kindref="compound">tensor&lt;T, 3, 4&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>A);</highlight></codeline>
+<codeline lineno="956"><highlight class="normal"></highlight></codeline>
+<codeline lineno="957"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>System,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>...Data&gt;</highlight></codeline>
+<codeline lineno="958"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>general_newton_raphson_iterate(System<sp/>&amp;<sp/>A,<sp/>std::tuple&lt;Data...&gt;<sp/>&amp;<sp/>x,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>System::value_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>tol<sp/>=<sp/>1e-8,<sp/>std::size_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>max_iter<sp/>=<sp/>20);</highlight></codeline>
+<codeline lineno="959"><highlight class="normal"></highlight></codeline>
+<codeline lineno="960"><highlight class="normal"></highlight></codeline>
+<codeline lineno="961"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>TENSOR_FUNCTIONS_FORWARD_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/tensor_functions_forward.h"/>
+  </compounddef>
+</doxygen>

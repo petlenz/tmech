@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1basis__change__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::basis_change_wrapper</compoundname>
+    <basecompoundref refid="classtensor__base" prot="public" virt="non-virtual">tensor_base&lt; basis_change_wrapper&lt; _Tensor, _Sequence &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+      <param>
+        <type>typename _Sequence</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1basis__change__wrapper_1ae08720eabd166f543b6bb92e505ef7ad" prot="private" static="no">
+        <type>typename std::remove_const&lt; typename std::remove_reference&lt; _Tensor &gt;::type &gt;::type</type>
+        <definition>using detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::data_type_tensor =  typename std::remove_const&lt;typename std::remove_reference&lt;_Tensor&gt;::type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>data_type_tensor</name>
+        <qualifiedname>detail::basis_change_wrapper::data_type_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="24" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1basis__change__wrapper_1aba561259bde5206ddb78a1726154f2cb" prot="private" static="no">
+        <type>min_value_squence_t&lt; _Sequence, 1 &gt;</type>
+        <definition>using detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::sequence =  min_value_squence_t&lt;_Sequence, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>sequence</name>
+        <qualifiedname>detail::basis_change_wrapper::sequence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="25" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1basis__change__wrapper_1a70d8158e63d141ce2548c448e84eb1d7" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::basis_change_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="27" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1basis__change__wrapper_1a06c976bcadbf63153f9828f38c37f975" prot="public" static="no">
+        <type>typename data_type_tensor::value_type</type>
+        <definition>using detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::value_type =  typename data_type_tensor::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::basis_change_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="28" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1basis__change__wrapper_1ac40034a140c14e4c16e92645585202bb" prot="private" static="no" mutable="no">
+        <type>_Tensor</type>
+        <definition>_Tensor detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>detail::basis_change_wrapper::_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="65" column="13" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1basis__change__wrapper_1a8c5367a9f19b44f9bb28a0ad0a58fdcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::basis_change_wrapper</definition>
+        <argsstring>(_Tensor __data)</argsstring>
+        <name>basis_change_wrapper</name>
+        <qualifiedname>detail::basis_change_wrapper::basis_change_wrapper</qualifiedname>
+        <param>
+          <type>_Tensor</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="34" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_meat.h" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1basis__change__wrapper_1a15a3ff74dde43a2061fe56f9612aa530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::basis_change_wrapper</definition>
+        <argsstring>(basis_change_wrapper const &amp;__data)</argsstring>
+        <name>basis_change_wrapper</name>
+        <qualifiedname>detail::basis_change_wrapper::basis_change_wrapper</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1basis__change__wrapper" kindref="compound">basis_change_wrapper</ref> const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="36" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_meat.h" bodystart="26" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1basis__change__wrapper_1ab6c53d81e8f64eacc434005fb9793362" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Derived</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::operator=</definition>
+        <argsstring>(tensor_base&lt; _Derived &gt; const &amp;__data_base)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>detail::basis_change_wrapper::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; _Derived &gt; const &amp;</type>
+          <declname>__data_base</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="39" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" bodystart="39" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1basis__change__wrapper_1a00a0b7627f8292645ad15d9b5c426915" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Indicies</declname>
+            <defname>Indicies</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::operator()</definition>
+        <argsstring>(Indicies... indices) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::basis_change_wrapper::operator()</qualifiedname>
+        <param>
+          <type>Indicies...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="56" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_meat.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1basis__change__wrapper_1aa25fd583831f594629d281856a1a8ebf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::evaluate</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::basis_change_wrapper::evaluate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="62" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_meat.h" bodystart="47" bodyend="49"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classdetail_1_1basis__change__wrapper_1a2c058ba5bd07711a3f72f39c7adbdf04" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::dimension</definition>
+        <argsstring>()</argsstring>
+        <name>dimension</name>
+        <qualifiedname>detail::basis_change_wrapper::dimension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="58" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_meat.h" bodystart="37" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1basis__change__wrapper_1ac704aaec5a0e43be7d8e5ab39aa44c8d" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>detail::basis_change_wrapper::rank</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="60" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_meat.h" bodystart="42" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;</label>
+        <link refid="classdetail_1_1basis__change__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; basis_change_wrapper&lt; _Tensor, _Sequence &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::basis_change_wrapper&lt; _Tensor, _Sequence &gt;</label>
+        <link refid="classdetail_1_1basis__change__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; basis_change_wrapper&lt; _Tensor, _Sequence &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" line="21" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/basis_change_wrapper_bones.h" bodystart="23" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1basis__change__wrapper_1ac40034a140c14e4c16e92645585202bb" prot="private" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>_data</name></member>
+      <member refid="classtensor__base_1ac10026fb2040db2caab8e6108cfdb95e" prot="protected" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>_is_init</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1a8c5367a9f19b44f9bb28a0ad0a58fdcc" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>basis_change_wrapper</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1a15a3ff74dde43a2061fe56f9612aa530" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>basis_change_wrapper</name></member>
+      <member refid="classtensor__base_1a9217342c966e050b1d2ae5431ff6d355" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a1f79397b5e5da7ba5b430dad6e2e6f7b" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a9217342c966e050b1d2ae5431ff6d355" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a1f79397b5e5da7ba5b430dad6e2e6f7b" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>convert</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1ae08720eabd166f543b6bb92e505ef7ad" prot="private" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>data_type_tensor</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1a2c058ba5bd07711a3f72f39c7adbdf04" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>dimension</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1aa25fd583831f594629d281856a1a8ebf" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1a00a0b7627f8292645ad15d9b5c426915" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>operator()</name></member>
+      <member refid="classtensor__base_1a4b12b9e1b4e6065b63ef84905f54272e" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>operator-</name></member>
+      <member refid="classtensor__base_1a4b12b9e1b4e6065b63ef84905f54272e" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1ab6c53d81e8f64eacc434005fb9793362" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>operator=</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1ac704aaec5a0e43be7d8e5ab39aa44c8d" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>rank</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1aba561259bde5206ddb78a1726154f2cb" prot="private" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>sequence</name></member>
+      <member refid="classtensor__base_1a193f15accda2947f7ac1d71e46b05588" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>size</name></member>
+      <member refid="classtensor__base_1a193f15accda2947f7ac1d71e46b05588" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>size</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1a70d8158e63d141ce2548c448e84eb1d7" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>size_type</name></member>
+      <member refid="classtensor__base_1a4f1b23287884e2560bd9a684fc8b4e67" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1afdecc080c560462657208e6e75ab4b98" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1a4f1b23287884e2560bd9a684fc8b4e67" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1afdecc080c560462657208e6e75ab4b98" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classdetail_1_1basis__change__wrapper_1a06c976bcadbf63153f9828f38c37f975" prot="public" virt="non-virtual"><scope>detail::basis_change_wrapper</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

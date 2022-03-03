@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classscalar__zero" kind="class" language="C++" prot="public">
+    <compoundname>scalar_zero</compoundname>
+    <basecompoundref refid="classvariable__base" prot="public" virt="non-virtual">variable_base&lt; scalar_zero&lt; T &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classscalar__zero_1a57c70126e3d8456947b176b612f82297" prot="public" static="no">
+        <type>T</type>
+        <definition>using scalar_zero&lt; T &gt;::data_type =  T</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>scalar_zero::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="8" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classscalar__zero_1a7a996f875af33f90ae0bc742cff46579" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr data_type</type>
+        <definition>constexpr data_type scalar_zero&lt; T &gt;::operator()</definition>
+        <argsstring>(Data const &amp;__data) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>scalar_zero::operator()</qualifiedname>
+        <param>
+          <type>Data const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="11" column="32" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" bodystart="11" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classscalar__zero_1a64654f560c3206ac3289667357f5f2a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string scalar_zero&lt; T &gt;::get_string</definition>
+        <argsstring>() const</argsstring>
+        <name>get_string</name>
+        <qualifiedname>scalar_zero::get_string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="15" column="24" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classscalar__zero_1aebf8fc1c2d00f777ca2c39f830381ba7" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::ostream &amp;</type>
+        <definition>constexpr std::ostream &amp; scalar_zero&lt; T &gt;::print</definition>
+        <argsstring>(std::ostream &amp;os) const</argsstring>
+        <name>print</name>
+        <qualifiedname>scalar_zero::print</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="19" column="35" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" bodystart="19" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classscalar__zero_1a321e4efb27d0f4fa0070691b65da3ded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto scalar_zero&lt; T &gt;::value</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>value</name>
+        <qualifiedname>scalar_zero::value</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="25" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classscalar__zero_1a9ee3301655b181621aecf154e943cb54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto scalar_zero&lt; T &gt;::update</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>update</name>
+        <qualifiedname>scalar_zero::update</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="28" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classscalar__zero_1a27cfd198699e1cc49004c5bc14856820" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto scalar_zero&lt; T &gt;::reset</definition>
+        <argsstring>()=delete</argsstring>
+        <name>reset</name>
+        <qualifiedname>scalar_zero::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="30" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classscalar__zero_1a4acb2cb4cd2e193fbac935643cf2bf94" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr data_type</type>
+        <definition>constexpr data_type scalar_zero&lt; T &gt;::get_value</definition>
+        <argsstring>(_Data const &amp;__data) const</argsstring>
+        <name>get_value</name>
+        <qualifiedname>scalar_zero::get_value</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="34" column="32" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" bodystart="34" bodyend="36"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>scalar_zero&lt; T &gt;</label>
+        <link refid="classscalar__zero"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; scalar_zero&lt; T &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>scalar_zero&lt; T &gt;</label>
+        <link refid="classscalar__zero"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; scalar_zero&lt; T &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" line="5" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/scalar_zero_bones.h" bodystart="6" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classvariable__base_1a30d0635dfb734e22c329677f7beb9d4f" prot="protected" virt="non-virtual"><scope>scalar_zero</scope><name>_update</name></member>
+      <member refid="classvariable__base_1a08062ec90dcff407477c4281a2949c06" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>convert</name></member>
+      <member refid="classscalar__zero_1a57c70126e3d8456947b176b612f82297" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>data_type</name></member>
+      <member refid="classscalar__zero_1a64654f560c3206ac3289667357f5f2a1" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>get_string</name></member>
+      <member refid="classscalar__zero_1a4acb2cb4cd2e193fbac935643cf2bf94" prot="private" virt="non-virtual"><scope>scalar_zero</scope><name>get_value</name></member>
+      <member refid="classscalar__zero_1a7a996f875af33f90ae0bc742cff46579" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1af7bb3cfe845189131467ba47a6ff9896" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; scalar_zero&lt; T &gt; &gt;::"><scope>scalar_zero</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1a1bce76f282394521dece5e217c3acbea" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>operator-</name></member>
+      <member refid="classscalar__zero_1aebf8fc1c2d00f777ca2c39f830381ba7" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>print</name></member>
+      <member refid="classscalar__zero_1a27cfd198699e1cc49004c5bc14856820" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>reset</name></member>
+      <member refid="classscalar__zero_1a9ee3301655b181621aecf154e943cb54" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>update</name></member>
+      <member refid="classvariable__base_1a76d5b56fe2476b728e4b6d873d4cd801" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; scalar_zero&lt; T &gt; &gt;::"><scope>scalar_zero</scope><name>update</name></member>
+      <member refid="classscalar__zero_1a321e4efb27d0f4fa0070691b65da3ded" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>value</name></member>
+      <member refid="classvariable__base_1a03e782ff9786edabe13abfc2adef95e5" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; scalar_zero&lt; T &gt; &gt;::"><scope>scalar_zero</scope><name>value</name></member>
+      <member refid="classvariable__base_1a00c523e7c5d602121591ca8dc8d0accd" prot="public" virt="non-virtual"><scope>scalar_zero</scope><name>variable_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

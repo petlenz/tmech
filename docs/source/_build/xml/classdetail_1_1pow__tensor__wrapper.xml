@@ -1,0 +1,496 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1pow__tensor__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::pow_tensor_wrapper</compoundname>
+    <basecompoundref refid="classtensor__base" prot="public" virt="non-virtual">tensor_base&lt; pow_tensor_wrapper&lt; Tensor &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <header>Constructors</header>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a785add1f8cde78c74db11b417d7fcab1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::pow_tensor_wrapper&lt; Tensor &gt;::pow_tensor_wrapper</definition>
+        <argsstring>(Tensor const &amp;data, size_type const exponent)</argsstring>
+        <name>pow_tensor_wrapper</name>
+        <qualifiedname>detail::pow_tensor_wrapper::pow_tensor_wrapper</qualifiedname>
+        <param>
+          <type>Tensor const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>exponent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Default constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="36" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="28" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a985736b0205a1fbbc54694aaf5e93f63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::pow_tensor_wrapper&lt; Tensor &gt;::pow_tensor_wrapper</definition>
+        <argsstring>(pow_tensor_wrapper const &amp;data)</argsstring>
+        <name>pow_tensor_wrapper</name>
+        <qualifiedname>detail::pow_tensor_wrapper::pow_tensor_wrapper</qualifiedname>
+        <param>
+          <type><ref refid="classdetail_1_1pow__tensor__wrapper" kindref="compound">pow_tensor_wrapper</ref> const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copy constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="38" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="36" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1ab0df6fa4696e272e7d18a14d4309318a" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::operator()</definition>
+        <argsstring>(Indices const ... indices) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::pow_tensor_wrapper::operator()</qualifiedname>
+        <param>
+          <type>Indices const ...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="41" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="46" bodyend="48"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Dimension and rank</header>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1adc17df8f4555e644146b393177b0686e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::derivative</definition>
+        <argsstring>()</argsstring>
+        <name>derivative</name>
+        <qualifiedname>detail::pow_tensor_wrapper::derivative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="47" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="71" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1ae51719621d0cc50ead6e652675bab635" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Result</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::evaluate</definition>
+        <argsstring>(Result &amp;result)</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::pow_tensor_wrapper::evaluate</qualifiedname>
+        <param>
+          <type>Result &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="50" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="105" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a762c62447596b5828047615c9ab31387" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::evaluate</definition>
+        <argsstring>()</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::pow_tensor_wrapper::evaluate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="52" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="110" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1aae954fe85c8c9fafb6acf4df0b2a0697" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::raw_data</definition>
+        <argsstring>() const</argsstring>
+        <name>raw_data</name>
+        <qualifiedname>detail::pow_tensor_wrapper::raw_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="54" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="115" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1af07437eea5df5b9d6bc2646191351757" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>detail::pow_tensor_wrapper::rank</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the rank. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="43" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="65" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1afb16fed7106f1299fd6075b4a95daf0f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::dimension</definition>
+        <argsstring>()</argsstring>
+        <name>dimension</name>
+        <qualifiedname>detail::pow_tensor_wrapper::dimension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the dimension. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="45" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="58" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a10b63edc7603af23f727b9ed46519fc2" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Result</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::evaluate_imp</definition>
+        <argsstring>(Result &amp;result)</argsstring>
+        <name>evaluate_imp</name>
+        <qualifiedname>detail::pow_tensor_wrapper::evaluate_imp</qualifiedname>
+        <param>
+          <type>Result &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="58" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="121" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a30ec5cd54499cb551e7d5732e7a49bb9" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::sym_derivative</definition>
+        <argsstring>()</argsstring>
+        <name>sym_derivative</name>
+        <qualifiedname>detail::pow_tensor_wrapper::sym_derivative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="60" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="135" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a0f0284d899dbb42605c302fd521d1d12" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::skew_derivative</definition>
+        <argsstring>()</argsstring>
+        <name>skew_derivative</name>
+        <qualifiedname>detail::pow_tensor_wrapper::skew_derivative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="62" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="143" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a46046f335af0800ab264b952a4e8a2ba" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::normal_derivative</definition>
+        <argsstring>()</argsstring>
+        <name>normal_derivative</name>
+        <qualifiedname>detail::pow_tensor_wrapper::normal_derivative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="64" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="151" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1af0617fdd59b0d0c6c2ff5423a2dfbb68" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::is_symmetric</definition>
+        <argsstring>(value_type const *const ptr)</argsstring>
+        <name>is_symmetric</name>
+        <qualifiedname>detail::pow_tensor_wrapper::is_symmetric</qualifiedname>
+        <param>
+          <type>value_type const *const</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="66" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="159" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1pow__tensor__wrapper_1a5f23346b4501315d54aa942202b62d73" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::pow_tensor_wrapper&lt; Tensor &gt;::is_skewsymmetric</definition>
+        <argsstring>(value_type const *const ptr)</argsstring>
+        <name>is_skewsymmetric</name>
+        <qualifiedname>detail::pow_tensor_wrapper::is_skewsymmetric</qualifiedname>
+        <param>
+          <type>value_type const *const</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="68" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_meat.h" bodystart="183" bodyend="194"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdetail_1_1pow__tensor__wrapper_1ae6e291fd25de7141b09f7a20805d1128" prot="private" static="no">
+        <type>typename <ref refid="structdetail_1_1result__expression__type" kindref="compound">result_expression_type</ref>&lt; Tensor &gt;::result_type</type>
+        <definition>using detail::pow_tensor_wrapper&lt; Tensor &gt;::data_type_tensor =  typename result_expression_type&lt;Tensor&gt;::result_type</definition>
+        <argsstring></argsstring>
+        <name>data_type_tensor</name>
+        <qualifiedname>detail::pow_tensor_wrapper::data_type_tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="30" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1pow__tensor__wrapper_1a0fc1b02aab4fcdd08583e66b5c9dc32a" prot="public" static="no">
+        <type>typename Tensor::data_type</type>
+        <definition>using detail::pow_tensor_wrapper&lt; Tensor &gt;::data_type =  typename Tensor::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::pow_tensor_wrapper::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="32" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1pow__tensor__wrapper_1ae0b17016580290758274faaab5e50473" prot="public" static="no">
+        <type>typename Tensor::value_type</type>
+        <definition>using detail::pow_tensor_wrapper&lt; Tensor &gt;::value_type =  typename Tensor::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::pow_tensor_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="33" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdetail_1_1pow__tensor__wrapper_1a111e3ca18bd077256789c1762893cb6a" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::pow_tensor_wrapper&lt; Tensor &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::pow_tensor_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="34" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1pow__tensor__wrapper_1a45361bb6db8ced149c1d2589849cb049" prot="private" static="no" mutable="no">
+        <type>data_type</type>
+        <definition>data_type detail::pow_tensor_wrapper&lt; Tensor &gt;::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>detail::pow_tensor_wrapper::_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="70" column="15" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1pow__tensor__wrapper_1a0a53bb6ff76677ba6583c39c37113cee" prot="private" static="no" mutable="no">
+        <type>data_type_tensor</type>
+        <definition>data_type_tensor detail::pow_tensor_wrapper&lt; Tensor &gt;::_data_expr</definition>
+        <argsstring></argsstring>
+        <name>_data_expr</name>
+        <qualifiedname>detail::pow_tensor_wrapper::_data_expr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="71" column="22" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1pow__tensor__wrapper_1a423e3837c7c771541c6682ba2ce8a2d2" prot="private" static="no" mutable="no">
+        <type>data_type</type>
+        <definition>data_type detail::pow_tensor_wrapper&lt; Tensor &gt;::_data_deriv</definition>
+        <argsstring></argsstring>
+        <name>_data_deriv</name>
+        <qualifiedname>detail::pow_tensor_wrapper::_data_deriv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="72" column="15" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1pow__tensor__wrapper_1a98322367068d7fadd50e5b61a8a4e042" prot="private" static="no" mutable="no">
+        <type><ref refid="classtensor" kindref="compound">tensor</ref>&lt; value_type, Tensor::dimension(), Tensor::rank() *2 &gt;</type>
+        <definition>tensor&lt;value_type, Tensor::dimension(), Tensor::rank()*2&gt; detail::pow_tensor_wrapper&lt; Tensor &gt;::_derivative</definition>
+        <argsstring></argsstring>
+        <name>_derivative</name>
+        <qualifiedname>detail::pow_tensor_wrapper::_derivative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="73" column="12" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1pow__tensor__wrapper_1a3868b4c3cc8685d03578fee1b5b36e6c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; data_type &gt;</type>
+        <definition>std::vector&lt;data_type&gt; detail::pow_tensor_wrapper&lt; Tensor &gt;::_data_i</definition>
+        <argsstring></argsstring>
+        <name>_data_i</name>
+        <qualifiedname>detail::pow_tensor_wrapper::_data_i</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="74" column="17" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1pow__tensor__wrapper_1af7f4224fd3264c567cd43f063953c27e" prot="private" static="no" mutable="no">
+        <type>size_type const</type>
+        <definition>size_type const detail::pow_tensor_wrapper&lt; Tensor &gt;::_expo</definition>
+        <argsstring></argsstring>
+        <name>_expo</name>
+        <qualifiedname>detail::pow_tensor_wrapper::_expo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="75" column="21" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::pow_tensor_wrapper&lt; Tensor &gt;</label>
+        <link refid="classdetail_1_1pow__tensor__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; pow_tensor_wrapper&lt; Tensor &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::pow_tensor_wrapper&lt; Tensor &gt;</label>
+        <link refid="classdetail_1_1pow__tensor__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; pow_tensor_wrapper&lt; Tensor &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" line="28" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/pow_tensor_wrapper_bones.h" bodystart="29" bodyend="76"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a45361bb6db8ced149c1d2589849cb049" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>_data</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a423e3837c7c771541c6682ba2ce8a2d2" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>_data_deriv</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a0a53bb6ff76677ba6583c39c37113cee" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>_data_expr</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a3868b4c3cc8685d03578fee1b5b36e6c" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>_data_i</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a98322367068d7fadd50e5b61a8a4e042" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>_derivative</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1af7f4224fd3264c567cd43f063953c27e" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>_expo</name></member>
+      <member refid="classtensor__base_1ac10026fb2040db2caab8e6108cfdb95e" prot="protected" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>_is_init</name></member>
+      <member refid="classtensor__base_1a9217342c966e050b1d2ae5431ff6d355" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a1f79397b5e5da7ba5b430dad6e2e6f7b" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a9217342c966e050b1d2ae5431ff6d355" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a1f79397b5e5da7ba5b430dad6e2e6f7b" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>convert</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a0fc1b02aab4fcdd08583e66b5c9dc32a" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1ae6e291fd25de7141b09f7a20805d1128" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>data_type_tensor</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1adc17df8f4555e644146b393177b0686e" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>derivative</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1afb16fed7106f1299fd6075b4a95daf0f" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>dimension</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1ae51719621d0cc50ead6e652675bab635" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a762c62447596b5828047615c9ab31387" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a10b63edc7603af23f727b9ed46519fc2" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>evaluate_imp</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a5f23346b4501315d54aa942202b62d73" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>is_skewsymmetric</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1af0617fdd59b0d0c6c2ff5423a2dfbb68" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>is_symmetric</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a46046f335af0800ab264b952a4e8a2ba" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>normal_derivative</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1ab0df6fa4696e272e7d18a14d4309318a" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>operator()</name></member>
+      <member refid="classtensor__base_1a4b12b9e1b4e6065b63ef84905f54272e" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>operator-</name></member>
+      <member refid="classtensor__base_1a4b12b9e1b4e6065b63ef84905f54272e" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a785add1f8cde78c74db11b417d7fcab1" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>pow_tensor_wrapper</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a985736b0205a1fbbc54694aaf5e93f63" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>pow_tensor_wrapper</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1af07437eea5df5b9d6bc2646191351757" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>rank</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1aae954fe85c8c9fafb6acf4df0b2a0697" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>raw_data</name></member>
+      <member refid="classtensor__base_1a193f15accda2947f7ac1d71e46b05588" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>size</name></member>
+      <member refid="classtensor__base_1a193f15accda2947f7ac1d71e46b05588" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>size</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a111e3ca18bd077256789c1762893cb6a" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>size_type</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a0f0284d899dbb42605c302fd521d1d12" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>skew_derivative</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1a30ec5cd54499cb551e7d5732e7a49bb9" prot="private" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>sym_derivative</name></member>
+      <member refid="classtensor__base_1a4f1b23287884e2560bd9a684fc8b4e67" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1afdecc080c560462657208e6e75ab4b98" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1a4f1b23287884e2560bd9a684fc8b4e67" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1afdecc080c560462657208e6e75ab4b98" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>tensor_base</name></member>
+      <member refid="classdetail_1_1pow__tensor__wrapper_1ae0b17016580290758274faaab5e50473" prot="public" virt="non-virtual"><scope>detail::pow_tensor_wrapper</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1change__value__at__position__h_3_01sequence_3_01Result_8_8_8_01_4_00_01sequence_06530e380916ee95c7995f9d85128daf" kind="struct" language="C++" prot="public">
+    <compoundname>detail::change_value_at_position_h&lt; sequence&lt; Result... &gt;, sequence&lt; First, Args... &gt;, IDX, Positions, Value &gt;</compoundname>
+    <basecompoundref refid="structdetail_1_1change__value__at__position__h" prot="public" virt="non-virtual">detail::change_value_at_position_h&lt; sequence&lt; Result..., First &gt;, sequence&lt; Args... &gt;, IDX+1, Positions, Value &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>Result</declname>
+        <defname>Result</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>First</declname>
+        <defname>First</defname>
+      </param>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>IDX</declname>
+        <defname>IDX</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Positions</declname>
+        <defname>Positions</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Value</declname>
+        <defname>Value</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>detail::change_value_at_position_h&lt; sequence&lt; Result..., First &gt;, sequence&lt; Args... &gt;, IDX+1, Positions, Value &gt;</label>
+        <link refid="structdetail_1_1change__value__at__position__h"/>
+      </node>
+      <node id="1">
+        <label>detail::change_value_at_position_h&lt; sequence&lt; Result... &gt;, sequence&lt; First, Args... &gt;, IDX, Positions, Value &gt;</label>
+        <link refid="structdetail_1_1change__value__at__position__h_3_01sequence_3_01Result_8_8_8_01_4_00_01sequence_06530e380916ee95c7995f9d85128daf"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>detail::change_value_at_position_h&lt; sequence&lt; Result..., First &gt;, sequence&lt; Args... &gt;, IDX+1, Positions, Value &gt;</label>
+        <link refid="structdetail_1_1change__value__at__position__h"/>
+      </node>
+      <node id="1">
+        <label>detail::change_value_at_position_h&lt; sequence&lt; Result... &gt;, sequence&lt; First, Args... &gt;, IDX, Positions, Value &gt;</label>
+        <link refid="structdetail_1_1change__value__at__position__h_3_01sequence_3_01Result_8_8_8_01_4_00_01sequence_06530e380916ee95c7995f9d85128daf"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="751" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="753" bodyend="753"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1change__value__at__position__h_1a8f8be9b6b941062700f0d260e7ee4b07" prot="public" virt="non-virtual"><scope>detail::change_value_at_position_h&lt; sequence&lt; Result... &gt;, sequence&lt; First, Args... &gt;, IDX, Positions, Value &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

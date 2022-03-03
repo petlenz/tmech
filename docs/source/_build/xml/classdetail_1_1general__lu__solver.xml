@@ -1,0 +1,503 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1general__lu__solver" kind="class" language="C++" prot="public">
+    <compoundname>detail::general_lu_solver</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1acbb3c3786840a83b12642ebe948791f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>detail::general_lu_solver::general_lu_solver</definition>
+        <argsstring>()</argsstring>
+        <name>general_lu_solver</name>
+        <qualifiedname>detail::general_lu_solver::general_lu_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="11" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="6" bodyend="6"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1a2c44944b3486d1b699a1a6d6da28b301" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+          <param>
+            <type>typename Residuum</type>
+          </param>
+          <param>
+            <type>typename Vector_x</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::apply</definition>
+        <argsstring>(Jacobian &amp;A, Residuum const &amp;R, Vector_x &amp;x)</argsstring>
+        <name>apply</name>
+        <qualifiedname>detail::general_lu_solver::apply</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Residuum const &amp;</type>
+          <declname>R</declname>
+        </param>
+        <param>
+          <type>Vector_x &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="14" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="9" bodyend="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1aced35db6e646b6022438308adb9e4105" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::elimination_I</definition>
+        <argsstring>(Jacobian &amp;A)</argsstring>
+        <name>elimination_I</name>
+        <qualifiedname>detail::general_lu_solver::elimination_I</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="18" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="21" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1aa0c8682e47c4051f032bea63e86d6d38" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>J</declname>
+            <defname>J</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+          <param>
+            <type>typename Val_inv</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::elimination_J</definition>
+        <argsstring>(Jacobian &amp;A, Val_inv const &amp;invAii)</argsstring>
+        <name>elimination_J</name>
+        <qualifiedname>detail::general_lu_solver::elimination_J</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Val_inv const &amp;</type>
+          <declname>invAii</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="21" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="45" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1ac9e564b6ec370cc8e38b4148068d7314" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>J</declname>
+            <defname>J</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::elimination_J</definition>
+        <argsstring>(Jacobian &amp;A)</argsstring>
+        <name>elimination_J</name>
+        <qualifiedname>detail::general_lu_solver::elimination_J</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="24" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="54" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1af35ae6cd2cc30e4b398746e293801645" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>J</declname>
+            <defname>J</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>K</declname>
+            <defname>K</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::elimination_K</definition>
+        <argsstring>(Jacobian &amp;A)</argsstring>
+        <name>elimination_K</name>
+        <qualifiedname>detail::general_lu_solver::elimination_K</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="27" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="63" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1ad98619be4b6663d4ec5003c9e4005926" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+          <param>
+            <type>typename Residuum</type>
+          </param>
+          <param>
+            <type>typename Vector_x</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::forward_I</definition>
+        <argsstring>(Jacobian &amp;A, Residuum const &amp;R, Vector_x &amp;x)</argsstring>
+        <name>forward_I</name>
+        <qualifiedname>detail::general_lu_solver::forward_I</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Residuum const &amp;</type>
+          <declname>R</declname>
+        </param>
+        <param>
+          <type>Vector_x &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="30" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="74" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1a77b79846fdb4af3141b28002637758fa" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>K</declname>
+            <defname>K</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+          <param>
+            <type>typename Vector_x</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::forward_K</definition>
+        <argsstring>(Jacobian &amp;A, Vector_x &amp;x)</argsstring>
+        <name>forward_K</name>
+        <qualifiedname>detail::general_lu_solver::forward_K</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Vector_x &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="33" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="93" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1a1354d12189008ffc7f8bb9b9b8593f3d" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+          <param>
+            <type>typename Vector_x</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::backward_I</definition>
+        <argsstring>(Jacobian &amp;A, Vector_x &amp;x)</argsstring>
+        <name>backward_I</name>
+        <qualifiedname>detail::general_lu_solver::backward_I</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Vector_x &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="36" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="103" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1ac21f42da72f383f69e237e5a873711e6" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>K</declname>
+            <defname>K</defname>
+          </param>
+          <param>
+            <type>typename Jacobian</type>
+          </param>
+          <param>
+            <type>typename Vector_x</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::backward_K</definition>
+        <argsstring>(Jacobian &amp;A, Vector_x &amp;x)</argsstring>
+        <name>backward_K</name>
+        <qualifiedname>detail::general_lu_solver::backward_K</qualifiedname>
+        <param>
+          <type>Jacobian &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Vector_x &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="39" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="122" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1a3a8db0585ba0ede307c3bc10729b292e" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::invert</definition>
+        <argsstring>(T const &amp;A)</argsstring>
+        <name>invert</name>
+        <qualifiedname>detail::general_lu_solver::invert</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="42" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="131" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1ae32aa69fd9803cf6dce66507995a43f3" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::invert</definition>
+        <argsstring>(T &amp;&amp;A)</argsstring>
+        <name>invert</name>
+        <qualifiedname>detail::general_lu_solver::invert</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="45" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="140" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1ac118581f037b66a99b5939006b65f3cd" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename LHS</type>
+          </param>
+          <param>
+            <type>typename RHS</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::inner_product</definition>
+        <argsstring>(LHS const &amp;A, RHS const &amp;B)</argsstring>
+        <name>inner_product</name>
+        <qualifiedname>detail::general_lu_solver::inner_product</qualifiedname>
+        <param>
+          <type>LHS const &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>RHS const &amp;</type>
+          <declname>B</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="48" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="149" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1a48758ab58a7d2e580a73b24c1487cbcd" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::eval_data</definition>
+        <argsstring>(T const &amp;data)</argsstring>
+        <name>eval_data</name>
+        <qualifiedname>detail::general_lu_solver::eval_data</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="51" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="162" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1general__lu__solver_1ac7398473540883f225a0e4fb88075647" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::general_lu_solver::eval_data</definition>
+        <argsstring>(T &amp;&amp;data)</argsstring>
+        <name>eval_data</name>
+        <qualifiedname>detail::general_lu_solver::eval_data</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="54" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_meat.h" bodystart="171" bodyend="178"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" line="7" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/general_lu_decomposition_bones.h" bodystart="8" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1general__lu__solver_1a2c44944b3486d1b699a1a6d6da28b301" prot="public" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>apply</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1a1354d12189008ffc7f8bb9b9b8593f3d" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>backward_I</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1ac21f42da72f383f69e237e5a873711e6" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>backward_K</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1aced35db6e646b6022438308adb9e4105" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>elimination_I</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1aa0c8682e47c4051f032bea63e86d6d38" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>elimination_J</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1ac9e564b6ec370cc8e38b4148068d7314" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>elimination_J</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1af35ae6cd2cc30e4b398746e293801645" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>elimination_K</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1a48758ab58a7d2e580a73b24c1487cbcd" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>eval_data</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1ac7398473540883f225a0e4fb88075647" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>eval_data</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1ad98619be4b6663d4ec5003c9e4005926" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>forward_I</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1a77b79846fdb4af3141b28002637758fa" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>forward_K</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1acbb3c3786840a83b12642ebe948791f4" prot="public" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>general_lu_solver</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1ac118581f037b66a99b5939006b65f3cd" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>inner_product</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1a3a8db0585ba0ede307c3bc10729b292e" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>invert</name></member>
+      <member refid="classdetail_1_1general__lu__solver_1ae32aa69fd9803cf6dce66507995a43f3" prot="private" virt="non-virtual"><scope>detail::general_lu_solver</scope><name>invert</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

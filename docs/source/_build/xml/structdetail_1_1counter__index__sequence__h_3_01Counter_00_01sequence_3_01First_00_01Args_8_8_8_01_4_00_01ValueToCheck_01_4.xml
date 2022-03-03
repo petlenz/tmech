@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1counter__index__sequence__h_3_01Counter_00_01sequence_3_01First_00_01Args_8_8_8_01_4_00_01ValueToCheck_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::counter_index_sequence_h&lt; Counter, sequence&lt; First, Args... &gt;, ValueToCheck &gt;</compoundname>
+    <basecompoundref refid="structdetail_1_1counter__index__sequence__h" prot="public" virt="non-virtual">detail::counter_index_sequence_h&lt; Counter, sequence&lt; Args... &gt;, ValueToCheck &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>Counter</declname>
+        <defname>Counter</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>First</declname>
+        <defname>First</defname>
+      </param>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>ValueToCheck</declname>
+        <defname>ValueToCheck</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>detail::counter_index_sequence_h&lt; Counter, sequence&lt; Args... &gt;, ValueToCheck &gt;</label>
+        <link refid="structdetail_1_1counter__index__sequence__h"/>
+      </node>
+      <node id="1">
+        <label>detail::counter_index_sequence_h&lt; Counter, sequence&lt; First, Args... &gt;, ValueToCheck &gt;</label>
+        <link refid="structdetail_1_1counter__index__sequence__h_3_01Counter_00_01sequence_3_01First_00_01Args_8_8_8_01_4_00_01ValueToCheck_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>detail::counter_index_sequence_h&lt; Counter, sequence&lt; Args... &gt;, ValueToCheck &gt;</label>
+        <link refid="structdetail_1_1counter__index__sequence__h"/>
+      </node>
+      <node id="1">
+        <label>detail::counter_index_sequence_h&lt; Counter, sequence&lt; First, Args... &gt;, ValueToCheck &gt;</label>
+        <link refid="structdetail_1_1counter__index__sequence__h_3_01Counter_00_01sequence_3_01First_00_01Args_8_8_8_01_4_00_01ValueToCheck_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="550" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="552" bodyend="552"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1counter__index__sequence__h_1a1462ac4e76e7c730bbf54d6750cbbf0e" prot="public" virt="non-virtual"><scope>detail::counter_index_sequence_h&lt; Counter, sequence&lt; First, Args... &gt;, ValueToCheck &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

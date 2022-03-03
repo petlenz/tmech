@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1find__in__sequence__h" kind="struct" language="C++" prot="public">
+    <compoundname>detail::find_in_sequence_h</compoundname>
+    <templateparamlist>
+      <param>
+        <type>bool</type>
+        <declname>Result</declname>
+        <defname>Result</defname>
+      </param>
+      <param>
+        <type>typename Sequence</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>ValueToCheck</declname>
+        <defname>ValueToCheck</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structdetail_1_1find__in__sequence__h_1a254d1d8165dca6fc4083e9d8c5ccdb9f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::find_in_sequence_h&lt; Result, Sequence, ValueToCheck &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>detail::find_in_sequence_h::value</qualifiedname>
+        <initializer>= Result</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="572" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="572" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="570" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="571" bodyend="573"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1find__in__sequence__h_1a254d1d8165dca6fc4083e9d8c5ccdb9f" prot="public" virt="non-virtual"><scope>detail::find_in_sequence_h</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

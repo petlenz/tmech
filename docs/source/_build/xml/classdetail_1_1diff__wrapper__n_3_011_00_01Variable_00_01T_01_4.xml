@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__wrapper__n_3_011_00_01Variable_00_01T_01_4" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_wrapper_n&lt; 1, Variable, T &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Variable</type>
+      </param>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__wrapper__n_3_011_00_01Variable_00_01T_01_4_1ab1788b8a35d8e8318677a6dd165ca25e" prot="public" static="no">
+        <type>typename <ref refid="classdetail_1_1diff__wrapper" kindref="compound">diff_wrapper</ref>&lt; Variable, T &gt;::deriv_type</type>
+        <definition>using detail::diff_wrapper_n&lt; 1, Variable, T &gt;::deriv_type =  typename diff_wrapper&lt;Variable, T&gt;::deriv_type</definition>
+        <argsstring></argsstring>
+        <name>deriv_type</name>
+        <qualifiedname>detail::diff_wrapper_n&lt; 1, Variable, T &gt;::deriv_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="611" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="611" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" line="608" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/derivative_wrapper_bones.h" bodystart="609" bodyend="612"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__wrapper__n_3_011_00_01Variable_00_01T_01_4_1ab1788b8a35d8e8318677a6dd165ca25e" prot="public" virt="non-virtual"><scope>detail::diff_wrapper_n&lt; 1, Variable, T &gt;</scope><name>deriv_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

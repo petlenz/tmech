@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1dot__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::dot_wrapper</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1dot__wrapper_1a17b65614a94624a6c471b96757dd1828" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::dot_wrapper::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::dot_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" line="23" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1dot__wrapper_1ad39138280fe86e26786a7c8e47d2189a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>detail::dot_wrapper::dot_wrapper</definition>
+        <argsstring>()</argsstring>
+        <name>dot_wrapper</name>
+        <qualifiedname>detail::dot_wrapper::dot_wrapper</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" line="25" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classdetail_1_1dot__wrapper_1a66c87c78fcd47c82922d67837e6a86f7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _DerivedLHS</type>
+          </param>
+          <param>
+            <type>typename _DerivedRHS</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::dot_wrapper::evaluate</definition>
+        <argsstring>(tensor_base&lt; _DerivedLHS &gt; const &amp;__lhs_base, tensor_base&lt; _DerivedRHS &gt; const &amp;__rhs_base)</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>detail::dot_wrapper::evaluate</qualifiedname>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; _DerivedLHS &gt; const &amp;</type>
+          <declname>__lhs_base</declname>
+        </param>
+        <param>
+          <type><ref refid="classtensor__base" kindref="compound">tensor_base</ref>&lt; _DerivedRHS &gt; const &amp;</type>
+          <declname>__rhs_base</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" line="28" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" bodystart="28" bodyend="60"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classdetail_1_1dot__wrapper_1a2082104544c599c1e55efee80d6177a5" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>_Size</declname>
+            <defname>_Size</defname>
+          </param>
+          <param>
+            <type>typename _LHS</type>
+          </param>
+          <param>
+            <type>typename _RHS</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>static constexpr auto detail::dot_wrapper::evaluate_implementation</definition>
+        <argsstring>(_LHS const *__lhs, _RHS const *__rhs)</argsstring>
+        <name>evaluate_implementation</name>
+        <qualifiedname>detail::dot_wrapper::evaluate_implementation</qualifiedname>
+        <param>
+          <type>_LHS const *</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>_RHS const *</type>
+          <declname>__rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" line="64" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" bodystart="64" bodyend="70"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" line="20" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/dot_wrapper_bones.h" bodystart="21" bodyend="71"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1dot__wrapper_1ad39138280fe86e26786a7c8e47d2189a" prot="public" virt="non-virtual"><scope>detail::dot_wrapper</scope><name>dot_wrapper</name></member>
+      <member refid="classdetail_1_1dot__wrapper_1a66c87c78fcd47c82922d67837e6a86f7" prot="public" virt="non-virtual"><scope>detail::dot_wrapper</scope><name>evaluate</name></member>
+      <member refid="classdetail_1_1dot__wrapper_1a2082104544c599c1e55efee80d6177a5" prot="private" virt="non-virtual"><scope>detail::dot_wrapper</scope><name>evaluate_implementation</name></member>
+      <member refid="classdetail_1_1dot__wrapper_1a17b65614a94624a6c471b96757dd1828" prot="public" virt="non-virtual"><scope>detail::dot_wrapper</scope><name>size_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classtensor__zero" kind="class" language="C++" prot="public">
+    <compoundname>tensor_zero</compoundname>
+    <basecompoundref refid="classvariable__base" prot="public" virt="non-virtual">variable_base&lt; tensor_zero&lt; _T &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename _T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classtensor__zero_1ab5c9b34a356dc69f23a42ab009fd6af0" prot="public" static="no">
+        <type>_T</type>
+        <definition>using tensor_zero&lt; _T &gt;::data_type =  _T</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>tensor_zero::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="9" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classtensor__zero_1a459d3ecb16f9d023e557472859ecc543" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class variable_base&lt; tensor_zero&lt; _T &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>variable_base&lt; tensor_zero&lt; _T &gt; &gt;</name>
+        <qualifiedname>tensor_zero::variable_base&lt; tensor_zero&lt; _T &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classvariable__base" kindref="compound">variable_base</ref>&lt; <ref refid="classtensor__zero" kindref="compound">tensor_zero</ref>&lt; _T &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="1" column="0" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtensor__zero_1a0a12b992226e509e2f9ae36e67cfffe3" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor_zero&lt; _T &gt;::operator()</definition>
+        <argsstring>(_Data const &amp;) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>tensor_zero::operator()</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="14" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" bodystart="14" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__zero_1ac962b7172543b4b6ae5973db4b820990" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::ostream &amp;</type>
+        <definition>constexpr std::ostream &amp; tensor_zero&lt; _T &gt;::print</definition>
+        <argsstring>(std::ostream &amp;os) const</argsstring>
+        <name>print</name>
+        <qualifiedname>tensor_zero::print</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="18" column="35" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" bodystart="18" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__zero_1a7886a62f358ec9d8e762161db17ad962" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto tensor_zero&lt; _T &gt;::value</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>value</name>
+        <qualifiedname>tensor_zero::value</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="24" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__zero_1a798ad8792c3628f5261ead45db92cc8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto tensor_zero&lt; _T &gt;::update</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>update</name>
+        <qualifiedname>tensor_zero::update</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="27" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtensor__zero_1a495aa285bee5d1aef209dcef71517ebb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto tensor_zero&lt; _T &gt;::reset</definition>
+        <argsstring>()=delete</argsstring>
+        <name>reset</name>
+        <qualifiedname>tensor_zero::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="29" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classtensor__zero_1a58429aab1ff84bc9e053a263bca549eb" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto tensor_zero&lt; _T &gt;::get_value</definition>
+        <argsstring>(_Data const &amp;) const</argsstring>
+        <name>get_value</name>
+        <qualifiedname>tensor_zero::get_value</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="32" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>tensor_zero&lt; _T &gt;</label>
+        <link refid="classtensor__zero"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; tensor_zero&lt; _T &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>tensor_zero&lt; _T &gt;</label>
+        <link refid="classtensor__zero"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; tensor_zero&lt; _T &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" line="5" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/tensor_zero_bones.h" bodystart="6" bodyend="35"/>
+    <listofallmembers>
+      <member refid="classvariable__base_1a30d0635dfb734e22c329677f7beb9d4f" prot="protected" virt="non-virtual"><scope>tensor_zero</scope><name>_update</name></member>
+      <member refid="classvariable__base_1a08062ec90dcff407477c4281a2949c06" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>convert</name></member>
+      <member refid="classtensor__zero_1ab5c9b34a356dc69f23a42ab009fd6af0" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>data_type</name></member>
+      <member refid="classtensor__zero_1a58429aab1ff84bc9e053a263bca549eb" prot="private" virt="non-virtual"><scope>tensor_zero</scope><name>get_value</name></member>
+      <member refid="classtensor__zero_1a0a12b992226e509e2f9ae36e67cfffe3" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1af7bb3cfe845189131467ba47a6ff9896" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; tensor_zero&lt; _T &gt; &gt;::"><scope>tensor_zero</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1a1bce76f282394521dece5e217c3acbea" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>operator-</name></member>
+      <member refid="classtensor__zero_1ac962b7172543b4b6ae5973db4b820990" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>print</name></member>
+      <member refid="classtensor__zero_1a495aa285bee5d1aef209dcef71517ebb" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>reset</name></member>
+      <member refid="classtensor__zero_1a798ad8792c3628f5261ead45db92cc8e" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>update</name></member>
+      <member refid="classvariable__base_1a76d5b56fe2476b728e4b6d873d4cd801" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; tensor_zero&lt; _T &gt; &gt;::"><scope>tensor_zero</scope><name>update</name></member>
+      <member refid="classtensor__zero_1a7886a62f358ec9d8e762161db17ad962" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>value</name></member>
+      <member refid="classvariable__base_1a03e782ff9786edabe13abfc2adef95e5" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; tensor_zero&lt; _T &gt; &gt;::"><scope>tensor_zero</scope><name>value</name></member>
+      <member refid="classvariable__base_1a00c523e7c5d602121591ca8dc8d0accd" prot="public" virt="non-virtual"><scope>tensor_zero</scope><name>variable_base</name></member>
+      <member refid="classtensor__zero_1a459d3ecb16f9d023e557472859ecc543" prot="private" virt="non-virtual"><scope>tensor_zero</scope><name>variable_base&lt; tensor_zero&lt; _T &gt; &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

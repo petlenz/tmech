@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1make__outer__sequence__find_3_01Index_00_01First_00_01ArgsInner_8_8_8_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::make_outer_sequence_find&lt; Index, First, ArgsInner... &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>Index</declname>
+        <defname>Index</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>First</declname>
+        <defname>First</defname>
+      </param>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>ArgsInner</declname>
+        <defname>ArgsInner</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structdetail_1_1make__outer__sequence__find_3_01Index_00_01First_00_01ArgsInner_8_8_8_01_4_1a0f6a5d66418e3703d21ad900f7c0048e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool detail::make_outer_sequence_find&lt; Index, First, ArgsInner... &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>detail::make_outer_sequence_find&lt; Index, First, ArgsInner... &gt;::value</qualifiedname>
+        <initializer>= <ref refid="structdetail_1_1make__outer__sequence__find" kindref="compound">make_outer_sequence_find</ref>&lt;Index, ArgsInner...&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="639" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="639" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="637" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="638" bodyend="640"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1make__outer__sequence__find_3_01Index_00_01First_00_01ArgsInner_8_8_8_01_4_1a0f6a5d66418e3703d21ad900f7c0048e" prot="public" virt="non-virtual"><scope>detail::make_outer_sequence_find&lt; Index, First, ArgsInner... &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

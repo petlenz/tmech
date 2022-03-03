@@ -32,6 +32,10 @@ author = 'Peter Lenz'
 #html_logo = 'logo'
 
 imgmath_latex_preamble = r'''
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
  \newcommand{\inv}{^{-1}}
 \newcommand{\invT}{^{-T}}
 \newcommand{\eye}{\mathbf{I}}

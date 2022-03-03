@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1diff__pow" kind="class" language="C++" prot="public">
+    <compoundname>detail::diff_pow</compoundname>
+    <basecompoundref refid="classvariable__base" prot="public" virt="non-virtual">variable_base&lt; diff_pow&lt; Base, Exp, true &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename Base</type>
+      </param>
+      <param>
+        <type>typename Exp</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>IsFundamental</declname>
+        <defname>IsFundamental</defname>
+        <defval>true</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1diff__pow_1a40f648be8602576b90ba96713891205e" prot="public" static="no">
+        <type>typename Base::data_type</type>
+        <definition>using detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::data_type =  typename Base::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::diff_pow::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="143" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classdetail_1_1diff__pow_1a8a036534e261bd9c5fcc19c966f42756" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class variable_base&lt; diff_pow&lt; Base, Exp, IsFundamental &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>variable_base&lt; diff_pow&lt; Base, Exp, IsFundamental &gt; &gt;</name>
+        <qualifiedname>detail::diff_pow::variable_base&lt; diff_pow&lt; Base, Exp, IsFundamental &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classvariable__base" kindref="compound">variable_base</ref>&lt; <ref refid="classdetail_1_1diff__pow" kindref="compound">diff_pow</ref>&lt; Base, Exp, IsFundamental &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="133" column="31" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classdetail_1_1diff__pow_1afc3bb30cb918c32e329c16b4ef9d9caa" prot="private" static="yes" mutable="no">
+        <type>data_type</type>
+        <definition>diff_pow&lt; Base, Exp, IsFundamental &gt;::data_type detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::_value</definition>
+        <argsstring></argsstring>
+        <name>_value</name>
+        <qualifiedname>detail::diff_pow::_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="196" column="22" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1diff__pow_1ab8f7a0b636ea1dc3bff4204286bd348e" prot="private" static="no" mutable="no">
+        <type>Base</type>
+        <definition>Base detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::_base</definition>
+        <argsstring></argsstring>
+        <name>_base</name>
+        <qualifiedname>detail::diff_pow::_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="197" column="10" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdetail_1_1diff__pow_1a9d987f5a2423583d3c15ef9acc4784e8" prot="private" static="no" mutable="no">
+        <type>Exp</type>
+        <definition>Exp detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::_exp</definition>
+        <argsstring></argsstring>
+        <name>_exp</name>
+        <qualifiedname>detail::diff_pow::_exp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="198" column="9" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1a00ab2edb164cc34319924d151e7b0ff2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::diff_pow</definition>
+        <argsstring>()</argsstring>
+        <name>diff_pow</name>
+        <qualifiedname>detail::diff_pow::diff_pow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="145" column="14" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="145" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1a613658347305792edf938883a052a417" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::operator()</definition>
+        <argsstring>(Data const &amp;__data)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::diff_pow::operator()</qualifiedname>
+        <param>
+          <type>Data const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="151" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="151" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1a5f49c59626e5a14b73ceb7f6d6e85419" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::ostream &amp;</type>
+        <definition>constexpr std::ostream &amp; detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::print</definition>
+        <argsstring>(std::ostream &amp;os) const</argsstring>
+        <name>print</name>
+        <qualifiedname>detail::diff_pow::print</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="157" column="35" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="157" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1a36d182dca9fa188c33322d46b47f9feb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::value</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>value</name>
+        <qualifiedname>detail::diff_pow::value</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="167" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1a176a2efcf9147c1ca6c048ab37d27176" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::update</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>update</name>
+        <qualifiedname>detail::diff_pow::update</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="170" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1a776f9d06b747ace3242794bfe4f41e75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::reset</definition>
+        <argsstring>()=delete</argsstring>
+        <name>reset</name>
+        <qualifiedname>detail::diff_pow::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="172" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1abcbcd7d4a720ad3aebbef776827e6328" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::update_imp</definition>
+        <argsstring>(_Data const &amp;x)</argsstring>
+        <name>update_imp</name>
+        <qualifiedname>detail::diff_pow::update_imp</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="176" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="176" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1a63b8d75666fb4a2277cb67df4a63d846" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::reset_imp</definition>
+        <argsstring>()</argsstring>
+        <name>reset_imp</name>
+        <qualifiedname>detail::diff_pow::reset_imp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="185" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="185" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1diff__pow_1ad65e048a4416572b617c4e7e6a86c65f" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; detail::diff_pow&lt; Base, Exp, IsFundamental &gt;::get_value</definition>
+        <argsstring>(_Data const &amp;__data) const</argsstring>
+        <name>get_value</name>
+        <qualifiedname>detail::diff_pow::get_value</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="192" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="192" bodyend="194"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::diff_pow&lt; Base, Exp, IsFundamental &gt;</label>
+        <link refid="classdetail_1_1diff__pow"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; diff_pow&lt; Base, Exp, true &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::diff_pow&lt; Base, Exp, IsFundamental &gt;</label>
+        <link refid="classdetail_1_1diff__pow"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; diff_pow&lt; Base, Exp, true &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" line="139" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/std_functions_wrapper_bones.h" bodystart="140" bodyend="199"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1diff__pow_1ab8f7a0b636ea1dc3bff4204286bd348e" prot="private" virt="non-virtual"><scope>detail::diff_pow</scope><name>_base</name></member>
+      <member refid="classdetail_1_1diff__pow_1a9d987f5a2423583d3c15ef9acc4784e8" prot="private" virt="non-virtual"><scope>detail::diff_pow</scope><name>_exp</name></member>
+      <member refid="classvariable__base_1a30d0635dfb734e22c329677f7beb9d4f" prot="protected" virt="non-virtual"><scope>detail::diff_pow</scope><name>_update</name></member>
+      <member refid="classdetail_1_1diff__pow_1afc3bb30cb918c32e329c16b4ef9d9caa" prot="private" virt="non-virtual"><scope>detail::diff_pow</scope><name>_value</name></member>
+      <member refid="classvariable__base_1a08062ec90dcff407477c4281a2949c06" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>convert</name></member>
+      <member refid="classdetail_1_1diff__pow_1a40f648be8602576b90ba96713891205e" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1diff__pow_1a00ab2edb164cc34319924d151e7b0ff2" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>diff_pow</name></member>
+      <member refid="classdetail_1_1diff__pow_1ad65e048a4416572b617c4e7e6a86c65f" prot="private" virt="non-virtual"><scope>detail::diff_pow</scope><name>get_value</name></member>
+      <member refid="classdetail_1_1diff__pow_1a613658347305792edf938883a052a417" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1af7bb3cfe845189131467ba47a6ff9896" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; diff_pow&lt; Base, Exp, true &gt; &gt;::"><scope>detail::diff_pow</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1a1bce76f282394521dece5e217c3acbea" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1diff__pow_1a5f49c59626e5a14b73ceb7f6d6e85419" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>print</name></member>
+      <member refid="classdetail_1_1diff__pow_1a776f9d06b747ace3242794bfe4f41e75" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>reset</name></member>
+      <member refid="classdetail_1_1diff__pow_1a63b8d75666fb4a2277cb67df4a63d846" prot="private" virt="non-virtual"><scope>detail::diff_pow</scope><name>reset_imp</name></member>
+      <member refid="classdetail_1_1diff__pow_1a176a2efcf9147c1ca6c048ab37d27176" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>update</name></member>
+      <member refid="classvariable__base_1a76d5b56fe2476b728e4b6d873d4cd801" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; diff_pow&lt; Base, Exp, true &gt; &gt;::"><scope>detail::diff_pow</scope><name>update</name></member>
+      <member refid="classdetail_1_1diff__pow_1abcbcd7d4a720ad3aebbef776827e6328" prot="private" virt="non-virtual"><scope>detail::diff_pow</scope><name>update_imp</name></member>
+      <member refid="classdetail_1_1diff__pow_1a36d182dca9fa188c33322d46b47f9feb" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>value</name></member>
+      <member refid="classvariable__base_1a03e782ff9786edabe13abfc2adef95e5" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; diff_pow&lt; Base, Exp, true &gt; &gt;::"><scope>detail::diff_pow</scope><name>value</name></member>
+      <member refid="classvariable__base_1a00c523e7c5d602121591ca8dc8d0accd" prot="public" virt="non-virtual"><scope>detail::diff_pow</scope><name>variable_base</name></member>
+      <member refid="classdetail_1_1diff__pow_1a8a036534e261bd9c5fcc19c966f42756" prot="private" virt="non-virtual"><scope>detail::diff_pow</scope><name>variable_base&lt; diff_pow&lt; Base, Exp, IsFundamental &gt; &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

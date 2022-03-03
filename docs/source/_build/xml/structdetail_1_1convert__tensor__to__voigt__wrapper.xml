@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1convert__tensor__to__voigt__wrapper" kind="struct" language="C++" prot="public">
+    <compoundname>detail::convert_tensor_to_voigt_wrapper</compoundname>
+    <innerclass refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1_1get__index__sequence" prot="private">detail::convert_tensor_to_voigt_wrapper::get_index_sequence</innerclass>
+    <innerclass refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1_1get__index__sequence_3_010_00_01__Result_01_4" prot="private">detail::convert_tensor_to_voigt_wrapper::get_index_sequence&lt; 0, _Result &gt;</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename _Tuple</type>
+      </param>
+      <param>
+        <type>typename _Tensor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1convert__tensor__to__voigt__wrapper_1a9f80400be393c167e781e951dcf9050d" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using detail::convert_tensor_to_voigt_wrapper&lt; _Tuple, _Tensor &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>detail::convert_tensor_to_voigt_wrapper::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" line="10" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdetail_1_1convert__tensor__to__voigt__wrapper_1a6db0406afd2e2eb14db36be9c69439bd" prot="public" static="no">
+        <type>typename _Tensor::value_type</type>
+        <definition>using detail::convert_tensor_to_voigt_wrapper&lt; _Tuple, _Tensor &gt;::value_type =  typename _Tensor::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>detail::convert_tensor_to_voigt_wrapper::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" line="11" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structdetail_1_1convert__tensor__to__voigt__wrapper_1abb8866bfe6ad9fec43ec5bb8810d0a51" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_type</type>
+        <definition>constexpr size_type detail::convert_tensor_to_voigt_wrapper&lt; _Tuple, _Tensor &gt;::size_tuple</definition>
+        <argsstring></argsstring>
+        <name>size_tuple</name>
+        <qualifiedname>detail::convert_tensor_to_voigt_wrapper::size_tuple</qualifiedname>
+        <initializer>{std::tuple_size_v&lt;_Tuple&gt;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" line="12" column="32" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1convert__tensor__to__voigt__wrapper_1a0521b9273148aa62cfc672e5db94e53d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto detail::convert_tensor_to_voigt_wrapper&lt; _Tuple, _Tensor &gt;::convert</definition>
+        <argsstring>(_Tensor const &amp;__tensor, value_type *__ptr)</argsstring>
+        <name>convert</name>
+        <qualifiedname>detail::convert_tensor_to_voigt_wrapper::convert</qualifiedname>
+        <param>
+          <type>_Tensor const &amp;</type>
+          <declname>__tensor</declname>
+        </param>
+        <param>
+          <type>value_type *</type>
+          <declname>__ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" line="31" column="24" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" bodystart="31" bodyend="45"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structdetail_1_1convert__tensor__to__voigt__wrapper_1ae6a461ecf9b535e991abbd591e65fe20" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>_Numbers</declname>
+            <defname>_Numbers</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr size_type</type>
+        <definition>static constexpr size_type detail::convert_tensor_to_voigt_wrapper&lt; _Tuple, _Tensor &gt;::single_index</definition>
+        <argsstring>(size_type const __first, size_type const __second, _Numbers... __numbers)</argsstring>
+        <name>single_index</name>
+        <qualifiedname>detail::convert_tensor_to_voigt_wrapper::single_index</qualifiedname>
+        <param>
+          <type>size_type const</type>
+          <declname>__first</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__second</declname>
+        </param>
+        <param>
+          <type>_Numbers...</type>
+          <declname>__numbers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" line="49" column="39" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" bodystart="49" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail_1_1convert__tensor__to__voigt__wrapper_1af99c5e85f3e233be977de346497d6c05" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr size_type</type>
+        <definition>static constexpr size_type detail::convert_tensor_to_voigt_wrapper&lt; _Tuple, _Tensor &gt;::single_index</definition>
+        <argsstring>(size_type const __first, size_type const __second)</argsstring>
+        <name>single_index</name>
+        <qualifiedname>detail::convert_tensor_to_voigt_wrapper::single_index</qualifiedname>
+        <param>
+          <type>size_type const</type>
+          <declname>__first</declname>
+        </param>
+        <param>
+          <type>size_type const</type>
+          <declname>__second</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" line="54" column="39" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" bodystart="54" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" line="8" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/convert_tensor_to_voigt.h" bodystart="9" bodyend="58"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1a0521b9273148aa62cfc672e5db94e53d" prot="public" virt="non-virtual"><scope>detail::convert_tensor_to_voigt_wrapper</scope><name>convert</name></member>
+      <member refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1ae6a461ecf9b535e991abbd591e65fe20" prot="private" virt="non-virtual"><scope>detail::convert_tensor_to_voigt_wrapper</scope><name>single_index</name></member>
+      <member refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1af99c5e85f3e233be977de346497d6c05" prot="private" virt="non-virtual"><scope>detail::convert_tensor_to_voigt_wrapper</scope><name>single_index</name></member>
+      <member refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1abb8866bfe6ad9fec43ec5bb8810d0a51" prot="public" virt="non-virtual"><scope>detail::convert_tensor_to_voigt_wrapper</scope><name>size_tuple</name></member>
+      <member refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1a9f80400be393c167e781e951dcf9050d" prot="public" virt="non-virtual"><scope>detail::convert_tensor_to_voigt_wrapper</scope><name>size_type</name></member>
+      <member refid="structdetail_1_1convert__tensor__to__voigt__wrapper_1a6db0406afd2e2eb14db36be9c69439bd" prot="public" virt="non-virtual"><scope>detail::convert_tensor_to_voigt_wrapper</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

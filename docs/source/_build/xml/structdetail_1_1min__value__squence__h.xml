@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1min__value__squence__h" kind="struct" language="C++" prot="public">
+    <compoundname>detail::min_value_squence_h</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Result</type>
+      </param>
+      <param>
+        <type>typename Input</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Value</declname>
+        <defname>Value</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdetail_1_1min__value__squence__h_1ab18c249eaab22eca58e6e95b1950bd2d" prot="public" static="no">
+        <type>Result</type>
+        <definition>using detail::min_value_squence_h&lt; Result, Input, Value &gt;::type =  Result</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>detail::min_value_squence_h::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="811" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="811" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="809" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="810" bodyend="812"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1min__value__squence__h_1ab18c249eaab22eca58e6e95b1950bd2d" prot="public" virt="non-virtual"><scope>detail::min_value_squence_h</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

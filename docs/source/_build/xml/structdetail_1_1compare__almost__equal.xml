@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1compare__almost__equal" kind="struct" language="C++" prot="public">
+    <compoundname>detail::compare_almost_equal</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structdetail_1_1compare__almost__equal_1ab3e615351fce497bc6a7dc7de6254265" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _LHS</type>
+          </param>
+          <param>
+            <type>typename _RHS</type>
+          </param>
+          <param>
+            <type>typename _T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static bool detail::compare_almost_equal::check</definition>
+        <argsstring>(_LHS const &amp;__lhs, _RHS const &amp;__rhs, _T const __eps)</argsstring>
+        <name>check</name>
+        <qualifiedname>detail::compare_almost_equal::check</qualifiedname>
+        <param>
+          <type>_LHS const &amp;</type>
+          <declname>__lhs</declname>
+        </param>
+        <param>
+          <type>_RHS const &amp;</type>
+          <declname>__rhs</declname>
+        </param>
+        <param>
+          <type>_T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" line="9" column="24" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" bodystart="9" bodyend="37"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structdetail_1_1compare__almost__equal_1a5a71fb8a91280f4fc585d21ede8c31ac" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>_Size</declname>
+            <defname>_Size</defname>
+          </param>
+          <param>
+            <type>typename _R</type>
+          </param>
+          <param>
+            <type>typename _T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>static constexpr bool detail::compare_almost_equal::check_detail</definition>
+        <argsstring>(_R *__R, _T const __eps)</argsstring>
+        <name>check_detail</name>
+        <qualifiedname>detail::compare_almost_equal::check_detail</qualifiedname>
+        <param>
+          <type>_R *</type>
+          <declname>__R</declname>
+        </param>
+        <param>
+          <type>_T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" line="41" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" bodystart="41" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="structdetail_1_1compare__almost__equal_1a52dad5e3c00e8f198b3522e456712c17" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>_Size</declname>
+            <defname>_Size</defname>
+          </param>
+          <param>
+            <type>typename _R</type>
+          </param>
+          <param>
+            <type>typename _T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>static constexpr bool detail::compare_almost_equal::check_detail_imp</definition>
+        <argsstring>(_R *__R, _T const __eps)</argsstring>
+        <name>check_detail_imp</name>
+        <qualifiedname>detail::compare_almost_equal::check_detail_imp</qualifiedname>
+        <param>
+          <type>_R *</type>
+          <declname>__R</declname>
+        </param>
+        <param>
+          <type>_T const</type>
+          <declname>__eps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" line="56" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" bodystart="56" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" line="6" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/compare_almost_equal.h" bodystart="7" bodyend="103"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1compare__almost__equal_1ab3e615351fce497bc6a7dc7de6254265" prot="public" virt="non-virtual"><scope>detail::compare_almost_equal</scope><name>check</name></member>
+      <member refid="structdetail_1_1compare__almost__equal_1a5a71fb8a91280f4fc585d21ede8c31ac" prot="private" virt="non-virtual"><scope>detail::compare_almost_equal</scope><name>check_detail</name></member>
+      <member refid="structdetail_1_1compare__almost__equal_1a52dad5e3c00e8f198b3522e456712c17" prot="private" virt="non-virtual"><scope>detail::compare_almost_equal</scope><name>check_detail_imp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classdetail_1_1tensor__function__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>detail::tensor_function_wrapper</compoundname>
+    <basecompoundref refid="classvariable__base" prot="public" virt="non-virtual">variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename _Expr</type>
+      </param>
+      <param>
+        <type>typename _Func</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdetail_1_1tensor__function__wrapper_1a84d52315b0ad1ac9389ff35ec1758677" prot="public" static="no">
+        <type>typename _Expr::data_type</type>
+        <definition>using detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::data_type =  typename _Expr::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>detail::tensor_function_wrapper::data_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="71" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classdetail_1_1tensor__function__wrapper_1a93ebfdc43a8b1521fd1df1057813d9bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;</name>
+        <qualifiedname>detail::tensor_function_wrapper::variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classvariable__base" kindref="compound">variable_base</ref>&lt; <ref refid="classdetail_1_1tensor__function__wrapper" kindref="compound">tensor_function_wrapper</ref>&lt; _Expr, _Func &gt; &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="58" column="11" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classdetail_1_1tensor__function__wrapper_1a705f4e4f8202b903f23ecb6f5207b2cc" prot="private" static="yes" mutable="no">
+        <type>data_type</type>
+        <definition>tensor_function_wrapper&lt; _Expr, _Func &gt;::data_type detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::_value</definition>
+        <argsstring></argsstring>
+        <name>_value</name>
+        <qualifiedname>detail::tensor_function_wrapper::_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="118" column="22" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdetail_1_1tensor__function__wrapper_1a784452c2958c9fe8cec9c6b4d333c684" prot="private" static="no" mutable="no">
+        <type>_Expr</type>
+        <definition>_Expr detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::_expr</definition>
+        <argsstring></argsstring>
+        <name>_expr</name>
+        <qualifiedname>detail::tensor_function_wrapper::_expr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="119" column="11" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1a4ee7db87d3f6bf77cdbcd9ec85e4a262" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::tensor_function_wrapper</definition>
+        <argsstring>()</argsstring>
+        <name>tensor_function_wrapper</name>
+        <qualifiedname>detail::tensor_function_wrapper::tensor_function_wrapper</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="73" column="14" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1a0be8921cca651d81fe64af99092f1597" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::operator()</definition>
+        <argsstring>(_Data const &amp;__data)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>detail::tensor_function_wrapper::operator()</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="78" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="78" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1a550f40ed020d4bea3f3aca56e04b3496" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::ostream &amp;</type>
+        <definition>constexpr std::ostream &amp; detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::print</definition>
+        <argsstring>(std::ostream &amp;os) const</argsstring>
+        <name>print</name>
+        <qualifiedname>detail::tensor_function_wrapper::print</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="84" column="35" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="84" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1a215145e0291fadc26973ddd3ad5d4c77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::value</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>value</name>
+        <qualifiedname>detail::tensor_function_wrapper::value</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1ae50c1e8d2a44b70192dabe6ae802d357" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::update</definition>
+        <argsstring>(_Data)=delete</argsstring>
+        <name>update</name>
+        <qualifiedname>detail::tensor_function_wrapper::update</qualifiedname>
+        <param>
+          <type>_Data</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1a95b09979fd6fd7ca9f404ebb6da826c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::reset</definition>
+        <argsstring>()=delete</argsstring>
+        <name>reset</name>
+        <qualifiedname>detail::tensor_function_wrapper::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="95" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1ab5ab59a7375df321cc7d536948aa09ea" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto const &amp;</type>
+        <definition>constexpr auto const  &amp; detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::get_value</definition>
+        <argsstring>(_Data const &amp;__data) const</argsstring>
+        <name>get_value</name>
+        <qualifiedname>detail::tensor_function_wrapper::get_value</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="100" column="33" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="100" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1a0779ccbdabec7c17c3aecae12202775e" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename _Data</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::update_imp</definition>
+        <argsstring>(_Data const &amp;__data)</argsstring>
+        <name>update_imp</name>
+        <qualifiedname>detail::tensor_function_wrapper::update_imp</qualifiedname>
+        <param>
+          <type>_Data const &amp;</type>
+          <declname>__data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="105" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="105" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classdetail_1_1tensor__function__wrapper_1a33c2dd2cd127340ad9cad012dd4ac42a" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>constexpr auto detail::tensor_function_wrapper&lt; _Expr, _Func &gt;::reset_imp</definition>
+        <argsstring>()</argsstring>
+        <name>reset_imp</name>
+        <qualifiedname>detail::tensor_function_wrapper::reset_imp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="113" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="113" bodyend="116"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::tensor_function_wrapper&lt; _Expr, _Func &gt;</label>
+        <link refid="classdetail_1_1tensor__function__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::tensor_function_wrapper&lt; _Expr, _Func &gt;</label>
+        <link refid="classdetail_1_1tensor__function__wrapper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;</label>
+        <link refid="classvariable__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" line="67" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/symdiff/function_wrapper.h" bodystart="68" bodyend="120"/>
+    <listofallmembers>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a784452c2958c9fe8cec9c6b4d333c684" prot="private" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>_expr</name></member>
+      <member refid="classvariable__base_1a30d0635dfb734e22c329677f7beb9d4f" prot="protected" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>_update</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a705f4e4f8202b903f23ecb6f5207b2cc" prot="private" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>_value</name></member>
+      <member refid="classvariable__base_1a08062ec90dcff407477c4281a2949c06" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>convert</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a84d52315b0ad1ac9389ff35ec1758677" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>data_type</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1ab5ab59a7375df321cc7d536948aa09ea" prot="private" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>get_value</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a0be8921cca651d81fe64af99092f1597" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>operator()</name></member>
+      <member refid="classvariable__base_1a1bce76f282394521dece5e217c3acbea" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>operator-</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a550f40ed020d4bea3f3aca56e04b3496" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>print</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a95b09979fd6fd7ca9f404ebb6da826c2" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>reset</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a33c2dd2cd127340ad9cad012dd4ac42a" prot="private" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>reset_imp</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a4ee7db87d3f6bf77cdbcd9ec85e4a262" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>tensor_function_wrapper</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1ae50c1e8d2a44b70192dabe6ae802d357" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>update</name></member>
+      <member refid="classvariable__base_1a76d5b56fe2476b728e4b6d873d4cd801" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;::"><scope>detail::tensor_function_wrapper</scope><name>update</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a0779ccbdabec7c17c3aecae12202775e" prot="private" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>update_imp</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a215145e0291fadc26973ddd3ad5d4c77" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>value</name></member>
+      <member refid="classvariable__base_1a03e782ff9786edabe13abfc2adef95e5" prot="public" virt="non-virtual" ambiguityscope="variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;::"><scope>detail::tensor_function_wrapper</scope><name>value</name></member>
+      <member refid="classvariable__base_1a00c523e7c5d602121591ca8dc8d0accd" prot="public" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>variable_base</name></member>
+      <member refid="classdetail_1_1tensor__function__wrapper_1a93ebfdc43a8b1521fd1df1057813d9bf" prot="private" virt="non-virtual"><scope>detail::tensor_function_wrapper</scope><name>variable_base&lt; tensor_function_wrapper&lt; _Expr, _Func &gt; &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

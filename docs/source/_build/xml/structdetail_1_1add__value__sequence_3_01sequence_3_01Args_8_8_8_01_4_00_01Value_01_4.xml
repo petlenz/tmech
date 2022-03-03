@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1add__value__sequence_3_01sequence_3_01Args_8_8_8_01_4_00_01Value_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>detail::add_value_sequence&lt; sequence&lt; Args... &gt;, Value &gt;</compoundname>
+    <basecompoundref refid="structdetail_1_1add__value__sequence__h" prot="public" virt="non-virtual">detail::add_value_sequence_h&lt; sequence&lt;&gt;, sequence&lt; Args... &gt;, Value &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Value</declname>
+        <defname>Value</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>detail::add_value_sequence_h&lt; sequence&lt;&gt;, sequence&lt; Args... &gt;, Value &gt;</label>
+        <link refid="structdetail_1_1add__value__sequence__h"/>
+      </node>
+      <node id="1">
+        <label>detail::add_value_sequence&lt; sequence&lt; Args... &gt;, Value &gt;</label>
+        <link refid="structdetail_1_1add__value__sequence_3_01sequence_3_01Args_8_8_8_01_4_00_01Value_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>detail::add_value_sequence_h&lt; sequence&lt;&gt;, sequence&lt; Args... &gt;, Value &gt;</label>
+        <link refid="structdetail_1_1add__value__sequence__h"/>
+      </node>
+      <node id="1">
+        <label>detail::add_value_sequence&lt; sequence&lt; Args... &gt;, Value &gt;</label>
+        <link refid="structdetail_1_1add__value__sequence_3_01sequence_3_01Args_8_8_8_01_4_00_01Value_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="800" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="802" bodyend="802"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1add__value__sequence__h_1a3fd03fd6605e09ff48e35c3f5b4382af" prot="public" virt="non-virtual"><scope>detail::add_value_sequence&lt; sequence&lt; Args... &gt;, Value &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

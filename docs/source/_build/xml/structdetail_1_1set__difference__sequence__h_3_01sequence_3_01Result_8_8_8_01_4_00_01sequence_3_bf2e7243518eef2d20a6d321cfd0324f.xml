@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="structdetail_1_1set__difference__sequence__h_3_01sequence_3_01Result_8_8_8_01_4_00_01sequence_3_bf2e7243518eef2d20a6d321cfd0324f" kind="struct" language="C++" prot="public">
+    <compoundname>detail::set_difference_sequence_h&lt; sequence&lt; Result... &gt;, sequence&lt; ArgsInput1... &gt;, sequence&lt;&gt; &gt;</compoundname>
+    <basecompoundref refid="structdetail_1_1set__difference__sequence__h" prot="public" virt="non-virtual">detail::set_difference_sequence_h&lt; sequence&lt; Result..., ArgsInput1... &gt;, void, void &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>Result</declname>
+        <defname>Result</defname>
+      </param>
+      <param>
+        <type>std::size_t ...</type>
+        <declname>ArgsInput1</declname>
+        <defname>ArgsInput1</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>detail::set_difference_sequence_h&lt; sequence&lt; Result... &gt;, sequence&lt; ArgsInput1... &gt;, sequence&lt;&gt; &gt;</label>
+        <link refid="structdetail_1_1set__difference__sequence__h_3_01sequence_3_01Result_8_8_8_01_4_00_01sequence_3_bf2e7243518eef2d20a6d321cfd0324f"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::set_difference_sequence_h&lt; sequence&lt; Result..., ArgsInput1... &gt;, void, void &gt;</label>
+        <link refid="structdetail_1_1set__difference__sequence__h"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>detail::set_difference_sequence_h&lt; sequence&lt; Result... &gt;, sequence&lt; ArgsInput1... &gt;, sequence&lt;&gt; &gt;</label>
+        <link refid="structdetail_1_1set__difference__sequence__h_3_01sequence_3_01Result_8_8_8_01_4_00_01sequence_3_bf2e7243518eef2d20a6d321cfd0324f"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::set_difference_sequence_h&lt; sequence&lt; Result..., ArgsInput1... &gt;, void, void &gt;</label>
+        <link refid="structdetail_1_1set__difference__sequence__h"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" line="729" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/utility.h" bodystart="731" bodyend="731"/>
+    <listofallmembers>
+      <member refid="structdetail_1_1set__difference__sequence__h_1a0fc474bc2fd361ff5e94c5eb9b0c5c19" prot="public" virt="non-virtual"><scope>detail::set_difference_sequence_h&lt; sequence&lt; Result... &gt;, sequence&lt; ArgsInput1... &gt;, sequence&lt;&gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

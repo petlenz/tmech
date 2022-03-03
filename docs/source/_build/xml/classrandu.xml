@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="classrandu" kind="class" language="C++" prot="public">
+    <compoundname>randu</compoundname>
+    <basecompoundref refid="classtensor__base" prot="public" virt="non-virtual">tensor_base&lt; randu&lt; T, Dim, Rank &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Dim</declname>
+        <defname>Dim</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Rank</declname>
+        <defname>Rank</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classrandu_1adf5eca33673b0fe02a8138165b78e070" prot="private" static="no">
+        <type>typename <ref refid="structdetail_1_1uniform__distribution" kindref="compound">detail::uniform_distribution</ref>&lt; T, std::is_floating_point&lt; T &gt;::value &gt;::type</type>
+        <definition>using randu&lt; T, Dim, Rank &gt;::uniform_distribution =  typename detail::uniform_distribution&lt;T, std::is_floating_point&lt;T&gt;::value&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>uniform_distribution</name>
+        <qualifiedname>randu::uniform_distribution</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="36" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrandu_1ac1897d690c66f25b072347780288f70c" prot="public" static="no">
+        <type>T</type>
+        <definition>using randu&lt; T, Dim, Rank &gt;::value_type =  T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>randu::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="38" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrandu_1a07a5c4cf129ac56c182260de0bb9778a" prot="private" static="no" mutable="no">
+        <type>std::random_device</type>
+        <definition>std::random_device randu&lt; T, Dim, Rank &gt;::dev</definition>
+        <argsstring></argsstring>
+        <name>dev</name>
+        <qualifiedname>randu::dev</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="64" column="24" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandu_1aa1acbd671b1853df03e85a5a5c4f4e11" prot="private" static="no" mutable="no">
+        <type>std::mt19937</type>
+        <definition>std::mt19937 randu&lt; T, Dim, Rank &gt;::rng</definition>
+        <argsstring></argsstring>
+        <name>rng</name>
+        <qualifiedname>randu::rng</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="65" column="18" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandu_1a72cfad3098d09baf0d77be1c202ee14c" prot="private" static="no" mutable="no">
+        <type>uniform_distribution</type>
+        <definition>uniform_distribution randu&lt; T, Dim, Rank &gt;::dist</definition>
+        <argsstring></argsstring>
+        <name>dist</name>
+        <qualifiedname>randu::dist</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="66" column="26" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrandu_1a4a7a63b56235f88d4c2832576a1006cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>randu&lt; T, Dim, Rank &gt;::randu</definition>
+        <argsstring>(value_type __a, value_type __b=value_type(1))</argsstring>
+        <name>randu</name>
+        <qualifiedname>randu::randu</qualifiedname>
+        <param>
+          <type>value_type</type>
+          <declname>__a</declname>
+        </param>
+        <param>
+          <type>value_type</type>
+          <declname>__b</declname>
+          <defval>value_type(1)</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="40" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandu_1a6ce4db303afa2c4db335c9971c542d95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>randu&lt; T, Dim, Rank &gt;::randu</definition>
+        <argsstring>(randu const &amp;data)</argsstring>
+        <name>randu</name>
+        <qualifiedname>randu::randu</qualifiedname>
+        <param>
+          <type><ref refid="classrandu" kindref="compound">randu</ref> const &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="45" column="5" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="45" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandu_1af613ee91f5aab47c14fc597e128042a4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto randu&lt; T, Dim, Rank &gt;::operator()</definition>
+        <argsstring>(const Indices...) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>randu::operator()</qualifiedname>
+        <param>
+          <type>const</type>
+          <declname>Indices...</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="51" column="27" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="51" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classrandu_1ad21be33392f91080df8954053bf10768" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>static constexpr auto randu&lt; T, Dim, Rank &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>randu::rank</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="55" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandu_1a213ae8185dc2c3019186d03eaf88464b" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr auto</type>
+        <definition>static constexpr auto randu&lt; T, Dim, Rank &gt;::dimension</definition>
+        <argsstring>()</argsstring>
+        <name>dimension</name>
+        <qualifiedname>randu::dimension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="59" column="34" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="59" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>randu&lt; T, Dim, Rank &gt;</label>
+        <link refid="classrandu"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; randu&lt; T, Dim, Rank &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>randu&lt; T, Dim, Rank &gt;</label>
+        <link refid="classrandu"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tensor_base&lt; randu&lt; T, Dim, Rank &gt; &gt;</label>
+        <link refid="classtensor__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" line="34" column="1" bodyfile="/home/peter/SynologyDrive/Drive/tmech/include/tmech/tensor/randu_wrapper_bones.h" bodystart="35" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classtensor__base_1ac10026fb2040db2caab8e6108cfdb95e" prot="protected" virt="non-virtual"><scope>randu</scope><name>_is_init</name></member>
+      <member refid="classtensor__base_1a9217342c966e050b1d2ae5431ff6d355" prot="public" virt="non-virtual"><scope>randu</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a1f79397b5e5da7ba5b430dad6e2e6f7b" prot="public" virt="non-virtual"><scope>randu</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a9217342c966e050b1d2ae5431ff6d355" prot="public" virt="non-virtual"><scope>randu</scope><name>convert</name></member>
+      <member refid="classtensor__base_1a1f79397b5e5da7ba5b430dad6e2e6f7b" prot="public" virt="non-virtual"><scope>randu</scope><name>convert</name></member>
+      <member refid="classrandu_1a07a5c4cf129ac56c182260de0bb9778a" prot="private" virt="non-virtual"><scope>randu</scope><name>dev</name></member>
+      <member refid="classrandu_1a213ae8185dc2c3019186d03eaf88464b" prot="public" virt="non-virtual"><scope>randu</scope><name>dimension</name></member>
+      <member refid="classrandu_1a72cfad3098d09baf0d77be1c202ee14c" prot="private" virt="non-virtual"><scope>randu</scope><name>dist</name></member>
+      <member refid="classrandu_1af613ee91f5aab47c14fc597e128042a4" prot="public" virt="non-virtual"><scope>randu</scope><name>operator()</name></member>
+      <member refid="classtensor__base_1a4b12b9e1b4e6065b63ef84905f54272e" prot="public" virt="non-virtual"><scope>randu</scope><name>operator-</name></member>
+      <member refid="classtensor__base_1a4b12b9e1b4e6065b63ef84905f54272e" prot="public" virt="non-virtual"><scope>randu</scope><name>operator-</name></member>
+      <member refid="classrandu_1a4a7a63b56235f88d4c2832576a1006cf" prot="public" virt="non-virtual"><scope>randu</scope><name>randu</name></member>
+      <member refid="classrandu_1a6ce4db303afa2c4db335c9971c542d95" prot="public" virt="non-virtual"><scope>randu</scope><name>randu</name></member>
+      <member refid="classrandu_1ad21be33392f91080df8954053bf10768" prot="public" virt="non-virtual"><scope>randu</scope><name>rank</name></member>
+      <member refid="classrandu_1aa1acbd671b1853df03e85a5a5c4f4e11" prot="private" virt="non-virtual"><scope>randu</scope><name>rng</name></member>
+      <member refid="classtensor__base_1a193f15accda2947f7ac1d71e46b05588" prot="public" virt="non-virtual"><scope>randu</scope><name>size</name></member>
+      <member refid="classtensor__base_1a193f15accda2947f7ac1d71e46b05588" prot="public" virt="non-virtual"><scope>randu</scope><name>size</name></member>
+      <member refid="classtensor__base_1a4f1b23287884e2560bd9a684fc8b4e67" prot="public" virt="non-virtual"><scope>randu</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1afdecc080c560462657208e6e75ab4b98" prot="public" virt="non-virtual"><scope>randu</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1a4f1b23287884e2560bd9a684fc8b4e67" prot="public" virt="non-virtual"><scope>randu</scope><name>tensor_base</name></member>
+      <member refid="classtensor__base_1afdecc080c560462657208e6e75ab4b98" prot="public" virt="non-virtual"><scope>randu</scope><name>tensor_base</name></member>
+      <member refid="classrandu_1adf5eca33673b0fe02a8138165b78e070" prot="private" virt="non-virtual"><scope>randu</scope><name>uniform_distribution</name></member>
+      <member refid="classrandu_1ac1897d690c66f25b072347780288f70c" prot="public" virt="non-virtual"><scope>randu</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
