@@ -4,7 +4,7 @@
 template<typename _VariableLHS, typename _VariableRHS,
          typename std::enable_if_t<symdiff::is_symdiff_type<_VariableLHS>::value> * = nullptr,
          typename std::enable_if_t<symdiff::is_symdiff_type<_VariableRHS>::value> * = nullptr>
-constexpr inline auto otimes(_VariableLHS, _VariableRHS){
+constexpr inline auto otimes(_VariableLHS const&, _VariableRHS const&){
     using _lhs_data_type = typename _VariableLHS::data_type;
     using _rhs_data_type = typename _VariableRHS::data_type;
     using _lhs_info = symdiff::detail::get_tensor_info<_lhs_data_type>;

@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['tensor_0',['tensor',['../classtensor.html#a57c05e7aedc268a549fb71c2fc4ba828',1,'tensor::tensor()'],['../classtensor.html#aa0dbcbddaa8467e3a848fabc6c39ced4',1,'tensor::tensor(tensor const &amp;_tensor)'],['../classtensor.html#a48c3f34fe7c54a1615a55ab8fe26e823',1,'tensor::tensor(tensor_base&lt; Derived &gt; const &amp;tensor_base)'],['../classtensor.html#a010fd65801eeff5aae794d9152374946',1,'tensor::tensor(std::initializer_list&lt; value_type &gt; const &amp;data)']]],
-  ['tensor_5fbinary_5fexpression_5fwrapper_1',['tensor_binary_expression_wrapper',['../classdetail_1_1tensor__binary__expression__wrapper.html#a52799952af59e37e511ba26d3a7b5102',1,'detail::tensor_binary_expression_wrapper::tensor_binary_expression_wrapper(data_type_LHS const &amp;__lhs, data_type_RHS const &amp;__rhs)'],['../classdetail_1_1tensor__binary__expression__wrapper.html#a35e2b605afb1ef75880574e4533e06b8',1,'detail::tensor_binary_expression_wrapper::tensor_binary_expression_wrapper(tensor_binary_expression_wrapper const &amp;__data)']]]
-];

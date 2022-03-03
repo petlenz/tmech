@@ -2,7 +2,7 @@
 #define TMECH_FUNCTIONS_FORWARD_H
 
 template<typename _VariableLHS, typename _VariableRHS, typename, typename>
-constexpr inline auto otimes(_VariableLHS, _VariableRHS);
+constexpr inline auto otimes(_VariableLHS const&, _VariableRHS const&);
 
 template<typename _VariableLHS, typename _VariableRHS, typename, typename>
 constexpr inline auto otimesl(_VariableLHS, _VariableRHS);
