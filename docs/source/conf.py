@@ -18,7 +18,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 #def setup(app):
 #    app.add_css_file("main_stylesheet.css")
 
-extensions = ['breathe','exhale']
+extensions = ['breathe']
 breathe_projects = { 'tmech': '_build/xml' }
 breathe_default_project = "tmech"
 templates_path = ['_templates']
