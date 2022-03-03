@@ -20,6 +20,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 extensions = ['breathe','exhale']
 breathe_projects = { 'tmech': '_build/xml' }
+breathe_default_project = "myproject"
 templates_path = ['_templates']
 html_static_path = ['_static']
 source_suffix = '.rst'
