@@ -269,7 +269,7 @@ tensor<T, Dim, Rank>::tensor():_data() {
  * @param _tensor Tensor to be copyed.
  */
 template<typename T, std::size_t Dim, std::size_t Rank>
-tensor<T, Dim, Rank>::tensor(tensor const& _tensor):_data() {
+tensor<T, Dim, Rank>::tensor(tensor<T, Dim, Rank> const& _tensor):_data() {
     if(&_tensor != this){
         check_size();
         _data = _tensor.data();
@@ -301,11 +301,27 @@ tensor<T, Dim, Rank>::tensor(std::initializer_list<value_type> const& l):_data()
      * The extended copy constructor.
      */
 template<typename T, std::size_t Dim, std::size_t Rank>
-template<typename Derived>
-tensor<T, Dim, Rank>::tensor(tensor_base<Derived> const& _tensor_base):
+template<typename _Tensor,  std::enable_if_t<is_tensor_type<_Tensor>::value> *>
+tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor):
     _data()
 {
-    *this = _tensor_base;
+    static_assert(_Tensor::rank() == Rank,     "tensor::operator=(): non matching rank");
+    static_assert(_Tensor::dimension() == Dim, "tensor::operator=(): no matching dimensions");
+    using type = typename detail::meta_for_loop_deep<Dim, Rank-1>::type;
+
+    if constexpr (std::is_same_v<_Tensor, tensor<T, Dim, Rank>>){
+        _data = std::forward<_Tensor>(__tensor)._data;
+    }else{
+        if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor, decltype (*this)>::value){
+            const_cast<_Tensor&>(__tensor).evaluate(*this);
+        }else{
+            if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor>::value){
+                const_cast<_Tensor&>(__tensor).evaluate();
+            }
+            auto func{[&](auto ...numbers){(*this)(numbers...) = __tensor(numbers...);}};
+            type::loop(func);
+        }
+    }
 }
 
 template<typename T, std::size_t Dim, std::size_t Rank>

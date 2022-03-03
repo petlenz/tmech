@@ -42,10 +42,10 @@ public:
 
     tensor();
 
-    tensor(tensor const& _tensor);
+    tensor(tensor<T, Dim, Rank> const& _tensor);
 
-    template<typename Derived>
-    tensor(tensor_base<Derived> const& tensor_base);
+    template<typename _Tensor,  std::enable_if_t<is_tensor_type<_Tensor>::value> * = nullptr>
+    tensor(_Tensor const& tensor_base);
 
     tensor(std::initializer_list<value_type> const& data);
 

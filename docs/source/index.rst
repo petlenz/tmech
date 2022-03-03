@@ -18,7 +18,6 @@ tensor expressions.
 - Integer and floating point numbers are fully supported, complex numbers are supported only for basic arithmetic operations.
 - Provides high-level syntax and functionality for easy use.
 - Can be used for solid mechanics, fluid mechanics, ...
-- an extensible expression system enabling **lazy broadcasting**.
 - isotropic tensor functions.
 - compile-time differentiation of scalar and tensorial expressions
 - many more...

@@ -68,10 +68,12 @@ protected:
     bool _is_init;
 };
 
-template<typename _Derived>
-std::ostream & operator<<(std::ostream &os, const tensor_base<_Derived>& __tensor)
+template<typename _Tensor,  std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+std::ostream & operator<<(std::ostream &os, _Tensor&& __tensor)
 {
-    tensor<typename _Derived::value_type, _Derived::dimension(), _Derived::rank()> temp{__tensor};
+    using TensorType = typename std::decay<_Tensor>::type;
+
+    tensor<typename TensorType::value_type, TensorType::dimension(), TensorType::rank()> temp{std::forward<_Tensor&&>(__tensor)};
     temp.print(os);
     return os;
 }
