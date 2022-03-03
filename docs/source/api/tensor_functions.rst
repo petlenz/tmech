@@ -5,32 +5,32 @@ Addition
 ^^^^^^^^
 
 .. _operator_add-func-ref:
-.. doxygenfunction:: operator+(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
+.. doxygenfunction:: operator+(_TensorLHS &&, _TensorRHS &&)
    :project: tmech
 
 Subtraction
 ^^^^^^^^^^^
 
 .. _operator_min-func-ref:
-.. doxygenfunction:: operator-(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
+.. doxygenfunction:: operator-(_TensorLHS &&, _TensorRHS &&)
    :project: tmech
 
 Single contraction
 ^^^^^^^^^^^^^^^^^^
 
 .. _operator_mul-func-ref:
-.. doxygenfunction:: operator*(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
+.. doxygenfunction:: operator*(_TensorLHS &&, _TensorRHS &&)
    :project: tmech
    
 Scalar update
 ^^^^^^^^^^^^^
  
 .. _operator_scalar_mul-func-ref:
-.. doxygenfunction:: operator*(_Scalar &&__scalar, _Tensor &&__tensor)
+.. doxygenfunction:: operator*(_Scalar &&, _Tensor &&)
    :project: tmech
 
 .. _operator_scalar_dic-func-ref:
-.. doxygenfunction:: operator/(_Tensor &&__tensor, _Scalar &&__scalar)
+.. doxygenfunction:: operator/(_Tensor &&, _Scalar &&)
    :project: tmech
    
 Basis rearrangement
@@ -39,22 +39,22 @@ Basis rearrangement
 General basis rearrangement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 .. _basis_change-func-ref:
-.. doxygenfunction:: basis_change(_Tensor &&__tensor)
+.. doxygenfunction:: basis_change(_Tensor &&)
    :project: tmech
 
 .. _basis_change-func-ref:
-.. doxygenfunction:: basis_change(_Tensor &&__tensor)
+.. doxygenfunction:: basis_change(_Tensor &&)
    :project: tmech
 Transposition
 ^^^^^^^^^^^^^
 .. _trans-func-ref:
-.. doxygenfunction:: trans(_Tensor &&__tensor)
+.. doxygenfunction:: trans(_Tensor &&)
    :project: tmech
    
 Left basis transposition
 ^^^^^^^^^^^^^^^^^^^^^^^^ 
 .. _transl-func-ref:
-.. doxygenfunction:: transl(_Tensor &&__tensor)
+.. doxygenfunction:: transl(_Tensor &&)
    :project: tmech
 
 Outer product
