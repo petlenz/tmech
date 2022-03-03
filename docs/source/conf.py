@@ -18,7 +18,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 #def setup(app):
 #    app.add_css_file("main_stylesheet.css")
 
-extensions = ['breathe']
+extensions = ['breathe','sphinx.ext.imgmath',]
 breathe_projects = { 'tmech': '_build/xml' }
 breathe_default_project = "tmech"
 templates_path = ['_templates']
@@ -30,6 +30,7 @@ copyright = '2022, Peter Lenz'
 author = 'Peter Lenz'
 
 #html_logo = 'logo'
+imgmath_image_format = 'svg'
 
 imgmath_latex_preamble = r'''
 \usepackage{amsmath}
