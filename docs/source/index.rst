@@ -1,6 +1,6 @@
 .. Copyright (c) 2021, Peter Lenz
 
-   Distributed under the terms of the BSD 3-Clause License.
+   Distributed under the terms of the  Apache-2.0 License.
 
    The full license is in the file LICENSE, distributed with this software.
 
