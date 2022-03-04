@@ -162,7 +162,7 @@ template <typename _Expr, typename _T>
 class squeezer<binary_expression_wrapper<scalar_zero<_T>, _Expr, op_sub>>
 {
 public:
-    using squeezedType = _Expr;
+    using squeezedType = negative<_Expr>;
 };
 
 //0 - 0 --> 0
@@ -186,7 +186,7 @@ template <typename _Expr, typename _T>
 class squeezer<binary_expression_wrapper<tensor_zero<_T>, _Expr, op_sub>>
 {
 public:
-    using squeezedType = _Expr;
+    using squeezedType = negative<_Expr>;
 };
 
 //0 - 0 --> 0
@@ -402,6 +402,31 @@ class squeezer<_Wrapper<negative<_Expr>, _Args...>>
 public:
     using squeezedType = negative<_Wrapper<_Expr, _Args...>>;
 };
+
+// negative(LHS) + 0 --> negative(LHS)
+template <typename _LHS, typename _T>
+class squeezer<binary_expression_wrapper<negative<_LHS>, scalar_zero<_T>, op_add>>
+{
+public:
+    using squeezedType = negative<_LHS>;
+};
+
+// 0 + negative(RHS) --> negative(RHS)
+template <typename _T, typename _RHS>
+class squeezer<binary_expression_wrapper<scalar_zero<_T>, negative<_RHS>, op_add>>
+{
+public:
+    using squeezedType = negative<_RHS>;
+};
+
+// negative(LHS) + RHS--> RHS - LHS
+template <typename _LHS, typename _RHS>
+class squeezer<binary_expression_wrapper<negative<_LHS>, _RHS, op_add>>
+{
+public:
+    using squeezedType = binary_expression_wrapper<_RHS, _LHS, op_sub>;
+};
+
 
 // LHS + negative(RHS) --> LHS - RHS
 template <typename _LHS, typename _RHS>

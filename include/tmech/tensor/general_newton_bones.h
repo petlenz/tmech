@@ -36,6 +36,7 @@ public:
         //update
         update<0, size>(x, dx);
 
+        //return norm
         return std::sqrt(norm_tuple<0, size>(dx));
     }
 
