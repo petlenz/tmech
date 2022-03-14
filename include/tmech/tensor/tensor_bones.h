@@ -27,7 +27,7 @@ class tensor : public tensor_base<tensor<T, Dim, Rank>>
 {
 public:
     static constexpr std::size_t Size{detail::get_tensor_size<Dim, Rank>::size};
-    static constexpr bool dynamic_memory{((Size > TMECH_MAX_STATIC_SIZE) ? false : true)};
+    static constexpr bool dynamic_memory{((Size <= TMECH_MAX_STATIC_SIZE) ? false : true)};
     using value_data_type = typename detail::get_tensor_array_type<T, Size, dynamic_memory>::data_type;
     using data_type  = tensor<T, Dim, Rank>;
     using entry_type = typename detail::get_complex_entry_type<T>::type;
@@ -129,20 +129,20 @@ private:
     template <typename, std::size_t, std::size_t>
     friend class tensor;
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
     constexpr inline auto check_size(){}
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
     constexpr inline auto check_size(){
         if(_data.size() == 0){
             _data.resize(Size);
         }
     }
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
     constexpr inline auto check_size_fill_zeros(){}
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
     constexpr inline auto check_size_fill_zeros(){
         if(_data.size() == 0){
             _data.resize(Size);
@@ -150,10 +150,10 @@ private:
         _data.fill(0);
     }
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
     constexpr inline auto delete_data(){}
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
     constexpr inline auto delete_data(){}
 
     value_data_type _data;

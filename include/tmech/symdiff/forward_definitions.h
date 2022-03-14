@@ -117,6 +117,21 @@ class inv_tensor;
 template <typename _Expr>
 class symdiff_expression_wrapper;
 
+template <typename _Expr, typename _Func>
+class tensor_isotropic_function_wrapper;
+
+template <typename _Father>
+class tensor_isotropic_function_wrapper_derivative;
+
+template <typename _Var>
+class as_sym_wrapper;
+
+template <typename _Expr, typename _RealExpo>
+class tensor_pow_wrapper;
+
+template <typename _Father>
+class tensor_pow_wrapper_derivative;
+
 } // NAMESPACE DETAIL
 
 

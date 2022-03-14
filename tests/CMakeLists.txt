@@ -29,5 +29,4 @@ macro(add_tmech_test TARGET_NAME)
     #gtest_discover_tests(${TARGET_NAME})
 endmacro()
 
-add_subdirectory(tmech)
-add_subdirectory(symdiff)
+add_tmech_test(tmech_test main.cpp)

@@ -24,18 +24,22 @@ namespace detail {
 * @tparam Tensor Tensor expression from which the
 * inverse should be determined.
 */
-template <typename Tensor>
-class pow_tensor_wrapper : public tensor_base<pow_tensor_wrapper<Tensor>>
+template <typename _Tensor>
+class pow_tensor_wrapper : public tensor_base<pow_tensor_wrapper<_Tensor>>
 {
-    using data_type_tensor = typename result_expression_type<Tensor>::result_type;
+    using data_type_tensor = typename std::remove_const<typename std::remove_reference<_Tensor>::type>::type;
+
+    template <typename _Dbase, typename _Dtensor>
+    friend class pow_tensor_derivative_wrapper;
+
+    using this_type = pow_tensor_wrapper<_Tensor>;
 public:
-    using data_type = typename Tensor::data_type;
-    using value_type = typename Tensor::value_type;
+    using value_type = typename data_type_tensor::value_type;
     using size_type = std::size_t;
 
-    pow_tensor_wrapper(Tensor const& data, size_type const exponent);
+    pow_tensor_wrapper(data_type_tensor const& __data_expr, size_type const __exponent);
 
-    pow_tensor_wrapper(pow_tensor_wrapper const& data);
+    pow_tensor_wrapper(pow_tensor_wrapper const& __data);
 
     template<typename ...Indices>
     constexpr inline auto operator ()(Indices const... indices)const;
@@ -44,8 +48,6 @@ public:
 
     static constexpr inline auto dimension();
 
-    constexpr inline auto derivative();
-
     template<typename Result>
     constexpr inline auto evaluate(Result & result);
 
@@ -53,25 +55,24 @@ public:
 
     constexpr inline auto raw_data()const;
 
+    constexpr inline auto derivative();
+
 private:
+    constexpr inline auto evaluate_derivatives();
+
     template<typename Result>
     constexpr inline auto evaluate_imp(Result & result);
 
-    constexpr inline auto sym_derivative();
+    //    constexpr inline auto sym_derivative();
 
-    constexpr inline auto skew_derivative();
+    //    constexpr inline auto skew_derivative();
 
     constexpr inline auto normal_derivative();
 
-    static constexpr inline auto is_symmetric(value_type const*const ptr);
-
-    static constexpr inline auto is_skewsymmetric(value_type const*const ptr);
-
-    data_type _data;
-    data_type_tensor _data_expr;
-    data_type _data_deriv;
-    tensor<value_type, Tensor::dimension(), Tensor::rank()*2> _derivative;
-    std::vector<data_type> _data_i;
+    tensor<value_type, data_type_tensor::dimension(), 2> _data;
+    _Tensor _data_expr;
+    tensor<value_type, data_type_tensor::dimension(), 4> _derivative;
+    std::vector<tensor<value_type, data_type_tensor::dimension(), data_type_tensor::rank()>> _data_i;
     size_type const _expo;
 };
 

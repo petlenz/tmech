@@ -341,6 +341,30 @@ public:
     using deriv_type = typename get_fundamental_zero< T_LHS, T_RHS >::type;
 };
 
+//symmetric argument
+//x' = 0.5*(otimesu(I,I) + otimesl(I,I))
+template <typename _Variable>
+class diff_wrapper<_Variable, as_sym_wrapper<_Variable>>
+{
+    using data_type   = typename _Variable::data_type;
+    using tensor_info = get_tensor_info<data_type>;
+    using I           = tensor_one<data_type>;
+    using otimesu     = tensor_outer_product_wrapper<I, I, tmech::sequence<1,3>, tmech::sequence<2,4>>;
+    using otimesl     = tensor_outer_product_wrapper<I, I, tmech::sequence<1,4>, tmech::sequence<2,3>>;
+    using _05         = real<typename tensor_info::value_type, 5, 0, 0>;
+public:
+    using deriv_type = binary_expression_wrapper<_05, binary_expression_wrapper<otimesu, otimesl, op_add>, op_mul>;
+};
+
+//symmetric argument
+//dadx = 0
+template <typename _Variable, typename _Expr>
+class diff_wrapper<_Variable, as_sym_wrapper<_Expr>>
+{
+public:
+    using deriv_type = typename get_fundamental_zero< typename _Variable::data_type, typename _Expr::data_type >::type;
+};
+
 
 //define derivative
 //dX/dx --> 0<X::rank(), X::dimension()>
@@ -588,8 +612,26 @@ class diff_wrapper<_Variable, inv_tensor<_Expr>>
     using _dinvExpr = typename squeezer<typename diff_wrapper<_Expr, inv_tensor<_Expr>>::deriv_type>::squeezedType;
     using _dExpr    = typename squeezer<typename diff_wrapper<_Variable, _Expr>::deriv_type>::squeezedType;
 public:
-    using deriv_type =typename squeezer<tensor_inner_product_wrapper<_dinvExpr, _dExpr, tmech::sequence<3,4>,tmech::sequence<1,2>>>::squeezedType;
+    using deriv_type = typename squeezer<tensor_inner_product_wrapper<_dinvExpr, _dExpr, tmech::sequence<3,4>,tmech::sequence<1,2>>>::squeezedType;
 };
+
+//isotropic tensor functions
+template <typename _Variable, typename _Func>
+class diff_wrapper<_Variable, tensor_isotropic_function_wrapper<_Variable, _Func>>
+{
+public:
+    using deriv_type = tensor_isotropic_function_wrapper_derivative<tensor_isotropic_function_wrapper<_Variable, _Func>>;
+};
+
+//isotropic tensor functions
+template <typename _Variable, typename _RealExpo>
+class diff_wrapper<_Variable, tensor_pow_wrapper<_Variable, _RealExpo>>
+{
+public:
+    using deriv_type = tensor_pow_wrapper_derivative<tensor_pow_wrapper<_Variable, _RealExpo>>;
+};
+
+
 
 
 //cross

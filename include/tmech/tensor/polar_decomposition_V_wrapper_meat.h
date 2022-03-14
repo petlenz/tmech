@@ -24,8 +24,8 @@ polar_decomposition_V_wrapper<_Base, _Tensor>::polar_decomposition_V_wrapper(_Ba
 
 template <typename _Base, typename _Tensor>
 polar_decomposition_V_wrapper<_Base, _Tensor>::polar_decomposition_V_wrapper(polar_decomposition_V_wrapper const & __data):
-    _base(__data.base),
-    _V(__data.V)
+    _base(__data._base),
+    _V(__data._V)
 {}
 
 template <typename _Base, typename _Tensor>

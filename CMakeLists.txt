@@ -135,6 +135,8 @@ set(TMECH_TENSOR_HEADER
     ${TMECH_INCLUDE_DIR}/tmech/tensor/compare_almost_equal.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/compare_lambda.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/convert_tensor_to_voigt.h
+    ${TMECH_INCLUDE_DIR}/tmech/tensor/pow_tensor_derivative_wrapper_bones.h
+    ${TMECH_INCLUDE_DIR}/tmech/tensor/pow_tensor_derivative_wrapper_meat.h
     )
 
 set(TMECH_SYMDIFF_HEADER
@@ -184,6 +186,16 @@ set(TMECH_SYMDIFF_HEADER
     ${TMECH_SYMDIFF_INCLUDE_DIR}/tmech_functions_implementation.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_function_wrapper_bones.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_function_wrapper_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_isotropic_function_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_isotropic_function_wrapper_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_isotropic_function_wrapper_derivative_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_isotropic_function_wrapper_derivative_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_as_sym_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_as_sym_wrapper_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_pow_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_pow_wrapper_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_pow_derivative_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_pow_derivative_wrapper_meat.h
     )
 
 # add the library that runs

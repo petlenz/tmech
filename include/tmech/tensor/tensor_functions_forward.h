@@ -864,8 +864,8 @@ constexpr inline auto eigen_decomposition(_Tensor && __tensor);
 template<typename Derived>
 constexpr inline auto det(tensor_base<Derived>const& __A);
 
-template<typename Derived, typename T, typename std::enable_if<std::is_integral<T>::value, bool>::type = true>
-constexpr inline auto pow(tensor_base<Derived>const& base, T const exp);
+template<typename _Tensor, typename T, typename, typename >
+constexpr inline auto pow(_Tensor && __tensor, T const exp);
 
 /**
  * @brief The (2)-norm of a tensor is defined for a first-, second- and fourth-order tensor as

@@ -455,10 +455,15 @@ constexpr inline auto invf(_Tensor && __tensor){
     }
 }
 
-template<typename Derived, typename T, typename std::enable_if<std::is_integral<T>::value, bool>::type = true>
-constexpr inline auto pow(tensor_base<Derived>const& base, T const exp){
-    assert(exp >= 1);
-    return detail::pow_tensor_wrapper<Derived>(base.convert(), exp);
+template<typename _Tensor, typename T, typename std::enable_if<std::is_integral<T>::value, bool>::type = true, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+constexpr inline auto pow(_Tensor && __tensor, T const exp){
+    using TensorType = typename std::decay<_Tensor>::type;
+
+    if constexpr (std::is_lvalue_reference_v<_Tensor>){
+        return detail::pow_tensor_wrapper<TensorType const&>(std::forward<_Tensor>(__tensor), exp);
+    }else{
+        return detail::pow_tensor_wrapper<TensorType>(std::forward<_Tensor>(__tensor), exp);
+    }
 }
 
 template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>

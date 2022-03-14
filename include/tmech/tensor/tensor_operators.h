@@ -46,11 +46,11 @@ constexpr inline auto operator+(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
     static_assert(TensorTypeLHS::rank() == TensorTypeRHS::rank(), "operator +: no matching rank");
     //check size of indices
     static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "operator +: no matching dimensions");
-    if constexpr (isLvalueLHS && isLvalueLHS){
+    if constexpr (isLvalueLHS && isLvalueRHS){
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueLHS){
+    }else if constexpr (!isLvalueLHS && isLvalueRHS){
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS, TensorTypeRHS const&, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueLHS){
+    }else if constexpr (isLvalueLHS && !isLvalueRHS){
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS const&, TensorTypeRHS, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else{
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS, TensorTypeRHS, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
@@ -87,11 +87,11 @@ constexpr inline auto operator-(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
     static_assert(TensorTypeLHS::rank() == TensorTypeRHS::rank(), "operator -: no matching rank");
     //check size of indices
     static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "operator -: no matching dimensions");
-    if constexpr (isLvalueLHS && isLvalueLHS){
+    if constexpr (isLvalueLHS && isLvalueRHS){
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, tmech::detail::operator_sub>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueLHS){
+    }else if constexpr (!isLvalueLHS && isLvalueRHS){
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS, TensorTypeRHS const&, tmech::detail::operator_sub>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueLHS){
+    }else if constexpr (isLvalueLHS && !isLvalueRHS){
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS const&, TensorTypeRHS, tmech::detail::operator_sub>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else{
         return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS, TensorTypeRHS, tmech::detail::operator_sub>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
@@ -136,11 +136,11 @@ constexpr inline auto operator*(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
     //check size of indices
     static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "operator -: no matching dimensions");
 
-    if constexpr (isLvalueLHS && isLvalueLHS){
+    if constexpr (isLvalueLHS && isLvalueRHS){
         return tmech::detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueLHS){
+    }else if constexpr (!isLvalueLHS && isLvalueRHS){
         return tmech::detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueLHS){
+    }else if constexpr (isLvalueLHS && !isLvalueRHS){
         return tmech::detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else{
         return tmech::detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));

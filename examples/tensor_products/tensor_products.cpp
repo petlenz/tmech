@@ -13,5 +13,6 @@ int main() {
     A = tmech::otimesu(a,b);
     
     A = tmech::outer_product<tmech::sequence<2,3>, tmech::sequence<1,4>>(a,b);
+    std::cout<<A<<std::endl;
     return 0;
 }

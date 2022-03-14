@@ -13,6 +13,6 @@ int main() {
     B = tmech::inv(A);
     //full inverse no symmetry is assumed
     B = tmech::invf<tmech::sequence<1,2,3,4>>(A);
-    
+    std::cout<<B<<std::endl;
     return 0;
 }

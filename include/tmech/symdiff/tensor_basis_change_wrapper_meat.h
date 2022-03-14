@@ -28,13 +28,13 @@ constexpr inline auto tensor_basis_change_wrapper<_Expr, _Sequence>::operator()(
 }
 
 template <typename _Expr, typename _Sequence>
-constexpr inline std::ostream& tensor_basis_change_wrapper<_Expr, _Sequence>::print(std::ostream & __data)const{
+constexpr inline std::ostream& tensor_basis_change_wrapper<_Expr, _Sequence>::print(std::ostream & __os)const{
     if constexpr (std::is_same_v<_Sequence, tmech::sequence<2,1>> && tensor_info_lhs::rank() == 2){
-        print_trans(__data);
+        print_trans(__os);
     }else{
-        print_general(__data);
+        print_general(__os);
     }
-    return __data;
+    return __os;
 }
 
 template <typename _Expr, typename _Sequence>

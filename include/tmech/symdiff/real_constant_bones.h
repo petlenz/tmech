@@ -26,7 +26,7 @@ public:
     real(real const& __data);
 
     template<typename _Data>
-    constexpr inline auto& operator()(_Data const& __data) const;
+    constexpr inline auto operator()(_Data const& __data) const;
 
     inline std::string get_string()const;
 
@@ -42,9 +42,9 @@ public:
 
 private:
     template<typename _Data>
-    constexpr inline auto const& get_value(_Data const& /*__data*/)const;
+    constexpr inline auto get_value(_Data const& /*__data*/)const;
 
-    data_type _value;
+    double _value;
 };
 
 #endif // REAL_CONSTANT_BONES_H

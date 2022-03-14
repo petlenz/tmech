@@ -217,4 +217,72 @@ constexpr inline auto inv(_Expression){
     static_assert (tensor_info::rank() == 2, "inv: only for second order tensors");
     return symdiff::detail::inv_tensor<_Expression>();
 }
+
+template<typename _Expression,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Expression>::value> * = nullptr>
+constexpr inline auto sqrt(_Expression){
+    using data_type   = typename _Expression::data_type;
+    using tensor_info = symdiff::detail::get_tensor_info<data_type>;
+    static_assert (symdiff::detail::is_tensor<data_type>::value, "sqrt: argument is not a tensor type");
+    static_assert (tensor_info::rank() == 2, "sqrt: only for second order tensors");
+    return symdiff::detail::tensor_isotropic_function_wrapper<_Expression, tmech::detail::sqrt_>();
+}
+
+template<typename _Expression,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Expression>::value> * = nullptr>
+constexpr inline auto exp_sym(_Expression){
+    using data_type   = typename _Expression::data_type;
+    using tensor_info = symdiff::detail::get_tensor_info<data_type>;
+    static_assert (symdiff::detail::is_tensor<data_type>::value, "exp_sym: argument is not a tensor type");
+    static_assert (tensor_info::rank() == 2, "exp_sym: only for second order tensors");
+    return symdiff::detail::tensor_isotropic_function_wrapper<_Expression, tmech::detail::exp>();
+}
+
+template<typename _Expression,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Expression>::value> * = nullptr>
+constexpr inline auto log(_Expression){
+    using data_type   = typename _Expression::data_type;
+    using tensor_info = symdiff::detail::get_tensor_info<data_type>;
+    static_assert (symdiff::detail::is_tensor<data_type>::value, "log: argument is not a tensor type");
+    static_assert (tensor_info::rank() == 2, "log: only for second order tensors");
+    return symdiff::detail::tensor_isotropic_function_wrapper<_Expression, tmech::detail::log>();
+}
+
+template<typename _Expression,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Expression>::value> * = nullptr>
+constexpr inline auto positive(_Expression){
+    using data_type   = typename _Expression::data_type;
+    using tensor_info = symdiff::detail::get_tensor_info<data_type>;
+    static_assert (symdiff::detail::is_tensor<data_type>::value, "positive: argument is not a tensor type");
+    static_assert (tensor_info::rank() == 2, "positive: only for second order tensors");
+    return symdiff::detail::tensor_isotropic_function_wrapper<_Expression, tmech::detail::positive_part>();
+}
+
+template<typename _Expression,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Expression>::value> * = nullptr>
+constexpr inline auto negative(_Expression){
+    using data_type   = typename _Expression::data_type;
+    using tensor_info = symdiff::detail::get_tensor_info<data_type>;
+    static_assert (symdiff::detail::is_tensor<data_type>::value, "negative: argument is not a tensor type");
+    static_assert (tensor_info::rank() == 2, "negative: only for second order tensors");
+    return symdiff::detail::tensor_isotropic_function_wrapper<_Expression, tmech::detail::negative_part>();
+}
+
+
+template<typename _Expression,
+         long long int _L, long long int _R, long long int _E,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Expression>::value> * = nullptr>
+constexpr inline auto pow(_Expression, symdiff::real<int, _L, _R, _E>){
+    return symdiff::detail::tensor_pow_wrapper<_Expression, symdiff::real<int, _L, _R, _E>>();
+}
+
+template<typename _DataType, std::size_t _ID>
+constexpr inline auto as_sym(symdiff::variable<_DataType, _ID>){
+    using data_type   = _DataType;
+    using tensor_info = symdiff::detail::get_tensor_info<data_type>;
+    static_assert (symdiff::detail::is_tensor<data_type>::value, "as_sym: argument is not a tensor type");
+    static_assert (tensor_info::rank() == 2, "as_sym: only for second order tensors");
+    return symdiff::detail::as_sym_wrapper<symdiff::variable<_DataType, _ID>>();
+}
+
 #endif // TMECH_FUNCTIONS_IMPLEMENTATION_H

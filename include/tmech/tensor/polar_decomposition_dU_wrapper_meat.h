@@ -24,8 +24,8 @@ polar_decomposition_dU_wrapper<_Base, _Tensor>::polar_decomposition_dU_wrapper(_
 
 template <typename _Base, typename _Tensor>
 polar_decomposition_dU_wrapper<_Base, _Tensor>::polar_decomposition_dU_wrapper(polar_decomposition_dU_wrapper const & __data):
-    _base(__data.base),
-    _dU(__data.dU)
+    _base(__data._base),
+    _dU(__data._dU)
 {}
 
 template <typename _Base, typename _Tensor>

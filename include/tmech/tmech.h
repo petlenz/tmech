@@ -71,31 +71,31 @@ class skew_symmetric_part_wrapper;
 template <typename _Tensor>
 class deviatoric_wrapper;
 
-template <typename Tensor>
+template <typename _Tensor>
 class volumetric_wrapper;
 
 template <typename _Tensor, typename _Function>
 class isotropic_tensor_function;
 
-template <typename Base, typename Tensor>
+template <typename _Base, typename _Tensor>
 class polar_decomposition_R_wrapper;
 
-template <typename Base, typename Tensor>
+template <typename _Base, typename _Tensor>
 class polar_decomposition_U_wrapper;
 
-template <typename Base, typename Tensor>
+template <typename _Base, typename _Tensor>
 class polar_decomposition_V_wrapper;
 
-template <typename Base, typename Tensor>
+template <typename _Base, typename _Tensor>
 class polar_decomposition_dR_wrapper;
 
-template <typename Base, typename Tensor>
+template <typename _Base, typename _Tensor>
 class polar_decomposition_dU_wrapper;
 
-template <typename Base, typename Tensor>
+template <typename _Base, typename _Tensor>
 class polar_decomposition_dV_wrapper;
 
-template <typename Tensor>
+template <typename _Tensor>
 class exp_tensor_wrapper;
 
 template <typename _Father, typename _Tensor>
@@ -113,8 +113,14 @@ class positive_negative_decomposition_dneg_wrapper;
 template <typename _Base, typename _Tensor>
 class positive_negative_decomposition_dpos_wrapper;
 
-template <typename Tensor>
+template <typename _Tensor>
 class negative_tensor_wrapper;
+
+template <typename _Tensor>
+class pow_tensor_wrapper;
+
+template <typename _Base, typename _Tensor>
+class pow_tensor_derivative_wrapper;
 }
 
 //forward declaration
@@ -195,6 +201,8 @@ class adaptor;
 #include "tensor/volumetric_wrapper_meat.h"
 #include "tensor/pow_tensor_wrapper_bones.h"
 #include "tensor/pow_tensor_wrapper_meat.h"
+#include "tensor/pow_tensor_derivative_wrapper_bones.h"
+#include "tensor/pow_tensor_derivative_wrapper_meat.h"
 
 #include "tensor/numerical_differentiation_central_wrapper_bones.h"
 #include "tensor/numerical_differentiation_central_wrapper_meat.h"
@@ -295,13 +303,15 @@ class adaptor;
 
 
 
+namespace symdiff {
+#include "symdiff/forward_definitions.h"
+}
 
 namespace tmech {
 #include "symdiff/tmech_functions_forward.h"
 }
 
 namespace symdiff {
-#include "symdiff/forward_definitions.h"
 #include "symdiff/symdiff_functions_forward.h"
 #include "symdiff/symdiff_type_traits.h"
 #include "symdiff/symdiff_utility.h"
@@ -372,6 +382,18 @@ namespace symdiff {
 #include "symdiff/tensor_basis_change_wrapper_meat.h"
 #include "symdiff/tensor_inv_bones.h"
 #include "symdiff/tensor_inv_meat.h"
+#include "symdiff/tensor_isotropic_function_wrapper_bones.h"
+#include "symdiff/tensor_isotropic_function_wrapper_meat.h"
+#include "symdiff/tensor_isotropic_function_wrapper_derivative_bones.h"
+#include "symdiff/tensor_isotropic_function_wrapper_derivative_meat.h"
+#include "symdiff/tensor_as_sym_wrapper_bones.h"
+#include "symdiff/tensor_as_sym_wrapper_meat.h"
+#include "symdiff/tensor_pow_wrapper_bones.h"
+#include "symdiff/tensor_pow_wrapper_meat.h"
+#include "symdiff/tensor_pow_derivative_wrapper_bones.h"
+#include "symdiff/tensor_pow_derivative_wrapper_meat.h"
+
+
 } // NAMESPACE SYMDIFF
 
 

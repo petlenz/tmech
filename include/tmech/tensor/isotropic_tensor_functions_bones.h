@@ -25,7 +25,7 @@ struct sqrt_{
 
     template<typename  T>
     static constexpr inline auto derivative(T const& value){
-        return 1./(2.*std::sqrt(value));
+        return T(1)/(T(2)*std::sqrt(value));
     }
 };
 
@@ -37,7 +37,7 @@ struct log{
 
     template<typename  T>
     static constexpr inline auto derivative(T const& value){
-        return 1./value;
+        return T(1)/value;
     }
 };
 

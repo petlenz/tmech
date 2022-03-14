@@ -28,7 +28,7 @@ real<_T, _L, _R, _Exp>::real(real const& __data):
 
 template<typename _T, long long int _L, long long int _R, long long int _Exp>
 template<typename _Data>
-constexpr inline auto& real<_T, _L, _R, _Exp>::operator()(_Data const& __data) const{
+constexpr inline auto real<_T, _L, _R, _Exp>::operator()(_Data const& __data) const{
     return get_value(__data);
 }
 
@@ -45,7 +45,7 @@ constexpr inline std::ostream& real<_T, _L, _R, _Exp>::print(std::ostream & __os
 
 template<typename _T, long long int _L, long long int _R, long long int _Exp>
 template<typename _Data>
-constexpr inline auto const& real<_T, _L, _R, _Exp>::get_value(_Data const& /*__data*/)const{
-    return _value;
+constexpr inline auto real<_T, _L, _R, _Exp>::get_value(_Data const& /*__data*/)const{
+    return static_cast<_T>(_value);
 }
 #endif // REAL_CONSTANT_MEAT_H

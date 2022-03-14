@@ -274,6 +274,21 @@ struct is_tensor_type<detail::negative_tensor_wrapper<_Tensor>>
     static constexpr bool value = true;
 };
 
+template <typename _Tensor>
+struct is_tensor_type<detail::pow_tensor_wrapper<_Tensor>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Base, typename _Tensor>
+struct is_tensor_type<detail::pow_tensor_derivative_wrapper<_Base, _Tensor>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+
 // This is the type which holds sequences
 template <std::size_t ... _Idx> struct sequence {
     static constexpr size_t size() noexcept { return sizeof...(_Idx); }
@@ -287,13 +302,13 @@ template <typename T, std::size_t Size, bool Enable>
 struct get_tensor_array_type;
 
 template <typename T, std::size_t Size>
-struct get_tensor_array_type<T, Size, true>
+struct get_tensor_array_type<T, Size, false>
 {
     using data_type = std::array<T, Size>;
 };
 
 template <typename T, std::size_t Size>
-struct get_tensor_array_type<T, Size, false>
+struct get_tensor_array_type<T, Size, true>
 {
     using data_type = std::vector<T>;
 };

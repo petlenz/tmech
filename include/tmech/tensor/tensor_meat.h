@@ -309,6 +309,8 @@ tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor):
     static_assert(_Tensor::dimension() == Dim, "tensor::operator=(): no matching dimensions");
     using type = typename detail::meta_for_loop_deep<Dim, Rank-1>::type;
 
+    check_size();
+
     if constexpr (std::is_same_v<_Tensor, tensor<T, Dim, Rank>>){
         _data = std::forward<_Tensor>(__tensor)._data;
     }else{

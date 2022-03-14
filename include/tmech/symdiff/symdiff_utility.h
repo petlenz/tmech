@@ -140,8 +140,49 @@ struct is_symdiff_type<detail::tensor_function_wrapper<_Expr, _Func>>
     static constexpr bool value = true;
 };
 
+template <typename _Expr, typename _Func>
+struct is_symdiff_type<detail::tensor_isotropic_function_wrapper<_Expr, _Func>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Father>
+struct is_symdiff_type<detail::tensor_isotropic_function_wrapper_derivative<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Father>
+struct is_symdiff_type<detail::as_sym_wrapper<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Expr, typename _RealExpo>
+struct is_symdiff_type<detail::tensor_pow_wrapper<_Expr, _RealExpo>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Father>
+struct is_symdiff_type<detail::tensor_pow_wrapper_derivative<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
 
 namespace detail {
+
+//template <typename _T>
+//struct has_refe
+//{
+//    has_refe() {}
+//};
+
 
 template<typename _Type, typename... _Arguments>
 using has_update = decltype(std::declval<_Type>().update(std::declval<_Arguments>()...));

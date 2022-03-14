@@ -65,4 +65,25 @@ constexpr inline auto cof(_Expression);
 template<typename _Expression, typename >
 constexpr inline auto inv(_Expression);
 
+template<typename _Expression, typename >
+constexpr inline auto sqrt(_Expression);
+
+template<typename _Expression, typename >
+constexpr inline auto exp_sym(_Expression);
+
+template<typename _Expression, typename >
+constexpr inline auto log(_Expression);
+
+template<typename _Expression, typename >
+constexpr inline auto positive(_Expression);
+
+template<typename _Expression, typename >
+constexpr inline auto negative(_Expression);
+
+template<typename _Expression, long long int _L, long long int _R, long long int _E, typename>
+constexpr inline auto pow(_Expression, symdiff::real<int, _L, _R, _E>);
+
+template<typename _DataType, std::size_t _ID>
+constexpr inline auto as_sym(symdiff::variable<_DataType, _ID>);
+
 #endif // TMECH_FUNCTIONS_FORWARD_H
