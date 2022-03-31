@@ -106,7 +106,7 @@ constexpr inline auto operator-(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
  * The most right index of the left hand side tensor is contracted
  * with the most left index of the right hand tensor
  * \f[
- * C_{i_{1},...,i_{m+n-2}} = A_{i_{1},...,i_{m-1},k} - B_{k,i_{2},...,i_{n}}
+ * C_{i_{1},...,i_{m+n-2}} = A_{i_{1},...,i_{m-1},k} * B_{k,i_{2},...,i_{n}}
  * \f]
  *
  * \code{.cpp}
