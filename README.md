@@ -1,6 +1,6 @@
 ## Introduction
 
-`tmech` is a C++ library for the numerical analysis of physical effects with symbolic compile time differentiation.
+`tmech` is a C++ library for the numerical study of the physics of continuous materials using tensors
 
 `tmech` provides
 
