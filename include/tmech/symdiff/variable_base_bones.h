@@ -59,13 +59,13 @@ public:
     template<typename _Data>
     constexpr inline auto update(_Data const& __data){
         if constexpr(std::experimental::is_detected<has_update_imp, _Derived, _Data>::value){
-            return static_cast<_Derived*>(this)->update_imp(__data);
+            static_cast<_Derived*>(this)->update_imp(__data);
         }
     }
 
     constexpr inline auto reset(){
         if constexpr(std::experimental::is_detected<has_reset_imp, _Derived>::value){
-            return static_cast<_Derived*>(this)->reset_imp();
+            static_cast<_Derived*>(this)->reset_imp();
         }
     }
 

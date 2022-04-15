@@ -123,14 +123,14 @@ public:
 private:
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto scalar_wrt_scalar(Function & __func, Direction const& __A, Result & __result, T const __eps){
-        const T inv_eps{1.0/(2.0*__eps)};
+        const T inv_eps{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
 
         __result = (__func(__A+__eps) - __func(__A-__eps))*inv_eps;
     }
 
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto tensor_wrt_scalar(Function & __func, Direction const& __A, Result & __result, T const __eps){
-        const T inv_eps{1.0/(2.0*__eps)};
+        const T inv_eps{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
 
         __result = (__func(__A+__eps) - __func(__A-__eps))*inv_eps;
     }
@@ -140,7 +140,7 @@ private:
         using direction_loop = basis_pair_loop<Direction::dimension(), Direction::rank()/2ul>;
 
         const T eps_half{__eps/(sizeof... (SymDirection))};
-        const T inv_eps{1.0/((sizeof... (SymDirection))*__eps)};
+        const T inv_eps{static_cast<T>(1.0)/((sizeof... (SymDirection))*__eps)};
 
         //dS/dC_{ij}
         tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
@@ -169,7 +169,7 @@ private:
         using function_loop  = typename meta_for_loop_deep<Direction::dimension(), FuncRank-1>::type;
 
         const T eps_half{__eps/(sizeof... (SymDirection))};
-        const T inv_eps{1.0/((sizeof... (SymDirection))*__eps)};
+        const T inv_eps{static_cast<T>(1.0)/((sizeof... (SymDirection))*__eps)};
 
         tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
         tensor<T, Direction::dimension(), Direction::rank()> Dm(__A);

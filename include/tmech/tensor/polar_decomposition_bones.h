@@ -89,6 +89,7 @@ private:
 } // NAMESPACE DETAIL
 
 
+
 //This class provides two different methods.
 // * In the first method the orthogonal second order tensor \f$\SecondT{R}\f$ is obtained
 // * with the <a href="https://en.wikipedia.org/wiki/Polar_decomposition">iterative algorithm</a>.
@@ -122,5 +123,6 @@ private:
 // * \f]
 // * where \f$\tilde{\SecondT{U}} = \text{trace}(\SecondT{U})\SecondT{I} - \SecondT{U}\f$, \f$ \tilde{\SecondT{V}} = \text{trace}(\SecondT{V})\SecondT{I} - \SecondT{V}\f$.
 // *
+
 
 #endif // POLAR_DECOMPOSITION_BONES_H

@@ -335,6 +335,82 @@ public:
     using squeezedType = typename get_zero<data_type>::type;
 };
 
+//inner_product<<1,2><1,2>>(0.5*(otimesu(I,I) + otimesl(I,I)), I) = I
+template <typename _Type, typename _T>
+class squeezer<
+        tensor_inner_product_wrapper<
+        binary_expression_wrapper<
+        real<_T,5,0,0>,
+        binary_expression_wrapper<
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,3>, tmech::sequence<2,4>>,
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,4>, tmech::sequence<2,3>>,
+        op_add>,
+        op_mul>,
+        tensor_one<_Type>,
+        tmech::sequence<1,2>,
+        tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_one<_Type>;
+};
+
+//inner_product<<1,2><1,2>>(I, 0.5*(otimesu(I,I) + otimesl(I,I))) = I
+template <typename _Type, typename _T>
+class squeezer<
+        tensor_inner_product_wrapper<
+        tensor_one<_Type>,
+        binary_expression_wrapper<
+        real<_T,5,0,0>,
+        binary_expression_wrapper<
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,3>, tmech::sequence<2,4>>,
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,4>, tmech::sequence<2,3>>,
+        op_add>,
+        op_mul>,
+        tmech::sequence<1,2>,
+        tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_one<_Type>;
+};
+
+//inner_product<<1,2><1,2>>(0.5*(otimesu(I,I) + otimesl(I,I)), as_sym_wrapper<_type>) = as_sym_wrapper
+template <typename _Type, typename _T>
+class squeezer<
+        tensor_inner_product_wrapper<
+        binary_expression_wrapper<
+        real<_T,5,0,0>,
+        binary_expression_wrapper<
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,3>, tmech::sequence<2,4>>,
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,4>, tmech::sequence<2,3>>,
+        op_add>,
+        op_mul>,
+        as_sym_wrapper<_Type>,
+        tmech::sequence<1,2>,
+        tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_one<_Type>;
+};
+
+//inner_product<<1,2><1,2>>(as_sym_wrapper<_Type>, 0.5*(otimesu(I,I) + otimesl(I,I))) = as_sym_wrapper
+template <typename _Type, typename _T>
+class squeezer<
+        tensor_inner_product_wrapper<
+        as_sym_wrapper<_Type>,
+        binary_expression_wrapper<
+        real<_T,5,0,0>,
+        binary_expression_wrapper<
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,3>, tmech::sequence<2,4>>,
+        tensor_outer_product_wrapper<tensor_one<_Type>, tensor_one<_Type>, tmech::sequence<1,4>, tmech::sequence<2,3>>,
+        op_add>,
+        op_mul>,
+        tmech::sequence<1,2>,
+        tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_one<_Type>;
+};
+
 
 //inner_product<<1,2><1,2>>(outer<<1,3><2,4>>(I,I),X) = X
 template <typename _Type, typename _ExprRHS>
