@@ -1,3 +1,4 @@
 add_tmech_example(example_eigenvalues1 eigenvalues1.cpp)
 add_tmech_example(example_eigenvalues2 eigenvalues2.cpp)
 add_tmech_example(example_eigenvalues_non_repeated eigenvalues_non_repeated.cpp)
+add_tmech_example(eigenvalues_inv_eigenbasis eigenvalues_inv_eigenbasis.cpp)

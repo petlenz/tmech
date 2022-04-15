@@ -1,1 +1,1 @@
-add_tmech_example(example_system_nonlinear_equations main.cpp)
+add_tmech_example(j2_plasticity main.cpp)

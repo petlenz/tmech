@@ -137,6 +137,7 @@ set(TMECH_TENSOR_HEADER
     ${TMECH_INCLUDE_DIR}/tmech/tensor/convert_tensor_to_voigt.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/pow_tensor_derivative_wrapper_bones.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/pow_tensor_derivative_wrapper_meat.h
+    ${TMECH_INCLUDE_DIR}/tmech/tmech_forward_definitions.h
     )
 
 set(TMECH_SYMDIFF_HEADER

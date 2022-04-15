@@ -69,17 +69,9 @@ public:
 
     constexpr inline auto evaluate_eigenbasis();
 
-    constexpr inline size_type number_non_repeated_eigenvalues()const{
-        if constexpr (data_type_tensor::dimension() == 2){
-            return (all_eigenvalues_repeated() ? 1 : 2);
-        }else if constexpr (data_type_tensor::dimension() == 3){
-            return (all_eigenvalues_repeated() ? 1 : pair_eigenvalues_repeated() ? 2 : 3);
-        }
-    }
+    constexpr inline size_type number_non_repeated_eigenvalues()const;
 
-    constexpr inline auto permutation()const{
-        return _permut;
-    }
+    constexpr inline auto permutation()const;
 
 private:
     constexpr inline auto get_repeated_eigenvalues();

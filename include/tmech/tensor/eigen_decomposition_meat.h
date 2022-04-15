@@ -85,6 +85,21 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::pair_eigenvalues_repe
 }
 
 template <typename Tensor>
+constexpr inline typename eigen_decomposition_wrapper<Tensor>::size_type eigen_decomposition_wrapper<Tensor>::number_non_repeated_eigenvalues()const{
+    if constexpr (data_type_tensor::dimension() == 2){
+        return (all_eigenvalues_repeated() ? 1 : 2);
+    }else if constexpr (data_type_tensor::dimension() == 3){
+        return (all_eigenvalues_repeated() ? 1 : pair_eigenvalues_repeated() ? 2 : 3);
+    }
+}
+
+template <typename Tensor>
+constexpr inline auto eigen_decomposition_wrapper<Tensor>::permutation()const{
+    return _permut;
+}
+
+
+template <typename Tensor>
 constexpr inline auto eigen_decomposition_wrapper<Tensor>::non_repeated_eigenvalues_index()const{
     switch (number_non_repeated_eigenvalues()) {
     case 1:
