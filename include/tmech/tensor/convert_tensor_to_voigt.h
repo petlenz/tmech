@@ -1,3 +1,10 @@
+/***************************************************************************
+* Copyright (c) Peter Lenz                                                 *
+*                                                                          *
+* Distributed under the terms of the BSD 3-Clause License.                 *
+*                                                                          *
+* The full license is in the file LICENSE, distributed with this software. *
+****************************************************************************/
 #ifndef CONVERT_TENSOR_TO_VOIGT_H
 #define CONVERT_TENSOR_TO_VOIGT_H
 
