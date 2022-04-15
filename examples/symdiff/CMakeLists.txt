@@ -1,1 +1,2 @@
 add_subdirectory(system_nonlinear_equations)
+add_subdirectory(linear_elasticity)

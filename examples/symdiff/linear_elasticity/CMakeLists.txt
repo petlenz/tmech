@@ -1,0 +1,1 @@
+add_tmech_example(example_symdiff_linear_elasticity main.cpp)
