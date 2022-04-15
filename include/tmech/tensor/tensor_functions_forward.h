@@ -44,6 +44,11 @@ constexpr inline auto almost_equal(_TensorLHS && __tensor_lhs, _TensorRHS && __t
  * \f]
  * and represents a transposition of the two inner bases.
  *
+ * \code{.cpp}
+ * tmech::tensor<double,3,2> A, B;
+ * tmech::tensor<double,3,4> C{tmech::otimesu(A,B)};
+ * \endcode
+ *
  * @tparam _TensorLHS Left hand side tensor object
  * @tparam _TensorRHS Right hand side tensor object
  *
@@ -59,6 +64,11 @@ constexpr auto otimesu(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
  * \f[
  * \FourthT{C} =  \SecondT{A} \underline{\otimes} \SecondT{B} =  A_{ij} B_{kl} \SecondT{e}_i \otimes \SecondT{e}_l \otimes \SecondT{e}_j \otimes \SecondT{e}_k.
  * \f]
+ *
+ * \code{.cpp}
+ * tmech::tensor<double,3,2> A, B;
+ * tmech::tensor<double,3,4> C{tmech::otimesl(A,B)};
+ * \endcode
  *
  * @tparam _TensorLHS Left hand side tensor object
  * @tparam _TensorRHS Right hand side tensor object
@@ -79,9 +89,9 @@ constexpr auto otimesl(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
  *
  * \code{.cpp}
  * tmech::tensor<double,3,2> A, B;
- * tmech::tensor<double,3,4> C{tmech::times(A,B)};
- * tmech::tensor<double,3,6> D{tmech::times(C,B)};
- * tmech::tensor<double,3,8> E{tmech::times(C,C)};
+ * tmech::tensor<double,3,4> C{tmech::otimes(A,B)};
+ * tmech::tensor<double,3,6> D{tmech::otimes(C,B)};
+ * tmech::tensor<double,3,8> E{tmech::otimes(C,C)};
  * \endcode
  *
  * @tparam _TensorLHS Left hand side tensor object
