@@ -1,6 +1,6 @@
 ## Introduction
 
-`tmech` is a C++ library for the numerical study of the physics of continuous materials using higher-oder tensors
+`tmech` is a C++ library for the numerical study of the physics of continuous materials using higher-order tensors
 
 `tmech` provides
 
