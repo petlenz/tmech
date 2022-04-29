@@ -80,7 +80,6 @@ constexpr inline auto volumetric_wrapper<Tensor>::rank(){
 template <typename Tensor>
 constexpr inline auto volumetric_wrapper<Tensor>::evaluate(){
     if(!is_init){
-
         evaluate::apply(_data);
 
         _trace = 0;

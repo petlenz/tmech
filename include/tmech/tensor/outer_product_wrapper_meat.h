@@ -41,20 +41,8 @@ constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate(){
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_LHS>::value){
-        if constexpr (std::is_reference_v<_LHS>){
-            const_cast<data_type_LHS&>(lhs).evaluate();
-        }else{
-            lhs.evaluate();
-        }
-    }
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_RHS>::value){
-        if constexpr (std::is_reference_v<_RHS>){
-            const_cast<data_type_RHS&>(rhs).evaluate();
-        }else{
-            rhs.evaluate();
-        }
-    }
+    evaluate::apply(lhs);
+    evaluate::apply(rhs);
 }
 
 } // NAMESPACE DETAIL

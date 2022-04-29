@@ -127,8 +127,6 @@ constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate_derivatives(){
     _derivative.fill(0);
     if(_expo > 0){
         const tensor<value_type, dimension(), 2> temp{_data_expr};
-        std::cout<<std::endl;
-        std::cout<<temp<<std::endl;
         _data_i.clear();
         _data_i.reserve(_expo);
         _data_i.emplace_back(eye<value_type, dimension(), 2>());

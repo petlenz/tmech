@@ -77,13 +77,7 @@ constexpr inline auto abs_tensor_wrapper<_Tensor>::rank(){
 */
 template <typename _Tensor>
 constexpr inline auto abs_tensor_wrapper<_Tensor>::evaluate(){
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_tensor>::value){
-        if constexpr (std::is_reference_v<_Tensor>){
-            const_cast<data_type_tensor&>(_data).evaluate();
-        }else{
-            _data.evaluate();
-        }
-    }
+    evaluate::apply(_data);
 }
 //@}
 } // NAMESPACE DETAIL

@@ -81,14 +81,8 @@ template <typename _Tensor>
 template<typename _Result>
 constexpr inline auto cofactor_wrapper<_Tensor>::evaluate_imp(_Result & result){
     if(!this->_is_init){
-        if constexpr(std::experimental::is_detected<detail::has_raw_data, data_type_tensor>::value){
-            if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_tensor>::value){
-                if constexpr (std::is_reference_v<_Tensor>){
-                    const_cast<data_type_tensor&>(_data_basis).evaluate();
-                }else{
-                    _data_basis.evaluate();
-                }
-            }
+        if constexpr(is_detected<has_raw_data, data_type_tensor>::value){
+            evaluate::apply(_data_basis);
             evaluate_details(result.raw_data(), _data_basis.raw_data());
         }else{
             result = _data_basis;

@@ -102,9 +102,7 @@ public:
 
     constexpr inline auto get_derivative()const;
 
-    constexpr inline auto raw_data()const{
-        return _data.raw_data();
-    }
+    constexpr inline auto raw_data()const;
 
 private:
     constexpr inline auto evaluate_Gij();

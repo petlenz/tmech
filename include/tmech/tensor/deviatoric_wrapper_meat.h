@@ -68,13 +68,7 @@ constexpr inline auto deviatoric_wrapper<_Tensor>::rank(){
 template <typename _Tensor>
 constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate(){
     if(!this->_is_init){
-        if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_tensor>::value){
-            if constexpr (std::is_reference_v<_Tensor>){
-                const_cast<data_type_tensor&>(_data).evaluate();
-            }else{
-                _data.evaluate();
-            }
-        }
+        evaluate::apply(_data);
         _trace = 0;
         for(size_type i{0}; i<dimension(); ++i){
             _trace += _data(i,i);

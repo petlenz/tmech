@@ -31,21 +31,7 @@ public:
 
 
     template<typename System, typename Vector_x, typename Vector_dx, typename T>
-    static constexpr inline auto apply(System & A, Vector_x & x, Vector_dx & dx, T const tol){
-        constexpr std::size_t size{std::tuple_size_v<Vector_x>};
-
-        //get jacobian and residuum
-        auto [J, R]{A(x)};
-
-        //solve
-        general_lu_solver::apply(J, R, dx);
-
-        //update
-        update<0, size>(x, dx);
-
-        //return norm
-        return std::sqrt(norm_tuple<0, size>(dx));
-    }
+    static constexpr inline auto apply(System & A, Vector_x & x, Vector_dx & dx, T const tol);
 
 private:
     template<std::size_t I, std::size_t Size, typename Vector_x, typename Vector_dx>

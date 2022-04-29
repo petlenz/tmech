@@ -17,33 +17,19 @@ public:
     using value_type = _T;
     using el_type = typename detail::element_type<_T>::value_type;
 
-    randn(el_type mean = 0, el_type stddev = 1):
-        rng(dev()),
-        dist(mean, stddev)
-    {}
+    randn(el_type mean = 0, el_type stddev = 1);
 
-    randn(randn const& data):
-        rng(data.rng),
-        dist(data.dist)
-    {}
+    randn(randn const& data);
 
     template<typename ...Indices>
-    constexpr inline auto operator()(const Indices... indices)const{
-        return _data(indices...);
-    }
+    constexpr inline auto operator()(const Indices... indices)const;
 
-    static constexpr inline auto rank(){
-        return _Rank;
-    }
+    static constexpr inline auto rank();
 
-    static constexpr inline auto dimension(){
-        return _Dim;
-    }
+    static constexpr inline auto dimension();
 
-    constexpr inline auto evaluate(){
-        auto gen = [&](){return dist(rng);};
-        std::generate(std::begin(_data.data()), std::end(_data.data()), gen);
-    }
+    constexpr inline auto evaluate();
+
 private:
     std::random_device dev;
     std::mt19937 rng;

@@ -31,7 +31,7 @@ constexpr eye<T, Dim, Rank>::eye()
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
 template<typename ...Indices>
-constexpr inline auto eye<T, Dim, Rank>::operator ()(const Indices... indices)const{
+constexpr inline auto eye<T, Dim, Rank>::operator ()(const Indices... indices)const noexcept{
     return static_cast<value_type>(value(indices...));
 }
 //@}
@@ -44,7 +44,7 @@ constexpr inline auto eye<T, Dim, Rank>::operator ()(const Indices... indices)co
 * Returns the dimension.
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto eye<T, Dim, Rank>::dimension(){
+constexpr inline auto eye<T, Dim, Rank>::dimension()noexcept{
     return Dim;
 }
 
@@ -52,7 +52,7 @@ constexpr inline auto eye<T, Dim, Rank>::dimension(){
 * @brief Returns the rank.
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto eye<T, Dim, Rank>::rank(){
+constexpr inline auto eye<T, Dim, Rank>::rank()noexcept{
     return Rank;
 }
 //@}
@@ -67,7 +67,7 @@ constexpr inline auto eye<T, Dim, Rank>::rank(){
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
 template<typename ...Indicies>
-constexpr inline auto eye<T, Dim, Rank>::value(size_type const i, size_type const j, Indicies const ... indices){
+constexpr inline auto eye<T, Dim, Rank>::value(size_type const i, size_type const j, Indicies const ... indices)noexcept{
     return (i == j ? 1 : 0)*value(indices...);
 }
 
@@ -78,7 +78,7 @@ constexpr inline auto eye<T, Dim, Rank>::value(size_type const i, size_type cons
 * Indices must be unsigned integers, the number of indices must be equal to the rank of the expression.
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto eye<T, Dim, Rank>::value(size_type const i, size_type const j){
+constexpr inline auto eye<T, Dim, Rank>::value(size_type const i, size_type const j)noexcept{
     return (i == j ? 1 : 0);
 }
 //@}

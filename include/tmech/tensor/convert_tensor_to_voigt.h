@@ -40,9 +40,7 @@ public:
         //meta for loop
         using meta_loop = typename meta_for_loop_deep_symmetric<_Tensor::dimension(), _Tensor::rank()/2 - 1>::type;
 
-        if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor>::value){
-            const_cast<_Tensor&>(__tensor).evaluate();
-        }
+        evaluate::apply(__tensor);
 
         const auto lambda{[&](auto&&... numbers){
                 __ptr[single_index(numbers...)] = tuple_call(__tensor, std::make_tuple(numbers...), index_tuple());

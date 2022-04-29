@@ -861,13 +861,36 @@ template<typename _Tensor, typename >
 constexpr inline auto eigen_decomposition(_Tensor && __tensor);
 
 
+/**
+ * @brief The determinant of a second-order tensor object.
+ *
+ * \code{.cpp}
+ * tmech::tensor<double, 3, 2> A;
+ * A.randn();
+ * auto detA = tmech::det(A);
+ * \endcode
+ *
+ * @param _Derived Tensor object from which the determinant is to be formed.
+*/
+template<typename _Derived>
+constexpr inline auto det(tensor_base<_Derived>const& __A);
 
 
-
-
-template<typename Derived>
-constexpr inline auto det(tensor_base<Derived>const& __A);
-
+/**
+ * @brief n-th Power of a second-order tensor object.
+ *
+ * \f[
+ * \boldsymbol{a}^n &= \boldsymbol{a}\boldsymbol{a}
+ * \f]
+ *
+ * \code{.cpp}
+ * tmech::tensor<double, 3, 2> A;
+ * A.randn();
+ * auto powA = tmech::pow(A, 3);
+ * \endcode
+ *
+ * @param data_base Tensor object from which the n-th power is to be formed.
+*/
 template<typename _Tensor, typename T, typename, typename >
 constexpr inline auto pow(_Tensor && __tensor, T const exp);
 

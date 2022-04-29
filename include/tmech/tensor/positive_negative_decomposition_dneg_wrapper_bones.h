@@ -31,9 +31,9 @@ public:
 
     constexpr inline auto evaluate();
 
-    constexpr inline auto const& get_base()const{
-        return base;
-    }
+//    constexpr inline auto const& get_base()const{
+//        return base;
+//    }
 private:
     Tensor const& V;
     Base const& base;

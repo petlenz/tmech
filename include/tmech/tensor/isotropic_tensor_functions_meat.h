@@ -63,6 +63,11 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::rank(){
 //@}
 
 template <typename Tensor, typename Func>
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::raw_data()const{
+    return _data.raw_data();
+}
+
+template <typename Tensor, typename Func>
 constexpr inline auto isotropic_tensor_function<Tensor, Func>::derivative(){
     _eigen_decomposition.decompose_eigenbasis();
     const auto eig_values{_eigen_decomposition.eigenvalues()};

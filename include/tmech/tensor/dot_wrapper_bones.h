@@ -22,18 +22,20 @@ public:
     static constexpr inline auto evaluate(tensor_base<_DerivedLHS> const& __lhs_base, tensor_base<_DerivedRHS> const& __rhs_base){
         using value_type_LHS = typename _DerivedLHS::value_type;
         using value_type_RHS = typename _DerivedLHS::value_type;
-        constexpr bool LHS_raw_data{std::experimental::is_detected<has_raw_data, _DerivedLHS>::value};
-        constexpr bool RHS_raw_data{std::experimental::is_detected<has_raw_data, _DerivedRHS>::value};
+        constexpr bool LHS_raw_data{is_detected<has_raw_data, _DerivedLHS>::value};
+        constexpr bool RHS_raw_data{is_detected<has_raw_data, _DerivedRHS>::value};
+        constexpr bool LHS_has_evaluate{is_detected<has_evaluate, _DerivedLHS>::value};
+        constexpr bool RHS_has_evaluate{is_detected<has_evaluate, _DerivedRHS>::value};
 
         _DerivedLHS const& lhs{__lhs_base.convert()};
         _DerivedRHS const& rhs{__rhs_base.convert()};
 
-        if constexpr(RHS_raw_data && std::experimental::is_detected<detail::has_evaluate, _DerivedRHS>::value){
-            const_cast<_DerivedRHS&>(__rhs_base).evaluate();
+        if constexpr(RHS_raw_data && RHS_has_evaluate){
+            evaluate::apply(rhs);
         }
 
-        if constexpr(LHS_raw_data && std::experimental::is_detected<detail::has_evaluate, _DerivedLHS>::value){
-            const_cast<_DerivedLHS&>(rhs).evaluate();
+        if constexpr(LHS_raw_data && LHS_has_evaluate){
+            evaluate::apply(lhs);
         }
 
         constexpr auto Size{get_tensor_size<_DerivedLHS::dimension(), _DerivedLHS::rank()>::size};

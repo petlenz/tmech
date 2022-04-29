@@ -75,13 +75,7 @@ constexpr inline auto negative_tensor_wrapper<Tensor>::rank(){
 */
 template <typename Tensor>
 constexpr inline auto negative_tensor_wrapper<Tensor>::evaluate(){
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_tensor>::value){
-        if constexpr (std::is_reference_v<Tensor>){
-            const_cast<data_type_tensor&>(_data).evaluate();
-        }else{
-            _data.evaluate();
-        }
-    }
+    evaluate::apply(_data);
 }
 //@}
 

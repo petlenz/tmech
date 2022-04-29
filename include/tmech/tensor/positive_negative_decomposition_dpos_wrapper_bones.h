@@ -31,13 +31,9 @@ public:
 
     constexpr inline auto evaluate();
 
-    constexpr inline auto const& get_base()const{
-        return base;
-    }
-protected:
-    constexpr inline auto evaluate_test(){
-        std::cout<<"Test"<<std::endl;
-    }
+//    constexpr inline auto const& get_base()const{
+//        return base;
+//    }
 
 private:
     Tensor const& V;

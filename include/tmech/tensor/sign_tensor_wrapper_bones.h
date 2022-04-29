@@ -93,7 +93,7 @@ private:
 * @brief The tensor sign decomposition A = S*N, S = sign(A), N = sqrt(A*A)
 * https://www.maths.manchester.ac.uk/~higham/narep/narep225.pdf
 *
-* @tparam Tensor Tensor expression from which the
+* @tparam _Tensor Tensor expression from which the
 * sign decomposition should be determined.
 */
 template <typename _Tensor>
@@ -113,7 +113,7 @@ public:
     sign_tensor_wrapper(sign_tensor_wrapper const& data);
 
     template<typename ...Indicies>
-    constexpr inline auto operator ()(Indicies ... indicies)const;
+    constexpr inline auto operator()(Indicies ... indicies)const;
 
     constexpr inline auto N(){
         return sign_N_wrapper<sign_tensor_wrapper<_Tensor>>(*this);
@@ -125,7 +125,10 @@ public:
 
 private:
     constexpr inline auto decompose_S(){
-        decompose();
+        if(!_is_init_S){
+            decompose();
+            _is_init_S = true;
+        }
     }
 
     constexpr inline auto decompose_N(){

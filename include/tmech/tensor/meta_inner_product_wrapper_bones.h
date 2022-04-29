@@ -47,11 +47,11 @@ struct meta_inner_product{
 
         using type = typename meta_for_loop_deep<LHS::dimension(), SizeOuterLoop-1>::type;
 
-//        if constexpr (std::is_same_v<sequence<3,4>, SequenceLHS> && std::is_same_v<sequence<1,2>, SequenceRHS> && RankLHS == 4 && RankRHS == 4 && LHS::dimension() >= 2){
-//            constexpr std::size_t Size{LHS::dimension()*LHS::dimension()};
-//            gemm_wrapper<value_type_LHS, value_type_RHS, typename Result::value_type, Size, Size, Size, Size>::evaluate(lhs.raw_data(), rhs.raw_data(), res.raw_data());
-//            return ;
-//        }
+        if constexpr (std::is_same_v<sequence<3,4>, SequenceLHS> && std::is_same_v<sequence<1,2>, SequenceRHS> && RankLHS == 4 && RankRHS == 4 && LHS::dimension() >= 2){
+            constexpr std::size_t Size{LHS::dimension()*LHS::dimension()};
+            gemm_wrapper<value_type_LHS, value_type_RHS, typename Result::value_type, Size, Size, Size, Size>::evaluate(lhs.raw_data(), rhs.raw_data(), res.raw_data());
+            return ;
+        }
 
 //        if constexpr (std::is_same_v<sequence<3,4>, SequenceLHS> && std::is_same_v<sequence<1,2>, SequenceRHS> && RankLHS == 4 && RankRHS == 2 && LHS::dimension() >= 3){
 //            constexpr std::size_t Size{LHS::dimension()*LHS::dimension()};

@@ -55,7 +55,7 @@ public:
     constexpr inline auto const& operator=(tensor const& tensor) noexcept;
 
     template<typename Derived>
-    constexpr inline auto const& operator=(tensor_base<Derived> const& tensor_base) noexcept;
+    constexpr inline auto const& operator=(tensor_base<Derived> tensor_base) noexcept;
 
     template<typename _Tensor,  std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
     constexpr inline auto const& operator=(_Tensor && __tensor);

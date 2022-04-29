@@ -14,7 +14,7 @@ namespace detail {
 * @class abs_tensor_wrapper
 * @brief Element-wise absolute value.
 *
-* @tparam Tensor Tensor expression from which the
+* @tparam _Tensor Tensor expression from which the
 * element-wise absolute value is to be taken.
 */
 template <typename _Tensor>

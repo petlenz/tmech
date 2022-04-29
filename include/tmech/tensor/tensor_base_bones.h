@@ -9,12 +9,11 @@
 #define TENSOR_BASE_H
 
 /**
-    * @class tensor_base
-    * @brief Base class of a tensor and
-    * tensor objects.
-    *
-    * @tparam Derived Derived object
-    */
+* @class tensor_base
+* @brief Base class of tensor objects.
+*
+* @tparam _Derived Derived tensor object
+*/
 template<typename _Derived>
 class tensor_base
 {

@@ -583,10 +583,10 @@ constexpr inline auto eigen_decomposition(_Tensor && __tensor){
 
 
 
-template<typename Derived>
-constexpr inline auto det(tensor_base<Derived>const& __A){
-    static_assert (Derived::rank() == 2, "det: only for rank 2 tensors");
-    tensor<typename Derived::value_type, Derived::dimension(), Derived::rank()> temp{__A.convert()};
+template<typename _Derived>
+constexpr inline auto det(tensor_base<_Derived>const& __A){
+    static_assert (_Derived::rank() == 2, "det: only for rank 2 tensors");
+    tensor<typename _Derived::value_type, _Derived::dimension(), _Derived::rank()> temp{__A.convert()};
     //det wrapper
     constexpr auto rows{temp.dimension()};
     if constexpr (rows == 2){

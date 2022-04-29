@@ -65,6 +65,13 @@ struct is_tensor_type<randn<_T, _Dim, _Rank>>
     static constexpr bool value = true;
 };
 
+template <typename _T, std::size_t _Dim, std::size_t _Rank>
+struct is_tensor_type<randu<_T, _Dim, _Rank>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
 template <typename _Tensor>
 struct is_tensor_type<detail::adjoint_wrapper<_Tensor>>
 {
@@ -1160,10 +1167,17 @@ struct meta_for_loop_deep_symmetric<DIM, DEEP, DEEP>
 
 struct evaluate
 {
-    template<typename _Tensor, typename ..._Args>
-    static constexpr inline auto apply(_Tensor const& __data, _Args...){
-        if constexpr(std::experimental::is_detected<has_evaluate, _Tensor, _Args...>::value){
+    template<typename _Tensor>
+    static constexpr inline auto apply(_Tensor const& __data){
+        if constexpr(is_detected<has_evaluate, _Tensor>::value){
             const_cast<_Tensor&>(__data).evaluate();
+        }
+    }
+
+    template<typename _Tensor, typename _Result>
+    static constexpr inline auto apply(_Tensor const& __data, _Result & __result){
+        if constexpr(is_detected<has_evaluate, _Tensor, _Result>::value){
+            const_cast<_Tensor&>(__data).evaluate(__result);
         }
     }
 };

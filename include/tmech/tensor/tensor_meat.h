@@ -76,19 +76,17 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor const& tenso
 
 template<typename T, std::size_t Dim, std::size_t Rank>
 template<typename Derived>
-constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived> const& tensor_base) noexcept{
+constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived> tensor_base) noexcept{
     static_assert(Derived::rank() == Rank,     "tensor::operator=(): non matching rank");
     static_assert(Derived::dimension() == Dim, "tensor::operator=(): no matching dimensions");
     using type = typename detail::meta_for_loop_deep<Dim, Rank-1>::type;
-    const auto& tensor{tensor_base.convert()};
+    auto& tensor{tensor_base.convert()};
 
     check_size();
     if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
-        const_cast<Derived&>(tensor).evaluate(*this);
+        tensor.evaluate(*this);
     }else{
-        if constexpr(std::experimental::is_detected<detail::has_evaluate, typename std::remove_reference<Derived>::type>::value){
-            const_cast<Derived&>(tensor).evaluate();
-        }
+        detail::evaluate::apply(tensor);
         auto func{[&](auto ...numbers){(*this)(numbers...) = tensor(numbers...);}};
         type::loop(func);
     }

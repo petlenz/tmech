@@ -117,6 +117,9 @@ class tensor;
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 class randn;
 
+template <typename _T, std::size_t _Dim, std::size_t _Rank>
+class randu;
+
 template <typename T, std::size_t Dim>
 class levi_civita;
 

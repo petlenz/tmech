@@ -32,17 +32,17 @@ public:
     ~eye(){}
 
     template<typename ...Indices>
-    constexpr inline auto operator ()(const Indices... indices)const;
+    constexpr inline auto operator()(const Indices... indices)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
 private:
     template<typename ...Indicies>
-    static constexpr inline auto value(size_type const i, size_type const j, Indicies const ... indices);
+    static constexpr inline auto value(size_type const i, size_type const j, Indicies const ... indices)noexcept;
 
-    static constexpr inline auto value(size_type const i, size_type const j);
+    static constexpr inline auto value(size_type const i, size_type const j)noexcept;
 };
 
 #endif // IDENTITY_TENSOR_BONES_H

@@ -52,7 +52,38 @@ namespace detail {
 //    }
 //};
 
+namespace detail_is_detected {
+template <class Default, class AlwaysVoid,
+          template<class...> class Op, class... Args>
+struct detector {
+  using value_t = std::false_type;
+  using type = Default;
+};
 
+template <class Default, template<class...> class Op, class... Args>
+struct detector<Default, std::void_t<Op<Args...>>, Op, Args...> {
+  // Note that std::void_t is a C++17 feature
+  using value_t = std::true_type;
+  using type = Op<Args...>;
+};
+
+struct nonesuch {
+    nonesuch() = delete;
+    ~nonesuch() = delete;
+    nonesuch(nonesuch const&) = delete;
+    void operator=(nonesuch const&) = delete;
+};
+
+} // namespace detail
+
+template <template<class...> class Op, class... Args>
+using is_detected = typename detail_is_detected::detector<detail_is_detected::nonesuch, void, Op, Args...>::value_t;
+
+template <template<class...> class Op, class... Args>
+using detected_t = typename detail_is_detected::detector<detail_is_detected::nonesuch, void, Op, Args...>::type;
+
+template <class Default, template<class...> class Op, class... Args>
+using detected_or = detail_is_detected::detector<Default, void, Op, Args...>;
 
 
 template<typename T>

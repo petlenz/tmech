@@ -120,13 +120,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_imp(_Result & result){
 
     if(!this->_is_init){
         if constexpr (raw_data){
-            if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_tensor>::value){
-                if constexpr (std::is_reference_v<_Tensor>){
-                    const_cast<data_type_tensor&>(_data_basis).evaluate();
-                }else{
-                    _data_basis.evaluate();
-                }
-            }
+            evaluate::apply(_data);
             evaluate_details(result.raw_data(), _data_basis.raw_data());
         }else{
             result = _data_basis;

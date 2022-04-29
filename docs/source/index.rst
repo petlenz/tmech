@@ -8,8 +8,9 @@
 Introduction
 ------------
 
-`tmech` is a C++ library meant for numerical analysis with higher-order
-tensor expressions.
+'tmech' is a C++ library for the numerical study of the physics of continuous materials using higher-oder tensors
+.. `tmech` is a C++ library meant for numerical analysis with higher-order
+.. tensor expressions.
 
 `tmech` provides
 

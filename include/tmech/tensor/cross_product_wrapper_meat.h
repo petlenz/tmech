@@ -86,20 +86,8 @@ constexpr inline auto cross_product_wrapper<_LHS, _RHS>::rank(){
 */
 template<typename _LHS, typename _RHS>
 constexpr inline auto cross_product_wrapper<_LHS, _RHS>::evaluate(){
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_LHS>::value){
-        if constexpr (std::is_reference_v<_LHS>){
-            const_cast<data_type_LHS&>(_lhs).evaluate();
-        }else{
-            _lhs.evaluate();
-        }
-    }
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_RHS>::value){
-        if constexpr (std::is_reference_v<_RHS>){
-            const_cast<data_type_RHS&>(_rhs).evaluate();
-        }else{
-            _rhs.evaluate();
-        }
-    }
+    evaluate::apply(_lhs);
+    evaluate::apply(_rhs);
 }
 //@}
 

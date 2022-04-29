@@ -11,11 +11,12 @@
 namespace detail {
 
 /**
-* @class abs_tensor_wrapper
-* @brief Element-wise absolute value.
+* @class eval_tensor_wrapper
+* @brief temporary evaluation of a tensor expression into local memory.
+* A tensor expression is evaluated in the constructor of  %eval_tensor_wrapper.
 *
-* @tparam Tensor Tensor expression from which the
-* element-wise absolute value is to be taken.
+* @tparam _Tensor Tensor expression from which the
+* temporary evaluation is to be formed.
 */
 template <typename _Tensor>
 class eval_tensor_wrapper : public tensor_base<eval_tensor_wrapper<_Tensor>>
@@ -37,13 +38,6 @@ public:
     static constexpr inline auto dimension();
 
     constexpr inline auto raw_data()const;
-
-//    constexpr inline auto evaluate(){
-//        if(!this->_is_init){
-//            _data = _data_base;
-//            this->_is_init = true;
-//        }
-//    }
 
 private:
     tensor<value_type, dimension(), rank()> _data;
