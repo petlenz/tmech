@@ -17,19 +17,19 @@ public:
     using size_type  = std::size_t;
     using value_type = typename _Tensor::value_type;
 
-    polar_decomposition_dV_wrapper(_Base const & __base, _Tensor const& __dV);
+    polar_decomposition_dV_wrapper(_Base const & __base, _Tensor const& __dV)noexcept;
 
-    polar_decomposition_dV_wrapper(polar_decomposition_dV_wrapper const & __data);
+    polar_decomposition_dV_wrapper(polar_decomposition_dV_wrapper const & __data)noexcept;
 
-    constexpr inline auto const& operator()(size_type const i, size_type const j, size_type const k, size_type const l)const;
+    constexpr inline auto const& operator()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto raw_data()const;
+    constexpr inline auto raw_data()const noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     _Tensor const& _dV;

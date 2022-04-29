@@ -19,7 +19,7 @@ namespace detail {
  * @param data A tensor expression, from which the adjoint is computed.
 */
 template <typename _Tensor>
-adjoint_wrapper<_Tensor>::adjoint_wrapper(data_type_tensor const& data):
+adjoint_wrapper<_Tensor>::adjoint_wrapper(data_type_tensor const& data)noexcept:
     _data(),
     _data_basis(data)
 {}
@@ -30,7 +30,7 @@ adjoint_wrapper<_Tensor>::adjoint_wrapper(data_type_tensor const& data):
  * underlying tensor expression in copied.
  */
 template <typename _Tensor>
-adjoint_wrapper<_Tensor>::adjoint_wrapper(adjoint_wrapper const& data):
+adjoint_wrapper<_Tensor>::adjoint_wrapper(adjoint_wrapper const& data)noexcept:
     _data(data._data),
     _data_basis(data._data_basis)
 {}
@@ -45,7 +45,7 @@ adjoint_wrapper<_Tensor>::adjoint_wrapper(adjoint_wrapper const& data):
  * @param j Index specifying the position in the tensor expression.
 */
 template <typename _Tensor>
-constexpr inline auto adjoint_wrapper<_Tensor>::operator()(size_type const i, size_type const j)const{
+constexpr inline auto adjoint_wrapper<_Tensor>::operator()(size_type const i, size_type const j)const noexcept{
     return _data(i,j);
 }
 
@@ -54,7 +54,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::operator()(size_type const i, si
  * @return Read pointer to the underlying memory.
 */
 template <typename _Tensor>
-constexpr inline auto adjoint_wrapper<_Tensor>::raw_data()const{
+constexpr inline auto adjoint_wrapper<_Tensor>::raw_data()const noexcept{
     return _data.raw_data();
 }
 //@}
@@ -68,7 +68,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::raw_data()const{
 * @return dimension
 */
 template <typename _Tensor>
-constexpr inline auto adjoint_wrapper<_Tensor>::dimension(){
+constexpr inline auto adjoint_wrapper<_Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -77,7 +77,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::dimension(){
  * @return rank
  */
 template <typename _Tensor>
-constexpr inline auto adjoint_wrapper<_Tensor>::rank(){
+constexpr inline auto adjoint_wrapper<_Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
@@ -94,7 +94,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::rank(){
 */
 template <typename _Tensor>
 template<typename _Result>
-constexpr inline auto adjoint_wrapper<_Tensor>::evaluate(_Result & result){
+constexpr inline auto adjoint_wrapper<_Tensor>::evaluate(_Result & result)noexcept{
     this->_is_init = false;
     evaluate_imp(result);
 }
@@ -103,7 +103,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::evaluate(_Result & result){
 * @brief Internal memory is used to compute the result.
 */
 template <typename _Tensor>
-constexpr inline auto adjoint_wrapper<_Tensor>::evaluate(){
+constexpr inline auto adjoint_wrapper<_Tensor>::evaluate()noexcept{
     evaluate_imp(_data);
 }
 
@@ -115,7 +115,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::evaluate(){
 */
 template <typename _Tensor>
 template<typename _Result>
-constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_imp(_Result & result){
+constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_imp(_Result & result)noexcept{
     constexpr bool raw_data{std::experimental::is_detected<has_raw_data, data_type_tensor>::value};
 
     if(!this->_is_init){
@@ -142,7 +142,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_imp(_Result & result){
 * @param data Pointer to the data memory.
 */
 template <typename _Tensor>
-constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_details(value_type * result, value_type const* data){
+constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_details(value_type * result, value_type const* data)noexcept{
     if constexpr (dimension() == 1){
         result[0] = static_cast<value_type>(1.)/data[0];
         return ;
@@ -175,7 +175,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_details(value_type * re
 template <typename _Tensor>
 constexpr inline auto adjoint_wrapper<_Tensor>::adjoint_details_22(value_type * result,
                                                 value_type const A11, value_type const A12,
-                                                value_type const A21, value_type const A22){
+                                                value_type const A21, value_type const A22)noexcept{
     result[0] =  A22;
     result[1] = -A12;
     result[2] = -A21;
@@ -201,7 +201,7 @@ template <typename _Tensor>
 constexpr inline auto adjoint_wrapper<_Tensor>::adjoint_details_33(value_type * result,
                                                 value_type const A11, value_type const A12, value_type const A13,
                                                 value_type const A21, value_type const A22, value_type const A23,
-                                                value_type const A31, value_type const A32, value_type const A33){
+                                                value_type const A31, value_type const A32, value_type const A33)noexcept{
     result[0] = (A22*A33-A23*A32);
     result[1] = (A13*A32-A12*A33);
     result[2] = (A12*A23-A13*A22);

@@ -24,35 +24,21 @@ public:
     static_assert (_Sequence::size() != 0, "basis_change_wrapper: lhs sequence is empty");
     static_assert (!tmech::detail::check_duplicated_in_sequence_v<_Sequence>, "basis_change_wrapper: duplicated values in sequence");
 
-    basis_change_wrapper(_Tensor __data);
+    basis_change_wrapper(_Tensor __data)noexcept;
 
-    basis_change_wrapper(basis_change_wrapper const& __data);
+    basis_change_wrapper(basis_change_wrapper const& __data)noexcept;
 
     template<typename _Derived/*, typename = std::enable_if<!std::is_const_v<_Tensor> && std::is_reference_v<_Tensor>, bool>::type*/>
-    constexpr inline auto operator=(tensor_base<_Derived> const& __data_base){
-        using function_loop  = typename meta_for_loop_deep<dimension(), rank()-1>::type;
-        const auto& __data{__data_base.convert()};
-        if constexpr(std::experimental::is_detected<detail::has_evaluate, _Derived>::value){
-            const_cast<_Derived&>(__data).evaluate();
-        }
-
-        auto func = [&](auto ... numbers){
-                tuple_call(_data, std::make_tuple(numbers...), sequence()) = __data(numbers...);
-            };
-        function_loop::loop(func);
-    }
-
-    //template<typename _Derived, typename = std::enable_if<!(std::is_const_v<_Tensor> && std::is_reference_v<_Tensor>), bool>::type>
-    //constexpr inline auto operator=(tensor_base<_Derived> const&) = delete;
+    constexpr inline auto operator=(tensor_base<_Derived> const& __data_base)noexcept;
 
     template<typename ...Indicies>
-    constexpr inline auto operator()(Indicies... indices)const;
+    constexpr inline auto operator()(Indicies... indices)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     _Tensor _data;

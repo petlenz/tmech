@@ -18,7 +18,7 @@ namespace detail {
 * Default constructor
 */
 template <typename _Tensor>
-cofactor_wrapper<_Tensor>::cofactor_wrapper(data_type_tensor const& data):
+cofactor_wrapper<_Tensor>::cofactor_wrapper(data_type_tensor const& data)noexcept:
     _data(),
     _data_basis(data)
 {}
@@ -26,7 +26,7 @@ cofactor_wrapper<_Tensor>::cofactor_wrapper(data_type_tensor const& data):
  * Copy constructor
  */
 template <typename _Tensor>
-cofactor_wrapper<_Tensor>::cofactor_wrapper(cofactor_wrapper const& data):
+cofactor_wrapper<_Tensor>::cofactor_wrapper(cofactor_wrapper const& data)noexcept:
     _data(),
     _data_basis(data._data_basis)
 {}
@@ -34,7 +34,7 @@ cofactor_wrapper<_Tensor>::cofactor_wrapper(cofactor_wrapper const& data):
 
 
 template <typename _Tensor>
-constexpr inline auto cofactor_wrapper<_Tensor>::operator()(size_type const i, size_type const j)const{
+constexpr inline auto cofactor_wrapper<_Tensor>::operator()(size_type const i, size_type const j)const noexcept{
     return _data(i,j);
 }
 
@@ -46,7 +46,7 @@ constexpr inline auto cofactor_wrapper<_Tensor>::operator()(size_type const i, s
 * Returns the dimension.
 */
 template <typename _Tensor>
-constexpr inline auto cofactor_wrapper<_Tensor>::dimension(){
+constexpr inline auto cofactor_wrapper<_Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -54,7 +54,7 @@ constexpr inline auto cofactor_wrapper<_Tensor>::dimension(){
  * Returns the rank.
  */
 template <typename _Tensor>
-constexpr inline auto cofactor_wrapper<_Tensor>::rank(){
+constexpr inline auto cofactor_wrapper<_Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
@@ -62,24 +62,24 @@ constexpr inline auto cofactor_wrapper<_Tensor>::rank(){
 
 template <typename _Tensor>
 template<typename _Result>
-constexpr inline auto cofactor_wrapper<_Tensor>::evaluate(_Result & result){
+constexpr inline auto cofactor_wrapper<_Tensor>::evaluate(_Result & result)noexcept{
     this->_is_init = false;
     evaluate_imp(result);
 }
 
 template <typename _Tensor>
-constexpr inline auto cofactor_wrapper<_Tensor>::evaluate(){
+constexpr inline auto cofactor_wrapper<_Tensor>::evaluate()noexcept{
     evaluate_imp(_data);
 }
 
 template <typename _Tensor>
-constexpr inline auto cofactor_wrapper<_Tensor>::raw_data()const{
+constexpr inline auto cofactor_wrapper<_Tensor>::raw_data()const noexcept{
     return _data.raw_data();
 }
 
 template <typename _Tensor>
 template<typename _Result>
-constexpr inline auto cofactor_wrapper<_Tensor>::evaluate_imp(_Result & result){
+constexpr inline auto cofactor_wrapper<_Tensor>::evaluate_imp(_Result & result)noexcept{
     if(!this->_is_init){
         if constexpr(is_detected<has_raw_data, data_type_tensor>::value){
             evaluate::apply(_data_basis);
@@ -93,7 +93,7 @@ constexpr inline auto cofactor_wrapper<_Tensor>::evaluate_imp(_Result & result){
 }
 
 template <typename _Tensor>
-constexpr inline auto cofactor_wrapper<_Tensor>::evaluate_details(value_type * result, value_type const*const data){
+constexpr inline auto cofactor_wrapper<_Tensor>::evaluate_details(value_type * result, value_type const*const data)noexcept{
     if constexpr (dimension() == 1){
         result[0] = static_cast<value_type>(1.)/data[0];
         return ;
@@ -116,7 +116,7 @@ constexpr inline auto cofactor_wrapper<_Tensor>::evaluate_details(value_type * r
 template <typename _Tensor>
 constexpr inline auto cofactor_wrapper<_Tensor>::cofactors_details_22(value_type * result,
                                                                      value_type const A11, value_type const A12,
-                                                                     value_type const A21, value_type const A22){
+                                                                     value_type const A21, value_type const A22)noexcept{
     //cof(A) = adj(A)^T
     result[0] =  A22;
     result[1] = -A21;
@@ -128,7 +128,7 @@ template <typename _Tensor>
 constexpr inline auto cofactor_wrapper<_Tensor>::cofactors_details_33(value_type * result,
                                                   value_type const A0, value_type const A1, value_type const A2,
                                                   value_type const A3, value_type const A4, value_type const A5,
-                                                  value_type const A6, value_type const A7, value_type const A8){
+                                                  value_type const A6, value_type const A7, value_type const A8)noexcept{
     //0 1 2
     //3 4 5
     //6 7 8

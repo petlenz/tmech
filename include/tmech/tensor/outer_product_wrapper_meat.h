@@ -12,35 +12,35 @@
 namespace detail {
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-constexpr outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::outer_product_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs):
+constexpr outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::outer_product_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs)noexcept:
     lhs(__lhs),
     rhs(__rhs)
 {}
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-constexpr outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::outer_product_wrapper(outer_product_wrapper const& __data):
+constexpr outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::outer_product_wrapper(outer_product_wrapper const& __data)noexcept:
     lhs(__data.lhs),
     rhs(__data.rhs)
 {}
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 template<typename ...Indicies>
-constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::operator()(Indicies ... __indicies)const{
+constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::operator()(Indicies ... __indicies)const noexcept{
     return tuple_call(lhs,std::make_tuple(__indicies...),sequence_lhs())*tuple_call(rhs,std::make_tuple(__indicies...),sequence_rhs());
 };
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::dimension(){
+constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::dimension()noexcept{
     return data_type_RHS::dimension();
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::rank(){
+constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::rank()noexcept{
     return data_type_RHS::rank()+data_type_LHS::rank();
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate(){
+constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate()noexcept{
     evaluate::apply(lhs);
     evaluate::apply(rhs);
 }

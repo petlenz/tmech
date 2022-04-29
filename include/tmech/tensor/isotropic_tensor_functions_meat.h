@@ -18,7 +18,7 @@ namespace detail {
 * @brief Default constructor
 */
 template <typename Tensor, typename Func>
-constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(Tensor data):
+constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(Tensor data)noexcept:
     _data(),
     _deriv(),
     _Gij(),
@@ -29,7 +29,7 @@ constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(Ten
  * @brief Copy constructor
  */
 template <typename Tensor, typename Func>
-constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(isotropic_tensor_function const& data):
+constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(isotropic_tensor_function const& data)noexcept:
     _data(),
     _deriv(),
     _Gij(),
@@ -39,7 +39,7 @@ constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(iso
 
 
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::operator()(size_type const i, size_type const j)const{
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::operator()(size_type const i, size_type const j)const noexcept{
     return _data(i,j);
 }
 
@@ -50,25 +50,25 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::operator()(size_t
 * @brief Returns the dimension.
 */
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::dimension(){
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 /**
 * @brief Returns the rank.
 */
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::rank(){
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
 
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::raw_data()const{
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::raw_data()const noexcept{
     return _data.raw_data();
 }
 
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::derivative(){
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::derivative()noexcept{
     _eigen_decomposition.decompose_eigenbasis();
     const auto eig_values{_eigen_decomposition.eigenvalues()};
     const auto eig_basis{_eigen_decomposition.eigenbasis()};
@@ -92,7 +92,7 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::derivative(){
 }
 
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate(){
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate()noexcept{
     _eigen_decomposition.decompose_eigenbasis();
     const auto eig_values{_eigen_decomposition.eigenvalues()};
     const auto eig_basis{_eigen_decomposition.eigenbasis()};
@@ -121,12 +121,12 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate(){
 }
 
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::get_derivative()const{
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::get_derivative()const noexcept{
     return _deriv;
 }
 
 template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij(){
+constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij()noexcept{
     const auto eig_values{_eigen_decomposition.eigenvalues()};
     const auto eig_basis{_eigen_decomposition.eigenbasis()};
     const auto non_repeated_eigenvalues{_eigen_decomposition.non_repeated_eigenvalues_index()};

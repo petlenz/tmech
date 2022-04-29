@@ -19,7 +19,7 @@ namespace detail {
 * Default constructor
 */
 template <typename _Tensor>
-sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(_Tensor __data, value_type const __eps, size_type __max_iter):
+sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(_Tensor __data, value_type const __eps, size_type __max_iter)noexcept:
     _eps(__eps),
     _max_iter(__max_iter),
     _S(),
@@ -33,7 +33,7 @@ sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(_Tensor __data, value_type con
  * Copy constructor
  */
 template <typename _Tensor>
-sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(sign_tensor_wrapper const& __data):
+sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(sign_tensor_wrapper const& __data)noexcept:
     _eps(__data._eps),
     _max_iter(__data._max_iter),
     _S(),
@@ -46,12 +46,12 @@ sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(sign_tensor_wrapper const& __d
 
 template <typename _Tensor>
 template<typename ...Indicies>
-constexpr inline auto sign_tensor_wrapper<_Tensor>::operator ()(Indicies ... indicies)const{
+constexpr inline auto sign_tensor_wrapper<_Tensor>::operator ()(Indicies ... indicies)const noexcept{
     return _S(indicies...);
 }
 
 template <typename _Tensor>
-constexpr inline auto sign_tensor_wrapper<_Tensor>::decompose(){
+constexpr inline auto sign_tensor_wrapper<_Tensor>::decompose()noexcept{
     if(!_is_init_S){
         size_type iter{0};
         data_type _data_old;

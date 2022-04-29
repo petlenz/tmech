@@ -18,7 +18,7 @@ namespace detail {
 * @brief Default constructor
 */
 template <typename _Tensor>
-constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(data_type_tensor const& data):
+constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(data_type_tensor const& data)noexcept:
     _trace(0),
     _data(data)
 {}
@@ -27,14 +27,14 @@ constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(data_type_tensor const
  * @brief Copy constructor
  */
 template <typename _Tensor>
-constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(deviatoric_wrapper const& data):
+constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(deviatoric_wrapper const& data)noexcept:
     _trace(0),
     _data(data._data)
 {}
 //@}
 
 template <typename _Tensor>
-constexpr inline auto deviatoric_wrapper<_Tensor>::operator()(size_type const i, size_type const j)const{
+constexpr inline auto deviatoric_wrapper<_Tensor>::operator()(size_type const i, size_type const j)const noexcept{
     return (i == j ? _data(i,j)-_trace : _data(i,j));
 }
 
@@ -46,7 +46,7 @@ constexpr inline auto deviatoric_wrapper<_Tensor>::operator()(size_type const i,
 * @brief Returns the dimension.
 */
 template <typename _Tensor>
-constexpr inline auto deviatoric_wrapper<_Tensor>::dimension(){
+constexpr inline auto deviatoric_wrapper<_Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -54,7 +54,7 @@ constexpr inline auto deviatoric_wrapper<_Tensor>::dimension(){
 * @brief Returns the rank.
 */
 template <typename _Tensor>
-constexpr inline auto deviatoric_wrapper<_Tensor>::rank(){
+constexpr inline auto deviatoric_wrapper<_Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
@@ -66,7 +66,7 @@ constexpr inline auto deviatoric_wrapper<_Tensor>::rank(){
 * @brief Evaluates the underlying tensor expression and determines the trace.
 */
 template <typename _Tensor>
-constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate(){
+constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate()noexcept{
     if(!this->_is_init){
         evaluate::apply(_data);
         _trace = 0;

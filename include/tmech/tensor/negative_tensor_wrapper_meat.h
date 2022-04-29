@@ -18,7 +18,7 @@ namespace detail {
 * @brief Default constructor
 */
 template <typename Tensor>
-constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(data_type_tensor const& data):
+constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(data_type_tensor const& data)noexcept:
     _data(data)
 {}
 
@@ -26,7 +26,7 @@ constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(data_type_ten
  * @brief Copy constructor
  */
 template <typename Tensor>
-constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(negative_tensor_wrapper const& data):
+constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(negative_tensor_wrapper const& data)noexcept:
     _data(data._data)
 {}
 //@}
@@ -41,7 +41,7 @@ constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(negative_tens
 */
 template <typename Tensor>
 template<typename ...Indices>
-constexpr inline auto negative_tensor_wrapper<Tensor>::operator ()(Indices ... indices)const{
+constexpr inline auto negative_tensor_wrapper<Tensor>::operator ()(Indices ... indices)const noexcept{
     return -_data(indices...);
 }
 //@}
@@ -54,7 +54,7 @@ constexpr inline auto negative_tensor_wrapper<Tensor>::operator ()(Indices ... i
 * @brief Returns the dimension.
 */
 template <typename Tensor>
-constexpr inline auto negative_tensor_wrapper<Tensor>::dimension(){
+constexpr inline auto negative_tensor_wrapper<Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -62,7 +62,7 @@ constexpr inline auto negative_tensor_wrapper<Tensor>::dimension(){
 * @brief Returns the rank.
 */
 template <typename Tensor>
-constexpr inline auto negative_tensor_wrapper<Tensor>::rank(){
+constexpr inline auto negative_tensor_wrapper<Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
@@ -74,7 +74,7 @@ constexpr inline auto negative_tensor_wrapper<Tensor>::rank(){
 * @brief Evaluates the underlying left and right hand side tensor expression.
 */
 template <typename Tensor>
-constexpr inline auto negative_tensor_wrapper<Tensor>::evaluate(){
+constexpr inline auto negative_tensor_wrapper<Tensor>::evaluate()noexcept{
     evaluate::apply(_data);
 }
 //@}

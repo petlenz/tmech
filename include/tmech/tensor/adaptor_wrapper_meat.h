@@ -17,7 +17,7 @@
 * Default constructor
 */
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
-constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(_T * __data):
+constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(_T * __data)noexcept:
     _data(__data)
 {}
 
@@ -25,7 +25,7 @@ constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(_T * __data):
  * Copy constructor
  */
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
-constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(adaptor const& __data):
+constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(adaptor const& __data)noexcept:
     _data(__data._data)
 {}
 //@}
@@ -39,7 +39,7 @@ constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(adaptor const& __data):
 */
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
 template<typename _Derived>
-constexpr inline auto const& adaptor<_T, _Dim, _Rank, _Type>::operator=(tensor_base<_Derived> const& tensor_base){
+constexpr inline auto const& adaptor<_T, _Dim, _Rank, _Type>::operator=(tensor_base<_Derived> const& tensor_base)noexcept{
     static_assert(_Derived::rank() == _Rank,     "No matching rank in assignment operator");
     static_assert(_Derived::dimension() == _Dim, "No matching dimensions in assignment operator.");
 
@@ -61,7 +61,7 @@ constexpr inline auto const& adaptor<_T, _Dim, _Rank, _Type>::operator=(tensor_b
 */
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
 template<typename ...Indices>
-constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::operator()(Indices ...indices)const{
+constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::operator()(Indices ...indices)const noexcept{
     return _Type::apply(_data, indices...);
 }
 //@}
@@ -74,7 +74,7 @@ constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::operator()(Indices ...ind
 * Returns the dimension of the expression.
 */
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
-constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::dimension(){
+constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::dimension()noexcept{
     return _Dim;
 }
 
@@ -82,7 +82,7 @@ constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::dimension(){
  * Returns the rank of the expression.
  */
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
-constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::rank(){
+constexpr inline auto adaptor<_T, _Dim, _Rank, _Type>::rank()noexcept{
     return _Rank;
 }
 //@}

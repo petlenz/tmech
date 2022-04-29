@@ -25,14 +25,14 @@ public:
     using value_type = T;
     using size_type  = std::size_t;
 
-    constexpr zeros();
+    constexpr zeros()noexcept;
 
     template<typename ...Indices>
-    constexpr inline auto operator ()(const Indices... /*indices*/)const;
+    constexpr inline auto operator()(const Indices... /*indices*/)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 };
 
 

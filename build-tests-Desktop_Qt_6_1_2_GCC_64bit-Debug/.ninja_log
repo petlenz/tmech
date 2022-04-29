@@ -1,0 +1,17 @@
+# ninja log v5
+2	1170	1651224363534003745	_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	64e30729bce2aad9
+1	1461	1651224363826007446	_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o	9ace80999b3063ed
+1	2400	1651224364762019310	_deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o	e8eba3b0c1b35a04
+1	4145	1651224366506041419	_deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	9c950f71a69246d5
+4145	4172	1651224366538041825	lib/libgtestd.a	ea274e8bb29e6e39
+4172	4179	1651224366546041926	lib/libgtest_maind.a	2adaf0ee14c8a5ab
+4172	4196	1651224366562042129	lib/libgmockd.a	f38297e453b297c3
+4196	4204	1651224366570042230	lib/libgmock_maind.a	513d3dea679c017c
+0	44940	1651224407226558583	CMakeFiles/tmech_test.dir/main.cpp.o	1e55ecd2e16745eb
+44940	46860	1651224409206583776	tmech_test	f3e4cdc145bfb0c3
+3	44324	1651227445416207369	CMakeFiles/tmech_test.dir/main.cpp.o	1e55ecd2e16745eb
+44324	46132	1651227447280233328	tmech_test	f3e4cdc145bfb0c3
+3	42392	1651228149014247202	CMakeFiles/tmech_test.dir/main.cpp.o	1e55ecd2e16745eb
+42392	44251	1651228150938275079	tmech_test	f3e4cdc145bfb0c3
+3	44228	1651231321538401956	CMakeFiles/tmech_test.dir/main.cpp.o	1e55ecd2e16745eb
+44228	46098	1651231323470430931	tmech_test	f3e4cdc145bfb0c3

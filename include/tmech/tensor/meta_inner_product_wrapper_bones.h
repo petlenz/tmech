@@ -13,7 +13,7 @@ namespace detail {
 struct meta_inner_product{
 
     template <typename SequenceLHS, typename SequenceRHS, typename LHS, typename RHS, typename Result>
-    static constexpr inline auto evaluate(LHS const& lhs, RHS const& rhs, Result const & res){
+    static constexpr inline auto evaluate(LHS const& lhs, RHS const& rhs, Result const & res)noexcept{
         using data_type_RHS  = typename std::remove_const<typename std::remove_reference<RHS>::type>::type;
         using data_type_LHS  = typename std::remove_const<typename std::remove_reference<LHS>::type>::type;
         using value_type_LHS = typename data_type_LHS::value_type;

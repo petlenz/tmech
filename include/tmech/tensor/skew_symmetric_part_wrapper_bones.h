@@ -26,17 +26,17 @@ public:
     using size_type = std::size_t;
     using value_type = typename data_type_tensor::value_type;
 
-    skew_symmetric_part_wrapper(data_type_tensor const& __data);
+    skew_symmetric_part_wrapper(data_type_tensor const& __data)noexcept;
 
-    skew_symmetric_part_wrapper(skew_symmetric_part_wrapper const& __data);
+    skew_symmetric_part_wrapper(skew_symmetric_part_wrapper const& __data)noexcept;
 
-    constexpr inline auto operator()(size_type const i, size_type const j)const;
+    constexpr inline auto operator()(size_type const i, size_type const j)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     data_type_tensor _data;

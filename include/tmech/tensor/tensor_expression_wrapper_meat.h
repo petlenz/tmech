@@ -19,7 +19,7 @@ namespace detail {
 * Default constructor
 */
 template<typename _LHS, typename _RHS, typename _Operator>
-tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expression_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs):
+tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expression_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs)noexcept:
     _lhs(__lhs),
     _rhs(__rhs)
 {}
@@ -28,7 +28,7 @@ tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expressio
  * Copy constructor
  */
 template<typename _LHS, typename _RHS, typename _Operator>
-tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expression_wrapper(tensor_binary_expression_wrapper const& __data):
+tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expression_wrapper(tensor_binary_expression_wrapper const& __data)noexcept:
     _lhs(__data._lhs),
     _rhs(__data._rhs)
 {}
@@ -37,7 +37,7 @@ tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expressio
 
 template<typename _LHS, typename _RHS, typename _Operator>
 template<typename ..._Indices>
-constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::operator()(_Indices ... __indices)const{
+constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::operator()(_Indices ... __indices)const noexcept{
     return _Operator::apply(_lhs(__indices...), _rhs(__indices...));
 }
 
@@ -49,7 +49,7 @@ constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::o
 * Returns the dimension of the expression.
 */
 template<typename _LHS, typename _RHS, typename _Operator>
-constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::dimension(){
+constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::dimension()noexcept{
     return data_type_LHS::dimension();
 }
 
@@ -57,14 +57,14 @@ constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::d
  * Returns the rank of the expression.
  */
 template<typename _LHS, typename _RHS, typename _Operator>
-constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::rank(){
+constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::rank()noexcept{
     return data_type_LHS::rank();
 }
 //@}
 
 
 template<typename _LHS, typename _RHS, typename _Operator>
-constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::evaluate(){
+constexpr inline auto tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::evaluate()noexcept{
     evaluate::apply(_lhs);
     evaluate::apply(_rhs);
 }

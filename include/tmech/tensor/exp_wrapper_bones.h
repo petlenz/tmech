@@ -29,23 +29,23 @@ public:
     static_assert(Dim == 2 || Dim == 3, "exp_tensor_wrapper only for Dim == 2, 3");
     static_assert(Rank == 2,            "exp_tensor_wrapper only only for Rank == 2");
 
-    exp_tensor_wrapper(data_type_tensor const& data);
+    exp_tensor_wrapper(data_type_tensor const& data)noexcept;
 
-    exp_tensor_wrapper(exp_tensor_wrapper const& data);
+    exp_tensor_wrapper(exp_tensor_wrapper const& data)noexcept;
 
     template<typename ...Indices>
-    constexpr inline auto operator()(Indices const... indices)const;
+    constexpr inline auto operator()(Indices const... indices)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    constexpr inline auto derivative()const;
+    constexpr inline auto derivative()const noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
-    constexpr inline auto evaluate_derivative();
+    constexpr inline auto evaluate_derivative()noexcept;
 
     tensor<value_type, Dim, 2> _data;
     tensor<value_type, Dim, 4> _derivative;
@@ -61,30 +61,30 @@ public:
     using value_type = typename _Tensor::value_type;
     using size_type  = std::size_t;
 
-    exp_derivative_tensor_wrapper(_Father const& __father, _Tensor const& __tensor):
+    exp_derivative_tensor_wrapper(_Father const& __father, _Tensor const& __tensor)noexcept:
         _father(__father),
         _dexp(__tensor)
     {}
 
-    exp_derivative_tensor_wrapper(exp_derivative_tensor_wrapper const& __data):
+    exp_derivative_tensor_wrapper(exp_derivative_tensor_wrapper const& __data)noexcept:
         _father(__data._father),
         _dexp(__data._dexp)
     {}
 
     template<typename ...Indices>
-    constexpr inline auto operator()(Indices const... indices)const{
+    constexpr inline auto operator()(Indices const... indices)const noexcept{
         return _dexp(indices...);
     }
 
-    static constexpr inline auto rank(){
+    static constexpr inline auto rank()noexcept{
         return _Tensor::rank();
     }
 
-    static constexpr inline auto dimension(){
+    static constexpr inline auto dimension()noexcept{
         return _Tensor::dimension();
     }
 
-    constexpr inline auto evaluate(){
+    constexpr inline auto evaluate()noexcept{
         const_cast<_Father&>(_father).evaluate_derivative();
     }
 

@@ -31,37 +31,37 @@ public:
     using value_type = typename data_type_tensor::value_type;
     using size_type = std::size_t;
 
-    pow_tensor_wrapper(data_type_tensor const& __data_expr, size_type const __exponent);
+    pow_tensor_wrapper(data_type_tensor const& __data_expr, size_type const __exponent)noexcept;
 
-    pow_tensor_wrapper(pow_tensor_wrapper const& __data);
+    pow_tensor_wrapper(pow_tensor_wrapper const& __data)noexcept;
 
     template<typename ...Indices>
-    constexpr inline auto operator ()(Indices const... indices)const;
+    constexpr inline auto operator ()(Indices const... indices)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
     template<typename Result>
-    constexpr inline auto evaluate(Result & result);
+    constexpr inline auto evaluate(Result & result)noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
-    constexpr inline auto raw_data()const;
+    constexpr inline auto raw_data()const noexcept;
 
-    constexpr inline auto derivative();
+    constexpr inline auto derivative()noexcept;
 
 private:
-    constexpr inline auto evaluate_derivatives();
+    constexpr inline auto evaluate_derivatives()noexcept;
 
     template<typename Result>
-    constexpr inline auto evaluate_imp(Result & result);
+    constexpr inline auto evaluate_imp(Result & result)noexcept;
 
     //    constexpr inline auto sym_derivative();
 
     //    constexpr inline auto skew_derivative();
 
-    constexpr inline auto normal_derivative();
+    constexpr inline auto normal_derivative()noexcept;
 
     tensor<value_type, data_type_tensor::dimension(), 2> _data;
     _Tensor _data_expr;

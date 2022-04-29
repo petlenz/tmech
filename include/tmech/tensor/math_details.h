@@ -11,14 +11,14 @@
 namespace detail {
 
 template<typename T>
-static constexpr inline auto det_2_2(T const*const a){
+static constexpr inline auto det_2_2(T const*const a)noexcept{
     //0 1
     //2 3
     return a[0]*a[3] - a[1]*a[2];
 }
 
 template<typename A>
-constexpr inline auto det_3_3(A const*const a){
+constexpr inline auto det_3_3(A const*const a)noexcept{
     const auto A0{a[0]};
     const auto A1{a[1]};
     const auto A2{a[2]};
@@ -35,7 +35,7 @@ constexpr inline auto det_3_3(A const*const a){
 }
 
 template<typename T>
-constexpr inline auto det_4_4(T const*const a){
+constexpr inline auto det_4_4(T const*const a)noexcept{
     const auto A0{a[0]};
     const auto A1{a[1]};
     const auto A2{a[2]};
@@ -70,7 +70,7 @@ constexpr inline auto det_4_4(T const*const a){
 }
 
 template<typename T>
-constexpr inline auto det_5_5(T const*const a){
+constexpr inline auto det_5_5(T const*const a)noexcept{
     const auto A0{a[0]};
     const auto A1{a[1]};
     const auto A2{a[2]};
@@ -141,7 +141,7 @@ constexpr inline auto det_5_5(T const*const a){
 
 
 template<typename T>
-constexpr inline auto det_6_6(T const*const a){
+constexpr inline auto det_6_6(T const*const a)noexcept{
 
     const auto A0{a[0]};
     const auto A1{a[1]};

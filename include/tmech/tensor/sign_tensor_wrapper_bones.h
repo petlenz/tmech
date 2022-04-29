@@ -17,32 +17,32 @@ class sign_S_wrapper : public tensor_base<sign_S_wrapper<_Father>>
 public:
     using value_type = typename _Father::data_type::value_type;
 
-    sign_S_wrapper(_Father const& __father):
+    sign_S_wrapper(_Father const& __father)noexcept:
         _father(__father)
     {}
 
-    sign_S_wrapper(sign_S_wrapper const& __data):
+    sign_S_wrapper(sign_S_wrapper const& __data)noexcept:
         _father(__data._father)
     {}
 
     template<typename ...Indicies>
-    constexpr inline auto operator()(Indicies ... indicies)const{
+    constexpr inline auto operator()(Indicies ... indicies)const noexcept{
         return _father._S(indicies...);
     }
 
-    static constexpr inline auto dimension(){
+    static constexpr inline auto dimension()noexcept{
         return _Father::data_type::dimension();
     }
 
-    static constexpr inline auto rank(){
+    static constexpr inline auto rank()noexcept{
         return _Father::data_type::rank();
     }
 
-    constexpr inline auto evaluate(){
+    constexpr inline auto evaluate()noexcept{
         const_cast<_Father&>(_father).decompose_S();
     }
 
-    constexpr inline auto raw_data()const{
+    constexpr inline auto raw_data()const noexcept{
         return _father._S.raw_data();
     }
 private:
@@ -56,32 +56,32 @@ class sign_N_wrapper : public tensor_base<sign_N_wrapper<_Father>>
 public:
     using value_type = typename _Father::data_type::value_type;
 
-    sign_N_wrapper(_Father const& __father):
+    sign_N_wrapper(_Father const& __father)noexcept:
         _father(__father)
     {}
 
-    sign_N_wrapper(sign_N_wrapper const& __data):
+    sign_N_wrapper(sign_N_wrapper const& __data)noexcept:
         _father(__data._father)
     {}
 
     template<typename ...Indicies>
-    constexpr inline auto operator()(Indicies ... indicies)const{
+    constexpr inline auto operator()(Indicies ... indicies)const noexcept{
         return _father._N(indicies...);
     }
 
-    static constexpr inline auto dimension(){
+    static constexpr inline auto dimension()noexcept{
         return _Father::data_type::dimension();
     }
 
-    static constexpr inline auto rank(){
+    static constexpr inline auto rank()noexcept{
         return _Father::data_type::rank();
     }
 
-    constexpr inline auto evaluate(){
+    constexpr inline auto evaluate()noexcept{
         const_cast<_Father&>(_father).decompose_N();
     }
 
-    constexpr inline auto raw_data()const{
+    constexpr inline auto raw_data()const noexcept{
         return _father._N.raw_data();
     }
 private:
@@ -108,30 +108,30 @@ public:
     using value_type = typename data_type_tensor::value_type;
     using data_type = tensor<value_type, data_type_tensor::dimension(), data_type_tensor::rank()>;
 
-    sign_tensor_wrapper(_Tensor data, value_type const __eps, size_type __max_iter);
+    sign_tensor_wrapper(_Tensor data, value_type const __eps, size_type __max_iter)noexcept;
 
-    sign_tensor_wrapper(sign_tensor_wrapper const& data);
+    sign_tensor_wrapper(sign_tensor_wrapper const& data)noexcept;
 
     template<typename ...Indicies>
-    constexpr inline auto operator()(Indicies ... indicies)const;
+    constexpr inline auto operator()(Indicies ... indicies)const noexcept;
 
-    constexpr inline auto N(){
+    constexpr inline auto N()noexcept{
         return sign_N_wrapper<sign_tensor_wrapper<_Tensor>>(*this);
     }
 
-    constexpr inline auto S(){
+    constexpr inline auto S()noexcept{
         return sign_S_wrapper<sign_tensor_wrapper<_Tensor>>(*this);
     }
 
 private:
-    constexpr inline auto decompose_S(){
+    constexpr inline auto decompose_S()noexcept{
         if(!_is_init_S){
             decompose();
             _is_init_S = true;
         }
     }
 
-    constexpr inline auto decompose_N(){
+    constexpr inline auto decompose_N()noexcept{
         if(!_is_init_N){
             decompose();
             _N = inv(_S)*_data_tensor;
@@ -139,7 +139,7 @@ private:
         }
     }
 
-    constexpr inline auto decompose();
+    constexpr inline auto decompose()noexcept;
 
     //A = S*N
     //S = sign(A)

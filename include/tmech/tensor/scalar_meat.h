@@ -18,7 +18,7 @@ namespace detail {
 * Default constructor
 */
 template<typename _T>
-constexpr scalar<_T>::scalar(_T const scalar):
+constexpr scalar<_T>::scalar(_T const scalar)noexcept:
     scalar_(scalar)
 {}
 
@@ -26,18 +26,22 @@ constexpr scalar<_T>::scalar(_T const scalar):
  * Copy constructor
  */
 template<typename _T>
-constexpr scalar<_T>::scalar(scalar const& scalar):
+constexpr scalar<_T>::scalar(scalar const& scalar)noexcept:
     scalar_(scalar.scalar_)
 {}
 //@}
 
 
 template<typename _T>
-constexpr inline _T scalar<_T>::operator()()const{return scalar_;}
+constexpr inline _T scalar<_T>::operator()()const noexcept{
+    return scalar_;
+}
 
 template<typename _T>
 template<typename ...Numbers>
-constexpr inline _T scalar<_T>::operator()(Numbers...)const{return scalar_;}
+constexpr inline _T scalar<_T>::operator()(Numbers...)const noexcept{
+    return scalar_;
+}
 
 } // NAMESPACE DETAIL
 #endif // SCALAR_MEAT_H

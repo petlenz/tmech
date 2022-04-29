@@ -32,43 +32,43 @@ public:
     static_assert(data_type_tensor::rank() != 2      || data_type_tensor::rank() != 4,      "inverse_wrapper: no matching rank");
     static_assert(data_type_tensor::dimension() == 2 || data_type_tensor::dimension() == 3, "inverse_wrapper: no matching dimension");
 
-    constexpr inverse_wrapper(_Tensor __tensor_data);
+    constexpr inverse_wrapper(_Tensor __tensor_data)noexcept;
 
-    constexpr inverse_wrapper(inverse_wrapper const& __data);
+    constexpr inverse_wrapper(inverse_wrapper const& __data)noexcept;
 
     template<typename ...Indicies>
-    constexpr inline auto operator()(Indicies... __indices)const;
+    constexpr inline auto operator()(Indicies... __indices)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
     template<typename _Result>
-    constexpr inline auto evaluate(_Result const& __result);
+    constexpr inline auto evaluate(_Result const& __result)noexcept;
 
-    constexpr inline auto raw_data()const;
+    constexpr inline auto raw_data()const noexcept;
 
 private:
     template<typename _Result>
-    constexpr inline auto evaluate_imp(_Result const& __result);
+    constexpr inline auto evaluate_imp(_Result const& __result)noexcept;
 
-    static constexpr inline auto evaluate_imp(value_type const* __result, value_type const * __data);
-
-    template<std::size_t Rows>
-    static constexpr auto lu_detail(value_type const*  __A);
+    static constexpr inline auto evaluate_imp(value_type const* __result, value_type const * __data)noexcept;
 
     template<std::size_t Rows>
-    static constexpr auto inv_lu(value_type * __Ainv, value_type const * const __Afac);
+    static constexpr auto lu_detail(value_type const*  __A)noexcept;
+
+    template<std::size_t Rows>
+    static constexpr auto inv_lu(value_type * __Ainv, value_type const * const __Afac)noexcept;
 
     static constexpr inline auto invert_2_2(value_type * result, value_type const A11, value_type const A12,
-                                                                 value_type const A21, value_type const A22);
+                                                                 value_type const A21, value_type const A22)noexcept;
 
 
     static constexpr inline auto invert_3_3(value_type * result, value_type const A0, value_type const A1, value_type const A2,
                                                                  value_type const A3, value_type const A4, value_type const A5,
-                                                                 value_type const A6, value_type const A7, value_type const A8);
+                                                                 value_type const A6, value_type const A7, value_type const A8)noexcept;
 
     tmech::tensor<value_type, dimension(), rank()> data;
     _Tensor tensor_data;

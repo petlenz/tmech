@@ -28,19 +28,19 @@ public:
     using value_type = typename std::remove_const<_T>::type;
     using size_type  = std::size_t;
 
-    constexpr adaptor(_T *__data);
+    constexpr adaptor(_T *__data)noexcept;
 
-    constexpr adaptor(adaptor const& __data);
+    constexpr adaptor(adaptor const& __data)noexcept;
 
     template<typename _Derived>
-    constexpr inline auto const& operator=(tensor_base<_Derived> const& tensor_base);
+    constexpr inline auto const& operator=(tensor_base<_Derived> const& tensor_base)noexcept;
 
     template<typename ...Indices>
-    constexpr inline auto operator()(Indices ...indices)const;
+    constexpr inline auto operator()(Indices ...indices)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
 private:
     _T * _data;
@@ -59,7 +59,7 @@ struct abq_std
     static_assert (_Dim == 3, "abq_std: currently is only 3D supported");
 
     template<typename T>
-    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j){
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j)noexcept{
         constexpr auto _v2t{vt2()};
         if constexpr (_ShearStrain){
             return __ptr[_v2t[__i][__j]] * (__i == __j ? 1 : 0.5);
@@ -69,14 +69,14 @@ struct abq_std
     }
 
     template<typename T>
-    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l){
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l)noexcept{
         constexpr auto _v2t{vt2()};
         constexpr auto Rows{(_Dim == 2 ? 3 : 6)};
         return __ptr[_v2t[__i][__j]*Rows+_v2t[__k][__l]];
     }
 
     template<typename __T, typename __Tensor>
-    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input){
+    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input)noexcept{
         static_assert (__Tensor::rank() == 2 || __Tensor::rank() == 4, "voigt::assign_tensor() no matching rank");
         constexpr size_type Rows{(_Dim == 2 ? 3 : 6)};
         constexpr auto _t2v{t2v()};
@@ -99,7 +99,7 @@ struct abq_std
     }
 
 private:
-    static constexpr inline auto vt2(){
+    static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
             return std::array<std::array<size_type, 2>, 2>{0,2, 2,1};
         }else{
@@ -112,7 +112,7 @@ private:
         }
     }
 
-    static constexpr inline auto t2v(){
+    static constexpr inline auto t2v()noexcept{
         if constexpr (_Dim == 2){
             return std::array<std::array<size_type, 2>, 3>{0,0, 1,1, 0,1};
         }else{
@@ -136,7 +136,7 @@ struct abq_exp
     static_assert (_Dim == 3, "abq_exp: currently is only 3D supported");
 
     template<typename T>
-    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j){
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j)noexcept{
         constexpr auto _v2t{vt2()};
         if constexpr (_ShearStrain){
             return __ptr[_v2t[__i][__j]] * (__i == __j ? 1 : 0.5);
@@ -146,14 +146,14 @@ struct abq_exp
     }
 
     template<typename T>
-    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l){
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l)noexcept{
         constexpr auto _v2t{vt2()};
         constexpr auto Rows{(_Dim == 2 ? 3 : 6)};
         return __ptr[_v2t[__i][__j]*Rows+_v2t[__k][__l]];
     }
 
     template<typename __T, typename __Tensor>
-    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input){
+    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input)noexcept{
         static_assert (__Tensor::rank() == 2 || __Tensor::rank() == 4, "voigt::assign_tensor() no matching rank");
         constexpr size_type Rows{(_Dim == 2 ? 3 : 6)};
         constexpr auto _t2v{t2v()};
@@ -176,7 +176,7 @@ struct abq_exp
     }
 
 private:
-    static constexpr inline auto vt2(){
+    static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
             return std::array<std::array<size_type, 2>, 2>{0,2, 2,1};
         }else{
@@ -186,7 +186,7 @@ private:
         }
     }
 
-    static constexpr inline auto t2v(){
+    static constexpr inline auto t2v()noexcept{
         if constexpr (_Dim == 2){
             return std::array<std::array<size_type, 2>, 3>{0,0, 1,1, 0,1};
         }else{
@@ -208,7 +208,7 @@ struct voigt
     //if _ShearStrain == true shear strains are multiplied with 0.5
 
     template<typename T>
-    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j){
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j)noexcept{
         constexpr auto _v2t{vt2()};
         if constexpr (_ShearStrain){
             return __ptr[_v2t[__i][__j]] * (__i == __j ? 1 : 0.5);
@@ -218,14 +218,14 @@ struct voigt
     }
 
     template<typename T>
-    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l){
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l)noexcept{
         constexpr auto _v2t{vt2()};
         constexpr auto Rows{(_Dim == 2 ? 3 : 6)};
         return __ptr[_v2t[__i][__j]*Rows+_v2t[__k][__l]];
     }
 
     template<typename __T, typename __Tensor>
-    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input){
+    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input)noexcept{
         static_assert (__Tensor::rank() == 2 || __Tensor::rank() == 4, "voigt::assign_tensor() no matching rank");
         constexpr size_type Rows{(_Dim == 2 ? 3 : 6)};
         constexpr auto _t2v{t2v()};
@@ -248,7 +248,7 @@ struct voigt
     }
 
 private:
-    static constexpr inline auto vt2(){
+    static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
             return std::array<std::array<size_type, 2>, 2>{0,2, 2,1};
         }else{
@@ -256,7 +256,7 @@ private:
         }
     }
 
-    static constexpr inline auto t2v(){
+    static constexpr inline auto t2v()noexcept{
         if constexpr (_Dim == 2){
             return std::array<std::array<size_type, 2>, 3>{0,0, 1,1, 0,1};
         }else{
@@ -274,24 +274,24 @@ struct full
     using size_type = std::size_t;
 
     template<typename T>
-    static constexpr inline auto apply(T const* const __ptr, size_type const __i){
+    static constexpr inline auto apply(T const* const __ptr, size_type const __i)noexcept{
         return __ptr[__i];
     }
 
     template<typename T>
-    static constexpr inline auto apply(T const* const __ptr, size_type const __i, size_type const __j){
+    static constexpr inline auto apply(T const* const __ptr, size_type const __i, size_type const __j)noexcept{
         return __ptr[__i*_Dim+__j];
     }
 
     template<typename T>
-    static constexpr inline auto apply(T const* const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l){
+    static constexpr inline auto apply(T const* const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l)noexcept{
         constexpr auto Dim1{_Dim*_Dim*_Dim};
         constexpr auto Dim2{_Dim*_Dim};
         return __ptr[__i*Dim1+__j*Dim2+__k*_Dim+__l];
     }
 
     template<typename __T, typename __Tensor>
-    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input){
+    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input)noexcept{
         static_assert (__Tensor::rank() != 1 || __Tensor::rank() == 2 || __Tensor::rank() == 4, "full::assign_tensor() no matching rank");
         if constexpr (__Tensor::rank() == 1){
             for(size_type i{0}; i<_Dim; ++i){

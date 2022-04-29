@@ -19,7 +19,7 @@ namespace detail {
 * Default constructor
 */
 template <typename _Tensor>
-pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(data_type_tensor const& __data_expr, size_type const __exponent):
+pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(data_type_tensor const& __data_expr, size_type const __exponent)noexcept:
     _data(),
     _data_expr(__data_expr),
     _derivative(),
@@ -30,7 +30,7 @@ pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(data_type_tensor const& __data_e
  * Copy constructor
  */
 template <typename _Tensor>
-pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(pow_tensor_wrapper const& data):
+pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(pow_tensor_wrapper const& data)noexcept:
     _data(),
     _data_expr(data._data_expr),
     _derivative(),
@@ -42,7 +42,7 @@ pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(pow_tensor_wrapper const& data):
 
 template <typename _Tensor>
 template<typename ...Indices>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::operator ()(Indices const... indices)const{
+constexpr inline auto pow_tensor_wrapper<_Tensor>::operator ()(Indices const... indices)const noexcept{
     return _data(indices...);
 }
 
@@ -54,42 +54,42 @@ constexpr inline auto pow_tensor_wrapper<_Tensor>::operator ()(Indices const... 
 * Returns the dimension.
 */
 template <typename _Tensor>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::dimension(){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 /**
  * Returns the rank.
  */
 template <typename _Tensor>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::rank(){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
 
 template <typename _Tensor>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::derivative(){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::derivative()noexcept{
     return pow_tensor_derivative_wrapper<this_type, decltype (_derivative)>(*this, _derivative);
 }
 
 template <typename _Tensor>
 template<typename Result>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate(Result & result){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate(Result & result)noexcept{
     evaluate_imp(result);
 }
 
 template <typename _Tensor>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate(){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate()noexcept{
     evaluate_imp(_data);
 }
 
 template <typename _Tensor>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::raw_data()const{
+constexpr inline auto pow_tensor_wrapper<_Tensor>::raw_data()const noexcept{
     return _data.raw_data();
 }
 
 template <typename _Tensor>
 template<typename Result>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate_imp(Result & result){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate_imp(Result & result)noexcept{
     if(_expo == 0){
         result.fill(0);
     }else{
@@ -123,7 +123,7 @@ constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate_imp(Result & result)
 //}
 
 template <typename _Tensor>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate_derivatives(){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate_derivatives()noexcept{
     _derivative.fill(0);
     if(_expo > 0){
         const tensor<value_type, dimension(), 2> temp{_data_expr};
@@ -140,7 +140,7 @@ constexpr inline auto pow_tensor_wrapper<_Tensor>::evaluate_derivatives(){
 }
 
 template <typename _Tensor>
-constexpr inline auto pow_tensor_wrapper<_Tensor>::normal_derivative(){
+constexpr inline auto pow_tensor_wrapper<_Tensor>::normal_derivative()noexcept{
     for(size_type i{1}; i<=_expo; ++i){
         _derivative += otimesu(_data_i[i-1], trans(_data_i[_expo - i]));
     }

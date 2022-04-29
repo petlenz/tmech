@@ -25,18 +25,18 @@ public:
     using size_type  = std::size_t;
     using value_type = typename data_type_tensor::value_type;
 
-    constexpr abs_tensor_wrapper(data_type_tensor const& __data);
+    constexpr abs_tensor_wrapper(data_type_tensor const& __data)noexcept;
 
-    constexpr abs_tensor_wrapper(abs_tensor_wrapper const& __data);
+    constexpr abs_tensor_wrapper(abs_tensor_wrapper const& __data)noexcept;
 
     template<typename ...Indicies>
-    constexpr inline auto operator ()(Indicies ... __indicies)const;
+    constexpr inline auto operator ()(Indicies ... __indicies)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     _Tensor _data;

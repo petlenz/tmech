@@ -18,7 +18,7 @@ namespace detail {
 * Default constructor
 */
 template <typename Tensor>
-symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(data_type_tensor const& data):
+symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(data_type_tensor const& data)noexcept:
     _data(data)
 {}
 
@@ -26,13 +26,13 @@ symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(data_type_tensor const& d
  * Copy constructor
  */
 template <typename Tensor>
-symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(symmetric_part_wrapper const& data):
+symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(symmetric_part_wrapper const& data)noexcept:
     _data(data._data)
 {}
 //@}
 
 template <typename Tensor>
-constexpr inline auto symmetric_part_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const{
+constexpr inline auto symmetric_part_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const noexcept{
     //check if data.raw_data() is enable for better performace??
     if constexpr(std::experimental::is_detected<detail::has_raw_data, data_type_tensor>::value){
         constexpr auto Dim{dimension()};
@@ -50,7 +50,7 @@ constexpr inline auto symmetric_part_wrapper<Tensor>::operator ()(size_type cons
 * Returns the dimension of the expression.
 */
 template <typename Tensor>
-constexpr inline auto symmetric_part_wrapper<Tensor>::dimension(){
+constexpr inline auto symmetric_part_wrapper<Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -58,13 +58,13 @@ constexpr inline auto symmetric_part_wrapper<Tensor>::dimension(){
  * Returns the rank of the expression.
  */
 template <typename Tensor>
-constexpr inline auto symmetric_part_wrapper<Tensor>::rank(){
+constexpr inline auto symmetric_part_wrapper<Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
 
 template <typename Tensor>
-constexpr inline auto symmetric_part_wrapper<Tensor>::evaluate(){
+constexpr inline auto symmetric_part_wrapper<Tensor>::evaluate()noexcept{
     evaluate::apply(_data);
 }
 

@@ -17,7 +17,7 @@ class gemm_wrapper
 public:
     using size_type = std::size_t;
 
-    static constexpr inline void evaluate(LHS const* __lhs, RHS const* __rhs, RESULT* __result){
+    static constexpr inline void evaluate(LHS const* __lhs, RHS const* __rhs, RESULT* __result)noexcept{
 
         gemm(__lhs, __rhs, __result);
         return ;
@@ -96,7 +96,7 @@ public:
     }
 
 
-    static constexpr inline auto gemm(LHS const*const __lhs, RHS const*const __rhs, RESULT * __result){
+    static constexpr inline auto gemm(LHS const*const __lhs, RHS const*const __rhs, RESULT * __result)noexcept{
         for(size_type i{0}; i<RowsLHS; ++i){
             for(size_type j{0}; j<ColumnsRHS; ++j){
                 RESULT sum{0};

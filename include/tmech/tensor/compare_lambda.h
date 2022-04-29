@@ -13,7 +13,7 @@ namespace detail {
 struct compare_lambda
 {
     template <typename _LHS, typename _RHS, typename _Func>
-    static inline bool check(_LHS const& __lhs, _RHS const& __rhs, _Func _func){
+    static inline bool check(_LHS const& __lhs, _RHS const& __rhs, _Func _func)noexcept{
         constexpr bool LHS_raw_data{is_detected<has_raw_data, _LHS>::value};
         constexpr bool RHS_raw_data{is_detected<has_raw_data, _RHS>::value};
         constexpr bool LHS_evaluate{is_detected<has_evaluate, _LHS>::value};
@@ -40,7 +40,7 @@ struct compare_lambda
 
 private:
     template <std::size_t _Size, typename _LHS, typename _RHS, typename _Func>
-    static constexpr inline bool check_detail(_LHS * __lhs, _RHS * __rhs, _Func _func){
+    static constexpr inline bool check_detail(_LHS * __lhs, _RHS * __rhs, _Func _func)noexcept{
         for(std::size_t i{0}; i<_Size; ++i){
             if(_func(__lhs[i],__rhs[i])){
                 return false;

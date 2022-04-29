@@ -23,14 +23,14 @@ class scalar
 public:
     using value_type = _T;
 
-    constexpr scalar(value_type const scalar);
+    constexpr scalar(value_type const scalar)noexcept;
 
-    constexpr scalar(scalar const& scalar);
+    constexpr scalar(scalar const& scalar)noexcept;
 
-    constexpr inline value_type operator()()const;
+    constexpr inline value_type operator()()const noexcept;
 
     template<typename ...Numbers>
-    constexpr inline value_type operator()(Numbers...)const;
+    constexpr inline value_type operator()(Numbers...)const noexcept;
 
 private:
     value_type const scalar_;

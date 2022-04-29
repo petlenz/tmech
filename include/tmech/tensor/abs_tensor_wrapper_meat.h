@@ -18,7 +18,7 @@ namespace detail {
 * Default constructor
 */
 template <typename _Tensor>
-constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(data_type_tensor const& __data):
+constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(data_type_tensor const& __data)noexcept:
     _data(__data)
 {}
 
@@ -26,7 +26,7 @@ constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(data_type_tensor const
  * Copy constructor
  */
 template <typename _Tensor>
-constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(abs_tensor_wrapper const& __data):
+constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(abs_tensor_wrapper const& __data)noexcept:
     _data(__data._data)
 {}
 //@}
@@ -41,7 +41,7 @@ constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(abs_tensor_wrapper con
 */
 template <typename _Tensor>
 template<typename ...Indicies>
-constexpr inline auto abs_tensor_wrapper<_Tensor>::operator ()(Indicies ... __indicies)const{
+constexpr inline auto abs_tensor_wrapper<_Tensor>::operator ()(Indicies ... __indicies)const noexcept{
     return std::fabs(_data(__indicies...));
 }
 //@}
@@ -55,7 +55,7 @@ constexpr inline auto abs_tensor_wrapper<_Tensor>::operator ()(Indicies ... __in
 * @return dimension
 */
 template <typename _Tensor>
-constexpr inline auto abs_tensor_wrapper<_Tensor>::dimension(){
+constexpr inline auto abs_tensor_wrapper<_Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -64,7 +64,7 @@ constexpr inline auto abs_tensor_wrapper<_Tensor>::dimension(){
  * @return rank
  */
 template <typename _Tensor>
-constexpr inline auto abs_tensor_wrapper<_Tensor>::rank(){
+constexpr inline auto abs_tensor_wrapper<_Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
@@ -76,7 +76,7 @@ constexpr inline auto abs_tensor_wrapper<_Tensor>::rank(){
 * @brief Evaluates the underlying tensor expression.
 */
 template <typename _Tensor>
-constexpr inline auto abs_tensor_wrapper<_Tensor>::evaluate(){
+constexpr inline auto abs_tensor_wrapper<_Tensor>::evaluate()noexcept{
     evaluate::apply(_data);
 }
 //@}

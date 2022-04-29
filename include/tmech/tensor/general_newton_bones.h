@@ -31,17 +31,17 @@ public:
 
 
     template<typename System, typename Vector_x, typename Vector_dx, typename T>
-    static constexpr inline auto apply(System & A, Vector_x & x, Vector_dx & dx, T const tol);
+    static constexpr inline auto apply(System & A, Vector_x & x, Vector_dx & dx, T const tol)noexcept;
 
 private:
     template<std::size_t I, std::size_t Size, typename Vector_x, typename Vector_dx>
-    static constexpr inline auto update(Vector_x & x, Vector_dx const& dx);
+    static constexpr inline auto update(Vector_x & x, Vector_dx const& dx)noexcept;
 
     template<std::size_t I, std::size_t Size, typename Vector_dx>
-    static constexpr inline auto norm_tuple(Vector_dx const& dx);
+    static constexpr inline auto norm_tuple(Vector_dx const& dx)noexcept;
 
     template<typename T>
-    static constexpr inline auto norm(T const& dx);
+    static constexpr inline auto norm(T const& dx)noexcept;
 };
 
 } // NAMESPACE DETAIL

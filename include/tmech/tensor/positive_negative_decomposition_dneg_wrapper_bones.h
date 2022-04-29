@@ -17,19 +17,19 @@ public:
     using size_type  = std::size_t;
     using value_type = typename Tensor::value_type;
 
-    positive_negative_decomposition_dneg_wrapper(Base const & __base, Tensor const& __R);
+    positive_negative_decomposition_dneg_wrapper(Base const & __base, Tensor const& __R)noexcept;
 
-    positive_negative_decomposition_dneg_wrapper(positive_negative_decomposition_dneg_wrapper const & __data);
+    positive_negative_decomposition_dneg_wrapper(positive_negative_decomposition_dneg_wrapper const & __data)noexcept;
 
-    constexpr inline auto const& operator()(size_type const i, size_type const j, size_type const k, size_type const l)const;
+    constexpr inline auto const& operator()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto raw_data()const;
+    constexpr inline auto raw_data()const noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 //    constexpr inline auto const& get_base()const{
 //        return base;

@@ -17,7 +17,7 @@
 * Default constructor
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
-constexpr zeros<T, Dim, Rank>::zeros()
+constexpr zeros<T, Dim, Rank>::zeros()noexcept
 {}
 //@}
 
@@ -32,7 +32,7 @@ constexpr zeros<T, Dim, Rank>::zeros()
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
 template<typename ...Indices>
-constexpr inline auto zeros<T, Dim, Rank>::operator ()(const Indices... /*indices*/)const{
+constexpr inline auto zeros<T, Dim, Rank>::operator ()(const Indices... /*indices*/)const noexcept{
     return static_cast<value_type>(0);
 }
 //@}
@@ -46,7 +46,7 @@ constexpr inline auto zeros<T, Dim, Rank>::operator ()(const Indices... /*indice
 * Returns the dimension.
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto zeros<T, Dim, Rank>::dimension(){
+constexpr inline auto zeros<T, Dim, Rank>::dimension()noexcept{
     return Dim;
 }
 
@@ -54,7 +54,7 @@ constexpr inline auto zeros<T, Dim, Rank>::dimension(){
  * Returns the rank.
  */
 template <typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto zeros<T, Dim, Rank>::rank(){
+constexpr inline auto zeros<T, Dim, Rank>::rank()noexcept{
     return Rank;
 }
 //@}

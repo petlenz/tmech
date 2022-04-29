@@ -18,23 +18,23 @@ template<typename _Derived>
 class tensor_base
 {
 public:
-    constexpr tensor_base():
+    constexpr tensor_base()noexcept:
         _is_init(false)
     {}
 
-    constexpr tensor_base(tensor_base const& __data):
+    constexpr tensor_base(tensor_base const& __data)noexcept:
         _is_init(false)
     {}
 
-    constexpr inline auto& convert() const {
+    constexpr inline auto& convert() const noexcept{
         return *static_cast<const _Derived*>(this);
     }
 
-    constexpr inline auto& convert(){
+    constexpr inline auto& convert()noexcept{
         return *static_cast<_Derived*>(this);
     }
 
-    constexpr inline auto operator-()const{
+    constexpr inline auto operator-()const noexcept{
         if constexpr (std::is_lvalue_reference_v<decltype (this)>){
             return detail::negative_tensor_wrapper<_Derived const&>(this->convert());
         }else{
@@ -45,7 +45,7 @@ public:
     template<typename DerivedOut>
     friend std::ostream & operator<<(std::ostream &os, const tensor_base<_Derived>& tensor);
 
-    static constexpr inline auto size(){
+    static constexpr inline auto size()noexcept{
         return detail::get_tensor_size<_Derived::dimension(), _Derived::rank()>::size;
     }
 

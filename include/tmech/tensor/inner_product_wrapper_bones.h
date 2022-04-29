@@ -31,9 +31,9 @@ public:
     static_assert (data_type_LHS::dimension() == data_type_RHS::dimension(), "inner_product_wrapper: dimensions does not match");
     static_assert (sequence_inner_rhs::size() == sequence_inner_rhs::size(), "inner_product_wrapper: SequenceLHS::size != SequenceRHS::size");
 
-    inner_product_wrapper(LHS __lhs, RHS __rhs);
+    inner_product_wrapper(LHS __lhs, RHS __rhs)noexcept;
 
-    inner_product_wrapper(inner_product_wrapper const& __data);
+    inner_product_wrapper(inner_product_wrapper const& __data)noexcept;
 
     template<typename ...Indicies>
     constexpr inline auto operator ()(Indicies ... __indicies)const noexcept;
@@ -57,7 +57,7 @@ private:
     constexpr inline auto evaluate_implementation(_RESULT & __result, _LHS const& __lhs, _RHS const& __rhs) const noexcept;
 
     template<size_type _Size>
-    static constexpr inline auto get_size();
+    static constexpr inline auto get_size()noexcept;
 
 
 private:

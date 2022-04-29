@@ -35,7 +35,7 @@ private:
     };
 
 public:
-    static inline auto convert(_Tensor const& __tensor, value_type * __ptr){
+    static inline auto convert(_Tensor const& __tensor, value_type * __ptr)noexcept{
         using index_tuple = typename get_index_sequence<>::sequence;
         //meta for loop
         using meta_loop = typename meta_for_loop_deep_symmetric<_Tensor::dimension(), _Tensor::rank()/2 - 1>::type;
@@ -51,12 +51,12 @@ public:
 
 private:
     template<typename ..._Numbers>
-    static constexpr inline size_type single_index(size_type const __first, size_type const __second, _Numbers... __numbers){
+    static constexpr inline size_type single_index(size_type const __first, size_type const __second, _Numbers... __numbers)noexcept{
         constexpr size_type Size{(_Tensor::dimension() == 2 ? 3 : 6)};
         return (__first == __second ? __first : Size - (__first + __second))*Size + single_index(__numbers...);
     }
 
-    static constexpr inline size_type single_index(size_type const __first, size_type const __second){
+    static constexpr inline size_type single_index(size_type const __first, size_type const __second)noexcept{
         constexpr size_type Size{(_Tensor::dimension() == 2 ? 3 : 6)};
         return (__first == __second ? __first : Size - (__first + __second));
     }

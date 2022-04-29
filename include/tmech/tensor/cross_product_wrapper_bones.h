@@ -29,17 +29,17 @@ public:
     using value_type = typename result_type<value_type_LHS, value_type_RHS>::value_type;
     using size_type  = std::size_t;
 
-    constexpr cross_product_wrapper(_LHS lhs, _RHS rhs);
+    constexpr cross_product_wrapper(_LHS lhs, _RHS rhs)noexcept;
 
-    constexpr cross_product_wrapper(cross_product_wrapper const& data);
+    constexpr cross_product_wrapper(cross_product_wrapper const& data)noexcept;
 
-    constexpr inline auto operator()(size_type const idx)const;
+    constexpr inline auto operator()(size_type const idx)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     _LHS _lhs;

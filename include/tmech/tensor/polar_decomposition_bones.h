@@ -39,30 +39,30 @@ public:
     static_assert(data_type_tensor::dimension() == 2 || data_type_tensor::dimension() == 3, "Polar decomposition only for Dim == 2, 3");
     static_assert(data_type_tensor::rank() == 2,                                  "Polar decomposition only for Rank == 2");
 
-    constexpr polar_decomposition_wrapper(data_type_tensor const& __data, bool const __newton_method, value_type const __tol, size_type const __max_steps);
+    constexpr polar_decomposition_wrapper(data_type_tensor const& __data, bool const __newton_method, value_type const __tol, size_type const __max_steps)noexcept;
 
-    constexpr polar_decomposition_wrapper(polar_decomposition_wrapper const& __data);
+    constexpr polar_decomposition_wrapper(polar_decomposition_wrapper const& __data)noexcept;
 
-    constexpr inline auto R()const;
+    constexpr inline auto R()const noexcept;
 
-    constexpr inline auto U()const;
+    constexpr inline auto U()const noexcept;
 
-    constexpr inline auto V()const;
+    constexpr inline auto V()const noexcept;
 
 private:
-    constexpr inline auto evaluate_newton();
+    constexpr inline auto evaluate_newton()noexcept;
 
-    constexpr inline auto set_up_R_newton();
+    constexpr inline auto set_up_R_newton()noexcept;
 
-    constexpr inline auto evaluate_eigen();
+    constexpr inline auto evaluate_eigen()noexcept;
 
-    constexpr inline auto evaluate_derivatives();
+    constexpr inline auto evaluate_derivatives()noexcept;
 
-    constexpr inline auto evaluate_derivatives_2D();
+    constexpr inline auto evaluate_derivatives_2D()noexcept;
 
-    constexpr inline auto evaluate_derivatives_3D();
+    constexpr inline auto evaluate_derivatives_3D()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
     static constexpr auto Rank = data_type_tensor::rank();
     static constexpr auto Dim  = data_type_tensor::dimension();

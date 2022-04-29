@@ -18,37 +18,37 @@ public:
     using value_type = typename data_type_tensor::value_type;
     using size_type = std::size_t;
 
-    cofactor_wrapper(data_type_tensor const& data);
+    cofactor_wrapper(data_type_tensor const& data)noexcept;
 
-    cofactor_wrapper(cofactor_wrapper const& data);
+    cofactor_wrapper(cofactor_wrapper const& data)noexcept;
 
-    constexpr inline auto operator()(size_type const i, size_type const j)const;
+    constexpr inline auto operator()(size_type const i, size_type const j)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
     template<typename _Result>
-    constexpr inline auto evaluate(_Result & result);
+    constexpr inline auto evaluate(_Result & result)noexcept;
 
-    constexpr inline auto raw_data()const;
+    constexpr inline auto raw_data()const noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     template<typename _Result>
-    constexpr inline auto evaluate_imp(_Result & result);
+    constexpr inline auto evaluate_imp(_Result & result)noexcept;
 
-    static constexpr inline auto evaluate_details(value_type * result, value_type const*const data);
+    static constexpr inline auto evaluate_details(value_type * result, value_type const*const data)noexcept;
 
     static constexpr inline auto cofactors_details_22(value_type * result,
                                                       value_type const A11, value_type const A12,
-                                                      value_type const A21, value_type const A22);
+                                                      value_type const A21, value_type const A22)noexcept;
 
     static constexpr inline auto cofactors_details_33(value_type * result,
                                                       value_type const A0, value_type const A1, value_type const A2,
                                                       value_type const A3, value_type const A4, value_type const A5,
-                                                      value_type const A6, value_type const A7, value_type const A8);
+                                                      value_type const A6, value_type const A7, value_type const A8)noexcept;
     tensor<value_type, dimension(), rank()> _data;
     _Tensor _data_basis;
 };

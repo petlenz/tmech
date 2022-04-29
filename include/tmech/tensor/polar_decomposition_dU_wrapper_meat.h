@@ -11,39 +11,39 @@
 namespace detail {
 
 template <typename _Base, typename _Tensor>
-polar_decomposition_dU_wrapper<_Base, _Tensor>::polar_decomposition_dU_wrapper(_Base const & __base, _Tensor const& __dU):
+polar_decomposition_dU_wrapper<_Base, _Tensor>::polar_decomposition_dU_wrapper(_Base const & __base, _Tensor const& __dU)noexcept:
     _base(__base),
     _dU(__dU)
 {}
 
 template <typename _Base, typename _Tensor>
-polar_decomposition_dU_wrapper<_Base, _Tensor>::polar_decomposition_dU_wrapper(polar_decomposition_dU_wrapper const & __data):
+polar_decomposition_dU_wrapper<_Base, _Tensor>::polar_decomposition_dU_wrapper(polar_decomposition_dU_wrapper const & __data)noexcept:
     _base(__data._base),
     _dU(__data._dU)
 {}
 
 template <typename _Base, typename _Tensor>
-constexpr inline auto const& polar_decomposition_dU_wrapper<_Base, _Tensor>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const{
+constexpr inline auto const& polar_decomposition_dU_wrapper<_Base, _Tensor>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept{
     return _dU(i,j,k,l);
 }
 
 template <typename _Base, typename _Tensor>
-constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::dimension(){
+constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::dimension()noexcept{
     return _Tensor::dimension();
 }
 
 template <typename _Base, typename _Tensor>
-constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::rank(){
+constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::rank()noexcept{
     return _Tensor::rank();
 }
 
 template <typename _Base, typename _Tensor>
-constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::evaluate(){
+constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::evaluate()noexcept{
     const_cast<_Base&>(_base).evaluate_derivatives();
 }
 
 template <typename _Base, typename _Tensor>
-constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::raw_data()const{
+constexpr inline auto polar_decomposition_dU_wrapper<_Base, _Tensor>::raw_data()const noexcept{
     return _dU.raw_data();
 }
 

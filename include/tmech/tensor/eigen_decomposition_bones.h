@@ -40,52 +40,52 @@ public:
     static_assert(Dim == 2 || Dim == 3, "eigen_decomposition_wrapper only for Dim == 2, 3");
     static_assert(Rank == 2,            "eigen_decomposition_wrapper for Rank == 2");
 
-    eigen_decomposition_wrapper(_Tensor const& data);
+    eigen_decomposition_wrapper(_Tensor const& data)noexcept;
 
-    eigen_decomposition_wrapper(eigen_decomposition_wrapper const& data);
+    eigen_decomposition_wrapper(eigen_decomposition_wrapper const& data)noexcept;
 
-    constexpr inline auto decompose();
+    constexpr inline auto decompose()noexcept;
 
-    constexpr inline auto decompose_eigenbasis();
+    constexpr inline auto decompose_eigenbasis()noexcept;
 
-    constexpr inline auto eigenvalues()const;
+    constexpr inline auto eigenvalues()const noexcept;
 
-    constexpr inline auto eigenvectors()const;
+    constexpr inline auto eigenvectors()const noexcept;
 
-    constexpr inline auto eigenbasis()const;
+    constexpr inline auto eigenbasis()const noexcept;
 
-    constexpr inline auto all_eigenvalues_repeated()const;
+    constexpr inline auto all_eigenvalues_repeated()const noexcept;
 
-    constexpr inline auto pair_eigenvalues_repeated()const;
+    constexpr inline auto pair_eigenvalues_repeated()const noexcept;
 
-    constexpr inline auto non_repeated_eigenvalues_index()const;
+    constexpr inline auto non_repeated_eigenvalues_index()const noexcept;
 
-    constexpr inline auto evaluate_eigenbasis();
+    constexpr inline auto evaluate_eigenbasis()noexcept;
 
-    constexpr inline size_type number_non_repeated_eigenvalues()const;
+    constexpr inline size_type number_non_repeated_eigenvalues()const noexcept;
 
-    constexpr inline auto permutation()const;
+    constexpr inline auto permutation()const noexcept;
 
 private:
-    constexpr inline auto get_repeated_eigenvalues();
+    constexpr inline auto get_repeated_eigenvalues()noexcept;
 
-    constexpr inline auto evaluate_detail_2D(bool eigenvectors, value_type const _a00, value_type const _a01, value_type const _a10, value_type const _a11);
+    constexpr inline auto evaluate_detail_2D(bool eigenvectors, value_type const _a00, value_type const _a01, value_type const _a10, value_type const _a11)noexcept;
 
-    constexpr inline auto evaluate_detail_3D(bool eigenvectors, value_type const _a00, value_type const _a01, value_type const _a02, value_type const _a11, value_type const _a12, value_type const _a22);
+    constexpr inline auto evaluate_detail_3D(bool eigenvectors, value_type const _a00, value_type const _a01, value_type const _a02, value_type const _a11, value_type const _a12, value_type const _a22)noexcept;
 
-    constexpr inline auto compute_orthogonal_complement(tensor1 const& W, tensor1& U, tensor1& V) const;
+    constexpr inline auto compute_orthogonal_complement(tensor1 const& W, tensor1& U, tensor1& V) const noexcept;
 
-    constexpr inline auto compute_eigenvector0(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22, value_type const eval0, tensor1& evec0) const;
+    constexpr inline auto compute_eigenvector0(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22, value_type const eval0, tensor1& evec0) const noexcept;
 
-    constexpr inline auto compute_eigenvector1(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22, tensor1 const& evec0, value_type const eval1, tensor1& evec1) const;
+    constexpr inline auto compute_eigenvector1(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22, tensor1 const& evec0, value_type const eval1, tensor1& evec1) const noexcept;
 
-    constexpr inline auto sort_eigenvalues(int sortType, bool isRotation, bool eigenvectors);
+    constexpr inline auto sort_eigenvalues(int sortType, bool isRotation, bool eigenvectors)noexcept;
 
-    static constexpr inline auto cross(value_type *data, value_type const*const data_lhs, value_type const*const data_rhs);
+    static constexpr inline auto cross(value_type *data, value_type const*const data_lhs, value_type const*const data_rhs)noexcept;
 
-    static constexpr inline auto dot(value_type const*const data_lhs, value_type const*const data_rhs);
+    static constexpr inline auto dot(value_type const*const data_lhs, value_type const*const data_rhs)noexcept;
 
-    static constexpr inline auto mul(value_type *data, value_type const*const data_lhs, value_type const*const data_rhs);
+    static constexpr inline auto mul(value_type *data, value_type const*const data_lhs, value_type const*const data_rhs)noexcept;
 
 
     tensor2                     _data;

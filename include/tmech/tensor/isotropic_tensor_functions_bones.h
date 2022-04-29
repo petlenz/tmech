@@ -86,26 +86,26 @@ public:
     static_assert(Dim == 2 || Dim == 3, "isotropic_tensor_function: only for Dim = 2, 3");
     static_assert(Rank == 2,            "isotropic_tensor_function: only only for Rank = 2");
 
-    constexpr isotropic_tensor_function(Tensor data);
+    constexpr isotropic_tensor_function(Tensor data)noexcept;
 
-    constexpr isotropic_tensor_function(isotropic_tensor_function const& data);
+    constexpr isotropic_tensor_function(isotropic_tensor_function const& data)noexcept;
 
-    constexpr inline auto operator()(size_type const i, size_type const j)const;
+    constexpr inline auto operator()(size_type const i, size_type const j)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    constexpr inline auto derivative();
+    constexpr inline auto derivative()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
-    constexpr inline auto get_derivative()const;
+    constexpr inline auto get_derivative()const noexcept;
 
-    constexpr inline auto raw_data()const;
+    constexpr inline auto raw_data()const noexcept;
 
 private:
-    constexpr inline auto evaluate_Gij();
+    constexpr inline auto evaluate_Gij()noexcept;
 
     tensor<value_type, Dim, 2> _data;
     tensor<value_type, Dim, 4> _deriv;

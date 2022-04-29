@@ -18,7 +18,7 @@ namespace detail {
 * @brief Default constructor
 */
 template <typename _Tensor>
-constexpr polar_decomposition_wrapper<_Tensor>::polar_decomposition_wrapper(data_type_tensor const& __data, bool const __newton_method, value_type const __tol, size_type const __max_steps):
+constexpr polar_decomposition_wrapper<_Tensor>::polar_decomposition_wrapper(data_type_tensor const& __data, bool const __newton_method, value_type const __tol, size_type const __max_steps)noexcept:
     _is_init(false),
     _is_init_deriv(false),
     newton_method(__newton_method),
@@ -37,7 +37,7 @@ constexpr polar_decomposition_wrapper<_Tensor>::polar_decomposition_wrapper(data
  * @brief Copy constructor
  */
 template <typename _Tensor>
-constexpr polar_decomposition_wrapper<_Tensor>::polar_decomposition_wrapper(polar_decomposition_wrapper const& __data):
+constexpr polar_decomposition_wrapper<_Tensor>::polar_decomposition_wrapper(polar_decomposition_wrapper const& __data)noexcept:
     _is_init(false),
     _is_init_deriv(false),
     newton_method(__data.newton_method),
@@ -61,7 +61,7 @@ constexpr polar_decomposition_wrapper<_Tensor>::polar_decomposition_wrapper(pola
 * from the decomposition \f$\SecondT{F} = \SecondT{R}\SecondT{U}\f$.
 */
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::R()const{
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::R()const noexcept{
     return polar_decomposition_R_wrapper<this_type, tensor2>(*this, _R);
 }
 
@@ -70,7 +70,7 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::R()const{
 * from the decomposition \f$\SecondT{F} = \SecondT{R}\SecondT{U}\f$.
 */
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::U()const{
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::U()const noexcept{
     return polar_decomposition_U_wrapper<this_type, tensor2>(*this, _U);
 }
 
@@ -79,13 +79,13 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::U()const{
 * from the decomposition \f$\SecondT{F} = \SecondT{V}\SecondT{R}\f$.
 */
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::V()const{
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::V()const noexcept{
     return polar_decomposition_V_wrapper<this_type, tensor2>(*this, _V);
 }
 //@}
 
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_newton(){
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_newton()noexcept{
     // F = R*U = V*R
     set_up_R_newton();
     _U = trans(_R)*_data;
@@ -93,7 +93,7 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_newton(){
 }
 
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives(){
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives()noexcept{
     evaluate();
     if(!_is_init_deriv){
         if constexpr (data_type_tensor::dimension() == 2){
@@ -105,7 +105,7 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives
     }
 }
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives_2D(){
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives_2D()noexcept{
     const auto I{eye<value_type, Dim, Rank>()};
     const auto Iu{trace(_U)};
     const auto Iv{trace(_V)};
@@ -122,7 +122,7 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives
 }
 
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives_3D(){
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives_3D()noexcept{
     const auto I{eye<value_type, Dim, Rank>()};
     const tensor<value_type, 3, 2> U_tilde{trace(_U)*I - _U};
     const tensor<value_type, 3, 2> V_tilde{trace(_V)*I - _V};
@@ -139,7 +139,7 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_derivatives
 }
 
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate(){
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate()noexcept{
     if(!_is_init){
         if(newton_method){
             evaluate_newton();
@@ -162,7 +162,7 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate(){
 * A detailed describtion is given <a href="https://en.wikipedia.org/wiki/Polar_decomposition">here</a>.
 */
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::set_up_R_newton(){
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::set_up_R_newton()noexcept{
     size_type iter{0};
     tensor<value_type, Dim, Rank> R_old;
     _R = _data;
@@ -198,7 +198,7 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::set_up_R_newton(){
 // R = F*invU
 // set_up_V_eigen() V = R*U*R^T
 template <typename _Tensor>
-constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_eigen(){
+constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_eigen()noexcept{
     auto eigen{eigen_decomposition(trans(_data)*_data)};
     const auto [eigenvalues, eigenbasis]{eigen.decompose_eigenbasis()};
     tensor2 Uinv;

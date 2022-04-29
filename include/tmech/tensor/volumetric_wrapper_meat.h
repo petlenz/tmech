@@ -18,9 +18,8 @@ namespace detail {
 * Default constructor
 */
 template <typename Tensor>
-constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(data_type_tensor const& data):
+constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(data_type_tensor const& data)noexcept:
     _trace(),
-    is_init(false),
     _data(data)
 {}
 
@@ -28,9 +27,8 @@ constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(data_type_tensor const&
  * Copy constructor
  */
 template <typename Tensor>
-constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper const& data):
+constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper const& data)noexcept:
     _trace(),
-    is_init(false),
     _data(data._data)
 {}
 //@}
@@ -44,7 +42,7 @@ constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper cons
 * @param j Index specifying the column
 */
 template <typename Tensor>
-constexpr inline auto volumetric_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const{
+constexpr inline auto volumetric_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const noexcept{
     return (i == j ? _trace : static_cast<value_type>(0.0));
 }
 //@}
@@ -57,7 +55,7 @@ constexpr inline auto volumetric_wrapper<Tensor>::operator ()(size_type const i,
 * Returns the dimension.
 */
 template <typename Tensor>
-constexpr inline auto volumetric_wrapper<Tensor>::dimension(){
+constexpr inline auto volumetric_wrapper<Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -65,7 +63,7 @@ constexpr inline auto volumetric_wrapper<Tensor>::dimension(){
  * Returns the rank of the expression.
  */
 template <typename Tensor>
-constexpr inline auto volumetric_wrapper<Tensor>::rank(){
+constexpr inline auto volumetric_wrapper<Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
@@ -78,8 +76,8 @@ constexpr inline auto volumetric_wrapper<Tensor>::rank(){
 * and computes the trace.
 */
 template <typename Tensor>
-constexpr inline auto volumetric_wrapper<Tensor>::evaluate(){
-    if(!is_init){
+constexpr inline auto volumetric_wrapper<Tensor>::evaluate()noexcept{
+    if(!this->_is_init){
         evaluate::apply(_data);
 
         _trace = 0;
@@ -88,7 +86,7 @@ constexpr inline auto volumetric_wrapper<Tensor>::evaluate(){
         }
 
         _trace /= static_cast<value_type>(dimension());
-        is_init = true;
+        this->_is_init = true;
     }
 }
 //@}

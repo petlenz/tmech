@@ -58,7 +58,7 @@ public:
     constexpr inline auto const& operator=(tensor_base<Derived> tensor_base) noexcept;
 
     template<typename _Tensor,  std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
-    constexpr inline auto const& operator=(_Tensor && __tensor);
+    constexpr inline auto const& operator=(_Tensor && __tensor) noexcept;
 
     template <typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
     constexpr inline auto const& operator+=(_Tensor && __rhs) noexcept;
@@ -80,10 +80,10 @@ public:
     inline constexpr auto& operator()(Indicies const ... indices) noexcept;
 
     template<typename _TensorLHS, typename _TensorRHS, typename, typename >
-    friend constexpr inline auto operator == (_TensorLHS && __lhs, _TensorRHS && __rhs);
+    friend constexpr inline auto operator == (_TensorLHS && __lhs, _TensorRHS && __rhs) noexcept;
 
     template<typename _TensorLHS, typename _TensorRHS, typename, typename >
-    friend constexpr inline auto operator != (_TensorLHS && __lhs, _TensorRHS && __rhs);
+    friend constexpr inline auto operator != (_TensorLHS && __lhs, _TensorRHS && __rhs) noexcept;
 
     static constexpr inline auto rank() noexcept;
 

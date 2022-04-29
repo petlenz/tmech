@@ -30,18 +30,18 @@ public:
     static_assert (sequence_rhs::size() != 0, "outer_product_wrapper: rhs sequence is empty");
     static_assert (data_type_LHS::dimension() == data_type_RHS::dimension(), "outer_product_wrapper: dimensions does not match");
 
-    constexpr outer_product_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs);
+    constexpr outer_product_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs)noexcept;
 
-    constexpr outer_product_wrapper(outer_product_wrapper const& __data);
+    constexpr outer_product_wrapper(outer_product_wrapper const& __data)noexcept;
 
     template<typename ...Indicies>
-    constexpr inline auto operator()(Indicies ... __indicies)const;
+    constexpr inline auto operator()(Indicies ... __indicies)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     _LHS lhs;

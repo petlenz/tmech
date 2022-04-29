@@ -18,7 +18,7 @@
 * @brief Default constructor
 */
 template <typename T, std::size_t Dim>
-constexpr levi_civita<T, Dim>::levi_civita() {}
+constexpr levi_civita<T, Dim>::levi_civita()noexcept{}
 //@}
 
 /**
@@ -29,14 +29,14 @@ constexpr levi_civita<T, Dim>::levi_civita() {}
 * @brief Returns the rank.
 */
 template <typename T, std::size_t Dim>
-constexpr inline auto levi_civita<T, Dim>::rank(){
+constexpr inline auto levi_civita<T, Dim>::rank()noexcept{
     return Dim;
 }
 /**
 * @brief Returns the dimension.
 */
 template <typename T, std::size_t Dim>
-constexpr inline auto levi_civita<T, Dim>::dimension(){
+constexpr inline auto levi_civita<T, Dim>::dimension()noexcept{
     return Dim;
 }
 //@}
@@ -52,7 +52,7 @@ constexpr inline auto levi_civita<T, Dim>::dimension(){
 */
 template <typename T, std::size_t Dim>
 template<std::size_t DIM, typename >
-constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j)const{
+constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j)const noexcept{
     return static_cast<value_type>(j) - static_cast<value_type>(i);
 }
 
@@ -65,7 +65,7 @@ constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_ty
 */
 template <typename T, std::size_t Dim>
 template<std::size_t DIM, typename >
-constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k)const{
+constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k)const noexcept{
     return (static_cast<value_type>(j) - static_cast<value_type>(i))
             *(static_cast<value_type>(k) - static_cast<value_type>(j))
             *(static_cast<value_type>(i) - static_cast<value_type>(k))*static_cast<value_type>(0.5);
@@ -81,7 +81,7 @@ constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_ty
 */
 template <typename T, std::size_t Dim>
 template<std::size_t DIM, typename>
-constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const{
+constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept{
     constexpr value_type fac{1./12.};
     return (static_cast<value_type>(j) - static_cast<value_type>(i))
             *(static_cast<value_type>(k) - static_cast<value_type>(i))

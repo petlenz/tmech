@@ -28,18 +28,18 @@ public:
     using value_type = typename result_type<typename data_type_LHS::value_type, typename data_type_RHS::value_type>::value_type;
     using size_type = std::size_t;
 
-    tensor_binary_expression_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs);
+    tensor_binary_expression_wrapper(data_type_LHS const& __lhs, data_type_RHS const& __rhs)noexcept;
 
-    tensor_binary_expression_wrapper(tensor_binary_expression_wrapper const& __data);
+    tensor_binary_expression_wrapper(tensor_binary_expression_wrapper const& __data)noexcept;
 
     template<typename ..._Indices>
-    constexpr inline auto operator()(_Indices... __indices)const;
+    constexpr inline auto operator()(_Indices... __indices)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     _LHS _lhs;

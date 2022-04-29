@@ -11,7 +11,7 @@
 namespace detail {
 
 template<typename System, typename Vector_x, typename Vector_dx, typename T>
-constexpr inline auto general_newton_raphson_solver::apply(System & A, Vector_x & x, Vector_dx & dx, T const tol){
+constexpr inline auto general_newton_raphson_solver::apply(System & A, Vector_x & x, Vector_dx & dx, T const tol)noexcept{
     constexpr std::size_t size{std::tuple_size_v<Vector_x>};
 
     //get jacobian and residuum
@@ -28,7 +28,7 @@ constexpr inline auto general_newton_raphson_solver::apply(System & A, Vector_x 
 }
 
 template<std::size_t I, std::size_t Size, typename Vector_x, typename Vector_dx>
-constexpr inline auto general_newton_raphson_solver::update(Vector_x & x, Vector_dx const& dx){
+constexpr inline auto general_newton_raphson_solver::update(Vector_x & x, Vector_dx const& dx)noexcept{
     if constexpr (I < Size){
         std::get<I>(x) -= std::get<I>(dx);
         update<I+1, Size>(x, dx);
@@ -36,7 +36,7 @@ constexpr inline auto general_newton_raphson_solver::update(Vector_x & x, Vector
 }
 
 template<std::size_t I, std::size_t Size, typename Vector_dx>
-constexpr inline auto general_newton_raphson_solver::norm_tuple(Vector_dx const& dx){
+constexpr inline auto general_newton_raphson_solver::norm_tuple(Vector_dx const& dx)noexcept{
     if constexpr (I < Size){
         const auto norm_temp{norm(std::get<I>(dx))};
         if constexpr(I == Size-1){
@@ -48,7 +48,7 @@ constexpr inline auto general_newton_raphson_solver::norm_tuple(Vector_dx const&
 }
 
 template<typename T>
-constexpr inline auto general_newton_raphson_solver::norm(T const& dx){
+constexpr inline auto general_newton_raphson_solver::norm(T const& dx)noexcept{
     if constexpr (std::is_fundamental_v<T>){
         return dx;
     }else{

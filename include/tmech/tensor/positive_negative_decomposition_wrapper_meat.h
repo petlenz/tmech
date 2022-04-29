@@ -18,7 +18,7 @@ namespace detail {
 * Default constructor
 */
 template <typename Tensor>
-positive_negative_decomposition_wrapper<Tensor>::positive_negative_decomposition_wrapper(data_type_tensor const& data):
+positive_negative_decomposition_wrapper<Tensor>::positive_negative_decomposition_wrapper(data_type_tensor const& data)noexcept:
     is_pos(false),
     is_neg(false),
     is_dpos(false),
@@ -35,7 +35,7 @@ positive_negative_decomposition_wrapper<Tensor>::positive_negative_decomposition
  * Copy constructor
  */
 template <typename Tensor>
-positive_negative_decomposition_wrapper<Tensor>::positive_negative_decomposition_wrapper(positive_negative_decomposition_wrapper const& data):
+positive_negative_decomposition_wrapper<Tensor>::positive_negative_decomposition_wrapper(positive_negative_decomposition_wrapper const& data)noexcept:
     is_pos(data.is_pos),
     is_neg(data.is_neg),
     is_dpos(data.is_dpos),
@@ -71,7 +71,7 @@ positive_negative_decomposition_wrapper<Tensor>::positive_negative_decomposition
 
 template <typename Tensor>
 template <typename Func>
-constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::evaluate_Gij(){
+constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::evaluate_Gij()noexcept{
     const auto& eig_values{eigen_decomposition.eigenvalues()};
     const auto& eig_basis{eigen_decomposition.eigenbasis()};
     const auto& non_repeated_eigenvalues{eigen_decomposition.non_repeated_eigenvalues_index()};
@@ -93,7 +93,7 @@ constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::evaluate_
 
 template <typename Tensor>
 template <typename Data>
-constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::derivative_details(Data & data){
+constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::derivative_details(Data & data)noexcept{
     const auto& eig_values{eigen_decomposition.eigenvalues()};
     const auto& eig_basis{eigen_decomposition.eigenbasis()};
     const auto& non_repeated_eigenvalues{eigen_decomposition.non_repeated_eigenvalues_index()};
@@ -114,7 +114,7 @@ constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::derivativ
 
 template <typename Tensor>
 template <typename Func, typename Data>
-constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::decompose_details(Data & data){
+constexpr inline auto positive_negative_decomposition_wrapper<Tensor>::decompose_details(Data & data)noexcept{
     const auto& eig_values{eigen_decomposition.eigenvalues()};
     const auto& eig_basis{eigen_decomposition.eigenbasis()};
     const auto& non_repeated_eigenvalues{eigen_decomposition.non_repeated_eigenvalues_index()};

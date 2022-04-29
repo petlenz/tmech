@@ -27,20 +27,20 @@ public:
     static_assert(Dim != 2 || Dim != 3 || Dim != 4,
     "levi_civita: dimension is not supported. Only Dim=2,3,4");
 
-    constexpr levi_civita();
+    constexpr levi_civita()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
     template<std::size_t DIM = Dim, typename = typename std::enable_if<(DIM == 2)>::type>
-    constexpr inline auto operator ()(size_type const i, size_type const j)const;
+    constexpr inline auto operator ()(size_type const i, size_type const j)const noexcept;
 
     template<std::size_t DIM = Dim, typename = typename std::enable_if<(DIM == 3)>::type>
-    constexpr inline auto operator ()(size_type const i, size_type const j, size_type const k)const;
+    constexpr inline auto operator ()(size_type const i, size_type const j, size_type const k)const noexcept;
 
     template<std::size_t DIM = Dim, typename = typename std::enable_if<(DIM == 4)>::type>
-    constexpr inline auto operator ()(size_type const i, size_type const j, size_type const k, size_type const l)const;
+    constexpr inline auto operator ()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept;
 };
 
 #endif // LEVI_CIVITA_SYMBOL_BONES_H

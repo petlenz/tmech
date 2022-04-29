@@ -19,7 +19,7 @@ public:
     dot_wrapper(){}
 
     template<typename _DerivedLHS, typename _DerivedRHS>
-    static constexpr inline auto evaluate(tensor_base<_DerivedLHS> const& __lhs_base, tensor_base<_DerivedRHS> const& __rhs_base){
+    static constexpr inline auto evaluate(tensor_base<_DerivedLHS> const& __lhs_base, tensor_base<_DerivedRHS> const& __rhs_base)noexcept{
         using value_type_LHS = typename _DerivedLHS::value_type;
         using value_type_RHS = typename _DerivedLHS::value_type;
         constexpr bool LHS_raw_data{is_detected<has_raw_data, _DerivedLHS>::value};
@@ -57,7 +57,7 @@ public:
 
 private:
     template <std::size_t _Size, typename _LHS, typename _RHS>
-    static constexpr inline auto evaluate_implementation(_LHS const* __lhs, _RHS const* __rhs){
+    static constexpr inline auto evaluate_implementation(_LHS const* __lhs, _RHS const* __rhs)noexcept{
         decltype (_LHS()*_RHS()) sum{0};
         for(size_type i{0}; i<_Size; ++i){
             sum += __lhs[i]*__rhs[i];

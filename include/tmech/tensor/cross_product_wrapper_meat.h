@@ -19,7 +19,7 @@ namespace detail {
 * Default constructor
 */
 template<typename _LHS, typename _RHS>
-constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(_LHS lhs, _RHS rhs):
+constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(_LHS lhs, _RHS rhs)noexcept:
     _lhs(lhs),
     _rhs(rhs)
 {}
@@ -28,7 +28,7 @@ constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(_LHS lhs, _RH
  * Copy constructor
  */
 template<typename _LHS, typename _RHS>
-constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(cross_product_wrapper const& data):
+constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(cross_product_wrapper const& data)noexcept:
     _lhs(data._lhs),
     _rhs(data._rhs)
 {}
@@ -43,7 +43,7 @@ constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(cross_product
 * must be unsigned integers, the number of indices must be equal to the rank of the expression.
 */
 template<typename _LHS, typename _RHS>
-constexpr inline auto cross_product_wrapper<_LHS, _RHS>::operator ()(size_type const idx)const{
+constexpr inline auto cross_product_wrapper<_LHS, _RHS>::operator ()(size_type const idx)const noexcept{
     switch (idx) {
     case 0:
         return static_cast<value_type>(_lhs(1) * _rhs(2) - _lhs(2) * _rhs(1));
@@ -65,7 +65,7 @@ constexpr inline auto cross_product_wrapper<_LHS, _RHS>::operator ()(size_type c
 * Returns the dimension.
 */
 template<typename _LHS, typename _RHS>
-constexpr inline auto cross_product_wrapper<_LHS, _RHS>::dimension(){
+constexpr inline auto cross_product_wrapper<_LHS, _RHS>::dimension()noexcept{
     return data_type_LHS::dimension();
 }
 
@@ -73,7 +73,7 @@ constexpr inline auto cross_product_wrapper<_LHS, _RHS>::dimension(){
 * Returns the rank.
 */
 template<typename _LHS, typename _RHS>
-constexpr inline auto cross_product_wrapper<_LHS, _RHS>::rank(){
+constexpr inline auto cross_product_wrapper<_LHS, _RHS>::rank()noexcept{
     return data_type_LHS::rank();
 }
 //@}
@@ -85,7 +85,7 @@ constexpr inline auto cross_product_wrapper<_LHS, _RHS>::rank(){
 * Evaluates the underlying left and right hand side tensor expression.
 */
 template<typename _LHS, typename _RHS>
-constexpr inline auto cross_product_wrapper<_LHS, _RHS>::evaluate(){
+constexpr inline auto cross_product_wrapper<_LHS, _RHS>::evaluate()noexcept{
     evaluate::apply(_lhs);
     evaluate::apply(_rhs);
 }

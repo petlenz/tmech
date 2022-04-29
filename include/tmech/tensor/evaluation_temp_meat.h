@@ -18,7 +18,7 @@ namespace detail {
 * @brief Default constructor
 */
 template <typename _Tensor>
-constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(_Tensor __data):
+constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(_Tensor __data)noexcept:
     _data(__data),
     _data_base(__data)
 {}
@@ -27,7 +27,7 @@ constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(_Tensor __data):
  * @brief Copy constructor
  */
 template <typename _Tensor>
-constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(eval_tensor_wrapper const& __data):
+constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(eval_tensor_wrapper const& __data)noexcept:
     _data(__data._data),
     _data_base(__data._data_base)
 {}
@@ -43,12 +43,12 @@ constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(eval_tensor_wrapper 
 */
 template <typename _Tensor>
 template<typename ...Indices>
-constexpr inline auto eval_tensor_wrapper<_Tensor>::operator()(Indices const... indices)const{
+constexpr inline auto eval_tensor_wrapper<_Tensor>::operator()(Indices const... indices)const noexcept{
     return _data(indices...);
 }
 
 template <typename _Tensor>
-constexpr inline auto eval_tensor_wrapper<_Tensor>::raw_data()const{
+constexpr inline auto eval_tensor_wrapper<_Tensor>::raw_data()const noexcept{
     return _data.raw_data();
 }
 //@}
@@ -61,7 +61,7 @@ constexpr inline auto eval_tensor_wrapper<_Tensor>::raw_data()const{
 * @brief Returns the dimension.
 */
 template <typename _Tensor>
-constexpr inline auto eval_tensor_wrapper<_Tensor>::dimension(){
+constexpr inline auto eval_tensor_wrapper<_Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -69,7 +69,7 @@ constexpr inline auto eval_tensor_wrapper<_Tensor>::dimension(){
 * @brief Returns the rank.
 */
 template <typename _Tensor>
-constexpr inline auto eval_tensor_wrapper<_Tensor>::rank(){
+constexpr inline auto eval_tensor_wrapper<_Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}

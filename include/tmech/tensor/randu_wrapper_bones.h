@@ -34,18 +34,18 @@ public:
     using value_type = _T;
     using el_type = typename detail::element_type<_T>::value_type;
 
-    randu(el_type __a = el_type(0), el_type __b = el_type(1));
+    randu(el_type __a = el_type(0), el_type __b = el_type(1))noexcept;
 
-    randu(randu const& data);
+    randu(randu const& data)noexcept;
 
     template<typename ...Indices>
-    constexpr inline auto operator()(const Indices... indices)const;
+    constexpr inline auto operator()(const Indices... indices)const noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     std::random_device dev;

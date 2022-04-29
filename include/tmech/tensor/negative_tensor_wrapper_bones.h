@@ -19,18 +19,18 @@ public:
     using value_type = typename data_type_tensor::value_type;
     using size_type  = std::size_t;
 
-    constexpr negative_tensor_wrapper(data_type_tensor const& data);
+    constexpr negative_tensor_wrapper(data_type_tensor const& data)noexcept;
 
-    constexpr negative_tensor_wrapper(negative_tensor_wrapper const& data);
+    constexpr negative_tensor_wrapper(negative_tensor_wrapper const& data)noexcept;
 
     template<typename ...Indices>
-    constexpr inline auto operator ()(Indices ... indices)const;
+    constexpr inline auto operator()(Indices ... indices)const noexcept;
 
-    static constexpr inline auto dimension();
+    static constexpr inline auto dimension()noexcept;
 
-    static constexpr inline auto rank();
+    static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto evaluate();
+    constexpr inline auto evaluate()noexcept;
 
 private:
     Tensor _data;

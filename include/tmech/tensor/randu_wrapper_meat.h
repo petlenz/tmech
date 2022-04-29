@@ -16,7 +16,7 @@
 * Default constructor
 */
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
-randu<_T, _Dim, _Rank>::randu(el_type __a, el_type __b):
+randu<_T, _Dim, _Rank>::randu(el_type __a, el_type __b)noexcept:
     rng(dev()),
     dist(__a, __b)
 {}
@@ -25,7 +25,7 @@ randu<_T, _Dim, _Rank>::randu(el_type __a, el_type __b):
  * Copy constructor
  */
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
-randu<_T, _Dim, _Rank>::randu(randu const& data):
+randu<_T, _Dim, _Rank>::randu(randu const& data)noexcept:
     rng(data.rng),
     dist(data.dist)
 {}
@@ -34,22 +34,22 @@ randu<_T, _Dim, _Rank>::randu(randu const& data):
 
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 template<typename ...Indices>
-constexpr inline auto randu<_T, _Dim, _Rank>::operator()(const Indices... indices)const{
+constexpr inline auto randu<_T, _Dim, _Rank>::operator()(const Indices... indices)const noexcept{
     return _data(indices...);
 }
 
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
-constexpr inline auto randu<_T, _Dim, _Rank>::rank(){
+constexpr inline auto randu<_T, _Dim, _Rank>::rank()noexcept{
     return _Rank;
 }
 
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
-constexpr inline auto randu<_T, _Dim, _Rank>::dimension(){
+constexpr inline auto randu<_T, _Dim, _Rank>::dimension()noexcept{
     return _Dim;
 }
 
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
-constexpr inline auto randu<_T, _Dim, _Rank>::evaluate(){
+constexpr inline auto randu<_T, _Dim, _Rank>::evaluate()noexcept{
     if(!this->_is_init){
         auto gen = [&](){return dist(rng);};
         std::generate(std::begin(_data.data()), std::end(_data.data()), gen);

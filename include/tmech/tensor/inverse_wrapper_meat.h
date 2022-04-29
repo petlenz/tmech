@@ -18,7 +18,7 @@ namespace detail {
 * @brief Default constructor
 */
 template <typename _Tensor, typename ..._Sequences>
-constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(_Tensor __data):
+constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(_Tensor __data)noexcept:
     data(),
     tensor_data(__data)
 {}
@@ -27,7 +27,7 @@ constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(_Tensor __dat
  * @brief Copy constructor
  */
 template <typename _Tensor, typename ..._Sequences>
-constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(inverse_wrapper const& __data):
+constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(inverse_wrapper const& __data)noexcept:
     data(),
     tensor_data(__data.tensor_data)
 {}
@@ -35,7 +35,7 @@ constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(inverse_wrapp
 
 template <typename _Tensor, typename ..._Sequences>
 template<typename ...Indicies>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::operator ()(Indicies... __indices)const{
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::operator ()(Indicies... __indices)const noexcept{
     return data(__indices...);
 }
 
@@ -47,25 +47,25 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::operator ()(Indic
 * @brief Returns the dimension.
 */
 template <typename _Tensor, typename ..._Sequences>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::dimension(){
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 /**
  * @brief Returns the rank.
  */
 template <typename _Tensor, typename ..._Sequences>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::rank(){
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
 
 template <typename _Tensor, typename ..._Sequences>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::raw_data()const{
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::raw_data()const noexcept{
     return data.raw_data();
 }
 
 template <typename _Tensor, typename ..._Sequences>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate(){
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate()noexcept{
     if(!this->_is_init){
         evaluate_imp(data);
         this->_is_init = true;
@@ -74,13 +74,13 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate(){
 
 template <typename _Tensor, typename ..._Sequences>
 template<typename _Result>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate(_Result const& __result){
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate(_Result const& __result)noexcept{
     evaluate_imp(__result);
 }
 
 template <typename _Tensor, typename ..._Sequences>
 template<typename _Result>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Result const& __result){
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Result const& __result)noexcept{
     constexpr auto HasRawData{is_detected<has_raw_data, data_type_tensor>::value};
 
     if constexpr (rank() == 4){
@@ -157,7 +157,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Res
 
 
 template <typename _Tensor, typename ..._Sequences>
-constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(value_type const* __result, value_type const * __data){
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(value_type const* __result, value_type const * __data)noexcept{
     constexpr auto DIM{dimension()};
     constexpr auto RANK{rank()};
 
@@ -196,7 +196,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(valu
 
 template <typename _Tensor, typename ..._Sequences>
 template<std::size_t Rows>
-constexpr auto inverse_wrapper<_Tensor, _Sequences...>::lu_detail(value_type const*  __A){
+constexpr auto inverse_wrapper<_Tensor, _Sequences...>::lu_detail(value_type const*  __A)noexcept{
     for(std::size_t i{0};i<Rows;++i){
         const value_type Akk = 1.0/__A[i*Rows+i];
         for(std::size_t j{i+1};j<Rows;++j){
@@ -213,7 +213,7 @@ constexpr auto inverse_wrapper<_Tensor, _Sequences...>::lu_detail(value_type con
 
 template <typename _Tensor, typename ..._Sequences>
 template<std::size_t Rows>
-constexpr auto inverse_wrapper<_Tensor, _Sequences...>::inv_lu(value_type * __Ainv, value_type const * const __Afac){
+constexpr auto inverse_wrapper<_Tensor, _Sequences...>::inv_lu(value_type * __Ainv, value_type const * const __Afac)noexcept{
 
     for (std::size_t i{0}; i < Rows*Rows; ++i){
         __Ainv[i] = static_cast<value_type>(0);
@@ -249,7 +249,7 @@ constexpr auto inverse_wrapper<_Tensor, _Sequences...>::inv_lu(value_type * __Ai
 
 template <typename _Tensor, typename ..._Sequences>
 constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::invert_2_2(value_type * result, value_type const A11, value_type const A12,
-                                                             value_type const A21, value_type const A22){
+                                                             value_type const A21, value_type const A22)noexcept{
     const auto det{A11*A22 - A12*A21};
     const auto invdet{1.0/det};
 
@@ -262,7 +262,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::invert_2_2(value_
 template <typename _Tensor, typename ..._Sequences>
 constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::invert_3_3(value_type * result, value_type const A0, value_type const A1, value_type const A2,
                                                              value_type const A3, value_type const A4, value_type const A5,
-                                                             value_type const A6, value_type const A7, value_type const A8){
+                                                             value_type const A6, value_type const A7, value_type const A8)noexcept{
     const auto det{A0*(A4*A8-A5*A7)
                 + A1*(A5*A6-A3*A8)
                 + A2*(A3*A7-A4*A6)};

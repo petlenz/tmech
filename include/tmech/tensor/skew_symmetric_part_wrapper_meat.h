@@ -19,7 +19,7 @@ namespace detail {
 * Default constructor
 */
 template <typename Tensor>
-skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(data_type_tensor const& __data):
+skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(data_type_tensor const& __data)noexcept:
     _data(__data)
 {}
 
@@ -27,13 +27,13 @@ skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(data_type_tenso
  * Copy constructor
  */
 template <typename Tensor>
-skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(skew_symmetric_part_wrapper const& __data):
+skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(skew_symmetric_part_wrapper const& __data)noexcept:
     _data(__data._data)
 {}
 //@}
 
 template <typename Tensor>
-constexpr inline auto skew_symmetric_part_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const{
+constexpr inline auto skew_symmetric_part_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const noexcept{
     //check if data.raw_data() is enable for better performace
     if constexpr(std::experimental::is_detected<detail::has_raw_data, typename std::remove_reference<Tensor>::type>::value){
         constexpr auto Dim{dimension()};
@@ -51,7 +51,7 @@ constexpr inline auto skew_symmetric_part_wrapper<Tensor>::operator ()(size_type
 * Returns the dimension of the expression.
 */
 template <typename Tensor>
-constexpr inline auto skew_symmetric_part_wrapper<Tensor>::dimension(){
+constexpr inline auto skew_symmetric_part_wrapper<Tensor>::dimension()noexcept{
     return data_type_tensor::dimension();
 }
 
@@ -59,13 +59,13 @@ constexpr inline auto skew_symmetric_part_wrapper<Tensor>::dimension(){
  * Returns the rank of the expression.
  */
 template <typename Tensor>
-constexpr inline auto skew_symmetric_part_wrapper<Tensor>::rank(){
+constexpr inline auto skew_symmetric_part_wrapper<Tensor>::rank()noexcept{
     return data_type_tensor::rank();
 }
 //@}
 
 template <typename Tensor>
-constexpr inline auto skew_symmetric_part_wrapper<Tensor>::evaluate(){
+constexpr inline auto skew_symmetric_part_wrapper<Tensor>::evaluate()noexcept{
     evaluate::apply(_data);
 }
 

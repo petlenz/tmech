@@ -12,7 +12,7 @@
 namespace detail {
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(_LHS __lhs, _RHS __rhs):
+inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(_LHS __lhs, _RHS __rhs)noexcept:
     _lhs(__lhs),
     _rhs(__rhs),
     _data(),
@@ -21,7 +21,7 @@ inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wra
 {}
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(inner_product_wrapper const& __data):
+inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(inner_product_wrapper const& __data)noexcept:
     _lhs(__data._lhs),
     _rhs(__data._rhs),
     _data(),
@@ -112,7 +112,7 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 template<std::size_t _Size>
-constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::get_size(){
+constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::get_size()noexcept{
     if constexpr (_Size == 0){
         return 1ul;
     }else{

@@ -19,23 +19,23 @@ public:
     using size_type  = std::size_t;
     using this_type = positive_negative_decomposition_wrapper<_Tensor>;
 
-    positive_negative_decomposition_wrapper(data_type_tensor const& data);
+    positive_negative_decomposition_wrapper(data_type_tensor const& data)noexcept;
 
-    positive_negative_decomposition_wrapper(positive_negative_decomposition_wrapper const& data);
+    positive_negative_decomposition_wrapper(positive_negative_decomposition_wrapper const& data)noexcept;
 
-    constexpr inline auto positive()const{
+    constexpr inline auto positive()const noexcept{
         return positive_negative_decomposition_pos_wrapper<this_type, tensor<value_type, data_type_tensor::dimension(), 2>>(*this, data_pos);
     }
 
-    constexpr inline auto negative()const{
+    constexpr inline auto negative()const noexcept{
         return positive_negative_decomposition_neg_wrapper<this_type, tensor<value_type, data_type_tensor::dimension(), 2>>(*this, data_neg);
     }
 
-    constexpr inline auto dpositive()const{
+    constexpr inline auto dpositive()const noexcept{
         return positive_negative_decomposition_dpos_wrapper<this_type, tensor<value_type, data_type_tensor::dimension(), 4>>(*this, deriv_pos);
     }
 
-    constexpr inline auto dnegative()const{
+    constexpr inline auto dnegative()const noexcept{
         return positive_negative_decomposition_dneg_wrapper<this_type, tensor<value_type, data_type_tensor::dimension(), 4>>(*this, deriv_neg);
     }
 
@@ -45,7 +45,7 @@ private:
     friend class positive_negative_decomposition_dpos_wrapper<this_type, tensor<value_type, data_type_tensor::dimension(), 4>>;
     friend class positive_negative_decomposition_dneg_wrapper<this_type, tensor<value_type, data_type_tensor::dimension(), 4>>;
 
-    constexpr inline auto evaluate_positive(){
+    constexpr inline auto evaluate_positive()noexcept{
         if(!is_pos){
             decompose_eigen();
             decompose_details<positive_part>(data_pos);
@@ -53,7 +53,7 @@ private:
         }
     }
 
-    constexpr inline auto evaluate_negative(){
+    constexpr inline auto evaluate_negative()noexcept{
         if(!is_neg){
             decompose_eigen();
             decompose_details<negative_part>(data_neg);
@@ -61,7 +61,7 @@ private:
         }
     }
 
-    constexpr inline auto evaluate_dpositive(){
+    constexpr inline auto evaluate_dpositive()noexcept{
         if(!is_dpos){
             decompose_eigen();
             evaluate_Gij<positive_part>();
@@ -70,7 +70,7 @@ private:
         }
     }
 
-    constexpr inline auto evaluate_dnegative(){
+    constexpr inline auto evaluate_dnegative()noexcept{
         if(!is_dneg){
             decompose_eigen();
             evaluate_Gij<negative_part>();
@@ -79,20 +79,20 @@ private:
         }
     }
 
-    constexpr inline auto decompose_eigen(){
+    constexpr inline auto decompose_eigen()noexcept{
         if(!is_pos || !is_neg || !is_dpos || !is_dneg){
             eigen_decomposition.decompose_eigenbasis();
         }
     }
 
     template <typename Func>
-    constexpr inline auto evaluate_Gij();
+    constexpr inline auto evaluate_Gij()noexcept;
 
     template <typename Data>
-    constexpr inline auto derivative_details(Data & data);
+    constexpr inline auto derivative_details(Data & data)noexcept;
 
     template <typename Func, typename Data>
-    constexpr inline auto decompose_details(Data & data);
+    constexpr inline auto decompose_details(Data & data)noexcept;
 
     bool is_pos;
     bool is_neg;

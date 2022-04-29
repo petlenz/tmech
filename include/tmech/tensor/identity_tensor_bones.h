@@ -27,9 +27,9 @@ public:
     static_assert(Rank % 2 == 0,
     "eye: No matching Rank. Only for a Rank which is a multiplier of two");
 
-    constexpr eye();
+    constexpr eye()noexcept;
 
-    ~eye(){}
+    ~eye()noexcept{}
 
     template<typename ...Indices>
     constexpr inline auto operator()(const Indices... indices)const noexcept;

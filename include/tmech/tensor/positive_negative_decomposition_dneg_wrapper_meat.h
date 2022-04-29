@@ -11,33 +11,39 @@
 namespace detail {
 
 template <typename Base, typename Tensor>
-positive_negative_decomposition_dneg_wrapper<Base, Tensor>::positive_negative_decomposition_dneg_wrapper(Base const& __base, Tensor const& __V):base(__base),V(__V) {}
+positive_negative_decomposition_dneg_wrapper<Base, Tensor>::positive_negative_decomposition_dneg_wrapper(Base const& __base, Tensor const& __V)noexcept:
+    base(__base),
+    V(__V)
+{}
 
 template <typename Base, typename Tensor>
-positive_negative_decomposition_dneg_wrapper<Base, Tensor>::positive_negative_decomposition_dneg_wrapper(positive_negative_decomposition_dneg_wrapper const & __data):base(__data.base),V(__data.V) {}
+positive_negative_decomposition_dneg_wrapper<Base, Tensor>::positive_negative_decomposition_dneg_wrapper(positive_negative_decomposition_dneg_wrapper const & __data)noexcept:
+    base(__data.base),
+    V(__data.V)
+{}
 
 template <typename Base, typename Tensor>
-constexpr inline auto const& positive_negative_decomposition_dneg_wrapper<Base, Tensor>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const{
+constexpr inline auto const& positive_negative_decomposition_dneg_wrapper<Base, Tensor>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept{
     return V(i,j,k,l);
 }
 
 template <typename Base, typename Tensor>
-constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::dimension(){
+constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::dimension()noexcept{
     return Tensor::dimension();
 }
 
 template <typename Base, typename Tensor>
-constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::rank(){
+constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::rank()noexcept{
     return Tensor::rank();
 }
 
 template <typename Base, typename Tensor>
-constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::evaluate(){
+constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::evaluate()noexcept{
     const_cast<Base&>(base).evaluate_dnegative();
 }
 
 template <typename Base, typename Tensor>
-constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::raw_data()const{
+constexpr inline auto positive_negative_decomposition_dneg_wrapper<Base, Tensor>::raw_data()const noexcept{
     return V.raw_data();
 }
 

@@ -18,7 +18,7 @@ namespace detail {
 * @brief Default constructor
 */
 template <typename _Tensor>
-exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(data_type_tensor const& data):
+exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(data_type_tensor const& data)noexcept:
     _data(),
     _derivative(),
     _num_of_iter(0),
@@ -29,7 +29,7 @@ exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(data_type_tensor const& data):
  * @brief Copy constructor
  */
 template <typename _Tensor>
-exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(exp_tensor_wrapper const& data):
+exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(exp_tensor_wrapper const& data)noexcept:
     _data(),
     _derivative(),
     _num_of_iter(0),
@@ -39,7 +39,7 @@ exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(exp_tensor_wrapper const& data):
 
 template <typename _Tensor>
 template<typename ...Indices>
-constexpr inline auto exp_tensor_wrapper<_Tensor>::operator()(Indices const... indices)const{
+constexpr inline auto exp_tensor_wrapper<_Tensor>::operator()(Indices const... indices)const noexcept{
     return _data(indices...);
 }
 
@@ -51,25 +51,25 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::operator()(Indices const... i
 * @brief Returns the dimension.
 */
 template <typename _Tensor>
-constexpr inline auto exp_tensor_wrapper<_Tensor>::dimension(){
+constexpr inline auto exp_tensor_wrapper<_Tensor>::dimension()noexcept{
     return data_type::dimension();
 }
 /**
  * @brief Returns the rank.
  */
 template <typename _Tensor>
-constexpr inline auto exp_tensor_wrapper<_Tensor>::rank(){
+constexpr inline auto exp_tensor_wrapper<_Tensor>::rank()noexcept{
     return data_type::rank();
 }
 //@}
 
 template <typename _Tensor>
-constexpr inline auto exp_tensor_wrapper<_Tensor>::derivative()const{
+constexpr inline auto exp_tensor_wrapper<_Tensor>::derivative()const noexcept{
     return exp_derivative_tensor_wrapper<exp_tensor_wrapper<_Tensor>, decltype (_derivative)>(*this, _derivative);
 }
 
 template <typename _Tensor>
-constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate(){
+constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate()noexcept{
     if(!this->_is_init){
         const value_type tol{1e-14};
         size_type iter{1}, max_iter{50};
@@ -98,7 +98,7 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate(){
 }
 
 template <typename _Tensor>
-constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate_derivative(){
+constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate_derivative()noexcept{
     std::vector<data_type> _data_i;
     _data_i.reserve(15);
     const value_type tol{1e-14};

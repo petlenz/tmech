@@ -13,7 +13,7 @@ namespace detail {
 struct compare_almost_equal
 {
     template <typename _LHS, typename _RHS, typename _T>
-    static inline bool check(_LHS const& __lhs, _RHS const& __rhs, _T const __eps){
+    static inline bool check(_LHS const& __lhs, _RHS const& __rhs, _T const __eps)noexcept{
         using value_type = typename result_type<typename _LHS::value_type, typename _RHS::value_type>::value_type;
 
         tensor<value_type, _RHS::dimension(), _RHS::rank()> R{__rhs - __lhs};
@@ -45,7 +45,7 @@ struct compare_almost_equal
 
 private:
     template <std::size_t _Size, typename _R, typename _T>
-    static constexpr inline bool check_detail(_R * __R, _T const __eps){
+    static constexpr inline bool check_detail(_R * __R, _T const __eps)noexcept{
         using R = typename std::remove_const<_R>::type;
 
         if constexpr (is_complex<R>()){
@@ -60,7 +60,7 @@ private:
     }
 
     template <std::size_t _Size, typename _R, typename _T>
-    static constexpr inline bool check_detail_imp(_R * __R, _T const __eps){
+    static constexpr inline bool check_detail_imp(_R * __R, _T const __eps)noexcept{
         const auto max{std::max(std::abs(*std::min_element(__R, __R+_Size)), *std::max_element(__R, __R+_Size))};
         return (max < std::abs(__eps));
     }

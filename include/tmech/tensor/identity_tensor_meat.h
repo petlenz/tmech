@@ -17,7 +17,7 @@
 * @brief Default constructor
 */
 template <typename T, std::size_t Dim, std::size_t Rank>
-constexpr eye<T, Dim, Rank>::eye()
+constexpr eye<T, Dim, Rank>::eye()noexcept
 {}
 //@}
 
