@@ -20,48 +20,26 @@ class variable_base
     template<typename _Type, typename... _Arguments>
     using has_reset_imp =  decltype(_Type().reset_imp(std::declval<_Arguments>()...));
 
-
-//    template <typename _T>
-//    struct get_data{using type = _T;};
-
-//    template <typename ..._T>
-//    struct get_data<std::tuple<_T...>>{using type = ..._T;};
-
 public:
     constexpr variable_base();
 
     constexpr auto convert() const;
 
     template<typename _Data>
-    constexpr inline auto&& operator()(_Data const& x);
+    constexpr inline auto operator()(_Data const& x);
 
     constexpr inline auto operator-()const;
 
     template<typename _DerivedT>
     friend std::ostream& operator << (std::ostream const& stream, variable_base<_DerivedT> const& var_base);
 
-    template<typename _Data, typename __Derived = _Derived, typename std::enable_if_t<std::is_lvalue_reference_v<decltype (__Derived().get_value(_Data()))>> * = nullptr>
-    constexpr inline auto const& value(_Data const& __data)const{
-        return static_cast<const _Derived*>(this)->get_value(__data);
-    }
-
-    template<typename _Data, typename __Derived = _Derived, typename std::enable_if_t<!std::is_lvalue_reference_v<decltype (__Derived().get_value(_Data()))>> * = nullptr>
-    constexpr inline auto value(_Data const& __data)const{
-        return static_cast<const _Derived*>(this)->get_value(__data);
-    }
+    template<typename _Data>
+    constexpr inline decltype(auto) value(_Data const& __data)const;
 
     template<typename _Data>
-    constexpr inline auto update(_Data const& __data){
-        if constexpr(std::experimental::is_detected<has_update_imp, _Derived, _Data>::value){
-            static_cast<_Derived*>(this)->update_imp(__data);
-        }
-    }
+    constexpr inline auto update(_Data const& __data);
 
-    constexpr inline auto reset(){
-        if constexpr(std::experimental::is_detected<has_reset_imp, _Derived>::value){
-            static_cast<_Derived*>(this)->reset_imp();
-        }
-    }
+    constexpr inline auto reset();
 
 protected:
     static bool _update;

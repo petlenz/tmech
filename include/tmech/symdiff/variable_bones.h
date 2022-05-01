@@ -24,24 +24,24 @@ public:
 
     ~variable();
 
-    template<typename _Data, typename std::enable_if_t<std::tuple_size_v<_Data> != 0> * = nullptr>
-    constexpr inline auto const& operator()(_Data const& __data) const;
+    template<typename _Data>
+    constexpr inline decltype(auto) operator()(_Data const& __data) const;
 
     constexpr inline auto get_string()const;
 
     constexpr inline std::ostream& print(std::ostream & __os)const;
 
     template<typename _Data>
-    constexpr auto value(_Data) = delete;
+    constexpr auto value(_Data const&) = delete;
 
     template<typename _Data>
-    constexpr auto update(_Data) = delete;
+    constexpr auto update(_Data const&) = delete;
 
     constexpr auto reset() = delete;
 
 private:
-    template<typename _Data, typename std::enable_if_t<std::tuple_size_v<_Data> != 0> * = nullptr>
-    constexpr inline auto const& get_value(_Data const& __data)const;
+    template<typename _Data>
+    constexpr inline decltype(auto) get_value(_Data const& __data)const;
 
     static std::string _var_name;
 };

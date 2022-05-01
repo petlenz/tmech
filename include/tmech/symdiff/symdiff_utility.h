@@ -169,6 +169,21 @@ struct is_symdiff_type<detail::tensor_pow_wrapper_derivative<_Father>>
     static constexpr bool value = true;
 };
 
+
+
+
+
+template <typename _T>
+struct has_update_function
+{
+    using type = std::false_type;
+    static constexpr bool value = false;
+};
+
+
+
+
+
 namespace detail {
 
 //template <typename _T>

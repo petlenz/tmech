@@ -31,10 +31,10 @@ public:
     constexpr inline std::ostream& print(std::ostream & __os)const;
 
     template<typename _Data>
-    constexpr inline  auto value(_Data) = delete;
+    constexpr inline  auto value(_Data const&) = delete;
 
     template<typename _Data>
-    constexpr inline  auto update(_Data) = delete;
+    constexpr inline  auto update(_Data const&) = delete;
 
     constexpr inline  auto reset() = delete;
 

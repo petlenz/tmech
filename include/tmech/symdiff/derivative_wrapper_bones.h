@@ -639,11 +639,6 @@ public:
 
 
 
-
-
-
-
-
 //n-th derivative
 template <std::size_t N, typename Variable, typename T>
 class diff_wrapper_n
@@ -670,23 +665,12 @@ public:
 
     derivative_wrapper() = delete;
 
-    derivative_wrapper(Expression const& expr):
-        _data(expr)
-    {}
+    derivative_wrapper(Expression const& expr)noexcept;
 
     template<typename _Data>
-    constexpr inline auto operator()(_Data const& __data){
-        return _data(__data);
-    }
+    constexpr inline decltype(auto) operator()(_Data const& __data)noexcept;
 
-    constexpr inline auto get_expression(){
-        return _data;
-    }
-
-    constexpr inline std::ostream& print(std::ostream & os)const{
-        _data.print(os);
-        return os;
-    }
+    constexpr inline std::ostream& print(std::ostream & os)const noexcept;
 
     Expression _data;
 };

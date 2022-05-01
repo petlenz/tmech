@@ -17,7 +17,7 @@ constexpr auto variable_base<_Derived>::convert() const {return *static_cast<con
 
 template <typename _Derived>
 template<typename _Data>
-constexpr inline auto&& variable_base<_Derived>::operator()(_Data const& __data){
+constexpr inline auto variable_base<_Derived>::operator()(_Data const& __data){
     if constexpr(std::experimental::is_detected<detail::has_update, _Derived, _Data>::value){
         static_cast<const _Derived*>(this)->reset();
     }
@@ -25,6 +25,27 @@ constexpr inline auto&& variable_base<_Derived>::operator()(_Data const& __data)
         static_cast<const _Derived*>(this)->update(__data);
     }
     return static_cast<const _Derived*>(this)->get_value(__data);
+}
+
+template <typename _Derived>
+template<typename _Data>
+constexpr inline decltype(auto) variable_base<_Derived>::value(_Data const& __data)const{
+    return static_cast<const _Derived*>(this)->get_value(__data);
+}
+
+template <typename _Derived>
+template<typename _Data>
+constexpr inline auto variable_base<_Derived>::update(_Data const& __data){
+    if constexpr(tmech::detail::is_detected<has_update_imp, _Derived, _Data>::value){
+        static_cast<_Derived*>(this)->update_imp(__data);
+    }
+}
+
+template <typename _Derived>
+constexpr inline auto variable_base<_Derived>::reset(){
+    if constexpr(tmech::detail::is_detected<has_reset_imp, _Derived>::value){
+        static_cast<_Derived*>(this)->reset_imp();
+    }
 }
 
 template <typename _Derived>

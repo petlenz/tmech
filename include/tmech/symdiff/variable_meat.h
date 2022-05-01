@@ -25,8 +25,8 @@ template <typename _T, std::size_t _VarID>
 variable<_T, _VarID>::~variable(){}
 
 template <typename _T, std::size_t _VarID>
-template<typename _Data, typename std::enable_if_t<std::tuple_size_v<_Data> != 0> *>
-constexpr inline auto const& variable<_T, _VarID>::operator()(_Data const& __data) const{
+template<typename _Data>
+constexpr inline decltype(auto) variable<_T, _VarID>::operator()(_Data const& __data) const{
     return get_value(__data);
 }
 
@@ -51,8 +51,8 @@ constexpr inline std::ostream& variable<_T, _VarID>::print(std::ostream & __os)c
 }
 
 template <typename _T, std::size_t _VarID>
-template<typename _Data, typename std::enable_if_t<std::tuple_size_v<_Data> != 0> *>
-constexpr inline auto const& variable<_T, _VarID>::get_value(_Data const& __data)const{
+template<typename _Data>
+constexpr inline decltype(auto) variable<_T, _VarID>::get_value(_Data const& __data)const{
     return std::get<_VarID>(__data);
 }
 

@@ -514,12 +514,13 @@ public:
     using squeezedType = negative<binary_expression_wrapper<_LHS, _RHS, op_mul>>;
 };
 
-// negative(LHS) * RHS --> LHS - RHS
+// negative(LHS) * RHS --> -(LHS * RHS)
 template <typename _LHS, typename _RHS>
 class squeezer<binary_expression_wrapper<negative<_LHS>, _RHS, op_mul>>
 {
 public:
     using squeezedType = negative<binary_expression_wrapper<_LHS, _RHS, op_mul>>;
 };
+
 }
 #endif // SQUEEZER_H

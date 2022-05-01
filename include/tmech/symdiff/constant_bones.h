@@ -28,7 +28,6 @@ public:
     template<typename _Type>
     constexpr inline auto operator=(_Type const& __data);
 
-
     template<typename Data>
     constexpr inline auto const& operator()(Data const& __data) const;
 

@@ -42,7 +42,7 @@ template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqR
 template<typename _Data>
 constexpr inline auto tensor_outer_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, _SeqRHS>::get_value(_Data const& __data)const{
     return tmech::outer_product<_SeqLHS, _SeqRHS>(static_cast<const variable_base<_ExprLHS>&>(_lhs).value(__data),
-                                                  static_cast<const variable_base<_ExprRHS>&>(_rhs).value(__data));
+                                                            static_cast<const variable_base<_ExprRHS>&>(_rhs).value(__data));
 }
 
 template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqRHS>
