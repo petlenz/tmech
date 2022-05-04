@@ -34,7 +34,7 @@ public:
 
 private:
     template<typename _Data>
-    constexpr inline auto get_value(_Data const& __data);
+    constexpr inline auto get_value(_Data const& __data)const;
 
     template<typename _Data>
     constexpr inline auto update_imp(_Data const& __data);

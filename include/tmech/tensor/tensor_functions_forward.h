@@ -36,7 +36,6 @@ constexpr inline auto almost_equal(_TensorLHS && __tensor_lhs, _TensorRHS && __t
  * \f[
  * \FourthT{C} =  \SecondT{A} \overline{\otimes} \SecondT{B} =  A_{ij} B_{kl} \SecondT{e}_i \otimes \SecondT{e}_k \otimes \SecondT{e}_j \otimes \SecondT{e}_l
  * \f]
- * and represents a transposition of the two inner bases.
  *
  * \code{.cpp}
  * tmech::tensor<double,3,2> A, B;
@@ -172,10 +171,8 @@ constexpr inline auto outer_product(_TensorLHS && __tensor_lhs, _TensorRHS && __
 /**
  * @brief General inner product. Controlled by template parameters
  *        %_SequenceLHS and %_SequenceRHS. Bases contained in sequence
- *        %_SequenceLHS are used for ordered element acces in %_DerivedLHS
- *        tensor expression. Bases contained in sequence
- *        %_SequenceRHS are used for ordered element acces in %_DerivedRHS
- *        tensor expression.
+ *        %_SequenceLHS are contracted with bases contained in sequence
+ *        %_SequenceRHS.
  *
  * \code{.cpp}
  * using SeqL = tmech::sequence<3,4>;
@@ -691,7 +688,7 @@ constexpr inline auto negative(_Tensor && __tensor);
 
 /**
  * @brief Positive and negative decomposition
- * part \f$ \SecondT{A} = \SecondT{A}^{+} + \SecondT{A}^{-}\f$
+ * \f$ \SecondT{A} = \SecondT{A}^{+} + \SecondT{A}^{-}\f$
  * of a positive semi-definite symmetric second-order tensor is given by spectral decomposition
  * \f[
  * \SecondT{A}^{+} = \sum_{i}^m \text{pos}(\lambda_i) \SecondT{E}_i,\quad \text{with}
@@ -973,7 +970,7 @@ inline auto num_diff_central(_Function __func, _Point const& __x, double const _
  * @param __dx Is
  */
 template<typename _SymDirection, typename _SymResult = std::tuple<>, typename _Function, typename _Point>
-inline auto num_diff_sym_central(_Function __func, _Point const& __x, double const __h = 1e-7);
+inline auto num_diff_sym_central(_Function __func, _Point const& __x, double const __h = 5e-6);
 
 template<typename T>
 constexpr inline auto convert_3D_to_2D(tensor<T, 3, 2> const& A);
@@ -981,8 +978,8 @@ constexpr inline auto convert_3D_to_2D(tensor<T, 3, 2> const& A);
 template<typename T>
 constexpr inline auto convert_3D_to_2D(tensor<T, 3, 4> const& A);
 
-template<typename System, typename ...Data>
-inline auto general_newton_raphson_iterate(System & A, std::tuple<Data...> & x, typename System::value_type const tol = 1e-8, std::size_t const max_iter = 20);
+template<typename System, typename T, typename ...Data>
+inline auto general_newton_raphson_iterate(System A, std::tuple<Data...> & x, T const tol = 1e-8, std::size_t const max_iter = 20);
 
 
 #endif // TENSOR_FUNCTIONS_FORWARD_H

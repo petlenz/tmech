@@ -383,7 +383,7 @@ class squeezer<
         tmech::sequence<1,2>>>
 {
 public:
-    using squeezedType = tensor_one<_Type>;
+    using squeezedType = as_sym_wrapper<_Type>;
 };
 
 //inner_product<<1,2><1,2>>(as_sym_wrapper<_Type>, 0.5*(otimesu(I,I) + otimesl(I,I))) = as_sym_wrapper
@@ -402,7 +402,7 @@ class squeezer<
         tmech::sequence<1,2>>>
 {
 public:
-    using squeezedType = tensor_one<_Type>;
+    using squeezedType = as_sym_wrapper<_Type>;
 };
 
 
@@ -466,6 +466,17 @@ public:
 //    using squeezedType = tensor_outer_product_wrapper<_LHS, _RHS, tmech::sequence<1,4>, tmech::sequence<2,3>>;
 //};
 
+//basis_change<seq>(Zero) = Zero
+template <typename _DataType, typename _Sequence>
+class squeezer<
+        tensor_basis_change_wrapper<
+        tensor_zero<_DataType>,
+        _Sequence>>
+{
+public:
+    using squeezedType = tensor_zero<_DataType>;
+};
+
 template <typename _Expr, template<class ...> class _Wrapper, typename ..._Args>
 class squeezer<_Wrapper<negative<_Expr>, _Args...>>
 {
@@ -521,6 +532,7 @@ class squeezer<binary_expression_wrapper<negative<_LHS>, _RHS, op_mul>>
 public:
     using squeezedType = negative<binary_expression_wrapper<_LHS, _RHS, op_mul>>;
 };
+
 
 }
 #endif // SQUEEZER_H

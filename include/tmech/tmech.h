@@ -216,6 +216,15 @@ namespace symdiff {
 #include "symdiff/variable_base_bones.h"
 #include "symdiff/variable_base_meat.h"
 
+#include "symdiff/jacobi_matrix_wrapper.h"
+//#include "symdiff/newton_solver_multi_variable_bones.h"
+//#include "symdiff/newton_solver_single_variable_bones.h"
+#include "symdiff/vector_of_functions.h"
+#include "symdiff/newton_raphson_solver_bones.h"
+
+
+#include "symdiff/implicit_function_bones.h"
+#include "symdiff/implicit_nonlinear_function_bones.h"
 
 
 //fundamental results

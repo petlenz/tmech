@@ -474,11 +474,11 @@ class diff_wrapper<_Variable, tensor_inner_product_wrapper<_LHS, _RHS, _SeqLHS, 
     static constexpr auto _ResultRank{_RankLHS + _RankRHS + _RankArgument - _InnerSizeLHS - _InnerSizeRHS};
 
     using lhs_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankLHS-_InnerSizeLHS-1>,1>;
-    using rhs_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankRHS-_InnerSizeRHS-1>, _ResultRank>;
-    using result_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankArgument-1>, _RankLHS-_InnerSizeLHS+1>;
-    using final_seq = tmech::detail::append_sequence_end_t<tmech::detail::append_sequence_end_t<lhs_seq,rhs_seq>,result_seq>;
+    using rhs_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankRHS-_InnerSizeRHS-1>, _RankLHS-_InnerSizeLHS+1>;
+    using result_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankArgument-1>, _RankLHS-_InnerSizeLHS + _RankRHS-_InnerSizeRHS + 1>;
+    using final_seq = tmech::detail::append_sequence_end_t<tmech::detail::append_sequence_end_t<lhs_seq,result_seq>,rhs_seq>;
 
-    using _lhs = typename squeezer<tensor_inner_product_wrapper<_dL, _RHS, _SeqLHS, _SeqRHS>>::squeezedType;
+    using _lhs = typename squeezer<tensor_basis_change_wrapper<typename squeezer<tensor_inner_product_wrapper<_dL, _RHS, _SeqLHS, _SeqRHS>>::squeezedType, final_seq>>::squeezedType;
     using _rhs = typename squeezer<tensor_inner_product_wrapper<_LHS, _dR, _SeqLHS, _SeqRHS>>::squeezedType;
 public:
     using deriv_type = typename squeezer<binary_expression_wrapper<_lhs, _rhs, op_add>>::squeezedType;
@@ -627,6 +627,34 @@ public:
 
 
 
+
+//implicit functions
+template <typename _Variable, typename _Func, typename _Var1, typename _Var2>
+class diff_wrapper<_Variable, implicit_function<std::tuple<_Func>, std::tuple<_Var1, _Var2>>>
+{
+public:
+    using deriv_type = typename get_fundamental_zero< typename _Variable::data_type, typename _Func::data_type >::type;
+};
+
+template <typename _Variable, typename _Func, typename _Var2>
+class diff_wrapper<_Variable, implicit_function<std::tuple<_Func>, std::tuple<_Variable, _Var2>>>
+{
+    using Rx   = typename squeezer<typename diff_wrapper<_Variable, _Func>::deriv_type>::squeezedType;
+    using Ry   = typename squeezer<typename diff_wrapper<_Var2,     _Func>::deriv_type>::squeezedType;
+    using RxRy = typename squeezer<negative<typename squeezer<binary_expression_wrapper<Rx, Ry, op_div>>::squeezedType>>::squeezedType;
+public:
+    using deriv_type = implicit_function<std::tuple<RxRy>, std::tuple<_Variable, _Var2>>;
+};
+
+template <typename _Variable, typename _Func, typename _Var1>
+class diff_wrapper<_Variable, implicit_function<std::tuple<_Func>, std::tuple<_Var1, _Variable>>>
+{
+    using Rx   = typename squeezer<typename diff_wrapper<_Var1,     _Func>::deriv_type>::squeezedType;
+    using Ry   = typename squeezer<typename diff_wrapper<_Variable, _Func>::deriv_type>::squeezedType;
+    using RxRy = typename squeezer<negative<typename squeezer<binary_expression_wrapper<Rx, Ry, op_div>>::squeezedType>>::squeezedType;
+public:
+    using deriv_type = implicit_function<std::tuple<RxRy>, std::tuple<_Var1, _Variable>>;
+};
 
 //cross
 //dot

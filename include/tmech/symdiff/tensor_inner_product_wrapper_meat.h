@@ -23,7 +23,11 @@ constexpr inline auto const& tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _S
 
 template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqRHS>
 constexpr inline std::ostream& tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, _SeqRHS>::print(std::ostream & __os)const{
-    print_general(__os);
+    if constexpr (tensor_info_lhs::rank() == 2 && tensor_info_rhs::rank() == 2 && std::is_same_v<tmech::sequence<2>, _SeqLHS> && std::is_same_v<tmech::sequence<1>, _SeqRHS>){
+        print_single(__os);
+    }else{
+        print_general(__os);
+    }
     return __os;
 }
 
@@ -59,6 +63,11 @@ constexpr inline auto tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, 
     __os<<">,<";
     print_sequence(__os, _SeqRHS());
     __os<<">>("<<_lhs<<", "<<_rhs<<")";
+}
+
+template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqRHS>
+constexpr inline auto tensor_inner_product_wrapper<_ExprLHS, _ExprRHS, _SeqLHS, _SeqRHS>::print_single(std::ostream & __os)const{
+    __os<<"("<<_lhs<<"*"<<_rhs<<")";
 }
 
 template <typename _ExprLHS, typename _ExprRHS, typename _SeqLHS, typename _SeqRHS>

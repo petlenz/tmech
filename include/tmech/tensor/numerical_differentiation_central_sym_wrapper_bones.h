@@ -169,7 +169,7 @@ private:
 
         //dS/dC_{ij}
         tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
-        tensor<T, Direction::dimension(), Direction::rank()> Dm(__A);
+        tensor<T, Direction::dimension(), Direction::rank()> Dm(Dp);
         auto diff_kernal = [&](auto ...Numbers){
             auto tuple = std::make_tuple(Numbers...);
 
@@ -191,13 +191,14 @@ private:
     static constexpr inline auto tensor_wrt_tensor(Function & __func, Direction const& __A, Result & __result, T const __eps)noexcept{
         constexpr auto FuncRank{decltype (__func(__A))::rank()};
         using direction_loop = basis_pair_loop<Direction::dimension(), Direction::rank()/2ul>;
+        //using function_loop = basis_pair_loop<Direction::dimension(), FuncRank/2ul>;
         using function_loop  = typename meta_for_loop_deep<Direction::dimension(), FuncRank-1>::type;
 
         const T eps_half{__eps/(sizeof... (SymDirection))};
-        const T inv_eps{static_cast<T>(1.0)/((sizeof... (SymDirection))*__eps)};
+        const T inv_eps{static_cast<T>(1.0)/(2*__eps)};
 
         tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
-        tensor<T, Direction::dimension(), Direction::rank()> Dm(__A);
+        tensor<T, Direction::dimension(), Direction::rank()> Dm(Dp);
 
         auto diff_kernal = [&](auto ...ONumbers){
             auto tuple = std::make_tuple(ONumbers...);

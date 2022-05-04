@@ -169,7 +169,12 @@ struct is_symdiff_type<detail::tensor_pow_wrapper_derivative<_Father>>
     static constexpr bool value = true;
 };
 
-
+template <typename _Functions, typename _Variables>
+struct is_symdiff_type<detail::implicit_function<_Functions, _Variables>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
 
 
 

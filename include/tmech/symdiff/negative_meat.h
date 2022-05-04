@@ -29,8 +29,8 @@ constexpr inline std::ostream& negative<_Expr>::print(std::ostream & __os)const{
 
 template<typename _Expr>
 template<typename _Data>
-constexpr inline auto negative<_Expr>::get_value(_Data const& __data){
-    return -static_cast<variable_base<_Expr>&>(_expr).value(__data);
+constexpr inline auto negative<_Expr>::get_value(_Data const& __data)const{
+    return -static_cast<const variable_base<_Expr>&>(_expr).value(__data);
 }
 
 template<typename _Expr>

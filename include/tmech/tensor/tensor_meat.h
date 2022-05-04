@@ -264,7 +264,7 @@ template<typename T, std::size_t Dim, std::size_t Rank>
 tensor<T, Dim, Rank>::tensor(tensor<T, Dim, Rank> const& _tensor):_data() {
     if(&_tensor != this){
         check_size();
-        _data = _tensor.data();
+        _data = _tensor._data;
         //detail::assign_tensors::apply(*this, _tensor);
     }
     //std::copy(_tensor.raw_data(), _tensor.raw_data()+Size, raw_data());
@@ -347,15 +347,15 @@ inline auto const& tensor<T, Dim, Rank>::randn()noexcept{
     return *this;
 }
 
-template<typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto const& tensor<T, Dim, Rank>::data()const noexcept{
-    return _data;
-}
+//template<typename T, std::size_t Dim, std::size_t Rank>
+//constexpr inline auto const& tensor<T, Dim, Rank>::data()const noexcept{
+//    return _data;
+//}
 
-template<typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto& tensor<T, Dim, Rank>::data()noexcept{
-    return _data;
-}
+//template<typename T, std::size_t Dim, std::size_t Rank>
+//constexpr inline auto& tensor<T, Dim, Rank>::data()noexcept{
+//    return _data;
+//}
 
 template<typename T, std::size_t Dim, std::size_t Rank>
 template<typename _Sequence>

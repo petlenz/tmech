@@ -111,9 +111,9 @@ public:
 
     constexpr inline auto const* raw_data()const noexcept;
 
-    constexpr inline auto const& data()const noexcept;
+//    constexpr inline auto const& data()const noexcept;
 
-    constexpr inline auto& data()noexcept;
+//    constexpr inline auto& data()noexcept;
 
     template<typename _Sequence>
     constexpr inline auto change_basis_view()noexcept;

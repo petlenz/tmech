@@ -126,6 +126,24 @@ class tensor_pow_wrapper;
 template <typename _Father>
 class tensor_pow_wrapper_derivative;
 
+//template <typename Jacobi, typename Functon>
+//class newton_solver_multi_variable;
+
+//template <typename Function, typename Variable>
+//class newton_solver_single_variable;
+
+template <typename Vector, typename ...Variables>
+class jacobi_matrix_wrapper_mixed_type;
+
+template <typename Jacobi, typename Functon>
+class newton_raphson_solver;
+
+template <typename ...Functions>
+class vector_of_functions;
+
+template <typename _Functions, typename _Variables>
+class implicit_function;
+
 } // NAMESPACE DETAIL
 
 

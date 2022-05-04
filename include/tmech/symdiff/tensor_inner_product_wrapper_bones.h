@@ -69,6 +69,8 @@ private:
 
     constexpr inline auto print_general(std::ostream & __os)const;
 
+    constexpr inline auto print_single(std::ostream & __os)const;
+
     template<std::size_t _First, std::size_t ..._Numbers>
     static constexpr auto print_sequence(std::ostream & __os, tmech::sequence<_First, _Numbers...>);
 

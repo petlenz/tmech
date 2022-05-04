@@ -197,6 +197,13 @@ set(TMECH_SYMDIFF_HEADER
     ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_pow_wrapper_meat.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_pow_derivative_wrapper_bones.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_pow_derivative_wrapper_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/jacobi_matrix_wrapper.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/newton_solver_multi_variable_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/newton_solver_single_variable_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/vector_of_functions.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/newton_raphson_solver_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/implicit_function_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/implicit_nonlinear_function_bones.h
     )
 
 # add the library that runs

@@ -31,6 +31,10 @@ public:
 
     constexpr inline std::ostream& print(std::ostream & __os)const;
 
+    static constexpr inline auto get_ID(){
+        return VarID;
+    }
+
     template<typename _Data>
     constexpr auto value(_Data const&) = delete;
 
