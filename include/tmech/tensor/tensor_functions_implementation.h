@@ -91,7 +91,6 @@ constexpr auto otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "otimes: no matching dimensions");
     using _SequenceLHS = detail::add_value_sequence_t<detail::sequence_t<TensorTypeLHS::rank()-1>, 1>;
     using _SequenceRHS = detail::add_value_sequence_t<detail::sequence_t<TensorTypeRHS::rank()-1>, TensorTypeLHS::rank()+1>;
-
     if constexpr (isLvalueLHS && isLvalueRHS){
         return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else if constexpr (!isLvalueLHS && isLvalueRHS){

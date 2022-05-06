@@ -252,18 +252,11 @@ Abaqus is a commerical software and often used in research [@Abaqus]
 
 ![Caption for example figure.\label{fig:example}](TensileSpecimen.pdf){ width=30% }
 
+
 \begin{eqnarray}
-\boldsymbol{\varepsilon} = \boldsymbol{\varepsilon}^e + \boldsymbol{\varepsilon}^p,
-\quad 
-\boldsymbol{\sigma} = \lambda \text{trace}(\boldsymbol{\varepsilon}^e) I + 2\mu\boldsymbol{\varepsilon}^e,
-\quad
-f[\boldsymbol{\sigma},\boldsymbol{q}] = ||\boldsymbol{\eta}|| - \sqrt{\frac{2}{3}} K[\alpha],
-\\
-\dot{\boldsymbol{\varepsilon}}^p = \gamma \frac{\boldsymbol{\eta}}{\boldsymbol{\eta}},
-\quad
-\dot{\boldsymbol{\beta}} = \gamma \frac{2}{3} H[\alpha]\frac{\boldsymbol{\eta}}{\boldsymbol{\eta}},
-\quad
-\dot{\alpha} = \gamma \sqrt{\frac{2}{3}}
+\boldsymbol{\sigma} = \lambda \text{trace}\boldsymbol{\varepsilon}\boldsymbol{I} + 2\mu\boldsymbol{\varepsilon},
+\qquad
+\mathbb{C} = \lambda\mathbb{I} + 2\mu\mathbb{I}^s
 \end{eqnarray}
 ```cpp
 #include <tmech/tmech.h>
@@ -281,9 +274,6 @@ extern "C" void umat_(double *stress, double *statev, double *ddsdde, double *ss
 	//parameters
 	const double E     = props[0]; //210000
 	const double nue   = props[1]; //0.3
-	const double m     = props[2];
-	const double k     = props[3];
-	const double sig_y = props[4];
 	
 	//Lamé parameters
 	const double mu     = E/(2*(1+nue)); 
@@ -300,37 +290,15 @@ extern "C" void umat_(double *stress, double *statev, double *ddsdde, double *ss
 	//voigt to tensor currently abq_std only Dim==3 supported
 	tmech::adaptor<double,3,2, tmech::abq_std<3,true>> strain(stran);
 	tmech::adaptor<double,3,2, tmech::abq_std<3,true>> dstrain(dstran);
-	tmech::adaptor<double,3,2, tmech::abq_std<3,true>> epspl(statev);
 	tmech::adaptor<double,3,2, tmech::abq_std<3>> sig(stress);
 	tmech::adaptor<double,3,4, tmech::abq_std<3>> C(ddsdde);
 	
-	//accumulated plastic strain last step
-	const double epl_n{*(statev+6)};
 	//updated strain
 	const tensor2 eps = strain + dstrain;
 	//trail stress 
-	const tensor2 sig_tr = lambda*tmech::trace(eps-epspl)*I + 2*mu*(eps-epspl);
-	//deviatoric stress
-	const auto sig_dev = tmech::dev(sig_tr);
-	//equivalent stress
-	const auto sig_eq = std::sqrt(tmech::dcontract(sig_dev,sig_dev));
-	//yield function
-	auto f = [&](double const& epl){return sig_eq - sig_y - k*std::pow(epl,m)};
-	if(f(epl_n) > 0){ //plastic
-		//yield normal
-		const tensor2 N = 3*sig_dev/(2*sig_eq);
-		//nonlinear function
-		auto f_non = [&](double const& depl){
-		const auto f{sig_eq - 3*G*depl - k*std::pow(epl_n+epl,m)};
-		const auto df{3*G - k*m*std::pow(epl_n+epl,m-1)};
-		return std::make_pair(std::make_tuple(std::make_tuple(df)), std::make_tuple(f));
-		};
-		const auto [iter, norm, dlambda]{tmech::general_newton_raphson_iterate(f_non, 0, 1e-8, 10)};
-		
-	}else{ //elastic
-		sig = sig_tr;
-		C = lambda*II + 2*mu*IIsym;
-	}
+	const tensor2 sig_tr = lambda*tmech::trace(eps)*I + 2*mu*(eps);
+	//elasticity tensor
+	C = lambda*II + 2*mu*IIsym;
 }
 ```
 : Abaqus example linear elasticity.
@@ -346,5 +314,7 @@ After the object file is generated, a Abaqus job can be submitted by the followi
 abaqus job=input_file_name user=object_file_output
 ```
 where input_file_name is the name of the .inp input file and object_file_output is the name of the generated object file.
+
+A more complex example of J2-plasticity is given in the 'tmech' github repositories
 
 # References

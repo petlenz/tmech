@@ -37,6 +37,29 @@ For more information on using `tmech`, check out the documentation
 
 http://tmech.readthedocs.io/
 
+## Issues and enhancements
+
+We use the [GitHub issue
+tracker](https://github.com/petlenz/tmech/issues) for all bug/issue
+reports and proposals for enhancements.
+
+## Contributing
+
+We welcome contributions directly to the code to improve performance as
+well as new functionality. For the latter, please first explain and
+motivate it in an [issue](https://github.com/petlenz/tmech/issues).
+
+Changes to the code base should follow these steps:
+
+-   [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+    the repository
+-   [Make a
+    branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
+    with an appropriate name in your fork
+-   Implement changes in your fork and include at least one [gtest](https://github.com/petlenz/tmech/blob/master/tests/tmech_test.h) to test your changes.
+-   Create a [pull
+    request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
+    into the `main` branch of `tmech`
 
 ## Usage
 

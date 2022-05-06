@@ -191,8 +191,8 @@ private:
     static constexpr inline auto tensor_wrt_tensor(Function & __func, Direction const& __A, Result & __result, T const __eps)noexcept{
         constexpr auto FuncRank{decltype (__func(__A))::rank()};
         using direction_loop = basis_pair_loop<Direction::dimension(), Direction::rank()/2ul>;
-        //using function_loop = basis_pair_loop<Direction::dimension(), FuncRank/2ul>;
-        using function_loop  = typename meta_for_loop_deep<Direction::dimension(), FuncRank-1>::type;
+        using function_loop = basis_pair_loop<Direction::dimension(), FuncRank/2ul>;
+        //using function_loop  = typename meta_for_loop_deep<Direction::dimension(), FuncRank-1>::type;
 
         const T eps_half{__eps/(sizeof... (SymDirection))};
         const T inv_eps{static_cast<T>(1.0)/(2*__eps)};
@@ -218,6 +218,35 @@ private:
         };
 
         direction_loop::loop(diff_kernal);
+
+//        if constexpr (FuncRank == 2 && Direction::rank() == 2){
+//            constexpr auto Dim{Direction::dimension()};
+
+//            for(std::size_t k{0}; k<Dim; ++k){
+//                for(std::size_t l{k}; l<Dim; ++l){
+//                    tensor<T, Direction::dimension(), Direction::rank()> eye;
+//                    if(k==l){
+//                        eye(k,l) = 1;
+//                    }else{
+//                        eye(k,l) = 0.5;
+//                        eye(l,k) = 0.5;
+//                    }
+//                    const tensor<T, Direction::dimension(), FuncRank> Ap{__func(Dp + eye*__eps)};
+//                    const tensor<T, Direction::dimension(), FuncRank> Am{__func(Dm - eye*__eps)};
+
+//                    for(std::size_t i{0}; i<Dim; ++i){
+//                        for(std::size_t j{i}; j<Dim; ++j){
+//                            __result(i,j,k,l) = ((Ap(i,j)-Am(i,j)))/(2*__eps);
+//                            __result(j,i,k,l) = ((Ap(i,j)-Am(i,j)))/(2*__eps);
+//                            __result(i,j,l,k) = ((Ap(i,j)-Am(i,j)))/(2*__eps);
+//                            __result(j,i,l,k) = ((Ap(i,j)-Am(i,j)))/(2*__eps);
+//                        }
+//                    }
+//                }
+//            }
+//        }else{
+
+//        }
     }
 };
 

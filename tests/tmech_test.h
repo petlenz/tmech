@@ -989,7 +989,7 @@ TEST(gtest, productRuleTensor_##ValueType##_##Dim##_##Rank) \
     auto f{x*x}; \
     auto f_var{std::make_tuple(a)}; \
     auto df = symdiff::derivative<1>(f, x); \
-    EXPECT_EQ(df(f_var), (tmech::inner_product<tmech::sequence<2>,tmech::sequence<1>>(tmech::otimesu(I, I), x(f_var)) \
+    EXPECT_EQ(df(f_var), (tmech::basis_change<tmech::sequence<1,3,4,2>>(tmech::inner_product<tmech::sequence<2>,tmech::sequence<1>>(tmech::otimesu(I, I), x(f_var))) \
                           +tmech::inner_product<tmech::sequence<2>,tmech::sequence<1>>(x(f_var), tmech::otimesu(I, I)))); \
 }
 
