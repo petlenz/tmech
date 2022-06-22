@@ -51,6 +51,33 @@ constexpr inline auto operator+(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
     }
 }
 
+
+
+//template<typename _TensorLHS, typename _TensorRHS,
+//         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
+//         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+//constexpr inline auto operator+(_TensorLHS const& __tensor_lhs, _TensorRHS const& __tensor_rhs){
+//    using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
+//    using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
+
+//    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
+//    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
+//    //check rank of both
+//    static_assert(TensorTypeLHS::rank() == TensorTypeRHS::rank(), "operator +: no matching rank");
+//    //check size of indices
+//    static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "operator +: no matching dimensions");
+//    if constexpr (isLvalueLHS && isLvalueRHS){
+//        return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+//    }else if constexpr (!isLvalueLHS && isLvalueRHS){
+//        return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS, TensorTypeRHS const&, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+//    }else if constexpr (isLvalueLHS && !isLvalueRHS){
+//        return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS const&, TensorTypeRHS, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+//    }else{
+//        return tmech::detail::tensor_binary_expression_wrapper<TensorTypeLHS, TensorTypeRHS, tmech::detail::operator_add>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+//    }
+//}
+
+
 /**
  * @brief Subtraction of two tensors of same rank and dimension.
  * \f[
@@ -162,14 +189,14 @@ constexpr inline auto operator*(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
 template<typename _Scalar, typename _Tensor,
          typename std::enable_if<std::is_fundamental<typename std::decay<_Scalar>::type>::value>::type* = nullptr,
          typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
-constexpr inline auto operator*(_Scalar && __scalar, _Tensor && __tensor){
+constexpr inline auto operator*(_Scalar __scalar, _Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
 
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
-        return tmech::detail::tensor_binary_expression_wrapper<const TensorType&, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(std::forward<_Scalar>(__scalar)));
+        return tmech::detail::tensor_binary_expression_wrapper<const TensorType&, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
     }else{
-        return tmech::detail::tensor_binary_expression_wrapper<TensorType, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(std::forward<_Scalar>(__scalar)));
+        return tmech::detail::tensor_binary_expression_wrapper<TensorType, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
     }
 }
 
@@ -193,14 +220,14 @@ constexpr inline auto operator*(_Scalar && __scalar, _Tensor && __tensor){
 template<typename _Scalar, typename _Tensor,
          typename std::enable_if<std::is_fundamental<typename std::decay<_Scalar>::type>::value>::type* = nullptr,
          typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
-constexpr inline auto operator*(_Tensor && __tensor, _Scalar && __scalar){
+constexpr inline auto operator*(_Tensor && __tensor, _Scalar __scalar){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
 
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
-        return tmech::detail::tensor_binary_expression_wrapper<const TensorType&, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(std::forward<_Scalar>(__scalar)));
+        return tmech::detail::tensor_binary_expression_wrapper<const TensorType&, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
     }else{
-        return tmech::detail::tensor_binary_expression_wrapper<TensorType, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(std::forward<_Scalar>(__scalar)));
+        return tmech::detail::tensor_binary_expression_wrapper<TensorType, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
     }
 }
 

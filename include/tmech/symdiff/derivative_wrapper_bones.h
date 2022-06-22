@@ -347,7 +347,8 @@ class diff_wrapper<_Variable, as_sym_wrapper<_Variable>>
     using otimesl     = tensor_outer_product_wrapper<I, I, tmech::sequence<1,4>, tmech::sequence<2,3>>;
     using _05         = real<typename tensor_info::value_type, 5, 0, 0>;
 public:
-    using deriv_type = binary_expression_wrapper<_05, binary_expression_wrapper<otimesu, otimesl, op_add>, op_mul>;
+    using deriv_type = tensor_sym_identity_wrapper<_Variable>;
+    //using deriv_type = binary_expression_wrapper<_05, binary_expression_wrapper<otimesu, otimesl, op_add>, op_mul>;
 };
 
 //symmetric argument
@@ -382,9 +383,6 @@ public:
 
 //outer product
 //derivative w.r.t. a scalar
-
-//derivative w.r.t. a tensor
-//otimes(A,B) = outer<>(A,B) + outer<>(A,B)
 template <typename _Variable, bool _isVariableTensor,  typename _LHS, typename _RHS, typename _SeqLHS, typename _SeqRHS>
 class get_tensor_outer_product_differentiation
 {
@@ -397,6 +395,8 @@ public:
     using type = typename squeezer<binary_expression_wrapper<_lhs, _rhs, op_add>>::squeezedType;
 };
 
+//derivative w.r.t. a tensor
+//otimes(A,B) = outer<>(A,B) + outer<>(A,B)
 template <typename _Variable,  typename _LHS, typename _RHS, typename _SeqLHS, typename _SeqRHS>
 class get_tensor_outer_product_differentiation<_Variable, true, _LHS, _RHS, _SeqLHS, _SeqRHS>
 {
@@ -535,6 +535,13 @@ public:
 using deriv_type = typename squeezer< tensor_function_wrapper<_Variable, cof_wrapper> >::squeezedType;
 };
 
+template <typename _Variable>
+class diff_wrapper<_Variable, function_wrapper<as_sym_wrapper<_Variable>, det_wrapper>>
+{
+public:
+using deriv_type = typename squeezer< tensor_function_wrapper<as_sym_wrapper<_Variable>, cof_wrapper> >::squeezedType;
+};
+
 //determinat
 //det(A[X])' = inner<<1,2>,<1,2>>(det(A[X])',A[X]')
 template <typename _Variable, typename _Expr>
@@ -552,10 +559,50 @@ public:
 template <typename _Variable>
 class diff_wrapper<_Variable, tensor_function_wrapper<_Variable, cof_wrapper>>
 {
-    using function = binary_expression_wrapper<function_wrapper<_Variable, det_wrapper>, decltype (trans(inv_tensor<_Variable>())), op_mul>;
+    using invT = typename squeezer< decltype (trans(inv_tensor<_Variable>())) >::squeezedType;
+    using function = binary_expression_wrapper<function_wrapper<_Variable, det_wrapper>, invT, op_mul>;
 public:
 using deriv_type = typename squeezer< typename diff_wrapper<_Variable, function>::deriv_type >::squeezedType;
 };
+
+
+//f(F[X])'_X = func(F)*F[X]'_X
+
+
+//f(F[X])'_X = inner_product<>(f(F[X])'_F[X], F[X]'_X)
+//sequence<>::size() == F[X].rank()
+//df(F[X])_{ij...}/dF[X]_{kl...} * dF[X]_{kl...}/dX{mn....}
+template <typename _Variable, typename _Expr, typename _Func>
+class diff_wrapper<_Variable, tensor_function_wrapper<_Expr, _Func>>
+{
+    using _dFunc = typename squeezer< typename diff_wrapper<_Expr, tensor_function_wrapper<_Expr, _Func>>::deriv_type >::squeezedType;
+    using _dExpr = typename squeezer< typename diff_wrapper<_Variable, _Expr>::deriv_type >::squeezedType;
+    using _FuncTensorInfo = get_tensor_info<typename tensor_function_wrapper<_Expr, _Func>::data_type>;
+    using _VarTensorInfo  = get_tensor_info<typename _Variable::data_type>;
+    using _SeqFuncLHS = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_FuncTensorInfo::rank()-1>, _FuncTensorInfo::rank()>;
+    using _SeqFuncRHS = tmech::detail::sequence_t<_FuncTensorInfo::rank()-1>;
+public:
+    using deriv_type = typename squeezer<tensor_inner_product_wrapper<_dFunc, _dExpr, _SeqFuncLHS, _SeqFuncRHS>>::squeezedType;
+};
+
+
+
+////cof(A[X])' = (det(A[X])*trans(inv(A[X])))'
+////           = inner_product<3,4,1,2>(cof(A)'_A, A'_X)
+//template <typename _Variable, typename _Expr>
+//class diff_wrapper<_Variable, tensor_function_wrapper<_Expr, cof_wrapper>>
+//{
+//    using dCof  = typename diff_wrapper<_Expr, tensor_function_wrapper<_Expr, cof_wrapper>>::deriv_type;
+//    using dExpr = typename diff_wrapper<_Variable, tensor_function_wrapper<_Expr, cof_wrapper>>::deriv_type;
+//public:
+//using deriv_type = typename squeezer< typename diff_wrapper<_Variable, function>::deriv_type >::squeezedType;
+//};
+
+
+//cofactor symmetric
+//cof(as_sym(X))' = (det(as_sym(X))*inv(as_sym(X)))'
+//det(as_sym(X)) = det(X)*inv(X)
+//inv(as_sym(X)) = -0.5*(otimes(inv(X),inv(X)) + inv(X),inv(X))
 
 //adjoint
 //adj(X)' = trans(cof(X))'
@@ -584,6 +631,62 @@ class diff_wrapper<_Variable, function_wrapper<_Expr, trace_wrapper>>
     using _dExpr = typename squeezer< typename diff_wrapper<_Variable, _Expr>::deriv_type >::squeezedType;
 public:
     using deriv_type = typename squeezer< tensor_inner_product_wrapper<_dExpr, I, tmech::sequence<1,2>, tmech::sequence<1,2>>>::squeezedType;
+};
+
+template <typename _Variable, typename _Expr>
+class diff_wrapper<_Variable, function_wrapper<as_sym_wrapper<_Expr>, trace_wrapper>>
+{
+    using I      = tensor_one<typename _Variable::data_type>;
+    using _dExpr = typename squeezer< typename diff_wrapper<_Variable, _Expr>::deriv_type >::squeezedType;
+public:
+    using deriv_type = typename squeezer< tensor_inner_product_wrapper<_dExpr, I, tmech::sequence<1,2>, tmech::sequence<1,2>>>::squeezedType;
+};
+
+//deviatoric
+//dev(X) = X - trace(X)*I
+//dev(X)' = IIdev
+template <typename Variable>
+class diff_wrapper<Variable, tensor_dev_wrapper<Variable>>
+{
+public:
+    using deriv_type = tensor_dev_identity_wrapper<Variable>;
+};
+
+//dev(A[X]) = A[X] - trace(A[X])*I
+//dev(X)' = IIdev:A,X
+template <typename Variable, typename _Expr>
+class diff_wrapper<Variable, tensor_dev_wrapper<_Expr>>
+{
+    using _dExpr = typename squeezer<typename diff_wrapper<Variable, _Expr>::deriv_type>::squeezedType;
+    using _IIdev = tensor_dev_identity_wrapper<Variable>;
+    using _SeqR = tmech::sequence<1,2>;
+    using _SeqL = tmech::sequence<3,4>;
+public:
+    using deriv_type = typename squeezer<tensor_inner_product_wrapper<_IIdev, _dExpr, _SeqL, _SeqR>>::squeezedType;
+};
+
+
+//volumetric
+//vol(X) = trace(X)*I
+//vol(X)' = IIvol
+template <typename Variable>
+class diff_wrapper<Variable, tensor_vol_wrapper<Variable>>
+{
+public:
+    using deriv_type = tensor_vol_identity_wrapper<Variable>;
+};
+
+//vol(A[X]) = trace(A[X])*I
+//vol(X)' = IIvol:A,X
+template <typename Variable, typename _Expr>
+class diff_wrapper<Variable, tensor_vol_wrapper<_Expr>>
+{
+    using _dExpr = typename squeezer<typename diff_wrapper<Variable, _Expr>::deriv_type>::squeezedType;
+    using _IIvol = tensor_vol_identity_wrapper<Variable>;
+    using _SeqR = tmech::sequence<1,2>;
+    using _SeqL = tmech::sequence<3,4>;
+public:
+    using deriv_type = typename squeezer<tensor_inner_product_wrapper<_IIvol, _dExpr, _SeqL, _SeqR>>::squeezedType;
 };
 
 //inverse
@@ -617,7 +720,8 @@ public:
     using deriv_type = tensor_isotropic_function_wrapper_derivative<tensor_isotropic_function_wrapper<_Variable, _Func>>;
 };
 
-//isotropic tensor functions
+//power function
+//pow(X,n) = pow(X,n)'
 template <typename _Variable, typename _RealExpo>
 class diff_wrapper<_Variable, tensor_pow_wrapper<_Variable, _RealExpo>>
 {
@@ -625,7 +729,84 @@ public:
     using deriv_type = tensor_pow_wrapper_derivative<tensor_pow_wrapper<_Variable, _RealExpo>>;
 };
 
+//pow(A[X],n) = pow(A[X],n),A[X] : A,X
+template <typename _Variable, typename _Expr, typename _RealExpo>
+class diff_wrapper<_Variable, tensor_pow_wrapper<_Expr, _RealExpo>>
+{
+    using SeqL = tmech::sequence<3,4>;
+    using SeqR = tmech::sequence<1,2>;
+    using dExpr = typename squeezer<typename diff_wrapper<_Variable, _Expr>::deriv_type>::squeezedType;
+public:
+    using deriv_type = typename squeezer<tensor_inner_product_wrapper<tensor_pow_wrapper_derivative<tensor_pow_wrapper<_Expr, _RealExpo>>, dExpr, SeqL, SeqR>>::squeezedType;
+};
 
+//trace(pow(A,n))' = n*pow(trace(trans(A)),n-1)
+template <typename _Variable, typename _RealExpo>
+class diff_wrapper<_Variable,  function_wrapper<tensor_pow_wrapper<_Variable, _RealExpo>, trace_wrapper>>
+{
+    using n_1 = typename squeezer<binary_expression_wrapper<_RealExpo, scalar_one<typename _RealExpo::data_type>, op_sub>>::squeezedType;
+    using varT = tensor_basis_change_wrapper<_Variable, tmech::sequence<2,1>>;
+public:
+    using deriv_type = typename squeezer<binary_expression_wrapper<_RealExpo, tensor_pow_wrapper<varT, n_1>, op_mul>>::squeezedType;
+};
+
+template <typename _Variable, typename _T, long long int _L, long long int _R>
+class diff_wrapper<_Variable,  function_wrapper<tensor_pow_wrapper<_Variable, real<_T, _L, _R, 1>>, trace_wrapper>>
+{
+    using n_1 = real<_T, _L-1, _R, 1>;
+    using varT = tensor_basis_change_wrapper<_Variable, tmech::sequence<2,1>>;
+public:
+    using deriv_type = typename squeezer<binary_expression_wrapper<real<_T, _L, _R, 1>, tensor_pow_wrapper<varT, n_1>, op_mul>>::squeezedType;
+};
+
+template <typename _Variable, typename _T>
+class diff_wrapper<_Variable, function_wrapper<tensor_pow_wrapper<_Variable, real<_T, 2, 0, 1>>, trace_wrapper>>
+{
+    using varT = tensor_basis_change_wrapper<_Variable, tmech::sequence<2,1>>;
+public:
+    using deriv_type = typename squeezer<binary_expression_wrapper<real<_T, 2, 0, 1>, varT, op_mul>>::squeezedType;
+};
+
+
+template <typename _Variable, template<class> class wrapper, typename _T, long long int _L, long long int _R>
+class diff_wrapper<_Variable, function_wrapper<tensor_pow_wrapper<wrapper<as_sym_wrapper<_Variable>>, real<_T, _L, _R, 1>>, trace_wrapper>>
+{
+    using n_1 = real<_T, _L-1, _R, 1>;
+public:
+    using deriv_type = typename squeezer<binary_expression_wrapper<real<_T, _L, _R, 1>, tensor_pow_wrapper<wrapper<as_sym_wrapper<_Variable>>, n_1>, op_mul>>::squeezedType;
+};
+
+template <typename _Variable, template<class> class wrapper, typename _T>
+class diff_wrapper<_Variable, function_wrapper<tensor_pow_wrapper<wrapper<as_sym_wrapper<_Variable>>, real<_T, 2, 0, 1>>, trace_wrapper>>
+{
+public:
+    using deriv_type = typename squeezer<binary_expression_wrapper<real<_T, 2, 0, 1>, wrapper<as_sym_wrapper<_Variable>>, op_mul>>::squeezedType;
+};
+
+template <typename _Variable, typename _T, long long int _L, long long int _R>
+class diff_wrapper<_Variable, function_wrapper<tensor_pow_wrapper<as_sym_wrapper<_Variable>, real<_T, _L, _R, 1>>, trace_wrapper>>
+{
+    using n_1 = real<_T, _L-1, _R, 1>;
+public:
+    using deriv_type = typename squeezer<binary_expression_wrapper<real<_T, _L, _R, 1>, tensor_pow_wrapper<as_sym_wrapper<_Variable>, n_1>, op_mul>>::squeezedType;
+};
+
+template <typename _Variable, typename _T>
+class diff_wrapper<_Variable, function_wrapper<tensor_pow_wrapper<as_sym_wrapper<_Variable>, real<_T, 2, 0, 1>>, trace_wrapper>>
+{
+public:
+    using deriv_type = typename squeezer<binary_expression_wrapper<real<_T, 2, 0, 1>, as_sym_wrapper<_Variable>, op_mul>>::squeezedType;
+};
+
+//pow(trace(A),n)' = n*pow(A,n-1)*I
+template <typename _Variable, typename _RealExpo>
+class diff_wrapper<_Variable, diff_pow<function_wrapper<_Variable, trace_wrapper>, _RealExpo>>
+{
+    using n_1 = typename squeezer<binary_expression_wrapper<_RealExpo, scalar_one<typename _RealExpo::data_type>, op_sub>>::squeezedType;
+    using I = tensor_one<typename _Variable::data_type>;
+public:
+    using deriv_type = binary_expression_wrapper<binary_expression_wrapper<_RealExpo, diff_pow<function_wrapper<_Variable, trace_wrapper>, n_1>, op_mul>, I, op_mul>;
+};
 
 
 //implicit functions

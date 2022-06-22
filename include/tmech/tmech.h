@@ -30,6 +30,8 @@
 
 
 #include "tmech_forward_definitions.h"
+#include "tensor/tensor_operators.h"
+
 
 namespace tmech {
 
@@ -198,6 +200,7 @@ namespace tmech {
 }
 
 namespace symdiff {
+#include "symdiff/forward_definitions.h"
 #include "symdiff/symdiff_functions_forward.h"
 #include "symdiff/symdiff_type_traits.h"
 #include "symdiff/symdiff_utility.h"
@@ -287,12 +290,14 @@ namespace symdiff {
 #include "symdiff/tensor_pow_wrapper_meat.h"
 #include "symdiff/tensor_pow_derivative_wrapper_bones.h"
 #include "symdiff/tensor_pow_derivative_wrapper_meat.h"
-
+#include "symdiff/tensor_dev_wrapper_bones.h"
+#include "symdiff/tensor_dev_wrapper_meat.h"
+#include "symdiff/tensor_vol_wrapper_bones.h"
+#include "symdiff/tensor_vol_wrapper_meat.h"
 } // NAMESPACE SYMDIFF
 
-
-
-#include "tensor/tensor_operators.h"
+#include "symdiff/tensor_fourth_order_identity_wrapper_bones.h"
+#include "symdiff/tensor_fourth_order_identity_wrapper_meat.h"
 
 
 #endif // TMECH_H

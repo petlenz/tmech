@@ -17,6 +17,10 @@ constexpr inline auto general_newton_raphson_solver::apply(System & A, Vector_x 
     //get jacobian and residuum
     auto [J, R]{A(x)};
 
+    if(std::sqrt(norm_tuple<0, size>(R)) == 0){
+        return 0.0;
+    }
+
     //solve
     general_lu_solver::apply(J, R, dx);
 

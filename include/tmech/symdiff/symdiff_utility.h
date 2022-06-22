@@ -169,6 +169,42 @@ struct is_symdiff_type<detail::tensor_pow_wrapper_derivative<_Father>>
     static constexpr bool value = true;
 };
 
+template <typename _Father>
+struct is_symdiff_type<detail::tensor_dev_wrapper<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Father>
+struct is_symdiff_type<detail::tensor_vol_wrapper<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Father>
+struct is_symdiff_type<detail::tensor_sym_identity_wrapper<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Father>
+struct is_symdiff_type<detail::tensor_dev_identity_wrapper<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+template <typename _Father>
+struct is_symdiff_type<detail::tensor_vol_identity_wrapper<_Father>>
+{
+    using type = std::true_type;
+    static constexpr bool value = true;
+};
+
+
 template <typename _Functions, typename _Variables>
 struct is_symdiff_type<detail::implicit_function<_Functions, _Variables>>
 {

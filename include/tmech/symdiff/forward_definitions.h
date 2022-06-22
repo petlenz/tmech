@@ -123,8 +123,23 @@ class as_sym_wrapper;
 template <typename _Expr, typename _RealExpo>
 class tensor_pow_wrapper;
 
-template <typename _Father>
+template <typename _Expr>
 class tensor_pow_wrapper_derivative;
+
+template <typename _Expr>
+class tensor_dev_wrapper;
+
+template <typename _Expr>
+class tensor_vol_wrapper;
+
+template <typename _Expr>
+class tensor_sym_identity_wrapper;
+
+template <typename _Expr>
+class tensor_dev_identity_wrapper;
+
+template <typename _Expr>
+class tensor_vol_identity_wrapper;
 
 //template <typename Jacobi, typename Functon>
 //class newton_solver_multi_variable;
@@ -138,11 +153,15 @@ class jacobi_matrix_wrapper_mixed_type;
 template <typename Jacobi, typename Functon>
 class newton_raphson_solver;
 
+
 template <typename ...Functions>
 class vector_of_functions;
 
 template <typename _Functions, typename _Variables>
 class implicit_function;
+
+template <typename Expression>
+class derivative_wrapper;
 
 } // NAMESPACE DETAIL
 

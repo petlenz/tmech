@@ -105,6 +105,17 @@ class pow_tensor_wrapper;
 
 template <typename _Base, typename _Tensor>
 class pow_tensor_derivative_wrapper;
+
+template <typename _T>
+class scalar;
+
+struct operator_add;
+struct operator_sub;
+struct operator_mul;
+struct operator_div;
+
+template<typename T>
+struct is_complex_t;
 }
 
 //forward declaration
@@ -131,6 +142,12 @@ class zeros;
 
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
 class adaptor;
+
+template <typename _T>
+struct is_tensor_type;
+
+template <std::size_t ..._Args>
+struct sequence;
 
 }
 

@@ -139,10 +139,9 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij()noe
             if(i == j){
                 _Gij[i][j] = Func::derivative(eig_values[non_repeated_eigenvalues[i]]);
             }else{
-                const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
-                const auto pair_repeated_eigenvalues{_eigen_decomposition.pair_eigenvalues_repeated()};
-
-                const size_type rows{(all_repeated_eigenvalues ? 1ul : (pair_repeated_eigenvalues ? 2ul : (dimension() == 3ul ? 3ul : 2ul)))};
+                //const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
+                //const auto pair_repeated_eigenvalues{_eigen_decomposition.pair_eigenvalues_repeated()};
+                //const size_type rows{(all_repeated_eigenvalues ? 1ul : (pair_repeated_eigenvalues ? 2ul : (dimension() == 3ul ? 3ul : 2ul)))};
                 const auto lambda_i{eig_values[non_repeated_eigenvalues[i]]}, lambda_j{eig_values[non_repeated_eigenvalues[j]]};
                 _Gij[i][j] = (Func::apply(lambda_i) - Func::apply(lambda_j))/(lambda_i - lambda_j);
             }

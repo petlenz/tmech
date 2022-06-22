@@ -138,6 +138,7 @@ set(TMECH_TENSOR_HEADER
     ${TMECH_INCLUDE_DIR}/tmech/tensor/pow_tensor_derivative_wrapper_bones.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/pow_tensor_derivative_wrapper_meat.h
     ${TMECH_INCLUDE_DIR}/tmech/tmech_forward_definitions.h
+    ${TMECH_INCLUDE_DIR}/tmech/tensor/tensor_operators_forward.h
     )
 
 set(TMECH_SYMDIFF_HEADER
@@ -204,6 +205,12 @@ set(TMECH_SYMDIFF_HEADER
     ${TMECH_SYMDIFF_INCLUDE_DIR}/newton_raphson_solver_bones.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/implicit_function_bones.h
     ${TMECH_SYMDIFF_INCLUDE_DIR}/implicit_nonlinear_function_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_dev_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_dev_wrapper_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_vol_wrapper_meat.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_vol_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_fourth_order_identity_wrapper_bones.h
+    ${TMECH_SYMDIFF_INCLUDE_DIR}/tensor_fourth_order_identity_wrapper_meat.h
     )
 
 # add the library that runs

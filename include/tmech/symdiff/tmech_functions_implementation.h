@@ -145,8 +145,9 @@ constexpr inline auto dev(_Expression){
     static_assert (symdiff::detail::is_tensor<data_type>::value, "dev: argument is not a tensor type");
     static_assert (tensor_info::rank() == 2, "dev: only for second order tensors");
     //ugly...
-    constexpr auto third{static_cast<long long int>(1e10/tensor_info::dimension())};
-    return _Expression() - symdiff::real<value_type, 0, third, 1>()*trace(_Expression())*symdiff::tensor_one<data_type>();
+    //constexpr auto third{static_cast<long long int>(1e10/tensor_info::dimension())};
+    //return _Expression() - symdiff::real<value_type, 0, third, 1>()*trace(_Expression())*symdiff::tensor_one<data_type>();
+    return symdiff::detail::tensor_dev_wrapper<_Expression>();
 }
 
 template<typename _Expression,
@@ -177,9 +178,10 @@ constexpr inline auto vol(_Expression){
     using value_type = typename tensor_info::value_type;
     static_assert (symdiff::detail::is_tensor<data_type>::value, "vol: argument is not a tensor type");
     static_assert (tensor_info::rank() == 2, "vol: only for second order tensors");
+    return symdiff::detail::tensor_vol_wrapper<_Expression>();
     //ugly...
-    constexpr auto third{static_cast<long long int>(1e10/tensor_info::dimension())};
-    return symdiff::real<value_type, 0, third, 1>()*trace(_Expression())*symdiff::tensor_one<data_type>();
+    //constexpr auto third{static_cast<long long int>(1e10/tensor_info::dimension())};
+    //return symdiff::real<value_type, 0, third, 1>()*trace(_Expression())*symdiff::tensor_one<data_type>();
 }
 
 template<typename _Expression,

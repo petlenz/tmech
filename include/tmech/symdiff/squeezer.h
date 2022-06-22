@@ -455,6 +455,63 @@ public:
     using squeezedType = tensor_zero<data_type>;
 };
 
+//inner_product<<3,4>,<1,2>>(IIsym, IIsym) = IIsym
+template <typename _T1, typename _T2>
+class squeezer<
+        tensor_inner_product_wrapper<
+        tensor_sym_identity_wrapper<_T1>,
+        tensor_sym_identity_wrapper<_T2>,
+        tmech::sequence<3,4>, tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_sym_identity_wrapper<_T1>;
+};
+//inner_product<<3,4>,<1,2>>(IIsym, IIdev) = IIdev
+template <typename _T1, typename _T2>
+class squeezer<
+        tensor_inner_product_wrapper<
+        tensor_sym_identity_wrapper<_T1>,
+        tensor_dev_identity_wrapper<_T2>,
+        tmech::sequence<3,4>, tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_dev_identity_wrapper<_T1>;
+};
+//inner_product<<3,4>,<1,2>>(IIsym, IIvol) = IIvol
+template <typename _T1, typename _T2>
+class squeezer<
+        tensor_inner_product_wrapper<
+        tensor_sym_identity_wrapper<_T1>,
+        tensor_vol_identity_wrapper<_T2>,
+        tmech::sequence<3,4>, tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_vol_identity_wrapper<_T1>;
+};
+
+//inner_product<<3,4>,<1,2>>(IIdev, IIsym) = IIdev
+template <typename _T1, typename _T2>
+class squeezer<
+        tensor_inner_product_wrapper<
+        tensor_dev_identity_wrapper<_T1>,
+        tensor_sym_identity_wrapper<_T2>,
+        tmech::sequence<3,4>, tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_dev_identity_wrapper<_T1>;
+};
+//inner_product<<3,4>,<1,2>>(IIvol, IIsym) = IIvol
+template <typename _T1, typename _T2>
+class squeezer<
+        tensor_inner_product_wrapper<
+        tensor_vol_identity_wrapper<_T1>,
+        tensor_sym_identity_wrapper<_T2>,
+        tmech::sequence<3,4>, tmech::sequence<1,2>>>
+{
+public:
+    using squeezedType = tensor_vol_identity_wrapper<_T1>;
+};
+
 ////basis_change<2,1,3,4>(otimesu(LHS, RHS)) = otimesl(RHS, LHS)
 //template <typename _LHS, typename _RHS>
 //class squeezer<

@@ -16,6 +16,15 @@ constexpr inline auto derivative(_Expression, _Variable){
     return detail::derivative_wrapper<_derivative>(_derivative());
 }
 
+
+template<std::size_t N = 1, typename _Derivative, typename _Variable,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Derivative>::value> * = nullptr,
+         typename std::enable_if_t<symdiff::is_symdiff_type<_Variable>::value> * = nullptr>
+constexpr inline auto derivative(detail::derivative_wrapper<_Derivative>, _Variable){
+    using _derivative = typename detail::diff_wrapper_n<N, _Variable, _Derivative>::deriv_type;
+    return detail::derivative_wrapper<_derivative>(_derivative());
+}
+
 namespace experimental {
 
 template<typename ...Functions>
