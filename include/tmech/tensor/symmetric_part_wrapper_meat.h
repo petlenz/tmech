@@ -18,16 +18,17 @@ namespace detail {
 * Default constructor
 */
 template <typename Tensor>
-symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(data_type_tensor const& data)noexcept:
-    _data(data)
+symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(data_type_tensor const& __data)noexcept:
+    _data(__data)
 {}
 
 /**
  * Copy constructor
  */
 template <typename Tensor>
-symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(symmetric_part_wrapper const& data)noexcept:
-    _data(data._data)
+symmetric_part_wrapper<Tensor>::symmetric_part_wrapper(symmetric_part_wrapper const& __data)noexcept:
+    basetype(__data),
+    _data(__data._data)
 {}
 //@}
 

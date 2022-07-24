@@ -22,7 +22,7 @@ public:
         _is_init(false)
     {}
 
-    constexpr tensor_base(tensor_base const& __data)noexcept:
+    constexpr explicit tensor_base(tensor_base const& /*__data*/)noexcept:
         _is_init(false)
     {}
 

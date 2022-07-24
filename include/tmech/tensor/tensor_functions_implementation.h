@@ -119,21 +119,16 @@ constexpr auto inline dcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
         return detail::dot_wrapper::evaluate(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else{
         using _SequenceRHS = sequence<1,2>;
-        const auto get_sequence_lhs{[&](){
-                if constexpr (TensorTypeLHS::rank() == 2){
-                    return sequence<1,2>();
-                }else if constexpr (TensorTypeLHS::rank() == 4){
-                    return sequence<3,4>();
-                }}};
+        using _SequenceLHS = sequence<TensorTypeLHS::rank()-1,TensorTypeLHS::rank()>;
 
         if constexpr (isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, decltype (get_sequence_lhs()), _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
         }else if constexpr (!isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, decltype (get_sequence_lhs()), _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
         }else if constexpr (isLvalueLHS && !isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, decltype (get_sequence_lhs()), _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
         }else{
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS, decltype (get_sequence_lhs()), _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
+            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
         }
     }
 }
@@ -616,15 +611,18 @@ constexpr inline auto det(tensor_base<_Derived>const& __A){
  */
 template<typename Derived>
 constexpr inline auto norm(tensor_base<Derived> const& data_base){
-    static_assert (Derived::rank() == 1 || Derived::rank() == 2 || Derived::rank() == 4,"norm: only valid for a first-, second- or fourth-order tensor");
+    //static_assert (Derived::rank() == 1 || Derived::rank() == 2 || Derived::rank() == 4,"norm: only valid for a first-, second- or fourth-order tensor");
+    using _Sequence = detail::add_value_sequence_t<detail::sequence_t<Derived::rank()-1>, 1>;
 
-    if constexpr (Derived::rank() == 1){
-        return std::sqrt(dot(data_base.convert(),data_base.convert()));
-    }else if constexpr (Derived::rank() == 2){
-        return std::sqrt(dcontract(data_base.convert(),data_base.convert()));
-    }else if constexpr (Derived::rank() == 4) {
-        return std::sqrt(ddcontract(data_base.convert(),data_base.convert()));
-    }
+//    if constexpr (Derived::rank() == 1){
+//        return std::sqrt(dot(data_base.convert(),data_base.convert()));
+//    }else if constexpr (Derived::rank() == 2){
+//        return std::sqrt(dcontract(data_base.convert(),data_base.convert()));
+//    }else if constexpr (Derived::rank() == 4) {
+//        return std::sqrt(ddcontract(data_base.convert(),data_base.convert()));
+//    }
+
+    return std::sqrt(inner_product<_Sequence,_Sequence>(data_base.convert(),data_base.convert()));
 }
 
 

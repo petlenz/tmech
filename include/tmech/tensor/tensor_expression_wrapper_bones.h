@@ -22,6 +22,7 @@ namespace detail {
 template<typename _LHS, typename _RHS, typename _Operator>
 class tensor_binary_expression_wrapper : public tensor_base<tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>>
 {
+    using basetype = tensor_base<tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>>;
     using data_type_RHS = typename std::remove_const<typename std::remove_reference<_RHS>::type>::type;
     using data_type_LHS = typename std::remove_const<typename std::remove_reference<_LHS>::type>::type;
 public:

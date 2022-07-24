@@ -24,7 +24,7 @@ class cross_product_wrapper : public tensor_base<cross_product_wrapper<_LHS, _RH
     using data_type_LHS  = typename std::remove_const<typename std::remove_reference<_LHS>::type>::type;
     using value_type_LHS = typename data_type_LHS::value_type;
     using value_type_RHS = typename data_type_RHS::value_type;
-
+    using basetype       = tensor_base<cross_product_wrapper<_LHS, _RHS>>;
 public:
     using value_type = typename result_type<value_type_LHS, value_type_RHS>::value_type;
     using size_type  = std::size_t;

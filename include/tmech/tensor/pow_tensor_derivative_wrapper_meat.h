@@ -19,6 +19,7 @@ pow_tensor_derivative_wrapper<_Base, _Tensor>::pow_tensor_derivative_wrapper(_Ba
 
 template <typename _Base, typename _Tensor>
 pow_tensor_derivative_wrapper<_Base, _Tensor>::pow_tensor_derivative_wrapper(pow_tensor_derivative_wrapper const & __data)noexcept:
+    basetype(__data),
     _base(__data._base),
     _derivative(__data._derivative)
 {}

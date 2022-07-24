@@ -27,6 +27,7 @@ constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(data_type_ten
  */
 template <typename Tensor>
 constexpr negative_tensor_wrapper<Tensor>::negative_tensor_wrapper(negative_tensor_wrapper const& data)noexcept:
+    basetype(data),
     _data(data._data)
 {}
 //@}

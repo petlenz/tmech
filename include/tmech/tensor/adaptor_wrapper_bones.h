@@ -24,6 +24,7 @@ struct full;
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
 class adaptor : public tensor_base<adaptor<_T, _Dim, _Rank, _Type>>
 {
+    using basetype = tensor_base<adaptor<_T, _Dim, _Rank, _Type>>;
 public:
     using value_type = typename std::remove_const<_T>::type;
     using size_type  = std::size_t;
@@ -292,7 +293,7 @@ struct full
 
     template<typename __T, typename __Tensor>
     static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input)noexcept{
-        static_assert (__Tensor::rank() != 1 || __Tensor::rank() == 2 || __Tensor::rank() == 4, "full::assign_tensor() no matching rank");
+        static_assert (__Tensor::rank() == 1 || __Tensor::rank() == 2 || __Tensor::rank() == 4, "full::assign_tensor() no matching rank");
         if constexpr (__Tensor::rank() == 1){
             for(size_type i{0}; i<_Dim; ++i){
                 __ptr[i] = __input(i);

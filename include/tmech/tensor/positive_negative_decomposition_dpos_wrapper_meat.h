@@ -18,6 +18,7 @@ positive_negative_decomposition_dpos_wrapper<Base, Tensor>::positive_negative_de
 
 template <typename Base, typename Tensor>
 positive_negative_decomposition_dpos_wrapper<Base, Tensor>::positive_negative_decomposition_dpos_wrapper(positive_negative_decomposition_dpos_wrapper const & __data)noexcept:
+    basetype(__data),
     base(__data.base),
     V(__data.V)
 {}

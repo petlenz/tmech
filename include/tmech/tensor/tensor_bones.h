@@ -19,6 +19,7 @@
 template<typename T, std::size_t Dim, std::size_t Rank>
 class tensor : public tensor_base<tensor<T, Dim, Rank>>
 {
+    using basetype = tensor_base<tensor<T, Dim, Rank>>;
 public:
     static constexpr std::size_t Size{detail::get_tensor_size<Dim, Rank>::size};
     static constexpr bool dynamic_memory{((Size <= TMECH_MAX_STATIC_SIZE) ? false : true)};

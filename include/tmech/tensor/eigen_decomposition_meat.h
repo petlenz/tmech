@@ -562,45 +562,58 @@ template <typename Tensor>
 constexpr inline auto eigen_decomposition_wrapper<Tensor>::sort_eigenvalues(int sortType, bool isRotation, bool eigenvectors)noexcept{
     if (sortType != 0){
         // Sort the eigenvalues to eval[0] <= eval[1] <= eval[2].
-        std::array<size_type, 3> index{};
-        if (_eigval[0] < _eigval[1]){
-            if (_eigval[2] < _eigval[1]){
-                // even permutation
-                index[0] = 2;
-                index[1] = 0;
-                index[2] = 1;
-            }else if (_eigval[2] < _eigval[1]){
-                // odd permutation
-                index[0] = 0;
-                index[1] = 2;
-                index[2] = 1;
-                isRotation = !isRotation;
-            }else{
-                // even permutation
-                index[0] = 0;
-                index[1] = 1;
-                index[2] = 2;
-            }
-        }else{
-            if (_eigval[2] < _eigval[1]){
-                // odd permutation
-                index[0] = 2;
-                index[1] = 1;
-                index[2] = 0;
-                isRotation = !isRotation;
-            }else if (_eigval[2] < _eigval[0]){
-                // even permutation
-                index[0] = 1;
-                index[1] = 2;
-                index[2] = 0;
-            }else{
-                // odd permutation
-                index[0] = 1;
-                index[1] = 0;
-                index[2] = 2;
-                isRotation = !isRotation;
-            }
-        }
+        std::array<size_type, 3> index{0,1,2};
+        if (_eigval[index[0]] > _eigval[index[1]])
+            std::swap(index[0], index[1]);
+        if (_eigval[index[0]] > _eigval[index[2]])
+            std::swap(index[0], index[2]);
+        if (_eigval[index[1]] > _eigval[index[2]])
+            std::swap(index[1], index[2]);
+
+//        if (_eigval[0] < _eigval[1]){
+//            if (_eigval[2] < _eigval[1]){
+//                // even permutation
+//                index[0] = 2;
+//                index[1] = 0;
+//                index[2] = 1;
+//            }else if (_eigval[2] < _eigval[1]){
+//                // odd permutation
+//                index[0] = 0;
+//                index[1] = 2;
+//                index[2] = 1;
+//                isRotation = !isRotation;
+//            }else{
+//                // even permutation
+//                index[0] = 0;
+//                index[1] = 1;
+//                index[2] = 2;
+//            }
+//        }else{
+//            if (_eigval[2] < _eigval[1]){
+//                // odd permutation
+//                index[0] = 2;
+//                index[1] = 1;
+//                index[2] = 0;
+//                isRotation = !isRotation;
+//            }else if (_eigval[2] < _eigval[0]){
+//                // even permutation
+//                index[0] = 1;
+//                index[1] = 2;
+//                index[2] = 0;
+//            }else{
+//                // odd permutation
+//                index[0] = 1;
+//                index[1] = 0;
+//                index[2] = 2;
+//                isRotation = !isRotation;
+//            }
+//        }
+
+        //odd permutation
+        if((index[0] == 0 && index[1] == 2 && index[2] == 1)
+                || (index[0] == 1 && index[1] == 0 && index[2] == 2)
+                || (index[0] == 2 && index[1] == 1 && index[2] == 0))
+            isRotation = !isRotation;
 
         if (sortType == -1){
             // The request is for eval[0] >= eval[1] >= eval[2]. This

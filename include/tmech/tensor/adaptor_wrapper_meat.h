@@ -26,6 +26,7 @@ constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(_T * __data)noexcept:
  */
 template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
 constexpr adaptor<_T, _Dim, _Rank, _Type>::adaptor(adaptor const& __data)noexcept:
+    basetype(__data),
     _data(__data._data)
 {}
 //@}

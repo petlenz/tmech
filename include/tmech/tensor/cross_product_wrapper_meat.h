@@ -29,6 +29,7 @@ constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(_LHS lhs, _RH
  */
 template<typename _LHS, typename _RHS>
 constexpr cross_product_wrapper<_LHS, _RHS>::cross_product_wrapper(cross_product_wrapper const& data)noexcept:
+    basetype(data),
     _lhs(data._lhs),
     _rhs(data._rhs)
 {}

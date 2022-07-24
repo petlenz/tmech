@@ -26,6 +26,7 @@ randu<_T, _Dim, _Rank>::randu(el_type __a, el_type __b)noexcept:
  */
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 randu<_T, _Dim, _Rank>::randu(randu const& data)noexcept:
+    basetype(data),
     rng(data.rng),
     dist(data.dist)
 {}

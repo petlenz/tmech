@@ -21,6 +21,7 @@ namespace detail {
 template <typename Tensor>
 class skew_symmetric_part_wrapper : public tensor_base<skew_symmetric_part_wrapper<Tensor>>
 {
+    using basetype = tensor_base<skew_symmetric_part_wrapper<Tensor>>;
     using data_type_tensor = typename std::remove_const<typename std::remove_reference<Tensor>::type>::type;
 public:
     using size_type = std::size_t;

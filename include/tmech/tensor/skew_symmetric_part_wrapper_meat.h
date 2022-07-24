@@ -28,6 +28,7 @@ skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(data_type_tenso
  */
 template <typename Tensor>
 skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(skew_symmetric_part_wrapper const& __data)noexcept:
+    basetype(__data),
     _data(__data._data)
 {}
 //@}

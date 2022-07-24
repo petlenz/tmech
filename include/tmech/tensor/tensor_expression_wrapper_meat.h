@@ -29,6 +29,7 @@ tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expressio
  */
 template<typename _LHS, typename _RHS, typename _Operator>
 tensor_binary_expression_wrapper<_LHS, _RHS, _Operator>::tensor_binary_expression_wrapper(tensor_binary_expression_wrapper const& __data)noexcept:
+    basetype(__data),
     _lhs(__data._lhs),
     _rhs(__data._rhs)
 {}

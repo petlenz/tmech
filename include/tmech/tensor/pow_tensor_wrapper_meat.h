@@ -31,6 +31,7 @@ pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(data_type_tensor const& __data_e
  */
 template <typename _Tensor>
 pow_tensor_wrapper<_Tensor>::pow_tensor_wrapper(pow_tensor_wrapper const& data)noexcept:
+    basetype(data),
     _data(),
     _data_expr(data._data_expr),
     _derivative(),

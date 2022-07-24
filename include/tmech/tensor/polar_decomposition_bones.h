@@ -82,41 +82,4 @@ private:
 
 } // NAMESPACE DETAIL
 
-
-
-//This class provides two different methods.
-// * In the first method the orthogonal second order tensor \f$\SecondT{R}\f$ is obtained
-// * with the <a href="https://en.wikipedia.org/wiki/Polar_decomposition">iterative algorithm</a>.
-// * The second method follows the standard approch
-// * \f[
-// * \SecondT{F}^T\SecondT{F} = (\SecondT{R}\SecondT{U})^T(\SecondT{R}\SecondT{U})
-// * =\SecondT{U}^T\SecondT{R}^T\SecondT{R}\SecondT{U}
-// * =\SecondT{U}^T\SecondT{U}
-// * =\SecondT{U}\SecondT{U}
-// * \f]
-// * this gives the final result
-// * \f[
-// * \SecondT{U} = (\SecondT{F}^T\SecondT{F})^{1/2}.
-// * \f]
-// *
-// * Moreover, this class provides also the derivatives \f$\frac{\text{d}\SecondT{R}}{\text{d}\SecondT{F}}\f$,
-// *  \f$\frac{\text{d}\SecondT{U}}{\text{d}\SecondT{F}}\f$ and \f$\frac{\text{d}\SecondT{V}}{\text{d}\SecondT{F}}\f$.
-// * The derivatives are given  <a href="https://doi.org/10.1023/A:1007663620943">here</a>.
-// * Note, that the differentiation rule given in <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/zamm.200410242">O. Kintzel</a> is used.
-// * For a two dimensional problem the derivatives are given as
-// * \f[
-// * \frac{\text{d}\SecondT{R}}{\text{d}\SecondT{F}} &=\frac{1}{I_u} ((\SecondT{I}\otimes\SecondT{I}) - (\SecondT{R}\boxtimes\SecondT{R}))\\
-// * \frac{\text{d}\SecondT{U}}{\text{d}\SecondT{F}} &=\frac{1}{I_u} (\SecondT{R}^T\otimes\SecondT{I}) - ((\SecondT{R}^T\otimes \SecondT{U}^T)  - (\SecondT{I}\boxtimes (\SecondT{U}\SecondT{R}^T)^T))\\
-// * \frac{\text{d}\SecondT{V}}{\text{d}\SecondT{F}} &=\frac{1}{I_v} (\SecondT{I}\otimes \SecondT{R}^T) - (\SecondT{V}\otimes \SecondT{R}^T)  - (\SecondT{V}\SecondT{R}\boxtimes \SecondT{I}))
-// * \f]
-// * where \f$I_u=\text{trace}(\SecondT{U})\f$ and \f$I_v=\text{trace}(\SecondT{V})\f$. For a three dimensional problem
-// * \f[
-// *  \frac{\text{d}\SecondT{R}}{\text{d}\SecondT{F}} &= (\SecondT{R}^T\otimes \SecondT{I}) - \frac{1}{\text{det}(\tilde{\SecondT{U}})}((\tilde{\SecondT{U}} \SecondT{R}^T\otimes(\SecondT{U}*\tilde{\SecondT{U}})^T) - (\tilde{\SecondT{U}}\boxtimes(\SecondT{U}\tilde{\SecondT{U}}\SecondT{R}^T)^T))\\
-// *  \frac{\text{d}\SecondT{U}}{\text{d}\SecondT{F}} &= (I\otimes \SecondT{R}^T) - \frac{1}{\text{det}(\tilde{\SecondT{V}})}*((\SecondT{V}\tilde{\SecondT{V}}\otimes (\tilde{\SecondT{V}}\SecondT{R})^T) - (\SecondT{V}\tilde{\SecondT{V}}\SecondT{R}\boxtimes \tilde{\SecondT{V}}^T))\\
-// *  \frac{\text{d}\SecondT{V}}{\text{d}\SecondT{F}} &= \frac{1}{\text{det}(\tilde{\SecondT{U}})}*((\SecondT{R}\tilde{\SecondT{U}}\SecondT{R}^T\otimes\tilde{\SecondT{U}}) - (\SecondT{R}\tilde{\SecondT{U}}\boxtimes (\tilde{\SecondT{U}}\SecondT{R}^T)^T))
-// * \f]
-// * where \f$\tilde{\SecondT{U}} = \text{trace}(\SecondT{U})\SecondT{I} - \SecondT{U}\f$, \f$ \tilde{\SecondT{V}} = \text{trace}(\SecondT{V})\SecondT{I} - \SecondT{V}\f$.
-// *
-
-
 #endif // POLAR_DECOMPOSITION_BONES_H

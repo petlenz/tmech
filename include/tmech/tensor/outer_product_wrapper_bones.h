@@ -19,7 +19,7 @@ class outer_product_wrapper : public tensor_base<outer_product_wrapper<_LHS, _RH
     using value_type_RHS = typename data_type_RHS::value_type;
     using sequence_lhs   = min_value_squence_t<_SequenceLHS, 1>;
     using sequence_rhs   = min_value_squence_t<_SequenceRHS, 1>;
-
+    using basetype       = tensor_base<outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>>;
 public:
     using value_type = typename result_type<value_type_LHS, value_type_RHS>::value_type;
     using size_type  = std::size_t;

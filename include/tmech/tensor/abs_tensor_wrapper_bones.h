@@ -20,6 +20,7 @@ namespace detail {
 template <typename _Tensor>
 class abs_tensor_wrapper : public tensor_base<abs_tensor_wrapper<_Tensor>>
 {
+    using basetype = tensor_base<abs_tensor_wrapper<_Tensor>>;
     using data_type_tensor = typename std::remove_const<typename std::remove_reference<_Tensor>::type>::type;
 public:
     using size_type  = std::size_t;

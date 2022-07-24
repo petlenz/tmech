@@ -34,6 +34,7 @@ sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(_Tensor __data, value_type con
  */
 template <typename _Tensor>
 sign_tensor_wrapper<_Tensor>::sign_tensor_wrapper(sign_tensor_wrapper const& __data)noexcept:
+    //basetype(__data),
     _eps(__data._eps),
     _max_iter(__data._max_iter),
     _S(),

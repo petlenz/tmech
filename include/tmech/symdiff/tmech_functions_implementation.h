@@ -141,7 +141,7 @@ template<typename _Expression,
 constexpr inline auto dev(_Expression){
     using data_type   = typename _Expression::data_type;
     using tensor_info = symdiff::detail::get_tensor_info<data_type>;
-    using value_type = typename tensor_info::value_type;
+    //using value_type = typename tensor_info::value_type;
     static_assert (symdiff::detail::is_tensor<data_type>::value, "dev: argument is not a tensor type");
     static_assert (tensor_info::rank() == 2, "dev: only for second order tensors");
     //ugly...
@@ -175,7 +175,7 @@ template<typename _Expression,
 constexpr inline auto vol(_Expression){
     using data_type   = typename _Expression::data_type;
     using tensor_info = symdiff::detail::get_tensor_info<data_type>;
-    using value_type = typename tensor_info::value_type;
+    //using value_type = typename tensor_info::value_type;
     static_assert (symdiff::detail::is_tensor<data_type>::value, "vol: argument is not a tensor type");
     static_assert (tensor_info::rank() == 2, "vol: only for second order tensors");
     return symdiff::detail::tensor_vol_wrapper<_Expression>();

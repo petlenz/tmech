@@ -26,6 +26,7 @@ randn<_T, _Dim, _Rank>::randn(el_type mean, el_type stddev)noexcept:
  */
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 randn<_T, _Dim, _Rank>::randn(randn const& data)noexcept:
+    basetype(data),
     rng(data.rng),
     dist(data.dist)
 {}

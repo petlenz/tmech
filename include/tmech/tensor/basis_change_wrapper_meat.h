@@ -18,6 +18,7 @@ basis_change_wrapper<_Tensor, _Sequence>::basis_change_wrapper(_Tensor __data)no
 
 template <typename _Tensor, typename _Sequence>
 basis_change_wrapper<_Tensor, _Sequence>::basis_change_wrapper(basis_change_wrapper const& __data)noexcept:
+    basetype(__data),
     _data(__data._data)
 {}
 

@@ -28,6 +28,7 @@ constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(_Tensor __data)noexc
  */
 template <typename _Tensor>
 constexpr eval_tensor_wrapper<_Tensor>::eval_tensor_wrapper(eval_tensor_wrapper const& __data)noexcept:
+    basetype(__data),
     _data(__data._data),
     _data_base(__data._data_base)
 {}

@@ -23,6 +23,7 @@ namespace detail {
 template <typename _Tensor, typename ..._Sequences>
 class inverse_wrapper : public tensor_base<inverse_wrapper<_Tensor, _Sequences...>>
 {
+    using basetype = tensor_base<inverse_wrapper<_Tensor, _Sequences...>>;
     using data_type_tensor = typename std::remove_const<typename std::remove_reference<_Tensor>::type>::type;
 public:
     using size_type  = std::size_t;

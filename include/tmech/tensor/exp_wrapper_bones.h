@@ -16,6 +16,7 @@ class exp_derivative_tensor_wrapper;
 template <typename _Tensor>
 class exp_tensor_wrapper : public tensor_base<exp_tensor_wrapper<_Tensor>>
 {
+    using basetype             = tensor_base<exp_tensor_wrapper<_Tensor>>;
     using data_type_tensor     = typename std::remove_const<typename std::remove_reference<_Tensor>::type>::type;
     static constexpr auto Dim  = data_type_tensor::dimension();
     static constexpr auto Rank = data_type_tensor::rank();

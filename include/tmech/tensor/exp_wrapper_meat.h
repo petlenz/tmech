@@ -30,6 +30,7 @@ exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(data_type_tensor const& data)noe
  */
 template <typename _Tensor>
 exp_tensor_wrapper<_Tensor>::exp_tensor_wrapper(exp_tensor_wrapper const& data)noexcept:
+    basetype(data),
     _data(),
     _derivative(),
     _num_of_iter(0),

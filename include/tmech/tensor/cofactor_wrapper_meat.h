@@ -27,6 +27,7 @@ cofactor_wrapper<_Tensor>::cofactor_wrapper(data_type_tensor const& data)noexcep
  */
 template <typename _Tensor>
 cofactor_wrapper<_Tensor>::cofactor_wrapper(cofactor_wrapper const& data)noexcept:
+    basetype(data),
     _data(),
     _data_basis(data._data_basis)
 {}

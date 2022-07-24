@@ -19,6 +19,7 @@ constexpr outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::outer_p
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 constexpr outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::outer_product_wrapper(outer_product_wrapper const& __data)noexcept:
+    basetype(__data),
     lhs(__data.lhs),
     rhs(__data.rhs)
 {}

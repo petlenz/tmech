@@ -18,6 +18,7 @@ polar_decomposition_U_wrapper<_Base, _Tensor>::polar_decomposition_U_wrapper(_Ba
 
 template <typename _Base, typename _Tensor>
 polar_decomposition_U_wrapper<_Base, _Tensor>::polar_decomposition_U_wrapper(polar_decomposition_U_wrapper const & __data)noexcept:
+    basetype(__data),
     _base(__data._base),
     _U(__data._U)
 {}

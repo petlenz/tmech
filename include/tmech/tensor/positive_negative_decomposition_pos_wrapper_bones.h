@@ -13,6 +13,7 @@ namespace detail {
 template <typename Base, typename Tensor>
 class positive_negative_decomposition_pos_wrapper : public tensor_base<positive_negative_decomposition_pos_wrapper<Base, Tensor>>
 {
+    using basetype = tensor_base<positive_negative_decomposition_pos_wrapper<Base, Tensor>>;
 public:
     using size_type  = std::size_t;
     using value_type = typename Tensor::value_type;

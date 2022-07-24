@@ -28,6 +28,7 @@ constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(_Tensor __dat
  */
 template <typename _Tensor, typename ..._Sequences>
 constexpr inverse_wrapper<_Tensor, _Sequences...>::inverse_wrapper(inverse_wrapper const& __data)noexcept:
+    basetype(__data),
     data(),
     tensor_data(__data.tensor_data)
 {}
@@ -81,8 +82,6 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate(_Result 
 template <typename _Tensor, typename ..._Sequences>
 template<typename _Result>
 constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Result const& __result)noexcept{
-    constexpr auto HasRawData{is_detected<has_raw_data, data_type_tensor>::value};
-
     if constexpr (rank() == 4){
         if constexpr (std::tuple_size_v<_Tuple> == 2){
             using tuple1 = typename std::remove_reference<decltype (std::get<0>(_Tuple()))>::type;
@@ -145,8 +144,9 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Res
             }
         }
     }else if constexpr (rank() == 2){
+        constexpr auto HasRawData{is_detected<has_raw_data, data_type_tensor>::value};
         if constexpr (HasRawData){
-            evaluate::apply(data);
+            evaluate::apply(tensor_data);
             evaluate_imp(__result.raw_data(), tensor_data.raw_data());
         }else{
             data = tensor_data;

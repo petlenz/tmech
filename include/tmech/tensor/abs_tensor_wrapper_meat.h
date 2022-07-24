@@ -27,6 +27,7 @@ constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(data_type_tensor const
  */
 template <typename _Tensor>
 constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(abs_tensor_wrapper const& __data)noexcept:
+    basetype(__data),
     _data(__data._data)
 {}
 //@}

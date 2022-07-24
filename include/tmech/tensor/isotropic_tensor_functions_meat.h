@@ -30,6 +30,7 @@ constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(Ten
  */
 template <typename Tensor, typename Func>
 constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(isotropic_tensor_function const& data)noexcept:
+    basetype(data),
     _data(),
     _deriv(),
     _Gij(),
@@ -120,10 +121,10 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate()noexcep
     }
 }
 
-template <typename Tensor, typename Func>
-constexpr inline auto isotropic_tensor_function<Tensor, Func>::get_derivative()const noexcept{
-    return _deriv;
-}
+//template <typename Tensor, typename Func>
+//constexpr inline auto isotropic_tensor_function<Tensor, Func>::get_derivative()const noexcept{
+//    return _deriv;
+//}
 
 template <typename Tensor, typename Func>
 constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij()noexcept{

@@ -261,7 +261,10 @@ tensor<T, Dim, Rank>::tensor():_data() {
  * @param _tensor Tensor to be copyed.
  */
 template<typename T, std::size_t Dim, std::size_t Rank>
-tensor<T, Dim, Rank>::tensor(tensor<T, Dim, Rank> const& _tensor):_data() {
+tensor<T, Dim, Rank>::tensor(tensor<T, Dim, Rank> const& _tensor):
+    basetype(_tensor),
+    _data()
+{
     if(&_tensor != this){
         check_size();
         _data = _tensor._data;

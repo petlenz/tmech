@@ -31,6 +31,7 @@ adjoint_wrapper<_Tensor>::adjoint_wrapper(data_type_tensor const& data)noexcept:
  */
 template <typename _Tensor>
 adjoint_wrapper<_Tensor>::adjoint_wrapper(adjoint_wrapper const& data)noexcept:
+    basetype(data),
     _data(data._data),
     _data_basis(data._data_basis)
 {}

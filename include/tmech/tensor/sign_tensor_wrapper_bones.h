@@ -14,6 +14,8 @@ namespace detail {
 template <typename _Father>
 class sign_S_wrapper : public tensor_base<sign_S_wrapper<_Father>>
 {
+    //using basetype = tensor_base<sign_S_wrapper<_Father>>;
+    //is not recognised
 public:
     using value_type = typename _Father::data_type::value_type;
 

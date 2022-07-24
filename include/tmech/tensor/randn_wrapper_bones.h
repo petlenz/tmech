@@ -13,6 +13,7 @@
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 class randn : public tensor_base<randn<_T, _Dim, _Rank>>
 {
+    using basetype = tensor_base<randn<_T, _Dim, _Rank>>;
 public:
     using value_type = _T;
     using el_type = typename detail::element_type<_T>::value_type;

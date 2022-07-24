@@ -14,6 +14,7 @@ template <typename _Tensor, typename _Sequence>
 class basis_change_wrapper
         : public tensor_base<basis_change_wrapper<_Tensor, _Sequence>>
 {
+    using basetype = tensor_base<basis_change_wrapper<_Tensor, _Sequence>>;
     using data_type_tensor = typename std::remove_const<typename std::remove_reference<_Tensor>::type>::type;
     using sequence         = min_value_squence_t<_Sequence, 1>;
 public:

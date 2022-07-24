@@ -12,7 +12,7 @@
 namespace detail {
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(_LHS __lhs, _RHS __rhs)noexcept:
+constexpr inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(_LHS __lhs, _RHS __rhs)noexcept:
     _lhs(__lhs),
     _rhs(__rhs),
     _data(),
@@ -21,7 +21,8 @@ inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wra
 {}
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(inner_product_wrapper const& __data)noexcept:
+constexpr inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::inner_product_wrapper(inner_product_wrapper const& __data)noexcept:
+    basetype(__data),
     _lhs(__data._lhs),
     _rhs(__data._rhs),
     _data(),

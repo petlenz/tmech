@@ -13,6 +13,7 @@ namespace detail {
 template <typename _Tensor>
 class cofactor_wrapper : public tensor_base<cofactor_wrapper<_Tensor>>
 {
+    using basetype = tensor_base<cofactor_wrapper<_Tensor>>;
     using data_type_tensor  = typename std::remove_const<typename std::remove_reference<_Tensor>::type>::type;
 public:
     using value_type = typename data_type_tensor::value_type;

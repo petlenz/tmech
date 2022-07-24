@@ -18,6 +18,7 @@ polar_decomposition_dV_wrapper<_Base, _Tensor>::polar_decomposition_dV_wrapper(_
 
 template <typename _Base, typename _Tensor>
 polar_decomposition_dV_wrapper<_Base, _Tensor>::polar_decomposition_dV_wrapper(polar_decomposition_dV_wrapper const & __data)noexcept:
+    basetype(__data),
     _base(__data._base),
     _dV(__data._dV)
 {}

@@ -18,6 +18,7 @@ polar_decomposition_R_wrapper<_Base, _Tensor>::polar_decomposition_R_wrapper(_Ba
 
 template <typename _Base, typename _Tensor>
 polar_decomposition_R_wrapper<_Base, _Tensor>::polar_decomposition_R_wrapper(polar_decomposition_R_wrapper const & __data)noexcept:
+    basetype(__data),
     _base(__data._base),
     _R(__data._R)
 {}

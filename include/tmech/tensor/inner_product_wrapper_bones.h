@@ -20,6 +20,7 @@ class inner_product_wrapper : public tensor_base<inner_product_wrapper<LHS, RHS,
     using value_type_RHS     = typename data_type_RHS::value_type;
     using sequence_inner_lhs = min_value_squence_t<SequenceLHS, 1>;
     using sequence_inner_rhs = min_value_squence_t<SequenceRHS, 1>;
+    using basetype           = tensor_base<inner_product_wrapper<LHS, RHS, SequenceLHS, SequenceRHS>>;
 public:
     using value_type = typename result_type<value_type_LHS, value_type_RHS>::value_type;
     using size_type  = std::size_t;
@@ -31,9 +32,9 @@ public:
     static_assert (data_type_LHS::dimension() == data_type_RHS::dimension(), "inner_product_wrapper: dimensions does not match");
     static_assert (sequence_inner_rhs::size() == sequence_inner_rhs::size(), "inner_product_wrapper: SequenceLHS::size != SequenceRHS::size");
 
-    inner_product_wrapper(LHS __lhs, RHS __rhs)noexcept;
+    constexpr inner_product_wrapper(LHS __lhs, RHS __rhs)noexcept;
 
-    inner_product_wrapper(inner_product_wrapper const& __data)noexcept;
+    constexpr inner_product_wrapper(inner_product_wrapper const& __data)noexcept;
 
     template<typename ...Indicies>
     constexpr inline auto operator ()(Indicies ... __indicies)const noexcept;

@@ -29,6 +29,7 @@ struct uniform_distribution<T, true>
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 class randu : public tensor_base<randu<_T, _Dim, _Rank>>
 {
+    using basetype = tensor_base<randu<_T, _Dim, _Rank>>;
     using uniform_distribution = typename detail::uniform_distribution<_T, std::is_floating_point<_T>::value>::type;
 public:
     using value_type = _T;

@@ -27,6 +27,7 @@ class pow_tensor_wrapper : public tensor_base<pow_tensor_wrapper<_Tensor>>
     friend class pow_tensor_derivative_wrapper;
 
     using this_type = pow_tensor_wrapper<_Tensor>;
+    using basetype = tensor_base<pow_tensor_wrapper<_Tensor>>;
 public:
     using value_type = typename data_type_tensor::value_type;
     using size_type = std::size_t;

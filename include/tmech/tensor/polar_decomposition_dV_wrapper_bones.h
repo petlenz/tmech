@@ -13,6 +13,7 @@ namespace detail {
 template <typename _Base, typename _Tensor>
 class polar_decomposition_dV_wrapper : public tensor_base<polar_decomposition_dV_wrapper<_Base, _Tensor>>
 {
+    using basetype = tensor_base<polar_decomposition_dV_wrapper<_Base, _Tensor>>;
 public:
     using size_type  = std::size_t;
     using value_type = typename _Tensor::value_type;

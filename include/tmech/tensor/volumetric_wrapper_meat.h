@@ -28,6 +28,7 @@ constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(data_type_tensor const&
  */
 template <typename Tensor>
 constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper const& data)noexcept:
+    basetype(data),
     _trace(),
     _data(data._data)
 {}
