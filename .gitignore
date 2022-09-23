@@ -45,5 +45,6 @@ docs/xml/
 docs/build/
 docs/*.tmp
 
-.user
+# Cmakelist files
+CMakeLists.txt.user
 
