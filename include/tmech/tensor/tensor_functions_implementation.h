@@ -742,6 +742,7 @@ inline auto general_newton_raphson_iterate(System A, std::tuple<Data...> & x, T 
 
     for(std::size_t iter{0}; iter<=max_iter; ++iter){
         const auto norm = detail::general_newton_raphson_solver::apply(A, x, dx, tol);
+        std::cout<<"iter "<<iter<<" norm "<<norm<<std::endl;
         if(norm < tol){
             return std::make_tuple(iter, norm, x);
         }

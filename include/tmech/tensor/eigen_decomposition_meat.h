@@ -26,6 +26,7 @@ eigen_decomposition_wrapper<Tensor>::eigen_decomposition_wrapper(Tensor const& d
     _non_repeated_eigenvalues({0}),
     _all_repeated_eigenvalues(false),
     _pair_repeated_eigenvalues(false),
+    _is_init(false),
     _data_base(data)
 {}
 
@@ -41,6 +42,7 @@ eigen_decomposition_wrapper<Tensor>::eigen_decomposition_wrapper(eigen_decomposi
     _non_repeated_eigenvalues({0}),
     _all_repeated_eigenvalues(false),
     _pair_repeated_eigenvalues(false),
+    _is_init(false),
     _data_base(data._data_base)
 {}
 //@}
@@ -48,17 +50,20 @@ eigen_decomposition_wrapper<Tensor>::eigen_decomposition_wrapper(eigen_decomposi
 
 template <typename Tensor>
 constexpr inline auto eigen_decomposition_wrapper<Tensor>::decompose_eigenbasis()noexcept{
-    _all_repeated_eigenvalues = false;
-    _pair_repeated_eigenvalues = false;
-    _data = _data_base;
-    std::iota(_non_repeated_eigenvalues.begin(), _non_repeated_eigenvalues.end(), 0);
-    if constexpr (data_type_tensor::dimension() == 2){
-        evaluate_detail_2D(false, _data(0,0), _data(0,1), _data(1,0), _data(1,1));
-    }else if constexpr (data_type_tensor::dimension() == 3){
-        evaluate_detail_3D(false, _data(0,0), _data(0,1), _data(0,2), _data(1,1), _data(1,2), _data(2,2));
+    if(!_is_init){
+        _all_repeated_eigenvalues = false;
+        _pair_repeated_eigenvalues = false;
+        _data = _data_base;
+        std::iota(_non_repeated_eigenvalues.begin(), _non_repeated_eigenvalues.end(), 0);
+        if constexpr (data_type_tensor::dimension() == 2){
+            evaluate_detail_2D(false, _data(0,0), _data(0,1), _data(1,0), _data(1,1));
+        }else if constexpr (data_type_tensor::dimension() == 3){
+            evaluate_detail_3D(false, _data(0,0), _data(0,1), _data(0,2), _data(1,1), _data(1,2), _data(2,2));
+        }
+        get_repeated_eigenvalues();
+        evaluate_eigenbasis();
+        _is_init = true;
     }
-    get_repeated_eigenvalues();
-    evaluate_eigenbasis();
 
     return std::make_tuple(eigenvalues(), eigenbasis());
 }
@@ -101,12 +106,12 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::non_repeated_eigenval
         break;
     case 2:
         return std::vector<size_type>{_non_repeated_eigenvalues[0],
-                                      _non_repeated_eigenvalues[1]};
+                    _non_repeated_eigenvalues[1]};
         break;
     case 3:
         return std::vector<size_type>{_non_repeated_eigenvalues[0],
-                                      _non_repeated_eigenvalues[1],
-                                      _non_repeated_eigenvalues[2]};
+                    _non_repeated_eigenvalues[1],
+                    _non_repeated_eigenvalues[2]};
         break;
     default:
         return std::vector<size_type>(0);
@@ -344,6 +349,47 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::evaluate_detail_3D(bo
         _eigval[1] = q + p * beta1;
         _eigval[2] = q + p * beta2;
 
+//        if(a00 == 1){
+//            std::cout<<"eigval 1 gehört zu a00"<<std::endl;
+//            if(a11 > a22){
+//                std::cout<<"eigval 2 gehört zu a11 und eigval 3 gehört su a22"<<std::endl;
+//                //{0,1,2}
+//                _permut = {0,1,2};
+//            }else{
+//                std::cout<<"eigval 3 gehört zu a11 und eigval 2 gehört su a22"<<std::endl;
+//                //{0,2,1}
+//                _permut = {0,2,1};
+//            }
+//        }
+
+//        if(a11 == 1){
+//            std::cout<<"eigval 2 gehört zu a11"<<std::endl;
+//            if(a00 > a22){
+//                std::cout<<"eigval 1 gehört zu a00 und eigval 3 gehört su a22"<<std::endl;
+//                //{1,0,2}
+//                _permut = {1,0,2};
+//            }else{
+//                std::cout<<"eigval 3 gehört zu a00 und eigval 1 gehört su a22"<<std::endl;
+//                //{1,2,0}
+//                _permut = {1,2,0};
+//            }
+//        }
+
+//        if(a22 == 1){
+//            std::cout<<"eigval 1 gehört zu a22"<<std::endl;
+//            if(a00 > a11){
+//                std::cout<<"eigval 1 gehört zu a00 und eigval 2 gehört su a11"<<std::endl;
+//                //{2,0,1}
+//                _permut = {2,0,1};
+//            }else{
+//                std::cout<<"eigval 2 gehört zu a00 und eigval 1 gehört su a11"<<std::endl;
+//                //{2,1,0}
+//                _permut = {2,1,0};
+//            }
+//        }
+
+
+
         if(eigenvectors){
             // Compute the eigenvectors so that the set
             // {evec[0], evec[1], evec[2]} is right handed andorthonormal.
@@ -381,7 +427,11 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::evaluate_detail_3D(bo
         _eigval[i] *= maxAbsElement;
     }
 
-    sort_eigenvalues(1, true, eigenvectors);
+
+    //std::cout<<"permut "<<std::endl;
+    //std::cout<<std::sqrt(1.0/(_eigval[_permut[0]]))<<" "<<std::sqrt(1.0/(_eigval[_permut[1]]))<<" "<<std::sqrt(1.0/(_eigval[_permut[2]]))<<std::endl;
+
+    sort_eigenvalues(-1, true, eigenvectors);
 }
 
 
@@ -427,7 +477,7 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::compute_orthogonal_co
 
 template <typename Tensor>
 constexpr inline auto eigen_decomposition_wrapper<Tensor>::compute_eigenvector0(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22, value_type const eval0,
-                                                                                   tensor1& evec0)const noexcept{
+                                                                                tensor1& evec0)const noexcept{
     // Compute a unit-length eigenvector for eigenvalue[i0].  The
     // matrix is rank 2, so two of the rows are linearly independent.
     // For a robust computation of the eigenvector, select the two
@@ -470,7 +520,7 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::compute_eigenvector0(
 
 template <typename Tensor>
 constexpr inline auto eigen_decomposition_wrapper<Tensor>::compute_eigenvector1(value_type const a00, value_type const a01, value_type const a02, value_type const a11, value_type const a12, value_type const a22,
-                                                                                   tensor1 const& evec0, value_type const eval1, tensor1& evec1) const noexcept{
+                                                                                tensor1 const& evec0, value_type const eval1, tensor1& evec1) const noexcept{
     // Robustly compute a right-handed orthonormal set
     // { U, V, evec0 }.
     tensor1 U, V;
@@ -570,44 +620,44 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::sort_eigenvalues(int 
         if (_eigval[index[1]] > _eigval[index[2]])
             std::swap(index[1], index[2]);
 
-//        if (_eigval[0] < _eigval[1]){
-//            if (_eigval[2] < _eigval[1]){
-//                // even permutation
-//                index[0] = 2;
-//                index[1] = 0;
-//                index[2] = 1;
-//            }else if (_eigval[2] < _eigval[1]){
-//                // odd permutation
-//                index[0] = 0;
-//                index[1] = 2;
-//                index[2] = 1;
-//                isRotation = !isRotation;
-//            }else{
-//                // even permutation
-//                index[0] = 0;
-//                index[1] = 1;
-//                index[2] = 2;
-//            }
-//        }else{
-//            if (_eigval[2] < _eigval[1]){
-//                // odd permutation
-//                index[0] = 2;
-//                index[1] = 1;
-//                index[2] = 0;
-//                isRotation = !isRotation;
-//            }else if (_eigval[2] < _eigval[0]){
-//                // even permutation
-//                index[0] = 1;
-//                index[1] = 2;
-//                index[2] = 0;
-//            }else{
-//                // odd permutation
-//                index[0] = 1;
-//                index[1] = 0;
-//                index[2] = 2;
-//                isRotation = !isRotation;
-//            }
-//        }
+        //        if (_eigval[0] < _eigval[1]){
+        //            if (_eigval[2] < _eigval[1]){
+        //                // even permutation
+        //                index[0] = 2;
+        //                index[1] = 0;
+        //                index[2] = 1;
+        //            }else if (_eigval[2] < _eigval[1]){
+        //                // odd permutation
+        //                index[0] = 0;
+        //                index[1] = 2;
+        //                index[2] = 1;
+        //                isRotation = !isRotation;
+        //            }else{
+        //                // even permutation
+        //                index[0] = 0;
+        //                index[1] = 1;
+        //                index[2] = 2;
+        //            }
+        //        }else{
+        //            if (_eigval[2] < _eigval[1]){
+        //                // odd permutation
+        //                index[0] = 2;
+        //                index[1] = 1;
+        //                index[2] = 0;
+        //                isRotation = !isRotation;
+        //            }else if (_eigval[2] < _eigval[0]){
+        //                // even permutation
+        //                index[0] = 1;
+        //                index[1] = 2;
+        //                index[2] = 0;
+        //            }else{
+        //                // odd permutation
+        //                index[0] = 1;
+        //                index[1] = 0;
+        //                index[2] = 2;
+        //                isRotation = !isRotation;
+        //            }
+        //        }
 
         //odd permutation
         if((index[0] == 0 && index[1] == 2 && index[2] == 1)

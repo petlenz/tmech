@@ -1,4 +1,3 @@
-tmech: C++ library for tensor algebra and analysis in physiks
-Copyright 2021 Peter Lenz
+tmech is a C++ library for the numerical study of the physics of continuous materials using higher-order tensors 
 
 This product includes software developed by Peter Lenz

@@ -123,6 +123,13 @@ public:
         tensor<value_type, Dim, 6> _deriv;
         const size_type rows{(all_repeated_eigenvalues ? 1ul : (pair_repeated_eigenvalues ? 2ul : (dimension() == 3ul ? 3ul : 2ul)))};
 
+//        if(pair_repeated_eigenvalues){
+//            std::cout<<"pair_repeated_eigenvalues"<<std::endl;
+//        }else if(all_repeated_eigenvalues){
+//            std::cout<<"all_repeated_eigenvalues"<<std::endl;
+//        }else{
+//            std::cout<<"non_repeated_eigenvalues"<<std::endl;
+//        }
 
         for(size_type i{0}; i<rows; ++i){
             const auto eigI{eig_values[non_repeated_eigenvalues[i]]};
@@ -131,7 +138,7 @@ public:
             _ddFi[non_repeated_eigenvalues[i]] = Func::second_derivative(eigI);
         }
 
-        std::array<std::array<std::array<value_type, Dim>, Dim>, Dim> Gijk;
+        std::array<std::array<std::array<value_type, Dim>, Dim>, Dim> Gijk{0};
         for(size_type i{0}; i<rows; ++i){
             const auto I{non_repeated_eigenvalues[i]};
             const auto eigI{eig_values[I]};
@@ -139,8 +146,6 @@ public:
                 const auto J{non_repeated_eigenvalues[j]};
                 const auto eigJ{eig_values[J]};
                 for(size_type k{0}; k<rows; ++k){
-                    const auto K{non_repeated_eigenvalues[k]};
-                    const auto eigK{eig_values[K]};
                     if(i == j && i == k && j == k){
                         Gijk[i][j][k] = _ddFi[I];
                     }else if (i != j && i == k && j != k){

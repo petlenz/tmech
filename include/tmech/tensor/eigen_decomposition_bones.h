@@ -96,6 +96,7 @@ private:
     std::array<size_type, Dim>  _permut;
     bool                        _all_repeated_eigenvalues;
     bool                        _pair_repeated_eigenvalues;
+    bool                        _is_init;
     _Tensor                     _data_base;
 };
 
