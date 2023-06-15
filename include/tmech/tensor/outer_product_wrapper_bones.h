@@ -43,12 +43,9 @@ public:
 
     constexpr inline auto evaluate()noexcept;
 
-    constexpr inline auto raw_data()const noexcept;
-
 private:
     _LHS lhs;
     _RHS rhs;
-    tensor<value_type, dimension(), rank()> _data;
 };
 
 

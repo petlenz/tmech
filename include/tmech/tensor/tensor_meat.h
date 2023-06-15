@@ -86,7 +86,7 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived
     if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
         tensor_base.convert().evaluate(*this);
     }else{
-        if constexpr(std::experimental::is_detected<detail::has_evaluate>::value){
+        if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived>::value){
             tensor_base.convert().evaluate();
         }
         using meta_loop = detail::for_loop_t<rank()-1, Dim>;
@@ -112,7 +112,7 @@ tensor<T, Dim, Rank>::operator=(_Tensor && __tensor) noexcept{
     if constexpr(std::experimental::is_detected<detail::has_evaluate, TensorType, decltype (*this)>::value){
         _tensor.evaluate(*this);
     }else{
-        if constexpr(std::experimental::is_detected<detail::has_evaluate>::value){
+        if constexpr(std::experimental::is_detected<detail::has_evaluate, TensorType>::value){
             _tensor.evaluate();
         }
         using meta_loop = detail::for_loop_t<rank()-1, Dim>;
@@ -316,7 +316,7 @@ tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor):
         if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor, decltype (*this)>::value){
             const_cast<_Tensor&>(__tensor).evaluate(*this);
         }else{
-            if constexpr(std::experimental::is_detected<detail::has_evaluate>::value){
+            if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor>::value){
                 const_cast<_Tensor&>(__tensor).evaluate();
             }
             using meta_loop = detail::for_loop_t<rank()-1, Dim>;
