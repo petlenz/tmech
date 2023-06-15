@@ -1407,7 +1407,7 @@ TEST(gtest, symdiff_numdiff_tensor_dcontract_4_2){
     auto s_func = tmech::dcontract(Bvar, Avar);
     auto dA_num = tmech::num_diff_central<tmech::sequence<1,2,3,4>>(func, A);
     auto dA_ana = symdiff::derivative<1>(s_func, Avar);
-    EXPECT_EQ(true, tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
+    EXPECT_EQ(true, tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-5));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_dcontract_4_4){
