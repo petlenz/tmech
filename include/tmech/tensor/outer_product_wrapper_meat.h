@@ -27,6 +27,7 @@ constexpr outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::outer_p
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 template<typename ...Indicies>
 constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::operator()(Indicies ... __indicies)const noexcept{
+    //return _data(__indicies...);
     return tuple_call(lhs,std::make_tuple(__indicies...),sequence_lhs())*tuple_call(rhs,std::make_tuple(__indicies...),sequence_rhs());
 };
 
@@ -41,9 +42,18 @@ constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
+constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::raw_data()const noexcept{
+    return _data.raw_data();
+}
+
+template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 constexpr inline auto outer_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate()noexcept{
     evaluate::apply(lhs);
     evaluate::apply(rhs);
+
+    //using type = typename detail::meta_for_loop_deep<dimension(), rank()-1>::type;
+    //auto func{[&](auto ...numbers){_data(numbers...) = tuple_call(lhs,std::make_tuple(numbers...),sequence_lhs())*tuple_call(rhs,std::make_tuple(numbers...),sequence_rhs());}};
+    //type::loop(func);
 }
 
 } // NAMESPACE DETAIL

@@ -32,6 +32,14 @@ public:
     template<typename ...Numbers>
     constexpr inline value_type operator()(Numbers...)const noexcept;
 
+    static constexpr inline auto simple_evaluation()noexcept{
+        return true;
+    }
+
+    constexpr inline auto direct_access(std::size_t /*__idx*/)const noexcept{
+        return scalar_;
+    }
+
 private:
     value_type const scalar_;
 };

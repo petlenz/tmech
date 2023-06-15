@@ -56,7 +56,7 @@ public:
     constexpr inline auto const& operator=(tensor const& tensor) noexcept;
 
     template<typename Derived>
-    constexpr inline auto const& operator=(tensor_base<Derived> tensor_base) noexcept;
+    constexpr inline auto const& operator=(tensor_base<Derived> const& tensor_base) noexcept;
 
     template<typename _Tensor,  std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
     constexpr inline auto const& operator=(_Tensor && __tensor) noexcept;
@@ -108,9 +108,15 @@ public:
 
     constexpr inline auto end()const noexcept;
 
-    constexpr inline auto* raw_data() noexcept;
+    constexpr inline T* raw_data() noexcept;
 
-    constexpr inline auto const* raw_data()const noexcept;
+    constexpr inline T const* raw_data()const noexcept;
+
+    static constexpr inline auto simple_evaluation(){return true;}
+
+    constexpr inline auto direct_access(std::size_t __idx)const noexcept{
+        return _data[__idx];
+    }
 
 //    constexpr inline auto const& data()const noexcept;
 
@@ -151,7 +157,7 @@ private:
     template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
     constexpr inline auto delete_data(){}
 
-    value_data_type _data;
+    alignas(32) value_data_type _data;
 };
 
 #endif // TENSOR_BONES_H

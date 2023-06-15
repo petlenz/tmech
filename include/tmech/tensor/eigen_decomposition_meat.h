@@ -337,7 +337,7 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::evaluate_detail_3D(bo
 
         const value_type halfDet{std::min(std::max(det * static_cast<value_type>(0.5), -static_cast<value_type>(1)), static_cast<value_type>(1))};
 
-        constexpr value_type twoThirdsPi{static_cast<value_type>(2)*M_PIf64/static_cast<value_type>(3)};
+        constexpr value_type twoThirdsPi{static_cast<value_type>(2)*M_PI/static_cast<value_type>(3)};
         const value_type angle{std::acos(halfDet) / static_cast<value_type>(3)};
         const value_type beta2{std::cos(angle) * static_cast<value_type>(2)};
         const value_type beta0{std::cos(angle + twoThirdsPi) * static_cast<value_type>(2)};

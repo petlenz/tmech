@@ -16,6 +16,13 @@ struct is_tensor_type
     static constexpr bool value = false;
 };
 
+//template <typename _Derived>
+//struct is_tensor_type<tensor_base<_Derived>>
+//{
+//    using type = std::true_type;
+//    static constexpr bool value = true;
+//};
+
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 struct is_tensor_type<tensor<_T, _Dim, _Rank>>
 {
@@ -288,6 +295,8 @@ struct is_tensor_type<detail::pow_tensor_derivative_wrapper<_Base, _Tensor>>
     using type = std::true_type;
     static constexpr bool value = true;
 };
+
+
 
 
 // This is the type which holds sequences
@@ -1062,6 +1071,7 @@ struct bubble_sort_sequence
 template <typename _Input>
 using bubble_sort_sequence_t = typename bubble_sort_sequence<_Input>::type;
 
+
 template <typename Function, std::size_t End, std::size_t Start=0>
 class meta_for_loop
 {
@@ -1099,6 +1109,42 @@ struct meta_for_loop_deep<DIM, DEEP, DEEP>
 {
     using type = meta_for_loop<void, DIM>;
 };
+
+template<typename Func, std::size_t Size>
+struct loop{
+    template<typename LambdaFunc, typename ...Args>
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices){
+        for(std::size_t i{0}; i<Size; ++i){
+            Func::for_loop(func, indices..., i);
+        }
+    }
+};
+
+template<std::size_t Size>
+struct loop<void, Size>{
+    template<typename LambdaFunc, typename ...Args>
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices){
+        for(std::size_t i{0}; i<Size; ++i){
+            func(indices..., i);
+        }
+    }
+};
+
+template <std::size_t DEEP, std::size_t Size, std::size_t Start=0>
+struct for_loop_deep
+{
+    using type = loop<typename for_loop_deep<DEEP, Size, Start+1>::type, Size>;
+};
+
+template <std::size_t DEEP, std::size_t Size>
+struct for_loop_deep<DEEP, Size, DEEP>
+{
+    using type = loop<void, Size>;
+};
+
+template <std::size_t DEEP, std::size_t Size>
+using for_loop_t = typename for_loop_deep<DEEP, Size>::type;
+
 
 
 

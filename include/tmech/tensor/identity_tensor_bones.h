@@ -38,6 +38,10 @@ public:
 
     static constexpr inline auto dimension()noexcept;
 
+    static constexpr inline auto simple_evaluation()noexcept{
+        return false;
+    }
+
 private:
     template<typename ...Indicies>
     static constexpr inline auto value(size_type const i, size_type const j, Indicies const ... indices)noexcept;

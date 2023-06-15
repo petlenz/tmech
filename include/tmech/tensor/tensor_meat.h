@@ -76,22 +76,27 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor const& tenso
 
 template<typename T, std::size_t Dim, std::size_t Rank>
 template<typename Derived>
-constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived> tensor_base) noexcept{
+constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived> const& tensor_base) noexcept{
     static_assert(Derived::rank() == Rank,     "tensor::operator=(): non matching rank");
     static_assert(Derived::dimension() == Dim, "tensor::operator=(): no matching dimensions");
-    using type = typename detail::meta_for_loop_deep<Dim, Rank-1>::type;
-    auto& tensor{tensor_base.convert()};
+
+    //const auto& tensor{tensor_base.convert()};
 
     check_size();
     if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
-        tensor.evaluate(*this);
+        tensor_base.convert().evaluate(*this);
     }else{
-        detail::evaluate::apply(tensor);
-        auto func{[&](auto ...numbers){(*this)(numbers...) = tensor(numbers...);}};
-        type::loop(func);
+        if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived>::value){
+            tensor_base.convert().evaluate();
+        }
+        using meta_loop = detail::for_loop_t<rank()-1, Dim>;
+        auto func{[&](auto ...numbers){(*this)(numbers...) = tensor_base.convert()(numbers...);}};
+        meta_loop::for_loop(func);
     }
     return *this;
 }
+
+
 
 template<typename T, std::size_t Dim, std::size_t Rank>
 template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value>*>
@@ -111,8 +116,9 @@ tensor<T, Dim, Rank>::operator=(_Tensor && __tensor) noexcept{
         if constexpr(std::experimental::is_detected<detail::has_evaluate, TensorType>::value){
             _tensor.evaluate();
         }
+        using meta_loop = detail::for_loop_t<rank()-1, Dim>;
         auto func{[&](auto ...numbers){(*this)(numbers...) = _tensor(numbers...);}};
-        type::loop(func);
+        meta_loop::for_loop(func);
     }
     return *this;
 }
@@ -185,7 +191,7 @@ constexpr inline auto tensor<T, Dim, Rank>::end()const noexcept{
  * Returns a pointer to the memory of the array.
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto* tensor<T, Dim, Rank>::raw_data()  noexcept{
+constexpr inline T* tensor<T, Dim, Rank>::raw_data()  noexcept{
     return const_cast<T*>(&_data[0]);
 }
 
@@ -193,7 +199,7 @@ constexpr inline auto* tensor<T, Dim, Rank>::raw_data()  noexcept{
  * Returns a constant pointer to the memory of the array.
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
-constexpr inline auto const* tensor<T, Dim, Rank>::raw_data()const noexcept{
+constexpr inline T const* tensor<T, Dim, Rank>::raw_data()const noexcept{
     return &_data[0];
 }
 //@}
@@ -315,8 +321,9 @@ tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor):
             if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor>::value){
                 const_cast<_Tensor&>(__tensor).evaluate();
             }
+            using meta_loop = detail::for_loop_t<rank()-1, Dim>;
             auto func{[&](auto ...numbers){(*this)(numbers...) = __tensor(numbers...);}};
-            type::loop(func);
+            meta_loop::for_loop(func);
         }
     }
 }

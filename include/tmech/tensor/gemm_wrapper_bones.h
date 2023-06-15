@@ -8,95 +8,223 @@
 #ifndef GEMM_WRAPPER_BONES_H
 #define GEMM_WRAPPER_BONES_H
 
+#include <immintrin.h>
+
+
 
 namespace detail {
 
 template <typename LHS, typename RHS, typename RESULT, std::size_t RowsLHS, std::size_t ColumnsLHS, std::size_t RowsRHS, std::size_t ColumnsRHS>
 class gemm_wrapper
 {
+    //static std::array<RHS, RowsRHS*ColumnsRHS> temp;
 public:
     using size_type = std::size_t;
 
     static constexpr inline void evaluate(LHS const* __lhs, RHS const* __rhs, RESULT* __result)noexcept{
 
-        gemm(__lhs, __rhs, __result);
+        if constexpr (ColumnsLHS == 1){
+            gevm(__lhs, __rhs, __result);
+            return ;
+        }
+
+        if constexpr (ColumnsRHS == 1){
+//            if constexpr (RowsLHS == 4 && ColumnsLHS == 4){
+//#if defined(__AVX__)
+//                if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
+//                    gemv_d_4x4_2(__lhs, __rhs, __result);
+//                    return ;
+//                }
+//#endif
+//            }
+            gemv(__lhs, __rhs, __result);
+            return ;
+        }
+//        if constexpr (ColumnsLHS >= 81){
+//            //ddouble contranction of two eight order tensors
+//            gemm_impl9(__lhs, __rhs, __result);
+//            return ;
+//        }
+
+        gemm_simple(__lhs, __rhs, __result);
+
+        //        if constexpr (ColumnsLHS <= 4){
+
+        //        }else{
+        //            gemm(__lhs, __rhs, __result);
+        //        }
+
+        //an improvement for larger data is needed
+        //        if constexpr (RowsLHS > 16){
+        //            gemm_block(__lhs, __rhs, __result);
+        //        }else{
+        //            gemm(__lhs, __rhs, __result);
+        //        }
+
+
         return ;
 
 
-//        //check if matrix vector multiplication
-//        if constexpr (ColumnsRHS == 1){
-//            gemv(__lhs, __rhs, __result);
-//            return ;
+        //        //check if matrix vector multiplication
+        //        if constexpr (ColumnsRHS == 1){
+        //            gemv(__lhs, __rhs, __result);
+        //            return ;
 
-////#if (defined(__SSE__) && !defined(__AVX__))
-////            if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
-////                gemv_blocked_sse(__lhs, __rhs, __result);
-////            } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
-////                gemv(__lhs, __rhs, __result);
-////            }else{
-////                gemv(__lhs, __rhs, __result);
-////            }
-////#elif __AVX__
+        ////#if (defined(__SSE__) && !defined(__AVX__))
+        ////            if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
+        ////                gemv_blocked_sse(__lhs, __rhs, __result);
+        ////            } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
+        ////                gemv(__lhs, __rhs, __result);
+        ////            }else{
+        ////                gemv(__lhs, __rhs, __result);
+        ////            }
+        ////#elif __AVX__
 
-////            if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
-////                gemv_blocked_avx(__lhs, __rhs, __result);
-////            } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
-////                gemv(__lhs, __rhs, __result);
-////            }else{
-////                gemv(__lhs, __rhs, __result);
-////            }
-////#else
-////            gemv(__lhs, __rhs, __result);
-////#endif
-////            return ;
-//        }
+        ////            if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
+        ////                gemv_blocked_avx(__lhs, __rhs, __result);
+        ////            } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
+        ////                gemv(__lhs, __rhs, __result);
+        ////            }else{
+        ////                gemv(__lhs, __rhs, __result);
+        ////            }
+        ////#else
+        ////            gemv(__lhs, __rhs, __result);
+        ////#endif
+        ////            return ;
+        //        }
 
-//        //check if vector matrix multiplication
-//        if constexpr (ColumnsLHS == 1){
-//            gevm(__lhs, __rhs, __result);
-//            return ;
-//        }
+        //        //check if vector matrix multiplication
+        //        if constexpr (ColumnsLHS == 1){
+        //            gevm(__lhs, __rhs, __result);
+        //            return ;
+        //        }
 
-//        //general matrix matrix multiplication
-//#if (defined(__SSE__) || defined(__AVX__))
-//        if constexpr ((RowsLHS == 3 && ColumnsLHS == 3 && RowsRHS == 3 && ColumnsRHS == 3)){
-//            gemm(__lhs, __rhs, __result);
-//            //irgendwas mit load??
-//            //computation_3_3(__lhs, __rhs, __result);
-//            return ;
-//        }
-//#endif
+        //        //general matrix matrix multiplication
+        //#if (defined(__SSE__) || defined(__AVX__))
+        //        if constexpr ((RowsLHS == 3 && ColumnsLHS == 3 && RowsRHS == 3 && ColumnsRHS == 3)){
+        //            gemm(__lhs, __rhs, __result);
+        //            //irgendwas mit load??
+        //            //computation_3_3(__lhs, __rhs, __result);
+        //            return ;
+        //        }
+        //#endif
 
 
 
-//#if (defined(__SSE__) && !defined(__AVX__))
-//        if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
-//            gemm_blocked<2>(__lhs, __rhs, __result);
-//        } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
-//            gemm_blocked<4>(__lhs, __rhs, __result);
-//        }else{
-//            gemm(__lhs, __rhs, __result);
-//        }
-//        return ;
-//#elif __AVX__
-//        if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
-//            constexpr size_type Size{((RowsRHS >= 4 && ColumnsRHS >= 4 && RowsLHS >= 4 && ColumnsLHS >= 4) ? 4 : 2)};
-//            gemm_blocked<Size>(__lhs, __rhs, __result);
-//        } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
-//            constexpr size_type Size{((RowsRHS >= 8 && ColumnsRHS >= 8 && RowsLHS >= 8 && ColumnsLHS >= 8) ? 8 : 4)};
-//            gemm_blocked<Size>(__lhs, __rhs, __result);
-//        }else{
-//            gemm(__lhs, __rhs, __result);
-//        }
-//        return ;
-//#else
-//        gemm(__lhs, __rhs, __result);
-//        return ;
-//#endif
+        //#if (defined(__SSE__) && !defined(__AVX__))
+        //        if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
+        //            gemm_blocked<2>(__lhs, __rhs, __result);
+        //        } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
+        //            gemm_blocked<4>(__lhs, __rhs, __result);
+        //        }else{
+        //            gemm(__lhs, __rhs, __result);
+        //        }
+        //        return ;
+        //#elif __AVX__
+        //        if constexpr (std::is_same_v<double, LHS> && std::is_same_v<double, RHS> && std::is_same_v<double, RESULT>){
+        //            constexpr size_type Size{((RowsRHS >= 4 && ColumnsRHS >= 4 && RowsLHS >= 4 && ColumnsLHS >= 4) ? 4 : 2)};
+        //            gemm_blocked<Size>(__lhs, __rhs, __result);
+        //        } else if constexpr (std::is_same_v<float, LHS> && std::is_same_v<float, RHS> && std::is_same_v<float, RESULT>){
+        //            constexpr size_type Size{((RowsRHS >= 8 && ColumnsRHS >= 8 && RowsLHS >= 8 && ColumnsLHS >= 8) ? 8 : 4)};
+        //            gemm_blocked<Size>(__lhs, __rhs, __result);
+        //        }else{
+        //            gemm(__lhs, __rhs, __result);
+        //        }
+        //        return ;
+        //#else
+        //        gemm(__lhs, __rhs, __result);
+        //        return ;
+        //#endif
     }
 
 
-    static constexpr inline auto gemm(LHS const*const __lhs, RHS const*const __rhs, RESULT * __result)noexcept{
+    template<std::size_t BI, std::size_t BJ, std::size_t BK, std::size_t _LDA, std::size_t _LDB, std::size_t _LDC, typename T>
+    static inline auto gemm_micro_kernal(T const* _A, T const* _B, T* _C){
+
+        for (std::size_t j = 0; j < BJ; ++j) {
+            alignas(alignof(T)) std::array<T, BI> Ci;
+            for (std::size_t i = 0; i < BI; ++i) {Ci[i] = _C[i*_LDC+j];}
+
+
+            for (std::size_t k = 0; k < BK; ++k) {
+                alignas(alignof(T)) std::array<T, BI> Ai;
+                for (std::size_t i = 0; i < BI; ++i) {
+                    Ai[i] = _A[i*_LDC+k];
+                }
+
+                for (std::size_t i = 0; i < BI; ++i) {
+                    //Ci[i] += _A[i*_LDC+k]*_B[k*_LDB+j];
+                    Ci[i] += Ai[i]*_B[k*_LDB+j];
+                }
+            }
+            for (std::size_t i = 0; i < BI; ++i) {
+                _C[i*_LDC+j] = Ci[i];
+            }
+        }
+    }
+
+
+    template<std::size_t BI, std::size_t BJ, std::size_t BK, std::size_t _LDA, std::size_t _LDB, std::size_t _LDC, typename T>
+    static inline auto gemm_micro_kernal_non(T const* _A, T const* _B, T* _C, std::size_t NI, std::size_t NJ, std::size_t NK){
+
+        for (std::size_t i{0}; i < NI; ++i) {
+            for (std::size_t j = 0; j < NJ; ++j) {
+                T sum{_C[i*_LDC+j]};
+                for (std::size_t k{0}; k < NK; ++k) {
+                    sum += _A[i*_LDC+k]*_B[k*_LDB+j];
+                }
+                _C[i*_LDC+j] = sum;
+            }
+        }
+    }
+
+
+    static inline auto gemm_impl9(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+        // micro kernal
+        //i --> RowsLHS
+        //j --> ColumnsRHS
+        //k --> ColumnsLHS
+        constexpr std::size_t Bi{(8 < RowsLHS ? 8 : RowsLHS)};
+        constexpr std::size_t Bj{(16 < ColumnsRHS ? 16 : ColumnsRHS)};
+        constexpr std::size_t Bk{(16 < ColumnsLHS ? 16 : ColumnsLHS)};
+        // macro kernal
+        constexpr std::size_t BI{(32 < RowsLHS ? 32 : RowsLHS)};
+        constexpr std::size_t BJ{(64 < ColumnsRHS ? 64 : ColumnsRHS)};
+        constexpr std::size_t BK{(64*2 < ColumnsLHS ? 64*2 : ColumnsLHS)};
+
+        //std::memset(_C, 0, _Size*_Size*sizeof(T));
+
+        for (std::size_t ii = 0; ii < RowsLHS - Bi+1; ii+=BI){
+            for (std::size_t kk = 0; kk < ColumnsLHS - Bk+1 ; kk+=BK){
+                for (std::size_t jj = 0; jj < ColumnsRHS - Bj+1; jj+=BJ){
+                    if(kk == 0){
+                            for (std::size_t j = jj; j < std::min(jj + BJ, ColumnsRHS); j+=Bj){
+                                for (std::size_t i = ii; i < std::min(ii + BI, RowsLHS); i+=Bi){
+                                __result[i*ColumnsLHS+j] = 0;
+                            }
+                        }
+                    }
+                    for (std::size_t i = ii; i < std::min(ii + BI, RowsLHS); i+=Bi){
+                        const auto SI{(RowsLHS < i + Bi ? RowsLHS - i : Bi)};
+                        for (std::size_t k = kk; k < std::min(kk + BK, ColumnsLHS); k+=Bk){
+                            const auto SK{(ColumnsLHS < k + Bk ? ColumnsLHS - k : Bk)};
+                            for (std::size_t j = jj; j < std::min(jj + BJ, ColumnsRHS); j+=Bj){
+                                const auto SJ{(ColumnsRHS < j + Bj ? ColumnsRHS - j : Bj)};
+                                if(SI == Bi && SJ == Bj && SK == Bk){
+                                    gemm_micro_kernal<Bi, Bj, Bk, RowsLHS, ColumnsRHS, ColumnsLHS>(__lhs+i*ColumnsLHS+k, __rhs+k*ColumnsRHS+j, __result+i*ColumnsLHS+j);
+                                }else{
+                                    gemm_micro_kernal_non<Bi, Bj, Bk, RowsLHS, ColumnsRHS, ColumnsLHS>(__lhs+i*ColumnsLHS+k, __rhs+k*ColumnsRHS+j, __result+i*ColumnsLHS+j, SI, SJ, SK);
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    static constexpr inline auto gemm_simple(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
         for(size_type i{0}; i<RowsLHS; ++i){
             for(size_type j{0}; j<ColumnsRHS; ++j){
                 RESULT sum{0};
@@ -107,6 +235,267 @@ public:
             }
         }
     }
+
+
+    static constexpr inline auto gemv(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+
+        //#pragma GCC ivdep
+        //        for(size_type i{0}; i<RowsLHS; ++i){
+        //            __result[i] = 0;
+        //        }
+
+        //#pragma GCC ivdep
+        //        for(size_type i{0}; i<RowsLHS; i+=4){
+        //            for(size_type j{0}; j<RowsRHS; j+=4){
+        //                for(size_type jj{0}; jj<4; ++jj){
+        //                    for(size_type ii{0}; ii<4; ++ii){
+        //                        __result[i+ii] += __lhs[(i+ii)*ColumnsLHS+(j+jj)]*__rhs[(j+jj)];
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //        alignas(32) std::array<RESULT,4> temp{0};
+        //        for(size_type i{0}; i<RowsLHS; i+=4){
+        //            for(size_type j{0}; j<RowsRHS; ++j){
+        //                //for(size_type ii{0}; ii<4; ++ii){
+        //                    temp[0] += __lhs[(i+0)*ColumnsLHS+j]*__rhs[j];
+        //                    temp[1] += __lhs[(i+1)*ColumnsLHS+j]*__rhs[j];
+        //                    temp[2] += __lhs[(i+2)*ColumnsLHS+j]*__rhs[j];
+        //                    temp[3] += __lhs[(i+3)*ColumnsLHS+j]*__rhs[j];
+        //                //}
+        //            }
+        //            for(size_type ii{0}; ii<4; ++ii){
+        //                __result[i+ii] = temp[ii];
+        //            }
+        //            //__result[i] = sum;
+        //        }
+
+        for(size_type i{0}; i<RowsLHS; ++i){
+            const auto idx{i*ColumnsLHS};
+            RESULT sum{0};
+            for(size_type j{0}; j<RowsRHS; ++j){
+                sum += __lhs[idx+j]*__rhs[j];
+            }
+            __result[i] = sum;
+        }
+
+        //        alignas(32) const LHS* lhs_ptr{__lhs};
+        //        alignas(32) RESULT* result{__result};
+        //        while(lhs_ptr != __lhs+RowsLHS*ColumnsLHS){
+        //            alignas(32) const RHS* rhs_ptr{__rhs};
+        //            *result = 0;
+        //            while(rhs_ptr != __rhs+RowsRHS){
+        //                *result += *lhs_ptr * *rhs_ptr;
+        //                ++rhs_ptr;
+        //                ++lhs_ptr;
+        //            }
+        //            ++result;
+        //        }
+    }
+
+    static inline auto transposed4x4(__m256d const& row1, __m256d const& row2, __m256d const& row3, __m256d const& row4){
+        const auto rr1 = _mm256_unpacklo_pd(row1, row2);
+        const auto rr2 = _mm256_unpacklo_pd(row3, row4);
+        const auto rr3 = _mm256_unpackhi_pd(row1, row2);
+        const auto rr4 = _mm256_unpackhi_pd(row3, row4);
+        return std::make_tuple(_mm256_permute2f128_pd(rr1, rr2, 0x20),
+                               _mm256_permute2f128_pd(rr3, rr4, 0x20),
+                               _mm256_permute2f128_pd(rr1, rr2, 0x31),
+                               _mm256_permute2f128_pd(rr3, rr4, 0x31));
+    }
+
+    static constexpr inline auto gemv_d_4x4_2(LHS const* __lhs, RHS const* __rhs, RESULT * __result){
+        const auto [col1, col2, col3, col4]{transposed4x4(_mm256_load_pd(__lhs+0),
+                                                          _mm256_load_pd(__lhs+4),
+                                                          _mm256_load_pd(__lhs+8),
+                                                          _mm256_load_pd(__lhs+12))};
+
+        const auto v = _mm256_loadu_pd(__rhs);
+        _mm256_storeu_pd(__result, (col1*v + col2*v + col3*v + col4*v));
+    }
+
+    static constexpr inline auto gevm(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+        for(size_type i{0}; i<RowsLHS; ++i){
+            RESULT sum{0};
+            for(size_type j{0}; j<RowsLHS; ++j){
+                sum += __lhs[j]*__rhs[j*ColumnsRHS+i];
+            }
+            __result[i] = sum;
+        }
+    }
+
+
+    //    static constexpr inline auto gemm(LHS const*const __lhs, RHS const*const __rhs, RESULT *const __result)noexcept{
+    //        std::array<LHS, ColumnsLHS> temp{0};
+    //        for(size_type i{0}; i<RowsLHS; ++i){
+    //            for(size_type j{0}; j<ColumnsRHS; ++j){
+
+    //            }
+    //        }
+
+
+    //        for(size_type i{0}; i<RowsLHS; ++i){
+    //            for(size_type j{0}; j<ColumnsRHS; ++j){
+    //                temp[j] = __lhs[i*ColumnsLHS+j];
+    //            }
+    //            size_type j{0};
+
+    //            for(size_type jj{0}; j<ColumnsRHS-3; j+=4, ++jj){
+    //                std::array<RESULT, 4> j_local{0};
+    //                for(size_type jj{0}; j<ColumnsRHS-3; j+=4, ++jj){
+    //                    for(size_type k{0}; k<RowsRHS; ++k){
+    //                        j_local[jj] += temp[k]*__rhs[k*ColumnsRHS+j];
+    //                    }
+    //                }
+    //            }
+    //            for(std::size_t jj{0}; j<ColumnsRHS; ++j){
+
+    //            }
+    //            for(; j<ColumnsRHS; ++j){
+    //                RESULT sum{0};
+    //                for(size_type k{0}; k<RowsRHS; ++k){
+    //                    sum += temp[k]*__rhs[k*ColumnsRHS+j];
+    //                }
+    //                __result[i*ColumnsRHS+j] = sum;
+    //            }
+    //        }
+    //    }
+
+
+    static constexpr inline auto gemv_blocked_sse(double const* __lhs, double const* __rhs, double const* __result){
+
+        constexpr auto Size{2ul};
+
+        for(std::size_t j{0}; j<(ColumnsRHS/Size)*Size; j+=Size){
+            __m128d yrow = _mm_loadu_pd(__rhs+j);
+            for(std::size_t i{0}; i<(RowsRHS/Size)*Size; i+=Size){
+                __m128d a = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+0)*RowsRHS+j), yrow);
+                __m128d b = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+1)*RowsRHS+j), yrow);
+
+                // {a[0]+a[1], b[0]+b[1]}
+                __m128d sumab = _mm_hadd_pd(a, b);
+
+                _mm_storeu_pd(const_cast<double*>(&__result[i]), sumab + _mm_loadu_pd(const_cast<double*>(&__result[i])));
+            }
+        }
+
+        //clean
+        for(std::size_t i{0}; i<RowsRHS; ++i){
+            RESULT sum{__result[i]};
+            for(std::size_t j{(ColumnsRHS/Size)*Size}; j<ColumnsRHS; ++j){
+                sum += __lhs[i*ColumnsLHS+j]*__rhs[j];
+            }
+            const_cast<double&>(__result[i]) = sum;
+        }
+    }
+
+
+    template<std::size_t _Size>
+    static constexpr inline auto gemm4x4_kernal(size_type __start_i, size_type __start_j, size_type __start_k, LHS const*const __lhs, RHS const*const __rhs, RESULT *const __result)noexcept{
+        //std::array<std::array<RESULT,_Size>,_Size> temp{0};
+        std::array<RESULT,_Size*_Size> temp{0};
+        for(size_type i{0}; i<_Size; ++i){
+            for(size_type j{0}; j<_Size; ++j){
+                for(size_type k{0}; k<RowsRHS; ++k){
+                    temp[i*_Size+j] += __lhs[(__start_i+i)*ColumnsLHS+k+__start_k]*__rhs[(k+__start_k)*ColumnsRHS+(j+__start_j)];
+                }
+            }
+        }
+        for(size_type i{0}; i<_Size; ++i){
+            for(size_type j{0}; j<_Size; ++j){
+                __result[(i+__start_i)*ColumnsRHS+j+__start_j] = temp[i*_Size+j];
+            }
+        }
+    }
+
+
+    static constexpr inline auto gemm(LHS const*const __lhs, RHS const*const __rhs, RESULT *const __result)noexcept{
+        constexpr size_type BS{4};
+        if constexpr (true/*RowsLHS/BS >= 1 && ColumnsRHS/BS >= 1*/){
+            size_type i{0};
+            for(; i<RowsLHS; i+=BS){
+                for(size_type jj{0}; jj<ColumnsRHS; jj+=BS){
+                    //for(size_type kk{0}; kk<RowsRHS; kk+=BS){
+                    gemm4x4_kernal<BS>(i*BS, jj*BS, 0, __lhs, __rhs, __result);
+                    //}
+                }
+            }
+
+            //            for(; i<RowsLHS; i+=BS){
+            //                for(size_type jj{0}; jj<ColumnsRHS; jj+=BS){
+            //                    gemm4x4_kernal<BS>(i*BS, jj*BS, __lhs, __rhs, __result);
+            //                }
+            //            }
+
+            for(; i<RowsLHS; ++i){
+                for(size_type jj=0; jj<ColumnsRHS; ++jj){
+                    RESULT sum{0};
+                    for(size_type k{0}; k<RowsRHS; ++k){
+                        sum += __lhs[i*ColumnsLHS+k]*__rhs[k*ColumnsRHS+jj];
+                    }
+                    __result[i*ColumnsRHS+jj] = sum;
+                }
+            }
+        }else{
+            std::array<RHS, RowsRHS> temprhs{0};
+            std::array<RHS, RowsRHS> templhs{0};
+            for(size_type i{0}; i<RowsLHS; ++i){
+                for(size_type k{0}; k<RowsRHS; ++k){
+                    templhs[k] = __lhs[i*ColumnsLHS+k];
+                }
+                for(size_type j{0}; j<ColumnsRHS; ++j){
+                    for(size_type k{0}; k<RowsRHS; ++k){
+                        temprhs[k] = __rhs[k*ColumnsRHS+j];
+                    }
+                    RESULT sum{0};
+                    for(size_type k{0}; k<RowsRHS; ++k){
+                        //sum += __lhs[i*ColumnsLHS+k]*temprhs[k];//__rhs[k*ColumnsRHS+j];
+                        sum += templhs[k]*temprhs[k];
+                    }
+                    __result[i*ColumnsRHS+j] = sum;
+                }
+            }
+        }
+    }
+
+    static constexpr inline auto gemm2x2(LHS const*const __lhs, RHS const*const __rhs, RESULT * __result)noexcept{
+        //aij = bik ckj
+        //0 1
+        //2 3
+        __result[0] = __lhs[0]*__rhs[0] + __lhs[1]*__rhs[2];
+        __result[1] = __lhs[0]*__rhs[1] + __lhs[1]*__rhs[3];
+        __result[2] = __lhs[2]*__rhs[0] + __lhs[3]*__rhs[2];
+        __result[3] = __lhs[2]*__rhs[1] + __lhs[3]*__rhs[3];
+    }
+
+
+    static constexpr inline auto gemm_block(LHS const*const __lhs, RHS const*const __rhs, RESULT * __result)noexcept{
+        constexpr std::size_t NB = 16;
+
+        for(size_type II{0}; II<RowsLHS; II+=NB){
+            const auto i_size{std::min(II+NB, RowsLHS)};
+            for(size_type JJ{0}; JJ<ColumnsRHS; JJ+=NB){
+                const auto j_size{std::min(JJ+NB, ColumnsRHS)};
+                for(size_type KK{0}; KK<RowsRHS; KK+=NB){
+                    const auto k_size{std::min(KK+NB, RowsRHS)};
+                    for(size_type k{KK}; k<k_size; ++k){
+                        for(size_type j{JJ}; j<j_size; ++j){
+                            for(size_type i{II}; i<i_size; ++i){
+                                __result[i*ColumnsRHS+j] += __lhs[i*ColumnsLHS+k]*__rhs[k*ColumnsRHS+j];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+};
+//template <typename LHS, typename RHS, typename RESULT, std::size_t RowsLHS, std::size_t ColumnsLHS, std::size_t RowsRHS, std::size_t ColumnsRHS>
+//std::array<RHS, RowsRHS*ColumnsRHS> gemm_wrapper<LHS, RHS, RESULT, RowsLHS, ColumnsLHS, RowsRHS, ColumnsRHS >::temp;
+
+
 
 //    template<size_type Size>
 //    static constexpr inline auto gemm_blocked(double const* __lhs, double const* __rhs, double const* __result){
@@ -290,32 +679,7 @@ public:
 //    }
 
 
-//    static constexpr inline auto gemv_blocked_sse(double const* __lhs, double const* __rhs, double const* __result){
 
-//        constexpr auto Size{2ul};
-
-//        for(std::size_t j{0}; j<(ColumnsRHS/Size)*Size; j+=Size){
-//            __m128d yrow = _mm_loadu_pd(__rhs+j);
-//            for(std::size_t i{0}; i<(RowsRHS/Size)*Size; i+=Size){
-//                __m128d a = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+0)*RowsRHS+j), yrow);
-//                __m128d b = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+1)*RowsRHS+j), yrow);
-
-//                // {a[0]+a[1], b[0]+b[1]}
-//                __m128d sumab = _mm_hadd_pd(a, b);
-
-//                _mm_storeu_pd(const_cast<double*>(&__result[i]), sumab + _mm_loadu_pd(const_cast<double*>(&__result[i])));
-//            }
-//        }
-
-//        //clean
-//        for(std::size_t i{0}; i<RowsRHS; ++i){
-//            RESULT sum{__result[i]};
-//            for(std::size_t j{(ColumnsRHS/Size)*Size}; j<ColumnsRHS; ++j){
-//                sum += __lhs[i*ColumnsLHS+j]*__rhs[j];
-//            }
-//            const_cast<double&>(__result[i]) = sum;
-//        }
-//    }
 
 //    static constexpr inline void gemm_block_sse(double const* __lhs, double const* __rhs, double const* __result, std::size_t const I, std::size_t const J, std::size_t const K) {
 //        __m128d row1 = _mm_loadu_pd(&__rhs[(K+0)*ColumnsRHS]);//two entries
@@ -451,9 +815,9 @@ public:
 //    }
 
 
-    //old stuff
+//old stuff
 
-    /*
+/*
 
     static constexpr inline auto evaluate(LHS const* __lhs, RHS const* __rhs, RESULT const* __result){
 
@@ -1429,7 +1793,7 @@ private:
     }
     */
 
-};
+
 
 
 

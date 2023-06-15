@@ -42,6 +42,14 @@ public:
 
     constexpr inline auto evaluate()noexcept;
 
+    static constexpr inline auto simple_evaluation()noexcept{
+        return data_type_RHS::simple_evaluation() && data_type_LHS::simple_evaluation();
+    }
+
+    constexpr inline auto direct_access(std::size_t __idx)const noexcept{
+        return _Operator::apply(_lhs.direct_access(__idx), _rhs.direct_access(__idx));
+    }
+
 private:
     _LHS _lhs;
     _RHS _rhs;

@@ -56,13 +56,13 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 template <typename _Result>
-constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate(_Result & __result)noexcept{
+constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate(_Result & __result)const noexcept{
     evaluate_imp(__result);
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 template<typename _Result>
-constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate_imp(_Result & __result)noexcept{
+constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate_imp(_Result & __result)const noexcept{
     constexpr bool basis_change_lhs{!std::is_same_v<add_value_sequence_t<sequence_t<RankLHS-1>,1>, new_basis_lhs>};
     constexpr bool basis_change_rhs{!std::is_same_v<add_value_sequence_t<sequence_t<RankRHS-1>,1>, new_basis_rhs>};
     constexpr bool raw_data_lhs{is_detected<has_raw_data, data_type_LHS>::value};
@@ -77,22 +77,21 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
     }
 
     if constexpr (basis_change_lhs || !raw_data_lhs){
-        _lhs_temp.template change_basis_view<new_basis_lhs>() = _lhs;
+        const_cast<decltype(_lhs_temp)&>(_lhs_temp).template change_basis_view<new_basis_lhs>() = _lhs;
     }
 
-
     if constexpr (basis_change_rhs || !raw_data_rhs){
-        _rhs_temp.template change_basis_view<new_basis_rhs>() = _rhs;
+        const_cast<decltype(_rhs_temp)&>(_rhs_temp).template change_basis_view<new_basis_rhs>() = _rhs;
     }
 
     if constexpr ((basis_change_lhs && basis_change_rhs) || (!raw_data_lhs && !raw_data_rhs)){
-        evaluate_implementation(__result, _lhs_temp, _rhs_temp);
+        evaluate_implementation(__result.raw_data(), _lhs_temp.raw_data(), _rhs_temp.raw_data());
     }else if constexpr (!(basis_change_lhs || !raw_data_lhs) && (basis_change_rhs || !raw_data_rhs)){
-        evaluate_implementation(__result, _lhs, _rhs_temp);
+        evaluate_implementation(__result.raw_data(), _lhs.raw_data(), _rhs_temp.raw_data());
     }else if constexpr ((basis_change_lhs || !raw_data_lhs) && !(basis_change_rhs || !raw_data_rhs)){
-        evaluate_implementation(__result, _lhs_temp, _rhs);
+        evaluate_implementation(__result.raw_data(), _lhs_temp.raw_data(), _rhs.raw_data());
     }else if constexpr (!(basis_change_lhs || !raw_data_lhs) && !(basis_change_rhs || !raw_data_rhs)){
-        evaluate_implementation(__result, _lhs, _rhs);
+        evaluate_implementation(__result.raw_data(), _lhs.raw_data(), _rhs.raw_data());
     }
 }
 
@@ -103,12 +102,12 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 template<typename _LHS_IN, typename _RHS_IN, typename _RESULT>
-constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate_implementation(_RESULT & __result, _LHS_IN const& __lhs, _RHS_IN const& __rhs) const noexcept {
+constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate_implementation(_RESULT * __result, _LHS_IN const* __lhs, _RHS_IN const* __rhs) noexcept {
     constexpr auto RowsLHS{get_size<sequence_outer_lhs::size()>()};
     constexpr auto ColsLHS{get_size<sequence_inner_lhs::size()>()};
     constexpr auto RowsRHS{get_size<sequence_inner_rhs::size()>()};
     constexpr auto ColsRHS{get_size<sequence_outer_rhs::size()>()};
-    gemm_wrapper<value_type_LHS, value_type_RHS, typename _RESULT::value_type, RowsLHS, ColsLHS, RowsRHS, ColsRHS>::evaluate(__lhs.raw_data(), __rhs.raw_data(), __result.raw_data());
+    gemm_wrapper<value_type_LHS, value_type_RHS, _RESULT, RowsLHS, ColsLHS, RowsRHS, ColsRHS>::evaluate(__lhs, __rhs, __result);
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>

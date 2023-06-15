@@ -46,16 +46,24 @@ public:
     constexpr inline auto evaluate()noexcept;
 
     template <typename _Result>
-    constexpr inline auto evaluate(_Result & __result)noexcept;
+    constexpr inline auto evaluate(_Result & __result)const noexcept;
 
     template<typename _Result>
-    constexpr inline auto evaluate_imp(_Result & __result)noexcept;
+    constexpr inline auto evaluate_imp(_Result & __result)const noexcept;
 
     constexpr inline auto raw_data()const noexcept;
 
+    static constexpr inline auto simple_evaluation()noexcept{
+        return true;
+    }
+
+    constexpr inline auto direct_access(std::size_t __idx)const noexcept{
+        return _data.direct_access(__idx);
+    }
+
 private:
     template<typename _LHS, typename _RHS, typename _RESULT>
-    constexpr inline auto evaluate_implementation(_RESULT & __result, _LHS const& __lhs, _RHS const& __rhs) const noexcept;
+    static constexpr inline auto evaluate_implementation(_RESULT * __result, _LHS const* __lhs, _RHS const* __rhs) noexcept;
 
     template<size_type _Size>
     static constexpr inline auto get_size()noexcept;
