@@ -516,9 +516,9 @@ void print_sequence(sequence<Numbers...>){
     ((std::cout<<Numbers<<" "),...)<<std::endl;
 }
 
-void print_sequence(sequence<>){
+//void print_sequence(sequence<>){
 
-}
+//}
 
 template<std::size_t Size, std::size_t First, std::size_t ...Numbers>
 struct get_tensor_array_size

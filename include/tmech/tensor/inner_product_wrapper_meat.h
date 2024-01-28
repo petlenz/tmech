@@ -43,7 +43,7 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::rank()noexcept{
-    return SizeOuterLoop;
+    return (RankLHS + RankRHS) - (SizeLHS + SizeRHS);
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>

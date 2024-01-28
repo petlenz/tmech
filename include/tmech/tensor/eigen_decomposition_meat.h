@@ -10,6 +10,12 @@
 
 namespace detail {
 
+extern "C" {
+    extern int dgeev_(char*,char*,int*,double*,int*,double*, double*, double*, int*, double*, int*, double*, int*, int*);
+    extern int sgeev_(char*,char*,int*,float*,int*,float*, float*, float*, int*, float*, int*, float*, int*, int*);
+}
+
+
 /**
 * @name Constructors
 */
@@ -289,6 +295,8 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::evaluate_detail_2D(bo
 
 template <typename Tensor>
 constexpr inline auto eigen_decomposition_wrapper<Tensor>::evaluate_detail_3D(bool eigenvectors, value_type const _a00, value_type const _a01, value_type const _a02, value_type const _a11, value_type const _a12, value_type const _a22)noexcept{
+
+    if(false){
     // Precondition the matrix by factoring out the maximum absolute
     // value of the components.  This guards against floating-point
     // overflow when computing the eigenvalues.
@@ -348,6 +356,9 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::evaluate_detail_3D(bo
         _eigval[0] = q + p * beta0;
         _eigval[1] = q + p * beta1;
         _eigval[2] = q + p * beta2;
+
+
+
 
 //        if(a00 == 1){
 //            std::cout<<"eigval 1 gehört zu a00"<<std::endl;
@@ -426,12 +437,60 @@ constexpr inline auto eigen_decomposition_wrapper<Tensor>::evaluate_detail_3D(bo
     for(size_type i{0}; i<3; ++i){
         _eigval[i] *= maxAbsElement;
     }
+    sort_eigenvalues(-1, true, eigenvectors);
+    }
+
+    //std::cout<<"Old "<<_eigval[0]<<" "<<_eigval[1]<<" "<<_eigval[2]<<std::endl;
+
+    if constexpr (false && std::is_same_v<double, value_type>){
+        // Declare variables for eigenvalues and eigenvectors
+        double eigenvectors[9];
+        double eigenvectorsL[9];
+        double wi[3];
+
+        // Declare other necessary variables
+        char jobvl = 'N';  // Compute left eigenvectors (change to 'V' to compute them)
+        char jobvr = 'V';  // Compute right eigenvectors
+        int n = 3;  // Size of the matrix
+        int lda = 3;  // Leading dimension of the matrix
+        int ldvl = 1;  // Leading dimension of the left eigenvector matrix
+        int ldvr = 3;  // Leading dimension of the right eigenvector matrix
+        int lwork = 4 * n;  // Size of the workspace
+        int info=0;  // Output variable to check success of the computation
+
+        // Workspace array
+        double work[12];
+
+        auto data = _data;
+
+        // Compute eigenvalues and eigenvectors using LAPACK function
+        dgeev_(&jobvl, &jobvr, &n, data.raw_data(), &lda, &_eigval[0], wi, eigenvectorsL, &ldvl,
+               eigenvectors, &ldvr, work, &lwork, &info);
+
+        std::array<std::size_t, 3> idx{0,1,2};
+        std::sort(idx.begin(), idx.end(),
+                  [&](size_t i1, size_t i2) {return _eigval[i1] < _eigval[i2];});
+
+        //std::cout<<"info "<<info<<std::endl;
+        const auto temp = _eigval;
+        for (std::size_t i = 0; i < 3; ++i) {
+            _eigval[i] = temp[idx[i]];
+            for (std::size_t j = 0; j < 3; ++j) {
+                _eigvectors[i](j) = eigenvectors[idx[i] * ldvr + j];
+            }
+        }
+        //std::cout<<"New "<<_eigval[0]<<" "<<_eigval[1]<<" "<<_eigval[2]<<std::endl;
+    }
+
+    if constexpr (std::is_same_v<float, value_type>){
+
+    }
 
 
     //std::cout<<"permut "<<std::endl;
     //std::cout<<std::sqrt(1.0/(_eigval[_permut[0]]))<<" "<<std::sqrt(1.0/(_eigval[_permut[1]]))<<" "<<std::sqrt(1.0/(_eigval[_permut[2]]))<<std::endl;
 
-    sort_eigenvalues(-1, true, eigenvectors);
+    //sort_eigenvalues(-1, true, eigenvectors);
 }
 
 
