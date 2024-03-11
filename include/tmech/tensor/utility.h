@@ -512,11 +512,11 @@ static constexpr inline auto get_sequence(sequence<Numbers...>){
 
 
 template<std::size_t...Numbers>
-void print_sequence(sequence<Numbers...>){
+inline void print_sequence(sequence<Numbers...>){
     ((std::cout<<Numbers<<" "),...)<<std::endl;
 }
 
-void print_sequence(sequence<>){
+inline void print_sequence(sequence<>){
 
 }
 
