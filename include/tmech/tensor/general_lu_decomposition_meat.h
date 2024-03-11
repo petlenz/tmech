@@ -10,8 +10,6 @@
 
 namespace detail {
 
-general_lu_solver::general_lu_solver()noexcept{}
-
 template<typename Jacobian, typename Residuum, typename Vector_x>
 constexpr inline auto general_lu_solver::apply(Jacobian & A, Residuum const& R, Vector_x & x)noexcept{
     constexpr std::size_t size{std::tuple_size_v<Residuum>};
