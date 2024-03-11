@@ -21,6 +21,13 @@ class inner_product_wrapper : public tensor_base<inner_product_wrapper<LHS, RHS,
     using sequence_inner_lhs = min_value_squence_t<SequenceLHS, 1>;
     using sequence_inner_rhs = min_value_squence_t<SequenceRHS, 1>;
     using basetype           = tensor_base<inner_product_wrapper<LHS, RHS, SequenceLHS, SequenceRHS>>;
+
+    static constexpr auto RankLHS{data_type_LHS::rank()};
+    static constexpr auto RankRHS{data_type_RHS::rank()};
+    static constexpr auto SizeLHS{SequenceLHS::size()};
+    static constexpr auto SizeRHS{SequenceRHS::size()};
+    static constexpr auto SizeOuterLoop{(RankLHS + RankRHS) - (SizeLHS + SizeRHS)};
+
 public:
     using value_type = typename result_type<value_type_LHS, value_type_RHS>::value_type;
     using size_type  = std::size_t;
@@ -75,12 +82,6 @@ private:
     tensor<value_type, dimension(), rank()> _data;
     tensor<value_type, dimension(), data_type_LHS::rank()> _lhs_temp;
     tensor<value_type, dimension(), data_type_RHS::rank()> _rhs_temp;
-
-    static constexpr auto RankLHS{data_type_LHS::rank()};
-    static constexpr auto RankRHS{data_type_RHS::rank()};
-    static constexpr auto SizeLHS{SequenceLHS::size()};
-    static constexpr auto SizeRHS{SequenceRHS::size()};
-    static constexpr auto SizeOuterLoop{(RankLHS + RankRHS) - (SizeLHS + SizeRHS)};
 
     using sorted_sequence_lhs = bubble_sort_sequence_t<sequence_inner_lhs>;
     using sorted_sequence_rhs = bubble_sort_sequence_t<sequence_inner_rhs>;
