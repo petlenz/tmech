@@ -15,7 +15,7 @@ class general_lu_solver
 {
 public:
 
-    general_lu_solver()noexcept;
+    general_lu_solver()noexcept{}
 
     template<typename Jacobian, typename Residuum, typename Vector_x>
     static constexpr inline auto apply(Jacobian & A, Residuum const& R, Vector_x & x)noexcept;
