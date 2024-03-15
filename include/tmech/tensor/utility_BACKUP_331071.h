@@ -516,6 +516,14 @@ inline void print_sequence(sequence<Numbers...>){
     ((std::cout<<Numbers<<" "),...)<<std::endl;
 }
 
+<<<<<<< HEAD
+//void print_sequence(sequence<>){
+=======
+inline void print_sequence(sequence<>){
+>>>>>>> refs/remotes/origin/master
+
+//}
+
 template<std::size_t Size, std::size_t First, std::size_t ...Numbers>
 struct get_tensor_array_size
 {
