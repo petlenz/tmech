@@ -22,11 +22,36 @@
 #include <tuple>
 #include <any>
 #include <map>
-#include <experimental/type_traits>
 #include <immintrin.h>
 #include <complex>
 #include <cstring>
 #include <string>
+
+
+#ifdef TMECH_IS_DETECTED
+namespace std {
+namespace detail {
+template <class AlwaysVoid, template<class...> class Op, class... Args>
+struct detector {
+  using value_t = std::false_type;
+};
+
+template <template<class...> class Op, class... Args>
+struct detector<std::void_t<Op<Args...>>, Op, Args...> {
+  using value_t = std::true_type;
+};
+} // namespace detail
+
+template <template<class...> class Op, class... Args>
+using is_detected = typename detail::detector<void, Op, Args...>::value_t;
+
+template <template<class...> class Op, class... Args>
+const auto is_detected_v = is_detected<Op, Args...>::value;
+}
+#else
+#include <experimental/type_traits>
+#endif
+
 
 
 #include "tmech_forward_definitions.h"
