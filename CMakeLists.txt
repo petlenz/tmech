@@ -7,9 +7,9 @@ set(TMECH_TENSOR_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/tmech/tensor)
 set(TMECH_SYMDIFF_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/tmech/symdiff)
 
  if (MSVC)
-    if(${MSVC_TOOLSET_VERSION} LESS 142)
+    #if(${MSVC_TOOLSET_VERSION} LESS 142)
         set(TMECH_IS_DETECTED ON)
-    endif()
+    #endif()
 endif()
 
 # Versionning
