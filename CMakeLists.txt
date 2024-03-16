@@ -11,6 +11,7 @@ set(TMECH_SYMDIFF_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/tmech/symdiff)
         add_compile_definitions(TMECH_IS_DETECTED)
     #endif()
 endif()
+add_compile_definitions(TMECH_IS_DETECTED)
 
 # Versionning
 # ===========

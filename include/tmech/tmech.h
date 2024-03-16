@@ -30,6 +30,7 @@
 
 #ifdef TMECH_IS_DETECTED
 namespace std {
+namespace experimental {
 namespace detail {
 template <class AlwaysVoid, template<class...> class Op, class... Args>
 struct detector {
@@ -47,6 +48,7 @@ using is_detected = typename detail::detector<void, Op, Args...>::value_t;
 
 template <template<class...> class Op, class... Args>
 const auto is_detected_v = is_detected<Op, Args...>::value;
+}
 }
 #else
 #include <experimental/type_traits>
