@@ -35,16 +35,16 @@ public:
     static_assert(Rank != 0,
     "Tensors must have a rank greater than or equal to one.");
 
-    tensor();
+    tensor()noexcept;
 
-    tensor(tensor<T, Dim, Rank> const& _tensor);
+    tensor(tensor<T, Dim, Rank> const& _tensor)noexcept;
 
     template<typename _Tensor,  std::enable_if_t<is_tensor_type<_Tensor>::value> * = nullptr>
-    tensor(_Tensor const& tensor_base);
+    tensor(_Tensor const& tensor_base)noexcept;
 
-    tensor(std::initializer_list<value_type> const& data);
+    tensor(std::initializer_list<value_type> const& data)noexcept;
 
-    ~tensor();
+    ~tensor()noexcept;
 
     /**
       * \brief Assigns tensors to each other.
@@ -157,7 +157,7 @@ private:
     template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
     constexpr inline auto delete_data(){}
 
-    alignas(32) value_data_type _data;
+    alignas(T) value_data_type _data;
 };
 
 #endif // TENSOR_BONES_H

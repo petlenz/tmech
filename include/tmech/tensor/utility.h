@@ -1073,7 +1073,7 @@ class meta_for_loop
 {
 public:
     template<typename Func, typename ...Indicies>
-    static constexpr inline auto loop(Func const& func, const Indicies &... indicies) {
+    static constexpr inline auto loop(Func const& func, const Indicies &... indicies) noexcept{
         if constexpr (Start < End){
             Function::loop(func, indicies..., Start);
             meta_for_loop<Function, End, Start+1>::loop(func, indicies...);
@@ -1086,7 +1086,7 @@ class meta_for_loop<void, End, Start>
 {
 public:
     template<typename Func, typename ...Indicies>
-    static constexpr inline auto loop(Func const& func, const  Indicies &... indicies) {
+    static constexpr inline auto loop(Func const& func, const  Indicies &... indicies) noexcept {
         if constexpr (Start < End){
             func(indicies...,Start);
             meta_for_loop<void, End, Start+1>::loop(func, indicies...);
@@ -1109,7 +1109,7 @@ struct meta_for_loop_deep<DIM, DEEP, DEEP>
 template<typename Func, std::size_t Size>
 struct loop{
     template<typename LambdaFunc, typename ...Args>
-    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices){
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
         for(std::size_t i{0}; i<Size; ++i){
             Func::for_loop(func, indices..., i);
         }
@@ -1119,7 +1119,7 @@ struct loop{
 template<std::size_t Size>
 struct loop<void, Size>{
     template<typename LambdaFunc, typename ...Args>
-    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices){
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
         for(std::size_t i{0}; i<Size; ++i){
             func(indices..., i);
         }

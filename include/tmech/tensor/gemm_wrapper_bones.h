@@ -46,7 +46,16 @@ public:
 //            return ;
 //        }
 
+        //special rule for double contraction of two eight order tensors
+        constexpr std::size_t size{3*3*3*3};
+        if constexpr (RowsLHS >= size && ColumnsLHS >= size &&
+                      RowsRHS >= size && ColumnsRHS >= size){
+            gemm_simple_bigger(__lhs, __rhs, __result);
+            return ;
+        }
+
         gemm_simple(__lhs, __rhs, __result);
+
 
         //        if constexpr (ColumnsLHS <= 4){
 
@@ -224,14 +233,44 @@ public:
         }
     }
 
-    static constexpr inline auto gemm_simple(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    static constexpr inline auto gemm_simple_bigger(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+        //std::array<RHS, RowsRHS> temp;
         for(size_type i{0}; i<RowsLHS; ++i){
             for(size_type j{0}; j<ColumnsRHS; ++j){
-                RESULT sum{0};
-                for(size_type k{0}; k<RowsRHS; ++k){
-                    sum += __lhs[i*ColumnsLHS+k]*__rhs[k*ColumnsRHS+j];
+                __result[i*ColumnsRHS+j] = 0;
+            }
+            for(size_type k{0}; k<RowsRHS; ++k){
+                for(size_type j{0}; j<ColumnsRHS; ++j){
+                    __result[i*ColumnsRHS+j] += __lhs[i*ColumnsLHS+k]*__rhs[k*ColumnsRHS+j];
                 }
-                __result[i*ColumnsRHS+j] = sum;
+            }
+        }
+
+//        for(size_type i{0}; i<RowsLHS; ++i){
+//            for(size_type j{0}; j<ColumnsRHS; ++j){
+//                __result[i*ColumnsRHS+j] = 0;
+//            }
+//            for(size_type k{0}; k<RowsRHS; ++k){
+//                for(size_type j{0}; j<ColumnsRHS; ++j){
+//                    __result[i*ColumnsRHS+j] += __lhs[i*ColumnsLHS+k]*__rhs[k*ColumnsRHS+j];
+//                }
+//            }
+//        }
+    }
+
+
+    static constexpr inline auto gemm_simple(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+        //RHS temp[RowsRHS];
+        std::array<RHS, RowsRHS> temp;
+        for(size_type j{0}; j<ColumnsRHS; ++j){
+            for(size_type k{0}; k<RowsRHS; ++k){
+                temp[k] = __rhs[k*ColumnsRHS+j];
+            }
+            for(size_type i{0}; i<RowsLHS; ++i){
+                __result[i*ColumnsRHS+j] = 0;
+                for(size_type k{0}; k<RowsRHS; ++k){
+                    __result[i*ColumnsRHS+j] += __lhs[i*ColumnsLHS+k]*temp[k];//__rhs[k*ColumnsRHS+j];
+                }
             }
         }
     }
@@ -272,12 +311,17 @@ public:
         //        }
 
         for(size_type i{0}; i<RowsLHS; ++i){
-            const auto idx{i*ColumnsLHS};
-            RESULT sum{0};
-            for(size_type j{0}; j<RowsRHS; ++j){
-                sum += __lhs[idx+j]*__rhs[j];
+            __result[i] = 0;
+        }
+
+            //const auto idx{i*ColumnsLHS};
+            //RESULT sum{0};
+            //__result[i] = 0;
+        for(size_type j{0}; j<RowsRHS; ++j){
+            for(size_type i{0}; i<RowsLHS; ++i){
+                __result[i] += __lhs[i*ColumnsLHS+j]*__rhs[j];
             }
-            __result[i] = sum;
+            //__result[i] = sum;
         }
 
         //        alignas(32) const LHS* lhs_ptr{__lhs};

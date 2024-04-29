@@ -240,7 +240,7 @@ constexpr inline auto tensor<T, Dim, Rank>::size() noexcept{
  * Deallocates a Dim-dimensional Rank-tensor.
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
-tensor<T, Dim, Rank>::~tensor(){
+tensor<T, Dim, Rank>::~tensor()noexcept{
     this->delete_data();
 }
 //@}
@@ -254,7 +254,7 @@ tensor<T, Dim, Rank>::~tensor(){
  * All elements are set to zero.
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
-tensor<T, Dim, Rank>::tensor():_data() {
+tensor<T, Dim, Rank>::tensor()noexcept:_data() {
     //this->check_size_fill_zeros();
     check_size();
 }
@@ -266,7 +266,7 @@ tensor<T, Dim, Rank>::tensor():_data() {
  * @param _tensor Tensor to be copyed.
  */
 template<typename T, std::size_t Dim, std::size_t Rank>
-tensor<T, Dim, Rank>::tensor(tensor<T, Dim, Rank> const& _tensor):
+tensor<T, Dim, Rank>::tensor(tensor<T, Dim, Rank> const& _tensor)noexcept:
     basetype(_tensor),
     _data()
 {
@@ -288,7 +288,7 @@ tensor<T, Dim, Rank>::tensor(tensor<T, Dim, Rank> const& _tensor):
  *  @param l The elements of the tensor.
  */
 template<typename T, std::size_t Dim, std::size_t Rank>
-tensor<T, Dim, Rank>::tensor(std::initializer_list<value_type> const& l):_data() {
+tensor<T, Dim, Rank>::tensor(std::initializer_list<value_type> const& l)noexcept:_data() {
     std::copy(l.begin(), l.end(), raw_data());
 }
 //@}
@@ -302,7 +302,7 @@ tensor<T, Dim, Rank>::tensor(std::initializer_list<value_type> const& l):_data()
      */
 template<typename T, std::size_t Dim, std::size_t Rank>
 template<typename _Tensor,  std::enable_if_t<is_tensor_type<_Tensor>::value> *>
-tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor):
+tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor)noexcept:
     _data()
 {
     static_assert(_Tensor::rank() == Rank,     "tensor::operator=(): non matching rank");
