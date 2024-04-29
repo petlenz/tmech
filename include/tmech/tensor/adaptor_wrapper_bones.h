@@ -43,6 +43,11 @@ public:
 
     static constexpr inline auto dimension()noexcept;
 
+    template<typename Type = _Type, typename = typename std::enable_if<Type::use_raw_data()>::type>
+    constexpr inline auto raw_data()const noexcept{
+      return _data;
+    }
+
 private:
     _T * _data;
 };
@@ -99,6 +104,9 @@ struct abq_std
         }
     }
 
+    static constexpr inline auto use_raw_data(){
+        return false;
+    }
 private:
     static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
@@ -176,6 +184,9 @@ struct abq_exp
         }
     }
 
+    static constexpr inline auto use_raw_data(){
+        return false;
+    }
 private:
     static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
@@ -248,6 +259,9 @@ struct voigt
         }
     }
 
+    static constexpr inline auto use_raw_data(){
+        return false;
+    }
 private:
     static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
@@ -317,6 +331,10 @@ struct full
                 }
             }
         }
+    }
+
+    static constexpr inline auto use_raw_data(){
+        return true;
     }
 };
 
