@@ -472,7 +472,7 @@ constexpr inline auto adj(_Tensor && __tensor);
  * @tparam _Tensor Tensor object
  * @param __tensor Tensor expression from which the inverse is to be formed.
 */
-template<typename ..._Sequences, typename _Tensor, typename >
+template<typename _Tensor, typename , typename ..._Sequences>
 constexpr inline auto inv(_Tensor && __tensor);
 
 /**
@@ -513,7 +513,7 @@ constexpr inline auto inv(_Tensor && __tensor);
  * @tparam _Tensor Tensor object
  * @param __tensor Tensor expression from which the inverse is to be formed.
 */
-template<typename ..._Sequences, typename _Tensor, typename >
+template<typename _Tensor, typename , typename ..._Sequences>
 constexpr inline auto invf(_Tensor && __tensor);
 
 /**

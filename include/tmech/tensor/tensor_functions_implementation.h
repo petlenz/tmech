@@ -414,7 +414,7 @@ constexpr inline auto adj(_Tensor && __tensor){
     }
 }
 
-template<typename ..._Sequences, typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr, typename ..._Sequences>
 constexpr inline auto inv(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
 
@@ -433,7 +433,7 @@ constexpr inline auto inv(_Tensor && __tensor){
     }
 }
 
-template<typename ..._Sequences, typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr, typename ..._Sequences>
 constexpr inline auto invf(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     if constexpr (std::is_lvalue_reference_v<_Tensor>){

@@ -8,11 +8,27 @@
 #ifndef GEMM_WRAPPER_BONES_H
 #define GEMM_WRAPPER_BONES_H
 
+#include <stdlib.h>
 #include <immintrin.h>
-
-
+#include <array>
 
 namespace detail {
+
+extern "C" {
+void dgemm_ (char *TRANSA,
+            char *TRANSB,
+            int *M,
+            int *N,
+            int *K,
+            double *ALPHA,
+            double **A,
+            int *LDA,
+            double **B,
+            int *LDB,
+            double *BETA,
+            double **C,
+            int *LDC);
+}
 
 template <typename LHS, typename RHS, typename RESULT, std::size_t RowsLHS, std::size_t ColumnsLHS, std::size_t RowsRHS, std::size_t ColumnsRHS>
 class gemm_wrapper
@@ -51,8 +67,24 @@ public:
         if constexpr (RowsLHS >= size && ColumnsLHS >= size &&
                       RowsRHS >= size && ColumnsRHS >= size){
             gemm_simple_bigger(__lhs, __rhs, __result);
+//            char *TRANSA,
+//                char *TRANSB,
+//                int *M,
+//                int *N,
+//                int *K,
+//                double *ALPHA,
+//                double **A,
+//                int *LDA,
+//                double **B,
+//                int *LDB,
+//                double *BETA,
+//                double **C,
+//                int *LDC
+            //double alpha{1}, beta{0};
+            //dgemm_("N","N",RowsLHS,ColumnsLHS,ColumnsRHS);
             return ;
         }
+
 
         gemm_simple(__lhs, __rhs, __result);
 
@@ -148,7 +180,7 @@ public:
 
 
     template<std::size_t BI, std::size_t BJ, std::size_t BK, std::size_t _LDA, std::size_t _LDB, std::size_t _LDC, typename T>
-    static inline auto gemm_micro_kernal(T const* _A, T const* _B, T* _C){
+    static inline auto gemm_micro_kernal(T const* _A, T const* _B, T* _C)noexcept{
 
         for (std::size_t j = 0; j < BJ; ++j) {
             alignas(alignof(T)) std::array<T, BI> Ci;
@@ -174,7 +206,7 @@ public:
 
 
     template<std::size_t BI, std::size_t BJ, std::size_t BK, std::size_t _LDA, std::size_t _LDB, std::size_t _LDC, typename T>
-    static inline auto gemm_micro_kernal_non(T const* _A, T const* _B, T* _C, std::size_t NI, std::size_t NJ, std::size_t NK){
+    static inline auto gemm_micro_kernal_non(T const* _A, T const* _B, T* _C, std::size_t NI, std::size_t NJ, std::size_t NK)noexcept{
 
         for (std::size_t i{0}; i < NI; ++i) {
             for (std::size_t j = 0; j < NJ; ++j) {
@@ -258,8 +290,19 @@ public:
 //        }
     }
 
-
     static constexpr inline auto gemm_simple(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+        //RHS temp[RowsRHS];
+        for(size_type j{0}; j<ColumnsRHS; ++j){
+            for(size_type i{0}; i<RowsLHS; ++i){
+                __result[i*ColumnsRHS+j] = 0;
+                for(size_type k{0}; k<RowsRHS; ++k){
+                    __result[i*ColumnsRHS+j] += __lhs[i*ColumnsLHS+k]*__rhs[k*ColumnsRHS+j];
+                }
+            }
+        }
+    }
+
+    static constexpr inline auto gemm_simple_temp(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
         //RHS temp[RowsRHS];
         std::array<RHS, RowsRHS> temp;
         for(size_type j{0}; j<ColumnsRHS; ++j){
@@ -276,7 +319,7 @@ public:
     }
 
 
-    static constexpr inline auto gemv(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    static constexpr inline auto gemv(LHS const * __lhs, RHS const* __rhs, RESULT * __result)noexcept{
 
         //#pragma GCC ivdep
         //        for(size_type i{0}; i<RowsLHS; ++i){
@@ -310,19 +353,201 @@ public:
         //            //__result[i] = sum;
         //        }
 
-        for(size_type i{0}; i<RowsLHS; ++i){
-            __result[i] = 0;
-        }
+//        for(size_type i{0}; i<RowsLHS; ++i){
+//            __result[i] = 0;
+//        }
+
+//        if constexpr (RowsRHS == 4 && RowsLHS == 4){
+//            const auto r1{__rhs[0]}, r2{__rhs[1]}, r3{__rhs[2]}, r4{__rhs[3]};
+//            __result[0] = __lhs[0]  * r1 + __lhs[1]  * r2 + __lhs[2]  * r3 + __lhs[3]  * r4;
+//            __result[1] = __lhs[4]  * r1 + __lhs[5]  * r2 + __lhs[6]  * r3 + __lhs[7]  * r4;
+//            __result[2] = __lhs[8]  * r1 + __lhs[9]  * r2 + __lhs[10] * r3 + __lhs[11] * r4;
+//            __result[3] = __lhs[12] * r1 + __lhs[13] * r2 + __lhs[14] * r3 + __lhs[15] * r4;
+
+//            return ;
+//        }
+
+//        if constexpr (RowsRHS == 2){
+//            for(size_type i{0}; i<RowsLHS; ++i){
+//                __result[i] = __lhs[i*ColumnsLHS+0]*__rhs[0] +__lhs[i*ColumnsLHS+1]*__rhs[1];
+//            }
+
+//            return 0;
+//        }
+
+//        if constexpr (RowsRHS == 4){
+//            for(size_type i{0}; i<RowsLHS; ++i){
+//                __result[i] = __lhs[i*ColumnsLHS+0]*__rhs[0] +__lhs[i*ColumnsLHS+1]*__rhs[1] +
+//                              __lhs[i*ColumnsLHS+2]*__rhs[2] +__lhs[i*ColumnsLHS+3]*__rhs[3];
+//            }
+
+//            return 0;
+//        }
+
 
             //const auto idx{i*ColumnsLHS};
             //RESULT sum{0};
             //__result[i] = 0;
-        for(size_type j{0}; j<RowsRHS; ++j){
-            for(size_type i{0}; i<RowsLHS; ++i){
+
+//        for(size_type i{0}; i<RowsLHS; ++i){
+//            __result[i] = 0;
+//        }
+
+//        //const auto idx{i*ColumnsLHS};
+//        //RESULT sum{0};
+//        //__result[i] = 0;
+//        for(size_type j{0}; j<RowsRHS; ++j){
+//            for(size_type i{0}; i<RowsLHS; ++i){
+//                __result[i] += __lhs[i*ColumnsLHS+j]*__rhs[j];
+//            }
+//            //__result[i] = sum;
+//        }
+
+//        if constexpr (RowsLHS == 6 && RowsRHS == 6){
+//            for(size_type i{0}; i<RowsLHS; i+=2){
+//                RESULT sum1{0},sum2{0};
+//                for(size_type j{0}; j<RowsRHS; j+=2){
+//                    const auto temp1{__rhs[j]};
+//                    const auto temp2{__rhs[j+1]};
+//                    sum1 += __lhs[i*ColumnsLHS+j]*temp1     + __lhs[i*ColumnsLHS+j+1]*temp2;
+//                    sum2 += __lhs[(i+1)*ColumnsLHS+j]*temp1 + __lhs[(i+1)*ColumnsLHS+j+1]*temp2;
+//                }
+//                __result[i] = sum1;
+//                __result[i] = sum2;
+//            }
+//            return ;
+//        }
+
+//        if constexpr (RowsLHS == 9){
+//            for(size_type i{0}; i<8; i+=4){
+//                RESULT sum[4]{0};
+//                for(size_type j{0}; j<RowsRHS; ++j){
+//                    const auto temp{__rhs[j]};
+//                    for(size_type I{0}; I<4; ++I){
+//                    sum[I] += __lhs[(i+I)*ColumnsLHS+j]*temp;
+//                    }
+//                }
+//                for(size_type I{0}; I<4; ++I){
+//                    __result[i+I] = sum[I];
+//                }
+//            }
+//            return ;
+//        }
+
+        // 4x4 * 4x1
+        // 9x9 * 9x1
+
+//        if constexpr (RowsLHS == 4 && ColumnsLHS == 4 && RowsRHS == 4 && ColumnsRHS == 1 && std::is_same_v<double, RESULT>){
+//            gemv_d_4x4_2(__lhs, __rhs, __result);
+//            return ;
+//        }
+
+////            for(std::size_t i{0}; i<4; ++i){
+////                res += _mm256_set_pd(__rhs[i], __rhs[i+4], __rhs[i+8],__rhs[i+12]) * _mm256_set1_pd(__lhs[i]);
+////            }
+////            _mm256_storeu_pd(__result, res);
+
+
+//            // Load the vector into an AVX register
+//            const __m256d vec = _mm256_loadu_pd(__rhs);  // Load the 4x1 vector
+
+//            for(std::size_t i{0}; i<4; ++i){
+//                const __m256d row0 = _mm256_load_pd(__lhs + i*4);          // Load the first row of the matrix
+//                auto res0 = _mm256_mul_pd(row0, vec);
+//                res0 = _mm256_hadd_pd(res0, res0);
+//                res0 = _mm256_hadd_pd(res0, res0);
+//                __result[i] = _mm256_cvtsd_f64(res0);
+//            }
+
+////            // Process each row of the matrix
+////            const __m256d row1 = _mm256_loadu_pd(__lhs + 4);      // Load the second row of the matrix
+////            const __m256d row2 = _mm256_loadu_pd(__lhs + 8);      // Load the third row of the matrix
+////            const __m256d row3 = _mm256_loadu_pd(__lhs + 12);     // Load the fourth row of the matrix
+
+////            // Perform element-wise multiplication
+////            auto res0 = _mm256_mul_pd(row0, vec);
+////            auto res1 = _mm256_mul_pd(row1, vec);
+////            auto res2 = _mm256_mul_pd(row2, vec);
+////            auto res3 = _mm256_mul_pd(row3, vec);
+
+////            // Horizontal addition to sum the products
+////            res0 = _mm256_hadd_pd(res0, res0);
+////            res1 = _mm256_hadd_pd(res1, res1);
+////            res2 = _mm256_hadd_pd(res2, res2);
+////            res3 = _mm256_hadd_pd(res3, res3);
+
+////            // Sum the two pairs in each result
+////            res0 = _mm256_hadd_pd(res0, res0);
+////            res1 = _mm256_hadd_pd(res1, res1);
+////            res2 = _mm256_hadd_pd(res2, res2);
+////            res3 = _mm256_hadd_pd(res3, res3);
+
+////            // Extract the first element of each result and store it in the output array
+////            __result[0] = _mm256_cvtsd_f64(res0);
+////            __result[1] = _mm256_cvtsd_f64(res1);
+////            __result[2] = _mm256_cvtsd_f64(res2);
+////            __result[3] = _mm256_cvtsd_f64(res3);
+
+//            return ;
+//        }
+
+//        // Initialize the result vector to zero
+//        std::memset(__result, 0, RowsLHS * sizeof(double));
+//        constexpr std::size_t blockSize{3};
+//        // Perform blocked matrix-vector multiplication
+
+//            for (int j = 0; j < RowsRHS; j += blockSize) {
+//                const auto minJ{std::min(j + blockSize, RowsRHS)};
+//            for (int i = 0; i < RowsLHS; i += blockSize) {
+//                const auto minI{std::min(i + blockSize, RowsLHS)};
+//                // Compute the block multiplication
+//                for (int ii = i; ii < minI; ++ii) {
+//                    for (int jj = j; jj <minJ; ++jj) {
+//                        __result[ii] += __lhs[ii * ColumnsLHS + jj] * __rhs[jj];
+//                    }
+//                }
+//            }
+//        }
+
+//        if constexpr (RowsLHS == 9 && ColumnsLHS == 9 && RowsRHS == 9 && ColumnsRHS == 1){
+//            for(int i{0}; i<3; ++i){
+//                for(int j{0}; j<3; ++j){
+//                    //__result[i*3+j] = 0;
+//                    RESULT sum{0};
+//                    for(int k{0}; k<3; ++k){
+//                        for(int l{0}; l<3; ++l){
+//                            sum += __lhs[i*3*3*3+j*3*3+k*3+l]*__rhs[k*3+l];
+//                        }
+//                    }
+//                    __result[i*3+j] = sum;
+//                }
+//            }
+//            return ;
+//        }
+
+        //std::memset(__result, 0, RowsLHS * sizeof(RESULT));
+        //std::array<RESULT, RowsLHS> temp;
+//        for(size_type i{0}; i<RowsLHS; ++i){
+//            for(size_type j{0}; j<ColumnsLHS; ++j){
+//                temp[j*ColumnsLHS+i] = __lhs[i*ColumnsLHS+j];
+//            }
+//        }
+//#pragma omp simd
+        for(size_type i=0; i<RowsLHS; ++i){
+            __result[i] = 0;
+        for(size_type j=0; j<RowsRHS; ++j){
                 __result[i] += __lhs[i*ColumnsLHS+j]*__rhs[j];
             }
-            //__result[i] = sum;
         }
+
+
+//        std::memset(__result, 0, RowsLHS * sizeof(RESULT));
+//        for(size_type j{0}; j<RowsRHS; ++j){
+//            const auto temp{__rhs[j]};
+//            for(size_type i{0}; i<RowsLHS; ++i){
+//                __result[i] += __lhs[i*ColumnsLHS+j]*temp;
+//            }
+//        }
 
         //        alignas(32) const LHS* lhs_ptr{__lhs};
         //        alignas(32) RESULT* result{__result};
@@ -338,7 +563,7 @@ public:
         //        }
     }
 
-    static inline auto transposed4x4(__m256d const& row1, __m256d const& row2, __m256d const& row3, __m256d const& row4){
+    static inline auto transposed4x4(__m256d const& row1, __m256d const& row2, __m256d const& row3, __m256d const& row4)noexcept{
         const auto rr1 = _mm256_unpacklo_pd(row1, row2);
         const auto rr2 = _mm256_unpacklo_pd(row3, row4);
         const auto rr3 = _mm256_unpackhi_pd(row1, row2);
@@ -407,7 +632,7 @@ public:
     //    }
 
 
-    static constexpr inline auto gemv_blocked_sse(double const* __lhs, double const* __rhs, double const* __result){
+    static constexpr inline auto gemv_blocked_sse(double const* __lhs, double const* __rhs, double const* __result)noexcept{
 
         constexpr auto Size{2ul};
 

@@ -157,7 +157,7 @@ private:
     template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
     constexpr inline auto delete_data(){}
 
-    alignas(T) value_data_type _data;
+    /*alignas(T)*/ value_data_type _data;
 };
 
 #endif // TENSOR_BONES_H
