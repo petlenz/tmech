@@ -23,14 +23,14 @@ private:
     template <size_type _Iter = size_tuple-1, typename _Result = sequence<>>
     struct get_index_sequence
     {
-        static constexpr auto tuple{min_value_squence_t<decltype (std::get<_Iter>(_Tuple())), 1>()};
+        static constexpr auto tuple{min_value_squence_t<std::tuple_element_t<0, _Tuple>, 1>()};
         using sequence = append_sequence_end_t<typename get_index_sequence<_Iter-1, _Result>::sequence, typename std::remove_const<decltype (tuple)>::type>;
     };
 
     template <typename _Result>
     struct get_index_sequence<0, _Result>
     {
-        static constexpr auto tuple{min_value_squence_t<decltype (std::get<0>(_Tuple())), 1>()};
+        static constexpr auto tuple{min_value_squence_t<std::tuple_element_t<0, _Tuple>, 1>()};
         using sequence = append_sequence_end_t<_Result, typename std::remove_const<decltype (tuple)>::type>;
     };
 

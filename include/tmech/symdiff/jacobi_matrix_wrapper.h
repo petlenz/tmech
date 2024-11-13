@@ -24,12 +24,12 @@ struct get_matrix_type_row_h;
 
 template <std::size_t Size, std::size_t I, std::size_t J, typename Vector, typename Variables>
 struct get_matrix_type_row_h<std::tuple<>, Size, I, J, Vector, Variables>
-        : public get_matrix_type_row_h<std::tuple<typename get_derivative_data_type<decltype (Vector().template get_function<I>()), decltype (std::get<J>(Variables()))>::type>, Size, I, J+1, Vector, Variables>
+        : public get_matrix_type_row_h<std::tuple<typename get_derivative_data_type<decltype (Vector().template get_function<I>()), std::tuple_element_t<J, Variables>>::type>, Size, I, J+1, Vector, Variables>
 {};
 
 template <typename ...Result, std::size_t Size, std::size_t I, std::size_t J, typename Vector, typename Variables>
 struct get_matrix_type_row_h<std::tuple<Result...>, Size, I, J, Vector, Variables>
-        : public get_matrix_type_row_h<std::tuple<Result..., typename get_derivative_data_type<decltype (Vector().template get_function<I>()), decltype (std::get<J>(Variables()))>::type>, Size, I, J+1, Vector, Variables>
+        : public get_matrix_type_row_h<std::tuple<Result..., typename get_derivative_data_type<decltype (Vector().template get_function<I>()), std::tuple_element_t<J, Variables>>::type>, Size, I, J+1, Vector, Variables>
 {};
 
 template <typename ...Result, std::size_t Size, std::size_t I, typename Vector, typename Variables>
