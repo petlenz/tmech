@@ -28,7 +28,7 @@ class inverse_wrapper : public tensor_base<inverse_wrapper<_Tensor, _Sequences..
 public:
     using size_type  = std::size_t;
     using value_type = typename data_type_tensor::value_type;
-    using _Tuple = decltype (std::tuple<_Sequences...>(_Sequences()...));
+    using _Tuple = std::tuple<_Sequences...>;
 
     static_assert(data_type_tensor::rank() != 2      || data_type_tensor::rank() != 4,      "inverse_wrapper: no matching rank");
     static_assert(data_type_tensor::dimension() == 2 || data_type_tensor::dimension() == 3, "inverse_wrapper: no matching dimension");

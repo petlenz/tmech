@@ -84,8 +84,8 @@ template<typename _Result>
 constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Result const& __result)noexcept{
     if constexpr (rank() == 4){
         if constexpr (std::tuple_size_v<_Tuple> == 2){
-            using tuple1 = typename std::remove_reference<std::tuple_element_t<0, _Tuple>>::type;
-            using tuple2 = typename std::remove_reference<std::tuple_element_t<1, _Tuple>>::type;
+            using tuple1 = std::tuple_element_t<0, _Tuple>;
+            using tuple2 = std::tuple_element_t<1, _Tuple>;
             using sequence = decltype(tmech::detail::make_single_sequence(tuple1(), tuple2()));
 
             constexpr auto SIZE{(dimension() == 2 ? 3 : 6)};
@@ -123,7 +123,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Res
             //convert to <1,2,3,4>
             tmech::tensor<value_type, dimension(), rank()> data_local;
             if constexpr (std::tuple_size_v<_Tuple> == 1){
-                using sequence = typename std::remove_reference<std::tuple_element_t<0, _Tuple>>::type;
+                using sequence = std::tuple_element_t<0, _Tuple>;
                 if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
                     data_local = tensor_data;
                 }else{
@@ -137,7 +137,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Res
             evaluate_imp(__result.raw_data(), data_local.raw_data());
 
             if constexpr (std::tuple_size_v<_Tuple> == 1){
-                using sequence = typename std::remove_reference<std::tuple_element_t<0, _Tuple>>::type;
+                using sequence = std::tuple_element_t<0, _Tuple>;
                 if constexpr (!std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
                     const_cast<_Result&>(__result).template change_basis_view<sequence>() = eval(__result);
                 }
