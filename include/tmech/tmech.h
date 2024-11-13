@@ -54,7 +54,7 @@ const auto is_detected_v = is_detected<Op, Args...>::value;
 #include <experimental/type_traits>
 #endif
 
-#ifdef __MINGW32__
+#if defined(__MINGW32__) || defined(_MSC_VER)
 #define _USE_MATH_DEFINES
 #include <cmath>
 #endif
