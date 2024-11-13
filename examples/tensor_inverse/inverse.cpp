@@ -12,7 +12,7 @@ int main() {
     //minor symmetry at basis pair 1,2 and 3,4 is assumed
     B = tmech::inv(A);
     //full inverse no symmetry is assumed
-    B = tmech::invf<tmech::sequence<1,2,3,4>>(A);
+    B = tmech::invf(A, tmech::sequence<1,2,3,4>());
     std::cout<<B<<std::endl;
     return 0;
 }

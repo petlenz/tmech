@@ -180,8 +180,8 @@ TEST(gtest, inv_function_4_##ValueType##_##Dim##_){ \
     const auto Anew{tmech::basis_change<tmech::sequence<1,3,4,2>>(A)}; \
     EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::inv(A),A), IIsym, 5e-5)); \
     EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::inv(tmech::abs(A)),tmech::abs(A)), IIsym, 5e-5)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::inv<SeqL,SeqR>(Anew)),A), IIsym, 5e-5)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::inv<SeqL,SeqR>(tmech::abs(Anew))),tmech::abs(A)), IIsym, 5e-5)); \
+EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::inv(Anew, SeqL(), SeqR())),A), IIsym, 5e-5)); \
+EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::inv(tmech::abs(Anew), SeqL(), SeqR())),tmech::abs(A)), IIsym, 5e-5)); \
 }
 
 #define inv_full_function_4(ValueType, Dim)  \
@@ -194,12 +194,12 @@ TEST(gtest, inv_full_function_4_##ValueType##_##Dim##_){ \
     constexpr ValueType eps{(std::is_same_v<ValueType,float> ? 5e-3 : 8e-5)}; \
     std::cout<<tmech::dcontract(tmech::invf(A),A) - II<<std::endl; \
     std::cout<<tmech::dcontract(tmech::invf(tmech::abs(A)),tmech::abs(A)) - II<<std::endl; \
-    std::cout<<tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf<tmech::sequence<1,4,2,3>>(Anew)),A) - II<<std::endl; \
-    std::cout<<tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf<tmech::sequence<1,4,2,3>>(tmech::abs(Anew))),tmech::abs(A)) - II<<std::endl; \
+    std::cout<<tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(Anew, tmech::sequence<1,4,2,3>())),A) - II<<std::endl; \
+    std::cout<<tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(tmech::abs(Anew), tmech::sequence<1,4,2,3>())),tmech::abs(A)) - II<<std::endl; \
     EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::invf(A),A), II, eps)); \
     EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::invf(tmech::abs(A)),tmech::abs(A)), II, eps)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf<tmech::sequence<1,4,2,3>>(Anew)),A), II, eps)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf<tmech::sequence<1,4,2,3>>(tmech::abs(Anew))),tmech::abs(A)), II, eps)); \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(Anew, tmech::sequence<1,4,2,3>())),A), II, eps)); \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(tmech::abs(Anew), tmech::sequence<1,4,2,3>())),tmech::abs(A)), II, eps)); \
 }
 
 //abs function
