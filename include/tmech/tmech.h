@@ -8,6 +8,11 @@
 #ifndef TMECH_H
 #define TMECH_H
 
+#ifndef _USE_MATH_DEFINES
+  #define _USE_MATH_DEFINES
+#endif
+
+#include <cmath>
 #include <math.h>
 #include <cstdlib>
 #include <iostream>
@@ -53,7 +58,6 @@ const auto is_detected_v = is_detected<Op, Args...>::value;
 #else
 #include <experimental/type_traits>
 #endif
-
 
 
 #include "tmech_forward_definitions.h"
