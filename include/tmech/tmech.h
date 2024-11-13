@@ -54,6 +54,10 @@ const auto is_detected_v = is_detected<Op, Args...>::value;
 #include <experimental/type_traits>
 #endif
 
+#ifdef __MINGW32__
+#define _USE_MATH_DEFINES
+#include <cmath>
+#endif
 
 
 #include "tmech_forward_definitions.h"
