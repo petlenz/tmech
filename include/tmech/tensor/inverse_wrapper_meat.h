@@ -84,40 +84,7 @@ template<typename _Result>
 constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Result const& __result)noexcept{
     if constexpr (rank() == 4){
         if constexpr (std::tuple_size_v<_Tuple> == 2){
-            using tuple1 = std::tuple_element_t<0, _Tuple>;
-            using tuple2 = std::tuple_element_t<1, _Tuple>;
-            using sequence = decltype(tmech::detail::make_single_sequence(tuple1(), tuple2()));
-
-            constexpr auto SIZE{(dimension() == 2 ? 3 : 6)};
-            value_type _ptr[SIZE*SIZE], _ptr_inv[SIZE*SIZE]{0};
-            //convert to voigt
-            convert_tensor_to_voigt<std::tuple<tuple1, tuple2>>(tensor_data, _ptr);
-
-            //last three columns due to symmetry
-            for(int i{0}; i<SIZE; ++i){
-                for(int j{dimension()}; j<SIZE; ++j){
-                    _ptr[i*SIZE+j] *= 2;
-                }
-            }
-
-            //determine inv
-            evaluate_imp(_ptr_inv, _ptr);
-
-            //convert back last three columns due to symmetry
-            for(int i{0}; i<SIZE; ++i){
-                for(int j{dimension()}; j<SIZE; ++j){
-                    _ptr_inv[i*SIZE+j] *= 0.5;
-                }
-            }
-
-            //convert back to a tensor
-            const adaptor<value_type, dimension(), 4, voigt<dimension(), false>> adap(_ptr_inv);
-            if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
-                const_cast<_Result&>(__result) = adap;
-            }else{
-                const_cast<_Result&>(__result).template change_basis_view<sequence>() = adap;
-            }
-
+            voigt_rank_4(__result);
         }else{
             //full
             //convert to <1,2,3,4>
@@ -155,6 +122,43 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(_Res
     }
 }
 
+template <typename _Tensor, typename ..._Sequences>
+template<typename _Result>
+constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::voigt_rank_4(_Result const& __result)noexcept{
+    using tuple1 = std::tuple_element_t<0, _Tuple>;
+    using tuple2 = std::tuple_element_t<1, _Tuple>;
+    using sequence = decltype(tmech::detail::make_single_sequence(tuple1(), tuple2()));
+
+    constexpr auto SIZE{(dimension() == 2 ? 3 : 6)};
+    value_type _ptr[SIZE*SIZE], _ptr_inv[SIZE*SIZE]{0};
+    //convert to voigt
+    convert_tensor_to_voigt<std::tuple<tuple1, tuple2>>(tensor_data, _ptr);
+
+    //last three columns due to symmetry
+    for(int i{0}; i<SIZE; ++i){
+        for(int j{dimension()}; j<SIZE; ++j){
+            _ptr[i*SIZE+j] *= 2;
+        }
+    }
+
+    //determine inv
+    evaluate_imp(_ptr_inv, _ptr);
+
+    //convert back last three columns due to symmetry
+    for(std::size_t i{0}; i<SIZE; ++i){
+        for(std::size_t j{dimension()}; j<SIZE; ++j){
+            _ptr_inv[i*SIZE+j] *= 0.5;
+        }
+    }
+
+    //convert back to a tensor
+    const adaptor<value_type, dimension(), 4, voigt<dimension(), false>> adap(_ptr_inv);
+    if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
+        const_cast<_Result&>(__result) = adap;
+    }else{
+        const_cast<_Result&>(__result).template change_basis_view<sequence>() = adap;
+    }
+}
 
 template <typename _Tensor, typename ..._Sequences>
 constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(value_type const* __result, value_type const * __data)noexcept{

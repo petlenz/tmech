@@ -52,6 +52,10 @@ public:
     constexpr inline auto raw_data()const noexcept;
 
 private:
+
+    template<typename _Result>
+    constexpr inline auto voigt_rank_4(_Result const& __result)noexcept;
+
     template<typename _Result>
     constexpr inline auto evaluate_imp(_Result const& __result)noexcept;
 

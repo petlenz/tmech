@@ -18,7 +18,7 @@ class vector_of_functions
 public:
     using Data = std::tuple<Functions...>;
     using size_type = std::size_t;
-    using value_type = typename std::tuple_element<0, Data>::type::data_type;
+    using value_type = typename std::tuple_element_t<0, Data>::data_type;
 
     vector_of_functions():
         _data()
