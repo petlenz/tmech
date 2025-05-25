@@ -33,7 +33,6 @@
 #include <string>
 
 
-#ifdef TMECH_IS_DETECTED
 namespace std {
 namespace experimental {
 namespace detail {
@@ -55,9 +54,6 @@ template <template<class...> class Op, class... Args>
 const auto is_detected_v = is_detected<Op, Args...>::value;
 }
 }
-#else
-#include <experimental/type_traits>
-#endif
 
 
 #include "tmech_forward_definitions.h"
