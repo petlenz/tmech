@@ -7,11 +7,11 @@ set(TMECH_TENSOR_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/tmech/tensor)
 set(TMECH_SYMDIFF_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/tmech/symdiff)
 
  if (MSVC)
-    #if(${MSVC_TOOLSET_VERSION} LESS 142)
+    if(${MSVC_TOOLSET_VERSION} LESS 142)
         add_compile_definitions(TMECH_IS_DETECTED)
-    #endif()
+    endif()
 endif()
-add_compile_definitions(TMECH_IS_DETECTED)
+#add_compile_definitions(TMECH_IS_DETECTED)
 
 # Versionning
 # ===========
