@@ -41,7 +41,7 @@ constexpr polar_decomposition_wrapper<_Tensor>::polar_decomposition_wrapper(pola
     _is_init(false),
     _is_init_deriv(false),
     newton_method(__data.newton_method),
-    newton_tol(__data.tol),
+    newton_tol(__data.newton_tol),
     max_steps(__data.max_steps),
     _U(),
     _V(),
