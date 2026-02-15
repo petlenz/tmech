@@ -214,10 +214,10 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::voigt_rank_4(_Res
     convert_tensor_to_voigt<std::tuple<tuple1, tuple2>>(tensor_data, _ptr);
 
     //last three columns due to symmetry
-    for(int i{0}; i<SIZE; ++i){
-        for(int j{dimension()}; j<SIZE; ++j){
-            _ptr[i*SIZE+j] *= 2;
-        }
+    for (std::size_t i{0}; i < SIZE; ++i) {
+      for (std::size_t j{dimension()}; j < SIZE; ++j) {
+        _ptr[i * SIZE + j] *= 2;
+      }
     }
 
     //determine inv
