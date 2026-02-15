@@ -1,4 +1,13 @@
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4700)
+#endif
+
 #include "tmech_test.h"
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 #include "gtest/gtest.h"
 

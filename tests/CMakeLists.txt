@@ -30,7 +30,7 @@ endmacro()
 add_tmech_test(tmech_test main.cpp)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(tmech_test PRIVATE  -ftime-report -Wall -Wpedantic -Werror -Wextra -pedantic -Wconversion -Wno-error=comment)
+    target_compile_options(tmech_test PRIVATE  -ftime-report -Wall -Wuninitialized -Werror=uninitialized -Wpedantic -Werror -Wextra -pedantic -Wconversion -Wno-error=comment)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     target_compile_options(tmech_test PRIVATE /WX /bigobj)
 endif()
