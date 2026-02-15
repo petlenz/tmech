@@ -178,7 +178,6 @@ public:
 
     auto reset() = delete;
 
-private:
     template<typename _Data>
     constexpr inline auto update_imp(_Data const& x){
         static_cast<variable_base<Base>&>(_base).update(x);
@@ -201,6 +200,7 @@ private:
       return _value;
     }
 
+  private:
     static data_type _value;
     Base _base;
     Exp _exp;

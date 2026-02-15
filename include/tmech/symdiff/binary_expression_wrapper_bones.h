@@ -38,7 +38,6 @@ public:
 
     constexpr inline  auto reset() = delete;
 
-private:
     template<typename _Data>
     constexpr inline auto get_value(_Data const& __data)const;
 
@@ -47,6 +46,7 @@ private:
 
     constexpr inline auto reset_imp();
 
+  private:
     lhs_expression _lhs;
     rhs_expression _rhs;
 };
