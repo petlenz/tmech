@@ -168,39 +168,65 @@ TEST(gtest, inv_function_2_##ValueType##_##Dim##_){ \
     EXPECT_EQ(true, tmech::almost_equal(tmech::inv(tmech::abs(a))*tmech::abs(a), tmech::eye<ValueType, Dim, 2>(), 5e-5)); \
 }
 
-#define inv_function_4(ValueType, Dim)  \
-TEST(gtest, inv_function_4_##ValueType##_##Dim##_){ \
-    using SeqL = tmech::sequence<1,4>;\
-    using SeqR = tmech::sequence<2,3>;\
-    tmech::tensor<ValueType, Dim, 4> A; \
-    ValueType mu{200}, lambda{600}; \
-    const auto I{tmech::eye<ValueType,Dim,2>()};\
-    const auto IIsym{(tmech::otimesu(I,I) + tmech::otimesl(I,I))*0.5};\
-    A = 2*mu*IIsym + lambda*tmech::otimes(I,I);\
-    const auto Anew{tmech::basis_change<tmech::sequence<1,3,4,2>>(A)}; \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::inv(A),A), IIsym, 5e-5)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::inv(tmech::abs(A)),tmech::abs(A)), IIsym, 5e-5)); \
-EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::inv(Anew, SeqL(), SeqR())),A), IIsym, 5e-5)); \
-EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::inv(tmech::abs(Anew), SeqL(), SeqR())),tmech::abs(A)), IIsym, 5e-5)); \
-}
+#define inv_function_4(ValueType, Dim)                                         \
+  TEST(gtest, inv_function_4_##ValueType##_##Dim##_) {                         \
+    using SeqL = tmech::sequence<1, 4>;                                        \
+    using SeqR = tmech::sequence<2, 3>;                                        \
+    tmech::tensor<ValueType, Dim, 4> A;                                        \
+    ValueType mu{200}, lambda{600};                                            \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
+    A = 2 * mu * IIsym + lambda * tmech::otimes(I, I);                         \
+    const auto Anew{tmech::basis_change<tmech::sequence<1, 3, 4, 2>>(A)};      \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::inv(A), A),    \
+                                        IIsym, 5e-5));                         \
+    EXPECT_EQ(true,                                                            \
+              tmech::almost_equal(                                             \
+                  tmech::dcontract(tmech::inv(tmech::abs(A)), tmech::abs(A)),  \
+                  IIsym, 5e-5));                                               \
+    EXPECT_EQ(true, tmech::almost_equal(                                       \
+                        tmech::dcontract(                                      \
+                            tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(  \
+                                tmech::inv(Anew, SeqL(), SeqR())),             \
+                            A),                                                \
+                        IIsym, 5e-5));                                         \
+    EXPECT_EQ(true, tmech::almost_equal(                                       \
+                        tmech::dcontract(                                      \
+                            tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(  \
+                                tmech::inv(tmech::abs(Anew), SeqL(), SeqR())), \
+                            tmech::abs(A)),                                    \
+                        IIsym, 5e-5));                                         \
+  }
 
-#define inv_full_function_4(ValueType, Dim)  \
-TEST(gtest, inv_full_function_4_##ValueType##_##Dim##_){ \
-    tmech::tensor<ValueType, Dim, 4> A; \
-    A.randn();\
-    const auto I{tmech::eye<ValueType, Dim, 2>()};\
-    const auto II{tmech::otimesu(I,I)};\
-    const auto Anew{tmech::basis_change<tmech::sequence<1,3,4,2>>(A)}; \
-    constexpr ValueType eps{(std::is_same_v<ValueType,float> ? 5e-3 : 8e-5)}; \
-    std::cout<<tmech::dcontract(tmech::invf(A),A) - II<<std::endl; \
-    std::cout<<tmech::dcontract(tmech::invf(tmech::abs(A)),tmech::abs(A)) - II<<std::endl; \
-    std::cout<<tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(Anew, tmech::sequence<1,4,2,3>())),A) - II<<std::endl; \
-    std::cout<<tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(tmech::abs(Anew), tmech::sequence<1,4,2,3>())),tmech::abs(A)) - II<<std::endl; \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::invf(A),A), II, eps)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::invf(tmech::abs(A)),tmech::abs(A)), II, eps)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(Anew, tmech::sequence<1,4,2,3>())),A), II, eps)); \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::basis_change<tmech::sequence<1,4,2,3>>(tmech::invf(tmech::abs(Anew), tmech::sequence<1,4,2,3>())),tmech::abs(A)), II, eps)); \
-}
+#define inv_full_function_4(ValueType, Dim)                                    \
+  TEST(gtest, inv_full_function_4_##ValueType##_##Dim##_) {                    \
+    tmech::tensor<ValueType, Dim, 4> A;                                        \
+    A.randn();                                                                 \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto II{tmech::otimesu(I, I)};                                       \
+    const auto Anew{tmech::basis_change<tmech::sequence<1, 3, 4, 2>>(A)};      \
+    constexpr ValueType eps{(std::is_same_v<ValueType, float> ? 5e-3 : 8e-5)}; \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::invf(A), A),   \
+                                        II, eps));                             \
+    EXPECT_EQ(true,                                                            \
+              tmech::almost_equal(                                             \
+                  tmech::dcontract(tmech::invf(tmech::abs(A)), tmech::abs(A)), \
+                  II, eps));                                                   \
+    EXPECT_EQ(true,                                                            \
+              tmech::almost_equal(                                             \
+                  tmech::dcontract(                                            \
+                      tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(        \
+                          tmech::invf(Anew, tmech::sequence<1, 4, 2, 3>())),   \
+                      A),                                                      \
+                  II, eps));                                                   \
+    EXPECT_EQ(true, tmech::almost_equal(                                       \
+                        tmech::dcontract(                                      \
+                            tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(  \
+                                tmech::invf(tmech::abs(Anew),                  \
+                                            tmech::sequence<1, 4, 2, 3>())),   \
+                            tmech::abs(A)),                                    \
+                        II, eps));                                             \
+  }
 
 //abs function
 #define absFunction(ValueType, Dim, Rank)  \
@@ -1421,25 +1447,24 @@ TEST(gtest, symdiff_numdiff_tensor_dcontract_4_4){
     auto s_func = tmech::dcontract(Bvar, Avar);
     auto dA_num = tmech::num_diff_central<tmech::sequence<1,2,3,4,5,6,7,8>>(func, A);
     auto dA_ana = symdiff::derivative<1>(s_func, Avar);
-    std::cout<<"Hallo"<<std::endl;
-    EXPECT_EQ(true, tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
-    std::cout<<"Hallo"<<std::endl;
+    EXPECT_EQ(true,
+              tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
 }
 
-TEST(gtest, symdiff_numdiff_tensor_dcontract_2_4){
-    std::cout<<"Hallo"<<std::endl;
-    symdiff::variable<tmech::tensor<double, 3, 4>, 0> Avar;
-    symdiff::variable<tmech::tensor<double, 3, 2>, 1> Bvar;
-    tmech::tensor<double, 3, 4> A;
-    tmech::tensor<double, 3, 2> B;
-    A.randn();
-    B.randn();
-    auto func = [&](auto const& tensor){return tmech::dcontract(B, tensor);};
-    std::cout<<"Hallo"<<std::endl;
-    auto s_func = tmech::dcontract(Bvar, Avar);
-    auto dA_num = tmech::num_diff_central<tmech::sequence<1,2,3,4,5,6>>(func, A);
-    auto dA_ana = symdiff::derivative<1>(s_func, Avar);
-    EXPECT_EQ(true, tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
+TEST(gtest, symdiff_numdiff_tensor_dcontract_2_4) {
+  symdiff::variable<tmech::tensor<double, 3, 4>, 0> Avar;
+  symdiff::variable<tmech::tensor<double, 3, 2>, 1> Bvar;
+  tmech::tensor<double, 3, 4> A;
+  tmech::tensor<double, 3, 2> B;
+  A.randn();
+  B.randn();
+  auto func = [&](auto const &tensor) { return tmech::dcontract(B, tensor); };
+  auto s_func = tmech::dcontract(Bvar, Avar);
+  auto dA_num =
+      tmech::num_diff_central<tmech::sequence<1, 2, 3, 4, 5, 6>>(func, A);
+  auto dA_ana = symdiff::derivative<1>(s_func, Avar);
+  EXPECT_EQ(true,
+            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_trans_2){
