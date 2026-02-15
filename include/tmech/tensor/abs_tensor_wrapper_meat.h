@@ -43,7 +43,7 @@ constexpr abs_tensor_wrapper<_Tensor>::abs_tensor_wrapper(abs_tensor_wrapper con
 template <typename _Tensor>
 template<typename ...Indicies>
 constexpr inline auto abs_tensor_wrapper<_Tensor>::operator ()(Indicies ... __indicies)const noexcept{
-    return std::fabs(_data(__indicies...));
+    return std::abs(_data(__indicies...));
 }
 //@}
 
