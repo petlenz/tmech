@@ -81,7 +81,7 @@ constexpr inline auto volumetric_wrapper<Tensor>::evaluate()noexcept{
     if(!this->_is_init){
         evaluate::apply(_data);
 
-        _trace = 0;
+        _trace = static_cast<value_type>(0.0);
         for(size_type i{0}; i<dimension(); ++i){
             _trace += _data(i,i);
         }

@@ -8,6 +8,17 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+// Safely cast between numeric types without implicit narrowing warnings.
+// Handles: int->float, double->float, size_t->double,
+//          int->complex<float>, size_t->complex<double>, etc.
+template <typename To, typename From>
+constexpr To safe_cast(From val) noexcept {
+  if constexpr (std::is_complex_t<To>::value) {
+    return To(static_cast<typename To::value_type>(val));
+  } else {
+    return static_cast<To>(val);
+  }
+}
 
 template <typename _T>
 struct is_tensor_type

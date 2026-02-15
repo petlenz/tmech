@@ -332,7 +332,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         static_cast<ValueType>(50) *                                           \
             (tmech::otimesu(I, I) - tmech::otimesl(I, I));                     \
     const auto Anew{tmech::basis_change<tmech::sequence<1, 3, 4, 2>>(A)};      \
-    constexpr ValueType eps{(std::is_same_v<ValueType, float> ? 5e-3 : 8e-5)}; \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 5e-3 : 8e-5)};                      \
     EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::invf(A), A),   \
                                         II, eps));                             \
     EXPECT_EQ(true,                                                            \
