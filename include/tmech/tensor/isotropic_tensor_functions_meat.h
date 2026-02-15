@@ -71,7 +71,7 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::raw_data()const n
 template <typename Tensor, typename Func>
 constexpr inline auto isotropic_tensor_function<Tensor, Func>::derivative()noexcept{
     _eigen_decomposition.decompose_eigenbasis();
-    const auto eig_values{_eigen_decomposition.eigenvalues()};
+    // const auto eig_values{_eigen_decomposition.eigenvalues()};
     const auto eig_basis{_eigen_decomposition.eigenbasis()};
     const auto non_repeated_eigenvalues{_eigen_decomposition.non_repeated_eigenvalues_index()};
     const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
@@ -129,7 +129,7 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate()noexcep
 template <typename Tensor, typename Func>
 constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij()noexcept{
     const auto eig_values{_eigen_decomposition.eigenvalues()};
-    const auto eig_basis{_eigen_decomposition.eigenbasis()};
+    // const auto eig_basis{_eigen_decomposition.eigenbasis()};
     const auto non_repeated_eigenvalues{_eigen_decomposition.non_repeated_eigenvalues_index()};
     const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
     const auto pair_repeated_eigenvalues{_eigen_decomposition.pair_eigenvalues_repeated()};

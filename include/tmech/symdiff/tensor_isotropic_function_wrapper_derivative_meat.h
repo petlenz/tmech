@@ -31,9 +31,11 @@ constexpr inline std::ostream& tensor_isotropic_function_wrapper_derivative<_Fat
 }
 
 template <typename _Father>
-template<typename _Data>
-constexpr inline auto tensor_isotropic_function_wrapper_derivative<_Father>::get_value(_Data const& __data)const{
-    return _father._iso_data.derivative();
+template <typename _Data>
+constexpr inline auto
+tensor_isotropic_function_wrapper_derivative<_Father>::get_value(
+    [[maybe_unused]] _Data const &__data) const {
+  return _father._iso_data.derivative();
 }
 
 template <typename _Father>

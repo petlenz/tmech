@@ -195,9 +195,10 @@ private:
         static_cast<variable_base<Exp>&>(_exp).reset();
     }
 
-    template<typename _Data>
-    constexpr inline auto const& get_value(_Data const& __data)const{
-        return _value;
+    template <typename _Data>
+    constexpr inline auto const &
+    get_value([[maybe_unused]] _Data const &__data) const {
+      return _value;
     }
 
     static data_type _value;

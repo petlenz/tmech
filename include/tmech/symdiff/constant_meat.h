@@ -53,9 +53,10 @@ constexpr inline std::ostream& constant<_T, _ID>::print(std::ostream & __os)cons
 }
 
 template <typename _T, std::size_t _ID>
-template<typename _Data>
-constexpr inline auto const& constant<_T, _ID>::get_value(_Data const& x)const{
-    return _data;
+template <typename _Data>
+constexpr inline auto const &
+constant<_T, _ID>::get_value([[maybe_unused]] _Data const &x) const {
+  return _data;
 }
 
 #endif // CONSTANT_MEAT_H

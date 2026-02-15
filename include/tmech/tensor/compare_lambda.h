@@ -16,8 +16,8 @@ struct compare_lambda
     static inline bool check(_LHS const& __lhs, _RHS const& __rhs, _Func _func)noexcept{
         constexpr bool LHS_raw_data{is_detected<has_raw_data, _LHS>::value};
         constexpr bool RHS_raw_data{is_detected<has_raw_data, _RHS>::value};
-        constexpr bool LHS_evaluate{is_detected<has_evaluate, _LHS>::value};
-        constexpr bool RHS_evaluate{is_detected<has_evaluate, _RHS>::value};
+        // constexpr bool LHS_evaluate{is_detected<has_evaluate, _LHS>::value};
+        // constexpr bool RHS_evaluate{is_detected<has_evaluate, _RHS>::value};
 
         if constexpr (LHS_raw_data && RHS_raw_data){
             evaluate::apply(__lhs);

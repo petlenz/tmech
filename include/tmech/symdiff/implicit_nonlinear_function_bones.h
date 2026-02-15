@@ -37,9 +37,9 @@ private:
         return static_cast<const variable_base<Function>&>(_data).value(__data);
     }
 
-    template<typename _Data>
-    constexpr inline auto update_imp(_Data const& __data){
-        //static_cast<variable_base<Function>&>(_data).update(__data);
+    template <typename _Data>
+    constexpr inline auto update_imp([[maybe_unused]] _Data const &__data) {
+      // static_cast<variable_base<Function>&>(_data).update(__data);
     }
 
     constexpr inline auto reset_imp(){

@@ -28,10 +28,11 @@ constexpr inline std::ostream& scalar_zero<_T>::print(std::ostream & __os)const{
     return __os;
 }
 
-template<typename _T>
-template<typename _Data>
-constexpr inline typename scalar_zero<_T>::data_type scalar_zero<_T>::get_value(_Data const& __data)const{
-    return 0;
+template <typename _T>
+template <typename _Data>
+constexpr inline typename scalar_zero<_T>::data_type
+scalar_zero<_T>::get_value([[maybe_unused]] _Data const &__data) const {
+  return 0;
 }
 
 #endif // SCALAR_ZERO_MEAT_H

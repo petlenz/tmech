@@ -10,25 +10,27 @@
 
 namespace detail {
 
-template<typename System, typename Vector_x, typename Vector_dx, typename T>
-constexpr inline auto general_newton_raphson_solver::apply(System & A, Vector_x & x, Vector_dx & dx, T const tol)noexcept{
-    constexpr std::size_t size{std::tuple_size_v<Vector_x>};
+template <typename System, typename Vector_x, typename Vector_dx, typename T>
+constexpr inline auto
+general_newton_raphson_solver::apply(System &A, Vector_x &x, Vector_dx &dx,
+                                     [[maybe_unused]] T const tol) noexcept {
+  constexpr std::size_t size{std::tuple_size_v<Vector_x>};
 
-    //get jacobian and residuum
-    auto [J, R]{A(x)};
+  // get jacobian and residuum
+  auto [J, R]{A(x)};
 
-//    if(std::sqrt(norm_tuple<0, size>(R)) == 0){
-//        return 0.0;
-//    }
+  //    if(std::sqrt(norm_tuple<0, size>(R)) == 0){
+  //        return 0.0;
+  //    }
 
-    //solve
-    general_lu_solver::apply(J, R, dx);
+  // solve
+  general_lu_solver::apply(J, R, dx);
 
-    //update
-    update<0, size>(x, dx);
+  // update
+  update<0, size>(x, dx);
 
-    //return norm
-    return std::sqrt(norm_tuple<0, size>(dx));
+  // return norm
+  return std::sqrt(norm_tuple<0, size>(dx));
 }
 
 template<std::size_t I, std::size_t Size, typename Vector_x, typename Vector_dx>

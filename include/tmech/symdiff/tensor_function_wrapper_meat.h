@@ -30,19 +30,22 @@ constexpr inline std::ostream& tensor_function_wrapper<_Expr, _Func>::print(std:
 }
 
 template <typename _Expr, typename _Func>
-template<typename _Data>
-constexpr inline auto const& tensor_function_wrapper<_Expr, _Func>::get_value(_Data const& __data)const{
-    return _value;
+template <typename _Data>
+constexpr inline auto const &tensor_function_wrapper<_Expr, _Func>::get_value(
+    [[maybe_unused]] _Data const &__data) const {
+  return _value;
 }
 
 template <typename _Expr, typename _Func>
-template<typename _Data>
-constexpr inline auto tensor_function_wrapper<_Expr, _Func>::update_imp(_Data const& __data){
-    static_cast<variable_base<_Expr>&>(_expr).update(__data);
-    if(!this->_update){
-        _value = _Func::apply(static_cast<variable_base<_Expr>&>(_expr).value(__data));
-        this->_update = true;
-    }
+template <typename _Data>
+constexpr inline auto tensor_function_wrapper<_Expr, _Func>::update_imp(
+    [[maybe_unused]] _Data const &__data) {
+  static_cast<variable_base<_Expr> &>(_expr).update(__data);
+  if (!this->_update) {
+    _value =
+        _Func::apply(static_cast<variable_base<_Expr> &>(_expr).value(__data));
+    this->_update = true;
+  }
 }
 
 template <typename _Expr, typename _Func>

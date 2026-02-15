@@ -1298,53 +1298,76 @@ struct double_contraction{
         constexpr auto RankRHS{RHS::rank()};
         constexpr auto Dim{LHS::dimension()};
         constexpr auto Deep{RankLHS - 2 + RankRHS - 2};
-        typename Result::value_type sum{0};
-            //meta for loop
-            using type = typename meta_for_loop_deep<Dim, Deep-1>::type;
+        // typename Result::value_type sum{0};
+        // meta for loop
+        using type = typename meta_for_loop_deep<Dim, Deep - 1>::type;
 
-            const auto double_contraction = [&](auto&&... numbers){
+        const auto double_contraction = [&](auto &&...numbers) {
+          constexpr auto RankLHS{LHS::rank()};
+          constexpr auto RankRHS{RHS::rank()};
+          constexpr auto Dim{LHS::dimension()};
+          constexpr auto Deep{RankLHS - 2 + RankRHS - 2};
 
-                constexpr auto RankLHS{LHS::rank()};
-                constexpr auto RankRHS{RHS::rank()};
-                constexpr auto Dim{LHS::dimension()};
-                constexpr auto Deep{RankLHS - 2 + RankRHS - 2};
+          typename Result::value_type sum{0};
+          for (std::size_t k{0}; k < Dim; ++k) {
+            for (std::size_t l{0}; l < Dim; ++l) {
+              const auto tuple{std::make_tuple(numbers..., l, k)};
+              if constexpr (RankRHS == 2) {
+                constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+                // test_seq(make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1,
+                // Deep>())); test_seq(make_single_sequence(sequence_t<Deep+1,
+                // Deep>()));
 
-                typename Result::value_type sum{0};
-                for(std::size_t k{0};k<Dim;++k){
-                    for(std::size_t l{0};l<Dim;++l){
-                        const auto tuple{std::make_tuple(numbers...,l,k)};
-                        if constexpr (RankRHS == 2){
-                            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                            //test_seq(make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1, Deep>()));
-                            //test_seq(make_single_sequence(sequence_t<Deep+1, Deep>()));
+                sum += tuple_call(
+                           lhs, tuple,
+                           make_single_sequence(sequence_t<SequenceLHS>(),
+                                                sequence_t<Deep + 1, Deep>())) *
+                       tuple_call(
+                           rhs, tuple,
+                           make_single_sequence(sequence_t<Deep + 1, Deep>()));
+              } else if constexpr (RankLHS == 2) {
+                // test_seq(sequence_t<Deep+1, Deep>());
+                // test_seq(make_single_sequence(sequence_t<Deep+1,
+                // Deep>(),sequence_t<Deep-1,0>()));
+                sum += tuple_call(
+                           lhs, tuple,
+                           make_single_sequence(sequence_t<Deep + 1, Deep>())) *
+                       tuple_call(
+                           rhs, tuple,
+                           make_single_sequence(sequence_t<Deep + 1, Deep>(),
+                                                sequence_t<Deep - 1, 0>()));
+              } else {
+                constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+                sum += tuple_call(
+                           lhs, tuple,
+                           make_single_sequence(sequence_t<SequenceLHS>(),
+                                                sequence_t<Deep + 1, Deep>())) *
+                       tuple_call(rhs, tuple,
+                                  make_single_sequence(
+                                      sequence_t<Deep + 1, Deep>(),
+                                      sequence_t<Deep - 1, RankLHS - 2>()));
+              }
+            }
+          }
 
-                            sum += tuple_call(lhs,tuple,make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1, Deep>()))
-                                   *tuple_call(rhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>()));
-                        }else if constexpr (RankLHS == 2){
-                            //test_seq(sequence_t<Deep+1, Deep>());
-                            //test_seq(make_single_sequence(sequence_t<Deep+1, Deep>(),sequence_t<Deep-1,0>()));
-                            sum += tuple_call(lhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>()))
-                                   *tuple_call(rhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>(),sequence_t<Deep-1,0>()));
-                        }else{
-                            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                            sum += tuple_call(lhs,tuple,make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1, Deep>()))
-                                   *tuple_call(rhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>(),sequence_t<Deep-1,RankLHS-2>()));
-                        }
-                    }
-                }
+          if constexpr (RankRHS == 2) {
+            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+            tuple_call(result, std::make_tuple(numbers...),
+                       make_single_sequence(sequence_t<SequenceLHS>())) = sum;
+          } else if constexpr (RankLHS == 2) {
+            tuple_call(result, std::make_tuple(numbers...),
+                       make_single_sequence(
+                           sequence_t<Deep - 1, RankLHS - 2>())) = sum;
+          } else {
+            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+            tuple_call(result, std::make_tuple(numbers...),
+                       make_single_sequence(
+                           sequence_t<SequenceLHS>(),
+                           sequence_t<Deep - 1, RankLHS - 2>())) = sum;
+          }
+        };
 
-                if constexpr (RankRHS == 2){
-                    constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                    tuple_call(result,std::make_tuple(numbers...),make_single_sequence(sequence_t<SequenceLHS>())) = sum;
-                }else if constexpr (RankLHS == 2){
-                    tuple_call(result,std::make_tuple(numbers...),make_single_sequence(sequence_t<Deep-1,RankLHS-2>())) = sum;
-                }else{
-                    constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                    tuple_call(result,std::make_tuple(numbers...),make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep-1,RankLHS-2>())) = sum;
-                }
-            };
-
-            type::loop(double_contraction);
+        type::loop(double_contraction);
         //}
     }
 };

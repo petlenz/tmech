@@ -6,9 +6,6 @@ project(tmech_symdiff_tests)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-enable_testing()
-include(CTest)
-
 #google test
 include(FetchContent)
 FetchContent_Declare(
@@ -32,6 +29,8 @@ endmacro()
 
 add_tmech_test(tmech_test main.cpp)
 
-if(MSVC)
-    target_compile_options(tmech_test PRIVATE /bigobj)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(tmech_test PRIVATE  -ftime-report -Wall -Wpedantic -Werror -Wextra -pedantic -Wno-error=comment)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    target_compile_options(tmech_test PRIVATE /WX /bigobj)
 endif()

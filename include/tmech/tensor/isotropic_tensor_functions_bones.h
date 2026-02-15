@@ -245,43 +245,50 @@ private:
         }
     }
 
-    constexpr inline auto K_iijkjk(size_type const i, size_type const j, size_type const k){
-//        const auto eig_values{_eigen_decomposition.eigenvalues()};
-//        const eye<value_type, Dim, 2> I;
-//        if(std::fabs(eig_values[i] - eig_values[l]) <= std::numeric_limits<value_type>::epsilon()*std::max(eig_values[i], eig_values[k])){
-//            return _ddFi[j];
-//        }else{
-//            return gamma_iij(i,k)*I(i,j) + gamma_iij(i,j)*I(i,k);
-//        }
+    constexpr inline auto K_iijkjk([[maybe_unused]] size_type const i,
+                                   [[maybe_unused]] size_type const j,
+                                   [[maybe_unused]] size_type const k) {
+      //        const auto eig_values{_eigen_decomposition.eigenvalues()};
+      //        const eye<value_type, Dim, 2> I;
+      //        if(std::fabs(eig_values[i] - eig_values[l]) <=
+      //        std::numeric_limits<value_type>::epsilon()*std::max(eig_values[i],
+      //        eig_values[k])){
+      //            return _ddFi[j];
+      //        }else{
+      //            return gamma_iij(i,k)*I(i,j) + gamma_iij(i,j)*I(i,k);
+      //        }
     }
 
-    constexpr inline auto K_ijjkki(size_type const i, size_type const j, size_type const k){
-        const auto eig_values{_eigen_decomposition.eigenvalues()};
-        const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
-        const auto pair_repeated_eigenvalues{_eigen_decomposition.pair_eigenvalues_repeated()};
+    constexpr inline auto K_ijjkki([[maybe_unused]] size_type const i,
+                                   [[maybe_unused]] size_type const j,
+                                   [[maybe_unused]] size_type const k) {
+      const auto eig_values{_eigen_decomposition.eigenvalues()};
+      const auto all_repeated_eigenvalues{
+          _eigen_decomposition.all_eigenvalues_repeated()};
+      const auto pair_repeated_eigenvalues{
+          _eigen_decomposition.pair_eigenvalues_repeated()};
 
-        if(all_repeated_eigenvalues){
-            return 0.5*_ddFi[i];
+      if (all_repeated_eigenvalues) {
+        return 0.5 * _ddFi[i];
+      }
+
+      if constexpr (Dim == 3) {
+
+      } else {
+        if (all_repeated_eigenvalues) {
+
+        } else {
         }
+      }
 
-
-
-        if constexpr(Dim == 3){
-
-        }else{
-            if(all_repeated_eigenvalues){
-
-            }else{
-
-            }
-        }
-
-        const eye<value_type, Dim, 2> I;
-//        if(std::fabs(eig_values[i] - eig_values[l]) <= std::numeric_limits<value_type>::epsilon()*std::max(eig_values[i], eig_values[k])){
-//            return _ddFi[j];
-//        }else{
-//            return gamma_iij(i,k)*I(i,j) + gamma_iij(i,j)*I(i,k);
-//        }
+      const eye<value_type, Dim, 2> I;
+      //        if(std::fabs(eig_values[i] - eig_values[l]) <=
+      //        std::numeric_limits<value_type>::epsilon()*std::max(eig_values[i],
+      //        eig_values[k])){
+      //            return _ddFi[j];
+      //        }else{
+      //            return gamma_iij(i,k)*I(i,j) + gamma_iij(i,j)*I(i,k);
+      //        }
     }
 
     constexpr inline auto gamma()const{
@@ -290,10 +297,13 @@ private:
 //                /((eig_values[0]-eig_values[1])*(eig_values[1]-eig_values[2])*(eig_values[2]-eig_values[0]));
     }
 
-    constexpr inline auto gamma_iij(size_type const i, size_type const j)const{
-//        const auto eig_values{_eigen_decomposition.eigenvalues()};
-//        return (2*_dF[i]*(eig_values[i] - eig_values[j]) - 2*(_Fi[i] - _Fi[j]))
-//                /((eig_values[i] - eig_values[j]) * (eig_values[i] - eig_values[j]));
+    constexpr inline auto gamma_iij([[maybe_unused]] size_type const i,
+                                    [[maybe_unused]] size_type const j) const {
+      //        const auto eig_values{_eigen_decomposition.eigenvalues()};
+      //        return (2*_dF[i]*(eig_values[i] - eig_values[j]) - 2*(_Fi[i] -
+      //        _Fi[j]))
+      //                /((eig_values[i] - eig_values[j]) * (eig_values[i] -
+      //                eig_values[j]));
     }
 
 //    constexpr inline auto setup_equal_eigvals(){

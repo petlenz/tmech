@@ -302,6 +302,8 @@ endif()
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}")
 
 if(BUILD_TESTS)
+    enable_testing()
+    include(CTest)
     add_subdirectory(tests)
 endif()
 

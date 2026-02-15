@@ -734,18 +734,21 @@ constexpr inline auto convert_3D_to_2D(tensor<T, 3, 4> const& A){
  */
 template<typename System, typename T, typename ...Data>
 inline auto general_newton_raphson_iterate(System A, std::tuple<Data...> & x, T const tol, std::size_t const max_iter){
-    std::size_t iter{0};
+  // std::size_t iter{0};
 
-    //removes references of tuple entries
-    //local data
-    typename detail::general_newton_raphson_solver::result_type<std::tuple<Data...>> dx;
+  // removes references of tuple entries
+  // local data
+  typename detail::general_newton_raphson_solver::result_type<
+      std::tuple<Data...>>
+      dx;
 
-    for(std::size_t iter{0}; iter<=max_iter; ++iter){
-        const auto norm = detail::general_newton_raphson_solver::apply(A, x, dx, tol);
-        std::cout<<"iter "<<iter<<" norm "<<norm<<std::endl;
-        if(norm < tol){
-            return std::make_tuple(iter, norm, x);
-        }
+  for (std::size_t iter{0}; iter <= max_iter; ++iter) {
+    const auto norm =
+        detail::general_newton_raphson_solver::apply(A, x, dx, tol);
+    std::cout << "iter " << iter << " norm " << norm << std::endl;
+    if (norm < tol) {
+      return std::make_tuple(iter, norm, x);
+    }
     }
 
     throw std::runtime_error("general_newton_raphson_iterate: no convergenz");

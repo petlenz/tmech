@@ -46,10 +46,10 @@ constexpr inline auto function_wrapper<_Expr, _Func>::reset_imp(){
 }
 
 template <typename _Expr, typename _Func>
-template<typename _Data>
-constexpr inline auto const& function_wrapper<_Expr, _Func>::get_value(_Data const& __data)const{
-    return _value;
+template <typename _Data>
+constexpr inline auto const &function_wrapper<_Expr, _Func>::get_value(
+    [[maybe_unused]] _Data const &__data) const {
+  return _value;
 }
-
 }
 #endif // FUNCTION_WRAPPER_MEAT_H

@@ -125,10 +125,11 @@ constexpr inline auto general_lu_solver::backward_I(Jacobian & A, Vector_x & x)n
 
 template<std::size_t I, std::size_t K, typename Jacobian, typename Vector_x>
 constexpr inline auto general_lu_solver::backward_K(Jacobian & A, Vector_x & x)noexcept{
-    constexpr std::size_t size{std::tuple_size_v<Jacobian>};
-    if constexpr (K > I){
-        std::get<I>(x) = std::get<I>(x) - inner_product(std::get<K>(std::get<I>(A)), std::get<K>(x));
-        backward_K<I, K-1>(A, x);
+  [[maybe_unused]] constexpr std::size_t size{std::tuple_size_v<Jacobian>};
+  if constexpr (K > I) {
+    std::get<I>(x) = std::get<I>(x) -
+                     inner_product(std::get<K>(std::get<I>(A)), std::get<K>(x));
+    backward_K<I, K - 1>(A, x);
     }
 }
 
@@ -154,12 +155,14 @@ template<typename LHS, typename RHS>
 constexpr inline auto general_lu_solver::inner_product(LHS const& A, RHS const& B)noexcept{
     constexpr bool fundamental_LHS{std::is_fundamental_v<LHS>};
     constexpr bool fundamental_RHS{std::is_fundamental_v<RHS>};
-    if constexpr (fundamental_LHS && fundamental_RHS || !fundamental_LHS && fundamental_RHS || fundamental_LHS && !fundamental_RHS){
-        //scalar*scalar || tensor*scalar || scalar*tensor
-        return A*B;
-    }else{
-        //tensor:tensor
-        return dcontract(A, B);
+    if constexpr ((fundamental_LHS && fundamental_RHS) ||
+                  (!fundamental_LHS && fundamental_RHS) ||
+                  (fundamental_LHS && !fundamental_RHS)) {
+      // scalar*scalar || tensor*scalar || scalar*tensor
+      return A * B;
+    } else {
+      // tensor:tensor
+      return dcontract(A, B);
     }
 }
 
