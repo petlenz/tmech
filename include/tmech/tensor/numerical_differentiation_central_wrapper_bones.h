@@ -97,7 +97,12 @@ private:
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto tensor_wrt_tensor(Function __func, Direction const& __A, Result & __result, T const __eps)noexcept{
         using Position = min_value_squence_t<_Position, 1>;
-        constexpr auto FuncRank{decltype (__func(__A))::rank()};
+
+        // FIX: Use type aliases instead of constexpr auto FuncRank.
+        // MSVC does not treat constexpr auto variables from an enclosing
+        // scope as constant expressions inside generic lambdas.
+        using output_type = decltype(__func(__A));
+        constexpr auto FuncRank{output_type::rank()};
         using direction_loop = typename meta_for_loop_deep<Direction::dimension(), Direction::rank()-1>::type;
         using function_loop  = typename meta_for_loop_deep<Direction::dimension(), FuncRank-1>::type;
         const auto inv_eps{static_cast<T>(1.0)/(2*__eps)};
