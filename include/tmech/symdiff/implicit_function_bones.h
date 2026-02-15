@@ -36,17 +36,18 @@ public:
     constexpr inline  auto reset() = delete;
 
 private:
-    template<typename _Data>
-    constexpr inline auto get_value(_Data const& __data)const{
-        return 0;//static_cast<const variable_base<Function>&>(_data).value(__data);
-    }
+  template <typename _Data>
+  constexpr inline auto get_value([[maybe_unused]] _Data const &__data) const {
+    return 0; // static_cast<const
+              // variable_base<Function>&>(_data).value(__data);
+  }
 
-    template<typename _Data>
-    constexpr inline auto update_imp(_Data const& __data){
-        if(!this->_update){
-            //static_cast<variable_base<Function>&>(_data).update(__data);
-        }
+  template <typename _Data>
+  constexpr inline auto update_imp([[maybe_unused]] _Data const &__data) {
+    if (!this->_update) {
+      // static_cast<variable_base<Function>&>(_data).update(__data);
     }
+  }
 
     constexpr inline auto reset_imp(){
         //static_cast<variable_base<Function>&>(_data).reset();

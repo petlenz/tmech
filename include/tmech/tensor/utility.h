@@ -8,6 +8,29 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include <tmech/tensor/traits.h>
+
+// Safely cast between numeric types without implicit narrowing warnings.
+// Handles: int->float, double->float, size_t->double,
+//          int->complex<float>, size_t->complex<double>, etc.
+template <typename To, typename From>
+constexpr To safe_cast(From val) noexcept {
+  if constexpr (std::is_same_v<To, std::decay_t<From>>) {
+    // Same type, no conversion needed
+    return val;
+  } else if constexpr (detail::is_complex_t<To>::value &&
+                       detail::is_complex_t<std::decay_t<From>>::value) {
+    // complex -> complex (e.g. complex<double> -> complex<float>)
+    return To(static_cast<typename To::value_type>(val.real()),
+              static_cast<typename To::value_type>(val.imag()));
+  } else if constexpr (detail::is_complex_t<To>::value) {
+    // fundamental -> complex (e.g. int -> complex<float>)
+    return To(static_cast<typename To::value_type>(val));
+  } else {
+    // fundamental -> fundamental (e.g. double -> float, size_t -> double)
+    return static_cast<To>(val);
+  }
+}
 
 template <typename _T>
 struct is_tensor_type
@@ -555,9 +578,12 @@ struct get_tensor_array_index{
     static constexpr inline std::size_t index(std::tuple<Indicies...> const&  indicies){
         if constexpr(Index < Size-1){
             //std::cout<<"Index "<<get_tensor_index<Dim, Size-2, Index>::get()<<" "<<Size-1<<" "<<Index<<std::endl;
-            return get_tensor_index<Dim, Size-2, Index>::get()*std::get<Index>(indicies) + get_tensor_array_index<Dim, Size, Index+1>::index(indicies);
+            return get_tensor_index<Dim, Size - 2, Index>::get() *
+                       static_cast<std::size_t>(std::get<Index>(indicies)) +
+                   get_tensor_array_index<Dim, Size, Index + 1>::index(
+                       indicies);
         }//4-1=3 4-2=2 4-3=1
-        return std::get<Index>(indicies);
+        return static_cast<std::size_t>(std::get<Index>(indicies));
     }
 };
 
@@ -1275,11 +1301,11 @@ struct print_tensor{
                             os<<lhs(numbers...,k)<<" ";
                         }
                     }else{
-                        if(lhs(numbers...,k) >= static_cast<value_type>(0)){
-                            os<<" "<<lhs(numbers...,k)<<" ";
-                        }else{
-                            os<<lhs(numbers...,k)<<" ";
-                        }
+                      if (lhs(numbers..., k) >= safe_cast<value_type>(0)) {
+                        os << " " << lhs(numbers..., k) << " ";
+                      } else {
+                        os << lhs(numbers..., k) << " ";
+                      }
                     }
                 }
                 os<<"\n";
@@ -1298,53 +1324,76 @@ struct double_contraction{
         constexpr auto RankRHS{RHS::rank()};
         constexpr auto Dim{LHS::dimension()};
         constexpr auto Deep{RankLHS - 2 + RankRHS - 2};
-        typename Result::value_type sum{0};
-            //meta for loop
-            using type = typename meta_for_loop_deep<Dim, Deep-1>::type;
+        // typename Result::value_type sum{0};
+        // meta for loop
+        using type = typename meta_for_loop_deep<Dim, Deep - 1>::type;
 
-            const auto double_contraction = [&](auto&&... numbers){
+        const auto double_contraction = [&](auto &&...numbers) {
+          constexpr auto RankLHS{LHS::rank()};
+          constexpr auto RankRHS{RHS::rank()};
+          constexpr auto Dim{LHS::dimension()};
+          constexpr auto Deep{RankLHS - 2 + RankRHS - 2};
 
-                constexpr auto RankLHS{LHS::rank()};
-                constexpr auto RankRHS{RHS::rank()};
-                constexpr auto Dim{LHS::dimension()};
-                constexpr auto Deep{RankLHS - 2 + RankRHS - 2};
+          typename Result::value_type sum{0};
+          for (std::size_t k{0}; k < Dim; ++k) {
+            for (std::size_t l{0}; l < Dim; ++l) {
+              const auto tuple{std::make_tuple(numbers..., l, k)};
+              if constexpr (RankRHS == 2) {
+                constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+                // test_seq(make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1,
+                // Deep>())); test_seq(make_single_sequence(sequence_t<Deep+1,
+                // Deep>()));
 
-                typename Result::value_type sum{0};
-                for(std::size_t k{0};k<Dim;++k){
-                    for(std::size_t l{0};l<Dim;++l){
-                        const auto tuple{std::make_tuple(numbers...,l,k)};
-                        if constexpr (RankRHS == 2){
-                            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                            //test_seq(make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1, Deep>()));
-                            //test_seq(make_single_sequence(sequence_t<Deep+1, Deep>()));
+                sum += tuple_call(
+                           lhs, tuple,
+                           make_single_sequence(sequence_t<SequenceLHS>(),
+                                                sequence_t<Deep + 1, Deep>())) *
+                       tuple_call(
+                           rhs, tuple,
+                           make_single_sequence(sequence_t<Deep + 1, Deep>()));
+              } else if constexpr (RankLHS == 2) {
+                // test_seq(sequence_t<Deep+1, Deep>());
+                // test_seq(make_single_sequence(sequence_t<Deep+1,
+                // Deep>(),sequence_t<Deep-1,0>()));
+                sum += tuple_call(
+                           lhs, tuple,
+                           make_single_sequence(sequence_t<Deep + 1, Deep>())) *
+                       tuple_call(
+                           rhs, tuple,
+                           make_single_sequence(sequence_t<Deep + 1, Deep>(),
+                                                sequence_t<Deep - 1, 0>()));
+              } else {
+                constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+                sum += tuple_call(
+                           lhs, tuple,
+                           make_single_sequence(sequence_t<SequenceLHS>(),
+                                                sequence_t<Deep + 1, Deep>())) *
+                       tuple_call(rhs, tuple,
+                                  make_single_sequence(
+                                      sequence_t<Deep + 1, Deep>(),
+                                      sequence_t<Deep - 1, RankLHS - 2>()));
+              }
+            }
+          }
 
-                            sum += tuple_call(lhs,tuple,make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1, Deep>()))
-                                   *tuple_call(rhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>()));
-                        }else if constexpr (RankLHS == 2){
-                            //test_seq(sequence_t<Deep+1, Deep>());
-                            //test_seq(make_single_sequence(sequence_t<Deep+1, Deep>(),sequence_t<Deep-1,0>()));
-                            sum += tuple_call(lhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>()))
-                                   *tuple_call(rhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>(),sequence_t<Deep-1,0>()));
-                        }else{
-                            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                            sum += tuple_call(lhs,tuple,make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep+1, Deep>()))
-                                   *tuple_call(rhs,tuple,make_single_sequence(sequence_t<Deep+1, Deep>(),sequence_t<Deep-1,RankLHS-2>()));
-                        }
-                    }
-                }
+          if constexpr (RankRHS == 2) {
+            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+            tuple_call(result, std::make_tuple(numbers...),
+                       make_single_sequence(sequence_t<SequenceLHS>())) = sum;
+          } else if constexpr (RankLHS == 2) {
+            tuple_call(result, std::make_tuple(numbers...),
+                       make_single_sequence(
+                           sequence_t<Deep - 1, RankLHS - 2>())) = sum;
+          } else {
+            constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS - 3)};
+            tuple_call(result, std::make_tuple(numbers...),
+                       make_single_sequence(
+                           sequence_t<SequenceLHS>(),
+                           sequence_t<Deep - 1, RankLHS - 2>())) = sum;
+          }
+        };
 
-                if constexpr (RankRHS == 2){
-                    constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                    tuple_call(result,std::make_tuple(numbers...),make_single_sequence(sequence_t<SequenceLHS>())) = sum;
-                }else if constexpr (RankLHS == 2){
-                    tuple_call(result,std::make_tuple(numbers...),make_single_sequence(sequence_t<Deep-1,RankLHS-2>())) = sum;
-                }else{
-                    constexpr auto SequenceLHS{(RankLHS == 2 ? 0 : RankLHS-3)};
-                    tuple_call(result,std::make_tuple(numbers...),make_single_sequence(sequence_t<SequenceLHS>(),sequence_t<Deep-1,RankLHS-2>())) = sum;
-                }
-            };
-
-            type::loop(double_contraction);
+        type::loop(double_contraction);
         //}
     }
 };

@@ -135,7 +135,7 @@ struct sec_wrapper{
 struct sign_wrapper{
     template<typename T>
     constexpr static inline T apply(T const& value){
-        return (value < 0 ? -1 : 1);
+      return tmech::safe_cast<T>((T(0) < value) - (value < T(0)));
     }
     static inline std::string get_string(){
         return std::string("sign");
@@ -178,7 +178,6 @@ public:
 
     auto reset() = delete;
 
-private:
     template<typename _Data>
     constexpr inline auto update_imp(_Data const& x){
         static_cast<variable_base<Base>&>(_base).update(x);
@@ -195,11 +194,13 @@ private:
         static_cast<variable_base<Exp>&>(_exp).reset();
     }
 
-    template<typename _Data>
-    constexpr inline auto const& get_value(_Data const& __data)const{
-        return _value;
+    template <typename _Data>
+    constexpr inline auto const &
+    get_value([[maybe_unused]] _Data const &__data) const {
+      return _value;
     }
 
+  private:
     static data_type _value;
     Base _base;
     Exp _exp;

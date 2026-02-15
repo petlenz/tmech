@@ -11,6 +11,21 @@
 #include <utility>
 #include <type_traits>
 
+namespace tmech_ops_detail {
+// Helper to safely cast a fundamental scalar to a possibly-complex value_type
+// without triggering implicit narrowing warnings.
+// e.g. int -> float, double -> float, int -> complex<float>
+template <typename To, typename From>
+constexpr To safe_cast(From val) noexcept {
+  if constexpr (tmech::detail::is_complex_t<To>::value) {
+    // To is std::complex<T>; cast through T first to avoid int->T narrowing
+    return To(static_cast<typename To::value_type>(val));
+  } else {
+    return static_cast<To>(val);
+  }
+}
+} // namespace tmech_ops_detail
+
 /**
  * @brief Addition of two tensors of same rank and dimension
  * \f[
@@ -194,9 +209,17 @@ constexpr inline auto operator*(_Scalar __scalar, _Tensor && __tensor){
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
 
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
-        return tmech::detail::tensor_binary_expression_wrapper<const TensorType&, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
+      return tmech::detail::tensor_binary_expression_wrapper<
+          const TensorType &, scalar, tmech::detail::operator_mul>(
+          std::forward<_Tensor>(__tensor),
+          scalar(tmech_ops_detail::safe_cast<typename TensorType::value_type>(
+              __scalar)));
     }else{
-        return tmech::detail::tensor_binary_expression_wrapper<TensorType, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
+      return tmech::detail::tensor_binary_expression_wrapper<
+          TensorType, scalar, tmech::detail::operator_mul>(
+          std::forward<_Tensor>(__tensor),
+          scalar(tmech_ops_detail::safe_cast<typename TensorType::value_type>(
+              __scalar)));
     }
 }
 
@@ -225,9 +248,17 @@ constexpr inline auto operator*(_Tensor && __tensor, _Scalar __scalar){
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
 
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
-        return tmech::detail::tensor_binary_expression_wrapper<const TensorType&, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
+      return tmech::detail::tensor_binary_expression_wrapper<
+          const TensorType &, scalar, tmech::detail::operator_mul>(
+          std::forward<_Tensor>(__tensor),
+          scalar(tmech_ops_detail::safe_cast<typename TensorType::value_type>(
+              __scalar)));
     }else{
-        return tmech::detail::tensor_binary_expression_wrapper<TensorType, scalar, tmech::detail::operator_mul>(std::forward<_Tensor>(__tensor), scalar(__scalar));
+      return tmech::detail::tensor_binary_expression_wrapper<
+          TensorType, scalar, tmech::detail::operator_mul>(
+          std::forward<_Tensor>(__tensor),
+          scalar(tmech_ops_detail::safe_cast<typename TensorType::value_type>(
+              __scalar)));
     }
 }
 
@@ -256,9 +287,17 @@ constexpr inline auto operator/(_Tensor && __tensor, _Scalar && __scalar){
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
 
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
-        return tmech::detail::tensor_binary_expression_wrapper<const TensorType&, scalar, tmech::detail::operator_div>(std::forward<_Tensor>(__tensor), scalar(std::forward<_Scalar>(__scalar)));
+      return tmech::detail::tensor_binary_expression_wrapper<
+          const TensorType &, scalar, tmech::detail::operator_div>(
+          std::forward<_Tensor>(__tensor),
+          scalar(tmech_ops_detail::safe_cast<typename TensorType::value_type>(
+              __scalar)));
     }else{
-        return tmech::detail::tensor_binary_expression_wrapper<TensorType, scalar, tmech::detail::operator_div>(std::forward<_Tensor>(__tensor), scalar(std::forward<_Scalar>(__scalar)));
+      return tmech::detail::tensor_binary_expression_wrapper<
+          TensorType, scalar, tmech::detail::operator_div>(
+          std::forward<_Tensor>(__tensor),
+          scalar(tmech_ops_detail::safe_cast<typename TensorType::value_type>(
+              __scalar)));
     }
 }
 

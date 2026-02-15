@@ -33,8 +33,8 @@ public:
     constexpr inline auto evaluate()noexcept;
 
 private:
-    _Tensor const& _dV;
-    _Base const& _base;
+  _Base const &_base;
+  _Tensor const &_dV;
 };
 
 } // NAMESPACE DETAIL

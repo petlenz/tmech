@@ -37,9 +37,10 @@ constexpr inline auto symmetric_part_wrapper<Tensor>::operator ()(size_type cons
     //check if data.raw_data() is enable for better performace??
     if constexpr(std::experimental::is_detected<detail::has_raw_data, data_type_tensor>::value){
         constexpr auto Dim{dimension()};
-        return static_cast<value_type>(0.5)*(_data.raw_data()[i*Dim+j] + _data.raw_data()[j*Dim+i]);
+        return safe_cast<value_type>(0.5) *
+               (_data.raw_data()[i * Dim + j] + _data.raw_data()[j * Dim + i]);
     }else{
-        return static_cast<value_type>(0.5)*(_data(i,j) + _data(j,i));
+      return safe_cast<value_type>(0.5) * (_data(i, j) + _data(j, i));
     }
 }
 

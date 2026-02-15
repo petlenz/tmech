@@ -42,7 +42,6 @@ public:
 
     constexpr auto reset() = delete;
 
-private:
     template<typename _Data>
     constexpr inline auto get_value(_Data const& __data)const;
 
@@ -51,6 +50,7 @@ private:
 
     constexpr inline auto reset_imp();
 
+  private:
     constexpr inline auto print_general(std::ostream & __os)const;
 
     constexpr inline auto print_otimes(std::ostream & __os)const;

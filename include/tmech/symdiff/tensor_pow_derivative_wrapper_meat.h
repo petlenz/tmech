@@ -31,9 +31,10 @@ constexpr inline std::ostream& tensor_pow_wrapper_derivative<_Father>::print(std
 }
 
 template <typename _Father>
-template<typename _Data>
-constexpr inline auto tensor_pow_wrapper_derivative<_Father>::get_value(_Data const& __data)const{
-    return _father._pow_data.derivative();
+template <typename _Data>
+constexpr inline auto tensor_pow_wrapper_derivative<_Father>::get_value(
+    [[maybe_unused]] _Data const &__data) const {
+  return _father._pow_data.derivative();
 }
 
 template <typename _Father>

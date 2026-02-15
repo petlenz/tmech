@@ -34,9 +34,9 @@ public:
 
     constexpr inline auto derivative()const noexcept;
 
-private:
-    _Tensor const& _R;
+  private:
     _Base const& _base;
+    _Tensor const &_R;
 };
 
 } // NAMESPACE DETAIL

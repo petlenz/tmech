@@ -11,17 +11,16 @@
 namespace detail {
 
 template <typename Base, typename Tensor>
-positive_negative_decomposition_pos_wrapper<Base, Tensor>::positive_negative_decomposition_pos_wrapper(Base const& __base, Tensor const& __V)noexcept:
-    base(__base),
-    V(__V)
-{}
+positive_negative_decomposition_pos_wrapper<Base, Tensor>::
+    positive_negative_decomposition_pos_wrapper(Base const &__base,
+                                                Tensor const &__V) noexcept
+    : V(__V), base(__base) {}
 
 template <typename Base, typename Tensor>
-positive_negative_decomposition_pos_wrapper<Base, Tensor>::positive_negative_decomposition_pos_wrapper(positive_negative_decomposition_pos_wrapper const & __data)noexcept:
-    basetype(__data),
-    base(__data.base),
-    V(__data.V)
-{}
+positive_negative_decomposition_pos_wrapper<Base, Tensor>::
+    positive_negative_decomposition_pos_wrapper(
+        positive_negative_decomposition_pos_wrapper const &__data) noexcept
+    : basetype(__data), V(__data.V), base(__data.base) {}
 
 template <typename Base, typename Tensor>
 constexpr inline auto const& positive_negative_decomposition_pos_wrapper<Base, Tensor>::operator()(size_type const i, size_type const j)const noexcept{

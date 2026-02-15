@@ -16,15 +16,17 @@ template <typename _Derived>
 constexpr auto variable_base<_Derived>::convert() const {return *static_cast<const _Derived*>(this);}
 
 template <typename _Derived>
-template<typename _Data>
-constexpr inline auto variable_base<_Derived>::operator()(_Data const& __data){
-    if constexpr(std::experimental::is_detected<detail::has_update, _Derived, _Data>::value){
-        static_cast<const _Derived*>(this)->reset();
-    }
-    if constexpr(std::experimental::is_detected<detail::has_reset, _Derived>::value){
-        static_cast<const _Derived*>(this)->update(__data);
-    }
-    return static_cast<const _Derived*>(this)->get_value(__data);
+template <typename _Data>
+constexpr inline auto variable_base<_Derived>::operator()(_Data const &__data) {
+  if constexpr (std::experimental::is_detected<detail::has_reset,
+                                               _Derived>::value) {
+    static_cast<_Derived *>(this)->reset();
+  }
+  if constexpr (std::experimental::is_detected<detail::has_update, _Derived,
+                                               _Data>::value) {
+    static_cast<_Derived *>(this)->update(__data);
+  }
+  return static_cast<const _Derived *>(this)->get_value(__data);
 }
 
 template <typename _Derived>

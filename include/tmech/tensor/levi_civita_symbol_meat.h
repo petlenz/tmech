@@ -53,7 +53,7 @@ constexpr inline auto levi_civita<T, Dim>::dimension()noexcept{
 template <typename T, std::size_t Dim>
 template<std::size_t DIM, typename >
 constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j)const noexcept{
-    return static_cast<value_type>(j) - static_cast<value_type>(i);
+  return safe_cast<value_type>(j) - safe_cast<value_type>(i);
 }
 
 /**
@@ -66,9 +66,10 @@ constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_ty
 template <typename T, std::size_t Dim>
 template<std::size_t DIM, typename >
 constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k)const noexcept{
-    return (static_cast<value_type>(j) - static_cast<value_type>(i))
-            *(static_cast<value_type>(k) - static_cast<value_type>(j))
-            *(static_cast<value_type>(i) - static_cast<value_type>(k))*static_cast<value_type>(0.5);
+  return (safe_cast<value_type>(j) - safe_cast<value_type>(i)) *
+         (safe_cast<value_type>(k) - safe_cast<value_type>(j)) *
+         (safe_cast<value_type>(i) - safe_cast<value_type>(k)) *
+         safe_cast<value_type>(0.5);
 }
 
 /**
@@ -83,12 +84,12 @@ template <typename T, std::size_t Dim>
 template<std::size_t DIM, typename>
 constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept{
     constexpr value_type fac{1./12.};
-    return (static_cast<value_type>(j) - static_cast<value_type>(i))
-            *(static_cast<value_type>(k) - static_cast<value_type>(i))
-            *(static_cast<value_type>(l) - static_cast<value_type>(i))
-            *(static_cast<value_type>(k) - static_cast<value_type>(j))
-            *(static_cast<value_type>(l) - static_cast<value_type>(j))
-            *(static_cast<value_type>(l) - static_cast<value_type>(k))*fac;
+    return (safe_cast<value_type>(j) - safe_cast<value_type>(i)) *
+           (safe_cast<value_type>(k) - safe_cast<value_type>(i)) *
+           (safe_cast<value_type>(l) - safe_cast<value_type>(i)) *
+           (safe_cast<value_type>(k) - safe_cast<value_type>(j)) *
+           (safe_cast<value_type>(l) - safe_cast<value_type>(j)) *
+           (safe_cast<value_type>(l) - safe_cast<value_type>(k)) * fac;
 }
 //@}
 

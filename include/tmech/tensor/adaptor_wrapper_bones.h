@@ -110,22 +110,22 @@ struct abq_std
 private:
     static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
-            return std::array<std::array<size_type, 2>, 2>{0,2, 2,1};
+          return std::array<std::array<size_type, 2>, 2>{{{0, 2}, {2, 1}}};
         }else{
             //{11,22,33,12,13,23}
             // 0  1  2  3  4  5
             return std::array<std::array<size_type, 3>, 3>{
-                0,3,4,
-                3,1,5,
-                4,5,2};
+                {{0, 3, 4}, {3, 1, 5}, {4, 5, 2}}};
         }
     }
 
     static constexpr inline auto t2v()noexcept{
         if constexpr (_Dim == 2){
-            return std::array<std::array<size_type, 2>, 3>{0,0, 1,1, 0,1};
+          return std::array<std::array<size_type, 2>, 3>{
+              {{0, 0}, {1, 1}, {0, 1}}};
         }else{
-            return std::array<std::array<size_type, 2>, 6>{0,0, 1,1, 2,2, 0,1, 0,2, 1,2};
+          return std::array<std::array<size_type, 2>, 6>{
+              {{0, 0}, {1, 1}, {2, 2}, {0, 1}, {0, 2}, {1, 2}}};
         }
     }
 };
@@ -190,19 +190,22 @@ struct abq_exp
 private:
     static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
-            return std::array<std::array<size_type, 2>, 2>{0,2, 2,1};
+          return std::array<std::array<size_type, 2>, 2>{{{0, 2}, {2, 1}}};
         }else{
             //{11,22,33,12,23,13}
             // 0  1  2  3  4  5
-            return std::array<std::array<size_type, 3>, 3>{0,3,5, 3,1,4, 5,4,2};
+            return std::array<std::array<size_type, 3>, 3>{
+                {{0, 3, 5}, {3, 1, 4}, {5, 4, 2}}};
         }
     }
 
     static constexpr inline auto t2v()noexcept{
         if constexpr (_Dim == 2){
-            return std::array<std::array<size_type, 2>, 3>{0,0, 1,1, 0,1};
+          return std::array<std::array<size_type, 2>, 3>{
+              {{0, 0}, {1, 1}, {0, 1}}};
         }else{
-            return std::array<std::array<size_type, 2>, 6>{0,0, 1,1, 2,2, 0,1, 1,2, 0,2};
+          return std::array<std::array<size_type, 2>, 6>{
+              {{0, 0}, {1, 1}, {2, 2}, {0, 1}, {1, 2}, {0, 2}}};
         }
     }
 };
@@ -265,17 +268,20 @@ struct voigt
 private:
     static constexpr inline auto vt2()noexcept{
         if constexpr (_Dim == 2){
-            return std::array<std::array<size_type, 2>, 2>{0,2, 2,1};
+          return std::array<std::array<size_type, 2>, 2>{{{0, 2}, {2, 1}}};
         }else{
-            return std::array<std::array<size_type, 3>, 3>{0,5,4, 5,1,3, 4,3,2};
+          return std::array<std::array<size_type, 3>, 3>{
+              {{0, 5, 4}, {5, 1, 3}, {4, 3, 2}}};
         }
     }
 
     static constexpr inline auto t2v()noexcept{
         if constexpr (_Dim == 2){
-            return std::array<std::array<size_type, 2>, 3>{0,0, 1,1, 0,1};
+          return std::array<std::array<size_type, 2>, 3>{
+              {{0, 0}, {1, 1}, {0, 1}}};
         }else{
-            return std::array<std::array<size_type, 2>, 6>{0,0, 1,1, 2,2, 1,2, 0,2, 0,1};
+          return std::array<std::array<size_type, 2>, 6>{
+              {{0, 0}, {1, 1}, {2, 2}, {1, 2}, {0, 2}, {0, 1}}};
         }
     }
 };

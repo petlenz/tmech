@@ -19,13 +19,12 @@ class sign_S_wrapper : public tensor_base<sign_S_wrapper<_Father>>
 public:
     using value_type = typename _Father::data_type::value_type;
 
-    sign_S_wrapper(_Father const& __father)noexcept:
-        _father(__father)
-    {}
+    sign_S_wrapper(_Father const &__father) noexcept
+        : tensor_base<sign_S_wrapper<_Father>>(), _father(__father) {}
 
-    sign_S_wrapper(sign_S_wrapper const& __data)noexcept:
-        _father(__data._father)
-    {}
+    sign_S_wrapper(sign_S_wrapper const &__data) noexcept
+        : tensor_base<sign_S_wrapper<_Father>>(__data),
+          _father(__data._father) {}
 
     template<typename ...Indicies>
     constexpr inline auto operator()(Indicies ... indicies)const noexcept{
@@ -58,13 +57,12 @@ class sign_N_wrapper : public tensor_base<sign_N_wrapper<_Father>>
 public:
     using value_type = typename _Father::data_type::value_type;
 
-    sign_N_wrapper(_Father const& __father)noexcept:
-        _father(__father)
-    {}
+    sign_N_wrapper(_Father const &__father) noexcept
+        : tensor_base<sign_N_wrapper<_Father>>(), _father(__father) {}
 
-    sign_N_wrapper(sign_N_wrapper const& __data)noexcept:
-        _father(__data._father)
-    {}
+    sign_N_wrapper(sign_N_wrapper const &__data) noexcept
+        : tensor_base<sign_N_wrapper<_Father>>(__data),
+          _father(__data._father) {}
 
     template<typename ...Indicies>
     constexpr inline auto operator()(Indicies ... indicies)const noexcept{
