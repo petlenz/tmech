@@ -135,7 +135,7 @@ struct sec_wrapper{
 struct sign_wrapper{
     template<typename T>
     constexpr static inline T apply(T const& value){
-        return (value < 0 ? -1 : 1);
+      return tmech::safe_cast<T>((T(0) < value) - (value < T(0)));
     }
     static inline std::string get_string(){
         return std::string("sign");
