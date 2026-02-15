@@ -75,7 +75,7 @@ constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate()noexcept{
             _trace += _data(i,i);
         }
 
-        _trace /= static_cast<value_type>(dimension());
+        _trace /= safe_cast<value_type>(dimension());
         this->_is_init = true;
     }
 }

@@ -80,11 +80,12 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate()noexcept{
         _data = eye<value_type, data_type::dimension(), data_type::rank()>() + exp_start;
         //expA = (1/0!)*I + (1/1!)*A + (1/2!)*A*A + (1/3!)*A*A*A
         while (true) {
-            n_fac *= (iter+1);
-            exp_n = eval(exp_n*exp_start);
-            _data += (exp_n/n_fac);
-            const auto error{tmech::norm(exp_n)/n_fac};
-            if(error <= tol){break;}
+          n_fac *= safe_cast<value_type>(iter + 1);
+          exp_n = eval(exp_n * exp_start);
+          _data += (exp_n / n_fac);
+          const auto error{tmech::norm(exp_n) / n_fac};
+          if (error <= tol) {
+            break;}
 
             if(iter == max_iter){
                 break;
@@ -112,15 +113,16 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate_derivative()noexcept
     _data_i.emplace_back(exp_start);
     _data = I + exp_start;
     while (true) {
-        n_fac *= (iter+1);
-        exp_n = eval(exp_n*exp_start);
-        _data_i.emplace_back(exp_n);
-        _data += (exp_n/n_fac);
-        const auto error{tmech::norm(exp_n)/n_fac};
+      n_fac *= safe_cast<value_type>(iter + 1);
+      exp_n = eval(exp_n * exp_start);
+      _data_i.emplace_back(exp_n);
+      _data += (exp_n / n_fac);
+      const auto error{tmech::norm(exp_n) / n_fac};
 
-        ++iter;
+      ++iter;
 
-        if(error <= tol){break;}
+      if (error <= tol) {
+        break;}
 
         if(iter == max_iter){
             break;
@@ -139,10 +141,10 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate_derivative()noexcept
     // ...
     _derivative = otimesu(I,I);
     for(size_type i{1}; i<_data_i.size()-1; ++i){
-        n_fac *= (iter+1);
-        const auto inv_n_fac{(1./n_fac)};
-        for(size_type r{0}; r<=i; ++r){
-            _derivative += otimesu(_data_i[r], trans(_data_i[i - r]))*inv_n_fac;
+      n_fac *= safe_cast<value_type>(iter + 1);
+      const auto inv_n_fac{(1. / n_fac)};
+      for (size_type r{0}; r <= i; ++r) {
+        _derivative += otimesu(_data_i[r], trans(_data_i[i - r])) * inv_n_fac;
         }
         iter++;
     }

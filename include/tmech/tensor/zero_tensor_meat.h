@@ -33,7 +33,7 @@ constexpr zeros<T, Dim, Rank>::zeros()noexcept
 template <typename T, std::size_t Dim, std::size_t Rank>
 template<typename ...Indices>
 constexpr inline auto zeros<T, Dim, Rank>::operator ()(const Indices... /*indices*/)const noexcept{
-    return static_cast<value_type>(0);
+  return safe_cast<value_type>(0);
 }
 //@}
 

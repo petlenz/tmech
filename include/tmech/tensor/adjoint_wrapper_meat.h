@@ -145,8 +145,8 @@ constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_imp(_Result & result)no
 template <typename _Tensor>
 constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_details(value_type * result, value_type const* data)noexcept{
     if constexpr (dimension() == 1){
-        result[0] = static_cast<value_type>(1.)/data[0];
-        return ;
+      result[0] = safe_cast<value_type>(1.) / data[0];
+      return;
     }
 
     if constexpr (rank() == 2) {

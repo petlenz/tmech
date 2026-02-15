@@ -448,9 +448,11 @@ constexpr inline auto pow(_Tensor && __tensor, T const exp){
     using TensorType = typename std::decay<_Tensor>::type;
 
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
-        return detail::pow_tensor_wrapper<TensorType const&>(std::forward<_Tensor>(__tensor), exp);
+      return detail::pow_tensor_wrapper<TensorType const &>(
+          std::forward<_Tensor>(__tensor), static_cast<std::size_t>(exp));
     }else{
-        return detail::pow_tensor_wrapper<TensorType>(std::forward<_Tensor>(__tensor), exp);
+      return detail::pow_tensor_wrapper<TensorType>(
+          std::forward<_Tensor>(__tensor), static_cast<std::size_t>(exp));
     }
 }
 

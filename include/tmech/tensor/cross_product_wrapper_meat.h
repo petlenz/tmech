@@ -8,6 +8,7 @@
 #ifndef CROSS_PRODUCT_WRAPPER_MEAT_H
 #define CROSS_PRODUCT_WRAPPER_MEAT_H
 
+#include <tmech/tensor/utility.h>
 
 namespace detail {
 
@@ -47,13 +48,13 @@ template<typename _LHS, typename _RHS>
 constexpr inline auto cross_product_wrapper<_LHS, _RHS>::operator ()(size_type const idx)const noexcept{
     switch (idx) {
     case 0:
-        return static_cast<value_type>(_lhs(1) * _rhs(2) - _lhs(2) * _rhs(1));
+      return safe_cast<value_type>(_lhs(1) * _rhs(2) - _lhs(2) * _rhs(1));
     case 1:
-        return static_cast<value_type>(_lhs(2) * _rhs(0) - _lhs(0) * _rhs(2));
+      return safe_cast<value_type>(_lhs(2) * _rhs(0) - _lhs(0) * _rhs(2));
     case 2:
-        return static_cast<value_type>(_lhs(0) * _rhs(1) - _lhs(1) * _rhs(0));
+      return safe_cast<value_type>(_lhs(0) * _rhs(1) - _lhs(1) * _rhs(0));
     default:
-        return static_cast<value_type>(0.0);
+      return safe_cast<value_type>(0.0);
     }
 }
 //@}

@@ -147,8 +147,7 @@ eigen_decomposition_base<_Tensor,
                          _Derived>::get_repeated_eigenvalues() noexcept {
   if constexpr (Dim == 2) {
     const auto x1{_eigval[0]}, x2{_eigval[1]};
-    const auto max_val{
-        std::max(static_cast<value_type>(1.0), std::max(x1, x2))};
+    const auto max_val{std::max(safe_cast<value_type>(1.0), std::max(x1, x2))};
     const auto eps{std::numeric_limits<value_type>::epsilon() * max_val};
     if (std::fabs(x1 - x2) <= eps) {
       _all_repeated_eigenvalues = true;
@@ -156,7 +155,7 @@ eigen_decomposition_base<_Tensor,
   } else if constexpr (Dim == 3) {
     const auto x1{_eigval[0]}, x2{_eigval[1]}, x3{_eigval[2]};
     const auto max_val{
-        std::max(static_cast<value_type>(1.0), std::max(x1, std::max(x2, x3)))};
+        std::max(safe_cast<value_type>(1.0), std::max(x1, std::max(x2, x3)))};
     const auto eps{std::numeric_limits<value_type>::epsilon() * max_val};
     const auto equal_12{std::fabs(x1 - x2) <= eps};
     const auto equal_13{std::fabs(x1 - x3) <= eps};
@@ -320,13 +319,13 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_2D(
 
   const value_type max_element{
       std::max(_a00, std::max(_a01, std::max(_a10, _a11)))};
-  const value_type inv_max_element{static_cast<value_type>(1) / max_element};
+  const value_type inv_max_element{safe_cast<value_type>(1) / max_element};
   const value_type a00{_a00 * inv_max_element};
   const value_type a10{_a10 * inv_max_element};
   const value_type a01{_a01 * inv_max_element};
   const value_type a11{_a11 * inv_max_element};
   const value_type eps_zero{std::numeric_limits<value_type>::epsilon() *
-                            std::max(static_cast<value_type>(1), max_element)};
+                            std::max(safe_cast<value_type>(1), max_element)};
 
   if (std::abs(max_element) <= eps_zero) {
     // Zero matrix
@@ -352,12 +351,12 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_2D(
 
   const auto I1{a00 + a11};
   const auto I2{a00 * a11 - a01 * a10};
-  const auto dis{I1 * I1 - static_cast<value_type>(4) * I2};
+  const auto dis{I1 * I1 - safe_cast<value_type>(4) * I2};
 
   if (dis <= eps_zero) {
     // Repeated eigenvalues
-    this->_eigval[0] = I1 * static_cast<value_type>(0.5);
-    this->_eigval[1] = I1 * static_cast<value_type>(0.5);
+    this->_eigval[0] = I1 * safe_cast<value_type>(0.5);
+    this->_eigval[1] = I1 * safe_cast<value_type>(0.5);
     if (eigenvectors) {
       this->_eigvectors[0](0) = 1;
       this->_eigvectors[0](1) = 0;
@@ -366,8 +365,8 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_2D(
     }
   } else {
     const auto sqrt_dis{std::sqrt(dis)};
-    this->_eigval[0] = (I1 + sqrt_dis) * static_cast<value_type>(0.5);
-    this->_eigval[1] = (I1 - sqrt_dis) * static_cast<value_type>(0.5);
+    this->_eigval[0] = (I1 + sqrt_dis) * safe_cast<value_type>(0.5);
+    this->_eigval[1] = (I1 - sqrt_dis) * safe_cast<value_type>(0.5);
   }
 
   this->_eigval[0] *= max_element;
@@ -380,9 +379,10 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_2D(
 
   if (eigenvectors) {
     for (size_type i{0}; i < 2; ++i) {
-      const auto temp{
-          std::sqrt(1.0 + std::pow((this->_eigval[i] - _a00) / _a01, 2))};
-      this->_eigvectors[i](0) = static_cast<value_type>(1) / temp;
+      const value_type temp{safe_cast<value_type>(
+          std::sqrt(safe_cast<value_type>(1) +
+                    std::pow((this->_eigval[i] - _a00) / _a01, 2)))};
+      this->_eigvectors[i](0) = safe_cast<value_type>(1) / temp;
       this->_eigvectors[i](1) = (this->_eigval[i] - _a00) / (temp * _a01);
     }
   }
@@ -414,7 +414,7 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
     return;
   }
 
-  const value_type invMaxAbsElement{static_cast<value_type>(1) / maxAbsElement};
+  const value_type invMaxAbsElement{safe_cast<value_type>(1) / maxAbsElement};
   const value_type a00 = _a00 * invMaxAbsElement;
   const value_type a01 = _a01 * invMaxAbsElement;
   const value_type a02 = _a02 * invMaxAbsElement;
@@ -424,34 +424,34 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
 
   const value_type norm{a01 * a01 + a02 * a02 + a12 * a12};
 
-  if (norm > static_cast<value_type>(0)) {
+  if (norm > safe_cast<value_type>(0)) {
     // Non-diagonal: compute eigenvalues via cubic characteristic equation
-    const value_type q{(a00 + a11 + a22) / static_cast<value_type>(3)};
+    const value_type q{(a00 + a11 + a22) / safe_cast<value_type>(3)};
 
     const value_type b00{a00 - q};
     const value_type b11{a11 - q};
     const value_type b22{a22 - q};
 
-    const value_type p{std::sqrt((b00 * b00 + b11 * b11 + b22 * b22 +
-                                  norm * static_cast<value_type>(2)) /
-                                 static_cast<value_type>(6))};
+    const value_type p{std::sqrt(
+        (b00 * b00 + b11 * b11 + b22 * b22 + norm * safe_cast<value_type>(2)) /
+        safe_cast<value_type>(6))};
 
     const value_type c00{b11 * b22 - a12 * a12};
     const value_type c01{a01 * b22 - a12 * a02};
     const value_type c02{a01 * a12 - b11 * a02};
     const value_type det{(b00 * c00 - a01 * c01 + a02 * c02) / (p * p * p)};
 
-    const value_type halfDet{
-        std::min(std::max(det * static_cast<value_type>(0.5),
-                          -static_cast<value_type>(1)),
-                 static_cast<value_type>(1))};
+    const value_type halfDet{std::min(
+        std::max(det * safe_cast<value_type>(0.5), -safe_cast<value_type>(1)),
+        safe_cast<value_type>(1))};
 
-    constexpr value_type twoThirdsPi{static_cast<value_type>(2) * M_PI /
-                                     static_cast<value_type>(3)};
-    const value_type angle{std::acos(halfDet) / static_cast<value_type>(3)};
-    const value_type beta2{std::cos(angle) * static_cast<value_type>(2)};
+    constexpr value_type twoThirdsPi{safe_cast<value_type>(2) *
+                                     safe_cast<value_type>(M_PI) /
+                                     safe_cast<value_type>(3)};
+    const value_type angle{std::acos(halfDet) / safe_cast<value_type>(3)};
+    const value_type beta2{std::cos(angle) * safe_cast<value_type>(2)};
     const value_type beta0{std::cos(angle + twoThirdsPi) *
-                           static_cast<value_type>(2)};
+                           safe_cast<value_type>(2)};
     const value_type beta1{-(beta0 + beta2)};
 
     // Eigenvalues ordered: alpha0 <= alpha1 <= alpha2
@@ -504,12 +504,12 @@ eigen_decomposition_inline<_Tensor>::compute_orthogonal_complement(
     tensor1 const &W, tensor1 &U, tensor1 &V) const noexcept {
   if (std::fabs(W(0)) > std::fabs(W(1))) {
     const auto invLength =
-        static_cast<value_type>(1) / std::sqrt(W(0) * W(0) + W(2) * W(2));
+        safe_cast<value_type>(1) / std::sqrt(W(0) * W(0) + W(2) * W(2));
     U = tensor1(
-        {-W(2) * invLength, static_cast<value_type>(0), +W(0) * invLength});
+        {-W(2) * invLength, safe_cast<value_type>(0), +W(0) * invLength});
   } else {
     const auto invLength =
-        static_cast<value_type>(1) / std::sqrt(W(1) * W(1) + W(2) * W(2));
+        safe_cast<value_type>(1) / std::sqrt(W(1) * W(1) + W(2) * W(2));
     U = tensor1({0, +W(2) * invLength, -W(1) * invLength});
   }
   base::cross(V.raw_data(), W.raw_data(), U.raw_data());
@@ -545,11 +545,11 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::compute_eigenvector0(
   }
 
   if (imax == 0) {
-    evec0 = r0xr1 * (static_cast<value_type>(1) / std::sqrt(d0));
+    evec0 = r0xr1 * (safe_cast<value_type>(1) / std::sqrt(d0));
   } else if (imax == 1) {
-    evec0 = r0xr2 * (static_cast<value_type>(1) / std::sqrt(d1));
+    evec0 = r0xr2 * (safe_cast<value_type>(1) / std::sqrt(d1));
   } else {
-    evec0 = r1xr2 * (static_cast<value_type>(1) / std::sqrt(d2));
+    evec0 = r1xr2 * (safe_cast<value_type>(1) / std::sqrt(d2));
   }
 }
 
@@ -582,16 +582,16 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::compute_eigenvector1(
 
   if (absM00 >= absM11) {
     const value_type maxAbsComp{std::max(absM00, absM01)};
-    if (maxAbsComp > static_cast<value_type>(0)) {
+    if (maxAbsComp > safe_cast<value_type>(0)) {
       if (absM00 >= absM01) {
         m01 /= m00;
-        m00 = static_cast<value_type>(1) /
-              std::sqrt(static_cast<value_type>(1) + m01 * m01);
+        m00 = safe_cast<value_type>(1) /
+              std::sqrt(safe_cast<value_type>(1) + m01 * m01);
         m01 *= m00;
       } else {
         m00 /= m01;
-        m01 = static_cast<value_type>(1) /
-              std::sqrt(static_cast<value_type>(1) + m00 * m00);
+        m01 = safe_cast<value_type>(1) /
+              std::sqrt(safe_cast<value_type>(1) + m00 * m00);
         m00 *= m01;
       }
       evec1 = U * m01 - V * m00;
@@ -600,16 +600,16 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::compute_eigenvector1(
     }
   } else {
     const value_type maxAbsComp{std::max(absM11, absM01)};
-    if (maxAbsComp > static_cast<value_type>(0)) {
+    if (maxAbsComp > safe_cast<value_type>(0)) {
       if (absM11 >= absM01) {
         m01 /= m11;
-        m11 = static_cast<value_type>(1) /
-              std::sqrt(static_cast<value_type>(1) + m01 * m01);
+        m11 = safe_cast<value_type>(1) /
+              std::sqrt(safe_cast<value_type>(1) + m01 * m01);
         m01 *= m11;
       } else {
         m11 /= m01;
-        m01 = static_cast<value_type>(1) /
-              std::sqrt(static_cast<value_type>(1) + m11 * m11);
+        m01 = safe_cast<value_type>(1) /
+              std::sqrt(safe_cast<value_type>(1) + m11 * m11);
         m11 *= m01;
       }
       evec1 = U * m11 - V * m01;

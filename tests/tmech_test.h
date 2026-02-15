@@ -85,13 +85,16 @@ template <typename T, std::size_t Dim>
 inline auto well_conditioned_nonsym_rank2() {
   tmech::tensor<T, Dim, 2> A;
   if constexpr (Dim == 2) {
-    A = tmech::tensor<T, 2, 2>{static_cast<T>(3.0), static_cast<T>(-1.0),
-                               static_cast<T>(0.5), static_cast<T>(2.0)};
+    A = tmech::tensor<T, 2, 2>{
+        tmech::safe_cast<T>(3.0), tmech::safe_cast<T>(-1.0),
+        tmech::safe_cast<T>(0.5), tmech::safe_cast<T>(2.0)};
   } else if constexpr (Dim == 3) {
     A = tmech::tensor<T, 3, 2>{
-        static_cast<T>(3.0),  static_cast<T>(-0.5), static_cast<T>(0.3),
-        static_cast<T>(0.7),  static_cast<T>(2.5),  static_cast<T>(-0.4),
-        static_cast<T>(-0.2), static_cast<T>(0.6),  static_cast<T>(4.0)};
+        tmech::safe_cast<T>(3.0),  tmech::safe_cast<T>(-0.5),
+        tmech::safe_cast<T>(0.3),  tmech::safe_cast<T>(0.7),
+        tmech::safe_cast<T>(2.5),  tmech::safe_cast<T>(-0.4),
+        tmech::safe_cast<T>(-0.2), tmech::safe_cast<T>(0.6),
+        tmech::safe_cast<T>(4.0)};
   }
   return A;
 }
@@ -751,11 +754,10 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     EXPECT_EQ(true, tmech::almost_equal(C1, C2, 5e-6));                        \
   }
 
-// sign tensor decomposition — STABILIZED: fixed SPD matrix
 #define signDecomposition(ValueType, Dim)                                      \
   TEST(gtest, signDecomposition_##ValueType##_##Dim) {                         \
     auto A = test_helpers::well_conditioned_spd_rank2<ValueType, Dim>();       \
-    auto signA{tmech::sign(A, 5e-12, 15)};                                     \
+    auto signA{tmech::sign(A, 5e-12f, 15)};                                    \
     EXPECT_EQ(true, tmech::almost_equal(signA.N(), tmech::sqrt(A *A), 5e-5));  \
     EXPECT_EQ(true, tmech::almost_equal(signA.S() * signA.N(), A, 5e-5));      \
   }
@@ -763,13 +765,12 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
 #define signDecompositionEvaluate(ValueType, Dim)                              \
   TEST(gtest, signDecompositionEvaluate_##ValueType##_##Dim) {                 \
     auto A = test_helpers::well_conditioned_spd_rank2<ValueType, Dim>();       \
-    auto signA{tmech::sign(A * 2, 5e-12, 15)};                                 \
+    auto signA{tmech::sign(A * 2, 5e-12f, 15)};                                \
     EXPECT_EQ(true,                                                            \
               tmech::almost_equal(signA.N(), 2 * tmech::sqrt(A * A), 5e-5));   \
     EXPECT_EQ(true, tmech::almost_equal(signA.S() * signA.N(), 2 * A, 5e-5));  \
   }
 
-// positive and negative decomposition — STABILIZED: fixed SPD matrix
 #define positive_and_negavtive_decomposition(ValueType, Dim)                   \
   TEST(gtest, positive_and_negavtive_decomposition_##ValueType##_##Dim) {      \
     auto A = test_helpers::well_conditioned_spd_rank2<ValueType, Dim>();       \
@@ -779,24 +780,24 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
                   A, A_pos_neg.negative() + A_pos_neg.positive(), 5e-7));      \
   }
 
-// Symmetric eigenvalue problem — uses fixed matrix (already stable)
 #define symmetric_eigenvalue_problem(ValueType, TensorFunction,                \
                                      LambdaFunction)                           \
   TEST(gtest, SymmetricEigenvalueProblem_##TensorFunction##_##ValueType##_3) { \
-    tmech::tensor<ValueType, 3, 2> A{2.0306, 0.162,  2.0208, 0.162, 1.245,     \
-                                     0,      2.0208, 0,      2.561};           \
-    tmech::tensor<ValueType, 3, 1> Vec1{7.482647933407099e-01,                 \
-                                        -1.209568822617077e-01,                \
-                                        -6.522800255107561e-01};               \
+    tmech::tensor<ValueType, 3, 2> A{                                          \
+        2.0306f, 0.162f, 2.0208f, 0.162f, 1.245f, 0, 2.0208f, 0, 2.561f};      \
+    tmech::tensor<ValueType, 3, 1> Vec1{7.482647933407099e-01f,                \
+                                        -1.209568822617077e-01f,               \
+                                        -6.522800255107561e-01f};              \
     tmech::tensor<ValueType, 3, 1> Vec2{                                       \
-        -6.824020025926589e-02,                                                \
-        -9.920557437763156e-01,                                                \
-        1.056819582946706e-01,                                                 \
+        -6.824020025926589e-02f,                                               \
+        -9.920557437763156e-01f,                                               \
+        1.056819582946706e-01f,                                                \
     };                                                                         \
-    tmech::tensor<ValueType, 3, 1> Vec3{                                       \
-        6.598811060451425e-01, 3.456636911723016e-02, 7.505745079675242e-01};  \
-    ValueType lambda1{2.428338209898600e-01}, lambda2{1.256143438774842e+00},  \
-        lambda3{4.337622740235298e+00};                                        \
+    tmech::tensor<ValueType, 3, 1> Vec3{6.598811060451425e-01f,                \
+                                        3.456636911723016e-02f,                \
+                                        7.505745079675242e-01f};               \
+    ValueType lambda1{2.428338209898600e-01f},                                 \
+        lambda2{1.256143438774842e+00f}, lambda3{4.337622740235298e+00f};      \
     tmech::tensor<ValueType, 3, 2> B =                                         \
         LambdaFunction(lambda1) * tmech::otimes(Vec1, Vec1) +                  \
         LambdaFunction(lambda2) * tmech::otimes(Vec2, Vec2) +                  \
@@ -809,8 +810,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, symmetricPart_##ValueType##_##Dim) {                             \
     tmech::tensor<ValueType, Dim, 2> A, B;                                     \
     A.randn();                                                                 \
-    for (int i{0}; i < Dim; ++i) {                                             \
-      for (int j{0}; j < Dim; ++j) {                                           \
+    for (std::size_t i{0}; i < Dim; ++i) {                                     \
+      for (std::size_t j{0}; j < Dim; ++j) {                                   \
         B(i, j) = (A(i, j) + A(j, i)) * static_cast<ValueType>(0.5);           \
       }                                                                        \
     }                                                                          \
@@ -822,8 +823,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A, B;                                     \
     A.randn();                                                                 \
     const ValueType a{2};                                                      \
-    for (int i{0}; i < Dim; ++i) {                                             \
-      for (int j{0}; j < Dim; ++j) {                                           \
+    for (std::size_t i{0}; i < Dim; ++i) {                                     \
+      for (std::size_t j{0}; j < Dim; ++j) {                                   \
         B(i, j) = (a * A(i, j) + a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \
@@ -858,8 +859,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, skewSymmetricPart_##ValueType##_##Dim) {                         \
     tmech::tensor<ValueType, Dim, 2> A, B;                                     \
     A.randn();                                                                 \
-    for (int i{0}; i < Dim; ++i) {                                             \
-      for (int j{0}; j < Dim; ++j) {                                           \
+    for (std::size_t i{0}; i < Dim; ++i) {                                     \
+      for (std::size_t j{0}; j < Dim; ++j) {                                   \
         B(i, j) = (A(i, j) - A(j, i)) * static_cast<ValueType>(0.5);           \
       }                                                                        \
     }                                                                          \
@@ -871,8 +872,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A, B;                                     \
     A.randn();                                                                 \
     const ValueType a{2};                                                      \
-    for (int i{0}; i < Dim; ++i) {                                             \
-      for (int j{0}; j < Dim; ++j) {                                           \
+    for (std::size_t i{0}; i < Dim; ++i) {                                     \
+      for (std::size_t j{0}; j < Dim; ++j) {                                   \
         B(i, j) = (a * A(i, j) + a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \

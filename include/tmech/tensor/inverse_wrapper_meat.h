@@ -19,7 +19,7 @@ template <std::size_t Rows>
 constexpr auto
 inverse_wrapper_base<_ValueType>::lu_detail(value_type const *__A) noexcept {
   for (std::size_t i{0}; i < Rows; ++i) {
-    const value_type Akk = static_cast<value_type>(1.0) / __A[i * Rows + i];
+    const value_type Akk = safe_cast<value_type>(1.0) / __A[i * Rows + i];
     for (std::size_t j{i + 1}; j < Rows; ++j) {
       const_cast<value_type &>(__A[j * Rows + i]) *= Akk;
     }
@@ -39,11 +39,11 @@ constexpr auto inverse_wrapper_base<_ValueType>::inv_lu(
     value_type *__Ainv, value_type const *const __Afac) noexcept {
 
   for (std::size_t i{0}; i < Rows * Rows; ++i) {
-    __Ainv[i] = static_cast<value_type>(0);
+    __Ainv[i] = safe_cast<value_type>(0);
   }
 
   for (std::size_t i{0}; i < Rows; ++i) {
-    __Ainv[i * Rows + i] = static_cast<value_type>(1.0);
+    __Ainv[i * Rows + i] = safe_cast<value_type>(1.0);
   }
 
   value_type temp_data[Rows];
@@ -75,7 +75,7 @@ constexpr inline auto inverse_wrapper_base<_ValueType>::invert_2_2(
     value_type *result, value_type const A11, value_type const A12,
     value_type const A21, value_type const A22) noexcept {
   const auto det{A11 * A22 - A12 * A21};
-  const auto invdet{static_cast<value_type>(1.0) / det};
+  const auto invdet{safe_cast<value_type>(1.0) / det};
 
   result[0] = A22 * invdet;
   result[1] = -A12 * invdet;
@@ -92,7 +92,7 @@ constexpr inline auto inverse_wrapper_base<_ValueType>::invert_3_3(
   const auto det{A0 * (A4 * A8 - A5 * A7) + A1 * (A5 * A6 - A3 * A8) +
                  A2 * (A3 * A7 - A4 * A6)};
 
-  const auto invdet{static_cast<value_type>(1.0) / det};
+  const auto invdet{safe_cast<value_type>(1.0) / det};
 
   result[0] = (A4 * A8 - A5 * A7) * invdet;
   result[1] = (A2 * A7 - A1 * A8) * invdet;
@@ -216,7 +216,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::voigt_rank_4(_Res
     //last three columns due to symmetry
     for (std::size_t i{0}; i < SIZE; ++i) {
       for (std::size_t j{dimension()}; j < SIZE; ++j) {
-        _ptr[i * SIZE + j] *= static_cast<value_type>(2);
+        _ptr[i * SIZE + j] *= safe_cast<value_type>(2);
       }
     }
 
@@ -226,7 +226,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::voigt_rank_4(_Res
     //convert back last three columns due to symmetry
     for(std::size_t i{0}; i<SIZE; ++i){
         for(std::size_t j{dimension()}; j<SIZE; ++j){
-          _ptr_inv[i * SIZE + j] *= static_cast<value_type>(0.5);
+          _ptr_inv[i * SIZE + j] *= safe_cast<value_type>(0.5);
         }
     }
 
@@ -245,8 +245,9 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(valu
     constexpr auto RANK{rank()};
 
     if constexpr (DIM == 1){
-        const_cast<value_type&>(__result[0]) = static_cast<value_type>(1.)/__data[0];
-        return ;
+      const_cast<value_type &>(__result[0]) =
+          safe_cast<value_type>(1.) / __data[0];
+      return;
     }
 
     if constexpr (RANK == 2) {
@@ -361,7 +362,7 @@ inverse_wrapper<_Tensor>::evaluate_imp(value_type const *__result,
 
   if constexpr (DIM == 1) {
     const_cast<value_type &>(__result[0]) =
-        static_cast<value_type>(1.) / __data[0];
+        safe_cast<value_type>(1.) / __data[0];
     return;
   }
 
