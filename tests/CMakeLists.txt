@@ -31,3 +31,7 @@ macro(add_tmech_test TARGET_NAME)
 endmacro()
 
 add_tmech_test(tmech_test main.cpp)
+
+if(MSVC)
+    target_compile_options(tmech_test PRIVATE /bigobj)
+endif()

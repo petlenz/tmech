@@ -302,9 +302,6 @@ endif()
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}")
 
 if(BUILD_TESTS)
-    if(MSVC)
-        target_compile_options(tmech_test PRIVATE /bigobj)
-    endif()
     add_subdirectory(tests)
 endif()
 
