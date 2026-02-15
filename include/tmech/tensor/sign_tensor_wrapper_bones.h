@@ -23,7 +23,7 @@ public:
         _father(__father)
     {}
 
-    sign_S_wrapper(sign_S_wrapper const& __data)noexcept:
+    explicit sign_S_wrapper(sign_S_wrapper const& __data)noexcept:
         _father(__data._father)
     {}
 
