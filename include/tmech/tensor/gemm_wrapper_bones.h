@@ -9,26 +9,17 @@
 #define GEMM_WRAPPER_BONES_H
 
 #include <stdlib.h>
-#include <immintrin.h>
 #include <array>
 
-namespace detail {
+#if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
+    #include <immintrin.h>
+    #define TMECH_X86_SIMD 1
+#elif defined(__aarch64__) || defined(_M_ARM64)
+    #include <arm_neon.h>
+    #define TMECH_ARM_NEON 1
+#endif
 
-extern "C" {
-void dgemm_ (char *TRANSA,
-            char *TRANSB,
-            int *M,
-            int *N,
-            int *K,
-            double *ALPHA,
-            double **A,
-            int *LDA,
-            double **B,
-            int *LDB,
-            double *BETA,
-            double **C,
-            int *LDC);
-}
+namespace detail {
 
 template <typename LHS, typename RHS, typename RESULT, std::size_t RowsLHS, std::size_t ColumnsLHS, std::size_t RowsRHS, std::size_t ColumnsRHS>
 class gemm_wrapper
@@ -563,26 +554,25 @@ public:
         //        }
     }
 
-    static inline auto transposed4x4(__m256d const& row1, __m256d const& row2, __m256d const& row3, __m256d const& row4)noexcept{
-        const auto rr1 = _mm256_unpacklo_pd(row1, row2);
-        const auto rr2 = _mm256_unpacklo_pd(row3, row4);
-        const auto rr3 = _mm256_unpackhi_pd(row1, row2);
-        const auto rr4 = _mm256_unpackhi_pd(row3, row4);
-        return std::make_tuple(_mm256_permute2f128_pd(rr1, rr2, 0x20),
-                               _mm256_permute2f128_pd(rr3, rr4, 0x20),
-                               _mm256_permute2f128_pd(rr1, rr2, 0x31),
-                               _mm256_permute2f128_pd(rr3, rr4, 0x31));
-    }
+//    static inline auto transposed4x4(__m256d const& row1, __m256d const& row2, __m256d const& row3, __m256d const& row4)noexcept{
+//        const auto rr1 = _mm256_unpacklo_pd(row1, row2);
+//        const auto rr2 = _mm256_unpacklo_pd(row3, row4);
+//        const auto rr3 = _mm256_unpackhi_pd(row1, row2);
+//        const auto rr4 = _mm256_unpackhi_pd(row3, row4);
+//        return std::make_tuple(_mm256_permute2f128_pd(rr1, rr2, 0x20),
+//                               _mm256_permute2f128_pd(rr3, rr4, 0x20),
+//                               _mm256_permute2f128_pd(rr1, rr2, 0x31),
+//                               _mm256_permute2f128_pd(rr3, rr4, 0x31));
+//    }
 
-    static constexpr inline auto gemv_d_4x4_2(LHS const* __lhs, RHS const* __rhs, RESULT * __result){
-        const auto [col1, col2, col3, col4]{transposed4x4(_mm256_load_pd(__lhs+0),
-                                                          _mm256_load_pd(__lhs+4),
-                                                          _mm256_load_pd(__lhs+8),
-                                                          _mm256_load_pd(__lhs+12))};
-
-        const auto v = _mm256_loadu_pd(__rhs);
-        _mm256_storeu_pd(__result, (col1*v + col2*v + col3*v + col4*v));
-    }
+//    static constexpr inline auto gemv_d_4x4_2(LHS const* __lhs, RHS const* __rhs, RESULT * __result){
+//        const auto [col1, col2, col3, col4]{transposed4x4(_mm256_load_pd(__lhs+0),
+//                                                          _mm256_load_pd(__lhs+4),
+//                                                          _mm256_load_pd(__lhs+8),
+//                                                          _mm256_load_pd(__lhs+12))};
+//        const auto v = _mm256_loadu_pd(__rhs);
+//        _mm256_storeu_pd(__result, (col1*v + col2*v + col3*v + col4*v));
+//    }
 
     static constexpr inline auto gevm(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
         for(size_type i{0}; i<RowsLHS; ++i){
