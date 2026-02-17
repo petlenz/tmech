@@ -622,32 +622,27 @@ public:
     //    }
 
 
-    static constexpr inline auto gemv_blocked_sse(double const* __lhs, double const* __rhs, double const* __result)noexcept{
-
-        constexpr auto Size{2ul};
-
-        for(std::size_t j{0}; j<(ColumnsRHS/Size)*Size; j+=Size){
-            __m128d yrow = _mm_loadu_pd(__rhs+j);
-            for(std::size_t i{0}; i<(RowsRHS/Size)*Size; i+=Size){
-                __m128d a = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+0)*RowsRHS+j), yrow);
-                __m128d b = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+1)*RowsRHS+j), yrow);
-
-                // {a[0]+a[1], b[0]+b[1]}
-                __m128d sumab = _mm_hadd_pd(a, b);
-
-                _mm_storeu_pd(const_cast<double*>(&__result[i]), sumab + _mm_loadu_pd(const_cast<double*>(&__result[i])));
-            }
-        }
-
-        //clean
-        for(std::size_t i{0}; i<RowsRHS; ++i){
-            RESULT sum{__result[i]};
-            for(std::size_t j{(ColumnsRHS/Size)*Size}; j<ColumnsRHS; ++j){
-                sum += __lhs[i*ColumnsLHS+j]*__rhs[j];
-            }
-            const_cast<double&>(__result[i]) = sum;
-        }
-    }
+//    static constexpr inline auto gemv_blocked_sse(double const* __lhs, double const* __rhs, double const* __result)noexcept{
+//        constexpr auto Size{2ul};
+//        for(std::size_t j{0}; j<(ColumnsRHS/Size)*Size; j+=Size){
+//            __m128d yrow = _mm_loadu_pd(__rhs+j);
+//            for(std::size_t i{0}; i<(RowsRHS/Size)*Size; i+=Size){
+//                __m128d a = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+0)*RowsRHS+j), yrow);
+//                __m128d b = _mm_mul_pd(_mm_loadu_pd(__rhs + (i+1)*RowsRHS+j), yrow);
+//                // {a[0]+a[1], b[0]+b[1]}
+//                __m128d sumab = _mm_hadd_pd(a, b);
+//                _mm_storeu_pd(const_cast<double*>(&__result[i]), sumab + _mm_loadu_pd(const_cast<double*>(&__result[i])));
+//            }
+//        }
+//        //clean
+//        for(std::size_t i{0}; i<RowsRHS; ++i){
+//            RESULT sum{__result[i]};
+//            for(std::size_t j{(ColumnsRHS/Size)*Size}; j<ColumnsRHS; ++j){
+//                sum += __lhs[i*ColumnsLHS+j]*__rhs[j];
+//            }
+//            const_cast<double&>(__result[i]) = sum;
+//        }
+//    }
 
 
     template<std::size_t _Size>
