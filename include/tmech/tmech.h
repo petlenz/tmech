@@ -27,7 +27,6 @@
 #include <tuple>
 #include <any>
 #include <map>
-#include <immintrin.h>
 #include <complex>
 #include <cstring>
 #include <string>
