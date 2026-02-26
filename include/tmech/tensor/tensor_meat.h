@@ -89,9 +89,32 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived
         if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived>::value){
             tensor_base.convert().evaluate();
         }
-        using meta_loop = detail::for_loop_t<rank()-1, Dim>;
-        auto func{[&](auto ...numbers){(*this)(numbers...) = tensor_base.convert()(numbers...);}};
-        meta_loop::for_loop(func);
+
+        if constexpr (detail::is_direct_assignable_v<Derived>) {
+#ifdef TMECH_HAS_XSIMD
+            if constexpr (detail::is_simd_assignable_v<Derived, value_type>) {
+                using batch_type = xsimd::batch<value_type>;
+                constexpr std::size_t W = batch_type::size;
+                constexpr std::size_t vec_end = (Size / W) * W;
+                auto* dst = raw_data();
+                for (std::size_t i = 0; i < vec_end; i += W) {
+                    tensor_base.convert().batch_access(i).store_unaligned(dst + i);
+                }
+                for (std::size_t i = vec_end; i < Size; ++i) {
+                    dst[i] = tensor_base.convert().direct_access(i);
+                }
+            } else
+#endif
+            {
+                for (std::size_t i = 0; i < Size; ++i) {
+                    _data[i] = tensor_base.convert().direct_access(i);
+                }
+            }
+        } else {
+            using meta_loop = detail::for_loop_t<rank()-1, Dim>;
+            auto func{[&](auto ...numbers){(*this)(numbers...) = tensor_base.convert()(numbers...);}};
+            meta_loop::for_loop(func);
+        }
     }
     return *this;
 }
@@ -115,9 +138,32 @@ tensor<T, Dim, Rank>::operator=(_Tensor && __tensor) noexcept{
         if constexpr(std::experimental::is_detected<detail::has_evaluate, TensorType>::value){
             _tensor.evaluate();
         }
-        using meta_loop = detail::for_loop_t<rank()-1, Dim>;
-        auto func{[&](auto ...numbers){(*this)(numbers...) = _tensor(numbers...);}};
-        meta_loop::for_loop(func);
+
+        if constexpr (detail::is_direct_assignable_v<TensorType>) {
+#ifdef TMECH_HAS_XSIMD
+            if constexpr (detail::is_simd_assignable_v<TensorType, value_type>) {
+                using batch_type = xsimd::batch<value_type>;
+                constexpr std::size_t W = batch_type::size;
+                constexpr std::size_t vec_end = (Size / W) * W;
+                auto* dst = raw_data();
+                for (std::size_t i = 0; i < vec_end; i += W) {
+                    _tensor.batch_access(i).store_unaligned(dst + i);
+                }
+                for (std::size_t i = vec_end; i < Size; ++i) {
+                    dst[i] = _tensor.direct_access(i);
+                }
+            } else
+#endif
+            {
+                for (std::size_t i = 0; i < Size; ++i) {
+                    _data[i] = _tensor.direct_access(i);
+                }
+            }
+        } else {
+            using meta_loop = detail::for_loop_t<rank()-1, Dim>;
+            auto func{[&](auto ...numbers){(*this)(numbers...) = _tensor(numbers...);}};
+            meta_loop::for_loop(func);
+        }
     }
     return *this;
 }
@@ -319,9 +365,32 @@ tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor)noexcept:
             if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor>::value){
                 const_cast<_Tensor&>(__tensor).evaluate();
             }
-            using meta_loop = detail::for_loop_t<rank()-1, Dim>;
-            auto func{[&](auto ...numbers){(*this)(numbers...) = __tensor(numbers...);}};
-            meta_loop::for_loop(func);
+
+            if constexpr (detail::is_direct_assignable_v<_Tensor>) {
+#ifdef TMECH_HAS_XSIMD
+                if constexpr (detail::is_simd_assignable_v<_Tensor, value_type>) {
+                    using batch_type = xsimd::batch<value_type>;
+                    constexpr std::size_t W = batch_type::size;
+                    constexpr std::size_t vec_end = (Size / W) * W;
+                    auto* dst = raw_data();
+                    for (std::size_t i = 0; i < vec_end; i += W) {
+                        __tensor.batch_access(i).store_unaligned(dst + i);
+                    }
+                    for (std::size_t i = vec_end; i < Size; ++i) {
+                        dst[i] = __tensor.direct_access(i);
+                    }
+                } else
+#endif
+                {
+                    for (std::size_t i = 0; i < Size; ++i) {
+                        _data[i] = __tensor.direct_access(i);
+                    }
+                }
+            } else {
+                using meta_loop = detail::for_loop_t<rank()-1, Dim>;
+                auto func{[&](auto ...numbers){(*this)(numbers...) = __tensor(numbers...);}};
+                meta_loop::for_loop(func);
+            }
         }
     }
 }

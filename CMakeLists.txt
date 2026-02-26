@@ -129,7 +129,7 @@ set(TMECH_TENSOR_HEADER
     ${TMECH_INCLUDE_DIR}/tmech/tensor/tensor_expression_wrapper_bones.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/tensor_expression_wrapper_meat.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/traits.h
-    ${TMECH_INCLUDE_DIR}/tmech/tensor/utility.h
+    ${TMECH_INCLUDE_DIR}/tmech/tensor/tmech_utility.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/tensor_operators.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/tensor_functions_forward.h
     ${TMECH_INCLUDE_DIR}/tmech/tensor/tensor_functions_implementation.h
@@ -251,8 +251,24 @@ OPTION(BUILD_TESTS "tmech test suite" ON)
 OPTION(BUILD_BENCHMARK "tmech benchmark" OFF)
 OPTION(DOWNLOAD_GTEST "build gtest from downloaded sources" OFF)
 OPTION(DOWNLOAD_GBENCHMARK "download google benchmark and build from source" OFF)
+OPTION(TMECH_USE_XSIMD "Use xsimd for portable SIMD operations" OFF)
 
+if(TMECH_USE_XSIMD)
+    include(FetchContent)
+    FetchContent_Declare(
+        xsimd
+        GIT_REPOSITORY https://github.com/xtensor-stack/xsimd.git
+        GIT_TAG 13.2.0
+        GIT_SHALLOW TRUE
+    )
+    set(BUILD_TESTS_SAVED ${BUILD_TESTS})
+    set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(xsimd)
+    set(BUILD_TESTS ${BUILD_TESTS_SAVED} CACHE BOOL "" FORCE)
 
+    target_link_libraries(${PROJECT_NAME} INTERFACE xsimd)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE TMECH_HAS_XSIMD)
+endif()
 
 # Adding the install interface generator expression makes sure that the include
 # files are installed to the proper location (provided by GNUIcd build && ctestnstallDirs)
@@ -266,8 +282,12 @@ target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 
 if(TMECH_INSTALL_LIBRARY)
   # locations are provided by GNUInstallDirs
+  set(_TMECH_INSTALL_TARGETS ${PROJECT_NAME})
+  if(TMECH_USE_XSIMD)
+    list(APPEND _TMECH_INSTALL_TARGETS xsimd)
+  endif()
   install(
-    TARGETS ${PROJECT_NAME}
+    TARGETS ${_TMECH_INSTALL_TARGETS}
     EXPORT ${PROJECT_NAME}_Targets
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -307,9 +327,9 @@ if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-#if(BUILD_BENCHMARK)
-#    add_subdirectory(benchmark)
-#endif()
+if(BUILD_BENCHMARK)
+    add_subdirectory(benchmark)
+endif()
 
 if(BUILD_EXAMPLES)
     add_subdirectory(examples)

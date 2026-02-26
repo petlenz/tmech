@@ -39,6 +39,7 @@ docs/xml/
 # Build directory
 build/
 build-*/
+build_*/
 
 # Documentation build artefacts
 docs/CMakeCache.txt
@@ -46,6 +47,13 @@ docs/xml/
 docs/build/
 docs/*.tmp
 
+# Benchmark results
+benchmark_results/
+results_*/
+
 # Cmakelist files
 CMakeLists.txt.user
 
+
+python
+*.pyc

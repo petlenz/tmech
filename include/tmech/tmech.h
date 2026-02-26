@@ -55,6 +55,10 @@ const auto is_detected_v = is_detected<Op, Args...>::value;
 }
 
 
+#ifdef TMECH_HAS_XSIMD
+#include <xsimd/xsimd.hpp>
+#endif
+
 #include "tmech_forward_definitions.h"
 #include "tensor/tensor_operators.h"
 
@@ -66,7 +70,7 @@ namespace tmech {
 #include "tensor/scalar_meat.h"
 
 #include "tensor/traits.h"
-#include "tensor/utility.h"
+#include "tensor/tmech_utility.h"
 
 #include "tensor/compare_lambda.h"
 #include "tensor/compare_almost_equal.h"
@@ -74,6 +78,9 @@ namespace tmech {
 #include "tensor/tensor_base_bones.h"
 #include "tensor/tensor_base_meat.h"
 
+#include "tensor/gemm_kernels_small.h"
+#include "tensor/gemm_kernels_medium.h"
+#include "tensor/gemm_kernels_large.h"
 #include "tensor/gemm_wrapper_bones.h"
 #include "tensor/gemm_wrapper_meat.h"
 #include "tensor/dot_wrapper_bones.h"
