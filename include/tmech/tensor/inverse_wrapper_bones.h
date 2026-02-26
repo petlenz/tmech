@@ -101,6 +101,16 @@ public:
 
     constexpr inline auto raw_data()const noexcept;
 
+    constexpr inline auto direct_access(std::size_t __idx) const noexcept {
+        return data.direct_access(__idx);
+    }
+
+#ifdef TMECH_HAS_XSIMD
+    auto batch_access(std::size_t __idx) const noexcept {
+        return xsimd::batch<value_type>::load_unaligned(&data.raw_data()[__idx]);
+    }
+#endif
+
   private:
     template<typename _Result>
     constexpr inline auto voigt_rank_4(_Result const& __result)noexcept;
@@ -159,6 +169,16 @@ public:
   constexpr inline auto evaluate(_Result const &__result) noexcept;
 
   constexpr inline auto raw_data() const noexcept;
+
+    constexpr inline auto direct_access(std::size_t __idx) const noexcept {
+        return data.direct_access(__idx);
+    }
+
+#ifdef TMECH_HAS_XSIMD
+    auto batch_access(std::size_t __idx) const noexcept {
+        return xsimd::batch<value_type>::load_unaligned(&data.raw_data()[__idx]);
+    }
+#endif
 
 private:
   template <typename _Result>

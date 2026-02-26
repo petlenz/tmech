@@ -60,13 +60,15 @@ public:
 
     constexpr inline auto raw_data()const noexcept;
 
-    static constexpr inline auto simple_evaluation()noexcept{
-        return true;
-    }
-
     constexpr inline auto direct_access(std::size_t __idx)const noexcept{
         return _data.direct_access(__idx);
     }
+
+#ifdef TMECH_HAS_XSIMD
+    auto batch_access(std::size_t __idx) const noexcept {
+        return xsimd::batch<value_type>::load_unaligned(&_data.raw_data()[__idx]);
+    }
+#endif
 
 private:
     template<typename _LHS, typename _RHS, typename _RESULT>

@@ -33,6 +33,20 @@ public:
 
     constexpr inline auto evaluate()noexcept;
 
+    template <typename U = data_type_tensor,
+              std::enable_if_t<std::experimental::is_detected_v<has_direct_access_t, U>, int> = 0>
+    constexpr inline auto direct_access(std::size_t __idx) const noexcept {
+        return -_data.direct_access(__idx);
+    }
+
+#ifdef TMECH_HAS_XSIMD
+    template <typename U = data_type_tensor,
+              std::enable_if_t<std::experimental::is_detected_v<has_batch_access_t, U>, int> = 0>
+    auto batch_access(std::size_t __idx) const noexcept {
+        return -_data.batch_access(__idx);
+    }
+#endif
+
 private:
     Tensor _data;
 };
