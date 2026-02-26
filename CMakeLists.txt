@@ -246,11 +246,11 @@ endif()
 OPTION(TMECH_INSTALL_LIBRARY
        "Enable installing of tmech library into default locations"
        ${IS_TOPLEVEL_PROJECT})
-OPTION(BUILD_EXAMPLES "tmech examples" ON)
-OPTION(BUILD_TESTS "tmech test suite" ON)
-OPTION(BUILD_BENCHMARK "tmech benchmark" OFF)
-OPTION(DOWNLOAD_GTEST "build gtest from downloaded sources" OFF)
-OPTION(DOWNLOAD_GBENCHMARK "download google benchmark and build from source" OFF)
+OPTION(TMECH_BUILD_EXAMPLES "tmech examples" ON)
+OPTION(TMECH_BUILD_TESTS "tmech test suite" ON)
+OPTION(TMECH_BUILD_BENCHMARK "tmech benchmark" OFF)
+OPTION(TMECH_DOWNLOAD_GTEST "build gtest from downloaded sources" OFF)
+OPTION(TMECH_DOWNLOAD_GBENCHMARK "download google benchmark and build from source" OFF)
 OPTION(TMECH_USE_XSIMD "Use xsimd for portable SIMD operations" OFF)
 
 if(TMECH_USE_XSIMD)
@@ -261,10 +261,10 @@ if(TMECH_USE_XSIMD)
         GIT_TAG 13.2.0
         GIT_SHALLOW TRUE
     )
-    set(BUILD_TESTS_SAVED ${BUILD_TESTS})
-    set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(TMECH_BUILD_TESTS_SAVED ${TMECH_BUILD_TESTS})
+    set(TMECH_BUILD_TESTS OFF CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(xsimd)
-    set(BUILD_TESTS ${BUILD_TESTS_SAVED} CACHE BOOL "" FORCE)
+    set(TMECH_BUILD_TESTS ${TMECH_BUILD_TESTS_SAVED} CACHE BOOL "" FORCE)
 
     target_link_libraries(${PROJECT_NAME} INTERFACE xsimd)
     target_compile_definitions(${PROJECT_NAME} INTERFACE TMECH_HAS_XSIMD)
@@ -321,17 +321,17 @@ endif()
 
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}")
 
-if(BUILD_TESTS)
+if(TMECH_BUILD_TESTS)
     enable_testing()
     include(CTest)
     add_subdirectory(tests)
 endif()
 
-if(BUILD_BENCHMARK)
+if(TMECH_BUILD_BENCHMARK)
     add_subdirectory(benchmark)
 endif()
 
-if(BUILD_EXAMPLES)
+if(TMECH_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 

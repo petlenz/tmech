@@ -34,9 +34,9 @@ class BuildConfig:
 
     def cmake_args(self) -> List[str]:
         return [
-            "-DBUILD_BENCHMARK=ON",
-            "-DBUILD_TESTS=OFF",
-            "-DBUILD_EXAMPLES=OFF",
+            "-DTMECH_BUILD_BENCHMARK=ON",
+            "-DTMECH_BUILD_TESTS=OFF",
+            "-DTMECH_BUILD_EXAMPLES=OFF",
             "-DCMAKE_BUILD_TYPE=Release",
             f"-DTMECH_USE_XSIMD={'ON' if self.use_xsimd else 'OFF'}",
         ]
