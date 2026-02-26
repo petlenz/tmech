@@ -520,6 +520,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, inner_product4_##ValueType##_##Dim) {                            \
     using SeqL = tmech::sequence<3, 4>;                                        \
     using SeqR = tmech::sequence<1, 2>;                                        \
+    constexpr double tol =                                                      \
+        (std::is_same_v<ValueType, float> ||                                   \
+         std::is_same_v<ValueType, std::complex<float>>) ? 5e-5 : 5e-8;       \
     tmech::tensor<ValueType, Dim, 4> a, b, c;                                  \
     a = tmech::abs(tmech::randn<ValueType, Dim, 4>());                         \
     b = tmech::abs(tmech::randn<ValueType, Dim, 4>());                         \
@@ -538,7 +541,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
-                        tmech::inner_product<SeqL, SeqR>(a, b), c, 5e-7));     \
+                        tmech::inner_product<SeqL, SeqR>(a, b), c, tol));      \
     c.fill(0);                                                                 \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
       for (std::size_t j{0}; j < Dim; ++j) {                                   \
@@ -554,16 +557,16 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
-                        tmech::inner_product<SeqR, SeqL>(a, b), c, 5e-7));     \
+                        tmech::inner_product<SeqR, SeqL>(a, b), c, tol));      \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
                         tmech::inner_product<SeqR, SeqL>(tmech::abs(a), b), c, \
-                        5e-7));                                                \
+                        tol));                                                 \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
                         tmech::inner_product<SeqR, SeqL>(a, tmech::abs(b)), c, \
-                        5e-7));                                                \
+                        tol));                                                 \
     EXPECT_EQ(true, tmech::almost_equal(tmech::inner_product<SeqR, SeqL>(      \
                                             tmech::abs(a), tmech::abs(b)),     \
-                                        c, 5e-7));                             \
+                                        c, tol));                              \
   }
 
 // outer product test — safe with randn
