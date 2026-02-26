@@ -266,6 +266,10 @@ if(TMECH_USE_XSIMD)
     FetchContent_MakeAvailable(xsimd)
     set(TMECH_BUILD_TESTS ${TMECH_BUILD_TESTS_SAVED} CACHE BOOL "" FORCE)
 
+    # Mark xsimd includes as SYSTEM to suppress third-party warnings under -Werror
+    get_target_property(_xsimd_inc xsimd INTERFACE_INCLUDE_DIRECTORIES)
+    set_target_properties(xsimd PROPERTIES INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_xsimd_inc}")
+
     target_link_libraries(${PROJECT_NAME} INTERFACE xsimd)
     target_compile_definitions(${PROJECT_NAME} INTERFACE TMECH_HAS_XSIMD)
 endif()
