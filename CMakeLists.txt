@@ -307,9 +307,9 @@ if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-#if(BUILD_BENCHMARK)
-#    add_subdirectory(benchmark)
-#endif()
+if(BUILD_BENCHMARK)
+    add_subdirectory(benchmark)
+endif()
 
 if(BUILD_EXAMPLES)
     add_subdirectory(examples)
