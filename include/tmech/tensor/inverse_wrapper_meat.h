@@ -146,10 +146,7 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::raw_data()const n
 
 template <typename _Tensor, typename ..._Sequences>
 constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate()noexcept{
-    if(!this->_is_init){
-        evaluate_imp(data);
-        this->_is_init = true;
-    }
+    evaluate_imp(data);
 }
 
 template <typename _Tensor, typename ..._Sequences>
@@ -318,10 +315,7 @@ constexpr inline auto inverse_wrapper<_Tensor>::raw_data() const noexcept {
 
 template <typename _Tensor>
 constexpr inline auto inverse_wrapper<_Tensor>::evaluate() noexcept {
-  if (!this->_is_init) {
-    evaluate_imp(data);
-    this->_is_init = true;
-  }
+  evaluate_imp(data);
 }
 
 template <typename _Tensor>

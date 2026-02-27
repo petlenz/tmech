@@ -51,11 +51,8 @@ constexpr inline auto randn<_T, _Dim, _Rank>::dimension()noexcept{
 
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 constexpr inline auto randn<_T, _Dim, _Rank>::evaluate()noexcept{
-    if(!this->_is_init){
-        auto gen = [&](){return dist(rng);};
-        std::generate(_data.begin(), _data.end(), gen);
-        this->_is_init = true;
-    }
+    auto gen = [&](){return dist(rng);};
+    std::generate(_data.begin(), _data.end(), gen);
 }
 
 #endif // RANDN_WRAPPER_MEAT_H

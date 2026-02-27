@@ -406,6 +406,47 @@ struct is_simd_assignable_impl<Derived, T, true>
 template<typename Derived, typename T>
 inline constexpr bool is_simd_assignable_v = is_simd_assignable_impl<Derived, T>::value;
 
+// Expression tree node counter — walks the expression tree at compile time.
+// Primary template: leaf node (tensor, eye, scalar, etc.) = 1 node.
+template<typename T>
+struct tree_node_count : std::integral_constant<std::size_t, 1> {};
+
+template<typename T>
+inline constexpr std::size_t tree_node_count_v = tree_node_count<T>::value;
+
+// Generic unary wrapper: template<typename> class
+template<template<typename> class _Unary, typename _Expr>
+struct tree_node_count<_Unary<_Expr>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_Expr>>>> {};
+
+// Generic binary wrapper: template<typename, typename> class
+template<template<typename, typename> class _Binary, typename _LHS, typename _RHS>
+struct tree_node_count<_Binary<_LHS, _RHS>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_LHS>>>
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_RHS>>>> {};
+
+// tensor_binary_expression_wrapper has 3 template params
+template<typename _LHS, typename _RHS, typename _Op>
+struct tree_node_count<detail::tensor_binary_expression_wrapper<_LHS, _RHS, _Op>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_LHS>>>
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_RHS>>>> {};
+
+// outer_product_wrapper has 4 template params
+template<typename _LHS, typename _RHS, typename _SeqL, typename _SeqR>
+struct tree_node_count<detail::outer_product_wrapper<_LHS, _RHS, _SeqL, _SeqR>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_LHS>>>
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_RHS>>>> {};
+
+// basis_change_wrapper has 2 params but second is a sequence, not an expression
+template<typename _Tensor, typename _Sequence>
+struct tree_node_count<detail::basis_change_wrapper<_Tensor, _Sequence>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_Tensor>>>> {};
+
 //numerical differentiation
 template <typename Function, typename Direction, bool Fundamental>
 struct get_rank_result
@@ -1160,8 +1201,12 @@ struct meta_for_loop_deep<DIM, DEEP, DEEP>
     using type = meta_for_loop<void, DIM>;
 };
 
+template<typename Func, std::size_t Size, bool Unroll>
+struct loop;
+
+// Runtime loop
 template<typename Func, std::size_t Size>
-struct loop{
+struct loop<Func, Size, false>{
     template<typename LambdaFunc, typename ...Args>
     static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
         for(std::size_t i{0}; i<Size; ++i){
@@ -1171,7 +1216,7 @@ struct loop{
 };
 
 template<std::size_t Size>
-struct loop<void, Size>{
+struct loop<void, Size, false>{
     template<typename LambdaFunc, typename ...Args>
     static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
         for(std::size_t i{0}; i<Size; ++i){
@@ -1180,20 +1225,54 @@ struct loop<void, Size>{
     }
 };
 
-template <std::size_t DEEP, std::size_t Size, std::size_t Start=0>
+// Unrolled loop via fold expression
+template<typename Func, std::size_t Size>
+struct loop<Func, Size, true>{
+    template<typename LambdaFunc, typename ...Args, std::size_t... Is>
+    static constexpr inline auto for_loop_impl(LambdaFunc func, std::index_sequence<Is...>, Args ... indices)noexcept{
+        (Func::for_loop(func, indices..., Is), ...);
+    }
+    template<typename LambdaFunc, typename ...Args>
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
+        for_loop_impl(func, std::make_index_sequence<Size>{}, indices...);
+    }
+};
+
+template<std::size_t Size>
+struct loop<void, Size, true>{
+    template<typename LambdaFunc, typename ...Args, std::size_t... Is>
+    static constexpr inline auto for_loop_impl(LambdaFunc func, std::index_sequence<Is...>, Args ... indices)noexcept{
+        (func(indices..., Is), ...);
+    }
+    template<typename LambdaFunc, typename ...Args>
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
+        for_loop_impl(func, std::make_index_sequence<Size>{}, indices...);
+    }
+};
+
+template <std::size_t Base, std::size_t Exp>
+struct ct_pow { static constexpr std::size_t value = Base * ct_pow<Base, Exp-1>::value; };
+
+template <std::size_t Base>
+struct ct_pow<Base, 0> { static constexpr std::size_t value = 1; };
+
+template <std::size_t DEEP, std::size_t Size, bool Unroll, std::size_t Start=0>
 struct for_loop_deep
 {
-    using type = loop<typename for_loop_deep<DEEP, Size, Start+1>::type, Size>;
+    using type = loop<typename for_loop_deep<DEEP, Size, Unroll, Start+1>::type, Size, Unroll>;
 };
 
-template <std::size_t DEEP, std::size_t Size>
-struct for_loop_deep<DEEP, Size, DEEP>
+template <std::size_t DEEP, std::size_t Size, bool Unroll>
+struct for_loop_deep<DEEP, Size, Unroll, DEEP>
 {
-    using type = loop<void, Size>;
+    using type = loop<void, Size, Unroll>;
 };
 
-template <std::size_t DEEP, std::size_t Size>
-using for_loop_t = typename for_loop_deep<DEEP, Size>::type;
+template <std::size_t DEEP, std::size_t Size, std::size_t TreeNodes = 1>
+constexpr bool should_unroll_loop = (ct_pow<Size, DEEP+1>::value <= TMECH_MAX_LOOP_UNROLL_SIZE) && (TreeNodes <= TMECH_MAX_TREE_NODES_UNROLL);
+
+template <std::size_t DEEP, std::size_t Size, std::size_t TreeNodes = 1>
+using for_loop_t = typename for_loop_deep<DEEP, Size, should_unroll_loop<DEEP, Size, TreeNodes>>::type;
 
 
 

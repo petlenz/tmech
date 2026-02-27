@@ -15,6 +15,14 @@
 //Rank 8 Dim 3
 #define TMECH_MAX_STATIC_SIZE 6561ul
 
+#ifndef TMECH_MAX_TREE_NODES_UNROLL
+#define TMECH_MAX_TREE_NODES_UNROLL 16
+#endif
+
+#ifndef TMECH_MAX_LOOP_UNROLL_SIZE
+#define TMECH_MAX_LOOP_UNROLL_SIZE 256
+#endif
+
 // SIMD register width (bytes) for the current target architecture.
 // When xsimd is available, its architecture detection is authoritative
 // (xsimd.hpp is included in tmech.h before this header).

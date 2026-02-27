@@ -261,10 +261,10 @@ if(TMECH_USE_XSIMD)
         GIT_TAG 13.2.0
         GIT_SHALLOW TRUE
     )
-    set(TMECH_BUILD_TESTS_SAVED ${TMECH_BUILD_TESTS})
-    set(TMECH_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(BUILD_TESTS_SAVED ${BUILD_TESTS})
+    set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(xsimd)
-    set(TMECH_BUILD_TESTS ${TMECH_BUILD_TESTS_SAVED} CACHE BOOL "" FORCE)
+    set(BUILD_TESTS ${BUILD_TESTS_SAVED} CACHE BOOL "" FORCE)
 
     # Mark xsimd includes as SYSTEM to suppress third-party warnings under -Werror
     get_target_property(_xsimd_inc xsimd INTERFACE_INCLUDE_DIRECTORIES)
@@ -333,6 +333,7 @@ endif()
 
 if(TMECH_BUILD_BENCHMARK)
     add_subdirectory(benchmark)
+    add_subdirectory(benchmark_tree_nodes)
 endif()
 
 if(TMECH_BUILD_EXAMPLES)

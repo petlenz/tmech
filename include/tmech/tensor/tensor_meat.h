@@ -111,7 +111,7 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived
                 }
             }
         } else {
-            using meta_loop = detail::for_loop_t<rank()-1, Dim>;
+            using meta_loop = detail::for_loop_t<rank()-1, Dim, detail::tree_node_count_v<Derived>>;
             auto func{[&](auto ...numbers){(*this)(numbers...) = tensor_base.convert()(numbers...);}};
             meta_loop::for_loop(func);
         }
@@ -160,7 +160,7 @@ tensor<T, Dim, Rank>::operator=(_Tensor && __tensor) noexcept{
                 }
             }
         } else {
-            using meta_loop = detail::for_loop_t<rank()-1, Dim>;
+            using meta_loop = detail::for_loop_t<rank()-1, Dim, detail::tree_node_count_v<TensorType>>;
             auto func{[&](auto ...numbers){(*this)(numbers...) = _tensor(numbers...);}};
             meta_loop::for_loop(func);
         }
@@ -387,7 +387,7 @@ tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor)noexcept:
                     }
                 }
             } else {
-                using meta_loop = detail::for_loop_t<rank()-1, Dim>;
+                using meta_loop = detail::for_loop_t<rank()-1, Dim, detail::tree_node_count_v<_Tensor>>;
                 auto func{[&](auto ...numbers){(*this)(numbers...) = __tensor(numbers...);}};
                 meta_loop::for_loop(func);
             }

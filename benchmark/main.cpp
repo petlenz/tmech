@@ -7,6 +7,7 @@
 #include <Eigen/Core>
 #include <Eigen/Dense>
 #include <unsupported/Eigen/MatrixFunctions>
+#include <unsupported/Eigen/KroneckerProduct>
 #include <armadillo>
 #include <tmech/tmech.h>
 #include <boost/align/aligned_allocator.hpp>
@@ -77,6 +78,30 @@ public:
             }
         }
 
+        return temp;
+    }
+
+    // otimesu: C_ikjl = A_ij * B_kl
+    auto outerProductU(tensor2 const &_rhs) const
+    {
+        tensor4<Type, Dim> temp;
+        for (std::size_t i{0}; i < Dim; ++i)
+            for (std::size_t j{0}; j < Dim; ++j)
+                for (std::size_t k{0}; k < Dim; ++k)
+                    for (std::size_t l{0}; l < Dim; ++l)
+                        temp(i, k, j, l) = this->operator()(i, j) * _rhs(k, l);
+        return temp;
+    }
+
+    // otimesl: C_iljk = A_ij * B_kl
+    auto outerProductL(tensor2 const &_rhs) const
+    {
+        tensor4<Type, Dim> temp;
+        for (std::size_t i{0}; i < Dim; ++i)
+            for (std::size_t j{0}; j < Dim; ++j)
+                for (std::size_t k{0}; k < Dim; ++k)
+                    for (std::size_t l{0}; l < Dim; ++l)
+                        temp(i, l, j, k) = this->operator()(i, j) * _rhs(k, l);
         return temp;
     }
 
@@ -207,7 +232,7 @@ enum
 };
 
 template <typename T, std::size_t Dim>
-static void otimes_old(benchmark::State &state)
+static void otimes_iso_old(benchmark::State &state)
 {
     tensor2<T, Dim> pk2_part1, pk2_part2, pk2_part3;
     tensor4<T, Dim> result;
@@ -229,7 +254,7 @@ static void otimes_old(benchmark::State &state)
 }
 
 template <typename T, std::size_t Dim>
-static void otimes_tmech(benchmark::State &state)
+static void otimes_iso_tmech(benchmark::State &state)
 {
     tmech::tensor<T, Dim, 2> pk2_part1, pk2_part2, pk2_part3;
     tmech::tensor<T, Dim, 4> result;
@@ -251,7 +276,7 @@ static void otimes_tmech(benchmark::State &state)
 }
 
 template <typename T, std::size_t Dim>
-static void otimes_tmech_8(benchmark::State &state)
+static void otimes_iso_tmech_8(benchmark::State &state)
 {
     tmech::tensor<T, Dim, 4> pk2_part1, pk2_part2, pk2_part3;
     tmech::tensor<T, Dim, 8> result;
@@ -273,7 +298,7 @@ static void otimes_tmech_8(benchmark::State &state)
 }
 
 template <typename T, std::size_t Dim>
-static void otimes_fastor(benchmark::State &state)
+static void otimes_iso_fastor(benchmark::State &state)
 {
     Fastor::Tensor<T, Dim, Dim> pk2_part1, pk2_part2, pk2_part3;
     Fastor::Tensor<T, Dim, Dim, Dim, Dim> result;
@@ -295,7 +320,7 @@ static void otimes_fastor(benchmark::State &state)
 }
 
 template <typename T, std::size_t Dim>
-static void otimes_tmech_eval_8(benchmark::State &state)
+static void otimes_iso_tmech_eval_8(benchmark::State &state)
 {
     tmech::tensor<T, Dim, 4> pk2_part1, pk2_part2, pk2_part3;
     tmech::tensor<T, Dim, 8> result;
@@ -317,7 +342,7 @@ static void otimes_tmech_eval_8(benchmark::State &state)
 }
 
 template <typename T, std::size_t Dim>
-static void otimes_fastor_8(benchmark::State &state)
+static void otimes_iso_fastor_8(benchmark::State &state)
 {
     Fastor::Tensor<T, Dim, Dim, Dim, Dim> pk2_part1, pk2_part2, pk2_part3;
     Fastor::Tensor<T, Dim, Dim, Dim, Dim, Dim, Dim, Dim, Dim> result;
@@ -335,6 +360,223 @@ static void otimes_fastor_8(benchmark::State &state)
                                           d * Fastor::einsum<Fastor::Index<I, J>, Fastor::Index<K, L>>(pk2_part2, pk2_part2) +
                                           e * (Fastor::einsum<Fastor::Index<I, J>, Fastor::Index<K, L>>(pk2_part2, pk2_part3) + Fastor::einsum<Fastor::Index<I, J>, Fastor::Index<K, L>>(pk2_part3, pk2_part2)) +
                                           f * Fastor::einsum<Fastor::Index<I, J>, Fastor::Index<K, L>>(pk2_part3, pk2_part3));
+    }
+}
+
+// ── otimes simple benchmarks ─────────────────────────────────────────────────
+
+template <typename T, std::size_t Dim>
+static void otimes_simple_tmech(benchmark::State &state)
+{
+    tmech::tensor<T, Dim, 2> A, B;
+    tmech::tensor<T, Dim, 4> result;
+    A.randn();
+    B.randn();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = tmech::otimes(A, B));
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimes_simple_eigen(benchmark::State &state)
+{
+    Eigen::Matrix<T, Dim, Dim> A, B;
+    Eigen::Matrix<T, Dim * Dim, Dim * Dim> result;
+    A = A.Random();
+    B = B.Random();
+    for (auto _ : state)
+    {
+        // otimes: C_ijkl stored as (i*Dim+j, k*Dim+l)
+        for (std::size_t i = 0; i < Dim; ++i)
+            for (std::size_t j = 0; j < Dim; ++j)
+                for (std::size_t k = 0; k < Dim; ++k)
+                    for (std::size_t l = 0; l < Dim; ++l)
+                        result(i * Dim + j, k * Dim + l) = A(i, j) * B(k, l);
+        benchmark::DoNotOptimize(result);
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimes_simple_eigen_voigt(benchmark::State &state)
+{
+    // otimes: C_ijkl = A_ij * B_kl  →  Voigt: C = a * b^T
+    Eigen::Matrix<T, Dim, Dim> A, B;
+    Eigen::Vector<T, Dim * Dim> a_vec, b_vec;
+    Eigen::Matrix<T, Dim * Dim, Dim * Dim> result;
+    A = A.Random();
+    B = B.Random();
+    for (std::size_t i = 0; i < Dim; ++i)
+        for (std::size_t j = 0; j < Dim; ++j) {
+            a_vec(i * Dim + j) = A(i, j);
+            b_vec(i * Dim + j) = B(i, j);
+        }
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = a_vec * b_vec.transpose());
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimes_simple_fastor(benchmark::State &state)
+{
+    Fastor::Tensor<T, Dim, Dim> A, B;
+    Fastor::Tensor<T, Dim, Dim, Dim, Dim> result;
+    A.random();
+    B.random();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = Fastor::outer(A, B));
+    }
+}
+
+// ── otimesu benchmarks ──────────────────────────────────────────────────────
+
+template <typename T, std::size_t Dim>
+static void otimesu_old(benchmark::State &state)
+{
+    tensor2<T, Dim> A, B;
+    tensor4<T, Dim> result;
+    A.rand_();
+    B.rand_();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = A.outerProductU(B));
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesu_tmech(benchmark::State &state)
+{
+    tmech::tensor<T, Dim, 2> A, B;
+    tmech::tensor<T, Dim, 4> result;
+    A.randn();
+    B.randn();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = tmech::otimesu(A, B));
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesu_eigen(benchmark::State &state)
+{
+    Eigen::Matrix<T, Dim, Dim> A, B;
+    Eigen::Matrix<T, Dim * Dim, Dim * Dim> result;
+    A = A.Random();
+    B = B.Random();
+    for (auto _ : state)
+    {
+        // otimesu: C_ikjl stored as (i*Dim+k, j*Dim+l)
+        for (std::size_t i = 0; i < Dim; ++i)
+            for (std::size_t j = 0; j < Dim; ++j)
+                for (std::size_t k = 0; k < Dim; ++k)
+                    for (std::size_t l = 0; l < Dim; ++l)
+                        result(i * Dim + k, j * Dim + l) = A(i, j) * B(k, l);
+        benchmark::DoNotOptimize(result);
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesu_eigen_voigt(benchmark::State &state)
+{
+    // otimesu: C_ikjl = A_ij * B_kl  →  Voigt: C = A ⊗ B (Kronecker product)
+    Eigen::Matrix<T, Dim, Dim> A, B;
+    Eigen::Matrix<T, Dim * Dim, Dim * Dim> result;
+    A = A.Random();
+    B = B.Random();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = Eigen::kroneckerProduct(A, B));
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesu_fastor(benchmark::State &state)
+{
+    Fastor::Tensor<T, Dim, Dim> A, B;
+    Fastor::Tensor<T, Dim, Dim, Dim, Dim> result;
+    A.random();
+    B.random();
+    for (auto _ : state)
+    {
+        // otimesu: C_ikjl = permute(A_ij * B_kl, {i,k,j,l})
+        benchmark::DoNotOptimize(result = Fastor::permute<Fastor::Index<I, K, J, L>>(Fastor::outer(A, B)));
+    }
+}
+
+// ── otimesl benchmarks ──────────────────────────────────────────────────────
+
+template <typename T, std::size_t Dim>
+static void otimesl_old(benchmark::State &state)
+{
+    tensor2<T, Dim> A, B;
+    tensor4<T, Dim> result;
+    A.rand_();
+    B.rand_();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = A.outerProductL(B));
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesl_tmech(benchmark::State &state)
+{
+    tmech::tensor<T, Dim, 2> A, B;
+    tmech::tensor<T, Dim, 4> result;
+    A.randn();
+    B.randn();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = tmech::otimesl(A, B));
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesl_eigen(benchmark::State &state)
+{
+    Eigen::Matrix<T, Dim, Dim> A, B;
+    Eigen::Matrix<T, Dim * Dim, Dim * Dim> result;
+    A = A.Random();
+    B = B.Random();
+    for (auto _ : state)
+    {
+        // otimesl: C_iljk stored as (i*Dim+l, j*Dim+k)
+        for (std::size_t i = 0; i < Dim; ++i)
+            for (std::size_t j = 0; j < Dim; ++j)
+                for (std::size_t k = 0; k < Dim; ++k)
+                    for (std::size_t l = 0; l < Dim; ++l)
+                        result(i * Dim + l, j * Dim + k) = A(i, j) * B(k, l);
+        benchmark::DoNotOptimize(result);
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesl_eigen_voigt(benchmark::State &state)
+{
+    // otimesl: C_iljk = A_ij * B_kl  →  Voigt: C = A ⊗ B^T
+    Eigen::Matrix<T, Dim, Dim> A, B;
+    Eigen::Matrix<T, Dim * Dim, Dim * Dim> result;
+    A = A.Random();
+    B = B.Random();
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(result = Eigen::kroneckerProduct(A, B.transpose()));
+    }
+}
+
+template <typename T, std::size_t Dim>
+static void otimesl_fastor(benchmark::State &state)
+{
+    Fastor::Tensor<T, Dim, Dim> A, B;
+    Fastor::Tensor<T, Dim, Dim, Dim, Dim> result;
+    A.random();
+    B.random();
+    for (auto _ : state)
+    {
+        // otimesl: C_iljk = permute(A_ij * B_kl, {i,l,j,k})
+        benchmark::DoNotOptimize(result = Fastor::permute<Fastor::Index<I, L, J, K>>(Fastor::outer(A, B)));
     }
 }
 
@@ -1024,21 +1266,26 @@ BENCHMARK_TEMPLATE(more_complex_4_4_eigen_voigt, double, 2ul);
 BENCHMARK_TEMPLATE(more_complex_4_4_fastor, double, 2ul);
 #endif
 
-BENCHMARK_TEMPLATE(otimes_old, double, 3ul);
-BENCHMARK_TEMPLATE(otimes_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(otimes_fastor, double, 3ul);
-BENCHMARK_TEMPLATE(otimes_tmech_8, double, 3ul);
-// BENCHMARK_TEMPLATE(otimes_tmech_eval_8, double, 3ul);
-BENCHMARK_TEMPLATE(otimes_fastor_8, double, 3ul);
+BENCHMARK_TEMPLATE(otimes_simple_tmech, double, 3ul);
+BENCHMARK_TEMPLATE(otimes_simple_eigen, double, 3ul);
+BENCHMARK_TEMPLATE(otimes_simple_eigen_voigt, double, 3ul);
+BENCHMARK_TEMPLATE(otimes_simple_fastor, double, 3ul);
 
-BENCHMARK_TEMPLATE(addition_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(single_contraction_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(more_complex_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(double_contraction_4_2_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(more_complex_4_2_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(double_contraction_4_4_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(complex_double_contraction_4_4_tmech, double, 3ul);
-BENCHMARK_TEMPLATE(more_complex_4_4_tmech, double, 3ul);
+BENCHMARK_TEMPLATE(otimesu_old, double, 3ul);
+BENCHMARK_TEMPLATE(otimesu_tmech, double, 3ul);
+BENCHMARK_TEMPLATE(otimesu_eigen, double, 3ul);
+BENCHMARK_TEMPLATE(otimesu_eigen_voigt, double, 3ul);
+BENCHMARK_TEMPLATE(otimesu_fastor, double, 3ul);
+
+BENCHMARK_TEMPLATE(otimesl_old, double, 3ul);
+BENCHMARK_TEMPLATE(otimesl_tmech, double, 3ul);
+BENCHMARK_TEMPLATE(otimesl_eigen, double, 3ul);
+BENCHMARK_TEMPLATE(otimesl_eigen_voigt, double, 3ul);
+BENCHMARK_TEMPLATE(otimesl_fastor, double, 3ul);
+
+BENCHMARK_TEMPLATE(otimes_iso_old, double, 3ul);
+BENCHMARK_TEMPLATE(otimes_iso_tmech, double, 3ul);
+BENCHMARK_TEMPLATE(otimes_iso_fastor, double, 3ul);
 
 BENCHMARK_TEMPLATE(addition_tmech, double, 3ul);
 BENCHMARK_TEMPLATE(addition_eigen, double, 3ul);

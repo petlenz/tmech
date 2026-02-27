@@ -55,5 +55,8 @@ results_*/
 CMakeLists.txt.user
 
 
-python
+# python
 *.pyc
+
+# results
+*.png

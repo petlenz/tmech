@@ -71,32 +71,29 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::derivative()const noexcept{
 
 template <typename _Tensor>
 constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate()noexcept{
-    if(!this->_is_init){
-        const value_type tol{1e-14};
-        size_type iter{1}, max_iter{50};
-        value_type n_fac{1};
-        data_type exp_start{_data_base};
-        data_type exp_n{exp_start};
-        _data = eye<value_type, data_type::dimension(), data_type::rank()>() + exp_start;
-        //expA = (1/0!)*I + (1/1!)*A + (1/2!)*A*A + (1/3!)*A*A*A
-        while (true) {
-          n_fac *= safe_cast<value_type>(iter + 1);
-          exp_n = eval(exp_n * exp_start);
-          _data += (exp_n / n_fac);
-          const auto error{tmech::norm(exp_n) / n_fac};
-          if (error <= tol) {
-            break;}
+    const value_type tol{1e-14};
+    size_type iter{1}, max_iter{50};
+    value_type n_fac{1};
+    data_type exp_start{_data_base};
+    data_type exp_n{exp_start};
+    _data = eye<value_type, data_type::dimension(), data_type::rank()>() + exp_start;
+    //expA = (1/0!)*I + (1/1!)*A + (1/2!)*A*A + (1/3!)*A*A*A
+    while (true) {
+      n_fac *= safe_cast<value_type>(iter + 1);
+      exp_n = eval(exp_n * exp_start);
+      _data += (exp_n / n_fac);
+      const auto error{tmech::norm(exp_n) / n_fac};
+      if (error <= tol) {
+        break;}
 
-            if(iter == max_iter){
-                break;
-                //throw std::runtime_error("exp_tensor_wrapper::evaluate(): no convergence");
-            }
-            ++iter;
+        if(iter == max_iter){
+            break;
+            //throw std::runtime_error("exp_tensor_wrapper::evaluate(): no convergence");
         }
-        //for later use.... deriv
-        _num_of_iter = iter;
-        this->_is_init = true;
+        ++iter;
     }
+    //for later use.... deriv
+    _num_of_iter = iter;
 }
 
 template <typename _Tensor>
