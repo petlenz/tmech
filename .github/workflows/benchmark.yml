@@ -69,7 +69,7 @@ jobs:
 
       - name: Benchmark main
         run: |
-          python3 pr/scripts/run_benchmarks.py \
+          python3 main/scripts/run_benchmarks.py \
             --source-dir main \
             --build-dir-prefix build_bench_main \
             --output-dir results_main \
