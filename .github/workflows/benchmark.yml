@@ -73,7 +73,8 @@ jobs:
             --source-dir main \
             --build-dir-prefix build_bench_main \
             --output-dir results_main \
-            --repetitions 5
+            --repetitions 5 \
+            --benchmark-filter ".*_tmech"
 
       - name: Benchmark PR
         run: |
@@ -81,14 +82,17 @@ jobs:
             --source-dir pr \
             --build-dir-prefix build_bench_pr \
             --output-dir results_pr \
-            --repetitions 5
+            --repetitions 5 \
+            --benchmark-filter ".*_tmech"
 
       - name: Generate report
         if: always()
         run: |
           python3 pr/scripts/run_bench_report.py \
             --input-dir results_pr \
-            --mode both \
+            --mode regression \
+            --no-plots \
+            --pr-branch "${{ steps.pr.outputs.ref || github.ref_name }}" \
             --baseline-json-dir results_main
 
       - name: Post PR comment
