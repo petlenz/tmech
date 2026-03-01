@@ -35,10 +35,24 @@ struct gemm_wrapper_base
         }
     }
 
+    // j-i-k loop order: fuses zeroing with accumulation into a single
+    // result element — the compiler keeps __result[i*ColumnsRHS+j] in a
+    // register across the entire k-loop.  Best for scalar (non-SIMD) code.
+    static constexpr inline auto gemm_simple(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+        for(size_type j{0}; j<ColumnsRHS; ++j){
+            for(size_type i{0}; i<RowsLHS; ++i){
+                __result[i*ColumnsRHS+j] = 0;
+                for(size_type k{0}; k<RowsRHS; ++k){
+                    __result[i*ColumnsRHS+j] += __lhs[i*ColumnsLHS+k]*__rhs[k*ColumnsRHS+j];
+                }
+            }
+        }
+    }
+
     // i-k-j loop order: inner j-loop accesses result[] and rhs[]
     // sequentially, enabling auto-vectorisation (broadcast lhs element,
-    // FMA across j-vector).
-    static constexpr inline auto gemm_simple(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    // FMA across j-vector).  Requires pre-zeroed result buffer.
+    static constexpr inline auto gemm_simple_ikj(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
         for(size_type i{0}; i<RowsLHS; ++i){
             for(size_type k{0}; k<ColumnsLHS; ++k){
                 const auto a = __lhs[i*ColumnsLHS+k];
@@ -128,7 +142,6 @@ public:
             gemm_simple_bigger(__lhs, __rhs, __result);
             return;
         }
-        for (size_type i{0}; i < RowsLHS * ColumnsRHS; ++i) __result[i] = RESULT{0};
         gemm_simple(__lhs, __rhs, __result);
     }
 };
@@ -196,14 +209,13 @@ public:
             }
             return;
         }
-        // Scalar fallback
+        // Scalar fallback (type not supported by xsimd)
         constexpr std::size_t size{3*3*3*3};
         if constexpr (RowsLHS >= size && ColumnsLHS >= size &&
                       RowsRHS >= size && ColumnsRHS >= size) {
             gemm_simple_bigger(__lhs, __rhs, __result);
             return;
         }
-        for (size_type i{0}; i < RowsLHS * ColumnsRHS; ++i) __result[i] = RESULT{0};
         gemm_simple(__lhs, __rhs, __result);
     }
 };
