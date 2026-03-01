@@ -431,12 +431,17 @@ def main() -> int:
 
     if args.mode in ("regression", "both") and args.baseline_json_dir:
         baseline_dir = Path(args.baseline_json_dir).resolve()
-        if baseline_dir.exists():
+        baseline_jsons = list(baseline_dir.glob("*.json")) if baseline_dir.exists() else []
+        if baseline_jsons:
             report_parts.append(
                 generate_regression_report(baseline_dir, config_results)
             )
         else:
-            log.warning("Baseline directory %s not found, skipping regression report", baseline_dir)
+            log.warning("No baseline JSON files found in %s, skipping regression report", baseline_dir)
+            report_parts.append(
+                "## PR Regression Report\n\n"
+                "No baseline results available (main branch may not have benchmarks yet).\n"
+            )
 
     # Generate plots
     plot_groups: Dict[str, List[Tuple[str, str]]] = {}

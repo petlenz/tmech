@@ -28,31 +28,53 @@ LABELS = ["Scalar", "xsimd (no unroll)", "xsimd + unroll"]
 COLORS = ["#6c757d", "#0d6efd", "#198754"]
 
 
+def _parse_name(name):
+    """Extract (base_name, suffix) from a benchmark name like 'foo_scalar<double, 3ul>'."""
+    for suffix in sorted(SUFFIXES, key=len, reverse=True):
+        pattern = f"_{suffix}<"
+        idx = name.find(pattern)
+        if idx >= 0:
+            base = name[:idx] + name[idx + len(f"_{suffix}"):]
+            return base, suffix
+    return None, None
+
+
 def load_benchmarks(path):
-    """Load single JSON, split into 3 datasets keyed by base name."""
+    """Load single JSON, split into 3 datasets keyed by base name.
+
+    Returns:
+        means:   {suffix: {base_name: float}}
+        stddevs: {suffix: {base_name: float}}
+        cvs:     {suffix: {base_name: float}}  (coefficient of variation, 0-100%)
+    """
     with open(path) as f:
         data = json.load(f)
 
-    datasets = {s: {} for s in SUFFIXES}
+    means = {s: {} for s in SUFFIXES}
+    stddevs = {s: {} for s in SUFFIXES}
+    cvs = {s: {} for s in SUFFIXES}
+
     for bm in data["benchmarks"]:
         name = bm["name"]
-        # Only use _mean aggregates
-        if not name.endswith("_mean"):
-            continue
-        # Strip _mean suffix
-        name = name[: -len("_mean")]
+        agg = bm.get("aggregate_name", "")
 
-        # Identify which config this belongs to (longest suffix match first)
-        for suffix in sorted(SUFFIXES, key=len, reverse=True):
-            # Pattern: base_name_SUFFIX<template args>
-            pattern = f"_{suffix}<"
-            idx = name.find(pattern)
-            if idx >= 0:
-                base = name[:idx] + name[idx + len(f"_{suffix}") :]
-                datasets[suffix][base] = bm["real_time"]
-                break
+        if agg == "mean":
+            stripped = name[: -len("_mean")]
+            base, suffix = _parse_name(stripped)
+            if base and suffix:
+                means[suffix][base] = bm["real_time"]
+        elif agg == "stddev":
+            stripped = name[: -len("_stddev")]
+            base, suffix = _parse_name(stripped)
+            if base and suffix:
+                stddevs[suffix][base] = bm["real_time"]
+        elif agg == "cv":
+            stripped = name[: -len("_cv")]
+            base, suffix = _parse_name(stripped)
+            if base and suffix:
+                cvs[suffix][base] = bm["real_time"] * 100  # store as percentage
 
-    return datasets
+    return means, stddevs, cvs
 
 
 def shorten_name(name):
@@ -90,22 +112,26 @@ def group_benchmarks(names):
     return groups
 
 
-def plot_group(ax, names, datasets, title):
-    """Grouped bar chart — absolute times."""
+def plot_group(ax, names, means, stddevs, title):
+    """Grouped bar chart — absolute times with error bars."""
     short_names = [shorten_name(n) for n in names]
     x = np.arange(len(names))
     width = 0.25
 
     for i, (suffix, label, color) in enumerate(zip(SUFFIXES, LABELS, COLORS)):
-        vals = [datasets[suffix].get(n, 0) for n in names]
+        vals = [means[suffix].get(n, 0) for n in names]
+        errs = [stddevs[suffix].get(n, 0) for n in names]
         bars = ax.bar(
             x + i * width,
             vals,
             width,
+            yerr=errs,
+            capsize=2,
             label=label,
             color=color,
             edgecolor="white",
             linewidth=0.5,
+            error_kw={"linewidth": 0.8, "alpha": 0.7},
         )
         for bar, v in zip(bars, vals):
             if v > 0:
@@ -119,7 +145,7 @@ def plot_group(ax, names, datasets, title):
                 )
 
     vals_all = [
-        datasets[s].get(n, 0) for s in SUFFIXES for n in names if datasets[s].get(n, 0) > 0
+        means[s].get(n, 0) for s in SUFFIXES for n in names if means[s].get(n, 0) > 0
     ]
     if vals_all and max(vals_all) / min(vals_all) > 50:
         ax.set_yscale("log")
@@ -132,20 +158,20 @@ def plot_group(ax, names, datasets, title):
     ax.grid(axis="y", alpha=0.3)
 
 
-def plot_speedup(ax, names, datasets, title):
+def plot_speedup(ax, names, means, title):
     """Speedup bar chart relative to scalar baseline."""
     short_names = [shorten_name(n) for n in names]
     x = np.arange(len(names))
     width = 0.35
 
-    scalar = datasets["scalar"]
+    scalar = means["scalar"]
     for i, (suffix, label, color) in enumerate(
         zip(SUFFIXES[1:], LABELS[1:], COLORS[1:])
     ):
         speedups = []
         for n in names:
             s = scalar.get(n, 0)
-            v = datasets[suffix].get(n, 0)
+            v = means[suffix].get(n, 0)
             speedups.append(s / v if v > 0 else 0)
         bars = ax.bar(
             x + i * width,
@@ -180,14 +206,14 @@ def main():
         print(f"Usage: {sys.argv[0]} results.json")
         sys.exit(1)
 
-    datasets = load_benchmarks(sys.argv[1])
+    means, stddevs, cvs = load_benchmarks(sys.argv[1])
 
     for suffix in SUFFIXES:
-        print(f"  {suffix}: {len(datasets[suffix])} benchmarks")
+        print(f"  {suffix}: {len(means[suffix])} benchmarks")
 
     # Find common benchmarks across all 3 configs
     common = sorted(
-        set(datasets["scalar"]) & set(datasets["xsimd"]) & set(datasets["xsimd_unroll"])
+        set(means["scalar"]) & set(means["xsimd"]) & set(means["xsimd_unroll"])
     )
     if not common:
         print("ERROR: no common benchmarks found across the 3 configs.")
@@ -210,7 +236,7 @@ def main():
         "Benchmark: Absolute Times (lower is better)", fontsize=14, fontweight="bold"
     )
     for ax, (cat, names) in zip(axes, sorted(groups.items())):
-        plot_group(ax, names, datasets, cat)
+        plot_group(ax, names, means, stddevs, cat)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig("bench_absolute.png", bbox_inches="tight")
     print("Saved bench_absolute.png")
@@ -225,7 +251,7 @@ def main():
         fontweight="bold",
     )
     for ax, (cat, names) in zip(axes2, sorted(groups.items())):
-        plot_speedup(ax, names, datasets, cat)
+        plot_speedup(ax, names, means, cat)
     fig2.tight_layout(rect=[0, 0, 1, 0.97])
     fig2.savefig("bench_speedup.png", bbox_inches="tight")
     print("Saved bench_speedup.png")
@@ -249,8 +275,12 @@ def main():
                 node_counts.append(0)
 
         for suffix, label, color in zip(SUFFIXES, LABELS, COLORS):
-            vals = [datasets[suffix].get(n, 0) for n in node_names]
-            ax3a.plot(node_counts, vals, "o-", label=label, color=color, linewidth=2)
+            vals = [means[suffix].get(n, 0) for n in node_names]
+            errs = [stddevs[suffix].get(n, 0) for n in node_names]
+            ax3a.errorbar(
+                node_counts, vals, yerr=errs, fmt="o-",
+                label=label, color=color, linewidth=2, capsize=3,
+            )
         ax3a.axvline(x=16, color="red", linestyle="--", linewidth=1, alpha=0.7, label="Threshold (16)")
         ax3a.set_xlabel("Tree Nodes")
         ax3a.set_ylabel("Time (ns)")
@@ -259,9 +289,9 @@ def main():
         ax3a.grid(alpha=0.3)
 
         # Speedup vs scalar
-        scalar_vals = [datasets["scalar"].get(n, 0) for n in node_names]
+        scalar_vals = [means["scalar"].get(n, 0) for n in node_names]
         for suffix, label, color in zip(SUFFIXES[1:], LABELS[1:], COLORS[1:]):
-            vals = [datasets[suffix].get(n, 0) for n in node_names]
+            vals = [means[suffix].get(n, 0) for n in node_names]
             speedups = [s / v if v > 0 else 0 for s, v in zip(scalar_vals, vals)]
             ax3b.plot(node_counts, speedups, "o-", label=label, color=color, linewidth=2)
         ax3b.axhline(y=1.0, color="black", linestyle="--", linewidth=0.8, alpha=0.5)
@@ -277,16 +307,50 @@ def main():
         print("Saved bench_tree_nodes.png")
 
     # --- Summary table ---
-    hdr = f"{'Benchmark':<45} {'Scalar':>9} {'xsimd':>9} {'+unroll':>9} {'Speedup':>9}"
+    hdr = (
+        f"{'Benchmark':<45} "
+        f"{'Scalar':>12} {'':>6} "
+        f"{'xsimd':>12} {'':>6} "
+        f"{'+unroll':>12} {'':>6} "
+        f"{'Speedup':>9}"
+    )
+    sub = (
+        f"{'':45} "
+        f"{'mean +/- std':>12} {'cv%':>6} "
+        f"{'mean +/- std':>12} {'cv%':>6} "
+        f"{'mean +/- std':>12} {'cv%':>6} "
+        f"{'':>9}"
+    )
     sep = "=" * len(hdr)
-    print(f"\n{sep}\n{hdr}\n{sep}")
+    print(f"\n{sep}\n{hdr}\n{sub}\n{sep}")
     for name in common:
         short = shorten_name(name)
-        s = datasets["scalar"].get(name, 0)
-        x = datasets["xsimd"].get(name, 0)
-        u = datasets["xsimd_unroll"].get(name, 0)
-        sp = f"{s/u:.2f}x" if u > 0 else "N/A"
-        print(f"{short:<45} {s:>8.1f} {x:>8.1f} {u:>8.1f} {sp:>9}")
+        s_m = means["scalar"].get(name, 0)
+        s_sd = stddevs["scalar"].get(name, 0)
+        s_cv = cvs["scalar"].get(name, 0)
+        x_m = means["xsimd"].get(name, 0)
+        x_sd = stddevs["xsimd"].get(name, 0)
+        x_cv = cvs["xsimd"].get(name, 0)
+        u_m = means["xsimd_unroll"].get(name, 0)
+        u_sd = stddevs["xsimd_unroll"].get(name, 0)
+        u_cv = cvs["xsimd_unroll"].get(name, 0)
+        sp = f"{s_m/u_m:.2f}x" if u_m > 0 else "N/A"
+
+        def fmt(m, sd):
+            if m >= 100:
+                return f"{m:.0f}+/-{sd:.0f}"
+            elif m >= 10:
+                return f"{m:.1f}+/-{sd:.1f}"
+            else:
+                return f"{m:.2f}+/-{sd:.2f}"
+
+        print(
+            f"{short:<45} "
+            f"{fmt(s_m, s_sd):>12} {s_cv:>5.1f}% "
+            f"{fmt(x_m, x_sd):>12} {x_cv:>5.1f}% "
+            f"{fmt(u_m, u_sd):>12} {u_cv:>5.1f}% "
+            f"{sp:>9}"
+        )
     print(sep)
 
 

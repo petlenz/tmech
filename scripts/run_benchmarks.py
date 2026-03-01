@@ -141,7 +141,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Build and run tmech benchmarks under multiple configurations."
     )
-    parser.add_argument("--source-dir", default=".", help="tmech source root")
+    parser.add_argument(
+        "--source-dir",
+        default=str(Path(__file__).resolve().parent.parent),
+        help="tmech source root (default: repo root)",
+    )
     parser.add_argument(
         "--build-dir-prefix",
         default="build_bench",
