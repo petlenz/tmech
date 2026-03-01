@@ -29,18 +29,6 @@ if(NOT Eigen3_FOUND)
     FetchContent_MakeAvailable(eigen)
 endif()
 
-# ── Armadillo (header-only via FetchContent) ─────────────────────────────────
-FetchContent_Declare(
-    armadillo
-    GIT_REPOSITORY https://gitlab.com/conradsnicta/armadillo-code.git
-    GIT_TAG        14.2.x
-    GIT_SHALLOW    TRUE
-)
-FetchContent_GetProperties(armadillo)
-if(NOT armadillo_POPULATED)
-    FetchContent_Populate(armadillo)
-endif()
-
 # ── Fastor (header-only via FetchContent) ────────────────────────────────────
 FetchContent_Declare(
     fastor
@@ -66,9 +54,6 @@ if(NOT Boost_FOUND)
     FetchContent_MakeAvailable(boost)
 endif()
 
-# ── LAPACK / BLAS (for armadillo runtime functions) ──────────────────────────
-find_package(LAPACK REQUIRED)
-find_package(BLAS REQUIRED)
 
 # ── Benchmark executable ─────────────────────────────────────────────────────
 add_executable(tmech_benchmark main.cpp)
@@ -78,8 +63,6 @@ target_link_libraries(tmech_benchmark
         tmech
         benchmark::benchmark
         Eigen3::Eigen
-        ${LAPACK_LIBRARIES}
-        ${BLAS_LIBRARIES}
 )
 
 if(Boost_FOUND)
@@ -90,13 +73,7 @@ endif()
 
 target_include_directories(tmech_benchmark
     PRIVATE
-        ${armadillo_SOURCE_DIR}/include
         ${fastor_SOURCE_DIR}
-)
-
-target_compile_definitions(tmech_benchmark
-    PRIVATE
-        ARMA_DONT_USE_WRAPPER
 )
 
 target_compile_options(tmech_benchmark

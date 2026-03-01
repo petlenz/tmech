@@ -8,7 +8,6 @@
 #include <Eigen/Dense>
 #include <unsupported/Eigen/MatrixFunctions>
 #include <unsupported/Eigen/KroneckerProduct>
-#include <armadillo>
 #include <tmech/tmech.h>
 #include <boost/align/aligned_allocator.hpp>
 #include <Fastor/Fastor.h>
@@ -1398,35 +1397,6 @@ static void BM_single_contraction_eigen(benchmark::State &state)
     }
 }
 
-template <typename T, std::size_t Dim>
-static void BM_single_contraction_arma(benchmark::State &state)
-{
-    if constexpr (std::is_same_v<T, double>)
-    {
-        using value_type = double;
-        arma::Mat<value_type>::fixed<Dim, Dim> A(arma::fill::eye), B(arma::fill::eye), C(arma::fill::eye);
-        B.randn();
-
-        for (auto _ : state)
-        {
-            C = A * B;
-            B = A * C;
-        }
-    }
-    else
-    {
-        using value_type = float;
-        arma::Mat<value_type>::fixed<Dim, Dim> A(arma::fill::eye), B(arma::fill::eye), C(arma::fill::eye);
-        B.randn();
-
-        for (auto _ : state)
-        {
-            C = A * B;
-            B = A * C;
-        }
-    }
-}
-
 //-------------------------------------general contraction--------------------------
 template <typename T, std::size_t Dim, std::size_t RankLHS, std::size_t RankRHS>
 static void BM_general_contraction(benchmark::State &state)
@@ -1682,23 +1652,6 @@ static void BM_double_contraction_eigen_vector(benchmark::State &state)
     }
 }
 
-template <std::size_t SizeLHS, std::size_t SizeRHS>
-static void BM_double_contraction_arma_d(benchmark::State &state)
-{
-    using value_type = double;
-    arma::Mat<value_type>::fixed<SizeLHS, SizeLHS> A, A_inv;
-    arma::Mat<value_type>::fixed<SizeLHS, SizeRHS> B, C;
-    A.randn();
-    B.randn();
-    A_inv = arma::inv(A);
-
-    for (auto _ : state)
-    {
-        C = A * B;
-        B = C;
-    }
-}
-
 //------------------------exp-----------------------------
 template <std::size_t Dim>
 static void BM_exp_tmech(benchmark::State &state)
@@ -1726,18 +1679,6 @@ static void BM_exp_eigen(benchmark::State &state)
     }
 }
 
-template <std::size_t Dim>
-static void BM_exp_arma(benchmark::State &state)
-{
-    using value_type = double;
-    arma::Mat<value_type>::fixed<Dim, Dim> A, B;
-    B.randn();
-
-    for (auto _ : state)
-    {
-        A = arma::expmat(B);
-    }
-}
 ////--------------------------------------------------------------------
 ////static void BM_double_contraction_44_tmech(benchmark::State& state) {
 ////    using value_type = double;
@@ -1792,21 +1733,6 @@ static void BM_exp_arma(benchmark::State &state)
 ////    }
 ////}
 ////BENCHMARK(BM_double_contraction_44_full_eigen);
-
-//////static void BM_double_contraction_44_arma(benchmark::State& state) {
-//////    using value_type = double;
-//////    constexpr std::size_t Dim{3*2};
-//////    std::vector<arma::Mat<value_type>::fixed<Dim, Dim>> A(SIZE);
-//////    std::vector<arma::Mat<value_type>::fixed<Dim, Dim>> B(SIZE), C(SIZE);
-//////    A[0].randn();
-//////    B[0].randn();
-
-//////    for (auto _ : state){
-//////        for(std::size_t i{0}; i<SIZE; ++i)
-//////            C[i] = A[i]*B[i];
-//////    }
-//////}
-//////BENCHMARK(BM_double_contraction_44_arma);
 
 ////static void BM_inverse_44_full_tmech(benchmark::State& state) {
 ////    using value_type = double;
@@ -1886,23 +1812,6 @@ static void BM_inverse_eigen(benchmark::State &state)
         A_inv = A.inverse();
     }
 }
-
-// template<std::size_t Size>
-// static void BM_inverse_arma(benchmark::State& state) {
-//     using value_type = double;
-//     Eigen::Matrix<value_type, Size, Size> A, A_inv;
-//     A.fill(0);
-//     A_inv.fill(0);
-//     for(std::size_t i{0}; i<Size; ++i){
-//         A(i,i) = 1;
-//         A_inv(i,i) = 1;
-//     }
-
-//    for (auto _ : state){
-//        A     = A_inv.inverse();
-//        A_inv = A.inverse();
-//    }
-//}
 
 // template<std::size_t Dim>
 // static void contractio_first(benchmark::State& state) {
@@ -2058,11 +1967,8 @@ static void polar_decomposition_newton(benchmark::State &state)
 
 ////BENCHMARK_TEMPLATE(BM_single_contraction_tmech, double, 2ul);
 ////BENCHMARK_TEMPLATE(BM_single_contraction_eigen, double, 2ul);
-////BENCHMARK_TEMPLATE(BM_single_contraction_arma, double, 2ul);
-
 ////BENCHMARK_TEMPLATE(BM_single_contraction_tmech, double, 3ul);
 ////BENCHMARK_TEMPLATE(BM_single_contraction_eigen, double, 3ul);
-////BENCHMARK_TEMPLATE(BM_single_contraction_arma, double, 3ul);
 
 ////BENCHMARK_TEMPLATE(BM_double_contraction_left_tmech, double, 2ul, 2ul, 4ul);
 ////BENCHMARK_TEMPLATE(BM_double_contraction_left_tmech, double, 3ul, 2ul, 4ul);
@@ -2162,21 +2068,10 @@ static void polar_decomposition_newton(benchmark::State &state)
 ////BENCHMARK_TEMPLATE(BM_double_contraction_eigen_vector, double, 3, 3);
 ////BENCHMARK_TEMPLATE(BM_general_contraction_vector, double, 3ul, 2ul, 2ul);
 
-////BENCHMARK_TEMPLATE(BM_double_contraction_arma_d, 3 ,1);
-////BENCHMARK_TEMPLATE(BM_double_contraction_arma, 6 ,1);
-////BENCHMARK_TEMPLATE(BM_double_contraction_arma, 9 ,1);
-
-////BENCHMARK_TEMPLATE(BM_double_contraction_arma_d, 3, 3);
-////BENCHMARK_TEMPLATE(BM_double_contraction_arma_d, 6, 6);
-////BENCHMARK_TEMPLATE(BM_double_contraction_arma_d, 9, 9);
-
 ////BENCHMARK_TEMPLATE(BM_exp_tmech, 2);
 ////BENCHMARK_TEMPLATE(BM_exp_tmech, 3);
 ////BENCHMARK_TEMPLATE(BM_exp_eigen, 2);
 ////BENCHMARK_TEMPLATE(BM_exp_eigen, 3);
-////BENCHMARK_TEMPLATE(BM_exp_arma, 2);
-////BENCHMARK_TEMPLATE(BM_exp_arma, 3);
-
 ////BENCHMARK_TEMPLATE(BM_inverse_tmech, 2, 2);
 ////BENCHMARK_TEMPLATE(BM_inverse_tmech, 3, 2);
 ////BENCHMARK_TEMPLATE(BM_inverse_tmech, 2, 4);
@@ -2189,8 +2084,4 @@ static void polar_decomposition_newton(benchmark::State &state)
 ////BENCHMARK_TEMPLATE(BM_inverse_eigen, 4ul);
 ////BENCHMARK_TEMPLATE(BM_inverse_eigen, 6ul);
 ////BENCHMARK_TEMPLATE(BM_inverse_eigen, 9ul);
-//////BENCHMARK_TEMPLATE(BM_inverse_arma, 3ul);
-//////BENCHMARK_TEMPLATE(BM_inverse_arma, 6ul);
-//////BENCHMARK_TEMPLATE(BM_inverse_arma, 9ul);
-
 BENCHMARK_MAIN();
