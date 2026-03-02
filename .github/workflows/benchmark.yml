@@ -20,7 +20,7 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (
         github.event.issue.pull_request &&
-        github.event.comment.body == '/benchmark'
+        contains(github.event.comment.body, '/benchmark')
       )
     steps:
       - name: React to comment
