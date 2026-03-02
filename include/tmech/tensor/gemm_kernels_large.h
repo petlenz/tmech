@@ -25,8 +25,8 @@ struct gemm_kernels_large
     // Tiles in the j-dimension so that each tile's accumulators fit
     // in registers. Within each tile, full k-loop with register
     // accumulation. No pre-zeroing required.
-    static inline void gemm_simd_tiled(LHS const* __lhs, RHS const* __rhs,
-                                       RESULT* __result) noexcept {
+    static inline void gemm_simd_tiled(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs,
+                                       RESULT* TMECH_RESTRICT __result) noexcept {
         using batch_type = xsimd::batch<RESULT>;
         constexpr size_type W = batch_type::size;
         constexpr size_type JB = 4 * W;      // tile width: 16 (AVX2) or 32 (AVX-512)

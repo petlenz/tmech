@@ -22,7 +22,7 @@ struct gemm_wrapper_base
 {
     using size_type = std::size_t;
 
-    static constexpr inline auto gemm_simple_bigger(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    static constexpr inline auto gemm_simple_bigger(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT * TMECH_RESTRICT __result)noexcept{
         for(size_type i{0}; i<RowsLHS; ++i){
             for(size_type j{0}; j<ColumnsRHS; ++j){
                 __result[i*ColumnsRHS+j] = 0;
@@ -38,7 +38,7 @@ struct gemm_wrapper_base
     // j-i-k loop order: fuses zeroing with accumulation into a single
     // result element — the compiler keeps __result[i*ColumnsRHS+j] in a
     // register across the entire k-loop.  Best for scalar (non-SIMD) code.
-    static constexpr inline auto gemm_simple(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    static constexpr inline auto gemm_simple(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT * TMECH_RESTRICT __result)noexcept{
         for(size_type j{0}; j<ColumnsRHS; ++j){
             for(size_type i{0}; i<RowsLHS; ++i){
                 __result[i*ColumnsRHS+j] = 0;
@@ -52,7 +52,7 @@ struct gemm_wrapper_base
     // i-k-j loop order: inner j-loop accesses result[] and rhs[]
     // sequentially, enabling auto-vectorisation (broadcast lhs element,
     // FMA across j-vector).  Requires pre-zeroed result buffer.
-    static constexpr inline auto gemm_simple_ikj(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    static constexpr inline auto gemm_simple_ikj(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT * TMECH_RESTRICT __result)noexcept{
         for(size_type i{0}; i<RowsLHS; ++i){
             for(size_type k{0}; k<ColumnsLHS; ++k){
                 const auto a = __lhs[i*ColumnsLHS+k];
@@ -63,7 +63,7 @@ struct gemm_wrapper_base
         }
     }
 
-    static constexpr inline auto gemv(LHS const * __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    static constexpr inline auto gemv(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT * TMECH_RESTRICT __result)noexcept{
         for(size_type i=0; i<RowsLHS; ++i){
             __result[i] = 0;
             for(size_type j=0; j<RowsRHS; ++j){
@@ -72,7 +72,7 @@ struct gemm_wrapper_base
         }
     }
 
-    static constexpr inline auto gevm(LHS const* __lhs, RHS const* __rhs, RESULT * __result)noexcept{
+    static constexpr inline auto gevm(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT * TMECH_RESTRICT __result)noexcept{
         for(size_type i{0}; i<RowsLHS; ++i){
             RESULT sum{0};
             for(size_type j{0}; j<ColumnsLHS; ++j){
@@ -132,7 +132,7 @@ class gemm_wrapper
     using base::gemv;
     using base::gevm;
 public:
-    static constexpr inline void evaluate(LHS const* __lhs, RHS const* __rhs, RESULT* __result) noexcept {
+    static constexpr inline void evaluate(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT* TMECH_RESTRICT __result) noexcept {
         if constexpr (ColumnsRHS == 1) { gemv(__lhs, __rhs, __result); return; }
         if constexpr (ColumnsLHS == 1) { gevm(__lhs, __rhs, __result); return; }
 
@@ -173,7 +173,7 @@ class gemm_wrapper
     static constexpr bool is_small_gemm = xsimd_base::is_small_gemm;
     static constexpr bool is_small_gemv = xsimd_base::is_small_gemv;
 public:
-    static constexpr inline void evaluate(LHS const* __lhs, RHS const* __rhs, RESULT* __result) noexcept {
+    static constexpr inline void evaluate(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT* TMECH_RESTRICT __result) noexcept {
         // GEMV — writes directly, no pre-zeroing
         if constexpr (ColumnsRHS == 1) {
             if constexpr (simd_supported) {

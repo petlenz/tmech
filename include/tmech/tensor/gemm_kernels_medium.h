@@ -21,7 +21,7 @@ struct gemm_kernels_medium
 {
     using size_type = std::size_t;
 
-    static inline void gevm_simd(LHS const* __lhs, RHS const* __rhs, RESULT* __result) noexcept {
+    static inline void gevm_simd(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs, RESULT* TMECH_RESTRICT __result) noexcept {
         using batch_type = xsimd::batch<RESULT>;
         constexpr size_type W = batch_type::size;
         constexpr size_type N = RowsLHS;
@@ -46,8 +46,8 @@ struct gemm_kernels_medium
     // in SIMD registers across the full k-loop (zero intermediate
     // stores). Writes final values directly — no pre-zeroing needed.
     template <size_type NR_BLK>
-    static inline void gemm_regaccum_block(LHS const* __lhs, RHS const* __rhs,
-                                           RESULT* __result, size_type i_start) noexcept {
+    static inline void gemm_regaccum_block(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs,
+                                           RESULT* TMECH_RESTRICT __result, size_type i_start) noexcept {
         using batch_type = xsimd::batch<RESULT>;
         constexpr size_type W = batch_type::size;
         constexpr size_type NJ_FULL = ColumnsRHS / W;
@@ -111,8 +111,8 @@ struct gemm_kernels_medium
     // ---- gemm_simd_regaccum: multi-row register-accumulated GEMM ----
     // Dispatches rows in blocks of NR (compile-time), with a remainder
     // block for the last few rows. No pre-zeroing required.
-    static inline void gemm_simd_regaccum(LHS const* __lhs, RHS const* __rhs,
-                                          RESULT* __result) noexcept {
+    static inline void gemm_simd_regaccum(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs,
+                                          RESULT* TMECH_RESTRICT __result) noexcept {
         using batch_type = xsimd::batch<RESULT>;
         constexpr size_type W = batch_type::size;
         constexpr size_type NJ_FULL = ColumnsRHS / W;
@@ -136,8 +136,8 @@ struct gemm_kernels_medium
     // Processes NR rows simultaneously, sharing the RHS vector load
     // and providing multiple independent FMA chains to hide latency.
     // Writes results directly — no pre-zeroing needed.
-    static inline void gemv_simd_multirow(LHS const* __lhs, RHS const* __rhs,
-                                          RESULT* __result) noexcept {
+    static inline void gemv_simd_multirow(LHS const* TMECH_RESTRICT __lhs, RHS const* TMECH_RESTRICT __rhs,
+                                          RESULT* TMECH_RESTRICT __result) noexcept {
         using batch_type = xsimd::batch<RESULT>;
         constexpr size_type W = batch_type::size;
         constexpr size_type N = ColumnsLHS;
