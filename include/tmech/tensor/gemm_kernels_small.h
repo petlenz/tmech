@@ -88,7 +88,7 @@ public:
     }
 
     template <std::size_t I, std::size_t... Ks>
-    static constexpr TMECH_INLINE RESULT gemv_dot_row(LHS const* __lhs, RHS const* __rhs,
+    static constexpr inline RESULT gemv_dot_row(LHS const* __lhs, RHS const* __rhs,
                                                 std::index_sequence<Ks...>) noexcept
     {
         return ((static_cast<RESULT>(__lhs[I * ColumnsLHS + Ks]) *
@@ -105,7 +105,7 @@ public:
     }
 
     template <std::size_t... Ws>
-    static TMECH_INLINE void preload_rhs_v(xsimd::batch<RESULT>* rhs_b, RHS const* __rhs,
+    static inline void preload_rhs_v(xsimd::batch<RESULT>* rhs_b, RHS const* __rhs,
                                      std::index_sequence<Ws...>) noexcept
     {
         using batch_type = xsimd::batch<RESULT>;
@@ -113,7 +113,7 @@ public:
     }
 
     template <std::size_t I, std::size_t... Ws>
-    static TMECH_INLINE auto gemv_dot_chunks(LHS const* __lhs,
+    static inline auto gemv_dot_chunks(LHS const* __lhs,
                                        xsimd::batch<RESULT> const* rhs_b,
                                        std::index_sequence<Ws...>) noexcept
     {
@@ -123,7 +123,7 @@ public:
     }
 
     template <std::size_t I, std::size_t... Ts>
-    static constexpr TMECH_INLINE RESULT gemv_dot_tail(LHS const* __lhs, RHS const* __rhs,
+    static constexpr inline RESULT gemv_dot_tail(LHS const* __lhs, RHS const* __rhs,
                                                  std::index_sequence<Ts...>) noexcept
     {
         return ((static_cast<RESULT>(__lhs[I * ColumnsLHS + NW_V * W + Ts]) *
@@ -173,7 +173,7 @@ public:
     // Use explicit FMA chain instead of "sum of products" expression.
 
     template <std::size_t... Ks>
-    static TMECH_INLINE xsimd::batch<RESULT> fma_row_fused(xsimd::batch<RESULT> const* rhs_rows,
+    static inline xsimd::batch<RESULT> fma_row_fused(xsimd::batch<RESULT> const* rhs_rows,
                                                      LHS const* lhs_row,
                                                      std::index_sequence<Ks...>) noexcept
     {
@@ -185,7 +185,7 @@ public:
     }
 
     template <std::size_t... Ks>
-    static TMECH_INLINE void preload_rhs_single(xsimd::batch<RESULT>* rhs_rows,
+    static inline void preload_rhs_single(xsimd::batch<RESULT>* rhs_rows,
                                           RHS const* __rhs,
                                           std::index_sequence<Ks...>) noexcept
     {
@@ -212,7 +212,7 @@ public:
     // -------- Scalar GEMM (ColumnsRHS < W) --------
 
     template <std::size_t I, std::size_t J, std::size_t... Ks>
-    static constexpr TMECH_INLINE RESULT dot_ij(LHS const* __lhs, RHS const* __rhs,
+    static constexpr inline RESULT dot_ij(LHS const* __lhs, RHS const* __rhs,
                                           std::index_sequence<Ks...>) noexcept
     {
         return ((static_cast<RESULT>(__lhs[I * ColumnsLHS + Ks]) *
@@ -220,7 +220,7 @@ public:
     }
 
     template <std::size_t I, std::size_t... Js>
-    static constexpr TMECH_INLINE void gemm_row_scalar(LHS const* __lhs, RHS const* __rhs,
+    static constexpr inline void gemm_row_scalar(LHS const* __lhs, RHS const* __rhs,
                                                  RESULT* __result,
                                                  std::index_sequence<Js...>) noexcept
     {
@@ -309,14 +309,14 @@ public:
     };
 
     template <std::size_t I>
-    static TMECH_INLINE void gemm_row_multi_1(LHS const* TMECH_RESTRICT __lhs,
+    static inline void gemm_row_multi_1(LHS const* TMECH_RESTRICT __lhs,
                                         RHS const* TMECH_RESTRICT __rhs,
                                         RESULT* TMECH_RESTRICT __result) noexcept
     {
         row_blocker<1>::template run<I>(__lhs, __rhs, __result);
     }
 
-    static TMECH_INLINE void gemm_small_multi(LHS const* TMECH_RESTRICT __lhs,
+    static inline void gemm_small_multi(LHS const* TMECH_RESTRICT __lhs,
                                                RHS const* TMECH_RESTRICT __rhs,
                                                RESULT* TMECH_RESTRICT __result) noexcept
     {

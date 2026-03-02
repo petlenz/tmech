@@ -34,9 +34,9 @@ class BuildConfig:
 
     def cmake_args(self) -> List[str]:
         return [
-            "-DTMECH_BUILD_BENCHMARK=ON",
-            "-DTMECH_BUILD_TESTS=OFF",
-            "-DTMECH_BUILD_EXAMPLES=OFF",
+            "-DBUILD_BENCHMARK=ON",
+            "-DBUILD_TESTS=OFF",
+            "-DBUILD_EXAMPLES=OFF",
             "-DCMAKE_BUILD_TYPE=Release",
             f"-DTMECH_USE_XSIMD={'ON' if self.use_xsimd else 'OFF'}",
         ]
@@ -141,11 +141,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Build and run tmech benchmarks under multiple configurations."
     )
-    parser.add_argument(
-        "--source-dir",
-        default=str(Path(__file__).resolve().parent.parent),
-        help="tmech source root (default: repo root)",
-    )
+    parser.add_argument("--source-dir", default=".", help="tmech source root")
     parser.add_argument(
         "--build-dir-prefix",
         default="build_bench",

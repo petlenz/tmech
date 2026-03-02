@@ -234,60 +234,98 @@ def generate_flag_comparison_report(
 def generate_regression_report(
     baseline_dir: Path,
     current_results: Dict[str, List[BenchmarkResult]],
+    pr_branch: str = "PR",
 ) -> str:
-    """Markdown tables comparing main vs PR for each config."""
-    sections: List[str] = []
-    sections.append("## PR Regression Report\n")
+    """Single markdown table comparing main vs PR across all configs.
+
+    Columns: Benchmark | scalar (main) | scalar (PR) | xsimd (main) | xsimd (PR)
+    with per-config change percentage and an overall status column.
+    """
+    # Load baseline and current results per config
+    baseline_lookup: Dict[str, Dict[str, float]] = {}
+    current_lookup: Dict[str, Dict[str, float]] = {}
+    available_configs: List[str] = []
 
     for cfg_name in CONFIG_NAMES:
         baseline_json = baseline_dir / f"{cfg_name}.json"
         if not baseline_json.exists():
             continue
         baseline = parse_benchmark_json(baseline_json)
-        if not baseline:
-            continue
-
         current = current_results.get(cfg_name, [])
-        if not current:
+        if not baseline or not current:
             continue
 
-        baseline_lookup = {r.name: r.cpu_time_ns for r in baseline}
-        current_lookup = {r.name: r.cpu_time_ns for r in current}
+        available_configs.append(cfg_name)
+        baseline_lookup[cfg_name] = {r.name: r.cpu_time_ns for r in baseline}
+        current_lookup[cfg_name] = {r.name: r.cpu_time_ns for r in current}
 
-        all_names = list(dict.fromkeys(
-            [r.name for r in baseline] + [r.name for r in current]
-        ))
+    if not available_configs:
+        return "## main vs " + pr_branch + "\n\nNo comparable results available.\n"
 
-        lines = [
-            f"### {cfg_name}\n",
-            "| Benchmark | main (ns) | PR (ns) | Change | Status |",
-            "|-----------|----------|---------|--------|--------|",
-        ]
+    # Collect all benchmark names (union across configs, ordered by first appearance)
+    all_names: List[str] = []
+    seen: set = set()
+    for cfg_name in available_configs:
+        for name in baseline_lookup[cfg_name]:
+            if name not in seen:
+                all_names.append(name)
+                seen.add(name)
+        for name in current_lookup[cfg_name]:
+            if name not in seen:
+                all_names.append(name)
+                seen.add(name)
 
-        for name in all_names:
-            base_t = baseline_lookup.get(name)
-            curr_t = current_lookup.get(name)
+    # Build header
+    display = {"scalar": "Scalar", "xsimd": "xsimd"}
+    header_cells = []
+    sep_cells = []
+    for cfg_name in available_configs:
+        label = display.get(cfg_name, cfg_name)
+        header_cells.append(f"{label} (main)")
+        header_cells.append(f"{label} ({pr_branch})")
+        header_cells.append("Change")
+        sep_cells.extend(["---:", "---:", "---:"])
+
+    lines = [
+        f"## main vs {pr_branch}\n",
+        "| Benchmark | " + " | ".join(header_cells) + " | Status |",
+        "|---|" + "|".join(sep_cells) + "|---|",
+    ]
+
+    for name in all_names:
+        cells = []
+        worst_pct = 0.0
+        best_pct = 0.0
+        has_any = False
+
+        for cfg_name in available_configs:
+            base_t = baseline_lookup[cfg_name].get(name)
+            curr_t = current_lookup[cfg_name].get(name)
+            cells.append(_fmt(base_t))
+            cells.append(_fmt(curr_t))
 
             if base_t is not None and curr_t is not None and base_t > 0:
                 pct = ((curr_t - base_t) / base_t) * 100.0
-                if pct > 5.0:
-                    status = ":red_circle: regression"
-                elif pct < -5.0:
-                    status = ":green_circle: improvement"
-                else:
-                    status = ":white_circle: neutral"
-                change_str = f"{pct:+.1f}%"
+                cells.append(f"{pct:+.1f}%")
+                worst_pct = max(worst_pct, pct)
+                best_pct = min(best_pct, pct)
+                has_any = True
             else:
-                change_str = "N/A"
-                status = ":white_circle: neutral"
+                cells.append("N/A")
 
-            lines.append(
-                f"| `{name}` | {_fmt(base_t)} | {_fmt(curr_t)} | {change_str} | {status} |"
-            )
+        if has_any:
+            if worst_pct > 5.0:
+                status = ":red_circle:"
+            elif best_pct < -5.0:
+                status = ":green_circle:"
+            else:
+                status = ":white_circle:"
+        else:
+            status = ":white_circle:"
 
-        sections.append("\n".join(lines) + "\n")
+        lines.append(f"| `{name}` | " + " | ".join(cells) + f" | {status} |")
 
-    return "\n".join(sections)
+    return "\n".join(lines) + "\n"
 
 # ---------------------------------------------------------------------------
 # Plot generation
@@ -405,6 +443,11 @@ def main() -> int:
         help="Path to main's JSON results (for regression mode)",
     )
     parser.add_argument(
+        "--pr-branch",
+        default="PR",
+        help="Name of the PR branch (used in regression table header)",
+    )
+    parser.add_argument(
         "--no-plots",
         action="store_true",
         default=False,
@@ -431,17 +474,12 @@ def main() -> int:
 
     if args.mode in ("regression", "both") and args.baseline_json_dir:
         baseline_dir = Path(args.baseline_json_dir).resolve()
-        baseline_jsons = list(baseline_dir.glob("*.json")) if baseline_dir.exists() else []
-        if baseline_jsons:
+        if baseline_dir.exists():
             report_parts.append(
-                generate_regression_report(baseline_dir, config_results)
+                generate_regression_report(baseline_dir, config_results, args.pr_branch)
             )
         else:
-            log.warning("No baseline JSON files found in %s, skipping regression report", baseline_dir)
-            report_parts.append(
-                "## PR Regression Report\n\n"
-                "No baseline results available (main branch may not have benchmarks yet).\n"
-            )
+            log.warning("Baseline directory %s not found, skipping regression report", baseline_dir)
 
     # Generate plots
     plot_groups: Dict[str, List[Tuple[str, str]]] = {}
