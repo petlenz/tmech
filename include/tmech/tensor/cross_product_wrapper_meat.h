@@ -8,7 +8,7 @@
 #ifndef CROSS_PRODUCT_WRAPPER_MEAT_H
 #define CROSS_PRODUCT_WRAPPER_MEAT_H
 
-#include <tmech/tensor/utility.h>
+#include <tmech/tensor/tmech_utility.h>
 
 namespace detail {
 

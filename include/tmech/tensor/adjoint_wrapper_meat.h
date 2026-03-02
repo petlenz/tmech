@@ -96,7 +96,6 @@ constexpr inline auto adjoint_wrapper<_Tensor>::rank()noexcept{
 template <typename _Tensor>
 template<typename _Result>
 constexpr inline auto adjoint_wrapper<_Tensor>::evaluate(_Result & result)noexcept{
-    this->_is_init = false;
     evaluate_imp(result);
 }
 
@@ -119,15 +118,12 @@ template<typename _Result>
 constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_imp(_Result & result)noexcept{
     constexpr bool raw_data{std::experimental::is_detected<has_raw_data, data_type_tensor>::value};
 
-    if(!this->_is_init){
-        if constexpr (raw_data){
-            evaluate::apply(_data);
-            evaluate_details(result.raw_data(), _data_basis.raw_data());
-        }else{
-            result = _data_basis;
-            evaluate_details(result.raw_data(), result.raw_data());
-        }
-        this->_is_init = true;
+    if constexpr (raw_data){
+        evaluate::apply(_data);
+        evaluate_details(result.raw_data(), _data_basis.raw_data());
+    }else{
+        result = _data_basis;
+        evaluate_details(result.raw_data(), result.raw_data());
     }
 }
 //@}

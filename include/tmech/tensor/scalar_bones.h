@@ -32,13 +32,15 @@ public:
     template<typename ...Numbers>
     constexpr inline value_type operator()(Numbers...)const noexcept;
 
-    static constexpr inline auto simple_evaluation()noexcept{
-        return true;
-    }
-
     constexpr inline auto direct_access(std::size_t /*__idx*/)const noexcept{
         return scalar_;
     }
+
+#ifdef TMECH_HAS_XSIMD
+    auto batch_access(std::size_t) const noexcept {
+        return xsimd::batch<value_type>(scalar_);
+    }
+#endif
 
 private:
     value_type const scalar_;

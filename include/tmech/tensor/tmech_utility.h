@@ -5,8 +5,8 @@
 *                                                                          *
 * The full license is in the file LICENSE, distributed with this software. *
 ****************************************************************************/
-#ifndef UTILITY_H
-#define UTILITY_H
+#ifndef TMECH_UTILITY_H
+#define TMECH_UTILITY_H
 
 #include <tmech/tensor/traits.h>
 
@@ -377,6 +377,75 @@ using has_raw_data = decltype(std::declval<Type>().raw_data());
 template<typename Type, typename... Arguments>
 using has_evaluate = decltype(std::declval<Type>().evaluate(std::declval<Arguments>()...));
 
+template<typename Type>
+using has_direct_access_t = decltype(std::declval<const Type&>().direct_access(std::size_t{}));
+
+template<typename Type>
+using has_batch_access_t = decltype(std::declval<const Type>().batch_access(std::size_t{}));
+
+// True when an expression supports flat linear iteration via direct_access().
+template<typename Derived>
+inline constexpr bool is_direct_assignable_v =
+    std::experimental::is_detected<has_direct_access_t, Derived>::value;
+
+// True when an expression supports SIMD batch evaluation.
+// Uses struct-based dispatch to avoid instantiating has_batch_access_t
+// on types where is_direct_assignable_v is false.
+template<typename Derived, typename T, bool IsDirect = is_direct_assignable_v<Derived>>
+struct is_simd_assignable_impl : std::false_type {};
+
+#ifdef TMECH_HAS_XSIMD
+template<typename Derived, typename T>
+struct is_simd_assignable_impl<Derived, T, true>
+    : std::bool_constant<
+        std::experimental::is_detected<has_batch_access_t, Derived>::value
+        && has_xsimd_batch_v<T>
+        && std::is_same_v<typename Derived::value_type, T>> {};
+#endif
+
+template<typename Derived, typename T>
+inline constexpr bool is_simd_assignable_v = is_simd_assignable_impl<Derived, T>::value;
+
+// Expression tree node counter — walks the expression tree at compile time.
+// Primary template: leaf node (tensor, eye, scalar, etc.) = 1 node.
+template<typename T>
+struct tree_node_count : std::integral_constant<std::size_t, 1> {};
+
+template<typename T>
+inline constexpr std::size_t tree_node_count_v = tree_node_count<T>::value;
+
+// Generic unary wrapper: template<typename> class
+template<template<typename> class _Unary, typename _Expr>
+struct tree_node_count<_Unary<_Expr>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_Expr>>>> {};
+
+// Generic binary wrapper: template<typename, typename> class
+template<template<typename, typename> class _Binary, typename _LHS, typename _RHS>
+struct tree_node_count<_Binary<_LHS, _RHS>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_LHS>>>
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_RHS>>>> {};
+
+// tensor_binary_expression_wrapper has 3 template params
+template<typename _LHS, typename _RHS, typename _Op>
+struct tree_node_count<detail::tensor_binary_expression_wrapper<_LHS, _RHS, _Op>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_LHS>>>
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_RHS>>>> {};
+
+// outer_product_wrapper has 4 template params
+template<typename _LHS, typename _RHS, typename _SeqL, typename _SeqR>
+struct tree_node_count<detail::outer_product_wrapper<_LHS, _RHS, _SeqL, _SeqR>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_LHS>>>
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_RHS>>>> {};
+
+// basis_change_wrapper has 2 params but second is a sequence, not an expression
+template<typename _Tensor, typename _Sequence>
+struct tree_node_count<detail::basis_change_wrapper<_Tensor, _Sequence>>
+    : std::integral_constant<std::size_t, 1
+        + tree_node_count_v<std::remove_cv_t<std::remove_reference_t<_Tensor>>>> {};
 
 //numerical differentiation
 template <typename Function, typename Direction, bool Fundamental>
@@ -1132,8 +1201,12 @@ struct meta_for_loop_deep<DIM, DEEP, DEEP>
     using type = meta_for_loop<void, DIM>;
 };
 
+template<typename Func, std::size_t Size, bool Unroll>
+struct loop;
+
+// Runtime loop
 template<typename Func, std::size_t Size>
-struct loop{
+struct loop<Func, Size, false>{
     template<typename LambdaFunc, typename ...Args>
     static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
         for(std::size_t i{0}; i<Size; ++i){
@@ -1143,7 +1216,7 @@ struct loop{
 };
 
 template<std::size_t Size>
-struct loop<void, Size>{
+struct loop<void, Size, false>{
     template<typename LambdaFunc, typename ...Args>
     static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
         for(std::size_t i{0}; i<Size; ++i){
@@ -1152,20 +1225,54 @@ struct loop<void, Size>{
     }
 };
 
-template <std::size_t DEEP, std::size_t Size, std::size_t Start=0>
+// Unrolled loop via fold expression
+template<typename Func, std::size_t Size>
+struct loop<Func, Size, true>{
+    template<typename LambdaFunc, typename ...Args, std::size_t... Is>
+    static constexpr inline auto for_loop_impl(LambdaFunc func, std::index_sequence<Is...>, Args ... indices)noexcept{
+        (Func::for_loop(func, indices..., Is), ...);
+    }
+    template<typename LambdaFunc, typename ...Args>
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
+        for_loop_impl(func, std::make_index_sequence<Size>{}, indices...);
+    }
+};
+
+template<std::size_t Size>
+struct loop<void, Size, true>{
+    template<typename LambdaFunc, typename ...Args, std::size_t... Is>
+    static constexpr inline auto for_loop_impl(LambdaFunc func, std::index_sequence<Is...>, Args ... indices)noexcept{
+        (func(indices..., Is), ...);
+    }
+    template<typename LambdaFunc, typename ...Args>
+    static constexpr inline auto for_loop(LambdaFunc func, Args ... indices)noexcept{
+        for_loop_impl(func, std::make_index_sequence<Size>{}, indices...);
+    }
+};
+
+template <std::size_t Base, std::size_t Exp>
+struct ct_pow { static constexpr std::size_t value = Base * ct_pow<Base, Exp-1>::value; };
+
+template <std::size_t Base>
+struct ct_pow<Base, 0> { static constexpr std::size_t value = 1; };
+
+template <std::size_t DEEP, std::size_t Size, bool Unroll, std::size_t Start=0>
 struct for_loop_deep
 {
-    using type = loop<typename for_loop_deep<DEEP, Size, Start+1>::type, Size>;
+    using type = loop<typename for_loop_deep<DEEP, Size, Unroll, Start+1>::type, Size, Unroll>;
 };
 
-template <std::size_t DEEP, std::size_t Size>
-struct for_loop_deep<DEEP, Size, DEEP>
+template <std::size_t DEEP, std::size_t Size, bool Unroll>
+struct for_loop_deep<DEEP, Size, Unroll, DEEP>
 {
-    using type = loop<void, Size>;
+    using type = loop<void, Size, Unroll>;
 };
 
-template <std::size_t DEEP, std::size_t Size>
-using for_loop_t = typename for_loop_deep<DEEP, Size>::type;
+template <std::size_t DEEP, std::size_t Size, std::size_t TreeNodes = 1>
+constexpr bool should_unroll_loop = (ct_pow<Size, DEEP+1>::value <= TMECH_MAX_LOOP_UNROLL_SIZE) && (TreeNodes <= TMECH_MAX_TREE_NODES_UNROLL);
+
+template <std::size_t DEEP, std::size_t Size, std::size_t TreeNodes = 1>
+using for_loop_t = typename for_loop_deep<DEEP, Size, should_unroll_loop<DEEP, Size, TreeNodes>>::type;
 
 
 
@@ -1444,4 +1551,4 @@ struct single_contraction{
 
 } // NAMESPACE DETAIL
 
-#endif // UTILITY_H
+#endif // TMECH_UTILITY_H

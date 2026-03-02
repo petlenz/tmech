@@ -48,10 +48,7 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::evaluate()noexcept{
-    if(!this->_is_init){
-        evaluate_imp(_data);
-        this->_is_init = true;
-    }
+    evaluate_imp(_data);
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>

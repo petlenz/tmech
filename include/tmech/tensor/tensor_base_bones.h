@@ -18,12 +18,10 @@ template<typename _Derived>
 class tensor_base
 {
 public:
-    constexpr tensor_base()noexcept:
-        _is_init(false)
+    constexpr tensor_base()noexcept
     {}
 
-    constexpr explicit tensor_base(tensor_base const& /*__data*/)noexcept:
-        _is_init(false)
+    constexpr explicit tensor_base(tensor_base const& /*__data*/)noexcept
     {}
 
     constexpr inline auto& convert() const noexcept{
@@ -57,8 +55,6 @@ public:
     //    }
     //}
 
-protected:
-    bool _is_init;
 };
 
 template<typename _Tensor,  std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>

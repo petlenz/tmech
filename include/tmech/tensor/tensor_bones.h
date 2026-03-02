@@ -112,11 +112,15 @@ public:
 
     constexpr inline T const* raw_data()const noexcept;
 
-    static constexpr inline auto simple_evaluation(){return true;}
-
     constexpr inline auto direct_access(std::size_t __idx)const noexcept{
         return _data[__idx];
     }
+
+#ifdef TMECH_HAS_XSIMD
+    auto batch_access(std::size_t __idx) const noexcept {
+        return xsimd::batch<value_type>::load_unaligned(&_data[__idx]);
+    }
+#endif
 
 //    constexpr inline auto const& data()const noexcept;
 
@@ -157,7 +161,7 @@ private:
     template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
     constexpr inline auto delete_data(){}
 
-    /*alignas(T)*/ value_data_type _data;
+    alignas(detail::simd_alignment_v<T>) value_data_type _data;
 };
 
 #endif // TENSOR_BONES_H

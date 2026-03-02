@@ -50,6 +50,16 @@ public:
 
     constexpr inline auto raw_data()const noexcept;
 
+    constexpr inline auto direct_access(std::size_t __idx) const noexcept {
+        return _data.direct_access(__idx);
+    }
+
+#ifdef TMECH_HAS_XSIMD
+    auto batch_access(std::size_t __idx) const noexcept {
+        return xsimd::batch<value_type>::load_unaligned(&_data.raw_data()[__idx]);
+    }
+#endif
+
     constexpr inline auto derivative()noexcept;
 
 private:

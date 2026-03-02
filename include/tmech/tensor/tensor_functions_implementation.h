@@ -9,7 +9,7 @@
 #define TENSOR_FUNCTIONS_H
 
 #include <type_traits>
-#include "utility.h"
+#include "tmech_utility.h"
 
 /// @cond
 

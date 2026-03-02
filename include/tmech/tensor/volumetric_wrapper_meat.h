@@ -78,17 +78,14 @@ constexpr inline auto volumetric_wrapper<Tensor>::rank()noexcept{
 */
 template <typename Tensor>
 constexpr inline auto volumetric_wrapper<Tensor>::evaluate()noexcept{
-    if(!this->_is_init){
-        evaluate::apply(_data);
+    evaluate::apply(_data);
 
-        _trace = safe_cast<value_type>(0.0);
-        for(size_type i{0}; i<dimension(); ++i){
-            _trace += _data(i,i);
-        }
-
-        _trace /= safe_cast<value_type>(dimension());
-        this->_is_init = true;
+    _trace = safe_cast<value_type>(0.0);
+    for(size_type i{0}; i<dimension(); ++i){
+        _trace += _data(i,i);
     }
+
+    _trace /= safe_cast<value_type>(dimension());
 }
 //@}
 

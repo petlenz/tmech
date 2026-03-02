@@ -11,6 +11,7 @@
 #include <tmech/tmech.h>
 #include <boost/align/aligned_allocator.hpp>
 #include <Fastor/Fastor.h>
+#include <experimental/simd>
 
 // #define Do2DBenchmark
 
@@ -673,6 +674,60 @@ static void double_contraction_4_2_fastor(benchmark::State &state)
     }
 }
 
+// ── std::experimental::simd gemv kernel ──────────────────────────────────────
+// Hand-written SIMD matrix-vector product (N×N * N → N) using
+// std::experimental::simd.  N = Dim*Dim (e.g. 9 for Dim=3).
+//
+// Strategy: for each row, load simd-width chunks of the row and the
+// corresponding vector elements, FMA into a simd accumulator, then
+// horizontal-reduce + scalar tail.
+template <typename T, std::size_t Dim>
+static void double_contraction_4_2_simd(benchmark::State &state)
+{
+    namespace stdx = std::experimental;
+    using simd_t = stdx::native_simd<T>;
+    constexpr std::size_t W = simd_t::size(); // e.g. 4 for AVX2 double
+    constexpr std::size_t N = Dim * Dim;      // matrix/vector dimension
+
+    // row-major N×N matrix, N-vector source, N-vector result
+    alignas(stdx::memory_alignment_v<simd_t>) T A[N * N];
+    alignas(stdx::memory_alignment_v<simd_t>) T x[N];
+    alignas(stdx::memory_alignment_v<simd_t>) T y[N];
+
+    // initialise with deterministic non-trivial values
+    for (std::size_t i = 0; i < N * N; ++i)
+        A[i] = static_cast<T>(i) * T(0.01);
+    for (std::size_t i = 0; i < N; ++i)
+        x[i] = static_cast<T>(i) * T(0.1);
+
+    for (auto _ : state)
+    {
+        for (std::size_t i = 0; i < N; ++i)
+        {
+            const T *row = A + i * N;
+            simd_t acc(0);
+            std::size_t j = 0;
+            // vectorised body
+            for (; j + W <= N; j += W)
+            {
+                simd_t a_chunk(row + j, stdx::element_aligned);
+                simd_t x_chunk(x + j, stdx::element_aligned);
+                acc += a_chunk * x_chunk;
+            }
+            // horizontal reduce
+            T sum = stdx::reduce(acc);
+            // scalar tail (handles N % W != 0, e.g. 9 % 4 = 1)
+            for (; j < N; ++j)
+            {
+                sum += row[j] * x[j];
+            }
+            y[i] = sum;
+        }
+        benchmark::DoNotOptimize(y);
+        benchmark::ClobberMemory();
+    }
+}
+
 template <typename T, std::size_t Dim>
 static void more_complex_4_2_tmech(benchmark::State &state)
 {
@@ -1189,6 +1244,7 @@ BENCHMARK_TEMPLATE(double_contraction_4_2_tmech, double, 2ul);
 BENCHMARK_TEMPLATE(double_contraction_4_2_eigen, double, 2ul);
 BENCHMARK_TEMPLATE(double_contraction_4_2_eigen_voigt, double, 2ul);
 BENCHMARK_TEMPLATE(double_contraction_4_2_fastor, double, 2ul);
+BENCHMARK_TEMPLATE(double_contraction_4_2_simd, double, 2ul);
 
 BENCHMARK_TEMPLATE(more_complex_4_2_tmech, double, 2ul);
 BENCHMARK_TEMPLATE(more_complex_4_2_eigen, double, 2ul);
@@ -1258,6 +1314,7 @@ BENCHMARK_TEMPLATE(double_contraction_4_2_tmech, double, 3ul);
 BENCHMARK_TEMPLATE(double_contraction_4_2_eigen, double, 3ul);
 BENCHMARK_TEMPLATE(double_contraction_4_2_eigen_voigt, double, 3ul);
 BENCHMARK_TEMPLATE(double_contraction_4_2_fastor, double, 3ul);
+BENCHMARK_TEMPLATE(double_contraction_4_2_simd, double, 3ul);
 
 BENCHMARK_TEMPLATE(more_complex_4_2_tmech, double, 3ul);
 BENCHMARK_TEMPLATE(more_complex_4_2_eigen, double, 3ul);
