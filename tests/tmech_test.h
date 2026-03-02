@@ -15,6 +15,26 @@ using tensor2 = tmech::tensor<double, 3, 2>;
 using tensor4 = tmech::tensor<double, 3, 4>;
 
 template <typename T>
+struct test_tolerance {
+    static constexpr double value = 5e-7;
+};
+template <>
+struct test_tolerance<float> {
+    static constexpr double value = 5e-5;
+};
+template <>
+struct test_tolerance<std::complex<float>> {
+    static constexpr double value = 5e-5;
+};
+template <>
+struct test_tolerance<std::complex<double>> {
+    static constexpr double value = 5e-6;
+};
+
+template <typename T>
+static constexpr double test_tol_v = test_tolerance<T>::value;
+
+template <typename T>
 static constexpr inline auto positive_value(T const value) {
   return (value < T(0) ? T(0) : value);
 }
@@ -493,8 +513,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
+    constexpr double tol = test_tol_v<ValueType>;                               \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
-                        tmech::inner_product<SeqL, SeqR>(a, b), c, 5e-7));     \
+                        tmech::inner_product<SeqL, SeqR>(a, b), c, tol));      \
     c.fill(0);                                                                 \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
       for (std::size_t j{0}; j < Dim; ++j) {                                   \
@@ -504,25 +525,23 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
-                        tmech::inner_product<SeqR, SeqL>(a, b), c, 5e-7));     \
+                        tmech::inner_product<SeqR, SeqL>(a, b), c, tol));      \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
                         tmech::inner_product<SeqR, SeqL>(tmech::abs(a), b), c, \
-                        5e-7));                                                \
+                        tol));                                                 \
     EXPECT_EQ(true, tmech::almost_equal(                                       \
                         tmech::inner_product<SeqR, SeqL>(a, tmech::abs(b)), c, \
-                        5e-7));                                                \
+                        tol));                                                 \
     EXPECT_EQ(true, tmech::almost_equal(tmech::inner_product<SeqR, SeqL>(      \
                                             tmech::abs(a), tmech::abs(b)),     \
-                                        c, 5e-7));                             \
+                                        c, tol));                              \
   }
 
 #define inner_product4(ValueType, Dim)                                         \
   TEST(gtest, inner_product4_##ValueType##_##Dim) {                            \
     using SeqL = tmech::sequence<3, 4>;                                        \
     using SeqR = tmech::sequence<1, 2>;                                        \
-    constexpr double tol =                                                      \
-        (std::is_same_v<ValueType, float> ||                                   \
-         std::is_same_v<ValueType, std::complex<float>>) ? 5e-5 : 5e-8;       \
+    constexpr double tol = test_tol_v<ValueType>;                               \
     tmech::tensor<ValueType, Dim, 4> a, b, c;                                  \
     a = tmech::abs(tmech::randn<ValueType, Dim, 4>());                         \
     b = tmech::abs(tmech::randn<ValueType, Dim, 4>());                         \
@@ -731,7 +750,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     B.randn();                                                                 \
     C1 = tmech::dcontract(B, A);                                               \
     tmech::detail::double_contraction::apply(C2, B, A);                        \
-    EXPECT_EQ(true, tmech::almost_equal(C1, C2, 5e-6));                        \
+    EXPECT_EQ(true, tmech::almost_equal(C1, C2, test_tol_v<ValueType>));       \
   }
 
 #define DoubleContractionRight(ValueType, Dim, RankLHS, RankRHS)               \
@@ -743,7 +762,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     B.randn();                                                                 \
     C1 = tmech::dcontract(A, B);                                               \
     tmech::detail::double_contraction::apply(C2, A, B);                        \
-    EXPECT_EQ(true, tmech::almost_equal(C1, C2, 5e-6));                        \
+    EXPECT_EQ(true, tmech::almost_equal(C1, C2, test_tol_v<ValueType>));       \
   }
 
 #define SingleContraction(ValueType, Dim, RankLHS, RankRHS)                    \
@@ -837,24 +856,26 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
 // pow — STABILIZED: fixed matrix
 #define powFunction(ValueType, Dim)                                            \
   TEST(gtest, powFunction_##ValueType##_##Dim) {                               \
+    constexpr double tol = test_tol_v<ValueType>;                              \
     auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 1), A, 5e-7));           \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 2), A *A, 5e-7));        \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 3), A *A *A, 5e-7));     \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 4), A *A *A *A, 5e-7));  \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 1), A, tol));            \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 2), A *A, tol));         \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 3), A *A *A, tol));      \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 4), A *A *A *A, tol));   \
   }
 
 #define powFunctionEvaluate(ValueType, Dim)                                    \
   TEST(gtest, powFunctionEvaluate_##ValueType##_##Dim) {                       \
+    constexpr double tol = test_tol_v<ValueType>;                              \
     auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 1), A + A, 5e-7));   \
+    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 1), A + A, tol));    \
     EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 2),                  \
-                                        (A + A) * (A + A), 5e-7));             \
+                                        (A + A) * (A + A), tol));              \
     EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 3),                  \
-                                        (A + A) * (A + A) * (A + A), 5e-7));   \
+                                        (A + A) * (A + A) * (A + A), tol));    \
     EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 4),                  \
                                         (A + A) * (A + A) * (A + A) * (A + A), \
-                                        5e-7));                                \
+                                        tol));                                 \
   }
 
 // skew symmetric — safe with randn

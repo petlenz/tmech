@@ -178,7 +178,7 @@ public:
                                                      std::index_sequence<Ks...>) noexcept
     {
         using batch = xsimd::batch<RESULT>;
-        batch acc;
+        batch acc(RESULT(0));
         // fold that builds: acc = fma(broadcast(a_k), rhs_rows[k], acc) ...
         ((acc = xsimd::fma(batch(static_cast<RESULT>(lhs_row[Ks])), rhs_rows[Ks], acc)), ...);
         return acc;
