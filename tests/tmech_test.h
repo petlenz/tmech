@@ -2,8 +2,11 @@
 #define TST_GTEST_H
 
 #include "gtest/gtest.h"
+#include <algorithm>
+#include <cmath>
 #include <complex>
 #include <random>
+#include <type_traits>
 #include <tmech/tmech.h>
 
 using namespace testing;
@@ -33,6 +36,82 @@ struct test_tolerance<std::complex<double>> {
 
 template <typename T>
 static constexpr double test_tol_v = test_tolerance<T>::value;
+
+template <typename T>
+static constexpr double test_rel_tol_v =
+    std::is_same_v<T, float> ? 5e-5 : 5e-7;
+
+template <typename T>
+static constexpr double test_abs_floor_v =
+    std::is_same_v<T, float> ? 1e-7 : 1e-12;
+
+template <typename T>
+inline bool almost_equal_scalar_scaled(T actual, T expected,
+                                       double rel_tol = test_rel_tol_v<T>,
+                                       double abs_floor = test_abs_floor_v<T>) {
+  const long double err =
+      std::abs(static_cast<long double>(actual) -
+               static_cast<long double>(expected));
+  const long double ref = std::max(
+      static_cast<long double>(1.0),
+      std::abs(static_cast<long double>(expected)));
+  const long double tol = std::max(
+      static_cast<long double>(abs_floor),
+      static_cast<long double>(rel_tol) * ref);
+  return err <= tol;
+}
+
+template <typename TensorA, typename TensorB>
+inline bool almost_equal_tensor_scaled(
+    TensorA const &actual, TensorB const &expected, double rel_tol = 5e-6,
+    double abs_floor = 1e-12) {
+  const auto a_eval = tmech::eval(actual);
+  using tensor_type = tmech::tensor<typename std::decay_t<decltype(a_eval)>::value_type,
+                                    std::decay_t<decltype(a_eval)>::dimension(),
+                                    std::decay_t<decltype(a_eval)>::rank()>;
+  const tensor_type a{a_eval};
+  const tensor_type e{tmech::eval(expected)};
+
+  long double err_sq{0};
+  long double n_actual_sq{0};
+  long double n_expected_sq{0};
+
+  for (std::size_t i = 0; i < tensor_type::size(); ++i) {
+    const auto da = std::abs(a.raw_data()[i] - e.raw_data()[i]);
+    const auto na = std::abs(a.raw_data()[i]);
+    const auto ne = std::abs(e.raw_data()[i]);
+    err_sq += static_cast<long double>(da) * static_cast<long double>(da);
+    n_actual_sq += static_cast<long double>(na) * static_cast<long double>(na);
+    n_expected_sq +=
+        static_cast<long double>(ne) * static_cast<long double>(ne);
+  }
+
+  const double err = std::sqrt(static_cast<double>(err_sq));
+  const double n_actual = std::sqrt(static_cast<double>(n_actual_sq));
+  const double n_expected = std::sqrt(static_cast<double>(n_expected_sq));
+  const double ref = std::max(1.0, std::max(n_actual, n_expected));
+  const double tol = std::max(abs_floor, rel_tol * ref);
+  return err <= tol;
+}
+
+#define EXPECT_TENSOR_NEAR(actual, expected, rel_tol, abs_floor)              \
+  EXPECT_TRUE(almost_equal_tensor_scaled((actual), (expected),                \
+                                         (rel_tol), (abs_floor)))
+
+#define EXPECT_SCALAR_NEAR(actual, expected, rel_tol, abs_floor)              \
+  EXPECT_TRUE(almost_equal_scalar_scaled((actual), (expected),                \
+                                         (rel_tol), (abs_floor)))
+
+#define EXPECT_TENSOR_NEAR_DEFAULT(ValueType, actual, expected)               \
+  EXPECT_TRUE(almost_equal_tensor_scaled(                                     \
+      (actual), (expected),                                                   \
+      std::is_same_v<ValueType, float> ? 5e-4 : 5e-6,                         \
+      std::is_same_v<ValueType, float> ? 1e-7 : 1e-12))
+
+#define EXPECT_SCALAR_NEAR_DEFAULT(ValueType, actual, expected)               \
+  EXPECT_TRUE(almost_equal_scalar_scaled<ValueType>(                          \
+      (actual), (expected),                                                   \
+      test_rel_tol_v<ValueType>, test_abs_floor_v<ValueType>))
 
 template <typename T>
 static constexpr inline auto positive_value(T const value) {
@@ -306,10 +385,10 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, inv_function_2_##ValueType##_##Dim##_) {                         \
     auto a = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::inv(a) * a,                           \
+              almost_equal_tensor_scaled(tmech::inv(a) * a,                           \
                                   tmech::eye<ValueType, Dim, 2>(), 5e-5));     \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::inv(tmech::abs(a)) * tmech::abs(a),   \
+              almost_equal_tensor_scaled(tmech::inv(tmech::abs(a)) * tmech::abs(a),   \
                                   tmech::eye<ValueType, Dim, 2>(), 5e-5));     \
   }
 
@@ -323,19 +402,19 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
     A = 2 * mu * IIsym + lambda * tmech::otimes(I, I);                         \
     const auto Anew{tmech::basis_change<tmech::sequence<1, 3, 4, 2>>(A)};      \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::inv(A), A),    \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::dcontract(tmech::inv(A), A),    \
                                         IIsym, 5e-5));                         \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(                                             \
+              almost_equal_tensor_scaled(                                             \
                   tmech::dcontract(tmech::inv(tmech::abs(A)), tmech::abs(A)),  \
                   IIsym, 5e-5));                                               \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::dcontract(                                      \
                             tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(  \
                                 tmech::inv(Anew, SeqL(), SeqR())),             \
                             A),                                                \
                         IIsym, 5e-5));                                         \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::dcontract(                                      \
                             tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(  \
                                 tmech::inv(tmech::abs(Anew), SeqL(), SeqR())), \
@@ -357,20 +436,20 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     const auto Anew{tmech::basis_change<tmech::sequence<1, 3, 4, 2>>(A)};      \
     constexpr ValueType eps{static_cast<ValueType>(                            \
         std::is_same_v<ValueType, float> ? 5e-3 : 8e-5)};                      \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dcontract(tmech::invf(A), A),   \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::dcontract(tmech::invf(A), A),   \
                                         II, eps));                             \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(                                             \
+              almost_equal_tensor_scaled(                                             \
                   tmech::dcontract(tmech::invf(tmech::abs(A)), tmech::abs(A)), \
                   II, eps));                                                   \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(                                             \
+              almost_equal_tensor_scaled(                                             \
                   tmech::dcontract(                                            \
                       tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(        \
                           tmech::invf(Anew, tmech::sequence<1, 4, 2, 3>())),   \
                       A),                                                      \
                   II, eps));                                                   \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::dcontract(                                      \
                             tmech::basis_change<tmech::sequence<1, 4, 2, 3>>(  \
                                 tmech::invf(tmech::abs(Anew),                  \
@@ -385,28 +464,28 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, Rank> a, b;                                  \
     a.fill(static_cast<ValueType>(-10));                                       \
     b.fill(static_cast<ValueType>(10));                                        \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::abs(a), b, 5e-6));              \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::abs(a), b, 5e-6));              \
   }
 #define absFunctionEvaluate(ValueType, Dim, Rank)                              \
   TEST(gtest, absFuncEvaluate_##ValueType##_##Dim##_##Rank) {                  \
     tmech::tensor<ValueType, Dim, Rank> a, b;                                  \
     a.fill(static_cast<ValueType>(-10));                                       \
     b.fill(static_cast<ValueType>(10));                                        \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::abs(a + a), (b + b), 5e-6));    \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::abs(a + a), (b + b), 5e-6));    \
   }
 
 // adjoint function — STABILIZED: fixed matrix
 #define adjFunction(ValueType, Dim)                                            \
   TEST(gtest, adjFunc_##ValueType##_##Dim) {                                   \
     auto a = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::adj(a),                         \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::adj(a),                         \
                                         tmech::det(a) * tmech::inv(a), 5e-5)); \
   }
 
 #define adjFunctionEvaluate(ValueType, Dim)                                    \
   TEST(gtest, adjFuncEvaluate_##ValueType##_##Dim) {                           \
     auto a = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::adj(a + a),                     \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::adj(a + a),                     \
                                         tmech::det(a + a) * tmech::inv(a + a), \
                                         5e-5));                                \
   }
@@ -415,9 +494,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
 #define cofFunction(ValueType, Dim)                                            \
   TEST(gtest, cofFunc_##ValueType##_##Dim) {                                   \
     auto a = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::cof(a),                         \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::cof(a),                         \
                                         tmech::trans(tmech::adj(a)), 5e-5));   \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::cof(tmech::abs(a)),                             \
                         tmech::trans(tmech::adj(tmech::abs(a))), 5e-5));       \
   }
@@ -426,9 +505,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, cofFuncEvaluate_##ValueType##_##Dim) {                           \
     auto a = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::cof(a + a),                           \
+              almost_equal_tensor_scaled(tmech::cof(a + a),                           \
                                   tmech::trans(tmech::adj(a + a)), 5e-5));     \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::cof(tmech::abs(a + a)),                         \
                         tmech::trans(tmech::adj(tmech::abs(a + a))), 5e-5));   \
   }
@@ -445,7 +524,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::basis_change<Seq>(a), b, 5e-6));      \
+              almost_equal_tensor_scaled(tmech::basis_change<Seq>(a), b, 5e-6));      \
   }
 #define basisChangeEvaluate2(ValueType, Dim)                                   \
   TEST(gtest, basisChangeEvaluate2_##ValueType##_##Dim) {                      \
@@ -458,7 +537,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::basis_change<Seq>(a + a), b, 5e-6));  \
+              almost_equal_tensor_scaled(tmech::basis_change<Seq>(a + a), b, 5e-6));  \
   }
 
 // basis change fourth order — safe with randn
@@ -477,7 +556,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::basis_change<Seq>(a), b, 5e-6));      \
+              almost_equal_tensor_scaled(tmech::basis_change<Seq>(a), b, 5e-6));      \
   }
 #define basisChangeEvaluate4(ValueType, Dim)                                   \
   TEST(gtest, basisChangeEvaluate4_##ValueType##_##Dim) {                      \
@@ -494,7 +573,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::basis_change<Seq>(a + a), b, 5e-6));  \
+              almost_equal_tensor_scaled(tmech::basis_change<Seq>(a + a), b, 5e-6));  \
   }
 
 // inner product test — safe with randn (uses abs, no inversion)
@@ -514,7 +593,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
       }                                                                        \
     }                                                                          \
     constexpr double tol = test_tol_v<ValueType>;                               \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqL, SeqR>(a, b), c, tol));      \
     c.fill(0);                                                                 \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
@@ -524,15 +603,15 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqR, SeqL>(a, b), c, tol));      \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqR, SeqL>(tmech::abs(a), b), c, \
                         tol));                                                 \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqR, SeqL>(a, tmech::abs(b)), c, \
                         tol));                                                 \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::inner_product<SeqR, SeqL>(      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::inner_product<SeqR, SeqL>(      \
                                             tmech::abs(a), tmech::abs(b)),     \
                                         c, tol));                              \
   }
@@ -559,7 +638,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqL, SeqR>(a, b), c, tol));      \
     c.fill(0);                                                                 \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
@@ -575,15 +654,15 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqR, SeqL>(a, b), c, tol));      \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqR, SeqL>(tmech::abs(a), b), c, \
                         tol));                                                 \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::inner_product<SeqR, SeqL>(a, tmech::abs(b)), c, \
                         tol));                                                 \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::inner_product<SeqR, SeqL>(      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::inner_product<SeqR, SeqL>(      \
                                             tmech::abs(a), tmech::abs(b)),     \
                                         c, tol));                              \
   }
@@ -607,15 +686,15 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::outer_product<SeqL, SeqR>(a, b), c, 5e-7));     \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::outer_product<SeqL, SeqR>(tmech::abs(a), b), c, \
                         5e-7));                                                \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::outer_product<SeqL, SeqR>(a, tmech::abs(b)), c, \
                         5e-7));                                                \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::outer_product<SeqL, SeqR>(      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::outer_product<SeqL, SeqR>(      \
                                             tmech::abs(a), tmech::abs(b)),     \
                                         c, 5e-7));                             \
   }
@@ -646,15 +725,15 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::outer_product<SeqL, SeqR>(a, b), c, 5e-7));     \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::outer_product<SeqL, SeqR>(tmech::abs(a), b), c, \
                         5e-7));                                                \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::outer_product<SeqL, SeqR>(a, tmech::abs(b)), c, \
                         5e-7));                                                \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::outer_product<SeqL, SeqR>(      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::outer_product<SeqL, SeqR>(      \
                                             tmech::abs(a), tmech::abs(b)),     \
                                         c, 5e-7));                             \
   }
@@ -679,12 +758,12 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     b = tmech::randn<ValueType, Dim, 1>();                                     \
     tmech::levi_civita<ValueType, Dim> levi;                                   \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::cross(a, b), a *levi *b, 5e-6));      \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::cross(tmech::abs(a), b),        \
+              almost_equal_tensor_scaled(tmech::cross(a, b), a *levi *b, 5e-6));      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::cross(tmech::abs(a), b),        \
                                         tmech::abs(a) * levi * b, 5e-6));      \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::cross(a, tmech::abs(b)),        \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::cross(a, tmech::abs(b)),        \
                                         a *levi *tmech::abs(b), 5e-6));        \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::cross(tmech::abs(a), tmech::abs(b)),            \
                         tmech::abs(a) * levi * tmech::abs(b), 5e-6));          \
   }
@@ -699,9 +778,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         b(i, j) = a(j, i);                                                     \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::trans(a), b, 5e-6));            \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::trans(a), b, 5e-6));            \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::trans(tmech::abs(a)), b, 5e-6));      \
+              almost_equal_tensor_scaled(tmech::trans(tmech::abs(a)), b, 5e-6));      \
   }
 
 #define transposition_fourth_order_tensors(ValueType, Dim)                     \
@@ -717,9 +796,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::trans(a), b, 5e-6));            \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::trans(a), b, 5e-6));            \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::trans(tmech::abs(a)), b, 5e-6));      \
+              almost_equal_tensor_scaled(tmech::trans(tmech::abs(a)), b, 5e-6));      \
   }
 
 #define left_transposition_fourth_order_tensors(ValueType, Dim)                \
@@ -735,9 +814,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         }                                                                      \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::transl(a), b, 5e-6));           \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::transl(a), b, 5e-6));           \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::transl(tmech::abs(a)), b, 5e-6));     \
+              almost_equal_tensor_scaled(tmech::transl(tmech::abs(a)), b, 5e-6));     \
   }
 
 // DoubleContractionLeft — safe with randn
@@ -750,7 +829,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     B.randn();                                                                 \
     C1 = tmech::dcontract(B, A);                                               \
     tmech::detail::double_contraction::apply(C2, B, A);                        \
-    EXPECT_EQ(true, tmech::almost_equal(C1, C2, test_tol_v<ValueType>));       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(C1, C2, test_tol_v<ValueType>));       \
   }
 
 #define DoubleContractionRight(ValueType, Dim, RankLHS, RankRHS)               \
@@ -762,7 +841,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     B.randn();                                                                 \
     C1 = tmech::dcontract(A, B);                                               \
     tmech::detail::double_contraction::apply(C2, A, B);                        \
-    EXPECT_EQ(true, tmech::almost_equal(C1, C2, test_tol_v<ValueType>));       \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(C1, C2, test_tol_v<ValueType>));       \
   }
 
 #define SingleContraction(ValueType, Dim, RankLHS, RankRHS)                    \
@@ -773,15 +852,15 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     B.randn();                                                                 \
     C1 = A * B;                                                                \
     tmech::detail::single_contraction::apply(C2, A, B);                        \
-    EXPECT_EQ(true, tmech::almost_equal(C1, C2, 5e-6));                        \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(C1, C2, 5e-6));                        \
   }
 
 #define signDecomposition(ValueType, Dim)                                      \
   TEST(gtest, signDecomposition_##ValueType##_##Dim) {                         \
     auto A = test_helpers::well_conditioned_spd_rank2<ValueType, Dim>();       \
     auto signA{tmech::sign(A, 5e-12f, 15)};                                    \
-    EXPECT_EQ(true, tmech::almost_equal(signA.N(), tmech::sqrt(A *A), 5e-5));  \
-    EXPECT_EQ(true, tmech::almost_equal(signA.S() * signA.N(), A, 5e-5));      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(signA.N(), tmech::sqrt(A *A), 5e-5));  \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(signA.S() * signA.N(), A, 5e-5));      \
   }
 
 #define signDecompositionEvaluate(ValueType, Dim)                              \
@@ -789,8 +868,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto A = test_helpers::well_conditioned_spd_rank2<ValueType, Dim>();       \
     auto signA{tmech::sign(A * 2, 5e-12f, 15)};                                \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(signA.N(), 2 * tmech::sqrt(A * A), 5e-5));   \
-    EXPECT_EQ(true, tmech::almost_equal(signA.S() * signA.N(), 2 * A, 5e-5));  \
+              almost_equal_tensor_scaled(signA.N(), 2 * tmech::sqrt(A * A), 5e-5));   \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(signA.S() * signA.N(), 2 * A, 5e-5));  \
   }
 
 #define positive_and_negavtive_decomposition(ValueType, Dim)                   \
@@ -798,7 +877,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto A = test_helpers::well_conditioned_spd_rank2<ValueType, Dim>();       \
     auto A_pos_neg = tmech::positive_negative_decomposition(A);                \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(                                             \
+              almost_equal_tensor_scaled(                                             \
                   A, A_pos_neg.negative() + A_pos_neg.positive(), 5e-7));      \
   }
 
@@ -824,7 +903,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         LambdaFunction(lambda1) * tmech::otimes(Vec1, Vec1) +                  \
         LambdaFunction(lambda2) * tmech::otimes(Vec2, Vec2) +                  \
         LambdaFunction(lambda3) * tmech::otimes(Vec3, Vec3);                   \
-    EXPECT_EQ(true, tmech::almost_equal(B, tmech::TensorFunction(A), 5e-5));   \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(B, tmech::TensorFunction(A), 5e-5));   \
   }
 
 // Symmetric part — safe with randn
@@ -837,7 +916,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         B(i, j) = (A(i, j) + A(j, i)) * static_cast<ValueType>(0.5);           \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::sym(A), B, 5e-7));              \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(A), B, 5e-7));              \
   }
 
 #define symmetricPartEvaluate(ValueType, Dim)                                  \
@@ -850,7 +929,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         B(i, j) = (a * A(i, j) + a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::sym(a *A), B, 5e-7));           \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(a *A), B, 5e-7));           \
   }
 
 // pow — STABILIZED: fixed matrix
@@ -858,22 +937,22 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, powFunction_##ValueType##_##Dim) {                               \
     constexpr double tol = test_tol_v<ValueType>;                              \
     auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 1), A, tol));            \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 2), A *A, tol));         \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 3), A *A *A, tol));      \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A, 4), A *A *A *A, tol));   \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A, 1), A, tol));            \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A, 2), A *A, tol));         \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A, 3), A *A *A, tol));      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A, 4), A *A *A *A, tol));   \
   }
 
 #define powFunctionEvaluate(ValueType, Dim)                                    \
   TEST(gtest, powFunctionEvaluate_##ValueType##_##Dim) {                       \
     constexpr double tol = test_tol_v<ValueType>;                              \
     auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 1), A + A, tol));    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 2),                  \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A + A, 1), A + A, tol));    \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A + A, 2),                  \
                                         (A + A) * (A + A), tol));              \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 3),                  \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A + A, 3),                  \
                                         (A + A) * (A + A) * (A + A), tol));    \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::pow(A + A, 4),                  \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::pow(A + A, 4),                  \
                                         (A + A) * (A + A) * (A + A) * (A + A), \
                                         tol));                                 \
   }
@@ -888,7 +967,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         B(i, j) = (A(i, j) - A(j, i)) * static_cast<ValueType>(0.5);           \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::skew(A), B, 5e-7));             \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::skew(A), B, 5e-7));             \
   }
 
 #define skewSymmetricPartEvaluate(ValueType, Dim)                              \
@@ -901,7 +980,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         B(i, j) = (a * A(i, j) + a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::sym(a *A), B, 5e-7));           \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(a *A), B, 5e-7));           \
   }
 
 // deviatoric — safe with randn
@@ -910,7 +989,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A;                                        \
     A.randn();                                                                 \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::dev(A), A - tmech::vol(A), 5e-7));    \
+              almost_equal_tensor_scaled(tmech::dev(A), A - tmech::vol(A), 5e-7));    \
   }
 
 #define deviatoricPartEvaluate(ValueType, Dim)                                 \
@@ -918,7 +997,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A;                                        \
     A.randn();                                                                 \
     const ValueType a{2};                                                      \
-    EXPECT_EQ(true, tmech::almost_equal(tmech::dev(a *A),                      \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::dev(a *A),                      \
                                         a *A - a * tmech::vol(A), 5e-7));      \
   }
 
@@ -928,8 +1007,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A, B;                                     \
     A.randn();                                                                 \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(tmech::vol(A), A - tmech::dev(A), 5e-7));    \
-    EXPECT_EQ(true, tmech::almost_equal(                                       \
+              almost_equal_tensor_scaled(tmech::vol(A), A - tmech::dev(A), 5e-7));    \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::vol(tmech::abs(A)),                             \
                         tmech::abs(A) - tmech::dev(tmech::abs(A)), 5e-7));     \
   }
@@ -955,11 +1034,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto F_V_numdif =                                                          \
         tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(lambda_V, F);     \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(Fpolar.R().derivative(), F_R_numdif, 5e-5)); \
+              almost_equal_tensor_scaled(Fpolar.R().derivative(), F_R_numdif, 5e-5)); \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(Fpolar.V().derivative(), F_V_numdif, 5e-5)); \
+              almost_equal_tensor_scaled(Fpolar.V().derivative(), F_V_numdif, 5e-5)); \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(Fpolar.U().derivative(), F_U_numdif, 5e-5)); \
+              almost_equal_tensor_scaled(Fpolar.U().derivative(), F_U_numdif, 5e-5)); \
   }
 
 #define derivatives_polar_decomposition_newton(ValueType, Dim)                 \
@@ -982,11 +1061,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto F_V_numdif =                                                          \
         tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(lambda_V, F);     \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(Fpolar.R().derivative(), F_R_numdif, 5e-5)); \
+              almost_equal_tensor_scaled(Fpolar.R().derivative(), F_R_numdif, 5e-5)); \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(Fpolar.V().derivative(), F_V_numdif, 5e-5)); \
+              almost_equal_tensor_scaled(Fpolar.V().derivative(), F_V_numdif, 5e-5)); \
     EXPECT_EQ(true,                                                            \
-              tmech::almost_equal(Fpolar.U().derivative(), F_U_numdif, 5e-5)); \
+              almost_equal_tensor_scaled(Fpolar.U().derivative(), F_U_numdif, 5e-5)); \
   }
 
 //==========================================================================
@@ -1026,8 +1105,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::exp(x)};                                                       \
     auto f_var{std::make_tuple(ValueType(5))};                                 \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) - std::exp(std::get<0>(f_var))) < 5e-5);      \
+    EXPECT_SCALAR_NEAR_DEFAULT(ValueType, df(f_var),                           \
+                               std::exp(std::get<0>(f_var)));                  \
   }
 
 #define expFuncScalar(ValueType)                                               \
@@ -1036,10 +1115,10 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::exp(x * x)};                                                   \
     auto f_var{std::make_tuple(ValueType(5))};                                 \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) - ValueType(2) * std::get<0>(f_var) *         \
-                                       std::exp(std::get<0>(f_var) *           \
-                                                std::get<0>(f_var))) < 5e-5);  \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        ValueType(2) * std::get<0>(f_var) *                                    \
+            std::exp(std::get<0>(f_var) * std::get<0>(f_var)));                \
   }
 
 #define logVarScalar(ValueType)                                                \
@@ -1048,8 +1127,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::log(x)};                                                       \
     auto f_var{std::make_tuple(ValueType(5))};                                 \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) - ValueType(1) / std::get<0>(f_var)) < 5e-5); \
+    EXPECT_SCALAR_NEAR_DEFAULT(ValueType, df(f_var),                           \
+                               ValueType(1) / std::get<0>(f_var));             \
   }
 
 #define logFuncScalar(ValueType)                                               \
@@ -1058,11 +1137,10 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::log(x * x + x)};                                               \
     auto f_var{std::make_tuple(ValueType(5))};                                 \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) -                                             \
-                       (((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) / \
-                        ((std::get<0>(f_var) * std::get<0>(f_var)) +           \
-                         std::get<0>(f_var)))) < 5e-5);                        \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        (((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) /               \
+         ((std::get<0>(f_var) * std::get<0>(f_var)) + std::get<0>(f_var))));  \
   }
 
 #define sqrtVarScalar(ValueType)                                               \
@@ -1071,10 +1149,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::sqrt(x)};                                                      \
     auto f_var{std::make_tuple(ValueType(5))};                                 \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) -                                             \
-                       (ValueType(1) /                                         \
-                        (ValueType(2) * sqrt(std::get<0>(f_var))))) < 5e-5);   \
+    EXPECT_SCALAR_NEAR_DEFAULT(ValueType, df(f_var),                           \
+                               (ValueType(1) /                                 \
+                                (ValueType(2) * sqrt(std::get<0>(f_var)))));   \
   }
 
 #define sqrtFuncScalar(ValueType)                                              \
@@ -1083,12 +1160,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::sqrt(x * x + x)};                                              \
     auto f_var{std::make_tuple(ValueType(5))};                                 \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) -                                             \
-                       (((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) / \
-                        (ValueType(2) *                                        \
-                         sqrt(((std::get<0>(f_var) * std::get<0>(f_var)) +     \
-                               std::get<0>(f_var)))))) < 5e-5);                \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        (((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) /               \
+         (ValueType(2) * sqrt(((std::get<0>(f_var) * std::get<0>(f_var)) +    \
+                               std::get<0>(f_var))))));                        \
   }
 
 #define absVarScalar(ValueType)                                                \
@@ -1097,9 +1173,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::abs(x)};                                                       \
     auto f_var{std::make_tuple(-ValueType(5))};                                \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) - std::get<0>(f_var) /                        \
-                                       std::abs(std::get<0>(f_var))) < 5e-5);  \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        std::get<0>(f_var) / std::abs(std::get<0>(f_var)));                    \
   }
 
 #define absFuncScalar(ValueType)                                               \
@@ -1108,15 +1184,13 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::abs(x * x + x)};                                               \
     auto f_var{std::make_tuple(-ValueType(5))};                                \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(                                                                 \
-        true,                                                                  \
-        std::abs(df(f_var) -                                                   \
-                 ((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *      \
-                   ((std::get<0>(f_var) * std::get<0>(f_var)) +                \
-                    std::get<0>(f_var))) /                                     \
-                  abs(((std::get<0>(f_var) * std::get<0>(f_var)) +             \
-                       std::get<0>(f_var))))) < 5e-5);                         \
-  }
+    const auto expected =                                                      \
+        ((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *              \
+          ((std::get<0>(f_var) * std::get<0>(f_var)) + std::get<0>(f_var))) / \
+         std::abs(((std::get<0>(f_var) * std::get<0>(f_var)) +                \
+                   std::get<0>(f_var))));                                      \
+    EXPECT_SCALAR_NEAR_DEFAULT(ValueType, df(f_var), expected);                \
+  }                                                                            \
 
 #define cosVarScalar(ValueType)                                                \
   TEST(gtest, cosVarScalar_##ValueType) {                                      \
@@ -1124,8 +1198,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::cos(x)};                                                       \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) - (-std::sin(std::get<0>(f_var)))) < 5e-5);   \
+    EXPECT_SCALAR_NEAR_DEFAULT(ValueType, df(f_var),                           \
+                               (-std::sin(std::get<0>(f_var))));               \
   }
 
 #define cosFuncScalar(ValueType)                                               \
@@ -1134,12 +1208,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::cos(x * x + x)};                                               \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(                                                                 \
-        true,                                                                  \
-        std::abs(df(f_var) -                                                   \
-                 (-((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *    \
-                     sin(((std::get<0>(f_var) * std::get<0>(f_var)) +          \
-                          std::get<0>(f_var))))))) < 5e-5);                    \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        (-((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *            \
+            sin(((std::get<0>(f_var) * std::get<0>(f_var)) +                  \
+                 std::get<0>(f_var)))))));                                     \
   }
 
 #define sinVarScalar(ValueType)                                                \
@@ -1148,8 +1221,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::sin(x)};                                                       \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) - std::cos(std::get<0>(f_var))) < 5e-5);      \
+    EXPECT_SCALAR_NEAR_DEFAULT(ValueType, df(f_var),                           \
+                               std::cos(std::get<0>(f_var)));                  \
   }
 
 #define sinFuncScalar(ValueType)                                               \
@@ -1158,12 +1231,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::sin(x * x + x)};                                               \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(                                                                 \
-        true,                                                                  \
-        std::abs(df(f_var) -                                                   \
-                 ((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *      \
-                   cos(((std::get<0>(f_var) * std::get<0>(f_var)) +            \
-                        std::get<0>(f_var)))))) < 5e-5);                       \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        ((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *              \
+          cos(((std::get<0>(f_var) * std::get<0>(f_var)) +                    \
+               std::get<0>(f_var))))));                                        \
   }
 
 #define tanVarScalar(ValueType)                                                \
@@ -1172,10 +1244,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::tan(x)};                                                       \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) -                                             \
-                       std::pow(ValueType(1) / std::cos(std::get<0>(f_var)),   \
-                                ValueType(2))) < 5e-5);                        \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        std::pow(ValueType(1) / std::cos(std::get<0>(f_var)), ValueType(2))); \
   }
 
 #define tanFuncScalar(ValueType)                                               \
@@ -1184,13 +1255,13 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::tan(x * x + x)};                                               \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true, std::abs(df(f_var) -                                       \
-                             (((ValueType(2) * std::get<0>(f_var)) + 1.) *     \
-                              std::pow(ValueType(1) /                          \
-                                           std::cos(((std::get<0>(f_var) *     \
-                                                      std::get<0>(f_var)) +    \
-                                                     std::get<0>(f_var))),     \
-                                       ValueType(2)))) < 5e-5);                \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        (((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *               \
+         std::pow(ValueType(1) /                                               \
+                      std::cos(((std::get<0>(f_var) * std::get<0>(f_var)) +   \
+                                std::get<0>(f_var))),                          \
+                  ValueType(2))));                                             \
   }
 
 #define powVaraScalar(ValueType)                                               \
@@ -1200,8 +1271,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::pow(x, c)};                                                    \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true,                                                            \
-              std::abs(df(f_var) - ValueType(2) * std::get<0>(f_var)) < 5e-5); \
+    EXPECT_SCALAR_NEAR_DEFAULT(ValueType, df(f_var),                           \
+                               ValueType(2) * std::get<0>(f_var));             \
   }
 
 #define powFuncaScalar(ValueType)                                              \
@@ -1211,13 +1282,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::pow(x * x + x, c)};                                            \
     auto f_var{std::make_tuple(-ValueType(0.5), ValueType(2))};                \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(                                                                 \
-        true,                                                                  \
-        std::abs(df(f_var) -                                                   \
-                 (ValueType(2) * ((std::get<0>(f_var) * std::get<0>(f_var)) +  \
-                                  std::get<0>(f_var))) *                       \
-                     ((ValueType(2) * std::get<0>(f_var)) + ValueType(1))) <   \
-            5e-5);                                                             \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        (ValueType(2) * ((std::get<0>(f_var) * std::get<0>(f_var)) +          \
+                         std::get<0>(f_var))) *                                \
+            ((ValueType(2) * std::get<0>(f_var)) + ValueType(1)));             \
   }
 
 #define powVarbScalar(ValueType)                                               \
@@ -1227,9 +1296,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::pow(c, x)};                                                    \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true, std::abs(df(f_var) -                                       \
-                             std::pow(ValueType(2), std::get<0>(f_var)) *      \
-                                 std::log(ValueType(2))) < 5e-5);              \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        std::pow(ValueType(2), std::get<0>(f_var)) * std::log(ValueType(2))); \
   }
 
 #define powFuncbScalar(ValueType)                                              \
@@ -1239,14 +1308,12 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::pow(c, x * x + x)};                                            \
     auto f_var{std::make_tuple(-ValueType(0.5))};                              \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(                                                                 \
-        true,                                                                  \
-        std::abs(                                                              \
-            df(f_var) -                                                        \
-            (std::pow(ValueType(2), std::get<0>(f_var) * std::get<0>(f_var) +  \
-                                        std::get<0>(f_var)) *                  \
-             ((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *          \
-               log(ValueType(2)))))) < 5e-5);                                  \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        (std::pow(ValueType(2), std::get<0>(f_var) * std::get<0>(f_var) +     \
+                               std::get<0>(f_var)) *                           \
+         ((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *              \
+           log(ValueType(2))))));                                              \
   }
 
 #define powVarcScalar(ValueType)                                               \
@@ -1255,12 +1322,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::pow(x, x)};                                                    \
     auto f_var{std::make_tuple(ValueType(5))};                                 \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(true, std::abs(df(f_var) -                                       \
-                             std::pow(std::get<0>(f_var),                      \
-                                      (std::get<0>(f_var) - ValueType(1))) *   \
-                                 ((std::log(std::get<0>(f_var)) *              \
-                                   std::get<0>(f_var)) +                       \
-                                  std::get<0>(f_var))) < 5e-5);                \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        std::pow(std::get<0>(f_var), (std::get<0>(f_var) - ValueType(1))) *   \
+            ((std::log(std::get<0>(f_var)) * std::get<0>(f_var)) +             \
+             std::get<0>(f_var)));                                              \
   }
 
 #define powFunccScalar(ValueType)                                              \
@@ -1269,23 +1335,19 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto f{std::pow(x * x + x, x * x + x)};                                    \
     auto f_var{std::make_tuple(ValueType(0.5))};                               \
     auto df = symdiff::derivative<1>(f, x);                                    \
-    EXPECT_EQ(                                                                 \
-        true,                                                                  \
-        std::abs(df(f_var) -                                                   \
-                 (std::pow(((std::get<0>(f_var) * std::get<0>(f_var)) +        \
-                            std::get<0>(f_var)),                               \
-                           (((std::get<0>(f_var) * std::get<0>(f_var)) +       \
-                             std::get<0>(f_var)) -                             \
-                            ValueType(1))) *                                   \
-                  (((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *    \
-                     std::log(((std::get<0>(f_var) * std::get<0>(f_var)) +     \
-                               std::get<0>(f_var)))) *                         \
-                    ((std::get<0>(f_var) * std::get<0>(f_var)) +               \
-                     std::get<0>(f_var))) +                                    \
-                   (((std::get<0>(f_var) * std::get<0>(f_var)) +               \
-                     std::get<0>(f_var)) *                                     \
-                    ((ValueType(2) * std::get<0>(f_var)) + ValueType(1)))))) < \
-            5e-5);                                                             \
+    EXPECT_SCALAR_NEAR_DEFAULT(                                                \
+        ValueType, df(f_var),                                                  \
+        (std::pow(((std::get<0>(f_var) * std::get<0>(f_var)) +                \
+                   std::get<0>(f_var)),                                        \
+                  (((std::get<0>(f_var) * std::get<0>(f_var)) +               \
+                    std::get<0>(f_var)) -                                      \
+                   ValueType(1))) *                                            \
+         (((((ValueType(2) * std::get<0>(f_var)) + ValueType(1)) *            \
+            std::log(((std::get<0>(f_var) * std::get<0>(f_var)) +             \
+                      std::get<0>(f_var)))) *                                  \
+           ((std::get<0>(f_var) * std::get<0>(f_var)) + std::get<0>(f_var))) +\
+          (((std::get<0>(f_var) * std::get<0>(f_var)) + std::get<0>(f_var)) * \
+           ((ValueType(2) * std::get<0>(f_var)) + ValueType(1))))));          \
   }
 
 //==========================================================================
@@ -1319,7 +1381,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto lamb = [](auto const &T) { return T + T; };                           \
     auto df_num =                                                              \
         tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(lamb, a);         \
-    EXPECT_EQ(true, tmech::almost_equal(df(f_var), df_num, 5e-7));             \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(df(f_var), df_num, 5e-7));             \
   }
 
 #define minRuleTensor(ValueType, Dim, Rank)                                    \
@@ -1332,7 +1394,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto lamb = [](auto const &T) { return T - T; };                           \
     auto df_num =                                                              \
         tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(lamb, a);         \
-    EXPECT_EQ(true, tmech::almost_equal(df(f_var), df_num, 5e-7));             \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(df(f_var), df_num, 5e-7));             \
   }
 
 // lambdaTensor — STABILIZED: fixed matrix for inv/cof/adj
@@ -1346,7 +1408,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto lamb = [](auto const &x) { return tmech::Lambda(x); };                \
     auto df_num =                                                              \
         tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(lamb, a);         \
-    EXPECT_EQ(true, tmech::almost_equal(df(f_var), df_num, 5e-6));             \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(df(f_var), df_num, 5e-6));             \
   }
 
 // lambdaTensorSym — uses fixed SPD matrix (already stable)
@@ -1364,7 +1426,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto df = symdiff::derivative<1>(f, x);                                    \
     auto lamb = [](auto const &x) { return tmech::Lambda(x); };                \
     auto df_num = tmech::num_diff_sym_central<Sym2x2, Sym4x4>(lamb, a, 5e-6);  \
-    EXPECT_EQ(true, tmech::almost_equal(df(f_var), df_num, 5e-6));             \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(df(f_var), df_num, 5e-6));             \
   }
 
 //==========================================================================
@@ -1376,7 +1438,7 @@ TEST(gtest, adaptorVoigt2Dsecond) {
   tmech::adaptor<double, 2, 2, tmech::voigt<2>> a(ptr);
   tmech::tensor<double, 2, 2> b{1, 3, 3, 2};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorVoigt3Dsecond) {
@@ -1384,7 +1446,7 @@ TEST(gtest, adaptorVoigt3Dsecond) {
   tmech::adaptor<double, 3, 2, tmech::voigt<3>> a(ptr);
   tmech::tensor<double, 3, 2> b{1, 6, 5, 6, 2, 4, 5, 4, 3};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorVoigt2DsecondShear) {
@@ -1392,7 +1454,7 @@ TEST(gtest, adaptorVoigt2DsecondShear) {
   tmech::adaptor<double, 2, 2, tmech::voigt<2, true>> a(ptr);
   tmech::tensor<double, 2, 2> b{1, 3, 3, 2};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorVoigt3DsecondShear) {
@@ -1400,7 +1462,7 @@ TEST(gtest, adaptorVoigt3DsecondShear) {
   tmech::adaptor<double, 3, 2, tmech::voigt<3, true>> a(ptr);
   tmech::tensor<double, 3, 2> b{1, 6, 5, 6, 2, 4, 5, 4, 3};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorVoigt2Dfourth) {
@@ -1409,7 +1471,7 @@ TEST(gtest, adaptorVoigt2Dfourth) {
   tmech::tensor<double, 2, 4> b{1111, 1112, 1112, 1122, 1211, 1212, 1212, 1222,
                                 1211, 1212, 1212, 1222, 2211, 2212, 2212, 2222};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorVoigt3Dfourth) {
@@ -1427,7 +1489,7 @@ TEST(gtest, adaptorVoigt3Dfourth) {
       1313, 1323, 1333, 2311, 2312, 2313, 2312, 2322, 2323, 2313, 2323, 2333,
       3311, 3312, 3313, 3312, 3322, 3323, 3313, 3323, 3333};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorFull2Dfirst) {
@@ -1435,7 +1497,7 @@ TEST(gtest, adaptorFull2Dfirst) {
   tmech::adaptor<double, 2, 1, tmech::full<2>> a(ptr);
   tmech::tensor<double, 2, 1> b{1, 2};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorFull3Dfirst) {
@@ -1443,7 +1505,7 @@ TEST(gtest, adaptorFull3Dfirst) {
   tmech::adaptor<double, 3, 1, tmech::full<3>> a(ptr);
   tmech::tensor<double, 3, 1> b{1, 2, 3};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorFull2Dsecond) {
@@ -1451,7 +1513,7 @@ TEST(gtest, adaptorFull2Dsecond) {
   tmech::adaptor<double, 2, 2, tmech::full<2>> a(ptr);
   tmech::tensor<double, 2, 2> b{11, 12, 21, 22};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorFull3Dsecond) {
@@ -1459,7 +1521,7 @@ TEST(gtest, adaptorFull3Dsecond) {
   tmech::adaptor<double, 3, 2, tmech::full<3>> a(ptr);
   tmech::tensor<double, 3, 2> b{11, 12, 13, 21, 22, 23, 31, 32, 33};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorFull2Dfourth) {
@@ -1469,7 +1531,7 @@ TEST(gtest, adaptorFull2Dfourth) {
   tmech::tensor<double, 2, 4> b{1111, 1112, 1121, 1122, 1211, 1212, 1221, 1222,
                                 2111, 2112, 2121, 2122, 2211, 2212, 2221, 2222};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 TEST(gtest, adaptorFull3Dfourth) {
@@ -1491,7 +1553,7 @@ TEST(gtest, adaptorFull3Dfourth) {
       3131, 3132, 3133, 3211, 3212, 3213, 3221, 3222, 3223, 3231, 3232, 3233,
       3311, 3312, 3313, 3321, 3322, 3323, 3331, 3332, 3333};
   EXPECT_EQ(true,
-            tmech::almost_equal(a, b, std::numeric_limits<double>::epsilon()));
+            almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
 //==========================================================================
@@ -1508,8 +1570,8 @@ TEST(gtest, exponential_map) {
       2.458154759604529e+00, 7.615487934000856e-01,  1.403592316302926e-01,
       1.701192794766057e+00, -7.849258234991792e-01, 8.233614408596337e-01};
   const auto func_exp = [](auto const &tensor) { return tmech::exp(tensor); };
-  EXPECT_EQ(true, tmech::almost_equal(Aexp, tmech::exp(A), 5e-7));
-  EXPECT_EQ(true, tmech::almost_equal(
+  EXPECT_EQ(true, almost_equal_tensor_scaled(Aexp, tmech::exp(A), 5e-7));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(
                       tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(
                           func_exp, A),
                       tmech::exp(A).derivative(), 5e-7));
@@ -1523,10 +1585,10 @@ TEST(gtest, symdiff_numdiff_tensor_det) {
   auto dA = tmech::cof(A);
   auto dA_num = tmech::num_diff_central(func, A);
   auto dA_ana = symdiff::derivative<1>(tmech::det(Avar), Avar);
-  EXPECT_EQ(true, tmech::almost_equal(dA, dA_num, 5e-6));
-  EXPECT_EQ(true, tmech::almost_equal(dA, dA_ana(std::make_tuple(A)), 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(dA, dA_num, 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(dA, dA_ana(std::make_tuple(A)), 5e-6));
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_trace) {
@@ -1536,7 +1598,7 @@ TEST(gtest, symdiff_numdiff_tensor_trace) {
   auto dA_num = tmech::num_diff_central(func, A);
   auto dA_ana = symdiff::derivative<1>(tmech::trace(Avar), Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_norm) {
@@ -1551,7 +1613,7 @@ TEST(gtest, symdiff_numdiff_tensor_norm) {
   auto dA_num = tmech::num_diff_central(func, A);
   auto dA_ana = symdiff::derivative<1>(s_func, Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_inv) {
@@ -1562,7 +1624,7 @@ TEST(gtest, symdiff_numdiff_tensor_inv) {
   auto dA_num = tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(func, A);
   auto dA_ana = symdiff::derivative<1>(s_func, Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_dcontract_2_2) {
@@ -1575,7 +1637,7 @@ TEST(gtest, symdiff_numdiff_tensor_dcontract_2_2) {
   auto dA_num = tmech::num_diff_central(func, A);
   auto dA_ana = symdiff::derivative<1>(s_func, Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_dcontract_4_2) {
@@ -1589,7 +1651,7 @@ TEST(gtest, symdiff_numdiff_tensor_dcontract_4_2) {
   auto dA_num = tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(func, A);
   auto dA_ana = symdiff::derivative<1>(s_func, Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-5));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A, B)), 5e-5));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_dcontract_4_4) {
@@ -1605,7 +1667,7 @@ TEST(gtest, symdiff_numdiff_tensor_dcontract_4_4) {
       tmech::num_diff_central<tmech::sequence<1, 2, 3, 4, 5, 6, 7, 8>>(func, A);
   auto dA_ana = symdiff::derivative<1>(s_func, Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_dcontract_2_4) {
@@ -1621,7 +1683,7 @@ TEST(gtest, symdiff_numdiff_tensor_dcontract_2_4) {
       tmech::num_diff_central<tmech::sequence<1, 2, 3, 4, 5, 6>>(func, A);
   auto dA_ana = symdiff::derivative<1>(s_func, Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A, B)), 5e-6));
 }
 
 TEST(gtest, symdiff_numdiff_tensor_trans_2) {
@@ -1632,7 +1694,7 @@ TEST(gtest, symdiff_numdiff_tensor_trans_2) {
   auto dA_num = tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(func, A);
   auto dA_ana = symdiff::derivative<1>(s_func, Avar);
   EXPECT_EQ(true,
-            tmech::almost_equal(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
+            almost_equal_tensor_scaled(dA_num, dA_ana(std::make_tuple(A)), 5e-6));
 }
 
 TEST(gtest, numdiff_tensor_det) {
@@ -1640,7 +1702,7 @@ TEST(gtest, numdiff_tensor_det) {
   auto func = [](auto const &tensor) { return tmech::det(tensor); };
   auto dA = tmech::cof(A);
   auto dA_num = tmech::num_diff_central(func, A);
-  EXPECT_EQ(true, tmech::almost_equal(dA, dA_num, 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(dA, dA_num, 5e-6));
 }
 
 TEST(gtest, numdiff_tensor_trace) {
@@ -1648,7 +1710,7 @@ TEST(gtest, numdiff_tensor_trace) {
   auto func = [](auto const &tensor) { return tmech::trace(tensor); };
   auto dA = tmech::eye<double, 3, 2>();
   auto dA_num = tmech::num_diff_central(func, A);
-  EXPECT_EQ(true, tmech::almost_equal(dA, dA_num, 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(dA, dA_num, 5e-6));
 }
 
 TEST(gtest, numdiff_tensor_inv_2) {
@@ -1656,7 +1718,7 @@ TEST(gtest, numdiff_tensor_inv_2) {
   auto func = [](auto const &tensor) { return tmech::inv(tensor); };
   auto dA = -tmech::otimesu(tmech::inv(A), tmech::trans(tmech::inv(A)));
   auto dA_num = tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(func, A);
-  EXPECT_EQ(true, tmech::almost_equal(dA, dA_num, 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(dA, dA_num, 5e-6));
 }
 
 //==========================================================================
