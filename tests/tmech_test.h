@@ -65,30 +65,12 @@ template <typename TensorA, typename TensorB>
 inline bool almost_equal_tensor_scaled(
     TensorA const &actual, TensorB const &expected, double rel_tol = 5e-6,
     double abs_floor = 1e-12) {
-  const auto a_eval = tmech::eval(actual);
-  using tensor_type = tmech::tensor<typename std::decay_t<decltype(a_eval)>::value_type,
-                                    std::decay_t<decltype(a_eval)>::dimension(),
-                                    std::decay_t<decltype(a_eval)>::rank()>;
-  const tensor_type a{a_eval};
-  const tensor_type e{tmech::eval(expected)};
-
-  long double err_sq{0};
-  long double n_actual_sq{0};
-  long double n_expected_sq{0};
-
-  for (std::size_t i = 0; i < tensor_type::size(); ++i) {
-    const auto da = std::abs(a.raw_data()[i] - e.raw_data()[i]);
-    const auto na = std::abs(a.raw_data()[i]);
-    const auto ne = std::abs(e.raw_data()[i]);
-    err_sq += static_cast<long double>(da) * static_cast<long double>(da);
-    n_actual_sq += static_cast<long double>(na) * static_cast<long double>(na);
-    n_expected_sq +=
-        static_cast<long double>(ne) * static_cast<long double>(ne);
-  }
-
-  const double err = std::sqrt(static_cast<double>(err_sq));
-  const double n_actual = std::sqrt(static_cast<double>(n_actual_sq));
-  const double n_expected = std::sqrt(static_cast<double>(n_expected_sq));
+  const auto a = tmech::eval(actual);
+  const auto e = tmech::eval(expected);
+  const auto diff = tmech::eval(a - e);
+  const double err = static_cast<double>(std::abs(tmech::norm(diff)));
+  const double n_actual = static_cast<double>(std::abs(tmech::norm(a)));
+  const double n_expected = static_cast<double>(std::abs(tmech::norm(e)));
   const double ref = std::max(1.0, std::max(n_actual, n_expected));
   const double tol = std::max(abs_floor, rel_tol * ref);
   return err <= tol;
@@ -1645,7 +1627,7 @@ TEST(gtest, symdiff_numdiff_tensor_dcontract_4_2) {
   symdiff::variable<tmech::tensor<double, 3, 4>, 1> Bvar;
   auto A = test_helpers::well_conditioned_nonsym_rank2<double, 3>();
   tmech::tensor<double, 3, 4> B;
-  B.randn();
+  test_helpers::seeded_randn<double, 3, 4>(B);
   auto func = [&](auto const &tensor) { return tmech::dcontract(B, tensor); };
   auto s_func = tmech::dcontract(Bvar, Avar);
   auto dA_num = tmech::num_diff_central<tmech::sequence<1, 2, 3, 4>>(func, A);
