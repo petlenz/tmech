@@ -38,23 +38,33 @@ template <typename T>
 static constexpr double test_tol_v = test_tolerance<T>::value;
 
 template <typename T>
-static constexpr double test_rel_tol_v =
-    std::is_same_v<T, float> ? 5e-5 : 5e-7;
+static constexpr double test_rel_tol_v = test_tolerance<T>::value;
 
 template <typename T>
-static constexpr double test_abs_floor_v =
-    std::is_same_v<T, float> ? 1e-7 : 1e-12;
+struct test_abs_floor {
+    static constexpr double value = 1e-12;
+};
+template <>
+struct test_abs_floor<float> {
+    static constexpr double value = 1e-7;
+};
+template <>
+struct test_abs_floor<std::complex<float>> {
+    static constexpr double value = 1e-7;
+};
+
+template <typename T>
+static constexpr double test_abs_floor_v = test_abs_floor<T>::value;
 
 template <typename T>
 inline bool almost_equal_scalar_scaled(T actual, T expected,
                                        double rel_tol = test_rel_tol_v<T>,
                                        double abs_floor = test_abs_floor_v<T>) {
   const long double err =
-      std::abs(static_cast<long double>(actual) -
-               static_cast<long double>(expected));
+      static_cast<long double>(std::abs(actual - expected));
   const long double ref = std::max(
       static_cast<long double>(1.0),
-      std::abs(static_cast<long double>(expected)));
+      static_cast<long double>(std::abs(expected)));
   const long double tol = std::max(
       static_cast<long double>(abs_floor),
       static_cast<long double>(rel_tol) * ref);
@@ -63,15 +73,21 @@ inline bool almost_equal_scalar_scaled(T actual, T expected,
 
 template <typename TensorA, typename TensorB>
 inline bool almost_equal_tensor_scaled(
-    TensorA const &actual, TensorB const &expected, double rel_tol = 5e-6,
-    double abs_floor = 1e-12) {
+    TensorA const &actual, TensorB const &expected, double rel_tol = -1.0,
+    double abs_floor = -1.0) {
   const auto a_eval = tmech::eval(actual);
+  using value_type = typename std::decay_t<decltype(a_eval)>::value_type;
   using tensor_type =
-      tmech::tensor<typename std::decay_t<decltype(a_eval)>::value_type,
-                    std::decay_t<decltype(a_eval)>::dimension(),
+      tmech::tensor<value_type, std::decay_t<decltype(a_eval)>::dimension(),
                     std::decay_t<decltype(a_eval)>::rank()>;
   const tensor_type a{a_eval};
   const tensor_type e{tmech::eval(expected)};
+  if (rel_tol < 0) {
+    rel_tol = test_rel_tol_v<value_type>;
+  }
+  if (abs_floor < 0) {
+    abs_floor = test_abs_floor_v<value_type>;
+  }
 
   long double err_sq{0};
   long double n_actual_sq{0};
@@ -104,8 +120,7 @@ inline bool almost_equal_tensor_scaled(
 #define EXPECT_TENSOR_NEAR_DEFAULT(ValueType, actual, expected)               \
   EXPECT_TRUE(almost_equal_tensor_scaled(                                     \
       (actual), (expected),                                                   \
-      std::is_same_v<ValueType, float> ? 5e-4 : 5e-6,                         \
-      std::is_same_v<ValueType, float> ? 1e-7 : 1e-12))
+      test_rel_tol_v<ValueType>, test_abs_floor_v<ValueType>))
 
 #define EXPECT_SCALAR_NEAR_DEFAULT(ValueType, actual, expected)               \
   EXPECT_TRUE(almost_equal_scalar_scaled<ValueType>(                          \
@@ -966,7 +981,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         B(i, j) = (A(i, j) - A(j, i)) * static_cast<ValueType>(0.5);           \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::skew(A), B, 5e-7));             \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::skew(A), B, test_rel_tol_v<ValueType>));             \
   }
 
 #define skewSymmetricPartEvaluate(ValueType, Dim)                              \
@@ -979,7 +994,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         B(i, j) = (a * A(i, j) + a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(a *A), B, 5e-7));           \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(a *A), B, test_rel_tol_v<ValueType>));           \
   }
 
 // deviatoric — safe with randn
@@ -988,7 +1003,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A;                                        \
     A.randn();                                                                 \
     EXPECT_EQ(true,                                                            \
-              almost_equal_tensor_scaled(tmech::dev(A), A - tmech::vol(A), 5e-7));    \
+              almost_equal_tensor_scaled(tmech::dev(A), A - tmech::vol(A), test_rel_tol_v<ValueType>));    \
   }
 
 #define deviatoricPartEvaluate(ValueType, Dim)                                 \
@@ -997,7 +1012,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     A.randn();                                                                 \
     const ValueType a{2};                                                      \
     EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::dev(a *A),                      \
-                                        a *A - a * tmech::vol(A), 5e-7));      \
+                                        a *A - a * tmech::vol(A), test_rel_tol_v<ValueType>));      \
   }
 
 // volumetric — safe with randn
@@ -1006,10 +1021,10 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A, B;                                     \
     A.randn();                                                                 \
     EXPECT_EQ(true,                                                            \
-              almost_equal_tensor_scaled(tmech::vol(A), A - tmech::dev(A), 5e-7));    \
+              almost_equal_tensor_scaled(tmech::vol(A), A - tmech::dev(A), test_rel_tol_v<ValueType>));    \
     EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::vol(tmech::abs(A)),                             \
-                        tmech::abs(A) - tmech::dev(tmech::abs(A)), 5e-7));     \
+                        tmech::abs(A) - tmech::dev(tmech::abs(A)), test_rel_tol_v<ValueType>));     \
   }
 
 // derivatives polar decomposition — STABILIZED: fixed well-conditioned F
