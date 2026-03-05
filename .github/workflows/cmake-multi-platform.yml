@@ -49,12 +49,15 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
     - name: Configure CMake
+      env:
+        EXTRA_CXX_FLAGS: ${{ matrix.os == 'ubuntu-latest' && matrix.build_type == 'Debug' && '-D_GLIBCXX_ASSERTIONS' || '' }}
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DCMAKE_CXX_STANDARD=${{ matrix.cpp_version }}
+        -DCMAKE_CXX_FLAGS=${{ env.EXTRA_CXX_FLAGS }}
         -DTMECH_USE_XSIMD=${{ matrix.xsimd }}
         -S ${{ github.workspace }}
     - name: Build

@@ -203,7 +203,7 @@ inline constexpr auto& tensor<T, Dim, Rank>::operator ()(Indicies const ... indi
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
 constexpr inline auto tensor<T, Dim, Rank>::begin()noexcept{
-    return const_cast<T*>(&_data[0]);
+    return _data.data();
 }
 
 /**
@@ -212,7 +212,7 @@ constexpr inline auto tensor<T, Dim, Rank>::begin()noexcept{
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
 constexpr inline auto tensor<T, Dim, Rank>::end()noexcept{
-    return const_cast<T*>(&_data[Size]);
+    return _data.data() + Size;
 }
 
 /**
@@ -220,7 +220,7 @@ constexpr inline auto tensor<T, Dim, Rank>::end()noexcept{
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
 constexpr inline auto tensor<T, Dim, Rank>::begin()const noexcept{
-    return &_data[0];
+    return _data.data();
 }
 
 /**
@@ -229,7 +229,7 @@ constexpr inline auto tensor<T, Dim, Rank>::begin()const noexcept{
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
 constexpr inline auto tensor<T, Dim, Rank>::end()const noexcept{
-    return &_data[Size];
+    return _data.data() + Size;
 }
 
 /**
@@ -237,7 +237,7 @@ constexpr inline auto tensor<T, Dim, Rank>::end()const noexcept{
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
 constexpr inline T* tensor<T, Dim, Rank>::raw_data()  noexcept{
-    return const_cast<T*>(&_data[0]);
+    return _data.data();
 }
 
 /**
@@ -245,7 +245,7 @@ constexpr inline T* tensor<T, Dim, Rank>::raw_data()  noexcept{
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
 constexpr inline T const* tensor<T, Dim, Rank>::raw_data()const noexcept{
-    return &_data[0];
+    return _data.data();
 }
 //@}
 
