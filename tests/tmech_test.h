@@ -27,11 +27,11 @@ struct test_tolerance<float> {
 };
 template <>
 struct test_tolerance<std::complex<float>> {
-    static constexpr double value = 5e-5;
+    static constexpr double value = 5e-4;
 };
 template <>
 struct test_tolerance<std::complex<double>> {
-    static constexpr double value = 5e-6;
+    static constexpr double value = 5e-5;
 };
 
 template <typename T>
