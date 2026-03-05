@@ -37,7 +37,7 @@ public:
     static_assert (sequence_inner_lhs::size() != 0, "inner_product_wrapper: lhs sequence is empty");
     static_assert (sequence_inner_rhs::size() != 0, "inner_product_wrapper: rhs sequence is empty");
     static_assert (data_type_LHS::dimension() == data_type_RHS::dimension(), "inner_product_wrapper: dimensions does not match");
-    static_assert (sequence_inner_rhs::size() == sequence_inner_rhs::size(), "inner_product_wrapper: SequenceLHS::size != SequenceRHS::size");
+    static_assert (sequence_inner_lhs::size() == sequence_inner_rhs::size(), "inner_product_wrapper: SequenceLHS::size != SequenceRHS::size");
 
     constexpr inner_product_wrapper(LHS __lhs, RHS __rhs)noexcept;
 
