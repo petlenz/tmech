@@ -971,11 +971,11 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
                                         tol));                                 \
   }
 
-// skew symmetric — safe with randn
+// skew symmetric — deterministic input to avoid platform-specific randomness
 #define skewSymmetricPart(ValueType, Dim)                                      \
   TEST(gtest, skewSymmetricPart_##ValueType##_##Dim) {                         \
-    tmech::tensor<ValueType, Dim, 2> A, B;                                     \
-    A.randn();                                                                 \
+    auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
+    tmech::tensor<ValueType, Dim, 2> B;                                         \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
       for (std::size_t j{0}; j < Dim; ++j) {                                   \
         B(i, j) = (A(i, j) - A(j, i)) * static_cast<ValueType>(0.5);           \
@@ -986,8 +986,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
 
 #define skewSymmetricPartEvaluate(ValueType, Dim)                              \
   TEST(gtest, skewSymmetricPartEvaluate_##ValueType##_##Dim) {                 \
-    tmech::tensor<ValueType, Dim, 2> A, B;                                     \
-    A.randn();                                                                 \
+    auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
+    tmech::tensor<ValueType, Dim, 2> B;                                         \
     const ValueType a{2};                                                      \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
       for (std::size_t j{0}; j < Dim; ++j) {                                   \
@@ -997,29 +997,27 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(a *A), B, test_rel_tol_v<ValueType>));           \
   }
 
-// deviatoric — safe with randn
+// deviatoric — deterministic input to avoid platform-specific randomness
 #define deviatoricPart(ValueType, Dim)                                         \
   TEST(gtest, deviatoricPart_##ValueType##_##Dim) {                            \
-    tmech::tensor<ValueType, Dim, 2> A;                                        \
-    A.randn();                                                                 \
+    auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
     EXPECT_EQ(true,                                                            \
               almost_equal_tensor_scaled(tmech::dev(A), A - tmech::vol(A), test_rel_tol_v<ValueType>));    \
   }
 
 #define deviatoricPartEvaluate(ValueType, Dim)                                 \
   TEST(gtest, deviatoricPartEvaluate_##ValueType##_##Dim) {                    \
-    tmech::tensor<ValueType, Dim, 2> A;                                        \
-    A.randn();                                                                 \
+    auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
     const ValueType a{2};                                                      \
     EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::dev(a *A),                      \
                                         a *A - a * tmech::vol(A), test_rel_tol_v<ValueType>));      \
   }
 
-// volumetric — safe with randn
+// volumetric — deterministic input to avoid platform-specific randomness
 #define volumetricPart(ValueType, Dim)                                         \
   TEST(gtest, volumetricPart_##ValueType##_##Dim) {                            \
-    tmech::tensor<ValueType, Dim, 2> A, B;                                     \
-    A.randn();                                                                 \
+    auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
+    tmech::tensor<ValueType, Dim, 2> B;                                         \
     EXPECT_EQ(true,                                                            \
               almost_equal_tensor_scaled(tmech::vol(A), A - tmech::dev(A), test_rel_tol_v<ValueType>));    \
     EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
