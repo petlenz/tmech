@@ -37,10 +37,10 @@ public:
 
     static constexpr inline auto rank()noexcept;
 
-    constexpr inline auto evaluate()noexcept;
+    constexpr inline auto evaluate() const noexcept;
 
 private:
-    value_type _trace;
+    mutable value_type _trace;
     Tensor _data;
 };
 

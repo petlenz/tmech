@@ -77,7 +77,7 @@ constexpr inline auto volumetric_wrapper<Tensor>::rank()noexcept{
 * and computes the trace.
 */
 template <typename Tensor>
-constexpr inline auto volumetric_wrapper<Tensor>::evaluate()noexcept{
+constexpr inline auto volumetric_wrapper<Tensor>::evaluate() const noexcept{
     evaluate::apply(_data);
 
     _trace = safe_cast<value_type>(0.0);

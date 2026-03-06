@@ -67,7 +67,7 @@ constexpr inline auto deviatoric_wrapper<_Tensor>::rank()noexcept{
 * @brief Evaluates the underlying tensor expression and determines the trace.
 */
 template <typename _Tensor>
-constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate()noexcept{
+constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate() const noexcept{
     evaluate::apply(_data);
     _trace = 0;
     for(size_type i{0}; i<dimension(); ++i){
