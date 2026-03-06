@@ -29,7 +29,7 @@ constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(data_type_tensor const
 template <typename _Tensor>
 constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(deviatoric_wrapper const& data)noexcept:
     basetype(data),
-    _trace(0),
+    _trace(data._trace),
     _data(data._data)
 {}
 //@}
