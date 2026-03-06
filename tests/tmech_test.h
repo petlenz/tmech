@@ -1047,9 +1047,17 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     if (!ok) {                                                                  \
       const auto [err, ref, tol] =                                              \
           tensor_error_metrics(actual, expected, test_rel_tol_v<ValueType>);    \
+      const auto A_eval = tmech::eval(A);                                       \
+      const auto dev_eval = tmech::eval(actual);                                \
+      const auto vol_eval = tmech::eval(tmech::vol(A));                         \
+      const auto exp_eval = tmech::eval(expected);                              \
       std::cout << "deviatoricPart_" #ValueType "_" #Dim                        \
                 << " err=" << err << " ref=" << ref << " tol=" << tol          \
                 << std::endl;                                                   \
+      std::cout << "A:\n" << A_eval << std::endl;                               \
+      std::cout << "dev(A):\n" << dev_eval << std::endl;                        \
+      std::cout << "vol(A):\n" << vol_eval << std::endl;                        \
+      std::cout << "A-vol(A):\n" << exp_eval << std::endl;                      \
     }                                                                           \
     EXPECT_EQ(true, ok);                                                        \
   }
