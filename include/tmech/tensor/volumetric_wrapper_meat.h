@@ -44,15 +44,7 @@ constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper cons
 */
 template <typename Tensor>
 constexpr inline auto volumetric_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const noexcept{
-  if (i != j) {
-    return safe_cast<value_type>(0.0);
-  }
-  value_type trace = safe_cast<value_type>(0.0);
-  for(size_type k{0}; k<dimension(); ++k){
-      trace += _data(k,k);
-  }
-  trace /= safe_cast<value_type>(dimension());
-  return trace;
+  return (i == j ? _trace : safe_cast<value_type>(0.0));
 }
 //@}
 
