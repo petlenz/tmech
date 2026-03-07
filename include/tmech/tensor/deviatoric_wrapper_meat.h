@@ -36,10 +36,7 @@ constexpr deviatoric_wrapper<_Tensor>::deviatoric_wrapper(deviatoric_wrapper con
 
 template <typename _Tensor>
 constexpr inline typename deviatoric_wrapper<_Tensor>::value_type deviatoric_wrapper<_Tensor>::operator()(size_type const i, size_type const j) const noexcept{
-    if(i == j){
-        return _data(i,j) - _trace;
-    }
-    return _data(i,j);
+    return (i == j ? _data(i,j)-_trace : _data(i,j));
 }
 
 /**
@@ -70,7 +67,7 @@ constexpr inline auto deviatoric_wrapper<_Tensor>::rank()noexcept{
 * @brief Evaluates the underlying tensor expression and determines the trace.
 */
 template <typename _Tensor>
-constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate() const noexcept{
+constexpr inline auto deviatoric_wrapper<_Tensor>::evaluate()noexcept{
     evaluate::apply(_data);
     _trace = safe_cast<value_type>(0.0);
     for(size_type i{0}; i<dimension(); ++i){

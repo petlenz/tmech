@@ -44,10 +44,7 @@ constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper cons
 */
 template <typename Tensor>
 constexpr inline typename volumetric_wrapper<Tensor>::value_type volumetric_wrapper<Tensor>::operator ()(size_type const i, size_type const j) const noexcept{
-  if(i == j){
-    return _trace;
-  }
-  return safe_cast<value_type>(0.0);
+  return (i == j ? _trace : safe_cast<value_type>(0.0));
 }
 //@}
 
@@ -80,7 +77,7 @@ constexpr inline auto volumetric_wrapper<Tensor>::rank()noexcept{
 * and computes the trace.
 */
 template <typename Tensor>
-constexpr inline auto volumetric_wrapper<Tensor>::evaluate() const noexcept{
+constexpr inline auto volumetric_wrapper<Tensor>::evaluate()noexcept{
     evaluate::apply(_data);
 
     _trace = safe_cast<value_type>(0.0);
