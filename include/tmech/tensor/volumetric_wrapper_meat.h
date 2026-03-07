@@ -29,7 +29,7 @@ constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(data_type_tensor const&
 template <typename Tensor>
 constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper const& data)noexcept:
     basetype(data),
-    _trace(),
+    _trace(data._trace),
     _data(data._data)
 {}
 //@}
@@ -43,7 +43,7 @@ constexpr volumetric_wrapper<Tensor>::volumetric_wrapper(volumetric_wrapper cons
 * @param j Index specifying the column
 */
 template <typename Tensor>
-constexpr inline auto volumetric_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const noexcept{
+constexpr inline typename volumetric_wrapper<Tensor>::value_type volumetric_wrapper<Tensor>::operator ()(size_type const i, size_type const j) const noexcept{
   return (i == j ? _trace : safe_cast<value_type>(0.0));
 }
 //@}
