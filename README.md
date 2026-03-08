@@ -132,10 +132,11 @@ Example -- raise the unroll limits for aggressive optimisation:
 
 #### Set by the build system
 
+Only public/user-facing macros are listed here; internal implementation macros are intentionally omitted.
+
 | Macro | Description |
 |---|---|
 | `TMECH_HAS_XSIMD` | Defined when `TMECH_USE_XSIMD=ON`. Enables xsimd-accelerated GEMM kernels and delegates SIMD alignment queries to xsimd. |
-| `TMECH_SIMD_REGISTER_WIDTH` | SIMD register width in bytes for the target architecture. When xsimd is available its architecture detection is used; otherwise the library falls back to compiler-predefined macros (`__AVX512F__` → 64, `__AVX__`/`__AVX2__` → 32, `__SSE__`/`__ARM_NEON` → 16, else 0). |
 
 ## Quick start
 
