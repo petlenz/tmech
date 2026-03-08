@@ -29,23 +29,17 @@ constexpr auto otimesu(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
 
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
     static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "otimesu: no matching dimensions");
     static_assert(TensorTypeLHS::rank() == 2, "otimesu: left hand side tensors rank is not a tensor of rank two");
     static_assert(TensorTypeRHS::rank() == 2, "otimesu: right hand side tensors rank is not a tensor of rank two");
     using _SequenceLHS = sequence<1,3>;
     using _SequenceRHS = sequence<2,4>;
-    if constexpr (isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else{
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }
+    return detail::outer_product_wrapper<
+        detail::forward_storage_t<_TensorLHS>,
+        detail::forward_storage_t<_TensorRHS>,
+        _SequenceLHS, _SequenceRHS>(
+            std::forward<_TensorLHS>(__tensor_lhs),
+            std::forward<_TensorRHS>(__tensor_rhs));
 }
 
 
@@ -57,24 +51,17 @@ constexpr auto otimesl(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
 
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
     static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "times: no matching dimensions");
     static_assert(TensorTypeLHS::rank() == 2, "otimesl: left hand side tensors rank is not a tensor of rank two");
     static_assert(TensorTypeRHS::rank() == 2, "otimesl: right hand side tensors rank is not a tensor of rank two");
     using _SequenceLHS = sequence<1,4>;
     using _SequenceRHS = sequence<2,3>;
-
-    if constexpr (isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else{
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }
+    return detail::outer_product_wrapper<
+        detail::forward_storage_t<_TensorLHS>,
+        detail::forward_storage_t<_TensorRHS>,
+        _SequenceLHS, _SequenceRHS>(
+            std::forward<_TensorLHS>(__tensor_lhs),
+            std::forward<_TensorRHS>(__tensor_rhs));
 }
 
 template<typename _TensorLHS,
@@ -85,21 +72,15 @@ constexpr auto otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
 
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
     static_assert(TensorTypeLHS::dimension() == TensorTypeRHS::dimension(), "otimes: no matching dimensions");
     using _SequenceLHS = detail::add_value_sequence_t<detail::sequence_t<TensorTypeLHS::rank()-1>, 1>;
     using _SequenceRHS = detail::add_value_sequence_t<detail::sequence_t<TensorTypeRHS::rank()-1>, TensorTypeLHS::rank()+1>;
-    if constexpr (isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else{
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }
+    return detail::outer_product_wrapper<
+        detail::forward_storage_t<_TensorLHS>,
+        detail::forward_storage_t<_TensorRHS>,
+        _SequenceLHS, _SequenceRHS>(
+            std::forward<_TensorLHS>(__tensor_lhs),
+            std::forward<_TensorRHS>(__tensor_rhs));
 }
 
 
@@ -112,24 +93,17 @@ constexpr auto inline dcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
 
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
     if constexpr(TensorTypeLHS::rank() == 2 && TensorTypeRHS::rank() == 2){
         return detail::dot_wrapper::evaluate(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else{
         using _SequenceRHS = sequence<1,2>;
         using _SequenceLHS = sequence<TensorTypeLHS::rank()-1,TensorTypeLHS::rank()>;
-
-        if constexpr (isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else if constexpr (!isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else if constexpr (isLvalueLHS && !isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else{
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }
+        return detail::inner_product_wrapper<
+            detail::forward_storage_t<_TensorLHS>,
+            detail::forward_storage_t<_TensorRHS>,
+            _SequenceLHS, _SequenceRHS>(
+                std::forward<_TensorLHS>(__tensor_lhs),
+                std::forward<_TensorRHS>(__tensor_rhs));
     }
 }
 
@@ -141,44 +115,28 @@ constexpr auto inline ddcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __ten
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
 
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
     if constexpr(TensorTypeLHS::rank() == 4 && TensorTypeRHS::rank() == 4){
         return detail::dot_wrapper::evaluate(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else{
         using _SequenceRHS = sequence<1,2,3,4>;
         using _SequenceLHS = detail::add_value_sequence_t<sequence<0,1,2,3>,TensorTypeLHS::rank()-3>;
-
-        if constexpr (isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else if constexpr (!isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else if constexpr (isLvalueLHS && !isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else{
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }
+        return detail::inner_product_wrapper<
+            detail::forward_storage_t<_TensorLHS>,
+            detail::forward_storage_t<_TensorRHS>,
+            _SequenceLHS, _SequenceRHS>(
+                std::forward<_TensorLHS>(__tensor_lhs),
+                std::forward<_TensorRHS>(__tensor_rhs));
     }
 }
 
 template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr, std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
 constexpr inline auto outer_product(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
-    using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
-    using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
-
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
-    if constexpr (isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueRHS){
-        return detail::outer_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else{
-        return detail::outer_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }
+    return detail::outer_product_wrapper<
+        detail::forward_storage_t<_TensorLHS>,
+        detail::forward_storage_t<_TensorRHS>,
+        _SequenceLHS, _SequenceRHS>(
+            std::forward<_TensorLHS>(__tensor_lhs),
+            std::forward<_TensorRHS>(__tensor_rhs));
 }
 
 
@@ -187,21 +145,15 @@ constexpr inline auto inner_product(_TensorLHS && __tensor_lhs, _TensorRHS && __
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
 
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
     if constexpr (_SequenceLHS::size() == TensorTypeLHS::rank() && _SequenceRHS::size() == TensorTypeRHS::rank()){
         return detail::dot_wrapper::evaluate(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
     }else{
-        if constexpr (isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else if constexpr (!isLvalueLHS && isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS const&, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else if constexpr (isLvalueLHS && !isLvalueRHS){
-            return detail::inner_product_wrapper<TensorTypeLHS const&, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }else{
-            return detail::inner_product_wrapper<TensorTypeLHS, TensorTypeRHS, _SequenceLHS, _SequenceRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-        }
+        return detail::inner_product_wrapper<
+            detail::forward_storage_t<_TensorLHS>,
+            detail::forward_storage_t<_TensorRHS>,
+            _SequenceLHS, _SequenceRHS>(
+                std::forward<_TensorLHS>(__tensor_lhs),
+                std::forward<_TensorRHS>(__tensor_rhs));
     }
 }
 
@@ -216,18 +168,11 @@ constexpr inline auto cross(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_r
     static_assert(TensorTypeLHS::rank() == 1, "cross(): only valid for tensors with rank == 1.");
     static_assert(TensorTypeLHS::dimension() == 3, "cross(): only valid for tensors with dimension == 3.");
 
-    constexpr bool isLvalueLHS{std::is_lvalue_reference_v<_TensorLHS>};
-    constexpr bool isLvalueRHS{std::is_lvalue_reference_v<_TensorRHS>};
-
-    if constexpr (isLvalueLHS && isLvalueRHS){
-        return detail::cross_product_wrapper<TensorTypeLHS const&, TensorTypeRHS const&>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (!isLvalueLHS && isLvalueRHS){
-        return detail::cross_product_wrapper<TensorTypeLHS, TensorTypeRHS const&>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else if constexpr (isLvalueLHS && !isLvalueRHS){
-        return detail::cross_product_wrapper<TensorTypeLHS const&, TensorTypeRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }else{
-        return detail::cross_product_wrapper<TensorTypeLHS, TensorTypeRHS>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
-    }
+    return detail::cross_product_wrapper<
+        detail::forward_storage_t<_TensorLHS>,
+        detail::forward_storage_t<_TensorRHS>>(
+            std::forward<_TensorLHS>(__tensor_lhs),
+            std::forward<_TensorRHS>(__tensor_rhs));
 }
 
 template<typename _TensorLHS, typename _TensorRHS, std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr, std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
