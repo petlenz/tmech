@@ -383,6 +383,12 @@ using has_direct_access_t = decltype(std::declval<const Type&>().direct_access(s
 template<typename Type>
 using has_batch_access_t = decltype(std::declval<const Type>().batch_access(std::size_t{}));
 
+template <typename T>
+using forward_storage_t = std::conditional_t<
+    std::is_lvalue_reference_v<T>,
+    std::decay_t<T> const&,
+    std::decay_t<T>>;
+
 // True when an expression supports flat linear iteration via direct_access().
 template<typename Derived>
 inline constexpr bool is_direct_assignable_v =
