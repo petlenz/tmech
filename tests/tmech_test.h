@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <cmath>
 #include <complex>
-#include <iostream>
 #include <random>
-#include <tuple>
 #include <type_traits>
 #include <tmech/tmech.h>
 
@@ -77,75 +75,21 @@ template <typename TensorA, typename TensorB>
 inline bool almost_equal_tensor_scaled(
     TensorA const &actual, TensorB const &expected, double rel_tol = -1.0,
     double abs_floor = -1.0) {
-  const auto a_eval = tmech::eval(actual);
-  using value_type = typename std::decay_t<decltype(a_eval)>::value_type;
-  using tensor_type =
-      tmech::tensor<value_type, std::decay_t<decltype(a_eval)>::dimension(),
-                    std::decay_t<decltype(a_eval)>::rank()>;
-  const tensor_type a{a_eval};
-  const tensor_type e{tmech::eval(expected)};
+  using value_type = typename std::decay_t<TensorA>::value_type;
   if (rel_tol < 0) {
     rel_tol = test_rel_tol_v<value_type>;
   }
   if (abs_floor < 0) {
     abs_floor = test_abs_floor_v<value_type>;
   }
-
-  long double err_sq{0};
-  long double n_actual_sq{0};
-  long double n_expected_sq{0};
-  for (std::size_t i = 0; i < tensor_type::size(); ++i) {
-    const auto da = std::abs(a.raw_data()[i] - e.raw_data()[i]);
-    const auto na = std::abs(a.raw_data()[i]);
-    const auto ne = std::abs(e.raw_data()[i]);
-    err_sq += static_cast<long double>(da) * static_cast<long double>(da);
-    n_actual_sq += static_cast<long double>(na) * static_cast<long double>(na);
-    n_expected_sq +=
-        static_cast<long double>(ne) * static_cast<long double>(ne);
-  }
-  const double err = std::sqrt(static_cast<double>(err_sq));
-  const double n_actual = std::sqrt(static_cast<double>(n_actual_sq));
-  const double n_expected = std::sqrt(static_cast<double>(n_expected_sq));
+  const double err =
+      static_cast<double>(std::abs(tmech::norm(actual - expected)));
+  const double n_actual = static_cast<double>(std::abs(tmech::norm(actual)));
+  const double n_expected =
+      static_cast<double>(std::abs(tmech::norm(expected)));
   const double ref = std::max(1.0, std::max(n_actual, n_expected));
   const double tol = std::max(abs_floor, rel_tol * ref);
   return err <= tol;
-}
-
-template <typename TensorA, typename TensorB>
-inline std::tuple<double, double, double> tensor_error_metrics(
-    TensorA const &actual, TensorB const &expected, double rel_tol = -1.0,
-    double abs_floor = -1.0) {
-  const auto a_eval = tmech::eval(actual);
-  using value_type = typename std::decay_t<decltype(a_eval)>::value_type;
-  using tensor_type =
-      tmech::tensor<value_type, std::decay_t<decltype(a_eval)>::dimension(),
-                    std::decay_t<decltype(a_eval)>::rank()>;
-  const tensor_type a{a_eval};
-  const tensor_type e{tmech::eval(expected)};
-  if (rel_tol < 0) {
-    rel_tol = test_rel_tol_v<value_type>;
-  }
-  if (abs_floor < 0) {
-    abs_floor = test_abs_floor_v<value_type>;
-  }
-  long double err_sq{0};
-  long double n_actual_sq{0};
-  long double n_expected_sq{0};
-  for (std::size_t i = 0; i < tensor_type::size(); ++i) {
-    const auto da = std::abs(a.raw_data()[i] - e.raw_data()[i]);
-    const auto na = std::abs(a.raw_data()[i]);
-    const auto ne = std::abs(e.raw_data()[i]);
-    err_sq += static_cast<long double>(da) * static_cast<long double>(da);
-    n_actual_sq += static_cast<long double>(na) * static_cast<long double>(na);
-    n_expected_sq +=
-        static_cast<long double>(ne) * static_cast<long double>(ne);
-  }
-  const double err = std::sqrt(static_cast<double>(err_sq));
-  const double n_actual = std::sqrt(static_cast<double>(n_actual_sq));
-  const double n_expected = std::sqrt(static_cast<double>(n_expected_sq));
-  const double ref = std::max(1.0, std::max(n_actual, n_expected));
-  const double tol = std::max(abs_floor, rel_tol * ref);
-  return {err, ref, tol};
 }
 
 #define EXPECT_TENSOR_NEAR(actual, expected, rel_tol, abs_floor)              \
@@ -1040,26 +984,8 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
 #define deviatoricPart(ValueType, Dim)                                         \
   TEST(gtest, deviatoricPart_##ValueType##_##Dim) {                            \
     auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
-    const auto actual = tmech::dev(A);                                          \
-    const auto expected = A - tmech::vol(A);                                    \
-    const bool ok =                                                             \
-        almost_equal_tensor_scaled(actual, expected, test_rel_tol_v<ValueType>);\
-    if (!ok) {                                                                  \
-      const auto [err, ref, tol] =                                              \
-          tensor_error_metrics(actual, expected, test_rel_tol_v<ValueType>);    \
-      const auto A_eval = tmech::eval(A);                                       \
-      const auto dev_eval = tmech::eval(actual);                                \
-      const auto vol_eval = tmech::eval(tmech::vol(A));                         \
-      const auto exp_eval = tmech::eval(expected);                              \
-      std::cout << "deviatoricPart_" #ValueType "_" #Dim                        \
-                << " err=" << err << " ref=" << ref << " tol=" << tol          \
-                << std::endl;                                                   \
-      std::cout << "A:\n" << A_eval << std::endl;                               \
-      std::cout << "dev(A):\n" << dev_eval << std::endl;                        \
-      std::cout << "vol(A):\n" << vol_eval << std::endl;                        \
-      std::cout << "A-vol(A):\n" << exp_eval << std::endl;                      \
-    }                                                                           \
-    EXPECT_EQ(true, ok);                                                        \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(tmech::dev(A), A - tmech::vol(A), test_rel_tol_v<ValueType>));    \
   }
 
 #define deviatoricPartEvaluate(ValueType, Dim)                                 \
