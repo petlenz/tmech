@@ -30,7 +30,7 @@ public:
 
     constexpr deviatoric_wrapper(deviatoric_wrapper const& data)noexcept;
 
-    constexpr inline auto operator ()(size_type const i, size_type const j)const noexcept;
+    constexpr inline value_type operator ()(size_type const i, size_type const j) const noexcept;
 
     static constexpr inline auto dimension()noexcept;
 

@@ -473,9 +473,24 @@ class diff_wrapper<_Variable, tensor_inner_product_wrapper<_LHS, _RHS, _SeqLHS, 
     static constexpr auto _RankArgument{_var_tensor_info::rank()};
     static constexpr auto _ResultRank{_RankLHS + _RankRHS + _RankArgument - _InnerSizeLHS - _InnerSizeRHS};
 
-    using lhs_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankLHS-_InnerSizeLHS-1>,1>;
-    using rhs_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankRHS-_InnerSizeRHS-1>, _RankLHS-_InnerSizeLHS+1>;
-    using result_seq = tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_RankArgument-1>, _RankLHS-_InnerSizeLHS + _RankRHS-_InnerSizeRHS + 1>;
+    static constexpr auto _OuterRankLHS{_RankLHS - _InnerSizeLHS};
+    static constexpr auto _OuterRankRHS{_RankRHS - _InnerSizeRHS};
+    using lhs_seq = std::conditional_t<
+        (_OuterRankLHS == 0),
+        tmech::sequence<>,
+        tmech::detail::add_value_sequence_t<tmech::detail::sequence_t<_OuterRankLHS - 1>, 1>>;
+    using rhs_seq = std::conditional_t<
+        (_OuterRankRHS == 0),
+        tmech::sequence<>,
+        tmech::detail::add_value_sequence_t<
+            tmech::detail::sequence_t<_OuterRankRHS - 1>,
+            _OuterRankLHS + 1>>;
+    using result_seq = std::conditional_t<
+        (_RankArgument == 0),
+        tmech::sequence<>,
+        tmech::detail::add_value_sequence_t<
+            tmech::detail::sequence_t<_RankArgument - 1>,
+            _OuterRankLHS + _OuterRankRHS + 1>>;
     using final_seq = tmech::detail::append_sequence_end_t<tmech::detail::append_sequence_end_t<lhs_seq,result_seq>,rhs_seq>;
 
     using _lhs = typename squeezer<tensor_basis_change_wrapper<typename squeezer<tensor_inner_product_wrapper<_dL, _RHS, _SeqLHS, _SeqRHS>>::squeezedType, final_seq>>::squeezedType;
