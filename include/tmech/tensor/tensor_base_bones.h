@@ -57,7 +57,7 @@ public:
 
 };
 
-template<typename _Tensor,  std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 std::ostream & operator<<(std::ostream &os, _Tensor&& __tensor)
 {
     using TensorType = typename std::decay<_Tensor>::type;

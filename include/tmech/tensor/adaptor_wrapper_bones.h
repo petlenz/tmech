@@ -43,7 +43,7 @@ public:
 
     static constexpr inline auto dimension()noexcept;
 
-    template<typename Type = _Type, typename = typename std::enable_if<Type::use_raw_data()>::type>
+    template<typename Type = _Type, detail::enable_if_raw_data_t<Type> = 0>
     constexpr inline auto raw_data()const noexcept{
       return _data;
     }

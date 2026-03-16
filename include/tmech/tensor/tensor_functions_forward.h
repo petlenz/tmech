@@ -27,7 +27,7 @@
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename _T, typename, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename _T, typename, typename>
 constexpr inline auto almost_equal(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs, _T const __eps);
 
 /**
@@ -48,7 +48,7 @@ constexpr inline auto almost_equal(_TensorLHS && __tensor_lhs, _TensorRHS && __t
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename>
 constexpr auto otimesu(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -69,7 +69,7 @@ constexpr auto otimesu(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename>
 constexpr auto otimesl(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -93,7 +93,7 @@ constexpr auto otimesl(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename>
 constexpr auto otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -114,7 +114,7 @@ constexpr auto otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename>
 constexpr auto inline dcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -135,7 +135,7 @@ constexpr auto inline dcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename>
 constexpr auto inline ddcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -165,7 +165,7 @@ constexpr auto inline ddcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __ten
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, typename>
 constexpr inline auto outer_product(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -194,7 +194,7 @@ constexpr inline auto outer_product(_TensorLHS && __tensor_lhs, _TensorRHS && __
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, typename>
 constexpr inline auto inner_product(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -205,7 +205,7 @@ constexpr inline auto inner_product(_TensorLHS && __tensor_lhs, _TensorRHS && __
  * @param __tensor_lhs Left hand side tensor expression.
  * @param __tensor_rhs Reft hand side tensor expression.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename>
 constexpr inline auto cross(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 /**
@@ -223,7 +223,7 @@ constexpr inline auto cross(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_r
  * @param data_base_lhs Left hand side tensor object.
  * @param data_base_rhs Right hand side tensor object.
  */
-template<typename _TensorLHS, typename _TensorRHS, typename, typename>
+template<typename _TensorLHS, typename _TensorRHS, typename>
 constexpr inline auto dot(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs);
 
 

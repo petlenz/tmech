@@ -43,16 +43,14 @@ public:
     constexpr inline auto evaluate()noexcept;
 
     template <typename U = data_type_LHS, typename V = data_type_RHS,
-              std::enable_if_t<std::experimental::is_detected_v<has_direct_access_t, U>
-                            && std::experimental::is_detected_v<has_direct_access_t, V>, int> = 0>
+              detail::enable_if_direct_access_pair_t<U, V> = 0>
     constexpr inline auto direct_access(std::size_t __idx)const noexcept{
         return _Operator::apply(_lhs.direct_access(__idx), _rhs.direct_access(__idx));
     }
 
 #ifdef TMECH_HAS_XSIMD
     template <typename U = data_type_LHS, typename V = data_type_RHS,
-              std::enable_if_t<std::experimental::is_detected_v<has_batch_access_t, U>
-                            && std::experimental::is_detected_v<has_batch_access_t, V>, int> = 0>
+              detail::enable_if_batch_access_pair_t<U, V> = 0>
     auto batch_access(std::size_t __idx) const noexcept {
         return _Operator::apply(_lhs.batch_access(__idx), _rhs.batch_access(__idx));
     }

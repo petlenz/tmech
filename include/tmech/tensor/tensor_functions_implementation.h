@@ -14,17 +14,14 @@
 /// @cond
 
 template<typename _TensorLHS, typename _TensorRHS, typename _T,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr,
-         std::enable_if_t<std::is_fundamental_v<_T>> * = nullptr>
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0,
+         detail::enable_if_fundamental_t<_T> = 0>
 constexpr inline auto almost_equal(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs, _T const __eps){
     return detail::compare_almost_equal::check(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs), __eps);
 }
 
-template<typename _TensorLHS,
-         typename _TensorRHS,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _TensorLHS, typename _TensorRHS,
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr auto otimesu(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -49,10 +46,8 @@ constexpr auto otimesu(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
 }
 
 
-template<typename _TensorLHS,
-         typename _TensorRHS,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _TensorLHS, typename _TensorRHS,
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr auto otimesl(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -77,10 +72,8 @@ constexpr auto otimesl(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     }
 }
 
-template<typename _TensorLHS,
-         typename _TensorRHS,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _TensorLHS, typename _TensorRHS,
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr auto otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -104,10 +97,8 @@ constexpr auto otimes(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
 
 
 
-template<typename _TensorLHS,
-         typename _TensorRHS,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _TensorLHS, typename _TensorRHS,
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr auto inline dcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -133,10 +124,8 @@ constexpr auto inline dcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
     }
 }
 
-template<typename _TensorLHS,
-         typename _TensorRHS,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _TensorLHS, typename _TensorRHS,
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr auto inline ddcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -162,7 +151,7 @@ constexpr auto inline ddcontract(_TensorLHS && __tensor_lhs, _TensorRHS && __ten
     }
 }
 
-template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr, std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto outer_product(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -182,7 +171,7 @@ constexpr inline auto outer_product(_TensorLHS && __tensor_lhs, _TensorRHS && __
 }
 
 
-template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr, std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _SequenceLHS, typename _SequenceRHS, typename _TensorLHS, typename _TensorRHS, detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto inner_product(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -206,7 +195,7 @@ constexpr inline auto inner_product(_TensorLHS && __tensor_lhs, _TensorRHS && __
 }
 
 
-template<typename _TensorLHS, typename _TensorRHS, std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr, std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _TensorLHS, typename _TensorRHS, detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto cross(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -230,7 +219,7 @@ constexpr inline auto cross(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_r
     }
 }
 
-template<typename _TensorLHS, typename _TensorRHS, std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr, std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+template<typename _TensorLHS, typename _TensorRHS, detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto dot(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -241,7 +230,7 @@ constexpr inline auto dot(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs
     return inner_product<sequence<1>,sequence<1>>(std::forward<_TensorLHS>(__tensor_lhs), std::forward<_TensorRHS>(__tensor_rhs));
 }
 
-template<typename _T, typename std::enable_if<std::is_fundamental_v<_T>>::type* = nullptr>
+template<typename _T, detail::enable_if_fundamental_t<_T> = 0>
 constexpr inline _T sign(_T const __value){
     return (__value == 0 ? 0 : (__value > 0 ? 1 : -1));
 }
@@ -250,8 +239,8 @@ constexpr inline _T sign(_T const __value){
 template<typename _TupleSequence = void,
          typename _Tensor,
          typename _T,
-         std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr,
-         std::enable_if_t<std::is_fundamental_v<_T>> * = nullptr>
+         detail::enable_if_tensor_t<_Tensor> = 0,
+         detail::enable_if_fundamental_t<_T> = 0>
 constexpr inline auto convert_tensor_to_voigt(_Tensor && __tensor, _T * __ptr){
     using TensorType = typename std::decay<_Tensor>::type;
 
@@ -266,7 +255,7 @@ constexpr inline auto convert_tensor_to_voigt(_Tensor && __tensor, _T * __ptr){
     }
 }
 
-template<typename _Sequence, typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Sequence, typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto basis_change(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
@@ -276,7 +265,7 @@ constexpr inline auto basis_change(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr auto trace(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "trace: only valid for second order tensors");
@@ -296,7 +285,7 @@ constexpr auto trace(_Tensor && __tensor){
     return sum;
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto abs(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
@@ -306,7 +295,7 @@ constexpr inline auto abs(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto eval(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
@@ -316,7 +305,7 @@ constexpr inline auto eval(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr auto trans(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert (TensorType::rank() != 4 || TensorType::rank() != 2, "trans(): transposition is only valid for 2th or 4th order tensors");
@@ -337,7 +326,7 @@ constexpr auto trans(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr auto transl(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 4, "transl(): only valid for fourth order tensors");
@@ -348,7 +337,7 @@ constexpr auto transl(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr auto skew(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "skew: only valid for second order tensors");
@@ -359,7 +348,7 @@ constexpr auto skew(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr auto inline sym(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "sym: only valid for second order tensors");
@@ -370,7 +359,7 @@ constexpr auto inline sym(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto vol(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "vol: only valid for second order tensors");
@@ -381,7 +370,7 @@ constexpr inline auto vol(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto dev(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "dev: only valid for second order tensors");
@@ -392,7 +381,7 @@ constexpr inline auto dev(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto cof(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "cof: only valid for second order tensors");
@@ -403,7 +392,7 @@ constexpr inline auto cof(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto adj(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "adj: only valid for second order tensors");
@@ -414,7 +403,7 @@ constexpr inline auto adj(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr, typename ..._Sequences>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0, typename ..._Sequences>
 constexpr inline auto inv(_Tensor && __tensor, _Sequences ...){
     using TensorType = typename std::decay<_Tensor>::type;
 
@@ -433,7 +422,7 @@ constexpr inline auto inv(_Tensor && __tensor, _Sequences ...){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr, typename ..._Sequences>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0, typename ..._Sequences>
 constexpr inline auto invf(_Tensor && __tensor, _Sequences ...){
     using TensorType = typename std::decay<_Tensor>::type;
     if constexpr (std::is_lvalue_reference_v<_Tensor>){
@@ -443,7 +432,7 @@ constexpr inline auto invf(_Tensor && __tensor, _Sequences ...){
     }
 }
 
-template<typename _Tensor, typename T, typename std::enable_if<std::is_integral<T>::value, bool>::type = true, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, typename T, detail::enable_if_integral_t<T> = 0, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto pow(_Tensor && __tensor, T const exp){
     using TensorType = typename std::decay<_Tensor>::type;
 
@@ -456,13 +445,13 @@ constexpr inline auto pow(_Tensor && __tensor, T const exp){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto sign(_Tensor && __tensor, typename std::decay<_Tensor>::type::value_type __eps, std::size_t __max_iter){
     using TensorType = typename std::decay<_Tensor>::type;
     return detail::sign_tensor_wrapper<TensorType>(std::forward<_Tensor>(__tensor), __eps, __max_iter);
 }
 
-template<typename _Function, typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Function, typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto isotropic_tensor_function(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "isotropic_tensor_function: only valid for second order tensors");
@@ -473,12 +462,12 @@ constexpr inline auto isotropic_tensor_function(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto sqrt(_Tensor && __tensor){
     return isotropic_tensor_function<detail::sqrt_>(std::forward<_Tensor>(__tensor));
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto exp(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "exp: only valid for second order tensors");
@@ -489,27 +478,27 @@ constexpr inline auto exp(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto exp_sym(_Tensor && __tensor){
     return isotropic_tensor_function<detail::exp>(std::forward<_Tensor>(__tensor));
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto log(_Tensor && __tensor){
     return isotropic_tensor_function<detail::log>(std::forward<_Tensor>(__tensor));
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto positive(_Tensor && __tensor){
     return isotropic_tensor_function<detail::positive_part>(std::forward<_Tensor>(__tensor));
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto negative(_Tensor && __tensor){
     return isotropic_tensor_function<detail::negative_part>(std::forward<_Tensor>(__tensor));
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto positive_negative_decomposition(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "positive_negative_decomposition: only valid for second order tensors");
@@ -520,7 +509,7 @@ constexpr inline auto positive_negative_decomposition(_Tensor && __tensor){
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto polar_decomposition(_Tensor && __tensor, bool const newton_method = false, typename std::decay<_Tensor>::type::value_type const tol = 1e-10, std::size_t const max_steps = 20){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "polar_decomposition: only valid for second order tensors");
@@ -531,7 +520,7 @@ constexpr inline auto polar_decomposition(_Tensor && __tensor, bool const newton
     }
 }
 
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto eigen_decomposition(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     static_assert(TensorType::rank() == 2, "eigen_decomposition: only valid for second order tensors");

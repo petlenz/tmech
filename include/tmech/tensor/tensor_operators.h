@@ -11,6 +11,11 @@
 #include <utility>
 #include <type_traits>
 
+namespace tmech {
+#include "../tmech_config.h"
+#include "tmech_utility.h"
+}
+
 namespace tmech_ops_detail {
 // Helper to safely cast a fundamental scalar to a possibly-complex value_type
 // without triggering implicit narrowing warnings.
@@ -43,8 +48,7 @@ constexpr To safe_cast(From val) noexcept {
  * @param __tensor_rhs Right hand side tensor expression.
  */
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         tmech::detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator+(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -111,8 +115,7 @@ constexpr inline auto operator+(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
  * @param __tensor_rhs Right hand side tensor expression.
  */
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         tmech::detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator-(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -157,8 +160,7 @@ constexpr inline auto operator-(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
  * @param __tensor_rhs Right hand side tensor expression.
  */
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         tmech::detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator*(_TensorLHS && __tensor_lhs, _TensorRHS && __tensor_rhs){
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -202,8 +204,8 @@ constexpr inline auto operator*(_TensorLHS && __tensor_lhs, _TensorRHS && __tens
  * @param __tensor Tensor expression.
  */
 template<typename _Scalar, typename _Tensor,
-         typename std::enable_if<std::is_fundamental<typename std::decay<_Scalar>::type>::value>::type* = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+         tmech::detail::enable_if_fundamental_t<_Scalar> = 0,
+         tmech::detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto operator*(_Scalar __scalar, _Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
@@ -241,8 +243,8 @@ constexpr inline auto operator*(_Scalar __scalar, _Tensor && __tensor){
  * @param __tensor Tensor expression.
  */
 template<typename _Scalar, typename _Tensor,
-         typename std::enable_if<std::is_fundamental<typename std::decay<_Scalar>::type>::value>::type* = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+         tmech::detail::enable_if_fundamental_t<_Scalar> = 0,
+         tmech::detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto operator*(_Tensor && __tensor, _Scalar __scalar){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
@@ -280,8 +282,8 @@ constexpr inline auto operator*(_Tensor && __tensor, _Scalar __scalar){
  * @param __tensor Tensor expression.
  */
 template<typename _Scalar, typename _Tensor,
-         typename std::enable_if<std::is_fundamental<typename std::decay<_Scalar>::type>::value>::type* = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+         tmech::detail::enable_if_fundamental_t<_Scalar> = 0,
+         tmech::detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto operator/(_Tensor && __tensor, _Scalar && __scalar){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<typename TensorType::value_type>;
@@ -315,9 +317,9 @@ constexpr inline auto operator/(_Tensor && __tensor, _Scalar && __scalar){
  * @param __tensor Tensor expression.
  */
 template<typename _ScalarComplex, typename _Tensor,
-         typename std::enable_if<tmech::detail::is_complex_t<typename std::decay<_Tensor>::type::value_type>::value>::type* = nullptr,
-         typename std::enable_if<tmech::detail::is_complex_t<_ScalarComplex>::value>::type* = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+         tmech::detail::enable_if_tensor_value_complex_t<_Tensor> = 0,
+         tmech::detail::enable_if_complex_t<_ScalarComplex> = 0,
+         tmech::detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto operator*(_ScalarComplex const& __scalar_complex, _Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<_ScalarComplex>;
@@ -341,9 +343,9 @@ constexpr inline auto operator*(_ScalarComplex const& __scalar_complex, _Tensor 
  * @param __tensor Tensor expression.
  */
 template<typename _ScalarComplex, typename _Tensor,
-         typename std::enable_if<tmech::detail::is_complex_t<typename std::decay<_Tensor>::type::value_type>::value>::type* = nullptr,
-         typename std::enable_if<tmech::detail::is_complex_t<_ScalarComplex>::value>::type* = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+         tmech::detail::enable_if_tensor_value_complex_t<_Tensor> = 0,
+         tmech::detail::enable_if_complex_t<_ScalarComplex> = 0,
+         tmech::detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto operator*(_Tensor && __tensor, _ScalarComplex __scalar_complex){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<_ScalarComplex>;
@@ -367,9 +369,9 @@ constexpr inline auto operator*(_Tensor && __tensor, _ScalarComplex __scalar_com
  * @param __tensor Tensor expression.
  */
 template<typename _ScalarComplex, typename _Tensor,
-         typename std::enable_if<tmech::detail::is_complex_t<typename std::decay<_Tensor>::type::value_type>::value>::type* = nullptr,
-         typename std::enable_if<tmech::detail::is_complex_t<_ScalarComplex>::value>::type* = nullptr,
-         typename std::enable_if_t<tmech::is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+         tmech::detail::enable_if_tensor_value_complex_t<_Tensor> = 0,
+         tmech::detail::enable_if_complex_t<_ScalarComplex> = 0,
+         tmech::detail::enable_if_tensor_t<_Tensor> = 0>
 constexpr inline auto operator/(_Tensor && __tensor, _ScalarComplex __scalar_complex){
     using TensorType = typename std::decay<_Tensor>::type;
     using scalar = tmech::detail::scalar<_ScalarComplex>;

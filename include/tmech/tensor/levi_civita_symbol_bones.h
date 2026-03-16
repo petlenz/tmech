@@ -33,13 +33,13 @@ public:
 
     static constexpr inline auto dimension()noexcept;
 
-    template<std::size_t DIM = Dim, typename = typename std::enable_if<(DIM == 2)>::type>
+    template<std::size_t DIM = Dim, detail::enable_if_bool_t<(DIM == 2)> = 0>
     constexpr inline auto operator ()(size_type const i, size_type const j)const noexcept;
 
-    template<std::size_t DIM = Dim, typename = typename std::enable_if<(DIM == 3)>::type>
+    template<std::size_t DIM = Dim, detail::enable_if_bool_t<(DIM == 3)> = 0>
     constexpr inline auto operator ()(size_type const i, size_type const j, size_type const k)const noexcept;
 
-    template<std::size_t DIM = Dim, typename = typename std::enable_if<(DIM == 4)>::type>
+    template<std::size_t DIM = Dim, detail::enable_if_bool_t<(DIM == 4)> = 0>
     constexpr inline auto operator ()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept;
 };
 

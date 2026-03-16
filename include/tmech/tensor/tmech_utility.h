@@ -383,6 +383,54 @@ using has_direct_access_t = decltype(std::declval<const Type&>().direct_access(s
 template<typename Type>
 using has_batch_access_t = decltype(std::declval<const Type>().batch_access(std::size_t{}));
 
+template<typename T>
+using enable_if_tensor_t = std::enable_if_t<is_tensor_type<std::decay_t<T>>::value, int>;
+
+template<typename T>
+using enable_if_exact_tensor_t = std::enable_if_t<is_tensor_type<T>::value, int>;
+
+template<typename L, typename R>
+using enable_if_tensors_t =
+    std::enable_if_t<is_tensor_type<std::decay_t<L>>::value
+                     && is_tensor_type<std::decay_t<R>>::value, int>;
+
+template<typename T>
+using enable_if_fundamental_t = std::enable_if_t<std::is_fundamental_v<std::decay_t<T>>, int>;
+
+template<typename T>
+using enable_if_integral_t = std::enable_if_t<std::is_integral_v<std::decay_t<T>>, int>;
+
+template<typename T>
+using enable_if_complex_t = std::enable_if_t<is_complex_t<T>::value, int>;
+
+template<typename T>
+using enable_if_tensor_value_complex_t =
+    std::enable_if_t<is_complex_t<typename std::decay_t<T>::value_type>::value, int>;
+
+template<bool Condition>
+using enable_if_bool_t = std::enable_if_t<Condition, int>;
+
+template<typename Type>
+using enable_if_raw_data_t = std::enable_if_t<Type::use_raw_data(), int>;
+
+template<typename Type>
+using enable_if_direct_access_t =
+    std::enable_if_t<std::experimental::is_detected_v<has_direct_access_t, Type>, int>;
+
+template<typename Type>
+using enable_if_batch_access_t =
+    std::enable_if_t<std::experimental::is_detected_v<has_batch_access_t, Type>, int>;
+
+template<typename LHS, typename RHS>
+using enable_if_direct_access_pair_t =
+    std::enable_if_t<std::experimental::is_detected_v<has_direct_access_t, LHS>
+                     && std::experimental::is_detected_v<has_direct_access_t, RHS>, int>;
+
+template<typename LHS, typename RHS>
+using enable_if_batch_access_pair_t =
+    std::enable_if_t<std::experimental::is_detected_v<has_batch_access_t, LHS>
+                     && std::experimental::is_detected_v<has_batch_access_t, RHS>, int>;
+
 // True when an expression supports flat linear iteration via direct_access().
 template<typename Derived>
 inline constexpr bool is_direct_assignable_v =

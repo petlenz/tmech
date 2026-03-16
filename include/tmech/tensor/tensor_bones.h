@@ -39,7 +39,7 @@ public:
 
     tensor(tensor<T, Dim, Rank> const& _tensor)noexcept;
 
-    template<typename _Tensor,  std::enable_if_t<is_tensor_type<_Tensor>::value> * = nullptr>
+    template<typename _Tensor, detail::enable_if_exact_tensor_t<_Tensor> = 0>
     tensor(_Tensor const& tensor_base)noexcept;
 
     tensor(std::initializer_list<value_type> const& data)noexcept;
@@ -58,16 +58,16 @@ public:
     template<typename Derived>
     constexpr inline auto const& operator=(tensor_base<Derived> const& tensor_base) noexcept;
 
-    template<typename _Tensor,  std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+    template<typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
     constexpr inline auto const& operator=(_Tensor && __tensor) noexcept;
 
-    template <typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+    template <typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
     constexpr inline auto const& operator+=(_Tensor && __rhs) noexcept;
 
-    template <typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+    template <typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
     constexpr inline auto const& operator-=(_Tensor && __rhs) noexcept;
 
-    template <typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+    template <typename _Tensor, detail::enable_if_tensor_t<_Tensor> = 0>
     constexpr inline auto const& operator*=(_Tensor && __rhs) noexcept;
 
     constexpr inline auto const& operator*=(value_type const value) noexcept;
@@ -80,10 +80,10 @@ public:
     template<typename ...Indicies>
     inline constexpr auto& operator()(Indicies const ... indices) noexcept;
 
-    template<typename _TensorLHS, typename _TensorRHS, typename, typename >
+    template<typename _TensorLHS, typename _TensorRHS, typename>
     friend constexpr inline auto operator == (_TensorLHS && __lhs, _TensorRHS && __rhs) noexcept;
 
-    template<typename _TensorLHS, typename _TensorRHS, typename, typename >
+    template<typename _TensorLHS, typename _TensorRHS, typename>
     friend constexpr inline auto operator != (_TensorLHS && __lhs, _TensorRHS && __rhs) noexcept;
 
     static constexpr inline auto rank() noexcept;
@@ -134,20 +134,20 @@ private:
     template <typename, std::size_t, std::size_t>
     friend class tensor;
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, detail::enable_if_bool_t<!DynamicMemory> = 0>
     constexpr inline auto check_size(){}
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, detail::enable_if_bool_t<DynamicMemory> = 0>
     constexpr inline auto check_size(){
         if(_data.size() == 0){
             _data.resize(Size);
         }
     }
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, detail::enable_if_bool_t<!DynamicMemory> = 0>
     constexpr inline auto check_size_fill_zeros(){}
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, detail::enable_if_bool_t<DynamicMemory> = 0>
     constexpr inline auto check_size_fill_zeros(){
         if(_data.size() == 0){
             _data.resize(Size);
@@ -155,10 +155,10 @@ private:
         _data.fill(0);
     }
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<!DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, detail::enable_if_bool_t<!DynamicMemory> = 0>
     constexpr inline auto delete_data(){}
 
-    template<bool DynamicMemory = dynamic_memory, typename std::enable_if_t<DynamicMemory>* = nullptr >
+    template<bool DynamicMemory = dynamic_memory, detail::enable_if_bool_t<DynamicMemory> = 0>
     constexpr inline auto delete_data(){}
 
     alignas(detail::simd_alignment_v<T>) value_data_type _data;

@@ -51,7 +51,7 @@ constexpr inline auto levi_civita<T, Dim>::dimension()noexcept{
 * Indices must be unsigned integers, the number of indices must be equal to the rank of the expression.
 */
 template <typename T, std::size_t Dim>
-template<std::size_t DIM, typename >
+template<std::size_t DIM, detail::enable_if_bool_t<(DIM == 2)>>
 constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j)const noexcept{
   return safe_cast<value_type>(j) - safe_cast<value_type>(i);
 }
@@ -64,7 +64,7 @@ constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_ty
 * Indices must be unsigned integers, the number of indices must be equal to the rank of the expression.
 */
 template <typename T, std::size_t Dim>
-template<std::size_t DIM, typename >
+template<std::size_t DIM, detail::enable_if_bool_t<(DIM == 3)>>
 constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k)const noexcept{
   return (safe_cast<value_type>(j) - safe_cast<value_type>(i)) *
          (safe_cast<value_type>(k) - safe_cast<value_type>(j)) *
@@ -81,7 +81,7 @@ constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_ty
 * Indices must be unsigned integers, the number of indices must be equal to the rank of the expression.
 */
 template <typename T, std::size_t Dim>
-template<std::size_t DIM, typename>
+template<std::size_t DIM, detail::enable_if_bool_t<(DIM == 4)>>
 constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k, size_type const l)const noexcept{
     constexpr value_type fac{1./12.};
     return (safe_cast<value_type>(j) - safe_cast<value_type>(i)) *

@@ -17,7 +17,7 @@
  * @param rhs Right hand side tensor expression of subtraction.
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
-template <typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value>*>
+template <typename _Tensor, detail::enable_if_tensor_t<_Tensor>>
 constexpr inline auto const& tensor<T, Dim, Rank>::operator+=(_Tensor && __rhs) noexcept{
     *this = *this + std::forward<_Tensor>(__rhs);
     return *this;
@@ -28,7 +28,7 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator+=(_Tensor && __rhs) 
  * @param rhs Right hand side tensor expression of addtion.
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
-template <typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value>*>
+template <typename _Tensor, detail::enable_if_tensor_t<_Tensor>>
 constexpr inline auto const& tensor<T, Dim, Rank>::operator-=(_Tensor && __rhs) noexcept{
     *this = *this - std::forward<_Tensor>(__rhs);
     return *this;
@@ -39,7 +39,7 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator-=(_Tensor && __rhs) 
  * @param rhs Right hand side tensor expression of single contraction.
 */
 template<typename T, std::size_t Dim, std::size_t Rank>
-template <typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value>*>
+template <typename _Tensor, detail::enable_if_tensor_t<_Tensor>>
 constexpr inline auto const& tensor<T, Dim, Rank>::operator*=(_Tensor && __rhs) noexcept{
     *this = *this * std::forward<_Tensor>(__rhs);
     return *this;
@@ -122,7 +122,7 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived
 
 
 template<typename T, std::size_t Dim, std::size_t Rank>
-template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value>*>
+template<typename _Tensor, detail::enable_if_tensor_t<_Tensor>>
 constexpr inline auto const&
 tensor<T, Dim, Rank>::operator=(_Tensor && __tensor) noexcept{
     using TensorType = typename std::decay<_Tensor>::type;
@@ -347,7 +347,7 @@ tensor<T, Dim, Rank>::tensor(std::initializer_list<value_type> const& l)noexcept
      * The extended copy constructor.
      */
 template<typename T, std::size_t Dim, std::size_t Rank>
-template<typename _Tensor,  std::enable_if_t<is_tensor_type<_Tensor>::value> *>
+template<typename _Tensor, detail::enable_if_exact_tensor_t<_Tensor>>
 tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor)noexcept:
     _data()
 {
@@ -452,8 +452,7 @@ constexpr inline auto tensor<T, Dim, Rank>::change_basis_view()noexcept{
  * @return a bool value
  */
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator < (_TensorLHS && __lhs, _TensorRHS && __rhs)noexcept{
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -486,8 +485,7 @@ constexpr inline auto operator < (_TensorLHS && __lhs, _TensorRHS && __rhs)noexc
  * @return a bool value
  */
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator <= (_TensorLHS && __lhs, _TensorRHS && __rhs)noexcept{
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -520,8 +518,7 @@ constexpr inline auto operator <= (_TensorLHS && __lhs, _TensorRHS && __rhs)noex
  * @return a bool value
  */
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator > (_TensorLHS && __lhs, _TensorRHS && __rhs)noexcept{
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -555,8 +552,7 @@ constexpr inline auto operator > (_TensorLHS && __lhs, _TensorRHS && __rhs)noexc
  * @return a bool value
  */
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator >= (_TensorLHS && __lhs, _TensorRHS && __rhs)noexcept{
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -578,8 +574,7 @@ constexpr inline auto operator >= (_TensorLHS && __lhs, _TensorRHS && __rhs)noex
 
 
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator == (_TensorLHS && __lhs, _TensorRHS && __rhs)noexcept{
     using TensorTypeLHS = typename std::decay<_TensorLHS>::type;
     using TensorTypeRHS = typename std::decay<_TensorRHS>::type;
@@ -596,8 +591,7 @@ constexpr inline auto operator == (_TensorLHS && __lhs, _TensorRHS && __rhs)noex
 
 
 template<typename _TensorLHS, typename _TensorRHS,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
-         typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
+         detail::enable_if_tensors_t<_TensorLHS, _TensorRHS> = 0>
 constexpr inline auto operator != (_TensorLHS && __lhs, _TensorRHS && __rhs)noexcept{
     return !(std::forward<_TensorLHS>(__lhs) == std::forward<_TensorRHS>(__rhs));
 }
