@@ -516,29 +516,39 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, inv_pivoting_required_4_##ValueType##_##Dim##_) {                \
     const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
     const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
-    ValueType mu{1}, lambda{static_cast<ValueType>(0.1)};                      \
+    /* Construct a Minor-Major-sym rank-4 with O(1)-entry Voigt matrix       \
+     * but a deliberately tiny (0,0,0,0) entry. The base 100·IIsym +         \
+     * 50·I⊗I gives a Voigt 6×6 with diagonal ~150 and off-pair             \
+     * entries 50. Subtracting (150 - ε) at (0,0,0,0) only drops the         \
+     * single Voigt[0,0] to ε, leaving a dense O(50) row 0 in Voigt.         \
+     * Without partial pivoting the LU multiplier on row k is                \
+     * Voigt[k,0]/ε ≈ 5e10, and the (1,1) Schur entry computes               \
+     * 150 - 5e10·50 ≈ -2.5e12 — the +150 falls below double precision       \
+     * relative to 2.5e12, propagating an O(1e-3) error into the              \
+     * inverse. With pivoting, row 1 (Voigt[1,0]=50) is swapped in           \
+     * first and the multiplier becomes 50/50 = 1, machine-precision         \
+     * result. */                                                            \
     tmech::tensor<ValueType, Dim, 4> A =                                       \
-        static_cast<ValueType>(1e-3) *                                         \
-        (2 * mu * IIsym + lambda * tmech::otimes(I, I));                       \
-    /* Add a large off-diagonal coupling that forces pivoting. */              \
-    tmech::tensor<ValueType, Dim, 2> n;                                        \
-    if constexpr (Dim == 3) {                                                  \
-      n(0, 1) = n(1, 0) = static_cast<ValueType>(100);                         \
-      n(2, 2) = static_cast<ValueType>(50);                                    \
-    } else {                                                                   \
-      n(0, 1) = n(1, 0) = static_cast<ValueType>(100);                         \
-    }                                                                          \
-    A = A + tmech::otimes(n, n);                                               \
-    /* Project to MinorMajor sym so tmech::inv Voigt dispatch applies. */      \
-    A = 0.5 * (A + tmech::basis_change<tmech::sequence<3, 4, 1, 2>>(A));       \
-    A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
-                tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
-                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));          \
-    /* Without pivoting this test diverges by orders of magnitude.      \
-     * Float precision is limited by the small-pivot conditioning       \
-     * combined with engineering Voigt scaling. */                      \
+        static_cast<ValueType>(100) * IIsym +                                  \
+        static_cast<ValueType>(50) * tmech::otimes(I, I);                      \
+    tmech::tensor<ValueType, Dim, 2> e00;                                      \
+    e00(0, 0) = static_cast<ValueType>(1);                                     \
+    /* Voigt[0,0] = A(0,0,0,0) = 100·IIsym(0,0,0,0) + 50·δ_00·δ_00 = 150.    \
+     * Adjust so A(0,0,0,0) becomes ε without touching other entries.       \
+     * outer(e00, e00) is nonzero only at (0,0,0,0). */                      \
+    const ValueType eps_pivot{static_cast<ValueType>(                          \
+        std::is_same_v<ValueType, float> ? 1e-4 : 1e-9)};                      \
+    A = A + (eps_pivot - static_cast<ValueType>(150)) *                        \
+                tmech::otimes(e00, e00);                                       \
+    /* Empirical residuals on this matrix:                                    \
+     *   double 3D:  1.1e-16 (pivoted) vs 4.4e-7  (unpivoted)                 \
+     *   double 2D:  0       (pivoted) vs 1.3e-6  (unpivoted)                 \
+     *   float  3D:  6.0e-8  (pivoted) vs 4.5e-3  (unpivoted)                 \
+     *   float  2D:  2.3e-13 (pivoted) vs 1.3e-2  (unpivoted)                 \
+     * Tolerance is chosen between with/without pivoting so reverting         \
+     * the pivoting fix is caught. */                                         \
     constexpr ValueType eps{static_cast<ValueType>(                            \
-        std::is_same_v<ValueType, float> ? 1e-1 : 1e-8)};                      \
+        std::is_same_v<ValueType, float> ? 1e-4 : 1e-10)};                     \
     EXPECT_EQ(true,                                                            \
               almost_equal_tensor_scaled(                                      \
                   tmech::dcontract(tmech::inv(A), A), IIsym, eps));            \
