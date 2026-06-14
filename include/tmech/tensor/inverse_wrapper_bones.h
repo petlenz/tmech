@@ -36,11 +36,13 @@ protected:
                std::integral_constant<std::size_t, 3> /*dim*/) noexcept;
 
   template <std::size_t Rows>
-  static constexpr auto lu_detail(value_type const *__A) noexcept;
+  static constexpr auto lu_detail(value_type const *__A,
+                                  std::size_t *__P) noexcept;
 
   template <std::size_t Rows>
   static constexpr auto inv_lu(value_type *__Ainv,
-                               value_type const *const __Afac) noexcept;
+                               value_type const *const __Afac,
+                               std::size_t const *__P) noexcept;
 
   static constexpr inline auto
   invert_2_2(value_type *result, value_type const A11, value_type const A12,
