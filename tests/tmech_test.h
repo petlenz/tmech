@@ -455,6 +455,118 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
                         II, eps));                                             \
   }
 
+// =============================================================================
+// Issue #14: partial-pivoted LU robustness tests.
+// All three FAIL on the current non-pivoted Doolittle LU and PASS after the
+// partial-pivoting fix.
+// =============================================================================
+
+// Anisotropic 6×6 Voigt: a Minor-symmetric but Major-asymmetric rank-4
+// tensor (e.g. non-associative plasticity / anisotropic damage tangent).
+// The existing inv_function_4 only covers MinorMajor-sym inputs.
+#define inv_anisotropic_voigt_4(ValueType, Dim)                                \
+  TEST(gtest, inv_anisotropic_voigt_4_##ValueType##_##Dim##_) {                \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
+    ValueType mu{200}, lambda{600};                                            \
+    tmech::tensor<ValueType, Dim, 4> A_iso =                                   \
+        2 * mu * IIsym + lambda * tmech::otimes(I, I);                         \
+    /* Non-associative-style perturbation: outer(g, f) with g != f. */         \
+    tmech::tensor<ValueType, Dim, 2> g, f;                                     \
+    if constexpr (Dim == 3) {                                                  \
+      g(0, 0) = ValueType{1};                                                  \
+      g(1, 1) = ValueType{0.5};                                                \
+      g(2, 2) = ValueType{0.3};                                                \
+      g(0, 1) = g(1, 0) = ValueType{0.2};                                      \
+      g(0, 2) = g(2, 0) = ValueType{0.1};                                      \
+      f(0, 0) = ValueType{0.3};                                                \
+      f(1, 1) = ValueType{1};                                                  \
+      f(2, 2) = ValueType{0.5};                                                \
+      f(0, 2) = f(2, 0) = ValueType{0.2};                                      \
+      f(1, 2) = f(2, 1) = ValueType{0.1};                                      \
+    } else {                                                                   \
+      g(0, 0) = ValueType{1};                                                  \
+      g(1, 1) = ValueType{0.5};                                                \
+      g(0, 1) = g(1, 0) = ValueType{0.2};                                      \
+      f(0, 0) = ValueType{0.3};                                                \
+      f(1, 1) = ValueType{1};                                                  \
+      f(0, 1) = f(1, 0) = ValueType{0};                                        \
+    }                                                                          \
+    tmech::tensor<ValueType, Dim, 4> A =                                       \
+        A_iso + ValueType{0.5} * tmech::otimes(g, f);                          \
+    /* Minor-project to enforce both pair symmetries to machine prec. */       \
+    A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
+                tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
+                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));          \
+    /* The dcontract identity must hold despite the Major-asymmetry. */        \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 5e-3 : 5e-5)};                      \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(                                      \
+                  tmech::dcontract(tmech::inv(A), A), IIsym, eps));            \
+  }
+
+// Pivoting-required 6×6: a deliberately constructed input where the
+// (0,0) Voigt entry is small while off-diagonal coupling is large. A
+// non-pivoted Doolittle LU divides by a tiny pivot first and amplifies
+// FP error; partial pivoting selects the largest |__A[k,0]| pivot.
+#define inv_pivoting_required_4(ValueType, Dim)                                \
+  TEST(gtest, inv_pivoting_required_4_##ValueType##_##Dim##_) {                \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
+    ValueType mu{1}, lambda{ValueType{0.1}};                                   \
+    tmech::tensor<ValueType, Dim, 4> A =                                       \
+        ValueType{1e-3} * (2 * mu * IIsym + lambda * tmech::otimes(I, I));     \
+    /* Add a large off-diagonal coupling that forces pivoting. */              \
+    tmech::tensor<ValueType, Dim, 2> n;                                        \
+    if constexpr (Dim == 3) {                                                  \
+      n(0, 1) = n(1, 0) = ValueType{100};                                      \
+      n(2, 2) = ValueType{50};                                                 \
+    } else {                                                                   \
+      n(0, 1) = n(1, 0) = ValueType{100};                                      \
+    }                                                                          \
+    A = A + tmech::otimes(n, n);                                               \
+    /* Project to MinorMajor sym so tmech::inv Voigt dispatch applies. */      \
+    A = 0.5 * (A + tmech::basis_change<tmech::sequence<3, 4, 1, 2>>(A));       \
+    A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
+                tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
+                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));          \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 5e-3 : 5e-5)};                      \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(                                      \
+                  tmech::dcontract(tmech::inv(A), A), IIsym, eps));            \
+  }
+
+// Anisotropic rank-2: matrix with small (0,0) and large off-diagonals.
+// Without pivoting, lu_detail divides by a tiny pivot and amplifies error.
+#define inv_pivoting_required_2(ValueType, Dim)                                \
+  TEST(gtest, inv_pivoting_required_2_##ValueType##_##Dim##_) {                \
+    tmech::tensor<ValueType, Dim, 2> A;                                        \
+    if constexpr (Dim == 3) {                                                  \
+      A(0, 0) = ValueType{1e-3};                                               \
+      A(0, 1) = ValueType{100};                                                \
+      A(0, 2) = ValueType{50};                                                 \
+      A(1, 0) = ValueType{200};                                                \
+      A(1, 1) = ValueType{1};                                                  \
+      A(1, 2) = ValueType{-30};                                                \
+      A(2, 0) = ValueType{75};                                                 \
+      A(2, 1) = ValueType{20};                                                 \
+      A(2, 2) = ValueType{0.5};                                                \
+    } else {                                                                   \
+      A(0, 0) = ValueType{1e-3};                                               \
+      A(0, 1) = ValueType{100};                                                \
+      A(1, 0) = ValueType{200};                                                \
+      A(1, 1) = ValueType{1};                                                  \
+    }                                                                          \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 5e-3 : 5e-5)};                      \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(                                      \
+                  tmech::inv(A) * A,                                           \
+                  tmech::eye<ValueType, Dim, 2>(), eps));                      \
+  }
+
 // abs function
 #define absFunction(ValueType, Dim, Rank)                                      \
   TEST(gtest, absFunc_##ValueType##_##Dim##_##Rank) {                          \
@@ -1760,6 +1872,22 @@ inv_full_function_4(double, 2);
 inv_full_function_4(double, 3);
 inv_full_function_4(float, 2);
 inv_full_function_4(float, 3);
+
+// Issue #14 — partial-pivoted LU robustness instantiations.
+inv_anisotropic_voigt_4(double, 3);
+inv_anisotropic_voigt_4(double, 2);
+inv_anisotropic_voigt_4(float, 3);
+inv_anisotropic_voigt_4(float, 2);
+
+inv_pivoting_required_4(double, 3);
+inv_pivoting_required_4(double, 2);
+inv_pivoting_required_4(float, 3);
+inv_pivoting_required_4(float, 2);
+
+inv_pivoting_required_2(double, 3);
+inv_pivoting_required_2(double, 2);
+inv_pivoting_required_2(float, 3);
+inv_pivoting_required_2(float, 2);
 
 compareEqualOperator(double, 2, 1);
 compareEqualOperator(double, 2, 2);
