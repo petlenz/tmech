@@ -474,26 +474,26 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     /* Non-associative-style perturbation: outer(g, f) with g != f. */         \
     tmech::tensor<ValueType, Dim, 2> g, f;                                     \
     if constexpr (Dim == 3) {                                                  \
-      g(0, 0) = ValueType{1};                                                  \
-      g(1, 1) = ValueType{0.5};                                                \
-      g(2, 2) = ValueType{0.3};                                                \
-      g(0, 1) = g(1, 0) = ValueType{0.2};                                      \
-      g(0, 2) = g(2, 0) = ValueType{0.1};                                      \
-      f(0, 0) = ValueType{0.3};                                                \
-      f(1, 1) = ValueType{1};                                                  \
-      f(2, 2) = ValueType{0.5};                                                \
-      f(0, 2) = f(2, 0) = ValueType{0.2};                                      \
-      f(1, 2) = f(2, 1) = ValueType{0.1};                                      \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(2, 2) = static_cast<ValueType>(0.3);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      g(0, 2) = g(2, 0) = static_cast<ValueType>(0.1);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(2, 2) = static_cast<ValueType>(0.5);                                   \
+      f(0, 2) = f(2, 0) = static_cast<ValueType>(0.2);                         \
+      f(1, 2) = f(2, 1) = static_cast<ValueType>(0.1);                         \
     } else {                                                                   \
-      g(0, 0) = ValueType{1};                                                  \
-      g(1, 1) = ValueType{0.5};                                                \
-      g(0, 1) = g(1, 0) = ValueType{0.2};                                      \
-      f(0, 0) = ValueType{0.3};                                                \
-      f(1, 1) = ValueType{1};                                                  \
-      f(0, 1) = f(1, 0) = ValueType{0};                                        \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(0, 1) = f(1, 0) = static_cast<ValueType>(0);                           \
     }                                                                          \
     tmech::tensor<ValueType, Dim, 4> A =                                       \
-        A_iso + ValueType{0.5} * tmech::otimes(g, f);                          \
+        A_iso + static_cast<ValueType>(0.5) * tmech::otimes(g, f);             \
     /* Minor-project to enforce both pair symmetries to machine prec. */       \
     A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
                 tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
@@ -514,16 +514,17 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, inv_pivoting_required_4_##ValueType##_##Dim##_) {                \
     const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
     const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
-    ValueType mu{1}, lambda{ValueType{0.1}};                                   \
+    ValueType mu{1}, lambda{static_cast<ValueType>(0.1)};                      \
     tmech::tensor<ValueType, Dim, 4> A =                                       \
-        ValueType{1e-3} * (2 * mu * IIsym + lambda * tmech::otimes(I, I));     \
+        static_cast<ValueType>(1e-3) *                                         \
+        (2 * mu * IIsym + lambda * tmech::otimes(I, I));                       \
     /* Add a large off-diagonal coupling that forces pivoting. */              \
     tmech::tensor<ValueType, Dim, 2> n;                                        \
     if constexpr (Dim == 3) {                                                  \
-      n(0, 1) = n(1, 0) = ValueType{100};                                      \
-      n(2, 2) = ValueType{50};                                                 \
+      n(0, 1) = n(1, 0) = static_cast<ValueType>(100);                         \
+      n(2, 2) = static_cast<ValueType>(50);                                    \
     } else {                                                                   \
-      n(0, 1) = n(1, 0) = ValueType{100};                                      \
+      n(0, 1) = n(1, 0) = static_cast<ValueType>(100);                         \
     }                                                                          \
     A = A + tmech::otimes(n, n);                                               \
     /* Project to MinorMajor sym so tmech::inv Voigt dispatch applies. */      \
@@ -544,20 +545,20 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   TEST(gtest, inv_pivoting_required_2_##ValueType##_##Dim##_) {                \
     tmech::tensor<ValueType, Dim, 2> A;                                        \
     if constexpr (Dim == 3) {                                                  \
-      A(0, 0) = ValueType{1e-3};                                               \
-      A(0, 1) = ValueType{100};                                                \
-      A(0, 2) = ValueType{50};                                                 \
-      A(1, 0) = ValueType{200};                                                \
-      A(1, 1) = ValueType{1};                                                  \
-      A(1, 2) = ValueType{-30};                                                \
-      A(2, 0) = ValueType{75};                                                 \
-      A(2, 1) = ValueType{20};                                                 \
-      A(2, 2) = ValueType{0.5};                                                \
+      A(0, 0) = static_cast<ValueType>(1e-3);                                  \
+      A(0, 1) = static_cast<ValueType>(100);                                   \
+      A(0, 2) = static_cast<ValueType>(50);                                    \
+      A(1, 0) = static_cast<ValueType>(200);                                   \
+      A(1, 1) = static_cast<ValueType>(1);                                     \
+      A(1, 2) = static_cast<ValueType>(-30);                                   \
+      A(2, 0) = static_cast<ValueType>(75);                                    \
+      A(2, 1) = static_cast<ValueType>(20);                                    \
+      A(2, 2) = static_cast<ValueType>(0.5);                                   \
     } else {                                                                   \
-      A(0, 0) = ValueType{1e-3};                                               \
-      A(0, 1) = ValueType{100};                                                \
-      A(1, 0) = ValueType{200};                                                \
-      A(1, 1) = ValueType{1};                                                  \
+      A(0, 0) = static_cast<ValueType>(1e-3);                                  \
+      A(0, 1) = static_cast<ValueType>(100);                                   \
+      A(1, 0) = static_cast<ValueType>(200);                                   \
+      A(1, 1) = static_cast<ValueType>(1);                                     \
     }                                                                          \
     constexpr ValueType eps{static_cast<ValueType>(                            \
         std::is_same_v<ValueType, float> ? 5e-3 : 5e-5)};                      \
