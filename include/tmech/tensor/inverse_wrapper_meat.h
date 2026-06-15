@@ -274,20 +274,24 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::voigt_rank_4(_Res
     constexpr auto SIZE{(dimension() == 2 ? 3 : 6)};
     value_type _ptr[SIZE*SIZE], _ptr_inv[SIZE*SIZE]{0};
 
-    // Bring the indices specified by (tuple1, tuple2) into the natural
-    // <1,2,3,4> order via a basis_change so the convert_tensor_to_voigt
-    // call below always operates on a tensor whose indices 1,2 are the
-    // row pair and 3,4 are the col pair. The unpack at the end applies
-    // the inverse permutation via change_basis_view. This makes custom
-    // <SeqL, SeqR> work correctly for Major-asymmetric inputs; without
-    // the pre-pack basis_change the index_tuple in convert silently
-    // collapsed wrong permutations for non-default tuples.
+    // Separation of concerns: voigt_rank_4 owns the index-permutation
+    // step, convert_tensor_to_voigt is only ever called with the
+    // default <seq<1,2>, seq<3,4>> tuple. For non-default <SeqL, SeqR>
+    // a basis_change<merged_seq> view re-orders the input so that
+    // tuple1's pair is at positions 1,2 and tuple2's at positions 3,4
+    // before packing. The unpack at the end applies the inverse
+    // permutation via change_basis_view. Pack and unpack are now
+    // visibly symmetric in merged_seq, where they used to interact
+    // through convert's index_tuple in a way that only happened to
+    // round-trip for the existing test patterns.
+    //
+    // The basis_change view is passed directly — no materialization
+    // — so this costs one extra index permutation per (i,j,k,l) read
+    // and zero stack storage beyond the existing _ptr / _ptr_inv.
     if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
         convert_tensor_to_voigt<std::tuple<tmech::sequence<1,2>, tmech::sequence<3,4>>>(tensor_data, _ptr);
     }else{
-        tmech::tensor<value_type, dimension(), rank()> data_local;
-        data_local = basis_change<sequence>(tensor_data);
-        convert_tensor_to_voigt<std::tuple<tmech::sequence<1,2>, tmech::sequence<3,4>>>(data_local, _ptr);
+        convert_tensor_to_voigt<std::tuple<tmech::sequence<1,2>, tmech::sequence<3,4>>>(basis_change<sequence>(tensor_data), _ptr);
     }
 
     //last three columns due to symmetry
