@@ -20,11 +20,25 @@ struct convert_tensor_to_voigt_wrapper
     static_assert (size_tuple*2 == _Tensor::rank(), "convert_tensor_to_voigt:: tuple::size()*2 != tensor::rank()");
 
 private:
+    // Build the index permutation [0, 1, ..., 2*size_tuple-1] in the
+    // order corresponding to _Tuple's pair sequences. The recursion
+    // unwinds from the deepest (_Iter == 0, the FIRST tuple element)
+    // outward, so each level appends its sequence AFTER the recursive
+    // result. This puts tuple_element 0's indices first, tuple_element
+    // 1's indices second, etc. — i.e. the lambda's positional indices
+    // (i,j,k,l) map directly to M(i,j,k,l), not M(k,l,i,j).
+    //
+    // Prior versions accessed `tuple_element_t<size_tuple - 1 - _Iter, ...>`
+    // which reversed the pair order: lambda(i,j,k,l) wrote
+    // M(k,l,i,j) at _ptr[V(i,j)*6 + V(k,l)], packing the major-
+    // transpose of M. inv() of that gave the major-transpose of the
+    // true inverse, which is invisible for Major-symmetric inputs but
+    // wrong for Minor-only / Major-asymmetric inputs.
     template <size_type _Iter = size_tuple-1, typename _Result = sequence<>>
     struct get_index_sequence
     {
       static constexpr auto tuple{min_value_squence_t<
-          std::tuple_element_t<size_tuple - 1 - _Iter, _Tuple>, 1>()};
+          std::tuple_element_t<_Iter, _Tuple>, 1>()};
       using sequence = append_sequence_end_t<
           typename get_index_sequence<_Iter - 1, _Result>::sequence,
           typename std::remove_const<decltype(tuple)>::type>;
@@ -34,7 +48,7 @@ private:
     struct get_index_sequence<0, _Result>
     {
       static constexpr auto tuple{
-          min_value_squence_t<std::tuple_element_t<size_tuple - 1, _Tuple>,
+          min_value_squence_t<std::tuple_element_t<0, _Tuple>,
                               1>()};
       using sequence = append_sequence_end_t<
           _Result, typename std::remove_const<decltype(tuple)>::type>;

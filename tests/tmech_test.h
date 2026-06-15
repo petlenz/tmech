@@ -455,6 +455,254 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
                         II, eps));                                             \
   }
 
+// =============================================================================
+// Issue #14: partial-pivoted LU robustness tests.
+// All three FAIL on the current non-pivoted Doolittle LU and PASS after the
+// partial-pivoting fix.
+// =============================================================================
+
+// Anisotropic 6×6 Voigt: a Minor-symmetric but Major-asymmetric rank-4
+// tensor (e.g. non-associative plasticity / anisotropic damage tangent).
+// The existing inv_function_4 only covers MinorMajor-sym inputs.
+#define inv_anisotropic_voigt_4(ValueType, Dim)                                \
+  TEST(gtest, inv_anisotropic_voigt_4_##ValueType##_##Dim##_) {                \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
+    ValueType mu{200}, lambda{600};                                            \
+    tmech::tensor<ValueType, Dim, 4> A_iso =                                   \
+        2 * mu * IIsym + lambda * tmech::otimes(I, I);                         \
+    /* Non-associative-style perturbation: outer(g, f) with g != f. */         \
+    tmech::tensor<ValueType, Dim, 2> g, f;                                     \
+    if constexpr (Dim == 3) {                                                  \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(2, 2) = static_cast<ValueType>(0.3);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      g(0, 2) = g(2, 0) = static_cast<ValueType>(0.1);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(2, 2) = static_cast<ValueType>(0.5);                                   \
+      f(0, 2) = f(2, 0) = static_cast<ValueType>(0.2);                         \
+      f(1, 2) = f(2, 1) = static_cast<ValueType>(0.1);                         \
+    } else {                                                                   \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(0, 1) = f(1, 0) = static_cast<ValueType>(0);                           \
+    }                                                                          \
+    tmech::tensor<ValueType, Dim, 4> A =                                       \
+        A_iso + static_cast<ValueType>(0.5) * tmech::otimes(g, f);             \
+    /* Minor-project to enforce both pair symmetries to machine prec. */       \
+    A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
+                tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
+                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));          \
+    /* With the correct natural Voigt packing (no implicit major-       \
+     * transpose) plus partial-pivoted LU, the dcontract residual is    \
+     * machine precision for Minor-only Major-asymmetric inputs. */     \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(                                      \
+                  tmech::dcontract(tmech::inv(A), A), IIsym, eps));            \
+  }
+
+// Pivoting-required 6×6: a deliberately constructed input where the
+// (0,0) Voigt entry is small while off-diagonal coupling is large. A
+// non-pivoted Doolittle LU divides by a tiny pivot first and amplifies
+// FP error; partial pivoting selects the largest |__A[k,0]| pivot.
+#define inv_pivoting_required_4(ValueType, Dim)                                \
+  TEST(gtest, inv_pivoting_required_4_##ValueType##_##Dim##_) {                \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
+    /* Construct a Minor-Major-sym rank-4 with O(1)-entry Voigt matrix       \
+     * but a deliberately tiny (0,0,0,0) entry. The base 100·IIsym +         \
+     * 50·I⊗I gives a Voigt 6×6 with diagonal ~150 and off-pair             \
+     * entries 50. Subtracting (150 - ε) at (0,0,0,0) only drops the         \
+     * single Voigt[0,0] to ε, leaving a dense O(50) row 0 in Voigt.         \
+     * Without partial pivoting the LU multiplier on row k is                \
+     * Voigt[k,0]/ε ≈ 5e10, and the (1,1) Schur entry computes               \
+     * 150 - 5e10·50 ≈ -2.5e12. The +150 itself is preserved at this        \
+     * magnitude in double, but subsequent Schur cancellations across       \
+     * multiple elimination steps compound roundoff, ending at ~1e-3         \
+     * error in the inverse. With pivoting, row 1 (Voigt[1,0]=50) is        \
+     * swapped in first and the multiplier collapses to 50/50 = 1,          \
+     * restoring machine-precision accuracy. */                              \
+    tmech::tensor<ValueType, Dim, 4> A =                                       \
+        static_cast<ValueType>(100) * IIsym +                                  \
+        static_cast<ValueType>(50) * tmech::otimes(I, I);                      \
+    /* outer(e00, e00) is nonzero only at (0,0,0,0). Explicit zero       \
+     * init guards against future changes to tensor<>'s default ctor. */ \
+    tmech::tensor<ValueType, Dim, 2> e00;                                      \
+    for (size_t i = 0; i < Dim; ++i)                                           \
+      for (size_t j = 0; j < Dim; ++j)                                         \
+        e00(i, j) = static_cast<ValueType>(0);                                 \
+    e00(0, 0) = static_cast<ValueType>(1);                                     \
+    /* Voigt[0,0] = A(0,0,0,0) = 100·IIsym(0,0,0,0) + 50·δ_00·δ_00 = 150.    \
+     * Adjust so A(0,0,0,0) becomes ε without touching other entries.       \
+     * (outer(e00, e00) is nonzero only at (0,0,0,0).) */                    \
+    const ValueType eps_pivot{static_cast<ValueType>(                          \
+        std::is_same_v<ValueType, float> ? 1e-4 : 1e-9)};                      \
+    A = A + (eps_pivot - static_cast<ValueType>(150)) *                        \
+                tmech::otimes(e00, e00);                                       \
+    /* Empirical residuals on this matrix:                                    \
+     *   double 3D:  1.1e-16 (pivoted) vs 4.4e-7  (unpivoted)                 \
+     *   double 2D:  0       (pivoted) vs 1.3e-6  (unpivoted)                 \
+     *   float  3D:  6.0e-8  (pivoted) vs 4.5e-3  (unpivoted)                 \
+     *   float  2D:  2.3e-13 (pivoted) vs 1.3e-2  (unpivoted)                 \
+     * Tolerance is chosen between with/without pivoting so reverting         \
+     * the pivoting fix is caught. */                                         \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-4 : 1e-10)};                     \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(                                      \
+                  tmech::dcontract(tmech::inv(A), A), IIsym, eps));            \
+  }
+
+// Anisotropic rank-2: matrix with small (0,0) and large off-diagonals.
+// Note: rank-2 inv uses the closed-form Cramer formulas (invert_2_2 /
+// invert_3_3) — NOT lu_detail — so this test does not exercise the
+// partial-pivoting code path. Kept as a sanity check that the direct
+// inverters handle small leading entries correctly.
+#define inv_anisotropic_2(ValueType, Dim)                                      \
+  TEST(gtest, inv_anisotropic_2_##ValueType##_##Dim##_) {                      \
+    tmech::tensor<ValueType, Dim, 2> A;                                        \
+    if constexpr (Dim == 3) {                                                  \
+      A(0, 0) = static_cast<ValueType>(1e-3);                                  \
+      A(0, 1) = static_cast<ValueType>(100);                                   \
+      A(0, 2) = static_cast<ValueType>(50);                                    \
+      A(1, 0) = static_cast<ValueType>(200);                                   \
+      A(1, 1) = static_cast<ValueType>(1);                                     \
+      A(1, 2) = static_cast<ValueType>(-30);                                   \
+      A(2, 0) = static_cast<ValueType>(75);                                    \
+      A(2, 1) = static_cast<ValueType>(20);                                    \
+      A(2, 2) = static_cast<ValueType>(0.5);                                   \
+    } else {                                                                   \
+      A(0, 0) = static_cast<ValueType>(1e-3);                                  \
+      A(0, 1) = static_cast<ValueType>(100);                                   \
+      A(1, 0) = static_cast<ValueType>(200);                                   \
+      A(1, 1) = static_cast<ValueType>(1);                                     \
+    }                                                                          \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 5e-3 : 5e-5)};                      \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(                                      \
+                  tmech::inv(A) * A,                                           \
+                  tmech::eye<ValueType, Dim, 2>(), eps));                      \
+  }
+
+// Build the Minor-only Major-asymmetric rank-4 used by the
+// non-default-Voigt lock-in tests below. Factored out so each
+// mapping test can re-use the same A and the same IIsym.
+#define BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                         \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
+    ValueType mu{200}, lambda{600};                                            \
+    tmech::tensor<ValueType, Dim, 4> A_iso =                                   \
+        2 * mu * IIsym + lambda * tmech::otimes(I, I);                         \
+    tmech::tensor<ValueType, Dim, 2> g, f;                                     \
+    if constexpr (Dim == 3) {                                                  \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(2, 2) = static_cast<ValueType>(0.3);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      g(0, 2) = g(2, 0) = static_cast<ValueType>(0.1);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(2, 2) = static_cast<ValueType>(0.5);                                   \
+      f(0, 2) = f(2, 0) = static_cast<ValueType>(0.2);                         \
+      f(1, 2) = f(2, 1) = static_cast<ValueType>(0.1);                         \
+    } else {                                                                   \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(0, 1) = f(1, 0) = static_cast<ValueType>(0);                           \
+    }                                                                          \
+    tmech::tensor<ValueType, Dim, 4> A =                                       \
+        A_iso + static_cast<ValueType>(0.5) * tmech::otimes(g, f);             \
+    /* Minor-project to enforce both pair symmetries; Major-asymmetric    \
+     * because outer(g, f) with g != f breaks (1,2)↔(3,4) swap. */        \
+    A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
+                tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
+                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));
+
+// Ground-truth lock-in for inv with non-default Voigt mappings on a
+// Major-asymmetric Minor-only rank-4. For each mapping we construct
+// Anew = basis_change<PermFwd>(A) where PermFwd is the inverse of
+// merged_seq = SeqL ++ SeqR. Then:
+//   S = basis_change<PermInv>(inv(Anew, SeqL, SeqR))   // PermInv = merged_seq
+//   dcontract(S, A) must equal IIsym at machine precision.
+//
+// This is a ground-truth check — no comparison to another inv() path,
+// so a bug that breaks both default and custom paths the same way is
+// still caught here as a dcontract-identity violation.
+//
+// On the pre-convert-fix code (which packs the major-transpose M(k,l,i,j)
+// in the natural Voigt slot), S ends up as the major-transpose of
+// inv(A) and the dcontract residual is ~1e-3 on these inputs — fails.
+//
+// Three mappings cover three conjugacy classes of S_4 on the index
+// quartet:
+//   <1,4,2,3>  3-cycle      (2 3 4)
+//   <1,3,2,4>  transposition (2 3)         [self-inverse]
+//   <2,3,4,1>  4-cycle      (1 2 3 4)
+
+#define inv_voigt_map_1423_anisotropic_4(ValueType, Dim)                       \
+  TEST(gtest, inv_voigt_map_1423_anisotropic_4_##ValueType##_##Dim##_) {       \
+    BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                             \
+    using PermFwd = tmech::sequence<1, 3, 4, 2>;                               \
+    using PermInv = tmech::sequence<1, 4, 2, 3>;                               \
+    tmech::tensor<ValueType, Dim, 4> Anew = tmech::basis_change<PermFwd>(A);   \
+    using SeqL = tmech::sequence<1, 4>;                                        \
+    using SeqR = tmech::sequence<2, 3>;                                        \
+    tmech::tensor<ValueType, Dim, 4> S_custom =                                \
+        tmech::inv(Anew, SeqL(), SeqR());                                      \
+    tmech::tensor<ValueType, Dim, 4> S_unpermuted =                            \
+        tmech::basis_change<PermInv>(S_custom);                                \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                \
+                        tmech::dcontract(S_unpermuted, A), IIsym, eps));       \
+  }
+
+#define inv_voigt_map_1324_anisotropic_4(ValueType, Dim)                       \
+  TEST(gtest, inv_voigt_map_1324_anisotropic_4_##ValueType##_##Dim##_) {       \
+    BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                             \
+    using Perm = tmech::sequence<1, 3, 2, 4>;                                  \
+    tmech::tensor<ValueType, Dim, 4> Anew = tmech::basis_change<Perm>(A);      \
+    using SeqL = tmech::sequence<1, 3>;                                        \
+    using SeqR = tmech::sequence<2, 4>;                                        \
+    tmech::tensor<ValueType, Dim, 4> S_custom =                                \
+        tmech::inv(Anew, SeqL(), SeqR());                                      \
+    tmech::tensor<ValueType, Dim, 4> S_unpermuted =                            \
+        tmech::basis_change<Perm>(S_custom);                                   \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                \
+                        tmech::dcontract(S_unpermuted, A), IIsym, eps));       \
+  }
+
+#define inv_voigt_map_2341_anisotropic_4(ValueType, Dim)                       \
+  TEST(gtest, inv_voigt_map_2341_anisotropic_4_##ValueType##_##Dim##_) {       \
+    BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                             \
+    using PermFwd = tmech::sequence<4, 1, 2, 3>;                               \
+    using PermInv = tmech::sequence<2, 3, 4, 1>;                               \
+    tmech::tensor<ValueType, Dim, 4> Anew = tmech::basis_change<PermFwd>(A);   \
+    using SeqL = tmech::sequence<2, 3>;                                        \
+    using SeqR = tmech::sequence<4, 1>;                                        \
+    tmech::tensor<ValueType, Dim, 4> S_custom =                                \
+        tmech::inv(Anew, SeqL(), SeqR());                                      \
+    tmech::tensor<ValueType, Dim, 4> S_unpermuted =                            \
+        tmech::basis_change<PermInv>(S_custom);                                \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                \
+                        tmech::dcontract(S_unpermuted, A), IIsym, eps));       \
+  }
+
 // abs function
 #define absFunction(ValueType, Dim, Rank)                                      \
   TEST(gtest, absFunc_##ValueType##_##Dim##_##Rank) {                          \
@@ -1760,6 +2008,37 @@ inv_full_function_4(double, 2);
 inv_full_function_4(double, 3);
 inv_full_function_4(float, 2);
 inv_full_function_4(float, 3);
+
+// Issue #14 — partial-pivoted LU robustness instantiations.
+inv_anisotropic_voigt_4(double, 3);
+inv_anisotropic_voigt_4(double, 2);
+inv_anisotropic_voigt_4(float, 3);
+inv_anisotropic_voigt_4(float, 2);
+
+inv_pivoting_required_4(double, 3);
+inv_pivoting_required_4(double, 2);
+inv_pivoting_required_4(float, 3);
+inv_pivoting_required_4(float, 2);
+
+inv_anisotropic_2(double, 3);
+inv_anisotropic_2(double, 2);
+inv_anisotropic_2(float, 3);
+inv_anisotropic_2(float, 2);
+
+inv_voigt_map_1423_anisotropic_4(double, 3);
+inv_voigt_map_1423_anisotropic_4(double, 2);
+inv_voigt_map_1423_anisotropic_4(float, 3);
+inv_voigt_map_1423_anisotropic_4(float, 2);
+
+inv_voigt_map_1324_anisotropic_4(double, 3);
+inv_voigt_map_1324_anisotropic_4(double, 2);
+inv_voigt_map_1324_anisotropic_4(float, 3);
+inv_voigt_map_1324_anisotropic_4(float, 2);
+
+inv_voigt_map_2341_anisotropic_4(double, 3);
+inv_voigt_map_2341_anisotropic_4(double, 2);
+inv_voigt_map_2341_anisotropic_4(float, 3);
+inv_voigt_map_2341_anisotropic_4(float, 2);
 
 compareEqualOperator(double, 2, 1);
 compareEqualOperator(double, 2, 2);

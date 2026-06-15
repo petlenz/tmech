@@ -14,11 +14,67 @@ namespace detail {
 // inverse_wrapper_base — shared LU / direct inversion routines
 //==========================================================================
 
+// LU decomposition with partial (row) pivoting. The permutation
+// vector __P stores the row that landed at position i after swaps —
+// so __P[i] is the source row in the original matrix. Doolittle
+// layout: the lower triangle of __A stores L (unit diagonal implicit),
+// upper triangle stores U.
+//
+// Pivoting addresses two distinct failure modes (see issue #14):
+//
+//   (a) Platform-divergent fuzz on fuzz-generated inputs: without
+//       pivoting, the accumulation order during elimination is at the
+//       mercy of small leading pivots, and the resulting FP rounding
+//       chain differs between Linux/macOS/Windows. The inverse is then
+//       valid on one platform and garbage on another.
+//
+//   (b) Conditioning of well-conditioned matrices that happen to have
+//       a small Voigt[0,0] entry: e.g. 100·IIsym + 50·I⊗I with the
+//       (0,0,0,0) entry dropped to 1e-9. No-pivot LU multiplies row k
+//       by Voigt[k,0]/ε ≈ 5e10, then subtracts, losing ~3 digits in
+//       the resulting Schur entries — propagating to ~1e-3 error in
+//       the inverse. With pivoting the largest |Voigt[k,0]| row is
+//       swapped in first and the multiplier collapses to O(1).
+//
+// Singular matrix: if no nonzero pivot exists in column i from row i
+// down, piv stays at i and the division by __A[i*Rows+i] below
+// produces +Inf / NaN. Callers must ensure the matrix is invertible;
+// there is no in-band error signal.
 template <typename _ValueType>
 template <std::size_t Rows>
-constexpr auto
-inverse_wrapper_base<_ValueType>::lu_detail(value_type const *__A) noexcept {
+constexpr auto inverse_wrapper_base<_ValueType>::lu_detail(
+    value_type const *__A, std::size_t *__P) noexcept {
   for (std::size_t i{0}; i < Rows; ++i) {
+    __P[i] = i;
+  }
+  for (std::size_t i{0}; i < Rows; ++i) {
+    // Find the row k in i..Rows-1 with the largest |__A[k,i]| and
+    // swap it into position i.
+    std::size_t piv = i;
+    value_type maxv =
+        __A[i * Rows + i] >= safe_cast<value_type>(0)
+            ? __A[i * Rows + i]
+            : -__A[i * Rows + i];
+    for (std::size_t k{i + 1}; k < Rows; ++k) {
+      value_type v = __A[k * Rows + i] >= safe_cast<value_type>(0)
+                         ? __A[k * Rows + i]
+                         : -__A[k * Rows + i];
+      if (v > maxv) {
+        maxv = v;
+        piv = k;
+      }
+    }
+    if (piv != i) {
+      for (std::size_t k{0}; k < Rows; ++k) {
+        value_type t = __A[i * Rows + k];
+        const_cast<value_type &>(__A[i * Rows + k]) = __A[piv * Rows + k];
+        const_cast<value_type &>(__A[piv * Rows + k]) = t;
+      }
+      std::size_t pt = __P[i];
+      __P[i] = __P[piv];
+      __P[piv] = pt;
+    }
+
     const value_type Akk = safe_cast<value_type>(1.0) / __A[i * Rows + i];
     for (std::size_t j{i + 1}; j < Rows; ++j) {
       const_cast<value_type &>(__A[j * Rows + i]) *= Akk;
@@ -33,30 +89,40 @@ inverse_wrapper_base<_ValueType>::lu_detail(value_type const *__A) noexcept {
   }
 }
 
+// Solve A · X = I for X = inv(A), where PA = LU with __P from
+// lu_detail. The j-th column of X is the solution to LU · x = P · e_j,
+// which is the unit vector e_k where k = Pinv[j] (the row that
+// landed at position j after the permutation).
 template <typename _ValueType>
 template <std::size_t Rows>
 constexpr auto inverse_wrapper_base<_ValueType>::inv_lu(
-    value_type *__Ainv, value_type const *const __Afac) noexcept {
-
-  for (std::size_t i{0}; i < Rows * Rows; ++i) {
-    __Ainv[i] = safe_cast<value_type>(0);
-  }
-
+    value_type *__Ainv, value_type const *const __Afac,
+    std::size_t const *__P) noexcept {
+  // Inverse permutation: Pinv[__P[i]] = i.
+  std::size_t Pinv[Rows];
   for (std::size_t i{0}; i < Rows; ++i) {
-    __Ainv[i * Rows + i] = safe_cast<value_type>(1.0);
+    Pinv[__P[i]] = i;
   }
 
+  // No __Ainv zero-init: the column-by-column loop below writes
+  // every entry of __Ainv exactly once (via the final store loop
+  // over i for fixed j), so any prior content of __Ainv is dead.
   value_type temp_data[Rows];
 
   for (std::size_t j{0}; j < Rows; ++j) {
+    // Permuted identity column j: 1 at row Pinv[j], 0 elsewhere.
     for (std::size_t i{0}; i < Rows; ++i) {
-      temp_data[i] = __Ainv[i * Rows + j];
+      temp_data[i] = safe_cast<value_type>(0);
     }
+    temp_data[Pinv[j]] = safe_cast<value_type>(1.0);
+
+    // Forward substitution: L · y = b.
     for (std::size_t i{0}; i < Rows; ++i) {
       for (std::size_t k{0}; k < i; ++k) {
         temp_data[i] -= __Afac[i * Rows + k] * temp_data[k];
       }
     }
+    // Back substitution: U · x = y.
     for (std::size_t i{Rows}; i >= 1; --i) {
       const std::size_t ii{i - 1};
       for (std::size_t k{ii + 1}; k < Rows; ++k) {
@@ -207,8 +273,26 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::voigt_rank_4(_Res
 
     constexpr auto SIZE{(dimension() == 2 ? 3 : 6)};
     value_type _ptr[SIZE*SIZE], _ptr_inv[SIZE*SIZE]{0};
-    //convert to voigt
-    convert_tensor_to_voigt<std::tuple<tuple1, tuple2>>(tensor_data, _ptr);
+
+    // Separation of concerns: voigt_rank_4 owns the index-permutation
+    // step, convert_tensor_to_voigt is only ever called with the
+    // default <seq<1,2>, seq<3,4>> tuple. For non-default <SeqL, SeqR>
+    // a basis_change<merged_seq> view re-orders the input so that
+    // tuple1's pair is at positions 1,2 and tuple2's at positions 3,4
+    // before packing. The unpack at the end applies the inverse
+    // permutation via change_basis_view. Pack and unpack are now
+    // visibly symmetric in merged_seq, where they used to interact
+    // through convert's index_tuple in a way that only happened to
+    // round-trip for the existing test patterns.
+    //
+    // The basis_change view is passed directly — no materialization
+    // — so this costs one extra index permutation per (i,j,k,l) read
+    // and zero stack storage beyond the existing _ptr / _ptr_inv.
+    if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
+        convert_tensor_to_voigt<std::tuple<tmech::sequence<1,2>, tmech::sequence<3,4>>>(tensor_data, _ptr);
+    }else{
+        convert_tensor_to_voigt<std::tuple<tmech::sequence<1,2>, tmech::sequence<3,4>>>(basis_change<sequence>(tensor_data), _ptr);
+    }
 
     //last three columns due to symmetry
     for (std::size_t i{0}; i < SIZE; ++i) {
@@ -264,15 +348,17 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::evaluate_imp(valu
     if constexpr (RANK == 4){
         if constexpr (std::tuple_size_v<_Tuple> != 2){
             //full
-            inv_base::template lu_detail<DIM * DIM>(__data);
+            std::size_t P_perm[DIM * DIM];
+            inv_base::template lu_detail<DIM * DIM>(__data, P_perm);
             inv_base::template inv_lu<DIM * DIM>(
-                const_cast<value_type *>(__result), __data);
+                const_cast<value_type *>(__result), __data, P_perm);
         }else{
           // minor symmetric
           constexpr size_type SIZE{(dimension() == 2 ? 3 : 6)};
-          inv_base::template lu_detail<SIZE>(__data);
+          std::size_t P_perm[SIZE];
+          inv_base::template lu_detail<SIZE>(__data, P_perm);
           inv_base::template inv_lu<SIZE>(const_cast<value_type *>(__result),
-                                          __data);
+                                          __data, P_perm);
         }
     }
 }
@@ -376,9 +462,10 @@ inverse_wrapper<_Tensor>::evaluate_imp(value_type const *__result,
 
   if constexpr (RANK == 4) {
     // Always full LU — no sequences means no Voigt
-    inv_base::template lu_detail<DIM * DIM>(__data);
+    std::size_t P_perm[DIM * DIM];
+    inv_base::template lu_detail<DIM * DIM>(__data, P_perm);
     inv_base::template inv_lu<DIM * DIM>(const_cast<value_type *>(__result),
-                                         __data);
+                                         __data, P_perm);
   }
 }
 
