@@ -20,10 +20,26 @@ namespace detail {
 // layout: the lower triangle of __A stores L (unit diagonal implicit),
 // upper triangle stores U.
 //
-// Pivoting protects against near-singular pivots (LAPACK GETRF
-// convention). Without it, anisotropic and rank-deficient matrices
-// produce platform-divergent garbage due to FP accumulation in the
-// elimination step. See issue #14.
+// Pivoting addresses two distinct failure modes (see issue #14):
+//
+//   (a) Platform-divergent fuzz on fuzz-generated inputs: without
+//       pivoting, the accumulation order during elimination is at the
+//       mercy of small leading pivots, and the resulting FP rounding
+//       chain differs between Linux/macOS/Windows. The inverse is then
+//       valid on one platform and garbage on another.
+//
+//   (b) Conditioning of well-conditioned matrices that happen to have
+//       a small Voigt[0,0] entry: e.g. 100·IIsym + 50·I⊗I with the
+//       (0,0,0,0) entry dropped to 1e-9. No-pivot LU multiplies row k
+//       by Voigt[k,0]/ε ≈ 5e10, then subtracts, losing ~3 digits in
+//       the resulting Schur entries — propagating to ~1e-3 error in
+//       the inverse. With pivoting the largest |Voigt[k,0]| row is
+//       swapped in first and the multiplier collapses to O(1).
+//
+// Singular matrix: if no nonzero pivot exists in column i from row i
+// down, piv stays at i and the division by __A[i*Rows+i] below
+// produces +Inf / NaN. Callers must ensure the matrix is invertible;
+// there is no in-band error signal.
 template <typename _ValueType>
 template <std::size_t Rows>
 constexpr auto inverse_wrapper_base<_ValueType>::lu_detail(
@@ -88,10 +104,9 @@ constexpr auto inverse_wrapper_base<_ValueType>::inv_lu(
     Pinv[__P[i]] = i;
   }
 
-  for (std::size_t i{0}; i < Rows * Rows; ++i) {
-    __Ainv[i] = safe_cast<value_type>(0);
-  }
-
+  // No __Ainv zero-init: the column-by-column loop below writes
+  // every entry of __Ainv exactly once (via the final store loop
+  // over i for fixed j), so any prior content of __Ainv is dead.
   value_type temp_data[Rows];
 
   for (std::size_t j{0}; j < Rows; ++j) {
@@ -258,8 +273,22 @@ constexpr inline auto inverse_wrapper<_Tensor, _Sequences...>::voigt_rank_4(_Res
 
     constexpr auto SIZE{(dimension() == 2 ? 3 : 6)};
     value_type _ptr[SIZE*SIZE], _ptr_inv[SIZE*SIZE]{0};
-    //convert to voigt
-    convert_tensor_to_voigt<std::tuple<tuple1, tuple2>>(tensor_data, _ptr);
+
+    // Bring the indices specified by (tuple1, tuple2) into the natural
+    // <1,2,3,4> order via a basis_change so the convert_tensor_to_voigt
+    // call below always operates on a tensor whose indices 1,2 are the
+    // row pair and 3,4 are the col pair. The unpack at the end applies
+    // the inverse permutation via change_basis_view. This makes custom
+    // <SeqL, SeqR> work correctly for Major-asymmetric inputs; without
+    // the pre-pack basis_change the index_tuple in convert silently
+    // collapsed wrong permutations for non-default tuples.
+    if constexpr (std::is_same_v<tmech::sequence<1,2,3,4>, sequence>){
+        convert_tensor_to_voigt<std::tuple<tmech::sequence<1,2>, tmech::sequence<3,4>>>(tensor_data, _ptr);
+    }else{
+        tmech::tensor<value_type, dimension(), rank()> data_local;
+        data_local = basis_change<sequence>(tensor_data);
+        convert_tensor_to_voigt<std::tuple<tmech::sequence<1,2>, tmech::sequence<3,4>>>(data_local, _ptr);
+    }
 
     //last three columns due to symmetry
     for (std::size_t i{0}; i < SIZE; ++i) {

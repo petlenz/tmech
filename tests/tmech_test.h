@@ -523,19 +523,25 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
      * single Voigt[0,0] to ε, leaving a dense O(50) row 0 in Voigt.         \
      * Without partial pivoting the LU multiplier on row k is                \
      * Voigt[k,0]/ε ≈ 5e10, and the (1,1) Schur entry computes               \
-     * 150 - 5e10·50 ≈ -2.5e12 — the +150 falls below double precision       \
-     * relative to 2.5e12, propagating an O(1e-3) error into the              \
-     * inverse. With pivoting, row 1 (Voigt[1,0]=50) is swapped in           \
-     * first and the multiplier becomes 50/50 = 1, machine-precision         \
-     * result. */                                                            \
+     * 150 - 5e10·50 ≈ -2.5e12. The +150 itself is preserved at this        \
+     * magnitude in double, but subsequent Schur cancellations across       \
+     * multiple elimination steps compound roundoff, ending at ~1e-3         \
+     * error in the inverse. With pivoting, row 1 (Voigt[1,0]=50) is        \
+     * swapped in first and the multiplier collapses to 50/50 = 1,          \
+     * restoring machine-precision accuracy. */                              \
     tmech::tensor<ValueType, Dim, 4> A =                                       \
         static_cast<ValueType>(100) * IIsym +                                  \
         static_cast<ValueType>(50) * tmech::otimes(I, I);                      \
+    /* outer(e00, e00) is nonzero only at (0,0,0,0). Explicit zero       \
+     * init guards against future changes to tensor<>'s default ctor. */ \
     tmech::tensor<ValueType, Dim, 2> e00;                                      \
+    for (size_t i = 0; i < Dim; ++i)                                           \
+      for (size_t j = 0; j < Dim; ++j)                                         \
+        e00(i, j) = static_cast<ValueType>(0);                                 \
     e00(0, 0) = static_cast<ValueType>(1);                                     \
     /* Voigt[0,0] = A(0,0,0,0) = 100·IIsym(0,0,0,0) + 50·δ_00·δ_00 = 150.    \
      * Adjust so A(0,0,0,0) becomes ε without touching other entries.       \
-     * outer(e00, e00) is nonzero only at (0,0,0,0). */                      \
+     * (outer(e00, e00) is nonzero only at (0,0,0,0).) */                    \
     const ValueType eps_pivot{static_cast<ValueType>(                          \
         std::is_same_v<ValueType, float> ? 1e-4 : 1e-9)};                      \
     A = A + (eps_pivot - static_cast<ValueType>(150)) *                        \
@@ -555,9 +561,12 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
   }
 
 // Anisotropic rank-2: matrix with small (0,0) and large off-diagonals.
-// Without pivoting, lu_detail divides by a tiny pivot and amplifies error.
-#define inv_pivoting_required_2(ValueType, Dim)                                \
-  TEST(gtest, inv_pivoting_required_2_##ValueType##_##Dim##_) {                \
+// Note: rank-2 inv uses the closed-form Cramer formulas (invert_2_2 /
+// invert_3_3) — NOT lu_detail — so this test does not exercise the
+// partial-pivoting code path. Kept as a sanity check that the direct
+// inverters handle small leading entries correctly.
+#define inv_anisotropic_2(ValueType, Dim)                                      \
+  TEST(gtest, inv_anisotropic_2_##ValueType##_##Dim##_) {                      \
     tmech::tensor<ValueType, Dim, 2> A;                                        \
     if constexpr (Dim == 3) {                                                  \
       A(0, 0) = static_cast<ValueType>(1e-3);                                  \
@@ -581,6 +590,68 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
               almost_equal_tensor_scaled(                                      \
                   tmech::inv(A) * A,                                           \
                   tmech::eye<ValueType, Dim, 2>(), eps));                      \
+  }
+
+// Lock-in: inv with custom SeqL/SeqR on a Major-asymmetric Minor-only
+// rank-4 tensor. Verifies that the inverse-with-custom-sequences path
+// correctly accounts for the index permutation. Pattern: compute
+// inv(A) via the default path (which inv_anisotropic_voigt_4 already
+// pins to machine precision), then compute the same inverse via a
+// permuted view Anew = basis_change<perm>(A) with the corresponding
+// SeqL/SeqR sequences, undo the permutation on the result, and check
+// the two agree. Discriminates between the natural (1,2,3,4) packing
+// and any reversed/swapped variant for Major-asymmetric inputs.
+#define inv_custom_seq_anisotropic_4(ValueType, Dim)                           \
+  TEST(gtest, inv_custom_seq_anisotropic_4_##ValueType##_##Dim##_) {           \
+    const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
+    const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
+    ValueType mu{200}, lambda{600};                                            \
+    tmech::tensor<ValueType, Dim, 4> A_iso =                                   \
+        2 * mu * IIsym + lambda * tmech::otimes(I, I);                         \
+    tmech::tensor<ValueType, Dim, 2> g, f;                                     \
+    if constexpr (Dim == 3) {                                                  \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(2, 2) = static_cast<ValueType>(0.3);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      g(0, 2) = g(2, 0) = static_cast<ValueType>(0.1);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(2, 2) = static_cast<ValueType>(0.5);                                   \
+      f(0, 2) = f(2, 0) = static_cast<ValueType>(0.2);                         \
+      f(1, 2) = f(2, 1) = static_cast<ValueType>(0.1);                         \
+    } else {                                                                   \
+      g(0, 0) = static_cast<ValueType>(1);                                     \
+      g(1, 1) = static_cast<ValueType>(0.5);                                   \
+      g(0, 1) = g(1, 0) = static_cast<ValueType>(0.2);                         \
+      f(0, 0) = static_cast<ValueType>(0.3);                                   \
+      f(1, 1) = static_cast<ValueType>(1);                                     \
+      f(0, 1) = f(1, 0) = static_cast<ValueType>(0);                           \
+    }                                                                          \
+    tmech::tensor<ValueType, Dim, 4> A =                                       \
+        A_iso + static_cast<ValueType>(0.5) * tmech::otimes(g, f);             \
+    /* Minor-project to enforce both pair symmetries; Major-asymmetric    \
+     * because outer(g, f) with g != f breaks (1,2)↔(3,4) swap. */        \
+    A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
+                tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
+                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));          \
+    /* Natural inverse via the default path. */                              \
+    tmech::tensor<ValueType, Dim, 4> S_default = tmech::inv(A);                \
+    /* Permuted view: Anew(i,j,k,l) = A(i, k, l, j). */                       \
+    using PermFwd = tmech::sequence<1, 3, 4, 2>;                               \
+    /* Inverse permutation of <1, 3, 4, 2> is <1, 4, 2, 3>. */                \
+    using PermInv = tmech::sequence<1, 4, 2, 3>;                               \
+    tmech::tensor<ValueType, Dim, 4> Anew = tmech::basis_change<PermFwd>(A);   \
+    using SeqL = tmech::sequence<1, 4>;                                        \
+    using SeqR = tmech::sequence<2, 3>;                                        \
+    tmech::tensor<ValueType, Dim, 4> S_custom =                                \
+        tmech::inv(Anew, SeqL(), SeqR());                                      \
+    tmech::tensor<ValueType, Dim, 4> S_unpermuted =                            \
+        tmech::basis_change<PermInv>(S_custom);                                \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
+    EXPECT_EQ(true,                                                            \
+              almost_equal_tensor_scaled(S_unpermuted, S_default, eps));       \
   }
 
 // abs function
@@ -1900,10 +1971,15 @@ inv_pivoting_required_4(double, 2);
 inv_pivoting_required_4(float, 3);
 inv_pivoting_required_4(float, 2);
 
-inv_pivoting_required_2(double, 3);
-inv_pivoting_required_2(double, 2);
-inv_pivoting_required_2(float, 3);
-inv_pivoting_required_2(float, 2);
+inv_anisotropic_2(double, 3);
+inv_anisotropic_2(double, 2);
+inv_anisotropic_2(float, 3);
+inv_anisotropic_2(float, 2);
+
+inv_custom_seq_anisotropic_4(double, 3);
+inv_custom_seq_anisotropic_4(double, 2);
+inv_custom_seq_anisotropic_4(float, 3);
+inv_custom_seq_anisotropic_4(float, 2);
 
 compareEqualOperator(double, 2, 1);
 compareEqualOperator(double, 2, 2);
