@@ -592,17 +592,10 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
                   tmech::eye<ValueType, Dim, 2>(), eps));                      \
   }
 
-// Lock-in: inv with custom SeqL/SeqR on a Major-asymmetric Minor-only
-// rank-4 tensor. Verifies that the inverse-with-custom-sequences path
-// correctly accounts for the index permutation. Pattern: compute
-// inv(A) via the default path (which inv_anisotropic_voigt_4 already
-// pins to machine precision), then compute the same inverse via a
-// permuted view Anew = basis_change<perm>(A) with the corresponding
-// SeqL/SeqR sequences, undo the permutation on the result, and check
-// the two agree. Discriminates between the natural (1,2,3,4) packing
-// and any reversed/swapped variant for Major-asymmetric inputs.
-#define inv_custom_seq_anisotropic_4(ValueType, Dim)                           \
-  TEST(gtest, inv_custom_seq_anisotropic_4_##ValueType##_##Dim##_) {           \
+// Build the Minor-only Major-asymmetric rank-4 used by the
+// non-default-Voigt lock-in tests below. Factored out so each
+// mapping test can re-use the same A and the same IIsym.
+#define BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                         \
     const auto I{tmech::eye<ValueType, Dim, 2>()};                             \
     const auto IIsym{(tmech::otimesu(I, I) + tmech::otimesl(I, I)) * 0.5};     \
     ValueType mu{200}, lambda{600};                                            \
@@ -634,12 +627,21 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
      * because outer(g, f) with g != f breaks (1,2)↔(3,4) swap. */        \
     A = 0.25 * (A + tmech::basis_change<tmech::sequence<2, 1, 3, 4>>(A) +      \
                 tmech::basis_change<tmech::sequence<1, 2, 4, 3>>(A) +          \
-                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));          \
-    /* Natural inverse via the default path. */                              \
+                tmech::basis_change<tmech::sequence<2, 1, 4, 3>>(A));
+
+// Lock-in: inv with custom SeqL/SeqR on a Major-asymmetric Minor-only
+// rank-4 tensor. Verifies that the inverse-with-custom-sequences path
+// correctly accounts for the index permutation. Pattern: compute
+// inv(A) via the default path (which inv_anisotropic_voigt_4 already
+// pins to machine precision), then compute the same inverse via a
+// permuted view Anew = basis_change<perm>(A) with the corresponding
+// SeqL/SeqR sequences, undo the permutation on the result, and check
+// the two agree.
+#define inv_custom_seq_anisotropic_4(ValueType, Dim)                           \
+  TEST(gtest, inv_custom_seq_anisotropic_4_##ValueType##_##Dim##_) {           \
+    BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                             \
     tmech::tensor<ValueType, Dim, 4> S_default = tmech::inv(A);                \
-    /* Permuted view: Anew(i,j,k,l) = A(i, k, l, j). */                       \
     using PermFwd = tmech::sequence<1, 3, 4, 2>;                               \
-    /* Inverse permutation of <1, 3, 4, 2> is <1, 4, 2, 3>. */                \
     using PermInv = tmech::sequence<1, 4, 2, 3>;                               \
     tmech::tensor<ValueType, Dim, 4> Anew = tmech::basis_change<PermFwd>(A);   \
     using SeqL = tmech::sequence<1, 4>;                                        \
@@ -652,6 +654,58 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
         std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
     EXPECT_EQ(true,                                                            \
               almost_equal_tensor_scaled(S_unpermuted, S_default, eps));       \
+  }
+
+// Ground-truth lock-in: inv with non-default Voigt mapping
+// (SeqL=<1,4>, SeqR=<2,3>) must satisfy the dcontract identity
+// against A directly — no comparison to another inv() path. This
+// is the test that discriminates whether convert_tensor_to_voigt
+// packs the natural ordering vs the major-transpose. For
+// Major-asymmetric A:
+//   S = basis_change<<1,4,2,3>>(inv(Anew, SeqL=<1,4>, SeqR=<2,3>))
+//   dcontract(S, A) must equal IIsym at machine precision.
+// On the pre-convert-fix code (which silently packs M(k,l,i,j)),
+// S ends up as the major-transpose of inv(A), and the dcontract
+// residual is ~1e-3 — fails. With the fix, the dcontract residual
+// is machine precision.
+#define inv_voigt_map_1423_anisotropic_4(ValueType, Dim)                       \
+  TEST(gtest, inv_voigt_map_1423_anisotropic_4_##ValueType##_##Dim##_) {       \
+    BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                             \
+    using PermFwd = tmech::sequence<1, 3, 4, 2>;                               \
+    using PermInv = tmech::sequence<1, 4, 2, 3>;                               \
+    tmech::tensor<ValueType, Dim, 4> Anew = tmech::basis_change<PermFwd>(A);   \
+    using SeqL = tmech::sequence<1, 4>;                                        \
+    using SeqR = tmech::sequence<2, 3>;                                        \
+    tmech::tensor<ValueType, Dim, 4> S_custom =                                \
+        tmech::inv(Anew, SeqL(), SeqR());                                      \
+    tmech::tensor<ValueType, Dim, 4> S_unpermuted =                            \
+        tmech::basis_change<PermInv>(S_custom);                                \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                \
+                        tmech::dcontract(S_unpermuted, A), IIsym, eps));       \
+  }
+
+// Second non-default Voigt mapping for coverage:
+// SeqL=<1,3>, SeqR=<2,4> with merged_seq <1,3,2,4> (self-inverse —
+// just swaps indices 2 and 3). Exercises a different element of
+// the S_4 symmetry group on the index quartet than the <1,4,2,3>
+// case above. Ground-truth check via dcontract against A.
+#define inv_voigt_map_1324_anisotropic_4(ValueType, Dim)                       \
+  TEST(gtest, inv_voigt_map_1324_anisotropic_4_##ValueType##_##Dim##_) {       \
+    BUILD_ANISOTROPIC_MAJOR_ASYM_A(ValueType, Dim)                             \
+    using Perm = tmech::sequence<1, 3, 2, 4>;                                  \
+    tmech::tensor<ValueType, Dim, 4> Anew = tmech::basis_change<Perm>(A);      \
+    using SeqL = tmech::sequence<1, 3>;                                        \
+    using SeqR = tmech::sequence<2, 4>;                                        \
+    tmech::tensor<ValueType, Dim, 4> S_custom =                                \
+        tmech::inv(Anew, SeqL(), SeqR());                                      \
+    tmech::tensor<ValueType, Dim, 4> S_unpermuted =                            \
+        tmech::basis_change<Perm>(S_custom);                                   \
+    constexpr ValueType eps{static_cast<ValueType>(                            \
+        std::is_same_v<ValueType, float> ? 1e-5 : 1e-13)};                     \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(                                \
+                        tmech::dcontract(S_unpermuted, A), IIsym, eps));       \
   }
 
 // abs function
@@ -1980,6 +2034,16 @@ inv_custom_seq_anisotropic_4(double, 3);
 inv_custom_seq_anisotropic_4(double, 2);
 inv_custom_seq_anisotropic_4(float, 3);
 inv_custom_seq_anisotropic_4(float, 2);
+
+inv_voigt_map_1423_anisotropic_4(double, 3);
+inv_voigt_map_1423_anisotropic_4(double, 2);
+inv_voigt_map_1423_anisotropic_4(float, 3);
+inv_voigt_map_1423_anisotropic_4(float, 2);
+
+inv_voigt_map_1324_anisotropic_4(double, 3);
+inv_voigt_map_1324_anisotropic_4(double, 2);
+inv_voigt_map_1324_anisotropic_4(float, 3);
+inv_voigt_map_1324_anisotropic_4(float, 2);
 
 compareEqualOperator(double, 2, 1);
 compareEqualOperator(double, 2, 2);
