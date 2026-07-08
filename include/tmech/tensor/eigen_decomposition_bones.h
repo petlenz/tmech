@@ -19,7 +19,9 @@ namespace detail {
 
 // Forward declarations
 template <typename _Tensor> class eigen_decomposition_inline;
+#ifdef TMECH_ENABLE_LAPACK
 template <typename _Tensor> class eigen_decomposition_lapack;
+#endif
 
 /**
  * @class eigen_decomposition_base
@@ -161,13 +163,18 @@ private:
                                              tensor1 &evec1) const noexcept;
 };
 
+#ifdef TMECH_ENABLE_LAPACK
 /**
  * @class eigen_decomposition_lapack
- * @brief LAPACK-based eigenvalue decomposition using dgeev/sgeev.
+ * @brief Optional LAPACK-based eigenvalue decomposition using dgeev/sgeev.
  *
- * Uses LAPACK's general eigenvalue solver (dgeev for double,
- * sgeev for float). Suitable for any non-singular symmetric
- * 2D or 3D tensor.
+ * This backend is **opt-in** and is only available when the library is
+ * compiled with `TMECH_ENABLE_LAPACK` defined; it requires linking against a
+ * LAPACK implementation. The default eigen-decomposition path
+ * (`eigen_decomposition_inline`, aliased by `eigen_decomposition_wrapper`)
+ * uses a closed-form analytical solver and needs no external dependency.
+ *
+ * Uses LAPACK's general eigenvalue solver (dgeev for double, sgeev for float).
  *
  * @tparam _Tensor Tensor expression type.
  */
@@ -197,6 +204,7 @@ public:
 
   constexpr inline auto compute_decomposition(bool eigenvectors) noexcept;
 };
+#endif // TMECH_ENABLE_LAPACK
 
 /**
  * Backward-compatible alias.

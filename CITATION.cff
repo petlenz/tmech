@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use tmech in your research, please cite it as below."
+title: "tmech: A C++ header-only library for compile-time tensor algebra with symbolic differentiation"
+abstract: >-
+  tmech is a C++17 header-only library for higher-order tensor algebra in
+  computational continuum mechanics. It provides an expression-template engine
+  with lazy evaluation, tensors of arbitrary rank, tensor decompositions
+  (polar, eigenvalue, spectral) with derivatives, and a compile-time symbolic
+  differentiation module that produces analytic tangent operators.
+type: software
+authors:
+  - given-names: Peter
+    family-names: Lenz
+    email: peterlenz89.pl@gmail.com
+    affiliation: "Continental Reifen Deutschland GmbH"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: add the author's real ORCID before release
+license: BSD-3-Clause
+repository-code: "https://github.com/petlenz/tmech"
+url: "https://tmech.readthedocs.io/"
+keywords:
+  - C++
+  - tensor algebra
+  - continuum mechanics
+  - expression templates
+  - symbolic differentiation
+  - finite element method
+version: 1.1.0
+date-released: "2026-07-08"

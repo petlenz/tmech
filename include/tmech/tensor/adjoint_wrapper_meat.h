@@ -116,7 +116,7 @@ constexpr inline auto adjoint_wrapper<_Tensor>::evaluate()noexcept{
 template <typename _Tensor>
 template<typename _Result>
 constexpr inline auto adjoint_wrapper<_Tensor>::evaluate_imp(_Result & result)noexcept{
-    constexpr bool raw_data{std::experimental::is_detected<has_raw_data, data_type_tensor>::value};
+    constexpr bool raw_data{::tmech_detail::is_detected<has_raw_data, data_type_tensor>::value};
 
     if constexpr (raw_data){
         evaluate::apply(_data);

@@ -18,11 +18,11 @@ constexpr auto variable_base<_Derived>::convert() const {return *static_cast<con
 template <typename _Derived>
 template <typename _Data>
 constexpr inline auto variable_base<_Derived>::operator()(_Data const &__data) {
-  if constexpr (std::experimental::is_detected<detail::has_reset,
+  if constexpr (::tmech_detail::is_detected<detail::has_reset,
                                                _Derived>::value) {
     static_cast<_Derived *>(this)->reset();
   }
-  if constexpr (std::experimental::is_detected<detail::has_update, _Derived,
+  if constexpr (::tmech_detail::is_detected<detail::has_update, _Derived,
                                                _Data>::value) {
     static_cast<_Derived *>(this)->update(__data);
   }

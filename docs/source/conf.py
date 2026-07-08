@@ -99,9 +99,10 @@ pygments_style = 'sphinx'
 todo_include_todos = False
 htmlhelp_basename = 'tmechdoc'
 
-html_js_files = [
-    'goatcounter.js'
-]
+# Analytics snippet is optional; enable by dropping a goatcounter.js into _static.
+# html_js_files = [
+#     'goatcounter.js'
+# ]
 
 # Automatically link to numpy doc
 extensions += ['sphinx.ext.intersphinx']

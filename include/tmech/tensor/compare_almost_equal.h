@@ -19,10 +19,10 @@ struct compare_almost_equal
         tensor<value_type, _RHS::dimension(), _RHS::rank()> R{__rhs - __lhs};
         return check_detail<decltype (R)::size()>(R.raw_data(), __eps);
 
-//        constexpr bool LHS_raw_data{std::experimental::is_detected<has_raw_data, _LHS>::value};
-//        constexpr bool RHS_raw_data{std::experimental::is_detected<has_raw_data, _RHS>::value};
-//        constexpr bool LHS_evaluate{std::experimental::is_detected<detail::has_evaluate, _LHS>::value};
-//        constexpr bool RHS_evaluate{std::experimental::is_detected<detail::has_evaluate, _RHS>::value};
+//        constexpr bool LHS_raw_data{::tmech_detail::is_detected<has_raw_data, _LHS>::value};
+//        constexpr bool RHS_raw_data{::tmech_detail::is_detected<has_raw_data, _RHS>::value};
+//        constexpr bool LHS_evaluate{::tmech_detail::is_detected<detail::has_evaluate, _LHS>::value};
+//        constexpr bool RHS_evaluate{::tmech_detail::is_detected<detail::has_evaluate, _RHS>::value};
 
 //        if constexpr (LHS_raw_data && RHS_raw_data){
 //            if constexpr(LHS_evaluate){const_cast<_LHS&>(__lhs).evaluate();}

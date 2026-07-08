@@ -35,14 +35,14 @@ namespace detail {
 //struct name
 //{
 //    static constexpr inline auto evaluate(){
-//        if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_LHS>::value){
+//        if constexpr(::tmech_detail::is_detected<detail::has_evaluate, data_type_LHS>::value){
 //            if constexpr (std::is_reference_v<LHS>){
 //                const_cast<data_type_LHS&>(lhs_).evaluate();
 //            }else{
 //                lhs_.evaluate();
 //            }
 //        }
-//        if constexpr(std::experimental::is_detected<detail::has_evaluate, data_type_RHS>::value){
+//        if constexpr(::tmech_detail::is_detected<detail::has_evaluate, data_type_RHS>::value){
 //            if constexpr (std::is_reference_v<RHS>){
 //                const_cast<data_type_RHS&>(rhs_).evaluate();
 //            }else{

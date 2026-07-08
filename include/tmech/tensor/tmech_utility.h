@@ -392,7 +392,7 @@ using forward_storage_t = std::conditional_t<
 // True when an expression supports flat linear iteration via direct_access().
 template<typename Derived>
 inline constexpr bool is_direct_assignable_v =
-    std::experimental::is_detected<has_direct_access_t, Derived>::value;
+    ::tmech_detail::is_detected<has_direct_access_t, Derived>::value;
 
 // True when an expression supports SIMD batch evaluation.
 // Uses struct-based dispatch to avoid instantiating has_batch_access_t
@@ -404,7 +404,7 @@ struct is_simd_assignable_impl : std::false_type {};
 template<typename Derived, typename T>
 struct is_simd_assignable_impl<Derived, T, true>
     : std::bool_constant<
-        std::experimental::is_detected<has_batch_access_t, Derived>::value
+        ::tmech_detail::is_detected<has_batch_access_t, Derived>::value
         && has_xsimd_batch_v<T>
         && std::is_same_v<typename Derived::value_type, T>> {};
 #endif
@@ -608,11 +608,6 @@ static constexpr inline auto get_sequence(sequence<Numbers...>){
 }
 
 
-
-template<std::size_t...Numbers>
-inline void print_sequence(sequence<Numbers...>){
-    ((std::cout<<Numbers<<" "),...)<<std::endl;
-}
 
 template<std::size_t Size, std::size_t First, std::size_t ...Numbers>
 struct get_tensor_array_size

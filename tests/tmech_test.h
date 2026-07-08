@@ -2666,6 +2666,126 @@ lambdaTensorSym_3(double, 2, log);
 lambdaTensorSym_3(double, 2, positive);
 lambdaTensorSym_3(double, 2, negative);
 
+//==========================================================================
+// Direct coverage for previously untested subsystems:
+//   GEMM (single contraction), the eigen-decomposition public API, randu,
+//   the symdiff Newton solver, and inverse edge cases.
+//==========================================================================
+
+// --- GEMM / single contraction: analytically known 3x3 product ---
+TEST(gtest, gemm_single_contraction_3x3_known) {
+  tmech::tensor<double, 3, 2> A{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  tmech::tensor<double, 3, 2> B{9, 8, 7, 6, 5, 4, 3, 2, 1};
+  tmech::tensor<double, 3, 2> expected{30,  24,  18, 84, 69,
+                                       54,  138, 114, 90};
+  tmech::tensor<double, 3, 2> C = A * B;
+  EXPECT_TRUE(tmech::almost_equal(C, expected, 5e-7));
+}
+
+// --- GEMM: identity is neutral for both operand orders, dim 2 and 3 ---
+TEST(gtest, gemm_identity_is_neutral) {
+  tmech::tensor<double, 2, 2> A2{1.5, -2.0, 0.25, 3.0};
+  tmech::tensor<double, 2, 2> C2 = A2 * tmech::eye<double, 2, 2>();
+  EXPECT_TRUE(tmech::almost_equal(C2, A2, 5e-7));
+
+  auto A3 = test_helpers::well_conditioned_nonsym_rank2<double, 3>();
+  tmech::tensor<double, 3, 2> C3 = tmech::eye<double, 3, 2>() * A3;
+  EXPECT_TRUE(tmech::almost_equal(C3, A3, 5e-7));
+}
+
+// --- Eigen-decomposition public API: spectral reconstruction + sorting ---
+TEST(gtest, eigen_decomposition_reconstructs_symmetric_3x3) {
+  tmech::tensor<double, 3, 2> A =
+      tmech::sym(test_helpers::well_conditioned_rank2<double, 3>());
+  auto eig = tmech::eigen_decomposition(A);
+  const auto [eigval, eigvec] = eig.decompose();
+
+  // A == sum_i lambda_i (n_i (x) n_i)
+  tmech::tensor<double, 3, 2> R =
+      eigval[0] * tmech::otimes(eigvec[0], eigvec[0]);
+  for (std::size_t i = 1; i < 3; ++i) {
+    R += eigval[i] * tmech::otimes(eigvec[i], eigvec[i]);
+  }
+  EXPECT_TRUE(tmech::almost_equal(R, A, 5e-6));
+
+  // eigenvalues are returned in a monotonic (sorted) order
+  const bool ascending =
+      (eigval[0] <= eigval[1]) && (eigval[1] <= eigval[2]);
+  const bool descending =
+      (eigval[0] >= eigval[1]) && (eigval[1] >= eigval[2]);
+  EXPECT_TRUE(ascending || descending);
+}
+
+// --- randu: generated values respect the requested [a, b) bounds ---
+TEST(gtest, randu_within_bounds) {
+  tmech::tensor<double, 3, 2> A = tmech::randu<double, 3, 2>(0.0, 1.0);
+  for (std::size_t i = 0; i < A.size(); ++i) {
+    const double v = A.raw_data()[i];
+    EXPECT_TRUE(std::isfinite(v));
+    EXPECT_GE(v, 0.0);
+    EXPECT_LE(v, 1.0);
+  }
+}
+
+// --- symdiff Newton solver: a 2-equation nonlinear system converges ---
+namespace test_newton {
+struct nonlinear_system {
+  using value_type = double;
+  template <typename VectorX>
+  inline auto operator()(VectorX const &X) {
+    symdiff::variable<value_type, 0> x1;
+    symdiff::variable<value_type, 1> x2;
+    symdiff::real<value_type, 1, 0, 1> _1;
+    symdiff::real<value_type, 4, 0, 1> _4;
+    auto R1 = x1 * x1 + x2 * x2 - _4;
+    auto R2 = x1 * x1 - x2 + _1;
+    auto J11 = symdiff::derivative<1>(R1, x1);
+    auto J12 = symdiff::derivative<1>(R1, x2);
+    auto J21 = symdiff::derivative<1>(R2, x1);
+    auto J22 = symdiff::derivative<1>(R2, x2);
+    auto R = std::make_tuple(R1(X), R2(X));
+    auto J = std::make_tuple(std::make_tuple(J11(X), J12(X)),
+                             std::make_tuple(J21(X), J22(X)));
+    return std::make_tuple(J, R);
+  }
+};
+} // namespace test_newton
+
+TEST(gtest, symdiff_general_newton_raphson_converges) {
+  test_newton::nonlinear_system sys;
+  auto X = std::make_tuple(1.0, 2.0);
+  const auto [iter, norm, x_new] =
+      tmech::general_newton_raphson_iterate(sys, X, 1e-10, std::size_t{50});
+  const double x1 = std::get<0>(x_new);
+  const double x2 = std::get<1>(x_new);
+  // residuals must vanish at the converged solution
+  EXPECT_NEAR(x1 * x1 + x2 * x2 - 4.0, 0.0, 1e-8);
+  EXPECT_NEAR(x1 * x1 - x2 + 1.0, 0.0, 1e-8);
+  EXPECT_LT(norm, 1e-8);
+  (void)iter;
+}
+
+// --- inverse edge cases: identity, round-trip, and A * inv(A) == I ---
+TEST(gtest, inverse_identity_and_roundtrip_3x3) {
+  tmech::tensor<double, 3, 2> I = tmech::eye<double, 3, 2>();
+  EXPECT_TRUE(tmech::almost_equal(tmech::inv(I), I, 5e-7));
+
+  auto A = test_helpers::well_conditioned_nonsym_rank2<double, 3>();
+  tmech::tensor<double, 3, 2> Ainv = tmech::inv(A);
+  tmech::tensor<double, 3, 2> Ainvinv = tmech::inv(Ainv);
+  EXPECT_TRUE(tmech::almost_equal(Ainvinv, A, 5e-6));
+
+  tmech::tensor<double, 3, 2> AAinv = A * tmech::inv(A);
+  EXPECT_TRUE(tmech::almost_equal(AAinv, I, 5e-6));
+}
+
+TEST(gtest, inverse_identity_and_roundtrip_2x2) {
+  tmech::tensor<double, 2, 2> I = tmech::eye<double, 2, 2>();
+  auto A = test_helpers::well_conditioned_nonsym_rank2<double, 2>();
+  tmech::tensor<double, 2, 2> AAinv = A * tmech::inv(A);
+  EXPECT_TRUE(tmech::almost_equal(AAinv, I, 5e-6));
+}
+
 // powFunction(double, 2);
 // powFunction(double, 3);
 // powFunction(float, 2);

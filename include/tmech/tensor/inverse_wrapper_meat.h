@@ -141,6 +141,9 @@ constexpr inline auto inverse_wrapper_base<_ValueType>::invert_2_2(
     value_type *result, value_type const A11, value_type const A12,
     value_type const A21, value_type const A22) noexcept {
   const auto det{A11 * A22 - A12 * A21};
+  // Precondition: the tensor must be non-singular. A zero determinant would
+  // produce inf/nan; caught here in debug builds.
+  assert(det != value_type{} && "inv(): singular 2x2 tensor (determinant is zero)");
   const auto invdet{safe_cast<value_type>(1.0) / det};
 
   result[0] = A22 * invdet;
@@ -158,6 +161,9 @@ constexpr inline auto inverse_wrapper_base<_ValueType>::invert_3_3(
   const auto det{A0 * (A4 * A8 - A5 * A7) + A1 * (A5 * A6 - A3 * A8) +
                  A2 * (A3 * A7 - A4 * A6)};
 
+  // Precondition: the tensor must be non-singular. A zero determinant would
+  // produce inf/nan; caught here in debug builds.
+  assert(det != value_type{} && "inv(): singular 3x3 tensor (determinant is zero)");
   const auto invdet{safe_cast<value_type>(1.0) / det};
 
   result[0] = (A4 * A8 - A5 * A7) * invdet;

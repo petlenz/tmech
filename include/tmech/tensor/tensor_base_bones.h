@@ -47,10 +47,10 @@ public:
         return detail::get_tensor_size<_Derived::dimension(), _Derived::rank()>::size;
     }
 
-    //if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
-    //template<typename _Data, typename __Derived = _Derived, typename std::enable_if_t<std::experimental::is_detected<detail::has_evaluate, __Derived, _Data>> * = nullptr>
+    //if constexpr(::tmech_detail::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
+    //template<typename _Data, typename __Derived = _Derived, typename std::enable_if_t<::tmech_detail::is_detected<detail::has_evaluate, __Derived, _Data>> * = nullptr>
     //constexpr inline auto evaluate(_Data & __data){
-    //    if constexpr(std::experimental::is_detected<has_update_imp, _Derived, _Data>::value){
+    //    if constexpr(::tmech_detail::is_detected<has_update_imp, _Derived, _Data>::value){
     //        return static_cast<_Derived*>(this)->update_imp(__data);
     //    }
     //}

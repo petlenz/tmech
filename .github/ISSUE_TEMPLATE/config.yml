@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question / usage help
+    url: https://github.com/petlenz/tmech/discussions
+    about: Please ask usage questions and general questions in Discussions.
