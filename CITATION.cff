@@ -13,7 +13,7 @@ authors:
     family-names: Lenz
     email: peterlenz89.pl@gmail.com
     affiliation: "Continental Reifen Deutschland GmbH"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: add the author's real ORCID before release
+    orcid: "https://orcid.org/0000-0001-8041-9538"
 license: BSD-3-Clause
 repository-code: "https://github.com/petlenz/tmech"
 url: "https://tmech.readthedocs.io/"

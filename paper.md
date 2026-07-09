@@ -9,7 +9,7 @@ tags:
   - finite element method
 authors:
   - name: Peter Lenz
-    orcid: 0000-0000-0000-0000
+    orcid: 0000-0001-8041-9538
     affiliation: 1
 affiliations:
   - name: Continental Reifen Deutschland GmbH
