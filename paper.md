@@ -73,7 +73,8 @@ and thermo-chemo-mechanical curing simulations at large strains
 [@lenz2024]. It is also integrated with the MOOSE finite element
 framework [@moose] in an industrial setting for high-performance
 material point updates. In addition, its tensor-algebra engine is used
-as a dependency of the `numsim-cas` and `numsim-codegen` tools.
+as a dependency of the `numsim-cas` [@numsim_cas] and
+`numsim-codegen` [@numsim_codegen] tools.
 
 # Key features
 
