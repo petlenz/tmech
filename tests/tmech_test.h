@@ -2786,6 +2786,40 @@ TEST(gtest, inverse_identity_and_roundtrip_2x2) {
   EXPECT_TRUE(tmech::almost_equal(AAinv, I, 5e-6));
 }
 
+// --- symdiff end-to-end: a constitutive stress -> consistent tangent ---
+// Differentiate a linear-elastic stress law symbolically and check the
+// resulting fourth-order tangent against the closed-form modulus
+//   C = lambda (I (x) I) + mu (I (ox) I + I (o|) I).
+TEST(gtest, symdiff_linear_elastic_tangent_matches_analytical) {
+  using T2 = tmech::tensor<double, 3, 2>;
+  using T4 = tmech::tensor<double, 3, 4>;
+  const double lam = 150.0, muv = 200.0;
+
+  symdiff::variable<T2, 0> eps;
+  symdiff::constant<double, 0> lambda(lam, "lambda");
+  symdiff::constant<double, 1> mu(muv, "mu");
+  symdiff::real<double, 2, 0, 1> two;
+  symdiff::constant<T2, 2> I("I");
+  I = tmech::eye<double, 3, 2>();
+
+  auto sig = lambda * tmech::trace(tmech::as_sym(eps)) * I
+           + two * mu * tmech::as_sym(eps);
+  auto C = symdiff::derivative(sig, eps);
+
+  const auto Id = tmech::eye<double, 3, 2>();
+  T4 C_ref = lam * tmech::otimes(Id, Id)
+           + muv * (tmech::otimesu(Id, Id) + tmech::otimesl(Id, Id));
+
+  const T2 e = tmech::sym(test_helpers::well_conditioned_rank2<double, 3>());
+  T4 C_val = C(std::make_tuple(e));
+  EXPECT_TRUE(tmech::almost_equal(C_val, C_ref, 5e-6));
+
+  // the stress itself must reproduce the closed-form law
+  T2 sig_val = sig(std::make_tuple(e));
+  T2 sig_ref = lam * tmech::trace(tmech::sym(e)) * Id + 2.0 * muv * tmech::sym(e);
+  EXPECT_TRUE(tmech::almost_equal(sig_val, sig_ref, 5e-6));
+}
+
 // powFunction(double, 2);
 // powFunction(double, 3);
 // powFunction(float, 2);

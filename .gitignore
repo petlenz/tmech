@@ -60,3 +60,5 @@ CMakeLists.txt.user
 
 # results
 *.png
+# rendered paper (build artifact)
+paper.pdf
