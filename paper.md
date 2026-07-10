@@ -92,6 +92,21 @@ no mandatory dependencies, and is tested with Google Test across GCC, Clang, and
 MSVC on Linux, macOS, and Windows. Further examples and API documentation are
 provided in the repository.
 
+# AI usage disclosure
+
+Generative AI was used in preparing this submission. The tool was Claude
+(Anthropic; Opus 4.8), used through the Claude Code command-line interface. Its
+assistance covered: reviewing the library for code-quality and correctness
+issues and applying the resulting fixes; extending the automated test suite and
+the continuous-integration configuration; drafting repository documentation
+(Read the Docs pages, contribution guidelines, and citation metadata); and
+editing, restructuring, and condensing this manuscript. The library's core
+design and algorithms are the author's own work. All AI-assisted contributions
+were reviewed, corrected where necessary, and validated by the author, who made
+all architectural and design decisions and takes full responsibility for the
+accuracy, originality, licensing, and correctness of the submitted software and
+paper.
+
 # Acknowledgements
 
 The author thanks the open-source communities behind Eigen, xsimd, and Google
