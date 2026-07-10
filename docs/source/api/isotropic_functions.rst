@@ -3,40 +3,23 @@
    Distributed under the terms of the  BSD 3-Clause License.
 
    The full license is in the file LICENSE, distributed with this software.
-   
-Isotropic functions
-===================
 
+Isotropic tensor functions
+==========================
 
-Isotropic scalar-valued function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-In three-dimensional space, a scalar function of a symmetric tensor in terms of principal values (eigenvalues) is defined as
+``tmech`` implements isotropic tensor functions -- ``exp``, ``log``, ``sqrt``,
+``pow``, and positive/negative part operators -- via spectral decomposition
+(Miehe 1993; Miehe and Lambrecht 2001). Given a symmetric rank-2 tensor
+:math:`\mathbf{A}`, the library computes its eigenvalues :math:`\lambda_i` and
+eigenvectors :math:`\mathbf{n}_i`, applies the scalar function to each
+eigenvalue, and reconstructs the tensor result:
 
 .. math::
 
-    \phi(\Second{X}) = \hat{\phi}(\lambda_1,\lambda_2,\lambda_3)
-    
-where :math:`\lambda_i` are the eigenvalues of :math:`\Second{X}`.
+    f(\mathbf{A}) = \sum_{i} f(\lambda_i)\, \mathbf{n}_i \otimes \mathbf{n}_i
 
-Derivative of an isotropic scalar function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Isotropic tensor-valued function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-
-
-
-
-
-
-
-
-..
-	.. math::
-	\phi(\Second{X}) = \overline{\phi}(I_1(\Second{X}),I_2(\Second{X}),I_3(\Second{X}))
-	where :math:`I_i(\Second{X})` are the principal invariants of :math:`\Second{X}`.
-	 Another representation of isotropic scalar functions is given in terms of principal values 
+First and second derivatives are computed analytically using the eigenbasis,
+with proper treatment of repeated eigenvalues to avoid singularities. These
+functions integrate with the :doc:`symbolic differentiation
+<symbolic_differentiation>` module, enabling automatic tangent computation for
+models involving tensor logarithms or exponentials.

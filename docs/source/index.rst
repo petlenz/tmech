@@ -54,10 +54,18 @@ for details.
    :maxdepth: 2
 
    api/tensor_functions
+   api/isotropic_functions
+   api/polar_decomposition
    api/numerical_diff
    api/compare_operators
    api/adaptor
    api/convert_to_voigt
+
+.. toctree::
+   :caption: SYMBOLIC DIFFERENTIATION
+   :maxdepth: 2
+
+   api/symbolic_differentiation
 
 .. toctree::
    :caption: API REFERENCE TMECH
@@ -70,4 +78,11 @@ for details.
    :maxdepth: 2
 
    api/api_symdiff
+
+.. toctree::
+   :caption: DESIGN
+   :maxdepth: 2
+
+   api/design
+   api/comparison
 
