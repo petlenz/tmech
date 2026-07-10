@@ -978,8 +978,8 @@ constexpr inline auto convert_3D_to_2D(tensor<T, 3, 2> const& A);
 template<typename T>
 constexpr inline auto convert_3D_to_2D(tensor<T, 3, 4> const& A);
 
-template<typename System, typename T, typename ...Data>
-inline auto general_newton_raphson_iterate(System A, std::tuple<Data...> & x, T const tol = 1e-8, std::size_t const max_iter = 20);
+template<typename System, typename Vector_x, typename T>
+inline auto general_newton_raphson_iterate(System A, Vector_x & x, T const tol = 1e-8, std::size_t const max_iter = 20);
 
 
 #endif // TENSOR_FUNCTIONS_FORWARD_H

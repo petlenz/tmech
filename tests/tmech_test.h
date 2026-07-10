@@ -2820,6 +2820,28 @@ TEST(gtest, symdiff_linear_elastic_tangent_matches_analytical) {
   EXPECT_TRUE(tmech::almost_equal(sig_val, sig_ref, 5e-6));
 }
 
+// --- experimental multi-variable Newton solver; the Jacobian has a zero
+// diagonal pivot at the start point, exercising the partial-pivoted LU path ---
+TEST(gtest, symdiff_experimental_newton_solver_zero_pivot) {
+  symdiff::variable<double, 0> x;
+  symdiff::variable<double, 1> y;
+  symdiff::variable<double, 2> z;
+  symdiff::real<double, 1, 0, 1> _1;
+  symdiff::real<double, 2, 0, 1> _2;
+  symdiff::real<double, 3, 0, 1> _3;
+  auto f = symdiff::experimental::make_vector(
+      x * x - _2 * x + y * y - z + _1,
+      x * y * y - x - _3 * y + y * z + _2,
+      x * z * z - _3 * z + y * z * z + x * y);
+  auto J = symdiff::experimental::make_jacobi_matrix(f, x, y, z);
+  auto solver = symdiff::experimental::newton_solver(J, f);
+  std::array<double, 3> d{1, 2, 3};  // df1/dx = 2x-2 = 0 here -> zero pivot
+  solver.solve(d);
+  EXPECT_NEAR(d[0], 1.0, 1e-6);
+  EXPECT_NEAR(d[1], 1.0, 1e-6);
+  EXPECT_NEAR(d[2], 1.0, 1e-6);
+}
+
 // powFunction(double, 2);
 // powFunction(double, 3);
 // powFunction(float, 2);

@@ -679,15 +679,10 @@ constexpr inline auto convert_3D_to_2D(tensor<T, 3, 4> const& A){
 /**
  * @brief General Newton-Rapson method for scalar and tensor expressions
  */
-template<typename System, typename T, typename ...Data>
-inline auto general_newton_raphson_iterate(System A, std::tuple<Data...> & x, T const tol, std::size_t const max_iter){
-  // std::size_t iter{0};
-
-  // removes references of tuple entries
-  // local data
-  typename detail::general_newton_raphson_solver::result_type<
-      std::tuple<Data...>>
-      dx;
+template<typename System, typename Vector_x, typename T>
+inline auto general_newton_raphson_iterate(System A, Vector_x & x, T const tol, std::size_t const max_iter){
+  // local data (same shape as x: std::tuple or std::array of unknowns)
+  typename detail::general_newton_raphson_solver::result_type<Vector_x> dx;
 
   for (std::size_t iter{0}; iter <= max_iter; ++iter) {
     const auto norm =
