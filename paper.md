@@ -57,9 +57,9 @@ its (experimental) `symdiff` module differentiates tensor expressions
 symbolically, at compile time and entirely within C++, yielding closed-form
 derivative tensors in the library's own types without a run-time tape or external
 toolchain. Its tensor-algebra core is production-tested: it underlies the
-author's multiscale composite simulations [@lenz2023; @lenz2024], is integrated
-with the MOOSE finite-element framework [@moose], and is a dependency of the
-`numsim-cas` [@numsim_cas] and `numsim-codegen` [@numsim_codegen] tools.
+author's multiscale composite simulations [@lenz2023; @lenz2024] and is a
+dependency of the `numsim-cas` [@numsim_cas] and `numsim-codegen`
+[@numsim_codegen] tools.
 
 # Functionality
 
