@@ -68,7 +68,7 @@ template<std::size_t DIM, typename >
 constexpr inline auto levi_civita<T, Dim>::operator()(size_type const i, size_type const j, size_type const k)const noexcept{
   return (safe_cast<value_type>(j) - safe_cast<value_type>(i)) *
          (safe_cast<value_type>(k) - safe_cast<value_type>(j)) *
-         (safe_cast<value_type>(i) - safe_cast<value_type>(k)) *
+         (safe_cast<value_type>(k) - safe_cast<value_type>(i)) *
          safe_cast<value_type>(0.5);
 }
 
