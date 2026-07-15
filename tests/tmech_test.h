@@ -995,7 +995,29 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     EXPECT_EQ(tmech::trace(a), sum);                                           \
   }
 
-// cross product — safe with randn
+// Levi-Civita symbol values — directly checks the sign convention so a flip
+// cannot hide behind the cross-product identity below.
+#define leviCivitaSymbol(ValueType)                                            \
+  TEST(gtest, leviCivitaSymbol_##ValueType) {                                  \
+    tmech::levi_civita<ValueType, 3> e;                                        \
+    /* even permutations of (0,1,2) are +1 */                                  \
+    EXPECT_EQ(e(0, 1, 2), ValueType(1));                                       \
+    EXPECT_EQ(e(1, 2, 0), ValueType(1));                                       \
+    EXPECT_EQ(e(2, 0, 1), ValueType(1));                                       \
+    /* odd permutations are -1 */                                             \
+    EXPECT_EQ(e(0, 2, 1), ValueType(-1));                                      \
+    EXPECT_EQ(e(1, 0, 2), ValueType(-1));                                      \
+    EXPECT_EQ(e(2, 1, 0), ValueType(-1));                                      \
+    /* any repeated index is 0 */                                             \
+    EXPECT_EQ(e(0, 0, 1), ValueType(0));                                       \
+    EXPECT_EQ(e(1, 1, 1), ValueType(0));                                       \
+    EXPECT_EQ(e(2, 2, 0), ValueType(0));                                       \
+  }
+
+// cross product — safe with randn.  With tmech's contraction convention the
+// free index of `x * levi * y` is the middle slot, so the cross product
+// (a x b)_i = e_ijk a_j b_k is reproduced by reversing the operands:
+// cross(a, b) == b * levi * a.
 #define crossProduct(ValueType, Dim)                                           \
   TEST(gtest, crossProduct_##ValueType##_##Dim) {                              \
     tmech::tensor<ValueType, Dim, 1> a, b;                                     \
@@ -1003,14 +1025,14 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     b = tmech::randn<ValueType, Dim, 1>();                                     \
     tmech::levi_civita<ValueType, Dim> levi;                                   \
     EXPECT_EQ(true,                                                            \
-              almost_equal_tensor_scaled(tmech::cross(a, b), a *levi *b, 5e-6));      \
+              almost_equal_tensor_scaled(tmech::cross(a, b), b *levi *a, 5e-6));      \
     EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::cross(tmech::abs(a), b),        \
-                                        tmech::abs(a) * levi * b, 5e-6));      \
+                                        b * levi * tmech::abs(a), 5e-6));      \
     EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::cross(a, tmech::abs(b)),        \
-                                        a *levi *tmech::abs(b), 5e-6));        \
+                                        tmech::abs(b) *levi *a, 5e-6));        \
     EXPECT_EQ(true, almost_equal_tensor_scaled(                                       \
                         tmech::cross(tmech::abs(a), tmech::abs(b)),            \
-                        tmech::abs(a) * levi * tmech::abs(b), 5e-6));          \
+                        tmech::abs(b) * levi * tmech::abs(a), 5e-6));          \
   }
 
 // transposition — safe with randn
@@ -2444,6 +2466,10 @@ powFunctionEvaluate(complexd, 3);
 powFunctionEvaluate(complexf, 2);
 powFunctionEvaluate(complexf, 3);
 
+leviCivitaSymbol(double);
+leviCivitaSymbol(float);
+leviCivitaSymbol(complexf);
+leviCivitaSymbol(complexd);
 crossProduct(double, 3);
 crossProduct(float, 3);
 crossProduct(complexf, 3);
