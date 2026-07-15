@@ -3,6 +3,7 @@
 [![CI](https://github.com/petlenz/tmech/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/petlenz/tmech/actions/workflows/cmake-multi-platform.yml)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
 [![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://isocpp.org/std/the-standard)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21383707.svg)](https://doi.org/10.5281/zenodo.21383707)
 
 A header-only C++17 library for higher-order tensor algebra in continuum mechanics.
 
