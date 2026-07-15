@@ -25,6 +25,12 @@ class general_newton_raphson_solver{
         using type = std::tuple<typename get_return_type<Data>::type...>;
     };
 
+    // Support std::array-valued unknowns (multi-variable Newton solver).
+    template <typename Data, std::size_t N>
+    struct get_return_base<std::array<Data, N>>{
+        using type = std::array<typename get_return_type<Data>::type, N>;
+    };
+
 public:
     template<typename Argument>
     using result_type = typename get_return_base<Argument>::type;

@@ -19,7 +19,15 @@ template <typename _T, std::size_t _Dim, std::size_t _Rank>
 randn<_T, _Dim, _Rank>::randn(el_type mean, el_type stddev)noexcept:
     rng(dev()),
     dist(mean, stddev)
-{}
+{
+#ifdef TMECH_DETERMINISTIC_RANDN
+    // Reproducible mode (opt-in, used by the test suite): replace the
+    // random_device seed with a deterministic, per-instance counter so runs
+    // are repeatable. Production builds are unaffected.
+    static unsigned tmech_randn_counter{0u};
+    rng.seed(1234567u + (tmech_randn_counter++));
+#endif
+}
 
 /**
  * Copy constructor

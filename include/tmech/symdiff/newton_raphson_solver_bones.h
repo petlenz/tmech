@@ -24,7 +24,8 @@ public:
 
     template<typename _Data>
     inline auto solve(_Data & __data){
-        const auto [iter, norm, x_new]{tmech::general_newton_raphson_iterate(*this, __data, 1e-8, 50)};
+        // __data is updated in place by the iterate; the returned tuple is unused.
+        tmech::general_newton_raphson_iterate(*this, __data, 1e-8, 50);
     }
 
 private:

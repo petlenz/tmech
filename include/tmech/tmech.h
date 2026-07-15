@@ -32,8 +32,9 @@
 #include <string>
 
 
-namespace std {
-namespace experimental {
+// Detection idiom (LFTS v2). Defined in a tmech-owned namespace rather than
+// injected into ::std::experimental, which would be undefined behaviour.
+namespace tmech_detail {
 namespace detail {
 template <class AlwaysVoid, template<class...> class Op, class... Args>
 struct detector {
@@ -50,9 +51,8 @@ template <template<class...> class Op, class... Args>
 using is_detected = typename detail::detector<void, Op, Args...>::value_t;
 
 template <template<class...> class Op, class... Args>
-const auto is_detected_v = is_detected<Op, Args...>::value;
-}
-}
+inline constexpr bool is_detected_v = is_detected<Op, Args...>::value;
+} // namespace tmech_detail
 
 
 #ifdef TMECH_HAS_XSIMD
@@ -252,8 +252,6 @@ namespace symdiff {
 #include "symdiff/variable_base_meat.h"
 
 #include "symdiff/jacobi_matrix_wrapper.h"
-//#include "symdiff/newton_solver_multi_variable_bones.h"
-//#include "symdiff/newton_solver_single_variable_bones.h"
 #include "symdiff/vector_of_functions.h"
 #include "symdiff/newton_raphson_solver_bones.h"
 

@@ -8,25 +8,8 @@
 #ifndef GEMM_KERNELS_SMALL_H
 #define GEMM_KERNELS_SMALL_H
 
-// -------------------- restrict helper --------------------
-#if !defined(TMECH_RESTRICT)
-  #if defined(__GNUC__) || defined(__clang__)
-    #define TMECH_RESTRICT __restrict__
-  #else
-    #define TMECH_RESTRICT
-  #endif
-#endif
-
-// -------------------- force-inline helper --------------------
-#if !defined(TMECH_INLINE)
-  #if defined(__GNUC__) || defined(__clang__)
-    #define TMECH_INLINE inline __attribute__((always_inline))
-  #elif defined(_MSC_VER)
-    #define TMECH_INLINE __forceinline
-  #else
-    #define TMECH_INLINE inline
-  #endif
-#endif
+// TMECH_RESTRICT and TMECH_INLINE are defined in tmech_config.h (guarded with
+// #if !defined, so an external definition still takes precedence).
 
 #ifdef TMECH_HAS_XSIMD
 

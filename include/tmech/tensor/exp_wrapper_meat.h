@@ -87,8 +87,11 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate()noexcept{
         break;}
 
         if(iter == max_iter){
+            // Truncated Taylor series (no scaling-and-squaring): may not reach
+            // `tol` for large-norm tensors. Flagged in debug builds; in release
+            // the best available approximation is returned.
+            assert(false && "exp(tensor): Taylor series did not converge within max_iter; input norm may be too large");
             break;
-            //throw std::runtime_error("exp_tensor_wrapper::evaluate(): no convergence");
         }
         ++iter;
     }
@@ -122,8 +125,10 @@ constexpr inline auto exp_tensor_wrapper<_Tensor>::evaluate_derivative()noexcept
         break;}
 
         if(iter == max_iter){
+            // See evaluate(): truncated Taylor series may not reach `tol` for
+            // large-norm tensors. Flagged in debug builds.
+            assert(false && "exp(tensor) derivative: Taylor series did not converge within max_iter; input norm may be too large");
             break;
-            //throw std::runtime_error("exp_tensor_wrapper::derivative(): no convergence");
         }
     }
 

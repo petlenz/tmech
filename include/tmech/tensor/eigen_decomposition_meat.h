@@ -10,6 +10,7 @@
 
 namespace detail {
 
+#ifdef TMECH_ENABLE_LAPACK
 #ifndef TMECH_LAPACK_GEEV_DECLARED
 #define TMECH_LAPACK_GEEV_DECLARED
 extern "C" {
@@ -19,6 +20,7 @@ extern int sgeev_(char *, char *, int *, float *, int *, float *, float *,
                   float *, int *, float *, int *, float *, int *, int *);
 }
 #endif // TMECH_LAPACK_GEEV_DECLARED
+#endif // TMECH_ENABLE_LAPACK
 
 //==========================================================================
 //
@@ -621,10 +623,11 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::compute_eigenvector1(
 
 //==========================================================================
 //
-//  eigen_decomposition_lapack — LAPACK-based implementation
+//  eigen_decomposition_lapack — optional LAPACK-based implementation
+//  (only compiled when TMECH_ENABLE_LAPACK is defined; requires linking LAPACK)
 //
 //==========================================================================
-
+#ifdef TMECH_ENABLE_LAPACK
 template <typename _Tensor>
 constexpr inline auto
 eigen_decomposition_lapack<_Tensor>::compute_decomposition(
@@ -676,6 +679,7 @@ eigen_decomposition_lapack<_Tensor>::compute_decomposition(
     }
   }
 }
+#endif // TMECH_ENABLE_LAPACK
 
 } // NAMESPACE DETAIL
 #endif // EIGEN_DECOMPOSITION_MEAT_H

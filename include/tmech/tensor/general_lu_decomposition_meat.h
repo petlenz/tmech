@@ -10,16 +10,69 @@
 
 namespace detail {
 
+// True only for a fully-scalar system (every unknown/residual entry is scalar).
+template<typename> struct is_scalar_system : std::false_type {};
+template<typename... Ts> struct is_scalar_system<std::tuple<Ts...>>
+    : std::bool_constant<(std::is_fundamental_v<std::decay_t<Ts>> && ...)> {};
+template<typename T, std::size_t N> struct is_scalar_system<std::array<T, N>>
+    : std::bool_constant<std::is_fundamental_v<std::decay_t<T>>> {};
+
 template<typename Jacobian, typename Residuum, typename Vector_x>
 constexpr inline auto general_lu_solver::apply(Jacobian & A, Residuum const& R, Vector_x & x)noexcept{
-    constexpr std::size_t size{std::tuple_size_v<Residuum>};
+    if constexpr (is_scalar_system<std::decay_t<Residuum>>::value){
+        // scalar system: partial pivoting (robust against zero pivots)
+        apply_pivoted(A, R, x);
+    } else {
+        // block/tensor (or mixed) system: original pivot-free tuple-recursive path
+        constexpr std::size_t size{std::tuple_size_v<Residuum>};
+        elimination_I<0>(A);
+        forward_I<0>(A, R, x);
+        backward_I<size-1>(A, x);
+    }
+}
 
-    //factorize
-    elimination_I<0>(A);
-    //forward
-    forward_I<0>(A, R, x);
-    //backward
-    backward_I<size-1>(A, x);
+template<typename Jacobian, typename Residuum, typename Vector_x>
+inline auto general_lu_solver::apply_pivoted(Jacobian & A, Residuum const& R, Vector_x & x)noexcept{
+    constexpr std::size_t N{std::tuple_size_v<Residuum>};
+    using T = std::decay_t<decltype(std::get<0>(R))>;
+    T m[N][N]{};
+    T b[N]{};
+    // gather tuple/array system into runtime matrix and rhs
+    { std::size_t i{0};
+      std::apply([&](auto const&... row){
+          ([&](auto const& rw){ std::size_t j{0};
+               std::apply([&](auto const&... e){ ((m[i][j++] = static_cast<T>(e)), ...); }, rw);
+               ++i; }(row), ...); }, A); }
+    { std::size_t i{0};
+      std::apply([&](auto const&... e){ ((b[i++] = static_cast<T>(e)), ...); }, R); }
+    // forward elimination with partial (row) pivoting
+    for (std::size_t k{0}; k < N; ++k) {
+        std::size_t p{k};
+        T mx{std::abs(m[k][k])};
+        for (std::size_t i{k + 1}; i < N; ++i) {
+            const T v{std::abs(m[i][k])};
+            if (v > mx) { mx = v; p = i; }
+        }
+        if (p != k) {
+            for (std::size_t j{0}; j < N; ++j) { std::swap(m[k][j], m[p][j]); }
+            std::swap(b[k], b[p]);
+        }
+        for (std::size_t i{k + 1}; i < N; ++i) {
+            const T f{m[i][k] / m[k][k]};
+            for (std::size_t j{k}; j < N; ++j) { m[i][j] -= f * m[k][j]; }
+            b[i] -= f * b[k];
+        }
+    }
+    // back substitution
+    T sol[N]{};
+    for (std::size_t i{N}; i-- > 0;) {
+        T s{b[i]};
+        for (std::size_t j{i + 1}; j < N; ++j) { s -= m[i][j] * sol[j]; }
+        sol[i] = s / m[i][i];
+    }
+    // scatter solution back into x
+    { std::size_t i{0};
+      std::apply([&](auto&... e){ ((e = sol[i++]), ...); }, x); }
 }
 
 template<std::size_t I, typename Jacobian>

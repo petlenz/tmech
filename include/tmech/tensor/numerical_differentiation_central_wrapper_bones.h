@@ -10,20 +10,6 @@
 
 namespace detail {
 
-template<class TupType, size_t... I>
-void print(const TupType& _tup, std::index_sequence<I...>)
-{
-    std::cout << "(";
-    (..., (std::cout << (I == 0? "" : ", ") << std::get<I>(_tup)));
-    std::cout << ")\n";
-}
-
-template<class... T>
-void print (const std::tuple<T...>& _tup)
-{
-    print(_tup, std::make_index_sequence<sizeof...(T)>());
-}
-
 template<typename _Position>
 class numdiff_central
 {

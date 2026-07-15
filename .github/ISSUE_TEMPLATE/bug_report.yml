@@ -1,0 +1,53 @@
+name: Bug report
+description: Report incorrect results, a crash, or a build failure
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug! Please provide a minimal
+        reproducer so we can investigate quickly.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected instead.
+      placeholder: "inv(A) returns NaN for ..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Minimal reproducer
+      description: A small, self-contained snippet that triggers the problem.
+      render: cpp
+    validations:
+      required: true
+  - type: input
+    id: compiler
+    attributes:
+      label: Compiler and version
+      placeholder: "g++ 13.2 / clang++ 17 / MSVC 19.3x"
+    validations:
+      required: true
+  - type: dropdown
+    id: cxx-standard
+    attributes:
+      label: C++ standard
+      options: ["17", "20", "23"]
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Ubuntu 22.04 / macOS 14 / Windows 11"
+    validations:
+      required: true
+  - type: dropdown
+    id: xsimd
+    attributes:
+      label: Was TMECH_USE_XSIMD enabled?
+      options: ["OFF", "ON"]
+    validations:
+      required: true

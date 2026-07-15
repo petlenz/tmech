@@ -1,6 +1,6 @@
-.. Copyright (c) 2021, Peter Lenz
+.. Copyright (c) 2022, Peter Lenz
 
-   Distributed under the terms of the  Apache-2.0 License.
+   Distributed under the terms of the  BSD 3-Clause License.
 
    The full license is in the file LICENSE, distributed with this software.
 
@@ -8,7 +8,7 @@
 Introduction
 ------------
 
-'tmech' is a C++ library for the numerical study of the physics of continuous materials using higher-oder tensors.
+'tmech' is a C++ library for the numerical study of the physics of continuous materials using higher-order tensors.
 
 `tmech` provides
 
@@ -25,13 +25,13 @@ Introduction
 `tmech` requires a modern C++ compiler supporting C++17. The following C++
 compilers are supported:
 
-- On Unix platforms, gcc 5 or a recent version of Clang
-- On Windows platforms not tested
+- On Unix platforms, GCC 7+ or a recent version of Clang
+- On Windows, MSVC (Visual Studio 2022); all three platforms are exercised in CI
 
 Licensing
 ---------
 
-This software is licensed under the Apache License, Version 2.0. See the LICENSE file
+This software is licensed under the BSD 3-Clause License. See the LICENSE file
 for details.
 
 .. toctree::
@@ -54,33 +54,35 @@ for details.
    :maxdepth: 2
 
    api/tensor_functions
+   api/isotropic_functions
+   api/polar_decomposition
    api/numerical_diff
    api/compare_operators
    api/adaptor
    api/convert_to_voigt
 
 .. toctree::
-   :caption: QUICK REFERENCE SYMDIFF
+   :caption: SYMBOLIC DIFFERENTIATION
    :maxdepth: 2
-   
-   
+
+   api/symbolic_differentiation
+
 .. toctree::
    :caption: API REFERENCE TMECH
    :maxdepth: 2
-   
+
    api/api_tmech
-   
+
 .. toctree::
    :caption: API REFERENCE SYMDIFF
    :maxdepth: 2
-   
+
    api/api_symdiff
-   
+
 .. toctree::
-   :caption: DEVELOPER ZONE
+   :caption: DESIGN
    :maxdepth: 2
-   
-   
-..
-	   api/multi_newton
+
+   api/design
+   api/comparison
 

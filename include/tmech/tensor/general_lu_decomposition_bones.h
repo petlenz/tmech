@@ -21,6 +21,10 @@ public:
     static constexpr inline auto apply(Jacobian & A, Residuum const& R, Vector_x & x)noexcept;
 
 private:
+    // Robust scalar path: Gaussian elimination with partial pivoting.
+    template<typename Jacobian, typename Residuum, typename Vector_x>
+    static inline auto apply_pivoted(Jacobian & A, Residuum const& R, Vector_x & x)noexcept;
+
     template<std::size_t I, typename Jacobian>
     static constexpr inline auto elimination_I(Jacobian & A)noexcept;
 

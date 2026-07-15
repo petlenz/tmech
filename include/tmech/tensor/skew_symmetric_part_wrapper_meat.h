@@ -36,7 +36,7 @@ skew_symmetric_part_wrapper<Tensor>::skew_symmetric_part_wrapper(skew_symmetric_
 template <typename Tensor>
 constexpr inline auto skew_symmetric_part_wrapper<Tensor>::operator ()(size_type const i, size_type const j)const noexcept{
     //check if data.raw_data() is enable for better performace
-    if constexpr(std::experimental::is_detected<detail::has_raw_data, typename std::remove_reference<Tensor>::type>::value){
+    if constexpr(::tmech_detail::is_detected<detail::has_raw_data, typename std::remove_reference<Tensor>::type>::value){
         constexpr auto Dim{dimension()};
         return safe_cast<value_type>(0.5) *
                (_data.raw_data()[i * Dim + j] - _data.raw_data()[j * Dim + i]);

@@ -9,7 +9,7 @@
 #define TMECH_CONFIG_H
 
 #define TMECH_VERSION_MAJOR 1
-#define TMECH_VERSION_MINOR 0
+#define TMECH_VERSION_MINOR 1
 #define TMECH_VERSION_PATCH 0
 
 //Rank 8 Dim 3
@@ -21,6 +21,27 @@
 
 #ifndef TMECH_MAX_LOOP_UNROLL_SIZE
 #define TMECH_MAX_LOOP_UNROLL_SIZE 256
+#endif
+
+// -------------------- compiler intrinsic helpers --------------------
+// Internal, cross-compiler helpers used by the GEMM kernels. Defined here so
+// they are available before any kernel header is included.
+#if !defined(TMECH_RESTRICT)
+  #if defined(__GNUC__) || defined(__clang__)
+    #define TMECH_RESTRICT __restrict__
+  #else
+    #define TMECH_RESTRICT
+  #endif
+#endif
+
+#if !defined(TMECH_INLINE)
+  #if defined(__GNUC__) || defined(__clang__)
+    #define TMECH_INLINE inline __attribute__((always_inline))
+  #elif defined(_MSC_VER)
+    #define TMECH_INLINE __forceinline
+  #else
+    #define TMECH_INLINE inline
+  #endif
 #endif
 
 // SIMD register width (bytes) for the current target architecture.

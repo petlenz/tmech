@@ -60,3 +60,8 @@ CMakeLists.txt.user
 
 # results
 *.png
+# rendered paper (build artifact)
+paper.pdf
+
+# paper figure (ships with the JOSS paper)
+!paper_benchmark.png

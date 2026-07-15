@@ -83,10 +83,10 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived
     //const auto& tensor{tensor_base.convert()};
 
     check_size();
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
+    if constexpr(::tmech_detail::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
         tensor_base.convert().evaluate(*this);
     }else{
-        if constexpr(std::experimental::is_detected<detail::has_evaluate, Derived>::value){
+        if constexpr(::tmech_detail::is_detected<detail::has_evaluate, Derived>::value){
             tensor_base.convert().evaluate();
         }
 
@@ -132,10 +132,10 @@ tensor<T, Dim, Rank>::operator=(_Tensor && __tensor) noexcept{
     TensorType _tensor{std::forward<_Tensor>(__tensor)};
 
     check_size();
-    if constexpr(std::experimental::is_detected<detail::has_evaluate, TensorType, decltype (*this)>::value){
+    if constexpr(::tmech_detail::is_detected<detail::has_evaluate, TensorType, decltype (*this)>::value){
         _tensor.evaluate(*this);
     }else{
-        if constexpr(std::experimental::is_detected<detail::has_evaluate, TensorType>::value){
+        if constexpr(::tmech_detail::is_detected<detail::has_evaluate, TensorType>::value){
             _tensor.evaluate();
         }
 
@@ -359,10 +359,10 @@ tensor<T, Dim, Rank>::tensor(_Tensor const& __tensor)noexcept:
     if constexpr (std::is_same_v<_Tensor, tensor<T, Dim, Rank>>){
         _data = std::forward<_Tensor>(__tensor)._data;
     }else{
-        if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor, decltype (*this)>::value){
+        if constexpr(::tmech_detail::is_detected<detail::has_evaluate, _Tensor, decltype (*this)>::value){
             const_cast<_Tensor&>(__tensor).evaluate(*this);
         }else{
-            if constexpr(std::experimental::is_detected<detail::has_evaluate, _Tensor>::value){
+            if constexpr(::tmech_detail::is_detected<detail::has_evaluate, _Tensor>::value){
                 const_cast<_Tensor&>(__tensor).evaluate();
             }
 

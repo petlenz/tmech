@@ -388,7 +388,10 @@ to discuss the approach.
 1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository
 2. Create a [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository) with a descriptive name
 3. Implement your changes and add [tests](https://github.com/petlenz/tmech/blob/master/tests/tmech_test.h)
-4. Open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) into `main`
+4. Open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) into `master`
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow and our
+[Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
