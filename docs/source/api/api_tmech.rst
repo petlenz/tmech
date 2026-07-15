@@ -12,17 +12,13 @@ Tensor
 .. doxygenclass:: tensor
    :project: tmech
    :members:
-   :undoc-members:
-   :private-members:
    
 Adaptor
 ^^^^^^^
 
-.. doxygenclass:: adaptor_wrapper
+.. doxygenclass:: adaptor
    :project: tmech
    :members:
-   :undoc-members:
-   :private-members:
    
 Identity
 ^^^^^^^^
@@ -30,8 +26,6 @@ Identity
 .. doxygenclass:: eye
    :project: tmech
    :members:
-   :undoc-members:
-   :private-members:
    
 Zeros
 ^^^^^
@@ -39,8 +33,6 @@ Zeros
 .. doxygenclass:: zeros
    :project: tmech
    :members:
-   :undoc-members:
-   :private-members:
    
 Random normal
 ^^^^^^^^^^^^^
@@ -48,7 +40,6 @@ Random normal
 .. doxygenclass:: randn
    :project: tmech
    :members:
-   :undoc-members:
    
 Random uniform
 ^^^^^^^^^^^^^^
@@ -56,8 +47,6 @@ Random uniform
 .. doxygenclass:: randu
    :project: tmech
    :members:
-   :undoc-members:
-   :private-members:
    
    
    

@@ -18,7 +18,7 @@ Nonsymmetric input and result
 
 Symmetric input and result
 --------------------------------------
-.. _num_diff_central-func-ref:
+.. _num_diff_sym_central-func-ref:
 .. doxygenfunction:: num_diff_sym_central(_Function __func, _Point const& __x, double const __h = 1e-7)
    :project: tmech
 
