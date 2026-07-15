@@ -26,7 +26,7 @@ syntax for tensors of arbitrary rank and an expression-template engine that
 composes operations without intermediate temporaries. Beyond standard tensor
 algebra, it offers spectral-based isotropic tensor functions (`exp`, `log`,
 `sqrt`, `pow`) and tensor decompositions (polar, eigenvalue) with closed-form
-derivatives, and an experimental compile-time *symbolic differentiation* module
+derivatives, and an in-development compile-time *symbolic differentiation* module
 that produces analytic tangent operators for tensor-valued expressions. Tensors
 up to rank eight (in three dimensions) use stack-allocated storage; larger ranks
 fall back to dynamic allocation, and optional SIMD acceleration is available
@@ -36,27 +36,34 @@ finite-element solvers.
 
 # Statement of need
 
-Newton-type solvers for nonlinear boundary-value problems in continuum mechanics
-require *consistent tangent operators* — fourth-order tensors obtained by
-differentiating the stress response with respect to a deformation measure
-[@holzapfel2000; @bonetwood2008]. Deriving and implementing these by hand is
-tedious, error-prone, and a recurring bottleneck when developing new material
-models [@simo1992].
+Computational continuum mechanics places two demands on a numerical library.
+First, constitutive models are expressed in higher-order tensor algebra —
+symmetry-aware products, contractions, isotropic tensor functions, and spectral
+or polar decompositions of second- and fourth-order tensors. Second, Newton-type
+solvers for the resulting nonlinear boundary-value problems require *consistent
+tangent operators* — fourth-order tensors obtained by differentiating the stress
+response with respect to a deformation measure [@holzapfel2000; @bonetwood2008] —
+whose derivation by hand is tedious, error-prone, and a recurring bottleneck when
+developing new material models [@simo1992].
 
-Existing C++ tensor libraries do not address this. Eigen [@eigen] targets
-matrices and vectors rather than higher-order tensors, while FTensor [@ftensor]
-and Fastor [@fastor] provide higher-order tensor contractions through expression
-templates but offer no differentiation. General-purpose automatic
-differentiation tools — Sacado [@trilinos], CoDiPack [@codipack], autodiff
-[@autodiff], and Enzyme [@enzyme] — differentiate arbitrary C++ code, but
-typically produce derivative *values* at run time through a tape or dual numbers
-and are not specialized to tensor algebra; symbolic code generators such as
-AceGen [@korelc2002] emit closed-form code but depend on an external
-computer-algebra environment. `tmech` occupies a different point in this space:
-its (experimental) `symdiff` module differentiates tensor expressions
-symbolically, at compile time and entirely within C++, yielding closed-form
+Existing tools address at most one of these. General C++ tensor libraries provide
+efficient evaluation but not both higher-order continuum-mechanics operations and
+differentiation: Eigen [@eigen] targets matrices and vectors rather than
+higher-order tensors, while FTensor [@ftensor] and Fastor [@fastor] offer
+higher-order tensor contractions through expression templates but no
+differentiation. Conversely, general-purpose automatic differentiation tools —
+Sacado [@trilinos], CoDiPack [@codipack], autodiff [@autodiff], and Enzyme
+[@enzyme] — differentiate arbitrary C++ code but produce derivative *values* at
+run time and are not specialized to tensor algebra, and symbolic code generators
+such as AceGen [@korelc2002] emit closed-form code but depend on an external
+computer-algebra environment.
+
+`tmech` combines both in a single header-only library: a tensor-algebra engine
+for arbitrary-rank tensors with the operations continuum mechanics needs,
+together with an in-development compile-time `symdiff` module that differentiates
+tensor expressions symbolically — entirely within C++, yielding closed-form
 derivative tensors in the library's own types without a run-time tape or external
-toolchain. Its tensor-algebra core is production-tested: it underlies the
+toolchain. The tensor-algebra engine is production-tested: it underlies the
 author's multiscale composite simulations [@lenz2023; @lenz2024] and is a
 dependency of the `numsim-cas` [@numsim_cas] and `numsim-codegen`
 [@numsim_codegen] tools.
