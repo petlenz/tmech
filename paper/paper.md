@@ -114,8 +114,10 @@ small factor on the rest. Benchmark sources and full reports are provided in the
 repository.
 
 ![Execution time on representative tensor operations, relative to `tmech`
-(lower is faster; SIMD build via xsimd, GCC 13.3 on an AMD Ryzen 7 PRO 6850U,
-Ubuntu 24.04 / Linux 6.17, single machine). `A·B` is a single contraction;
+(lower is faster; SIMD build via xsimd, GCC 13.3 with
+`-O3 -march=native -funroll-loops`, on an AMD Ryzen 7 PRO 6850U,
+Ubuntu 24.04 / Linux 6.17, single machine; identical flags for all three
+libraries). `A·B` is a single contraction;
 `C:a` and `C:D` are fourth-order double contractions with a second- and
 fourth-order tensor, respectively; `expr` is a compound
 expression.\label{fig:bench}](paper_benchmark.png)
