@@ -10,14 +10,20 @@
 
 namespace detail {
 
+// True only for a fully-scalar system (every unknown/residual entry is scalar).
+template<typename> struct is_scalar_system : std::false_type {};
+template<typename... Ts> struct is_scalar_system<std::tuple<Ts...>>
+    : std::bool_constant<(std::is_fundamental_v<std::decay_t<Ts>> && ...)> {};
+template<typename T, std::size_t N> struct is_scalar_system<std::array<T, N>>
+    : std::bool_constant<std::is_fundamental_v<std::decay_t<T>>> {};
+
 template<typename Jacobian, typename Residuum, typename Vector_x>
 constexpr inline auto general_lu_solver::apply(Jacobian & A, Residuum const& R, Vector_x & x)noexcept{
-    using elem_type = std::decay_t<decltype(std::get<0>(R))>;
-    if constexpr (std::is_fundamental_v<elem_type>){
-        // scalar system: use partial pivoting (robust against zero pivots)
+    if constexpr (is_scalar_system<std::decay_t<Residuum>>::value){
+        // scalar system: partial pivoting (robust against zero pivots)
         apply_pivoted(A, R, x);
     } else {
-        // block/tensor system: original pivot-free tuple-recursive path
+        // block/tensor (or mixed) system: original pivot-free tuple-recursive path
         constexpr std::size_t size{std::tuple_size_v<Residuum>};
         elimination_I<0>(A);
         forward_I<0>(A, R, x);
