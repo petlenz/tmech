@@ -10,6 +10,14 @@
 
 #include "traits.h"
 
+/**
+* @brief Wrapper for a tensor whose elements are drawn from a normal
+* (Gaussian) distribution with the given mean and standard deviation.
+*
+* @tparam _T The type of the tensor holding the elements.
+* @tparam _Dim Dimension of the underlying physical problem.
+* @tparam _Rank Rank of the tensor.
+*/
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 class randn : public tensor_base<randn<_T, _Dim, _Rank>>
 {

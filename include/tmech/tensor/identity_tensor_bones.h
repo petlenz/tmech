@@ -10,7 +10,6 @@
 
 
 /**
-* @class eye
 * @brief Identity tensor. Only for a Rank which is a multiplier of two.
 *
 * @tparam T The type of the tensor holding the elements.
