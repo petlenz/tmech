@@ -26,7 +26,7 @@ html_static_path = ['_static']
 source_suffix = '.rst'
 master_doc = 'index'
 project = 'tmech'
-copyright = '2022, Peter Lenz'
+copyright = '2022-2026, Peter Lenz'
 author = 'Peter Lenz'
 
 #html_logo = 'logo'
