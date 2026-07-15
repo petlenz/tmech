@@ -3,6 +3,7 @@
 
 import os
 import subprocess
+from datetime import datetime
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
@@ -26,7 +27,7 @@ html_static_path = ['_static']
 source_suffix = '.rst'
 master_doc = 'index'
 project = 'tmech'
-copyright = '2022, Peter Lenz'
+copyright = '2022-%d, Peter Lenz' % datetime.now().year
 author = 'Peter Lenz'
 
 #html_logo = 'logo'

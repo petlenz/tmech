@@ -80,12 +80,6 @@ public:
     template<typename ...Indicies>
     inline constexpr auto& operator()(Indicies const ... indices) noexcept;
 
-    template<typename _TensorLHS, typename _TensorRHS, typename, typename >
-    friend constexpr inline auto operator == (_TensorLHS && __lhs, _TensorRHS && __rhs) noexcept;
-
-    template<typename _TensorLHS, typename _TensorRHS, typename, typename >
-    friend constexpr inline auto operator != (_TensorLHS && __lhs, _TensorRHS && __rhs) noexcept;
-
     static constexpr inline auto rank() noexcept;
 
     static constexpr inline auto dimension() noexcept;

@@ -3,7 +3,7 @@
    Distributed under the terms of the  BSD 3-Clause License.
 
    The full license is in the file LICENSE, distributed with this software.
-   
+
 Adapting pointers of raw memory
 ===============================
 
@@ -38,7 +38,8 @@ Without shear strains
 Running the program, produces the following output:
 
 .. code::
-	true
+
+    true
 
 Shear strains
 ^^^^^^^^^^^^^
@@ -62,8 +63,9 @@ Shear strains are multiplied with 0.5
 Running the program, produces the following output:
 
 .. code::
-	true
-	
+
+    true
+
 Adapting raw pointers full representation
 -----------------------------------------
 
@@ -84,4 +86,5 @@ Adapting raw pointers full representation
 Running the program, produces the following output:
 
 .. code::
-	true
+
+    true

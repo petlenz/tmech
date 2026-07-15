@@ -26,6 +26,14 @@ struct uniform_distribution<T, true>
 
 } // NAMESPACE DETAIL
 
+/**
+* @brief Wrapper for a tensor whose elements are drawn from a uniform
+* distribution (real or integer, depending on the value type).
+*
+* @tparam _T The type of the tensor holding the elements.
+* @tparam _Dim Dimension of the underlying physical problem.
+* @tparam _Rank Rank of the tensor.
+*/
 template <typename _T, std::size_t _Dim, std::size_t _Rank>
 class randu : public tensor_base<randu<_T, _Dim, _Rank>>
 {

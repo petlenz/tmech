@@ -27,9 +27,9 @@ Defined in ``tmech/tensor/tensor.h``
    :project: tmech
 
 .. _equal-op-ref:
-.. doxygenfunction:: operator==(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
+.. doxygenfunction:: operator==(_TensorLHS &&__lhs, _TensorRHS &&__rhs)
    :project: tmech
 
 .. _nequal-op-ref:
-.. doxygenfunction:: operator!=(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
+.. doxygenfunction:: operator!=(_TensorLHS &&__lhs, _TensorRHS &&__rhs)
    :project: tmech

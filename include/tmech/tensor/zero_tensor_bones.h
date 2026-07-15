@@ -10,7 +10,6 @@
 
 
 /**
-* @class zeros
 * @brief Wrapper for a tensor, which contains only zeros.
 * No memory is initialised.
 *

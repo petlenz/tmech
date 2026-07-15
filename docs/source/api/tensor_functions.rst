@@ -11,46 +11,43 @@ Addition
 ^^^^^^^^
 
 .. _operator_add-func-ref:
-.. doxygenfunction:: operator+(_TensorLHS &&, _TensorRHS &&)
+.. doxygenfunction:: operator+(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
    :project: tmech
 
 Subtraction
 ^^^^^^^^^^^
 
 .. _operator_min-func-ref:
-.. doxygenfunction:: operator-(_TensorLHS &&, _TensorRHS &&)
+.. doxygenfunction:: operator-(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
    :project: tmech
 
 Single contraction
 ^^^^^^^^^^^^^^^^^^
 
 .. _operator_mul-func-ref:
-.. doxygenfunction:: operator*(_TensorLHS &&, _TensorRHS &&)
+.. doxygenfunction:: operator*(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
    :project: tmech
-   
+
 Scalar update
 ^^^^^^^^^^^^^
- 
+
 .. _operator_scalar_mul-func-ref:
-.. doxygenfunction:: operator*(_Scalar &&, _Tensor &&)
+.. doxygenfunction:: operator*(_Scalar __scalar, _Tensor &&__tensor)
    :project: tmech
 
 .. _operator_scalar_dic-func-ref:
-.. doxygenfunction:: operator/(_Tensor &&, _Scalar &&)
+.. doxygenfunction:: operator/(_Tensor &&__tensor, _Scalar &&__scalar)
    :project: tmech
-   
+
 Basis rearrangement
 ===================
 
 General basis rearrangement
-^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. _basis_change-func-ref:
-.. doxygenfunction:: tmech::basis_change(_Tensor &&)
+.. doxygenfunction:: basis_change(_Tensor &&__tensor)
    :project: tmech
 
-.. _basis_change-func-ref:
-.. doxygenfunction:: basis_change(_Tensor &&)
-   :project: tmech
 Transposition
 ^^^^^^^^^^^^^
 .. _trans-func-ref:
@@ -74,7 +71,7 @@ General outer product
 Dyadic product
 ^^^^^^^^^^^^^^ 
 .. _otimes-func-ref:
-.. doxygenfunction:: tmech::otimes(_TensorLHS &&, _TensorRHS &&);
+.. doxygenfunction:: otimes(_TensorLHS &&__tensor_lhs, _TensorRHS &&__tensor_rhs)
    :project: tmech
    
 Lower dyadic product
@@ -116,14 +113,14 @@ Second order tensors and fourth order tensors with minior-symmetry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _inv-func-ref:
-.. doxygenfunction:: inv(_Tensor &&)
+.. doxygenfunction:: inv(_Tensor &&__tensor, _Sequences...)
    :project: tmech
 
 Fully anisotropic tensors
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _invf-func-ref:
-.. doxygenfunction:: invf(_Tensor &&)
+.. doxygenfunction:: invf(_Tensor &&__tensor, _Sequences...)
    :project: tmech
    
 Volumetric and deviatoric parts

@@ -577,6 +577,17 @@ constexpr inline auto operator >= (_TensorLHS && __lhs, _TensorRHS && __rhs)noex
 }
 
 
+/**
+ * @ingroup comparison_operators
+ * @brief Equal to
+ *
+ * Compares element-wise and returns true if
+ * all elements in \a lhs are equal to the
+ * elements in \a rhs.
+ * @param lhs a \ref tensor_base
+ * @param rhs a \ref tensor_base
+ * @return a bool value
+ */
 template<typename _TensorLHS, typename _TensorRHS,
          typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
          typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
@@ -595,6 +606,17 @@ constexpr inline auto operator == (_TensorLHS && __lhs, _TensorRHS && __rhs)noex
 }
 
 
+/**
+ * @ingroup comparison_operators
+ * @brief Not equal to
+ *
+ * Compares element-wise and returns true if
+ * at least one element in \a lhs differs from
+ * the corresponding element in \a rhs.
+ * @param lhs a \ref tensor_base
+ * @param rhs a \ref tensor_base
+ * @return a bool value
+ */
 template<typename _TensorLHS, typename _TensorRHS,
          typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorLHS>::type>::value> * = nullptr,
          typename std::enable_if_t<is_tensor_type<typename std::decay<_TensorRHS>::type>::value> * = nullptr>
