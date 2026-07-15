@@ -5,8 +5,9 @@ abstract: >-
   tmech is a C++17 header-only library for higher-order tensor algebra in
   computational continuum mechanics. It provides an expression-template engine
   with lazy evaluation, tensors of arbitrary rank, tensor decompositions
-  (polar, eigenvalue, spectral) with derivatives, and a compile-time symbolic
-  differentiation module that produces analytic tangent operators.
+  (polar, eigenvalue, spectral) with derivatives, and an in-development
+  compile-time symbolic differentiation module that yields analytic
+  derivatives of tensor-valued expressions.
 type: software
 authors:
   - given-names: Peter
