@@ -91,6 +91,11 @@ auto sig = lambda * tmech::trace(tmech::as_sym(eps)) * I
 auto C   = symdiff::derivative(sig, eps);   // tangent d(sigma)/d(eps)
 ```
 
+This covers hyperelastic constitutive models, whose stress and consistent tangent
+follow directly from a strain-energy function by symbolic differentiation. Support
+for models that require implicit (iterative) integration, such as inelastic
+materials, is in development.
+
 Isotropic tensor functions and polar/eigenvalue decompositions additionally
 expose analytic derivative tensors [@miehe1993; @miehe2001], required when
 constitutive models are formulated in terms of stretch or rotation tensors. The
