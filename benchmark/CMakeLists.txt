@@ -30,11 +30,12 @@ if(NOT Eigen3_FOUND)
 endif()
 
 # ── Fastor (header-only via FetchContent) ────────────────────────────────────
+# Fastor has no tagged releases; pin the exact commit used for the paper
+# benchmarks so results stay reproducible (master is a moving target).
 FetchContent_Declare(
     fastor
     GIT_REPOSITORY https://github.com/romeric/Fastor.git
-    GIT_TAG        master
-    GIT_SHALLOW    TRUE
+    GIT_TAG        a3002342a2c4fd78b80ca69214bd021d1c73d5a7
 )
 FetchContent_GetProperties(fastor)
 if(NOT fastor_POPULATED)
