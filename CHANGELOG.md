@@ -7,13 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
-- `levi_civita<T, Dim>::operator()(i, j, k)` returned the negated permutation
-  symbol (e.g. `e(0,1,2)` gave `-1` instead of `+1`); the rank-3 Levi-Civita
-  symbol is now mathematically correct. Added a direct symbol-value test
-  ([#13](https://github.com/petlenz/tmech/issues/13)).
-
-## [1.1.0] - 2026-07-08
+## [1.1.0] - 2026-07-15
 
 ### Added
 - Portable SIMD-accelerated GEMM kernels with an optional [xsimd](https://github.com/xtensor-stack/xsimd)
@@ -37,6 +31,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Uninitialized SIMD accumulator in the GEMM kernel.
 - Removed a debug print and other leftovers from library code paths.
+- `levi_civita<T, Dim>::operator()(i, j, k)` returned the negated permutation
+  symbol (e.g. `e(0,1,2)` gave `-1` instead of `+1`); the rank-3 Levi-Civita
+  symbol is now mathematically correct, with a direct symbol-value test
+  ([#13](https://github.com/petlenz/tmech/issues/13)).
 
 ## [1.0.0] - 2022-09-23
 
