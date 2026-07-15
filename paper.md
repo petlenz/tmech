@@ -92,6 +92,21 @@ no mandatory dependencies, and is tested with Google Test across GCC, Clang, and
 MSVC on Linux, macOS, and Windows. Further examples and API documentation are
 provided in the repository.
 
+# Performance
+
+`tmech` is benchmarked against Eigen [@eigen] and Fastor [@fastor] using Google
+Benchmark [@googlebenchmark]. Figure \ref{fig:bench} shows representative
+operations: `tmech` is consistently faster than Eigen (up to about a factor of
+three) and competitive with Fastor — faster on most operations and within a
+small factor on the rest. Benchmark sources and full reports are provided in the
+repository.
+
+![Execution time on representative tensor operations, relative to `tmech`
+(lower is faster; SIMD build, single x86-64 machine). `A·B` is a single
+contraction; `C:a` and `C:D` are fourth-order double contractions with a
+second- and fourth-order tensor, respectively; `expr` is a compound
+expression.\label{fig:bench}](paper_benchmark.png)
+
 # AI usage disclosure
 
 Generative AI (Claude Opus 4.8, Anthropic, via Claude Code) assisted with this
