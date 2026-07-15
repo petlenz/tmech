@@ -1,0 +1,35 @@
+name: Draft PDF
+
+# Builds the JOSS paper PDF so it can be previewed before submission.
+# Runs whenever the paper sources change (or manually via the Actions tab).
+on:
+  push:
+    paths:
+      - paper/**
+      - .github/workflows/draft-pdf.yml
+  pull_request:
+    paths:
+      - paper/**
+      - .github/workflows/draft-pdf.yml
+  workflow_dispatch:
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    name: Build the JOSS paper PDF
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build draft PDF
+        uses: openjournals/openjournals-draft-action@master
+        with:
+          journal: joss
+          paper-path: paper/paper.md
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          # The action writes the compiled PDF next to the paper source.
+          path: paper/paper.pdf
