@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-07-22
+
 ### Fixed
 - `inner_product<SeqL, SeqR>` silently returned a zero-initialised result when
   one operand needed a basis change and the other was a lazy expression-template
@@ -54,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   functions, a compile-time symbolic differentiation module (`symdiff`), and
   Abaqus UMAT/VUMAT adaptors.
 
-[Unreleased]: https://github.com/petlenz/tmech/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/petlenz/tmech/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/petlenz/tmech/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/petlenz/tmech/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/petlenz/tmech/releases/tag/v1.0.0
