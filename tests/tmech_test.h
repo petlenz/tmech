@@ -912,6 +912,43 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
                                         c, tol));                              \
   }
 
+// Regression: inner_product must give identical results for lazy
+// expression-template operands and materialised tensors. A non-exhaustive
+// constexpr dispatch in inner_product_wrapper::evaluate_imp used to skip the
+// contraction entirely and return a zero-initialised result when one operand
+// needed a basis change and the other was a lazy (no-raw_data) expression.
+#define inner_product_lazy(ValueType, Dim)                                     \
+  TEST(gtest, inner_product_lazy_##ValueType##_##Dim) {                        \
+    constexpr double tol = test_tol_v<ValueType>;                             \
+    const ValueType one(1);                                                    \
+    tmech::tensor<ValueType, Dim, 2> F =                                       \
+        tmech::abs(tmech::randn<ValueType, Dim, 2>());                         \
+    tmech::tensor<ValueType, Dim, 4> G =                                       \
+        tmech::abs(tmech::randn<ValueType, Dim, 4>());                         \
+    /* LHS needs a basis change, RHS does not: lazy RHS was the broken case */ \
+    {                                                                          \
+      using L = tmech::sequence<1>;                                            \
+      using R = tmech::sequence<1>;                                            \
+      tmech::tensor<ValueType, Dim, 4> ref = tmech::inner_product<L, R>(F, G); \
+      EXPECT_EQ(true, almost_equal_tensor_scaled(                                     \
+                          tmech::inner_product<L, R>(F, one * G), ref, tol));  \
+      EXPECT_EQ(true, almost_equal_tensor_scaled(                                     \
+                          tmech::inner_product<L, R>(one * F, G), ref, tol));  \
+      EXPECT_EQ(true, almost_equal_tensor_scaled(                                     \
+                    tmech::inner_product<L, R>(one * F, one * G), ref, tol));  \
+    }                                                                          \
+    /* RHS needs a basis change, LHS does not: lazy LHS was the broken case */ \
+    {                                                                          \
+      using L = tmech::sequence<2>;                                            \
+      using R = tmech::sequence<2>;                                            \
+      tmech::tensor<ValueType, Dim, 4> ref = tmech::inner_product<L, R>(F, G); \
+      EXPECT_EQ(true, almost_equal_tensor_scaled(                                     \
+                          tmech::inner_product<L, R>(one * F, G), ref, tol));  \
+      EXPECT_EQ(true, almost_equal_tensor_scaled(                                     \
+                          tmech::inner_product<L, R>(F, one * G), ref, tol));  \
+    }                                                                          \
+  }
+
 // outer product test — safe with randn
 #define outer_product2(ValueType, Dim)                                         \
   TEST(gtest, outer_product2_##ValueType##_##Dim) {                            \
@@ -2382,6 +2419,15 @@ inner_product4(complexd, 3);
 inner_product4(complexf, 1);
 inner_product4(complexf, 2);
 inner_product4(complexf, 3);
+
+inner_product_lazy(double, 2);
+inner_product_lazy(double, 3);
+inner_product_lazy(float, 2);
+inner_product_lazy(float, 3);
+inner_product_lazy(complexd, 2);
+inner_product_lazy(complexd, 3);
+inner_product_lazy(complexf, 2);
+inner_product_lazy(complexf, 3);
 
 outer_product2(double, 1);
 outer_product2(double, 2);

@@ -81,7 +81,7 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
         const_cast<decltype(_rhs_temp)&>(_rhs_temp).template change_basis_view<new_basis_rhs>() = _rhs;
     }
 
-    if constexpr ((basis_change_lhs && basis_change_rhs) || (!raw_data_lhs && !raw_data_rhs)){
+    if constexpr ((basis_change_lhs || !raw_data_lhs) && (basis_change_rhs || !raw_data_rhs)){
         evaluate_implementation(__result.raw_data(), _lhs_temp.raw_data(), _rhs_temp.raw_data());
     }else if constexpr (!(basis_change_lhs || !raw_data_lhs) && (basis_change_rhs || !raw_data_rhs)){
         evaluate_implementation(__result.raw_data(), _lhs.raw_data(), _rhs_temp.raw_data());
