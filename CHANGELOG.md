@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- `inner_product<SeqL, SeqR>` silently returned a zero-initialised result when
+  one operand needed a basis change and the other was a lazy expression-template
+  (no `raw_data()`), e.g. `inner_product<...>(F, 1.0*T)`. A non-exhaustive
+  `if constexpr` dispatch skipped the contraction entirely; the guard is now the
+  correct 2×2 over both operands. Added a lazy-operand regression test
+  ([#28](https://github.com/petlenz/tmech/issues/28)).
+
 ## [1.1.0] - 2026-07-15
 
 ### Added
