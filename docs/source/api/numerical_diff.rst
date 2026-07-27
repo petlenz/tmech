@@ -7,12 +7,28 @@
 Numerical differentiation
 =========================
 
+Both functions take an optional stencil-size template parameter selecting the
+accuracy order of the central-difference scheme: ``2`` (default) gives the
+classic two-point rule :math:`\mathcal{O}(h^2)`, ``5`` a five-point rule
+:math:`\mathcal{O}(h^4)`, and ``7`` a seven-point rule
+:math:`\mathcal{O}(h^6)`. Higher orders lower the truncation error at the cost
+of extra function evaluations and generally want a larger step ``h``.
+
+.. code::
+
+    // default two-point O(h^2)
+    auto d2 = tmech::num_diff_central(func, X);
+    // five-point O(h^4)
+    auto d4 = tmech::num_diff_central<void, 5>(func, X);
+    // with an index permutation and a five-point stencil
+    auto dd = tmech::num_diff_central<tmech::sequence<1,2,3,4>, 5>(func, X);
+
 Nonsymmetric input and result
 --------------------------------------
 .. _num_diff_central-func-ref:
 .. doxygenfunction:: num_diff_central(_Function __func, _Point const& __x, double const __h = 1e-7)
    :project: tmech
-   
+
 
 
 

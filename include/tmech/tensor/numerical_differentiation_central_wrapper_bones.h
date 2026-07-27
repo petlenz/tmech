@@ -10,7 +10,60 @@
 
 namespace detail {
 
-template<typename _Position>
+// Central finite-difference stencil descriptor. _Points selects the accuracy
+// order: 2 -> O(h^2) (the classic (f(x+h)-f(x-h))/(2h)), 5 -> O(h^4),
+// 7 -> O(h^6). nodes() lists the non-zero (offset, weight) pairs and divisor()
+// the shared denominator, i.e. f'(x) ~= (sum_k w_k f(x + k*h)) / (divisor*h).
+template<std::size_t _Points>
+struct numdiff_stencil
+{
+    static constexpr inline auto nodes()noexcept{
+        if constexpr (_Points == 2){
+            return std::array<std::pair<int, double>, 2>{{{-1, -1.0}, {1, 1.0}}};
+        }else if constexpr (_Points == 5){
+            return std::array<std::pair<int, double>, 4>{
+                {{-2, 1.0}, {-1, -8.0}, {1, 8.0}, {2, -1.0}}};
+        }else if constexpr (_Points == 7){
+            return std::array<std::pair<int, double>, 6>{
+                {{-3, -1.0}, {-2, 9.0}, {-1, -45.0}, {1, 45.0}, {2, -9.0}, {3, 1.0}}};
+        }else{
+            static_assert(_Points == 2 || _Points == 5 || _Points == 7,
+                          "num_diff_central: unsupported stencil size (supported: 2, 5, 7 points)");
+            return std::array<std::pair<int, double>, 2>{{{-1, -1.0}, {1, 1.0}}};
+        }
+    }
+
+    static constexpr inline double divisor()noexcept{
+        if constexpr (_Points == 5){
+            return 12.0;
+        }else if constexpr (_Points == 7){
+            return 60.0;
+        }else{
+            return 2.0;
+        }
+    }
+
+    // Combine the sampled function values into a derivative estimate.
+    // __base_scale is the plain 2-point factor 1/(2h) that the kernels already
+    // compute; multiplying by (2/divisor) turns the weighted node sum into the
+    // higher-order estimate and reduces to the original exactly for _Points==2.
+    // __sample(k) must return an already-materialised value at x + k*(unit step)
+    // so no expression-template temporaries dangle in the accumulation.
+    template<typename _ResultT, typename _ScaleT, typename _SampleFn>
+    static constexpr inline _ResultT combine(_SampleFn && __sample, _ScaleT const __base_scale)noexcept{
+        constexpr auto nds{nodes()};
+        const _ScaleT scale{__base_scale * static_cast<_ScaleT>(2.0 / divisor())};
+        _ResultT acc{__sample(nds[0].first) * static_cast<_ScaleT>(nds[0].second)};
+        for(std::size_t n{1}; n < nds.size(); ++n){
+            const _ResultT s{__sample(nds[n].first)};
+            acc = acc + s * static_cast<_ScaleT>(nds[n].second);
+        }
+        return acc * scale;
+    }
+};
+
+
+template<typename _Position, std::size_t _Points = 2>
 class numdiff_central
 {
 public:
@@ -43,36 +96,39 @@ public:
     }
 
 private:
+    using stencil = numdiff_stencil<_Points>;
+
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto scalar_wrt_scalar(Function __func, Direction const& __A, Result & __result, T const __eps)noexcept{
-        const auto inv_eps{static_cast<T>(1.0)/(2*__eps)};
-
-        __result = (__func(__A+__eps) - __func(__A-__eps))*inv_eps;
+        const T base{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
+        auto sample = [&](int __k){ return __func(__A + static_cast<T>(__k)*__eps); };
+        __result = stencil::template combine<T>(sample, base);
     }
 
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto tensor_wrt_scalar(Function __func, Direction const& __A, Result & __result, T const __eps)noexcept{
-        const auto inv_eps{static_cast<T>(1.0)/(2*__eps)};
-
-        __result = (__func(__A+__eps) - __func(__A-__eps))*inv_eps;
+        using output_type = decltype(__func(__A));
+        using result_tensor = tensor<T, output_type::dimension(), output_type::rank()>;
+        const T base{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
+        auto sample = [&](int __k){ return result_tensor(__func(__A + static_cast<T>(__k)*__eps)); };
+        __result = stencil::template combine<result_tensor>(sample, base);
     }
 
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto scalar_wrt_tensor(Function __func, Direction const& __A, Result & __result, T const __eps)noexcept{
         using direction_loop = typename meta_for_loop_deep<Direction::dimension(), Direction::rank()-1>::type;
-        const auto inv_eps{static_cast<T>(1.0)/(2*__eps)};
+        const T base{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
         //dS/dC_{ij}
-        tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
-        tensor<T, Direction::dimension(), Direction::rank()> Dm(Dp);
+        tensor<T, Direction::dimension(), Direction::rank()> D(__A);
 
         auto diff_kernal = [&](auto ...Numbers){
-            Dp(Numbers...) += __eps;
-            Dm(Numbers...) -= __eps;
-            const auto ap{__func(Dp)};
-            const auto am{__func(Dm)};
-            Dp(Numbers...) -= __eps;
-            Dm(Numbers...) += __eps;
-            __result(Numbers...) = (ap - am)*inv_eps;
+            auto sample = [&](int __k){
+                D(Numbers...) = __A(Numbers...) + static_cast<T>(__k)*__eps;
+                const auto v{__func(D)};
+                D(Numbers...) = __A(Numbers...);
+                return v;
+            };
+            __result(Numbers...) = stencil::template combine<T>(sample, base);
         };
 
         direction_loop::loop(diff_kernal);
@@ -94,26 +150,26 @@ private:
         using function_loop =
             typename meta_for_loop_deep<Direction::dimension(),
                                         func_result_tensor::rank() - 1>::type;
-        const auto inv_eps{static_cast<T>(1.0)/(2*__eps)};
+        const T base{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
 
         static_assert(Position::size() ==
                           (Direction::rank() + func_result_tensor::rank()),
                       "numdiff_central:: number of positions does not match!");
 
-        tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
-        tensor<T, Direction::dimension(), Direction::rank()> Dm(Dp);
+        tensor<T, Direction::dimension(), Direction::rank()> D(__A);
 
         auto direction_kernal = [&](auto ...ONumbers){
-            Dp(ONumbers...) += __eps;
-            Dm(ONumbers...) -= __eps;
-            const func_result_tensor Ap{__func(Dp)};
-            const func_result_tensor Am{__func(Dm)};
-            Dp(ONumbers...) -= __eps;
-            Dm(ONumbers...) += __eps;
+            auto sample = [&](int __k){
+                D(ONumbers...) = __A(ONumbers...) + static_cast<T>(__k)*__eps;
+                func_result_tensor v{__func(D)};
+                D(ONumbers...) = __A(ONumbers...);
+                return v;
+            };
+            const func_result_tensor Blk{stencil::template combine<func_result_tensor>(sample, base)};
 
             auto diff_kernal = [&](auto ...INumbers){
                 const auto tuple = std::make_tuple(INumbers..., ONumbers...);
-                tuple_call(__result, tuple, Position()) = (Ap(INumbers...) - Am(INumbers...))*inv_eps;
+                tuple_call(__result, tuple, Position()) = Blk(INumbers...);
             };
 
             function_loop::loop(diff_kernal);

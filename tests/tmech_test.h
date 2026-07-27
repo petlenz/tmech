@@ -2024,6 +2024,101 @@ TEST(gtest, numdiff_tensor_inv_2) {
 }
 
 //==========================================================================
+// num_diff_central stencil size (#27): higher-order central differences
+//==========================================================================
+
+// A high-degree scalar function exposes truncation order at a fixed step.
+// f(x)=x^6, f'(x)=6x^5. With a deliberately large h the 5-/7-point stencils
+// must be far more accurate than the default 2-point one.
+TEST(gtest, numdiffStencilScalarAccuracy) {
+  auto f = [](double x) { return std::pow(x, 6); };
+  const double x0 = 1.3;
+  const double exact = 6.0 * std::pow(x0, 5);
+  const double h = 1e-2;
+  const double e2 = std::abs(tmech::num_diff_central<void, 2>(f, x0, h) - exact);
+  const double e5 = std::abs(tmech::num_diff_central<void, 5>(f, x0, h) - exact);
+  const double e7 = std::abs(tmech::num_diff_central<void, 7>(f, x0, h) - exact);
+  EXPECT_LT(e5, e2 * 1e-3);   // O(h^4) vs O(h^2)
+  EXPECT_LT(e7, e5 * 1e-3);   // O(h^6) vs O(h^4)
+}
+
+// Convergence order: halving h reduces the 2-point error ~4x (O(h^2)) and the
+// 5-point error ~16x (O(h^4)).
+TEST(gtest, numdiffStencilConvergenceOrder) {
+  auto f = [](double x) { return std::pow(x, 6); };
+  const double x0 = 1.3;
+  const double exact = 6.0 * std::pow(x0, 5);
+  const double h = 1e-2;
+  const double e2_h = std::abs(tmech::num_diff_central<void, 2>(f, x0, h) - exact);
+  const double e2_h2 = std::abs(tmech::num_diff_central<void, 2>(f, x0, h / 2) - exact);
+  const double e5_h = std::abs(tmech::num_diff_central<void, 5>(f, x0, h) - exact);
+  const double e5_h2 = std::abs(tmech::num_diff_central<void, 5>(f, x0, h / 2) - exact);
+  EXPECT_NEAR(e2_h / e2_h2, 4.0, 0.2);
+  EXPECT_NEAR(e5_h / e5_h2, 16.0, 1.0);
+}
+
+// The defaulted _Points parameter must reproduce the classic 2-point result
+// exactly (full backward compatibility).
+TEST(gtest, numdiffStencilDefaultIsTwoPoint) {
+  auto A = test_helpers::well_conditioned_nonsym_rank2<double, 3>();
+  auto func = [](auto const &tensor) { return tmech::det(tensor); };
+  auto d_default = tmech::num_diff_central(func, A);
+  auto d_two = tmech::num_diff_central<void, 2>(func, A);
+  EXPECT_EQ(true, almost_equal_tensor_scaled(d_default, d_two, 0.0, 1e-15));
+}
+
+// tensor-wrt-scalar with a cubic coefficient: g(s)=s^3*A, dg/ds=3s^2*A. The
+// 5-point stencil is exact for a cubic, so it hits machine precision where the
+// 2-point stencil carries O(h^2) truncation.
+TEST(gtest, numdiffStencilTensorWrtScalar) {
+  auto A = test_helpers::well_conditioned_nonsym_rank2<double, 3>();
+  const double s0 = 1.1;
+  auto g = [&](double s) {
+    return tmech::tensor<double, 3, 2>(std::pow(s, 3) * A);
+  };
+  tmech::tensor<double, 3, 2> exact = 3.0 * s0 * s0 * A;
+  auto d2 = tmech::num_diff_central<void, 2>(g, s0, 1e-2);
+  auto d5 = tmech::num_diff_central<void, 5>(g, s0, 1e-2);
+  EXPECT_LT(tmech::norm(d5 - exact), tmech::norm(d2 - exact) * 1e-6);
+}
+
+// Higher-order stencils agree with the analytic derivative for a tensor-valued
+// map (here d/dF of det(F) = cof(F)).
+TEST(gtest, numdiffStencilTensorDet) {
+  auto A = test_helpers::well_conditioned_nonsym_rank2<double, 3>();
+  auto func = [](auto const &tensor) { return tmech::det(tensor); };
+  auto dA = tmech::cof(A);
+  EXPECT_EQ(true, almost_equal_tensor_scaled(
+                      dA, tmech::num_diff_central<void, 5>(func, A), 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(
+                      dA, tmech::num_diff_central<void, 7>(func, A), 5e-6));
+}
+
+// The symmetric variant gained the same _Points parameter. All stencil sizes
+// must match the analytic (symdiff) derivative for a symmetric input.
+TEST(gtest, numdiffStencilSymMatchesAnalytic) {
+  using Sym2x2 = std::tuple<tmech::sequence<1, 2>, tmech::sequence<2, 1>>;
+  using Sym4x4 =
+      std::tuple<tmech::sequence<1, 2, 3, 4>, tmech::sequence<2, 1, 3, 4>,
+                 tmech::sequence<1, 2, 4, 3>, tmech::sequence<2, 1, 4, 3>>;
+  symdiff::variable<tmech::tensor<double, 3, 2>, 0> x;
+  tmech::tensor<double, 3, 2> a{2.0306, 0.162,  2.0208, 0.162, 1.245,
+                                0,      2.0208, 0,      2.561};
+  auto df = symdiff::derivative<1>(tmech::log(x), x);
+  auto ana = df(std::make_tuple(a));
+  auto lamb = [](auto const &t) { return tmech::log(t); };
+  EXPECT_EQ(true, almost_equal_tensor_scaled(
+                      (tmech::num_diff_sym_central<Sym2x2, Sym4x4, 2>(lamb, a, 5e-6)),
+                      ana, 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(
+                      (tmech::num_diff_sym_central<Sym2x2, Sym4x4, 5>(lamb, a, 5e-6)),
+                      ana, 5e-6));
+  EXPECT_EQ(true, almost_equal_tensor_scaled(
+                      (tmech::num_diff_sym_central<Sym2x2, Sym4x4, 7>(lamb, a, 5e-6)),
+                      ana, 5e-6));
+}
+
+//==========================================================================
 // Test instantiations
 //==========================================================================
 

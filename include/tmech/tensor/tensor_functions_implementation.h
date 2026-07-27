@@ -577,7 +577,7 @@ constexpr inline auto norm(tensor_base<Derived> const& data_base){
  * @brief Numerical differentiation of expressions based on the central differences scheme.
  *
  */
-template<typename Position, typename Function, typename Direction>
+template<typename Position, std::size_t Points, typename Function, typename Direction>
 inline auto num_diff_central(Function func, Direction const& x, double const eps){
     using output = decltype (func(x));
 
@@ -585,34 +585,34 @@ inline auto num_diff_central(Function func, Direction const& x, double const eps
         static_assert (std::is_same_v<double, Direction>,
                 "Numerical differentiation: only for double precision tensors");
         double result{0};
-        detail::numdiff_central<Position>::evaluate(func, x, result, eps);
+        detail::numdiff_central<Position, Points>::evaluate(func, x, result, eps);
         return result;
 
     }else if constexpr (std::is_fundamental_v<Direction> == false && std::is_fundamental_v<output> == true) {
         static_assert (std::is_same_v<double, typename Direction::value_type>,
                 "Numerical differentiation: only for double precision tensors");
         tensor<double, Direction::dimension(), Direction::rank()> result;
-        detail::numdiff_central<Position>::evaluate(func, x, result, eps);
+        detail::numdiff_central<Position, Points>::evaluate(func, x, result, eps);
         return result;
 
     }else if constexpr (std::is_fundamental_v<Direction> == true && std::is_fundamental_v<output> == false) {
         static_assert (std::is_same_v<double, Direction>,
                 "Numerical differentiation: only for double precision tensors");
         tensor<double, output::dimension(), output::rank()> result;
-        detail::numdiff_central<Position>::evaluate(func, x, result, eps);
+        detail::numdiff_central<Position, Points>::evaluate(func, x, result, eps);
         return result;
 
     }else if constexpr (std::is_fundamental_v<Direction> == false && std::is_fundamental_v<output> == false) {
         static_assert (std::is_same_v<double, typename Direction::value_type>,
                 "Numerical differentiation: only for double precision tensors");
         tensor<double, output::dimension(), output::rank()+Direction::rank()> result;
-        detail::numdiff_central<Position>::evaluate(func, x, result, eps);
+        detail::numdiff_central<Position, Points>::evaluate(func, x, result, eps);
         return result;
     }
 }
 
 
-template<typename SymDirection, typename SymResult, typename Function, typename Direction>
+template<typename SymDirection, typename SymResult, std::size_t Points, typename Function, typename Direction>
 inline auto num_diff_sym_central(Function func, Direction const& x, double const eps){
     using output = decltype (func(x));
 
@@ -620,28 +620,28 @@ inline auto num_diff_sym_central(Function func, Direction const& x, double const
         static_assert (std::is_same_v<double, Direction>,
                 "Numerical differentiation: only for double precision tensors");
         double result{0};
-        detail::numdiff_central_symmetric<SymDirection, SymResult>::evaluate(func, x, result, eps);
+        detail::numdiff_central_symmetric<SymDirection, SymResult, Points>::evaluate(func, x, result, eps);
         return result;
 
     }else if constexpr (std::is_fundamental_v<Direction> == false && std::is_fundamental_v<output> == true) {
         static_assert (std::is_same_v<double, typename Direction::value_type>,
                 "Numerical differentiation: only for double precision tensors");
         tensor<double, Direction::dimension(), Direction::rank()> result;
-        detail::numdiff_central_symmetric<SymDirection, SymResult>::evaluate(func, x, result, eps);
+        detail::numdiff_central_symmetric<SymDirection, SymResult, Points>::evaluate(func, x, result, eps);
         return result;
 
     }else if constexpr (std::is_fundamental_v<Direction> == true && std::is_fundamental_v<output> == false) {
         static_assert (std::is_same_v<double, Direction>,
                 "Numerical differentiation: only for double precision tensors");
         tensor<double, output::dimension(), output::rank()> result;
-        detail::numdiff_central_symmetric<SymDirection, SymResult>::evaluate(func, x, result, eps);
+        detail::numdiff_central_symmetric<SymDirection, SymResult, Points>::evaluate(func, x, result, eps);
         return result;
 
     }else if constexpr (std::is_fundamental_v<Direction> == false && std::is_fundamental_v<output> == false) {
         static_assert (std::is_same_v<double, typename Direction::value_type>,
                 "Numerical differentiation: only for double precision tensors");
         tensor<double, output::dimension(), output::rank()+Direction::rank()> result;
-        detail::numdiff_central_symmetric<SymDirection, SymResult>::evaluate(func, x, result, eps);
+        detail::numdiff_central_symmetric<SymDirection, SymResult, Points>::evaluate(func, x, result, eps);
         return result;
     }
 }

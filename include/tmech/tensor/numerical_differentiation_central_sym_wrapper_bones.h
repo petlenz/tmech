@@ -80,11 +80,11 @@ struct set_basis<First>
     }
 };
 
-template<typename SymDirection, typename SymResult>
+template<typename SymDirection, typename SymResult, std::size_t _Points = 2>
 class numdiff_central_symmetric;
 
-template<typename ...SymDirection, typename ...SymResult>
-class numdiff_central_symmetric<std::tuple<SymDirection...>, std::tuple<SymResult...>>
+template<typename ...SymDirection, typename ...SymResult, std::size_t _Points>
+class numdiff_central_symmetric<std::tuple<SymDirection...>, std::tuple<SymResult...>, _Points>
 {
 public:
     using size_type = std::size_t;
@@ -111,18 +111,22 @@ public:
     }
 
 private:
+    using stencil = numdiff_stencil<_Points>;
+
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto scalar_wrt_scalar(Function & __func, Direction const& __A, Result & __result, T const __eps)noexcept{
-        const T inv_eps{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
-
-        __result = (__func(__A+__eps) - __func(__A-__eps))*inv_eps;
+        const T base{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
+        auto sample = [&](int __k){ return __func(__A + static_cast<T>(__k)*__eps); };
+        __result = stencil::template combine<T>(sample, base);
     }
 
     template <typename Function, typename Direction, typename Result, typename T>
     static constexpr inline auto tensor_wrt_scalar(Function & __func, Direction const& __A, Result & __result, T const __eps)noexcept{
-        const T inv_eps{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
-
-        __result = (__func(__A+__eps) - __func(__A-__eps))*inv_eps;
+        using output_type = decltype(__func(__A));
+        using result_tensor = tensor<T, output_type::dimension(), output_type::rank()>;
+        const T base{static_cast<T>(1.0)/(static_cast<T>(2.0)*__eps)};
+        auto sample = [&](int __k){ return result_tensor(__func(__A + static_cast<T>(__k)*__eps)); };
+        __result = stencil::template combine<result_tensor>(sample, base);
     }
 
     template <typename Function, typename Direction, typename Result, typename T>
@@ -130,22 +134,22 @@ private:
         using direction_loop = basis_pair_loop<Direction::dimension(), Direction::rank()/2ul>;
 
         const T eps_half{__eps/(sizeof... (SymDirection))};
-        const T inv_eps{static_cast<T>(1.0)/((sizeof... (SymDirection))*__eps)};
+        // original 2-point scale for this kernel: 1 / (nSym * eps)
+        const T base{static_cast<T>(1.0)/((sizeof... (SymDirection))*__eps)};
 
         //dS/dC_{ij}
-        tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
-        tensor<T, Direction::dimension(), Direction::rank()> Dm(Dp);
+        tensor<T, Direction::dimension(), Direction::rank()> D(__A);
         auto diff_kernal = [&](auto ...Numbers){
             auto tuple = std::make_tuple(Numbers...);
 
-            set_basis<SymDirection...>::add(Dp, tuple, +eps_half);
-            set_basis<SymDirection...>::add(Dm, tuple, -eps_half);
-            const auto Ap{__func(Dp)};
-            const auto Am{__func(Dm)};
-            set_basis<SymDirection...>::add(Dp, tuple, -eps_half);
-            set_basis<SymDirection...>::add(Dm, tuple, +eps_half);
+            auto sample = [&](int __k){
+                set_basis<SymDirection...>::add(D, tuple, static_cast<T>(__k)*eps_half);
+                const auto v{__func(D)};
+                set_basis<SymDirection...>::add(D, tuple, -static_cast<T>(__k)*eps_half);
+                return v;
+            };
 
-            set_basis<SymDirection...>::set(__result, tuple, (Ap - Am)*inv_eps);
+            set_basis<SymDirection...>::set(__result, tuple, stencil::template combine<T>(sample, base));
         };
         direction_loop::loop(diff_kernal);
     }
@@ -168,26 +172,26 @@ private:
           basis_pair_loop<Direction::dimension(), output_type::rank() / 2ul>;
 
       const T eps_half{__eps / (sizeof...(SymDirection))};
-      const T inv_eps{static_cast<T>(1.0) / (2 * __eps)};
+      // original 2-point scale for this kernel: 1 / (2 * eps)
+      const T base{static_cast<T>(1.0) / (static_cast<T>(2.0) * __eps)};
 
-      tensor<T, Direction::dimension(), Direction::rank()> Dp(__A);
-      tensor<T, Direction::dimension(), Direction::rank()> Dm(Dp);
+      tensor<T, Direction::dimension(), Direction::rank()> D(__A);
 
       auto diff_kernal =
           [&](auto... ONumbers) {
             auto tuple = std::make_tuple(ONumbers...);
 
-            set_basis<SymDirection...>::add(Dp, tuple, +eps_half);
-            set_basis<SymDirection...>::add(Dm, tuple, -eps_half);
-            // FIX: Use the type alias instead of constexpr auto FuncRank
-            const func_result_tensor Ap{__func(Dp)};
-            const func_result_tensor Am{__func(Dm)};
-            set_basis<SymDirection...>::add(Dp, tuple, -eps_half);
-            set_basis<SymDirection...>::add(Dm, tuple, +eps_half);
+            auto sample = [&](int __k){
+                set_basis<SymDirection...>::add(D, tuple, static_cast<T>(__k)*eps_half);
+                func_result_tensor v{__func(D)};
+                set_basis<SymDirection...>::add(D, tuple, -static_cast<T>(__k)*eps_half);
+                return v;
+            };
+            const func_result_tensor Blk{stencil::template combine<func_result_tensor>(sample, base)};
 
             auto diff_kernal = [&](auto ...INumbers){
                 const auto tuple = std::make_tuple(ONumbers..., INumbers...);
-                set_basis<SymResult...>::set(__result, tuple, (Ap(INumbers...) - Am(INumbers...))*inv_eps);
+                set_basis<SymResult...>::set(__result, tuple, Blk(INumbers...));
             };
             function_loop::loop(diff_kernal);
           };

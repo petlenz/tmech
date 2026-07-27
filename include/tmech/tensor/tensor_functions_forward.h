@@ -923,14 +923,23 @@ constexpr inline auto norm(tensor_base<Derived> const& data_base);
  *               return tmech::num_diff_central(func, F);
  *               };
  * auto ddFunc = tmech::num_diff_central<tmech::sequence<1,2,3,4>>(func, X);
+ *
+ * //higher-order stencil: 5-point central difference, O(h^4)
+ * auto dFunc4 = tmech::num_diff_central<void, 5>(func, X);
  * \endcode
  *
+ * @tparam _Position Index permutation of the assembled derivative (defaults to
+ * the natural order).
+ * @tparam _Points Central-difference stencil size, selecting the accuracy
+ * order: 2 (default) -> O(h^2), 5 -> O(h^4), 7 -> O(h^6). Higher orders reduce
+ * truncation error at the cost of extra function evaluations, and want a
+ * correspondingly larger step @p __h.
  * @param func Input type/function f(x), used for the numerical differentiation.
  * This type/function needs to provide an overloaded access operator(x).
  * @param x A given point, at which the function is evaluated.
  * @param __dx Is
  */
-template<typename _Position = void, typename _Function, typename _Point>
+template<typename _Position = void, std::size_t _Points = 2, typename _Function, typename _Point>
 inline auto num_diff_central(_Function __func, _Point const& __x, double const __h = 1e-7);
 
 
@@ -969,7 +978,7 @@ inline auto num_diff_central(_Function __func, _Point const& __x, double const _
  * @param x A given point, at which the function is evaluated.
  * @param __dx Is
  */
-template<typename _SymDirection, typename _SymResult = std::tuple<>, typename _Function, typename _Point>
+template<typename _SymDirection, typename _SymResult = std::tuple<>, std::size_t _Points = 2, typename _Function, typename _Point>
 inline auto num_diff_sym_central(_Function __func, _Point const& __x, double const __h = 5e-6);
 
 template<typename T>

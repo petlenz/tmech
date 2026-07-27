@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Stencil-size template parameter for `num_diff_central` (and
+  `num_diff_sym_central`), selecting the central-difference accuracy order:
+  `2` (default, `O(h²)`), `5` (`O(h⁴)`), or `7` (`O(h⁶)`), e.g.
+  `num_diff_central<void, 5>(f, x)`. Fully backward compatible — the parameter
+  defaults to the previous two-point behaviour ([#27](https://github.com/petlenz/tmech/issues/27)).
+
 ## [1.1.1] - 2026-07-22
 
 ### Fixed
