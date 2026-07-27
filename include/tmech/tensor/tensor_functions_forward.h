@@ -245,6 +245,16 @@ template<typename _TupleSequence = void, typename _Tensor, typename _T, typename
 constexpr inline auto convert_tensor_to_voigt(_Tensor && __tensor, _T * __ptr);
 
 /**
+ * @brief Converts a symmetric tensor into Mandel's notation
+ *
+ * Packs a symmetric rank-2 tensor into a length-6 (3D) / length-3 (2D) array
+ * and a rank-4 tensor into a 6x6 / 3x3 matrix, with the isometric √2 weights
+ * on the off-diagonal slots (so `A:B == mandel(A)·mandel(B)`).
+ */
+template<typename _Tensor, typename _T, typename, typename>
+constexpr inline auto convert_tensor_to_mandel(_Tensor && __tensor, _T * __ptr);
+
+/**
  * @brief General basis rearrangement. Controlled by template parameter
  *        %_Sequence, which contains the new order of bases.
  *

@@ -1794,6 +1794,179 @@ TEST(gtest, adaptorVoigt3Dfourth) {
             almost_equal_tensor_scaled(a, b, std::numeric_limits<double>::epsilon()));
 }
 
+//==========================================================================
+// Mandel notation adaptor tag (isometric √2-weighted packing)
+//==========================================================================
+
+// Explicit packing: 2D {11, 22, √2·12}
+TEST(gtest, adaptorMandel2Dsecond) {
+  const double s = std::sqrt(2.0);
+  double ptr[3]{1, 2, s * 3};
+  tmech::adaptor<double, 2, 2, tmech::mandel<2>> a(ptr);
+  tmech::tensor<double, 2, 2> b{1, 3, 3, 2};
+  EXPECT_EQ(true, almost_equal_tensor_scaled(a, b, 1e-14));
+}
+
+// Explicit packing: 3D {11, 22, 33, √2·23, √2·13, √2·12} (Voigt ordering)
+TEST(gtest, adaptorMandel3Dsecond) {
+  const double s = std::sqrt(2.0);
+  double ptr[6]{1, 2, 3, s * 4, s * 5, s * 6};
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> a(ptr);
+  tmech::tensor<double, 3, 2> b{1, 6, 5, 6, 2, 4, 5, 4, 3};
+  EXPECT_EQ(true, almost_equal_tensor_scaled(a, b, 1e-14));
+}
+
+// Round-trip: assign a symmetric tensor, read it back unchanged (rank 2 & 4,
+// 2D & 3D).
+TEST(gtest, adaptorMandelRoundtrip) {
+  // rank-2, 3D
+  tmech::tensor<double, 3, 2> A{1.1, 0.6, 0.5, 0.6, 2.2, 0.4,
+                                0.5, 0.4, 3.3};
+  double m2[6];
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> a2(m2);
+  a2 = A;
+  tmech::tensor<double, 3, 2> A_back;
+  A_back = a2;
+  EXPECT_EQ(true, almost_equal_tensor_scaled(A, A_back, 1e-14));
+
+  // rank-2, 2D
+  tmech::tensor<double, 2, 2> A2d{1.5, 0.9, 0.9, 2.5};
+  double m2d[3];
+  tmech::adaptor<double, 2, 2, tmech::mandel<2>> a2d(m2d);
+  a2d = A2d;
+  tmech::tensor<double, 2, 2> A2d_back;
+  A2d_back = a2d;
+  EXPECT_EQ(true, almost_equal_tensor_scaled(A2d, A2d_back, 1e-14));
+
+  // rank-4, 3D: minor+major symmetric isotropic elasticity tensor
+  const auto d = [](std::size_t i, std::size_t j) { return i == j ? 1.0 : 0.0; };
+  const double lam = 1.3, mu = 0.7;
+  tmech::tensor<double, 3, 4> D;
+  for (std::size_t i = 0; i < 3; ++i)
+    for (std::size_t j = 0; j < 3; ++j)
+      for (std::size_t k = 0; k < 3; ++k)
+        for (std::size_t l = 0; l < 3; ++l)
+          D(i, j, k, l) =
+              lam * d(i, j) * d(k, l) + mu * (d(i, k) * d(j, l) + d(i, l) * d(j, k));
+  double m4[36];
+  tmech::adaptor<double, 3, 4, tmech::mandel<3>> a4(m4);
+  a4 = D;
+  tmech::tensor<double, 3, 4> D_back;
+  D_back = a4;
+  EXPECT_EQ(true, almost_equal_tensor_scaled(D, D_back, 1e-14));
+}
+
+// Isometry: A:B == mandel(A)·mandel(B). This is the property Voigt fails.
+TEST(gtest, adaptorMandelIsometry) {
+  tmech::tensor<double, 3, 2> A{1.1, 0.6, 0.5, 0.6, 2.2, 0.4, 0.5, 0.4, 3.3};
+  tmech::tensor<double, 3, 2> B{2.0, -0.3, 1.2, -0.3, -1.0, -0.8,
+                                1.2, -0.8, 0.7};
+  double mA[6], mB[6];
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> aA(mA);
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> aB(mB);
+  aA = A;
+  aB = B;
+  double dot = 0.0;
+  for (int i = 0; i < 6; ++i) dot += mA[i] * mB[i];
+  double AB = 0.0;
+  for (std::size_t i = 0; i < 3; ++i)
+    for (std::size_t j = 0; j < 3; ++j) AB += A(i, j) * B(i, j);
+  EXPECT_NEAR(dot, AB, 1e-13);
+}
+
+// Rank-4 operator equivalence: mandel(𝔻:X) == mandel4(𝔻)·mandel2(X).
+TEST(gtest, adaptorMandelRank4Operator) {
+  const auto d = [](std::size_t i, std::size_t j) { return i == j ? 1.0 : 0.0; };
+  const double lam = 1.3, mu = 0.7;
+  tmech::tensor<double, 3, 4> D;
+  for (std::size_t i = 0; i < 3; ++i)
+    for (std::size_t j = 0; j < 3; ++j)
+      for (std::size_t k = 0; k < 3; ++k)
+        for (std::size_t l = 0; l < 3; ++l)
+          D(i, j, k, l) =
+              lam * d(i, j) * d(k, l) + mu * (d(i, k) * d(j, l) + d(i, l) * d(j, k));
+  tmech::tensor<double, 3, 2> X{1.1, 0.6, 0.5, 0.6, 2.2, 0.4, 0.5, 0.4, 3.3};
+
+  tmech::tensor<double, 3, 2> DX = tmech::dcontract(D, X);
+
+  double m4[36], mX[6];
+  tmech::adaptor<double, 3, 4, tmech::mandel<3>> a4(m4);
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> aX(mX);
+  a4 = D;
+  aX = X;
+  double y[6];
+  for (int a = 0; a < 6; ++a) {
+    double s = 0.0;
+    for (int b = 0; b < 6; ++b) s += m4[a * 6 + b] * mX[b];
+    y[a] = s;
+  }
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> aY(y);
+  tmech::tensor<double, 3, 2> Yt;
+  Yt = aY;
+  EXPECT_EQ(true, almost_equal_tensor_scaled(DX, Yt, 1e-13));
+}
+
+// Solve equivalence: the Mandel-space dense LU solution of M·x = r unpacks to
+// the tensor solution of 𝔻:X = R. This is the whole point of the √2 scaling.
+TEST(gtest, adaptorMandelSolveEquivalence) {
+  const auto d = [](std::size_t i, std::size_t j) { return i == j ? 1.0 : 0.0; };
+  const double lam = 1.3, mu = 0.7;
+  tmech::tensor<double, 3, 4> D;
+  for (std::size_t i = 0; i < 3; ++i)
+    for (std::size_t j = 0; j < 3; ++j)
+      for (std::size_t k = 0; k < 3; ++k)
+        for (std::size_t l = 0; l < 3; ++l)
+          D(i, j, k, l) =
+              lam * d(i, j) * d(k, l) + mu * (d(i, k) * d(j, l) + d(i, l) * d(j, k));
+  tmech::tensor<double, 3, 2> X{1.1, 0.6, 0.5, 0.6, 2.2, 0.4, 0.5, 0.4, 3.3};
+  tmech::tensor<double, 3, 2> R = tmech::dcontract(D, X);  // solve D:Z = R -> Z == X
+
+  double M[6][6], r[6];
+  {
+    double m4[36], mR[6];
+    tmech::adaptor<double, 3, 4, tmech::mandel<3>> a4(m4);
+    tmech::adaptor<double, 3, 2, tmech::mandel<3>> aR(mR);
+    a4 = D;
+    aR = R;
+    for (int a = 0; a < 6; ++a) {
+      for (int b = 0; b < 6; ++b) M[a][b] = m4[a * 6 + b];
+      r[a] = mR[a];
+    }
+  }
+  // partial-pivoted Gaussian elimination on the packed 6x6 system
+  for (int c = 0; c < 6; ++c) {
+    int piv = c;
+    for (int rr = c + 1; rr < 6; ++rr)
+      if (std::abs(M[rr][c]) > std::abs(M[piv][c])) piv = rr;
+    for (int cc = 0; cc < 6; ++cc) std::swap(M[c][cc], M[piv][cc]);
+    std::swap(r[c], r[piv]);
+    for (int rr = 0; rr < 6; ++rr) {
+      if (rr == c) continue;
+      const double f = M[rr][c] / M[c][c];
+      for (int cc = c; cc < 6; ++cc) M[rr][cc] -= f * M[c][cc];
+      r[rr] -= f * r[c];
+    }
+  }
+  double z[6];
+  for (int a = 0; a < 6; ++a) z[a] = r[a] / M[a][a];
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> aZ(z);
+  tmech::tensor<double, 3, 2> Z;
+  Z = aZ;
+  EXPECT_EQ(true, almost_equal_tensor_scaled(Z, X, 1e-12));
+}
+
+// Free-function packer agrees with the adaptor path.
+TEST(gtest, convertTensorToMandel) {
+  tmech::tensor<double, 3, 2> A{1.1, 0.6, 0.5, 0.6, 2.2, 0.4, 0.5, 0.4, 3.3};
+  double m_free[6], m_adap[6];
+  tmech::convert_tensor_to_mandel(A, m_free);
+  tmech::adaptor<double, 3, 2, tmech::mandel<3>> a(m_adap);
+  a = A;
+  double err = 0.0;
+  for (int i = 0; i < 6; ++i) err += std::abs(m_free[i] - m_adap[i]);
+  EXPECT_NEAR(err, 0.0, 1e-14);
+}
+
 TEST(gtest, adaptorFull2Dfirst) {
   double ptr[4]{1, 2};
   tmech::adaptor<double, 2, 1, tmech::full<2>> a(ptr);

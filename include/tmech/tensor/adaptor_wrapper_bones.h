@@ -18,6 +18,9 @@ template<std::size_t _Dim, bool _ShearStrain>
 struct voigt;
 
 template<std::size_t _Dim>
+struct mandel;
+
+template<std::size_t _Dim>
 struct full;
 
 
@@ -257,6 +260,91 @@ struct voigt
             for(size_type i{0}; i<Rows; ++i){
                 for(size_type j{0}; j<Rows; ++j){
                     __ptr[i*Rows+j] = __input(_t2v[i][0], _t2v[i][1], _t2v[j][0], _t2v[j][1]);
+                }
+            }
+        }
+    }
+
+    static constexpr inline auto use_raw_data(){
+        return false;
+    }
+private:
+    static constexpr inline auto vt2()noexcept{
+        if constexpr (_Dim == 2){
+          return std::array<std::array<size_type, 2>, 2>{{{0, 2}, {2, 1}}};
+        }else{
+          return std::array<std::array<size_type, 3>, 3>{
+              {{0, 5, 4}, {5, 1, 3}, {4, 3, 2}}};
+        }
+    }
+
+    static constexpr inline auto t2v()noexcept{
+        if constexpr (_Dim == 2){
+          return std::array<std::array<size_type, 2>, 3>{
+              {{0, 0}, {1, 1}, {0, 1}}};
+        }else{
+          return std::array<std::array<size_type, 2>, 6>{
+              {{0, 0}, {1, 1}, {2, 2}, {1, 2}, {0, 2}, {0, 1}}};
+        }
+    }
+};
+
+
+template<std::size_t _Dim>
+struct mandel
+{
+    using size_type = std::size_t;
+
+    //Mandel 3D {11, 22, 33, √2·23, √2·13, √2·12}
+    //Mandel 2D {11, 22, √2·12}
+    //
+    // Same component ordering as voigt<>, but the off-diagonal slots carry a
+    // √2 weight. That scaling makes the packing an isometry:
+    //   A : B          == mandel(A) · mandel(B)          (rank-2 double contraction -> dot product)
+    //   (𝔻 : X)        == mandel4(𝔻) · mandel2(X)        (rank-4 action -> matrix-vector product)
+    // so an LU solve / ∞-norm over the packed storage is equivalent to the
+    // tensor system. Unlike voigt<> there is deliberately no _ShearStrain
+    // option: a single self-inverse scaling is the whole point, and a
+    // strain/stress split would reintroduce the asymmetry that Mandel removes.
+
+    static constexpr double sqrt2    {1.41421356237309504880168872420969808};
+    static constexpr double inv_sqrt2{0.70710678118654752440084436210484904};
+
+    template<typename T>
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j)noexcept{
+        using value_type = typename std::remove_const<T>::type;
+        constexpr auto _v2t{vt2()};
+        return __ptr[_v2t[__i][__j]] * value_type(__i == __j ? 1 : inv_sqrt2);
+    }
+
+    template<typename T>
+    static constexpr inline auto apply(T const*const __ptr, size_type const __i, size_type const __j, size_type const __k, size_type const __l)noexcept{
+        using value_type = typename std::remove_const<T>::type;
+        constexpr auto _v2t{vt2()};
+        constexpr auto Rows{(_Dim == 2 ? 3 : 6)};
+        return __ptr[_v2t[__i][__j]*Rows+_v2t[__k][__l]]
+               * value_type(__i == __j ? 1 : inv_sqrt2)
+               * value_type(__k == __l ? 1 : inv_sqrt2);
+    }
+
+    template<typename __T, typename __Tensor>
+    static constexpr inline auto assign_tensor(__T* __ptr, __Tensor const& __input)noexcept{
+        static_assert (__Tensor::rank() == 2 || __Tensor::rank() == 4, "mandel::assign_tensor() no matching rank");
+        using value_type = typename __Tensor::value_type;
+        constexpr size_type Rows{(_Dim == 2 ? 3 : 6)};
+        constexpr auto _t2v{t2v()};
+
+        if constexpr (__Tensor::rank() == 2){
+            for(size_type i{0}; i<Rows; ++i){
+                const auto wi{_t2v[i][0] == _t2v[i][1] ? value_type(1) : value_type(sqrt2)};
+                __ptr[i] = __input(_t2v[i][0], _t2v[i][1]) * wi;
+            }
+        }else if constexpr (__Tensor::rank() == 4){
+            for(size_type i{0}; i<Rows; ++i){
+                const auto wi{_t2v[i][0] == _t2v[i][1] ? value_type(1) : value_type(sqrt2)};
+                for(size_type j{0}; j<Rows; ++j){
+                    const auto wj{_t2v[j][0] == _t2v[j][1] ? value_type(1) : value_type(sqrt2)};
+                    __ptr[i*Rows+j] = __input(_t2v[i][0], _t2v[i][1], _t2v[j][0], _t2v[j][1]) * wi * wj;
                 }
             }
         }

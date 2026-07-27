@@ -211,6 +211,18 @@ constexpr inline auto convert_tensor_to_voigt(_Tensor && __tensor, _T * __ptr){
     }
 }
 
+template<typename _Tensor,
+         typename _T,
+         std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr,
+         std::enable_if_t<std::is_fundamental_v<_T>> * = nullptr>
+constexpr inline auto convert_tensor_to_mandel(_Tensor && __tensor, _T * __ptr){
+    using TensorType = typename std::decay<_Tensor>::type;
+    static_assert (TensorType::rank() == 2 || TensorType::rank() == 4,
+                   "convert_tensor_to_mandel(): only rank-2 and rank-4 tensors are supported");
+    detail::evaluate::apply(__tensor);
+    mandel<TensorType::dimension()>::assign_tensor(__ptr, __tensor);
+}
+
 template<typename _Sequence, typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
 constexpr inline auto basis_change(_Tensor && __tensor){
     using TensorType = typename std::decay<_Tensor>::type;

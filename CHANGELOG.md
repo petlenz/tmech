@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `mandel<Dim>` adaptor tag beside `voigt`/`full`, packing a symmetric rank-2
+  tensor into a length-6 (3D) / length-3 (2D) array and a rank-4 tensor into a
+  6×6 / 3×3 matrix with the isometric √2 off-diagonal weights, so that
+  `A:B == mandel(A)·mandel(B)` and a dense LU solve over the packed storage is
+  equivalent to the tensor system. Added the free function
+  `convert_tensor_to_mandel` for the direct packing path
+  ([#30](https://github.com/petlenz/tmech/issues/30)).
+
 ## [1.1.1] - 2026-07-22
 
 ### Fixed
