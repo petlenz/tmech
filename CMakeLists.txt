@@ -1,6 +1,3 @@
-# 3.13+: option() honours a normal variable of the same name set by a parent
-# project (CMP0077 NEW), so consumers can switch tests/examples off without
-# forcing cache entries.
 cmake_minimum_required(VERSION 3.15)
 
 project(tmech CXX)
@@ -243,12 +240,9 @@ else()
   set(IS_TOPLEVEL_PROJECT FALSE)
 endif()
 
-
 OPTION(TMECH_INSTALL_LIBRARY
        "Enable installing of tmech library into default locations"
        ${IS_TOPLEVEL_PROJECT})
-# Tests and examples only when tmech is the top-level project; as a
-# subproject (add_subdirectory / FetchContent) consumers get just the library.
 OPTION(TMECH_BUILD_EXAMPLES "tmech examples" ${IS_TOPLEVEL_PROJECT})
 OPTION(TMECH_BUILD_TESTS "tmech test suite" ${IS_TOPLEVEL_PROJECT})
 OPTION(TMECH_BUILD_BENCHMARK "tmech benchmark" OFF)
@@ -285,7 +279,6 @@ target_include_directories(
             $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
-
 
 if(TMECH_INSTALL_LIBRARY)
   # locations are provided by GNUInstallDirs
@@ -325,7 +318,6 @@ if(TMECH_INSTALL_LIBRARY)
   install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/tmech
           DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
-
 
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}")
 
