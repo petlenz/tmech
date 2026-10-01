@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.5)
+# 3.13+: option() honours a normal variable of the same name set by a parent
+# project (CMP0077 NEW), so consumers can switch tests/examples off without
+# forcing cache entries.
+cmake_minimum_required(VERSION 3.15)
 
 project(tmech CXX)
 
@@ -244,8 +247,10 @@ endif()
 OPTION(TMECH_INSTALL_LIBRARY
        "Enable installing of tmech library into default locations"
        ${IS_TOPLEVEL_PROJECT})
-OPTION(TMECH_BUILD_EXAMPLES "tmech examples" ON)
-OPTION(TMECH_BUILD_TESTS "tmech test suite" ON)
+# Tests and examples only when tmech is the top-level project; as a
+# subproject (add_subdirectory / FetchContent) consumers get just the library.
+OPTION(TMECH_BUILD_EXAMPLES "tmech examples" ${IS_TOPLEVEL_PROJECT})
+OPTION(TMECH_BUILD_TESTS "tmech test suite" ${IS_TOPLEVEL_PROJECT})
 OPTION(TMECH_BUILD_BENCHMARK "tmech benchmark" OFF)
 OPTION(TMECH_DOWNLOAD_GTEST "build gtest from downloaded sources" OFF)
 OPTION(TMECH_DOWNLOAD_GBENCHMARK "download google benchmark and build from source" OFF)
@@ -298,8 +303,9 @@ if(TMECH_INSTALL_LIBRARY)
   include(CMakePackageConfigHelpers)
   write_basic_package_version_file(
     "${PROJECT_NAME}ConfigVersion.cmake"
-    VERSION {${PROJECT_NAME}_VERSION}
-    COMPATIBILITY SameMajorVersion)
+    VERSION ${${PROJECT_NAME}_VERSION}
+    COMPATIBILITY SameMajorVersion
+    ARCH_INDEPENDENT)
 
   configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in"
