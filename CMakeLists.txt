@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.15)
 
 project(tmech CXX)
 
@@ -240,12 +240,11 @@ else()
   set(IS_TOPLEVEL_PROJECT FALSE)
 endif()
 
-
 OPTION(TMECH_INSTALL_LIBRARY
        "Enable installing of tmech library into default locations"
        ${IS_TOPLEVEL_PROJECT})
-OPTION(TMECH_BUILD_EXAMPLES "tmech examples" ON)
-OPTION(TMECH_BUILD_TESTS "tmech test suite" ON)
+OPTION(TMECH_BUILD_EXAMPLES "tmech examples" ${IS_TOPLEVEL_PROJECT})
+OPTION(TMECH_BUILD_TESTS "tmech test suite" ${IS_TOPLEVEL_PROJECT})
 OPTION(TMECH_BUILD_BENCHMARK "tmech benchmark" OFF)
 OPTION(TMECH_DOWNLOAD_GTEST "build gtest from downloaded sources" OFF)
 OPTION(TMECH_DOWNLOAD_GBENCHMARK "download google benchmark and build from source" OFF)
@@ -281,7 +280,6 @@ target_include_directories(
 
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 
-
 if(TMECH_INSTALL_LIBRARY)
   # locations are provided by GNUInstallDirs
   set(_TMECH_INSTALL_TARGETS ${PROJECT_NAME})
@@ -298,8 +296,9 @@ if(TMECH_INSTALL_LIBRARY)
   include(CMakePackageConfigHelpers)
   write_basic_package_version_file(
     "${PROJECT_NAME}ConfigVersion.cmake"
-    VERSION {${PROJECT_NAME}_VERSION}
-    COMPATIBILITY SameMajorVersion)
+    VERSION ${${PROJECT_NAME}_VERSION}
+    COMPATIBILITY SameMajorVersion
+    ARCH_INDEPENDENT)
 
   configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in"
@@ -319,7 +318,6 @@ if(TMECH_INSTALL_LIBRARY)
   install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/tmech
           DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
-
 
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}")
 

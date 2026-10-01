@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-01
+
 ### Added
 - `mandel<Dim>` adaptor tag beside `voigt`/`full`, packing a symmetric rank-2
   tensor into a length-6 (3D) / length-3 (2D) array and a rank-4 tensor into a
@@ -15,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   equivalent to the tensor system. Added the free function
   `convert_tensor_to_mandel` for the direct packing path
   ([#30](https://github.com/petlenz/tmech/issues/30)).
+
+### Fixed
+- CMake: `tmechConfigVersion.cmake` carried a broken version string (a
+  missing `$`), so `find_package(tmech 1.1)` with a version requirement could
+  never succeed; consumers can now require `tmech 1.2` for the Mandel adaptor.
+- CMake: `TMECH_BUILD_TESTS` and `TMECH_BUILD_EXAMPLES` default to ON only
+  when tmech is the top-level project; as a subproject (add_subdirectory,
+  FetchContent) only the library is configured.
+- CMake: minimum version 3.15, so `option()` honours variables set by a parent
+  project (CMP0077) and consumers no longer need `CACHE ... FORCE`.
 
 ## [1.1.1] - 2026-07-22
 
