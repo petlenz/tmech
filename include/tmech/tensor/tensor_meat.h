@@ -83,6 +83,17 @@ constexpr inline auto const& tensor<T, Dim, Rank>::operator=(tensor_base<Derived
     //const auto& tensor{tensor_base.convert()};
 
     check_size();
+    if constexpr(::tmech_detail::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value
+                 && ::tmech_detail::is_detected<detail::has_can_write_to, Derived>::value){
+        // the target is also an operand (t = t * b): evaluate into the expression's storage first
+        if (!tensor_base.convert().can_write_to(raw_data(), raw_data() + Size)) {
+            auto& expression{const_cast<Derived&>(tensor_base.convert())};
+            expression.evaluate();
+            for (std::size_t i = 0; i < Size; ++i)
+                _data[i] = expression.direct_access(i);
+            return *this;
+        }
+    }
     if constexpr(::tmech_detail::is_detected<detail::has_evaluate, Derived, decltype (*this)>::value){
         tensor_base.convert().evaluate(*this);
     }else{
@@ -132,6 +143,16 @@ tensor<T, Dim, Rank>::operator=(_Tensor && __tensor) noexcept{
     TensorType _tensor{std::forward<_Tensor>(__tensor)};
 
     check_size();
+    if constexpr(::tmech_detail::is_detected<detail::has_evaluate, TensorType, decltype (*this)>::value
+                 && ::tmech_detail::is_detected<detail::has_can_write_to, TensorType>::value){
+        // the target is also an operand (t = t * b): evaluate into the expression's storage first
+        if (!_tensor.can_write_to(raw_data(), raw_data() + Size)) {
+            _tensor.evaluate();
+            for (std::size_t i = 0; i < Size; ++i)
+                _data[i] = _tensor.direct_access(i);
+            return *this;
+        }
+    }
     if constexpr(::tmech_detail::is_detected<detail::has_evaluate, TensorType, decltype (*this)>::value){
         _tensor.evaluate(*this);
     }else{

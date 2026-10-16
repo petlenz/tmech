@@ -60,6 +60,9 @@ public:
 
     constexpr inline auto raw_data()const noexcept;
 
+    /// Whether evaluate(result) may write into [first, last): no operand read in place overlaps it.
+    constexpr inline bool can_write_to(void const* __first, void const* __last)const noexcept;
+
     constexpr inline auto direct_access(std::size_t __idx)const noexcept{
         return _data.direct_access(__idx);
     }

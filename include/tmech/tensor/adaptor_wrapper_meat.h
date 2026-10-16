@@ -45,9 +45,42 @@ constexpr inline auto const& adaptor<_T, _Dim, _Rank, _Type>::operator=(tensor_b
     static_assert(_Derived::dimension() == _Dim, "No matching dimensions in assignment operator.");
 
     auto& tensor{tensor_base.convert()};
-    detail::evaluate::apply(tensor);
-    _Type::assign_tensor(_data, tensor);
+    constexpr std::size_t Size{[] { std::size_t n{1}; for (std::size_t r{0}; r < _Rank; ++r) n *= _Dim; return n; }()};
+    if constexpr (_Type::use_raw_data()) { // nested: the checks below need raw_data()
+        if constexpr (::tmech_detail::is_detected<detail::has_can_write_to, _Derived>::value
+                      && ::tmech_detail::is_detected<detail::has_evaluate, _Derived, adaptor&>::value) {
+            if (tensor.can_write_to(_data, _data + Size)) { // straight into the target, as tensor::operator=
+                tensor.evaluate(*this);
+                return *this;
+            }
+        }
+    }
+    detail::evaluate::apply(tensor); // into the expression's own storage: safe if the target is an operand
+    if constexpr (_Type::use_raw_data() && detail::is_direct_assignable_v<_Derived>) {
+#ifdef TMECH_HAS_XSIMD
+        if constexpr (detail::is_simd_assignable_v<_Derived, value_type>) {
+            using batch_type = xsimd::batch<value_type>;
+            constexpr std::size_t W = batch_type::size;
+            constexpr std::size_t vec_end = (Size / W) * W;
+            for (std::size_t i = 0; i < vec_end; i += W)
+                tensor.batch_access(i).store_unaligned(_data + i);
+            for (std::size_t i = vec_end; i < Size; ++i)
+                _data[i] = tensor.direct_access(i);
+        } else
+#endif
+        {
+            for (std::size_t i = 0; i < Size; ++i)
+                _data[i] = tensor.direct_access(i);
+        }
+    } else {
+        _Type::assign_tensor(_data, tensor);
+    }
     return *this;
+}
+
+template <typename _T, std::size_t _Dim, std::size_t _Rank, typename _Type>
+constexpr inline auto const& adaptor<_T, _Dim, _Rank, _Type>::operator=(adaptor const& __other)noexcept{
+    return this->operator=(static_cast<tensor_base<adaptor> const&>(__other));
 }
 //@}
 

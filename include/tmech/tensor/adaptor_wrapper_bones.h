@@ -36,6 +36,9 @@ public:
 
     constexpr adaptor(adaptor const& __data)noexcept;
 
+    /// Assigns the values of `__other`; the view keeps pointing to its own data.
+    constexpr inline auto const& operator=(adaptor const& __other)noexcept;
+
     template<typename _Derived>
     constexpr inline auto const& operator=(tensor_base<_Derived> const& tensor_base)noexcept;
 
@@ -49,6 +52,12 @@ public:
     template<typename Type = _Type, typename = typename std::enable_if<Type::use_raw_data()>::type>
     constexpr inline auto raw_data()const noexcept{
       return _data;
+    }
+
+    /// Flat access for storage types that map one-to-one onto memory.
+    template<typename Type = _Type, typename = typename std::enable_if<Type::use_raw_data()>::type>
+    constexpr inline auto direct_access(size_type __idx)const noexcept{
+      return _data[__idx];
     }
 
 private:
