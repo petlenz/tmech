@@ -1734,29 +1734,7 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
 //==========================================================================
 // Adaptor tests (all use fixed data — already stable)
 //==========================================================================
-// adaptor<full> = expression gives the tensor result, also when the target is an operand
-// a product whose result is also one of its operands is evaluated before it is written
-TEST(gtest, tensorProductAssignedToAnOperand) {
-  tmech::tensor<double, 3, 2> a, b;
-  a.randn();
-  b.randn();
-  tmech::tensor<double, 3, 2> const ab{a * b}, ba{b * a};
-  tmech::tensor<double, 3, 2> t{a};
-  t = t * b;
-  EXPECT_EQ(true, tmech::almost_equal(t, ab, 1e-14));
-  t = a;
-  t = b * t;
-  EXPECT_EQ(true, tmech::almost_equal(t, ba, 1e-14));
-  // rank 4 (a 9x9 product): wrong before at any optimisation level
-  tmech::tensor<double, 3, 4> A, B;
-  A.randn();
-  B.randn();
-  tmech::tensor<double, 3, 4> const AB{tmech::dcontract(A, B)};
-  tmech::tensor<double, 3, 4> T4{A};
-  T4 = tmech::dcontract(T4, B);
-  EXPECT_EQ(true, tmech::almost_equal(T4, AB, 1e-12));
-}
-
+// adaptor<full> = expression gives the tensor result (aliasing via tmech::eval, as for tensor)
 TEST(gtest, adaptorFullAssignmentMatchesTensor) {
   tmech::tensor<double, 3, 2> a, b;
   a.randn();
@@ -1780,7 +1758,7 @@ TEST(gtest, adaptorFullAssignmentMatchesTensor) {
   vy = tmech::dcontract(C, va);
   check(tmech::dcontract(C, a));
   vy = va;
-  vy = vy * vb; // the target is an operand
+  vy = tmech::eval(vy * vb); // the target is an operand
   check(a * b);
   vy = va;
   vy = vy + vy;

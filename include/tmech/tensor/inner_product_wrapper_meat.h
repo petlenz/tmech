@@ -93,24 +93,6 @@ constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceR
 }
 
 template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
-constexpr inline bool inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::can_write_to(void const* __first, void const* __last)const noexcept{
-    // operands with raw data and no basis change are read in place by evaluate_imp; the others go through temporaries
-    auto const overlaps = [&](auto const& __operand){
-        using operand_type = std::decay_t<decltype(__operand)>;
-        auto const* const b{static_cast<void const*>(__operand.raw_data())};
-        auto const* const e{static_cast<void const*>(__operand.raw_data() + get_tensor_size<operand_type::dimension(), operand_type::rank()>::size)};
-        return std::less<void const*>{}(b, __last) && std::less<void const*>{}(__first, e);
-    };
-    constexpr bool basis_change_lhs{!std::is_same_v<add_value_sequence_t<sequence_t<RankLHS-1>,1>, new_basis_lhs>};
-    constexpr bool basis_change_rhs{!std::is_same_v<add_value_sequence_t<sequence_t<RankRHS-1>,1>, new_basis_rhs>};
-    if constexpr (is_detected<has_raw_data, data_type_LHS>::value && !basis_change_lhs)
-        if (overlaps(_lhs)) return false;
-    if constexpr (is_detected<has_raw_data, data_type_RHS>::value && !basis_change_rhs)
-        if (overlaps(_rhs)) return false;
-    return true;
-}
-
-template <typename _LHS, typename _RHS, typename _SequenceLHS, typename _SequenceRHS>
 constexpr inline auto inner_product_wrapper<_LHS, _RHS, _SequenceLHS, _SequenceRHS>::raw_data()const noexcept{
     return _data.raw_data();
 }

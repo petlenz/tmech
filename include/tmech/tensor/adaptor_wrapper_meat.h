@@ -46,16 +46,13 @@ constexpr inline auto const& adaptor<_T, _Dim, _Rank, _Type>::operator=(tensor_b
 
     auto& tensor{tensor_base.convert()};
     constexpr std::size_t Size{[] { std::size_t n{1}; for (std::size_t r{0}; r < _Rank; ++r) n *= _Dim; return n; }()};
-    if constexpr (_Type::use_raw_data()) { // nested: the checks below need raw_data()
-        if constexpr (::tmech_detail::is_detected<detail::has_can_write_to, _Derived>::value
-                      && ::tmech_detail::is_detected<detail::has_evaluate, _Derived, adaptor&>::value) {
-            if (tensor.can_write_to(_data, _data + Size)) { // straight into the target, as tensor::operator=
-                tensor.evaluate(*this);
-                return *this;
-            }
+    if constexpr (_Type::use_raw_data()) { // nested: the check below needs raw_data()
+        if constexpr (::tmech_detail::is_detected<detail::has_evaluate, _Derived, adaptor&>::value) {
+            tensor.evaluate(*this); // straight into the target, as tensor::operator= (aliasing: tmech::eval)
+            return *this;
         }
     }
-    detail::evaluate::apply(tensor); // into the expression's own storage: safe if the target is an operand
+    detail::evaluate::apply(tensor);
     if constexpr (_Type::use_raw_data() && detail::is_direct_assignable_v<_Derived>) {
 #ifdef TMECH_HAS_XSIMD
         if constexpr (detail::is_simd_assignable_v<_Derived, value_type>) {

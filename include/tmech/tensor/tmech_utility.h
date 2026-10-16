@@ -377,10 +377,6 @@ using has_raw_data = decltype(std::declval<Type>().raw_data());
 template<typename Type, typename... Arguments>
 using has_evaluate = decltype(std::declval<Type>().evaluate(std::declval<Arguments>()...));
 
-// Expressions that can tell whether evaluate(result) may write into a memory range.
-template<typename Type>
-using has_can_write_to = decltype(std::declval<Type const&>().can_write_to(nullptr, nullptr));
-
 template<typename Type>
 using has_direct_access_t = decltype(std::declval<const Type&>().direct_access(std::size_t{}));
 
