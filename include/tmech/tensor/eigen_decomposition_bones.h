@@ -30,7 +30,7 @@ template <typename _Tensor> class eigen_decomposition_lapack;
  *        repeated-eigenvalue detection, sorting, and math helpers.
  *
  * Derived classes must implement:
- *   constexpr inline auto compute_decomposition(bool eigenvectors) noexcept;
+ *   constexpr inline auto compute_decomposition() noexcept;  // eigenvalues and eigenvectors
  *
  * @tparam _Tensor  Tensor expression type.
  * @tparam _Derived CRTP derived class.
@@ -75,10 +75,10 @@ public:
 
     constexpr inline auto get_repeated_eigenvalues() noexcept;
     constexpr inline auto evaluate_eigenbasis()noexcept;
-    constexpr inline auto sort_eigenvalues(int sortType, bool isRotation,
-                                           bool eigenvectors) noexcept;
+    constexpr inline auto sort_eigenvalues(int sortType, bool isRotation) noexcept;
 
   protected:
+    static constexpr inline bool close(value_type a, value_type b) noexcept;
     static constexpr inline auto cross(value_type *data,
                                        value_type const *const lhs,
                                        value_type const *const rhs) noexcept;
@@ -135,17 +135,15 @@ public:
 
   using base::base; // inherit constructors
 
-  constexpr inline auto compute_decomposition(bool eigenvectors) noexcept;
+  constexpr inline auto compute_decomposition() noexcept;
 
 private:
-  constexpr inline auto evaluate_detail_2D(bool eigenvectors, value_type _a00,
-                                           value_type _a01, value_type _a10,
-                                           value_type _a11) noexcept;
+  constexpr inline auto evaluate_detail_2D(value_type a00, value_type a01,
+                                           value_type a11) noexcept;
 
-  constexpr inline auto evaluate_detail_3D(bool eigenvectors, value_type _a00,
-                                           value_type _a01, value_type _a02,
-                                           value_type _a11, value_type _a12,
-                                           value_type _a22) noexcept;
+  constexpr inline auto evaluate_detail_3D(value_type _a00, value_type _a01,
+                                           value_type _a02, value_type _a11,
+                                           value_type _a12, value_type _a22) noexcept;
 
   constexpr inline auto
   compute_orthogonal_complement(tensor1 const &W, tensor1 &U,
@@ -204,7 +202,7 @@ public:
 
   using base::base; // inherit constructors
 
-  constexpr inline auto compute_decomposition(bool eigenvectors) noexcept;
+  constexpr inline auto compute_decomposition() noexcept;
 };
 #endif // TMECH_ENABLE_LAPACK
 

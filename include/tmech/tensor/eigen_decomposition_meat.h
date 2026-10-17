@@ -49,7 +49,7 @@ constexpr inline auto
 eigen_decomposition_base<_Tensor, _Derived>::decompose() noexcept {
   std::iota(_permut.begin(), _permut.end(), 0);
   _data = _data_base;
-  static_cast<_Derived *>(this)->compute_decomposition(true);
+  static_cast<_Derived *>(this)->compute_decomposition();
   return std::make_tuple(eigenvalues(), eigenvectors());
 }
 
@@ -60,9 +60,10 @@ eigen_decomposition_base<_Tensor, _Derived>::decompose_eigenbasis() noexcept {
     _all_repeated_eigenvalues = false;
     _pair_repeated_eigenvalues = false;
     _data = _data_base;
+    std::iota(_permut.begin(), _permut.end(), 0);
     std::iota(_non_repeated_eigenvalues.begin(),
               _non_repeated_eigenvalues.end(), 0);
-    static_cast<_Derived *>(this)->compute_decomposition(true);
+    static_cast<_Derived *>(this)->compute_decomposition();
     for (size_type i{0}; i < Dim; ++i)
       _projectors[i] = otimes(_eigvectors[i], _eigvectors[i]);
     get_repeated_eigenvalues();
@@ -156,22 +157,13 @@ constexpr inline auto
 eigen_decomposition_base<_Tensor,
                          _Derived>::get_repeated_eigenvalues() noexcept {
   if constexpr (Dim == 2) {
-    const auto x1{_eigval[0]}, x2{_eigval[1]};
-    const auto max_val{std::max(safe_cast<value_type>(1.0), std::max(std::fabs(x1), std::fabs(x2)))};
-    // eigenvalues closer than sqrt(eps) share one eigenbasis: the divided differences of the
-    // derivatives are not better than that, and the values use the projectors anyway
-    const auto eps{std::sqrt(std::numeric_limits<value_type>::epsilon()) * max_val};
-    if (std::fabs(x1 - x2) <= eps) {
+    if (close(_eigval[0], _eigval[1])) {
       _all_repeated_eigenvalues = true;
     }
   } else if constexpr (Dim == 3) {
-    const auto x1{_eigval[0]}, x2{_eigval[1]}, x3{_eigval[2]};
-    const auto max_val{std::max(safe_cast<value_type>(1.0),
-                                std::max(std::fabs(x1), std::max(std::fabs(x2), std::fabs(x3))))};
-    const auto eps{std::sqrt(std::numeric_limits<value_type>::epsilon()) * max_val};
-    const auto equal_12{std::fabs(x1 - x2) <= eps};
-    const auto equal_13{std::fabs(x1 - x3) <= eps};
-    const auto equal_23{std::fabs(x2 - x3) <= eps};
+    const auto equal_12{close(_eigval[0], _eigval[1])};
+    const auto equal_13{close(_eigval[0], _eigval[2])};
+    const auto equal_23{close(_eigval[1], _eigval[2])};
     _all_repeated_eigenvalues = false;
     _pair_repeated_eigenvalues = false;
     if (equal_12 && equal_13 && equal_23) {
@@ -224,6 +216,15 @@ eigen_decomposition_base<_Tensor, _Derived>::evaluate_eigenbasis() noexcept {
 
 // --- Static helpers ---
 
+// Repeated means closer than sqrt(eps) relative to the pair itself (scale invariant);
+// the divided differences of the derivatives are not better than that anyway.
+template <typename _Tensor, typename _Derived>
+constexpr inline bool eigen_decomposition_base<_Tensor, _Derived>::close(
+    value_type const a, value_type const b) noexcept {
+  constexpr auto tol{std::sqrt(std::numeric_limits<value_type>::epsilon())};
+  return std::fabs(a - b) <= tol * std::max(std::fabs(a), std::fabs(b));
+}
+
 template <typename _Tensor, typename _Derived>
 constexpr inline auto eigen_decomposition_base<_Tensor, _Derived>::mul(
     value_type *data, value_type const *const lhs,
@@ -254,7 +255,7 @@ constexpr inline auto eigen_decomposition_base<_Tensor, _Derived>::cross(
 template <typename _Tensor, typename _Derived>
 constexpr inline auto
 eigen_decomposition_base<_Tensor, _Derived>::sort_eigenvalues(
-    int sortType, bool isRotation, bool eigenvectors) noexcept {
+    int sortType, bool isRotation) noexcept {
   if (sortType != 0) {
     std::array<size_type, 3> index{0, 1, 2};
     if (_eigval[index[0]] > _eigval[index[1]])
@@ -282,20 +283,14 @@ eigen_decomposition_base<_Tensor, _Derived>::sort_eigenvalues(
       _permut[j] = index[j];
     }
 
-    if (eigenvectors) {
-      const std::array<tensor1, 3> unorderedEVec{_eigvectors};
-      for (size_type j = 0; j < 3; ++j) {
-        _eigvectors[j] = unorderedEVec[index[j]];
-      }
+    const std::array<tensor1, 3> unorderedEVec{_eigvectors};
+    for (size_type j = 0; j < 3; ++j) {
+      _eigvectors[j] = unorderedEVec[index[j]];
     }
   }
-  if (eigenvectors) {
-    // Ensure ordered eigenvectors form a right-handed basis
-    if (!isRotation) {
-      for (size_type j = 0; j < 3; ++j) {
-        _eigvectors[2](j) = -_eigvectors[2](j);
-      }
-    }
+  // Ensure ordered eigenvectors form a right-handed basis
+  if (!isRotation) {
+    _eigvectors[2] = -_eigvectors[2];
   }
 }
 
@@ -307,99 +302,40 @@ eigen_decomposition_base<_Tensor, _Derived>::sort_eigenvalues(
 
 template <typename _Tensor>
 constexpr inline auto
-eigen_decomposition_inline<_Tensor>::compute_decomposition(
-    bool eigenvectors) noexcept {
+eigen_decomposition_inline<_Tensor>::compute_decomposition() noexcept {
   if constexpr (Dim == 2) {
-    evaluate_detail_2D(eigenvectors, this->_data(0, 0), this->_data(0, 1),
-                       this->_data(1, 0), this->_data(1, 1));
+    evaluate_detail_2D(this->_data(0, 0), this->_data(0, 1), this->_data(1, 1));
   } else if constexpr (Dim == 3) {
-    evaluate_detail_3D(eigenvectors, this->_data(0, 0), this->_data(0, 1),
-                       this->_data(0, 2), this->_data(1, 1), this->_data(1, 2),
-                       this->_data(2, 2));
+    evaluate_detail_3D(this->_data(0, 0), this->_data(0, 1), this->_data(0, 2),
+                       this->_data(1, 1), this->_data(1, 2), this->_data(2, 2));
   }
 }
 
+// Symmetric 2x2 (upper triangle, as in 3D): lambda = m -/+ r with r = hypot(h, b), no
+// discriminant cancellation; the eigenvector comes from the larger of the two columns of A - lambda I.
 template <typename _Tensor>
 constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_2D(
-    bool eigenvectors, value_type const _a00, value_type const _a01,
-    value_type const _a10, value_type const _a11) noexcept {
-
-  const value_type max_element{
-      std::max(_a00, std::max(_a01, std::max(_a10, _a11)))};
-  const value_type inv_max_element{safe_cast<value_type>(1) / max_element};
-  const value_type a00{_a00 * inv_max_element};
-  const value_type a10{_a10 * inv_max_element};
-  const value_type a01{_a01 * inv_max_element};
-  const value_type a11{_a11 * inv_max_element};
-  const value_type eps_zero{std::numeric_limits<value_type>::epsilon() *
-                            std::max(safe_cast<value_type>(1), max_element)};
-
-  if (std::abs(max_element) <= eps_zero) {
-    // Zero matrix
-    this->_eigval[0] = 0;
-    this->_eigval[1] = 0;
-    if (eigenvectors) {
-      this->_eigvectors[0](0) = 1;
-      this->_eigvectors[1](1) = 1;
-    }
-    return;
-  } else if ((a10 * a01) <= eps_zero) {
-    // Diagonal matrix
-    this->_eigval[0] = a00;
-    this->_eigval[1] = a11;
-    if (eigenvectors) {
-      this->_eigvectors[0](0) = 1;
-      this->_eigvectors[0](1) = 0;
-      this->_eigvectors[1](0) = 0;
-      this->_eigvectors[1](1) = 1;
-    }
+    value_type const a00, value_type const a01, value_type const a11) noexcept {
+  const value_type m{(a00 + a11) / 2};
+  const value_type h{(a00 - a11) / 2};
+  const value_type r{std::hypot(h, a01)};
+  this->_eigval[0] = m - r;
+  this->_eigval[1] = m + r;
+  if (r == safe_cast<value_type>(0)) {
+    this->_eigvectors[0] = tensor1{1, 0};
+    this->_eigvectors[1] = tensor1{0, 1};
     return;
   }
-
-  const auto I1{a00 + a11};
-  const auto I2{a00 * a11 - a01 * a10};
-  const auto dis{I1 * I1 - safe_cast<value_type>(4) * I2};
-
-  if (dis <= eps_zero) {
-    // Repeated eigenvalues
-    this->_eigval[0] = I1 * safe_cast<value_type>(0.5);
-    this->_eigval[1] = I1 * safe_cast<value_type>(0.5);
-    if (eigenvectors) {
-      this->_eigvectors[0](0) = 1;
-      this->_eigvectors[0](1) = 0;
-      this->_eigvectors[1](0) = 0;
-      this->_eigvectors[1](1) = 1;
-    }
-  } else {
-    const auto sqrt_dis{std::sqrt(dis)};
-    this->_eigval[0] = (I1 + sqrt_dis) * safe_cast<value_type>(0.5);
-    this->_eigval[1] = (I1 - sqrt_dis) * safe_cast<value_type>(0.5);
-  }
-
-  this->_eigval[0] *= max_element;
-  this->_eigval[1] *= max_element;
-
-  if (this->_eigval[0] > this->_eigval[1]) {
-    std::swap(this->_eigval[0], this->_eigval[1]);
-    std::swap(this->_permut[0], this->_permut[1]);
-  }
-
-  if (eigenvectors) {
-    for (size_type i{0}; i < 2; ++i) {
-      const value_type temp{safe_cast<value_type>(
-          std::sqrt(safe_cast<value_type>(1) +
-                    std::pow((this->_eigval[i] - _a00) / _a01, 2)))};
-      this->_eigvectors[i](0) = safe_cast<value_type>(1) / temp;
-      this->_eigvectors[i](1) = (this->_eigval[i] - _a00) / (temp * _a01);
-    }
-  }
+  // v1 belongs to m + r; (h + r, b) or (b, r - h), whichever cannot cancel
+  const tensor1 v1{h >= safe_cast<value_type>(0) ? tensor1{h + r, a01} : tensor1{a01, r - h}};
+  this->_eigvectors[1] = v1 / norm(v1);
+  this->_eigvectors[0] = tensor1{-this->_eigvectors[1](1), this->_eigvectors[1](0)};
 }
 
 template <typename _Tensor>
 constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
-    bool eigenvectors, value_type const _a00, value_type const _a01,
-    value_type const _a02, value_type const _a11, value_type const _a12,
-    value_type const _a22) noexcept {
+    value_type const _a00, value_type const _a01, value_type const _a02,
+    value_type const _a11, value_type const _a12, value_type const _a22) noexcept {
 
   // Precondition: factor out maximum absolute value to guard
   // against floating-point overflow in eigenvalue computation.
@@ -413,11 +349,9 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
     this->_eigval[0] = 0;
     this->_eigval[1] = 0;
     this->_eigval[2] = 0;
-    if (eigenvectors) {
-      this->_eigvectors[0](0) = 1;
-      this->_eigvectors[1](1) = 1;
-      this->_eigvectors[2](2) = 1;
-    }
+    this->_eigvectors[0] = tensor1{1, 0, 0};
+    this->_eigvectors[1] = tensor1{0, 1, 0};
+    this->_eigvectors[2] = tensor1{0, 0, 1};
     return;
   }
 
@@ -429,9 +363,9 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
   const value_type a12 = _a12 * invMaxAbsElement;
   const value_type a22 = _a22 * invMaxAbsElement;
 
-  const value_type norm{a01 * a01 + a02 * a02 + a12 * a12};
+  const value_type off2{a01 * a01 + a02 * a02 + a12 * a12};
 
-  if (norm > safe_cast<value_type>(0)) {
+  if (off2 > safe_cast<value_type>(0)) {
     // Non-diagonal: compute eigenvalues via cubic characteristic equation
     const value_type q{(a00 + a11 + a22) / safe_cast<value_type>(3)};
 
@@ -440,7 +374,7 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
     const value_type b22{a22 - q};
 
     const value_type p{std::sqrt(
-        (b00 * b00 + b11 * b11 + b22 * b22 + norm * safe_cast<value_type>(2)) /
+        (b00 * b00 + b11 * b11 + b22 * b22 + off2 * safe_cast<value_type>(2)) /
         safe_cast<value_type>(6))};
 
     const value_type c00{b11 * b22 - a12 * a12};
@@ -466,98 +400,71 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
     this->_eigval[1] = q + p * beta1;
     this->_eigval[2] = q + p * beta2;
 
-    {
-      if (halfDet >= 0.) {
-        compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[2],
-                             this->_eigvectors[2]);
-        compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[2],
-                             this->_eigval[1], this->_eigvectors[1]);
-        base::cross(this->_eigvectors[0].raw_data(),
-                    this->_eigvectors[1].raw_data(),
-                    this->_eigvectors[2].raw_data());
-      } else {
-        compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[0],
-                             this->_eigvectors[0]);
-        compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[0],
-                             this->_eigval[1], this->_eigvectors[1]);
-        base::cross(this->_eigvectors[2].raw_data(),
-                    this->_eigvectors[0].raw_data(),
-                    this->_eigvectors[1].raw_data());
-      }
+    if (halfDet >= 0.) {
+      compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[2],
+                           this->_eigvectors[2]);
+      compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[2],
+                           this->_eigval[1], this->_eigvectors[1]);
+      this->_eigvectors[0] = cross(this->_eigvectors[1], this->_eigvectors[2]);
+    } else {
+      compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[0],
+                           this->_eigvectors[0]);
+      compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[0],
+                           this->_eigval[1], this->_eigvectors[1]);
+      this->_eigvectors[2] = cross(this->_eigvectors[0], this->_eigvectors[1]);
     }
   } else {
     // Diagonal matrix
     this->_eigval[0] = a00;
     this->_eigval[1] = a11;
     this->_eigval[2] = a22;
-    {
-      this->_eigvectors[0](0) = 1;
-      this->_eigvectors[1](1) = 1;
-      this->_eigvectors[2](2) = 1;
-    }
+    this->_eigvectors[0] = tensor1{1, 0, 0};
+    this->_eigvectors[1] = tensor1{0, 1, 0};
+    this->_eigvectors[2] = tensor1{0, 0, 1};
   }
 
-  // The closed form loses accuracy near repeated eigenvalues (issue #37). Check its eigenpairs
-  // by their residuals on the scaled matrix and, if needed, polish them with cyclic Jacobi
-  // rotations started from the closed-form basis, which then converge in a sweep or two.
-  {
-    const value_type a[3][3]{{a00, a01, a02}, {a01, a11, a12}, {a02, a12, a22}};
-    constexpr value_type eps{std::numeric_limits<value_type>::epsilon()};
-    value_type residual{0};
-    for (size_type i{0}; i < 3; ++i) {
-      for (size_type r{0}; r < 3; ++r) {
-        const value_type Av{a[r][0] * this->_eigvectors[i](0) + a[r][1] * this->_eigvectors[i](1) + a[r][2] * this->_eigvectors[i](2)};
-        residual = std::max(residual, std::fabs(Av - this->_eigval[i] * this->_eigvectors[i](r)));
-      }
-    }
-    if (residual > 256 * eps) { // generic spectra stay below this; the near-repeated failures sit at 1e-9
-      value_type Q[3][3];
-      for (size_type i{0}; i < 3; ++i)
-        for (size_type k{0}; k < 3; ++k)
-          Q[k][i] = this->_eigvectors[i](k);
-      // A' = Q^T A Q, nearly diagonal
-      value_type AQ[3][3], A[3][3];
-      for (size_type r{0}; r < 3; ++r)
-        for (size_type c{0}; c < 3; ++c)
-          AQ[r][c] = a[r][0] * Q[0][c] + a[r][1] * Q[1][c] + a[r][2] * Q[2][c];
-      for (size_type r{0}; r < 3; ++r)
-        for (size_type c{0}; c < 3; ++c)
-          A[r][c] = Q[0][r] * AQ[0][c] + Q[1][r] * AQ[1][c] + Q[2][r] * AQ[2][c];
-      for (size_type sweep{0}; sweep < 64; ++sweep) {
-        const value_type off{A[0][1] * A[0][1] + A[0][2] * A[0][2] + A[1][2] * A[1][2]};
-        const value_type diag{A[0][0] * A[0][0] + A[1][1] * A[1][1] + A[2][2] * A[2][2]};
-        if (off <= eps * eps * diag)
-          break;
-        for (size_type p{0}; p < 2; ++p) {
-          for (size_type q{p + 1}; q < 3; ++q) {
-            if (A[p][q] == safe_cast<value_type>(0))
-              continue;
-            const value_type theta{(A[q][q] - A[p][p]) / (2 * A[p][q])};
-            const value_type t{(theta >= 0 ? safe_cast<value_type>(1) : safe_cast<value_type>(-1)) /
-                               (std::fabs(theta) + std::sqrt(theta * theta + 1))};
-            const value_type c{safe_cast<value_type>(1) / std::sqrt(t * t + 1)};
-            const value_type sn{t * c};
-            const value_type apq{A[p][q]};
-            A[p][p] -= t * apq;
-            A[q][q] += t * apq;
-            A[p][q] = A[q][p] = 0;
-            const size_type r{3 - p - q};
-            const value_type arp{A[r][p]}, arq{A[r][q]};
-            A[r][p] = A[p][r] = c * arp - sn * arq;
-            A[r][q] = A[q][r] = sn * arp + c * arq;
-            for (size_type k{0}; k < 3; ++k) {
-              const value_type qkp{Q[k][p]}, qkq{Q[k][q]};
-              Q[k][p] = c * qkp - sn * qkq;
-              Q[k][q] = sn * qkp + c * qkq;
-            }
-          }
+  // The closed form loses accuracy near repeated eigenvalues (issue #37): check the residuals on
+  // the scaled matrix and, only if they fail, polish with Jacobi rotations from the closed-form basis.
+  const tensor2 a{a00, a01, a02, a01, a11, a12, a02, a12, a22};
+  constexpr value_type eps{std::numeric_limits<value_type>::epsilon()};
+  constexpr value_type residual_tol{256 * eps}; // generic spectra: ~1e-15; the failures: ~1e-9
+  constexpr size_type max_sweeps{64};
+  value_type residual{0};
+  for (size_type i{0}; i < 3; ++i)
+    residual = std::max(residual, norm(tensor1{a * this->_eigvectors[i] - this->_eigval[i] * this->_eigvectors[i]}));
+  if (residual > residual_tol) {
+    tensor2 Q; // columns are the eigenvectors
+    for (size_type i{0}; i < 3; ++i)
+      for (size_type k{0}; k < 3; ++k)
+        Q(k, i) = this->_eigvectors[i](k);
+    tensor2 A{trans(Q) * a * Q};
+    for (size_type sweep{0}; sweep < max_sweeps; ++sweep) {
+      const value_type off{A(0, 1) * A(0, 1) + A(0, 2) * A(0, 2) + A(1, 2) * A(1, 2)};
+      const value_type diag{A(0, 0) * A(0, 0) + A(1, 1) * A(1, 1) + A(2, 2) * A(2, 2)};
+      if (off <= eps * eps * diag)
+        break;
+      for (size_type p{0}; p < 2; ++p) {
+        for (size_type q{p + 1}; q < 3; ++q) {
+          if (A(p, q) == safe_cast<value_type>(0))
+            continue;
+          const value_type theta{(A(q, q) - A(p, p)) / (2 * A(p, q))};
+          const value_type t{std::copysign(safe_cast<value_type>(1), theta) /
+                             (std::fabs(theta) + std::sqrt(theta * theta + 1))};
+          const value_type c{safe_cast<value_type>(1) / std::sqrt(t * t + 1)};
+          tensor2 G{eye<value_type, 3, 2>()}; // rotation in the (p, q) plane
+          G(p, p) = c;
+          G(q, q) = c;
+          G(p, q) = t * c;
+          G(q, p) = -t * c;
+          A = tensor2{trans(G) * A * G};
+          Q = tensor2{Q * G};
         }
       }
-      for (size_type i{0}; i < 3; ++i) {
-        this->_eigval[i] = A[i][i];
-        for (size_type k{0}; k < 3; ++k)
-          this->_eigvectors[i](k) = Q[k][i];
-      }
+    }
+    for (size_type i{0}; i < 3; ++i) {
+      this->_eigval[i] = A(i, i);
+      for (size_type k{0}; k < 3; ++k)
+        this->_eigvectors[i](k) = Q(k, i);
     }
   }
   // Revert preconditioning scaling
@@ -565,7 +472,7 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
     this->_eigval[i] *= maxAbsElement;
   }
 
-  this->sort_eigenvalues(-1, true, eigenvectors);
+  this->sort_eigenvalues(-1, true);
 }
 
 template <typename _Tensor>
@@ -698,8 +605,7 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::compute_eigenvector1(
 #ifdef TMECH_ENABLE_LAPACK
 template <typename _Tensor>
 constexpr inline auto
-eigen_decomposition_lapack<_Tensor>::compute_decomposition(
-    bool eigenvectors) noexcept {
+eigen_decomposition_lapack<_Tensor>::compute_decomposition() noexcept {
   // Make a working copy — LAPACK destroys the input matrix.
   // Note: for symmetric tensors, row-major == column-major,
   // so passing raw_data() directly to LAPACK is valid.
@@ -718,7 +624,7 @@ eigen_decomposition_lapack<_Tensor>::compute_decomposition(
   int info = 0;
 
   char jobvl = 'N';
-  char jobvr = eigenvectors ? 'V' : 'N';
+  char jobvr = 'V';
 
   if constexpr (std::is_same_v<value_type, double>) {
     dgeev_(&jobvl, &jobvr, &n, data_copy.raw_data(), &lda, this->_eigval.data(),
@@ -739,11 +645,9 @@ eigen_decomposition_lapack<_Tensor>::compute_decomposition(
   for (size_type i = 0; i < Dim; ++i) {
     this->_eigval[i] = temp_eigval[idx[i]];
     this->_permut[i] = idx[i];
-    if (eigenvectors) {
-      // LAPACK stores eigenvectors as columns (column-major)
-      for (size_type j = 0; j < Dim; ++j) {
-        this->_eigvectors[i](j) = vr[idx[i] * ldvr + j];
-      }
+    // LAPACK stores eigenvectors as columns (column-major)
+    for (size_type j = 0; j < Dim; ++j) {
+      this->_eigvectors[i](j) = vr[idx[i] * ldvr + j];
     }
   }
 }

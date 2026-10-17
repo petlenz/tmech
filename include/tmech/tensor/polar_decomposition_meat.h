@@ -200,7 +200,8 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::set_up_R_newton()noe
 template <typename _Tensor>
 constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_eigen()noexcept{
     auto eigen{eigen_decomposition(trans(_data)*_data)};
-    const auto [eigenvalues, eigenbasis]{eigen.decompose_eigenbasis()};
+    eigen.decompose_eigenbasis();
+    const auto eigenvalues{eigen.eigenvalues()};
     const auto& projectors{eigen.projectors()}; // every eigenvalue with its own projector
     tensor2 Uinv;
     for(size_type i{0}; i<data_type_tensor::dimension(); ++i){

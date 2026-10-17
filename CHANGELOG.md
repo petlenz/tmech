@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- `eigen_decomposition` at near-repeated eigenvalues (#37): the 3D closed form is
+  checked by its residuals and polished with Jacobi rotations when they fail; the
+  2D path uses the cancellation-free `hypot` form; `decompose()` is idempotent.
+- Eigenbases are built from the eigenvector projectors `e_i ⊗ e_i` instead of
+  Sylvester products, so `log`, `sqrt`, `exp` and `polar_decomposition` are exact
+  for any eigenvalue split; new accessor `projectors()`.
+- Eigenvalues count as repeated when closer than √ε relative to the pair, at any
+  scale; the derivative of an isotropic tensor function falls back to `f'` at the
+  midpoint only where `f(λᵢ) − f(λⱼ)` cancels.
+
+### Changed
+- `compute_decomposition()` / `sort_eigenvalues()` no longer take the unused
+  `eigenvectors` flag (internal `detail` API).
+
 ## [1.2.0] - 2026-10-01
 
 ### Added
