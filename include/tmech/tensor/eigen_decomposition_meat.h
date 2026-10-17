@@ -405,13 +405,13 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
                            this->_eigvectors[2]);
       compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[2],
                            this->_eigval[1], this->_eigvectors[1]);
-      this->_eigvectors[0] = cross(this->_eigvectors[1], this->_eigvectors[2]);
+      this->_eigvectors[0] = tmech::cross(this->_eigvectors[1], this->_eigvectors[2]);
     } else {
       compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[0],
                            this->_eigvectors[0]);
       compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[0],
                            this->_eigval[1], this->_eigvectors[1]);
-      this->_eigvectors[2] = cross(this->_eigvectors[0], this->_eigvectors[1]);
+      this->_eigvectors[2] = tmech::cross(this->_eigvectors[0], this->_eigvectors[1]);
     }
   } else {
     // Diagonal matrix
