@@ -1734,6 +1734,37 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
 //==========================================================================
 // Adaptor tests (all use fixed data — already stable)
 //==========================================================================
+// adaptor<full> = expression gives the tensor result (aliasing via tmech::eval, as for tensor)
+TEST(gtest, adaptorFullAssignmentMatchesTensor) {
+  tmech::tensor<double, 3, 2> a, b;
+  a.randn();
+  b.randn();
+  tmech::tensor<double, 3, 2> const I{tmech::eye<double, 3, 2>()};
+  tmech::tensor<double, 3, 4> const C{2.0 * tmech::otimes(I, I) + tmech::otimesu(I, I)};
+  double xa[9], xb[9], y[9];
+  tmech::adaptor<double, 3, 2, tmech::full<3>> va{xa}, vb{xb}, vy{y};
+  va = a;
+  vb = b;
+  auto const check = [&](auto const &expected) {
+    tmech::tensor<double, 3, 2> const got{vy};
+    EXPECT_EQ(true, tmech::almost_equal(got, tmech::tensor<double, 3, 2>{expected}, 1e-14));
+  };
+  vy = va + 2.0 * vb;
+  check(a + 2.0 * b);
+  vy = va * vb;
+  check(a * b);
+  vy = tmech::trans(va) * vb - va;
+  check(tmech::trans(a) * b - a);
+  vy = tmech::dcontract(C, va);
+  check(tmech::dcontract(C, a));
+  vy = va;
+  vy = tmech::eval(vy * vb); // the target is an operand
+  check(a * b);
+  vy = va;
+  vy = vy + vy;
+  check(2.0 * a);
+}
+
 
 TEST(gtest, adaptorVoigt2Dsecond) {
   double ptr[3]{1, 2, 3};
