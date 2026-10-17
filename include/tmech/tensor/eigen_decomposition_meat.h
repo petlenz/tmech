@@ -241,15 +241,6 @@ constexpr inline auto eigen_decomposition_base<_Tensor, _Derived>::dot(
   return lhs[0] * rhs[0] + lhs[1] * rhs[1] + lhs[2] * rhs[2];
 }
 
-template <typename _Tensor, typename _Derived>
-constexpr inline auto eigen_decomposition_base<_Tensor, _Derived>::cross(
-    value_type *data, value_type const *const lhs,
-    value_type const *const rhs) noexcept {
-  data[0] = lhs[1] * rhs[2] - lhs[2] * rhs[1];
-  data[1] = lhs[2] * rhs[0] - lhs[0] * rhs[2];
-  data[2] = lhs[0] * rhs[1] - lhs[1] * rhs[0];
-}
-
 // --- sort_eigenvalues (3D only, called by derived classes) ---
 
 template <typename _Tensor, typename _Derived>
@@ -405,13 +396,13 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
                            this->_eigvectors[2]);
       compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[2],
                            this->_eigval[1], this->_eigvectors[1]);
-      this->_eigvectors[0] = tmech::cross(this->_eigvectors[1], this->_eigvectors[2]);
+      this->_eigvectors[0] = cross(this->_eigvectors[1], this->_eigvectors[2]);
     } else {
       compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[0],
                            this->_eigvectors[0]);
       compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[0],
                            this->_eigval[1], this->_eigvectors[1]);
-      this->_eigvectors[2] = tmech::cross(this->_eigvectors[0], this->_eigvectors[1]);
+      this->_eigvectors[2] = cross(this->_eigvectors[0], this->_eigvectors[1]);
     }
   } else {
     // Diagonal matrix
@@ -489,7 +480,7 @@ eigen_decomposition_inline<_Tensor>::compute_orthogonal_complement(
         safe_cast<value_type>(1) / std::sqrt(W(1) * W(1) + W(2) * W(2));
     U = tensor1({0, +W(2) * invLength, -W(1) * invLength});
   }
-  base::cross(V.raw_data(), W.raw_data(), U.raw_data());
+  V = cross(W, U);
 }
 
 template <typename _Tensor>
@@ -501,11 +492,7 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::compute_eigenvector0(
   const tensor1 row0{a00 - eval0, a01, a02};
   const tensor1 row1{a01, a11 - eval0, a12};
   const tensor1 row2{a02, a12, a22 - eval0};
-  tensor1 r0xr1, r0xr2, r1xr2;
-
-  base::cross(r0xr1.raw_data(), row0.raw_data(), row1.raw_data());
-  base::cross(r0xr2.raw_data(), row0.raw_data(), row2.raw_data());
-  base::cross(r1xr2.raw_data(), row1.raw_data(), row2.raw_data());
+  const tensor1 r0xr1{cross(row0, row1)}, r0xr2{cross(row0, row2)}, r1xr2{cross(row1, row2)};
 
   const value_type d0{base::dot(r0xr1.raw_data(), r0xr1.raw_data())};
   const value_type d1{base::dot(r0xr2.raw_data(), r0xr2.raw_data())};

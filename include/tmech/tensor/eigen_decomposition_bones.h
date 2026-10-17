@@ -79,9 +79,6 @@ public:
 
   protected:
     static constexpr inline bool close(value_type a, value_type b) noexcept;
-    static constexpr inline auto cross(value_type *data,
-                                       value_type const *const lhs,
-                                       value_type const *const rhs) noexcept;
     static constexpr inline auto dot(value_type const *const lhs,
                                      value_type const *const rhs) noexcept;
     static constexpr inline auto mul(value_type *data,
