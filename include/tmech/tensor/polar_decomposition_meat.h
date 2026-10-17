@@ -200,13 +200,14 @@ constexpr inline auto polar_decomposition_wrapper<_Tensor>::set_up_R_newton()noe
 template <typename _Tensor>
 constexpr inline auto polar_decomposition_wrapper<_Tensor>::evaluate_eigen()noexcept{
     auto eigen{eigen_decomposition(trans(_data)*_data)};
-    const auto [eigenvalues, eigenbasis]{eigen.decompose_eigenbasis()};
+    eigen.decompose_eigenbasis();
+    const auto eigenvalues{eigen.eigenvalues()};
+    const auto& projectors{eigen.projectors()}; // every eigenvalue with its own projector
     tensor2 Uinv;
-    const auto& idx{eigen.non_repeated_eigenvalues_index()};
-    for(size_type i{0}; i<eigen.number_non_repeated_eigenvalues(); ++i){
-        const auto val{std::sqrt(eigenvalues[idx[i]])};
-        _U += val*eigenbasis[idx[i]];
-        Uinv += (1.0/val)*eigenbasis[idx[i]];
+    for(size_type i{0}; i<data_type_tensor::dimension(); ++i){
+        const auto val{std::sqrt(eigenvalues[i])};
+        _U += val*projectors[i];
+        Uinv += (1.0/val)*projectors[i];
     }
     _R = _data*Uinv;
     _V = _R*_U*trans(_R);
