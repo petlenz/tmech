@@ -429,47 +429,136 @@ constexpr inline auto eigen_decomposition_inline<_Tensor>::evaluate_detail_3D(
   const value_type a12 = _a12 * invMaxAbsElement;
   const value_type a22 = _a22 * invMaxAbsElement;
 
-  // Cyclic Jacobi rotations: eigenvalues and an orthonormal eigenvector set accurate to machine
-  // precision for any spectrum, including repeated and nearly repeated eigenvalues, where the
-  // trigonometric closed form and the eigenvector cross products lose up to half the digits.
-  value_type A[3][3]{{a00, a01, a02}, {a01, a11, a12}, {a02, a12, a22}};
-  value_type Q[3][3]{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-  constexpr value_type eps{std::numeric_limits<value_type>::epsilon()};
-  for (size_type sweep{0}; sweep < 64; ++sweep) {
-    const value_type off{A[0][1] * A[0][1] + A[0][2] * A[0][2] + A[1][2] * A[1][2]};
-    const value_type diag{A[0][0] * A[0][0] + A[1][1] * A[1][1] + A[2][2] * A[2][2]};
-    if (off <= eps * eps * diag)
-      break;
-    for (size_type p{0}; p < 2; ++p) {
-      for (size_type q{p + 1}; q < 3; ++q) {
-        if (A[p][q] == safe_cast<value_type>(0))
-          continue;
-        const value_type theta{(A[q][q] - A[p][p]) / (2 * A[p][q])};
-        const value_type t{(theta >= 0 ? safe_cast<value_type>(1) : safe_cast<value_type>(-1)) /
-                           (std::fabs(theta) + std::sqrt(theta * theta + 1))};
-        const value_type c{safe_cast<value_type>(1) / std::sqrt(t * t + 1)};
-        const value_type sn{t * c};
-        const value_type apq{A[p][q]};
-        A[p][p] -= t * apq;
-        A[q][q] += t * apq;
-        A[p][q] = A[q][p] = 0;
-        const size_type r{3 - p - q};
-        const value_type arp{A[r][p]}, arq{A[r][q]};
-        A[r][p] = A[p][r] = c * arp - sn * arq;
-        A[r][q] = A[q][r] = sn * arp + c * arq;
-        for (size_type k{0}; k < 3; ++k) {
-          const value_type qkp{Q[k][p]}, qkq{Q[k][q]};
-          Q[k][p] = c * qkp - sn * qkq;
-          Q[k][q] = sn * qkp + c * qkq;
-        }
+  const value_type norm{a01 * a01 + a02 * a02 + a12 * a12};
+
+  if (norm > safe_cast<value_type>(0)) {
+    // Non-diagonal: compute eigenvalues via cubic characteristic equation
+    const value_type q{(a00 + a11 + a22) / safe_cast<value_type>(3)};
+
+    const value_type b00{a00 - q};
+    const value_type b11{a11 - q};
+    const value_type b22{a22 - q};
+
+    const value_type p{std::sqrt(
+        (b00 * b00 + b11 * b11 + b22 * b22 + norm * safe_cast<value_type>(2)) /
+        safe_cast<value_type>(6))};
+
+    const value_type c00{b11 * b22 - a12 * a12};
+    const value_type c01{a01 * b22 - a12 * a02};
+    const value_type c02{a01 * a12 - b11 * a02};
+    const value_type det{(b00 * c00 - a01 * c01 + a02 * c02) / (p * p * p)};
+
+    const value_type halfDet{std::min(
+        std::max(det * safe_cast<value_type>(0.5), -safe_cast<value_type>(1)),
+        safe_cast<value_type>(1))};
+
+    constexpr value_type twoThirdsPi{safe_cast<value_type>(2) *
+                                     safe_cast<value_type>(M_PI) /
+                                     safe_cast<value_type>(3)};
+    const value_type angle{std::acos(halfDet) / safe_cast<value_type>(3)};
+    const value_type beta2{std::cos(angle) * safe_cast<value_type>(2)};
+    const value_type beta0{std::cos(angle + twoThirdsPi) *
+                           safe_cast<value_type>(2)};
+    const value_type beta1{-(beta0 + beta2)};
+
+    // Eigenvalues ordered: alpha0 <= alpha1 <= alpha2
+    this->_eigval[0] = q + p * beta0;
+    this->_eigval[1] = q + p * beta1;
+    this->_eigval[2] = q + p * beta2;
+
+    {
+      if (halfDet >= 0.) {
+        compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[2],
+                             this->_eigvectors[2]);
+        compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[2],
+                             this->_eigval[1], this->_eigvectors[1]);
+        base::cross(this->_eigvectors[0].raw_data(),
+                    this->_eigvectors[1].raw_data(),
+                    this->_eigvectors[2].raw_data());
+      } else {
+        compute_eigenvector0(a00, a01, a02, a11, a12, a22, this->_eigval[0],
+                             this->_eigvectors[0]);
+        compute_eigenvector1(a00, a01, a02, a11, a12, a22, this->_eigvectors[0],
+                             this->_eigval[1], this->_eigvectors[1]);
+        base::cross(this->_eigvectors[2].raw_data(),
+                    this->_eigvectors[0].raw_data(),
+                    this->_eigvectors[1].raw_data());
       }
     }
+  } else {
+    // Diagonal matrix
+    this->_eigval[0] = a00;
+    this->_eigval[1] = a11;
+    this->_eigval[2] = a22;
+    {
+      this->_eigvectors[0](0) = 1;
+      this->_eigvectors[1](1) = 1;
+      this->_eigvectors[2](2) = 1;
+    }
   }
-  for (size_type i{0}; i < 3; ++i) {
-    this->_eigval[i] = A[i][i];
-    if (eigenvectors)
-      for (size_type k{0}; k < 3; ++k)
-        this->_eigvectors[i](k) = Q[k][i];
+
+  // The closed form loses accuracy near repeated eigenvalues (issue #37). Check its eigenpairs
+  // by their residuals on the scaled matrix and, if needed, polish them with cyclic Jacobi
+  // rotations started from the closed-form basis, which then converge in a sweep or two.
+  {
+    const value_type a[3][3]{{a00, a01, a02}, {a01, a11, a12}, {a02, a12, a22}};
+    constexpr value_type eps{std::numeric_limits<value_type>::epsilon()};
+    value_type residual{0};
+    for (size_type i{0}; i < 3; ++i) {
+      for (size_type r{0}; r < 3; ++r) {
+        const value_type Av{a[r][0] * this->_eigvectors[i](0) + a[r][1] * this->_eigvectors[i](1) + a[r][2] * this->_eigvectors[i](2)};
+        residual = std::max(residual, std::fabs(Av - this->_eigval[i] * this->_eigvectors[i](r)));
+      }
+    }
+    if (residual > 256 * eps) { // generic spectra stay below this; the near-repeated failures sit at 1e-9
+      value_type Q[3][3];
+      for (size_type i{0}; i < 3; ++i)
+        for (size_type k{0}; k < 3; ++k)
+          Q[k][i] = this->_eigvectors[i](k);
+      // A' = Q^T A Q, nearly diagonal
+      value_type AQ[3][3], A[3][3];
+      for (size_type r{0}; r < 3; ++r)
+        for (size_type c{0}; c < 3; ++c)
+          AQ[r][c] = a[r][0] * Q[0][c] + a[r][1] * Q[1][c] + a[r][2] * Q[2][c];
+      for (size_type r{0}; r < 3; ++r)
+        for (size_type c{0}; c < 3; ++c)
+          A[r][c] = Q[0][r] * AQ[0][c] + Q[1][r] * AQ[1][c] + Q[2][r] * AQ[2][c];
+      for (size_type sweep{0}; sweep < 64; ++sweep) {
+        const value_type off{A[0][1] * A[0][1] + A[0][2] * A[0][2] + A[1][2] * A[1][2]};
+        const value_type diag{A[0][0] * A[0][0] + A[1][1] * A[1][1] + A[2][2] * A[2][2]};
+        if (off <= eps * eps * diag)
+          break;
+        for (size_type p{0}; p < 2; ++p) {
+          for (size_type q{p + 1}; q < 3; ++q) {
+            if (A[p][q] == safe_cast<value_type>(0))
+              continue;
+            const value_type theta{(A[q][q] - A[p][p]) / (2 * A[p][q])};
+            const value_type t{(theta >= 0 ? safe_cast<value_type>(1) : safe_cast<value_type>(-1)) /
+                               (std::fabs(theta) + std::sqrt(theta * theta + 1))};
+            const value_type c{safe_cast<value_type>(1) / std::sqrt(t * t + 1)};
+            const value_type sn{t * c};
+            const value_type apq{A[p][q]};
+            A[p][p] -= t * apq;
+            A[q][q] += t * apq;
+            A[p][q] = A[q][p] = 0;
+            const size_type r{3 - p - q};
+            const value_type arp{A[r][p]}, arq{A[r][q]};
+            A[r][p] = A[p][r] = c * arp - sn * arq;
+            A[r][q] = A[q][r] = sn * arp + c * arq;
+            for (size_type k{0}; k < 3; ++k) {
+              const value_type qkp{Q[k][p]}, qkq{Q[k][q]};
+              Q[k][p] = c * qkp - sn * qkq;
+              Q[k][q] = sn * qkp + c * qkq;
+            }
+          }
+        }
+      }
+      for (size_type i{0}; i < 3; ++i) {
+        this->_eigval[i] = A[i][i];
+        for (size_type k{0}; k < 3; ++k)
+          this->_eigvectors[i](k) = Q[k][i];
+      }
+    }
   }
   // Revert preconditioning scaling
   for (size_type i{0}; i < 3; ++i) {
