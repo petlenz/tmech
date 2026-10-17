@@ -123,7 +123,7 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij()noe
                 // the eigenvalues are distinct but the values are not); then f' at the midpoint
                 const auto lambda_i{eig_values[non_repeated_eigenvalues[i]]}, lambda_j{eig_values[non_repeated_eigenvalues[j]]};
                 const auto f_i{Func::apply(lambda_i)}, f_j{Func::apply(lambda_j)};
-                constexpr auto tol{std::sqrt(std::numeric_limits<value_type>::epsilon())};
+                const auto tol{std::sqrt(std::numeric_limits<value_type>::epsilon())};
                 if(std::fabs(f_i - f_j) <= tol*std::max(std::fabs(f_i), std::fabs(f_j))){
                     _Gij[i][j] = Func::derivative((lambda_i + lambda_j)/2);
                 }else{

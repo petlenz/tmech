@@ -221,7 +221,7 @@ eigen_decomposition_base<_Tensor, _Derived>::evaluate_eigenbasis() noexcept {
 template <typename _Tensor, typename _Derived>
 constexpr inline bool eigen_decomposition_base<_Tensor, _Derived>::close(
     value_type const a, value_type const b) noexcept {
-  constexpr auto tol{std::sqrt(std::numeric_limits<value_type>::epsilon())};
+  const auto tol{std::sqrt(std::numeric_limits<value_type>::epsilon())};
   return std::fabs(a - b) <= tol * std::max(std::fabs(a), std::fabs(b));
 }
 
