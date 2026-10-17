@@ -2961,6 +2961,110 @@ TEST(gtest, eigen_decomposition_reconstructs_symmetric_3x3) {
   EXPECT_TRUE(ascending || descending);
 }
 
+// --- near-repeated eigenvalues: the analytic 3x3 path lost accuracy there (issue #37) ---
+namespace near_repeated {
+inline tmech::tensor<double, 3, 2> stretch_plus(double a, double c, std::size_t k, std::size_t l, double h) {
+  tmech::tensor<double, 3, 2> F;
+  F(0, 0) = a;
+  F(1, 1) = a;
+  F(2, 2) = c;
+  F(k, l) += h;
+  return F;
+}
+// every F whose F F^T has two eigenvalues split by 1e-14 ... 1e-9
+inline std::vector<tmech::tensor<double, 3, 2>> cases() {
+  std::vector<tmech::tensor<double, 3, 2>> out;
+  for (double h : {1e-7, 1e-6, 1e-5})
+    for (std::size_t k = 0; k < 3; ++k)
+      for (std::size_t l = 0; l < 3; ++l) {
+        out.push_back(stretch_plus(1.15, 1.0, k, l, h));
+        out.push_back(stretch_plus(1.24, 1.0, k, l, h));
+        out.push_back(stretch_plus(1.18, 0.9516, k, l, h));
+      }
+  out.push_back(stretch_plus(1.2, 1.2, 0, 0, 0.0)); // all three equal
+  out.push_back(stretch_plus(1.15, 1.0, 0, 0, 0.0)); // exactly a pair
+  return out;
+}
+inline tmech::tensor<double, 3, 2> fd_log_V(tmech::tensor<double, 3, 2> const &F, std::size_t k, std::size_t l, double h) {
+  tmech::tensor<double, 3, 2> Fp{F}, Fm{F};
+  Fp(k, l) += h;
+  Fm(k, l) -= h;
+  tmech::tensor<double, 3, 2> const lp{tmech::log(tmech::tensor<double, 3, 2>{tmech::polar_decomposition(Fp).V()})};
+  tmech::tensor<double, 3, 2> const lm{tmech::log(tmech::tensor<double, 3, 2>{tmech::polar_decomposition(Fm).V()})};
+  return tmech::tensor<double, 3, 2>{(lp - lm) / (2 * h)};
+}
+} // namespace near_repeated
+
+TEST(gtest, eigen_decomposition_near_repeated_eigenpairs_are_accurate) {
+  for (auto const &F : near_repeated::cases()) {
+    for (auto const &A : {tmech::tensor<double, 3, 2>{tmech::trans(F) * F}, tmech::tensor<double, 3, 2>{F * tmech::trans(F)}}) {
+      auto eig = tmech::eigen_decomposition(A);
+      const auto [lam, v] = eig.decompose();
+      tmech::tensor<double, 3, 2> sum;
+      for (std::size_t i = 0; i < 3; ++i) {
+        EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 1>{A * v[i] - lam[i] * v[i]}), 1e-13 * tmech::norm(A));
+        sum += tmech::otimes(v[i], v[i]);
+      }
+      EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{sum - tmech::eye<double, 3, 2>()}), 1e-14);
+      // the eigenbases are projectors that sum to the identity, whatever the split
+      auto eig2 = tmech::eigen_decomposition(A);
+      eig2.decompose_eigenbasis();
+      const auto basis = eig2.eigenbasis();
+      tmech::tensor<double, 3, 2> basis_sum;
+      for (auto i : eig2.non_repeated_eigenvalues_index()) {
+        EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{basis[i] * basis[i] - basis[i]}), 1e-13);
+        basis_sum += basis[i];
+      }
+      EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{basis_sum - tmech::eye<double, 3, 2>()}), 1e-13);
+    }
+  }
+}
+
+TEST(gtest, isotropic_tensor_functions_near_repeated_eigenvalues) {
+  for (auto const &F : near_repeated::cases()) {
+    tmech::tensor<double, 3, 2> const b{F * tmech::trans(F)};
+    tmech::tensor<double, 3, 2> const s{tmech::sqrt(b)};
+    EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{s * s - b}), 1e-13 * tmech::norm(b));
+    EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{s - tmech::trans(s)}), 1e-14);
+    tmech::tensor<double, 3, 2> const l{tmech::log(b)};
+    EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{tmech::tensor<double, 3, 2>{tmech::exp_sym(l)} - b}), 1e-12 * tmech::norm(b));
+  }
+}
+
+TEST(gtest, polar_decomposition_near_repeated_stretches) {
+  for (auto const &F : near_repeated::cases()) {
+    auto pol = tmech::polar_decomposition(F);
+    tmech::tensor<double, 3, 2> const V{pol.V()}, R{pol.R()}, U{pol.U()};
+    EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{V - tmech::trans(V)}), 1e-13);
+    EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{V * V - F * tmech::trans(F)}), 1e-13 * tmech::norm(F));
+    EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{R * U - F}), 1e-13 * tmech::norm(F));
+    EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 2>{tmech::trans(R) * R - tmech::eye<double, 3, 2>()}), 1e-13);
+  }
+}
+
+// the symptom of issue #37: a central difference of ln V with h = 1e-7 across exactly repeated stretches
+TEST(gtest, log_strain_finite_difference_is_stable_at_repeated_stretches) {
+  for (auto const &[a, c] : {std::pair{1.15, 1.0}, std::pair{1.24, 1.0}, std::pair{1.18, 0.9516}}) {
+    auto const F = near_repeated::stretch_plus(a, c, 0, 0, 0.0);
+    auto pol = tmech::polar_decomposition(F);
+    tmech::tensor<double, 3, 2> const V{pol.V()};
+    auto lg = tmech::log(V);
+    tmech::tensor<double, 3, 2> const value{lg};
+    tmech::tensor<double, 3, 4> const chain{tmech::dcontract(tmech::tensor<double, 3, 4>{lg.derivative()}, tmech::tensor<double, 3, 4>{pol.V().derivative()})};
+    for (double h : {1e-6, 1e-7, 1e-8}) {
+      tmech::tensor<double, 3, 4> fd;
+      for (std::size_t k = 0; k < 3; ++k)
+        for (std::size_t l = 0; l < 3; ++l) {
+          auto const d = near_repeated::fd_log_V(F, k, l, h);
+          for (std::size_t i = 0; i < 3; ++i)
+            for (std::size_t j = 0; j < 3; ++j)
+              fd(i, j, k, l) = d(i, j);
+        }
+      EXPECT_LT(tmech::norm(tmech::tensor<double, 3, 4>{chain - fd}) / tmech::norm(chain), 1e-6) << "a = " << a << " h = " << h;
+    }
+  }
+}
+
 // --- randu: generated values respect the requested [a, b) bounds ---
 TEST(gtest, randu_within_bounds) {
   tmech::tensor<double, 3, 2> A = tmech::randu<double, 3, 2>(0.0, 1.0);

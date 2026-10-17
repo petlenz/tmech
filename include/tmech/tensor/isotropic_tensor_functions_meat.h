@@ -94,37 +94,16 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::derivative()noexc
 
 template <typename Tensor, typename Func>
 constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate()noexcept{
+    // f(A) = sum_i f(lambda_i) e_i (x) e_i over every eigenvalue: exact to the accuracy of the
+    // eigenpairs, with no repeated-eigenvalue branch (that only concerns the derivatives).
     _eigen_decomposition.decompose_eigenbasis();
     const auto eig_values{_eigen_decomposition.eigenvalues()};
-    const auto eig_basis{_eigen_decomposition.eigenbasis()};
-    const auto non_repeated_eigenvalues{_eigen_decomposition.non_repeated_eigenvalues_index()};
-
-    if constexpr (dimension() == 2){
-        if(_eigen_decomposition.all_eigenvalues_repeated()){
-            _data = Func::apply(eig_values[0])*eig_basis[0];
-        }else{
-            _data = Func::apply(eig_values[0])*eig_basis[0] + Func::apply(eig_values[1])*eig_basis[1];
-        }
-    } else if constexpr (dimension() == 3){
-        if(_eigen_decomposition.all_eigenvalues_repeated()){
-            _data = Func::apply(eig_values[0])*eig_basis[0];
-
-        }else if (_eigen_decomposition.pair_eigenvalues_repeated()) {
-            _data =   Func::apply(eig_values[non_repeated_eigenvalues[0]])*eig_basis[non_repeated_eigenvalues[0]]
-                    + Func::apply(eig_values[non_repeated_eigenvalues[1]])*eig_basis[non_repeated_eigenvalues[1]];
-
-        }else{
-            _data =   Func::apply(eig_values[0])*eig_basis[0]
-                    + Func::apply(eig_values[1])*eig_basis[1]
-                    + Func::apply(eig_values[2])*eig_basis[2];
-        }
+    const auto& projectors{_eigen_decomposition.projectors()};
+    _data = Func::apply(eig_values[0])*projectors[0];
+    for(size_type i{1}; i<dimension(); ++i){
+        _data += Func::apply(eig_values[i])*projectors[i];
     }
 }
-
-//template <typename Tensor, typename Func>
-//constexpr inline auto isotropic_tensor_function<Tensor, Func>::get_derivative()const noexcept{
-//    return _deriv;
-//}
 
 template <typename Tensor, typename Func>
 constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij()noexcept{

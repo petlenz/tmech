@@ -65,6 +65,7 @@ public:
     constexpr inline auto eigenvalues() const noexcept;
     constexpr inline auto eigenvectors() const noexcept;
     constexpr inline auto eigenbasis()const noexcept;
+    constexpr inline auto const& projectors()const noexcept;
 
     constexpr inline auto all_eigenvalues_repeated() const noexcept;
     constexpr inline auto pair_eigenvalues_repeated() const noexcept;
@@ -91,6 +92,7 @@ public:
     std::array<value_type, Dim> _eigval;
     std::array<tensor1, Dim> _eigvectors;
     std::array<tensor2, Dim> _eig_basis;
+    std::array<tensor2, Dim> _projectors; ///< e_i (x) e_i for every eigenvalue, no merging
     std::array<size_type, Dim> _non_repeated_eigenvalues;
     std::array<size_type, Dim> _permut;
     bool _all_repeated_eigenvalues;
