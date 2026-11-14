@@ -113,105 +113,27 @@ public:
 
     constexpr inline auto derivative()noexcept;
 
+    // Daleckii-Krein: d2f(A)[H, K] = sum_ijk f[l_i, l_k, l_j] (P_i H P_k K P_j + P_i K P_k H P_j) over the
+    // rank-one projectors P_i = e_i (x) e_i, with confluent divided differences: valid for any multiplicity.
     constexpr inline auto second_derivative()noexcept{
         _eigen_decomposition.decompose_eigenbasis();
         const auto eig_values{_eigen_decomposition.eigenvalues()};
-        const auto eig_basis{_eigen_decomposition.eigenbasis()};
-        const auto non_repeated_eigenvalues{_eigen_decomposition.non_repeated_eigenvalues_index()};
-        const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
-        const auto pair_repeated_eigenvalues{_eigen_decomposition.pair_eigenvalues_repeated()};
-        tensor<value_type, Dim, 6> _deriv;
-        const size_type rows{(all_repeated_eigenvalues ? 1ul : (pair_repeated_eigenvalues ? 2ul : (dimension() == 3ul ? 3ul : 2ul)))};
-
-//        if(pair_repeated_eigenvalues){
-//            std::cout<<"pair_repeated_eigenvalues"<<std::endl;
-//        }else if(all_repeated_eigenvalues){
-//            std::cout<<"all_repeated_eigenvalues"<<std::endl;
-//        }else{
-//            std::cout<<"non_repeated_eigenvalues"<<std::endl;
-//        }
-
-        for(size_type i{0}; i<rows; ++i){
-            const auto eigI{eig_values[non_repeated_eigenvalues[i]]};
-            _Fi[non_repeated_eigenvalues[i]]   = Func::apply(eigI);
-            _dFi[non_repeated_eigenvalues[i]]  = Func::derivative(eigI);
-            _ddFi[non_repeated_eigenvalues[i]] = Func::second_derivative(eigI);
-        }
-
-        std::array<std::array<std::array<value_type, Dim>, Dim>, Dim> Gijk{0};
-        for(size_type i{0}; i<rows; ++i){
-            const auto I{non_repeated_eigenvalues[i]};
-            const auto eigI{eig_values[I]};
-            for(size_type j{0}; j<rows; ++j){
-                const auto J{non_repeated_eigenvalues[j]};
-                const auto eigJ{eig_values[J]};
-                for(size_type k{0}; k<rows; ++k){
-                    if(i == j && i == k && j == k){
-                        Gijk[i][j][k] = _ddFi[I];
-                    }else if (i != j && i == k && j != k){
-                        Gijk[i][j][k] = ((eigI-eigJ)*_dFi[I]-_Fi[I]+_Fi[J])/((eigI-eigJ)*(eigI-eigJ));
-                    }else if (i != j && i != k && j == k){
-                        Gijk[i][j][k] = ((eigJ-eigI)*_dFi[J]+_Fi[I]-_Fi[J])/((eigI-eigJ)*(eigI-eigJ));
-                    }
+        const auto& P{_eigen_decomposition.projectors()};
+        tensor<value_type, Dim, 6> G;
+        for(size_type i{0}; i<Dim; ++i){
+            for(size_type j{0}; j<Dim; ++j){
+                tensor<value_type, Dim, 2> M;
+                for(size_type k{0}; k<Dim; ++k){
+                    M += divided_difference(eig_values[i], eig_values[k], eig_values[j])*P[k];
                 }
+                // G_abcdef = (P_i)_ac (M_ij)_de (P_j)_fb
+                G += outer_product<sequence<1,3>, sequence<4,5,6,2>>(P[i], otimes(M, P[j]));
             }
         }
-
-        auto sym_f = [](auto const& Ei, auto const Ej){
-            using I = eye<value_type, Dim, 2>;
-            return (outer_product<sequence<1,3,5,6>,sequence<2,4>>((otimesu(I(),I()) + otimesl(I(),I())), Ej)
-                   +outer_product<sequence<1,3>,sequence<2,4,5,6>>(Ei, (otimesu(I(),I()) + otimesl(I(),I())))
-                   +outer_product<sequence<1,4,5,6>,sequence<2,3>>((otimesu(I(),I()) + otimesl(I(),I())), Ej)
-                   +outer_product<sequence<1,4>,sequence<2,3,5,6>>(Ei, (otimesu(I(),I()) + otimesl(I(),I()))))*0.5;
-        };
-
-
-        std::array<tensor<value_type,Dim,4>,Dim> dEidA;
-        for(size_type i{0}; i<rows; ++i){
-            const auto I{non_repeated_eigenvalues[i]};
-            const auto& _Ei = eig_basis[I];
-            const auto lambda_i = eig_values[I];
-            for(size_type j{0}; j<rows; ++j){
-                const auto J{non_repeated_eigenvalues[j]};
-                const auto& _Ej = eig_basis[J];
-                const auto lambda_j = eig_values[J];
-                if(i!=j){
-                    dEidA[I] += (otimesu(_Ei,_Ej) + otimesl(_Ei,_Ej))/((lambda_i-lambda_j));
-                }
-            }
-        }
-
-        evaluate_Gij();
-
-        eye<value_type, Dim, 2> I;
-        auto IIs2 = otimesu(I,I) + otimesl(I,I);
-        if(rows == 1){
-            const auto& _Ei = eig_basis[non_repeated_eigenvalues[0]];
-            _deriv = Gijk[0][0][0]*sym_f(_Ei,_Ei)*0.25;
-        }else{
-            for(size_type i{0}; i<rows; ++i){
-                const auto I{non_repeated_eigenvalues[i]};
-                const auto& _Ei = eig_basis[I];
-                for(size_type j{0}; j<rows; ++j){
-                    const auto J{non_repeated_eigenvalues[j]};
-                    const auto& _Ej = eig_basis[J];
-                    for(size_type k{0}; k<rows; ++k){
-                        const auto K{non_repeated_eigenvalues[k]};
-                        const auto& _Ek = eig_basis[K];
-                        if(Gijk[i][j][k] != 0)
-                            _deriv += Gijk[i][j][k]*otimes((otimesu(_Ei,_Ej) + otimesl(_Ei,_Ej)),_Ek)*0.5;
-                    }
-                    auto Eiji = outer_product<sequence<1,3,5,6>,sequence<2,4>>(IIs2, _Ej)
-                               +outer_product<sequence<1,4,5,6>,sequence<2,3>>(IIs2, _Ej);
-                    auto Eijj = outer_product<sequence<1,3>,sequence<2,4,5,6>>(_Ei, IIs2)
-                               +outer_product<sequence<1,4>,sequence<2,3,5,6>>(_Ei, IIs2);
-
-                    if(_Gij[i][j] != 0)
-                        _deriv += 0.5*_Gij[i][j]*0.5*(dcontract(Eiji, dEidA[I]) + dcontract(Eijj, dEidA[J]));
-                }
-            }
-        }
-
+        // both orders of H and K, symmetric in each
+        const tensor<value_type, Dim, 6> GK{G + basis_change<sequence<1,2,5,6,3,4>>(G)};
+        const tensor<value_type, Dim, 6> GKs{0.5*(GK + basis_change<sequence<1,2,4,3,5,6>>(GK))};
+        tensor<value_type, Dim, 6> _deriv{0.5*(GKs + basis_change<sequence<1,2,3,4,6,5>>(GKs))};
         return _deriv;
     }
 
@@ -222,6 +144,33 @@ public:
     constexpr inline auto raw_data()const noexcept;
 
 private:
+
+    // f[a, b]; f' at the midpoint where f(a) - f(b) cancels (e.g. exp near 0, where the eigenvalues are
+    // distinct but the values are not)
+    static constexpr inline value_type divided_difference(value_type const a, value_type const b)noexcept{
+        const auto f_a{Func::apply(a)}, f_b{Func::apply(b)};
+        if(std::fabs(f_a - f_b) <= std::sqrt(std::numeric_limits<value_type>::epsilon())*std::max(std::fabs(f_a), std::fabs(f_b))){
+            return Func::derivative((a + b)/2);
+        }
+        return (f_a - f_b)/(a - b);
+    }
+
+    // f[a, b, c] with the widest pair in the denominator; where that cancels, the mean of f''/2 at the nodes
+    // (exact for a linear f'')
+    static constexpr inline value_type divided_difference(value_type a, value_type b, value_type c)noexcept{
+        if(std::fabs(a - b) > std::fabs(a - c) && std::fabs(a - b) > std::fabs(b - c)){
+            std::swap(b, c);
+        }else if(std::fabs(b - c) > std::fabs(a - c)){
+            std::swap(a, b);
+        }
+        const auto f_ab{divided_difference(a, b)}, f_bc{divided_difference(b, c)};
+        const auto tol{std::pow(std::numeric_limits<value_type>::epsilon(), value_type(0.25))};
+        if(std::fabs(a - c) <= tol*std::max(std::fabs(a), std::fabs(c)) ||
+           std::fabs(f_ab - f_bc) <= tol*std::max(std::fabs(f_ab), std::fabs(f_bc))){
+            return (Func::second_derivative(a) + Func::second_derivative(b) + Func::second_derivative(c))/6;
+        }
+        return (f_ab - f_bc)/(a - c);
+    }
 
     template<typename EigBasis>
     constexpr inline auto otimes_special(EigBasis const& _Ei, EigBasis const& _Ej){

@@ -3292,6 +3292,136 @@ TEST(gtest, inverse_identity_and_roundtrip_2x2) {
   EXPECT_TRUE(tmech::almost_equal(AAinv, I, 5e-6));
 }
 
+// --- second derivative of isotropic tensor functions at every eigenvalue multiplicity (issue #40) ---
+namespace second_derivative {
+template <std::size_t Dim> using t2 = tmech::tensor<double, Dim, 2>;
+template <std::size_t Dim> using t4 = tmech::tensor<double, Dim, 4>;
+template <std::size_t Dim> using t6 = tmech::tensor<double, Dim, 6>;
+
+struct log_f {
+  template <typename A> static auto apply(A const &a) { return tmech::log(a); }
+  static double second(double l) { return -1.0 / (l * l); }
+};
+struct sqrt_f {
+  template <typename A> static auto apply(A const &a) { return tmech::sqrt(a); }
+  static double second(double l) { return -0.25 / (l * std::sqrt(l)); }
+};
+
+// Q diag(lambda) Q^T with a rotation that aligns no eigenvector with a basis vector
+template <std::size_t Dim> t2<Dim> spectral(std::array<double, Dim> const &lambda) {
+  t2<Dim> D;
+  for (std::size_t i = 0; i < Dim; ++i)
+    D(i, i) = lambda[i];
+  t2<Dim> Q{tmech::eye<double, Dim, 2>()};
+  Q(0, 0) = std::cos(0.4);
+  Q(0, 1) = -std::sin(0.4);
+  Q(1, 0) = std::sin(0.4);
+  Q(1, 1) = std::cos(0.4);
+  if constexpr (Dim == 3) {
+    t2<Dim> R{tmech::eye<double, Dim, 2>()};
+    R(1, 1) = std::cos(0.7);
+    R(1, 2) = -std::sin(0.7);
+    R(2, 1) = std::sin(0.7);
+    R(2, 2) = std::cos(0.7);
+    Q = t2<Dim>{Q * R};
+  }
+  return t2<Dim>{Q * D * tmech::trans(Q)};
+}
+
+// max |D2 - central difference of derivative()| over symmetric perturbations, relative to max |difference|;
+// at a repeated eigenvalue the step splits it and derivative() loses eps/split there, so take h = 1e-4
+template <typename F, std::size_t Dim> double fd_error(t2<Dim> const &A, double const h = 1e-6) {
+  t6<Dim> const D2{F::apply(A).second_derivative()};
+  double err{0}, scale{0};
+  for (std::size_t k = 0; k < Dim; ++k)
+    for (std::size_t m = 0; m < Dim; ++m) {
+      t2<Dim> dA;
+      dA(k, m) += h / 2;
+      dA(m, k) += h / 2;
+      t4<Dim> const fd{(t4<Dim>{F::apply(t2<Dim>{A + dA}).derivative()} - t4<Dim>{F::apply(t2<Dim>{A - dA}).derivative()}) / (2 * h)};
+      for (std::size_t a = 0; a < Dim; ++a)
+        for (std::size_t b = 0; b < Dim; ++b)
+          for (std::size_t c = 0; c < Dim; ++c)
+            for (std::size_t d = 0; d < Dim; ++d) {
+              err = std::max(err, std::abs(D2(a, b, c, d, k, m) - fd(a, b, c, d)));
+              scale = std::max(scale, std::abs(fd(a, b, c, d)));
+            }
+    }
+  return err / scale;
+}
+
+template <std::size_t Dim> double max_abs(t6<Dim> const &X) {
+  double r{0};
+  for (std::size_t i = 0; i < X.size(); ++i)
+    r = std::max(r, std::abs(X.raw_data()[i]));
+  return r;
+}
+
+template <typename F, std::size_t Dim> double relative_difference(t2<Dim> const &A, t2<Dim> const &B) {
+  t6<Dim> const DA{F::apply(A).second_derivative()}, DB{F::apply(B).second_derivative()};
+  return max_abs<Dim>(t6<Dim>{DA - DB}) / max_abs<Dim>(DA);
+}
+
+// at A = lambda I: f(A + H) = f(lambda) I + f'(lambda) H + f''(lambda) H H / 2 + O(H^3), so D2[H, H] = f'' H H
+template <typename F, std::size_t Dim> double isotropic_point_error(double lambda) {
+  t2<Dim> H;
+  for (std::size_t i = 0; i < Dim; ++i)
+    for (std::size_t j = 0; j < Dim; ++j)
+      H(i, j) = 0.1 * static_cast<double>(1 + i + 2 * j) + 0.1 * static_cast<double>(1 + j + 2 * i);
+  t2<Dim> const A{lambda * tmech::eye<double, Dim, 2>()};
+  t6<Dim> const D2{F::apply(A).second_derivative()};
+  t2<Dim> const got{tmech::dcontract(t4<Dim>{tmech::dcontract(D2, H)}, H)};
+  t2<Dim> const expected{F::second(lambda) * H * H};
+  return tmech::norm(t2<Dim>{got - expected}) / tmech::norm(expected);
+}
+} // namespace second_derivative
+
+TEST(gtest, isotropic_tensor_function_second_derivative_distinct_eigenvalues) {
+  using namespace second_derivative;
+  EXPECT_LT((fd_error<log_f, 3>(spectral<3>({1.5, 1.2, 0.8}))), 1e-7);
+  EXPECT_LT((fd_error<sqrt_f, 3>(spectral<3>({1.5, 1.2, 0.8}))), 1e-7);
+  EXPECT_LT((fd_error<log_f, 2>(spectral<2>({1.5, 0.8}))), 1e-7);
+  EXPECT_LT((fd_error<sqrt_f, 2>(spectral<2>({1.5, 0.8}))), 1e-7);
+}
+
+TEST(gtest, isotropic_tensor_function_second_derivative_repeated_pair) {
+  using namespace second_derivative;
+  EXPECT_LT((fd_error<log_f, 3>(spectral<3>({1.5, 1.5, 0.8}), 1e-4)), 1e-6);
+  EXPECT_LT((fd_error<log_f, 3>(spectral<3>({0.8, 1.5, 1.5}), 1e-4)), 1e-6);
+  EXPECT_LT((fd_error<sqrt_f, 3>(spectral<3>({1.5, 1.5, 0.8}), 1e-4)), 1e-6);
+  EXPECT_LT((fd_error<sqrt_f, 3>(spectral<3>({0.8, 1.5, 1.5}), 1e-4)), 1e-6);
+}
+
+TEST(gtest, isotropic_tensor_function_second_derivative_all_equal) {
+  using namespace second_derivative;
+  EXPECT_LT((isotropic_point_error<log_f, 3>(1.3)), 1e-12);
+  EXPECT_LT((isotropic_point_error<sqrt_f, 3>(1.3)), 1e-12);
+  EXPECT_LT((isotropic_point_error<log_f, 2>(1.3)), 1e-12);
+  EXPECT_LT((isotropic_point_error<sqrt_f, 2>(1.3)), 1e-12);
+}
+
+TEST(gtest, isotropic_tensor_function_second_derivative_continuous_near_repeated) {
+  using namespace second_derivative;
+  for (double const gap : {1e-4, 1e-6, 1e-9}) {
+    EXPECT_LT((relative_difference<log_f, 3>(spectral<3>({1.5, 1.5, 0.8}), spectral<3>({1.5, 1.5 + gap, 0.8}))), 10 * gap + 1e-7) << gap;
+    EXPECT_LT((relative_difference<log_f, 3>(spectral<3>({1.3, 1.3, 1.3}), spectral<3>({1.3, 1.3 + gap, 1.3 + 2 * gap}))), 10 * gap + 1e-7) << gap;
+    EXPECT_LT((relative_difference<sqrt_f, 2>(spectral<2>({1.3, 1.3}), spectral<2>({1.3, 1.3 + gap}))), 10 * gap + 1e-7) << gap;
+  }
+  EXPECT_LT((fd_error<log_f, 3>(spectral<3>({1.5, 1.5 + 1e-5, 0.8}))), 1e-5);
+}
+
+TEST(gtest, isotropic_tensor_function_second_derivative_symmetries) {
+  using namespace second_derivative;
+  for (auto const &A : {spectral<3>({1.5, 1.2, 0.8}), spectral<3>({1.5, 1.5, 0.8}), spectral<3>({1.3, 1.3, 1.3})}) {
+    t6<3> const D2{tmech::log(A).second_derivative()};
+    double const s{max_abs<3>(D2)};
+    EXPECT_LT(max_abs<3>(t6<3>{D2 - tmech::basis_change<tmech::sequence<2, 1, 3, 4, 5, 6>>(D2)}), 1e-13 * s);
+    EXPECT_LT(max_abs<3>(t6<3>{D2 - tmech::basis_change<tmech::sequence<1, 2, 4, 3, 5, 6>>(D2)}), 1e-13 * s);
+    EXPECT_LT(max_abs<3>(t6<3>{D2 - tmech::basis_change<tmech::sequence<1, 2, 3, 4, 6, 5>>(D2)}), 1e-13 * s);
+    EXPECT_LT(max_abs<3>(t6<3>{D2 - tmech::basis_change<tmech::sequence<1, 2, 5, 6, 3, 4>>(D2)}), 1e-13 * s);
+  }
+}
+
 // --- symdiff end-to-end: a constitutive stress -> consistent tangent ---
 // Differentiate a linear-elastic stress law symbolically and check the
 // resulting fourth-order tangent against the closed-form modulus
