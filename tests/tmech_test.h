@@ -3306,6 +3306,10 @@ struct sqrt_f {
   template <typename A> static auto apply(A const &a) { return tmech::sqrt(a); }
   static double second(double l) { return -0.25 / (l * std::sqrt(l)); }
 };
+struct exp_f {
+  template <typename A> static auto apply(A const &a) { return tmech::exp_sym(a); }
+  static double second(double l) { return std::exp(l); }
+};
 
 // Q diag(lambda) Q^T with a rotation that aligns no eigenvector with a basis vector
 template <std::size_t Dim> t2<Dim> spectral(std::array<double, Dim> const &lambda) {
@@ -3382,6 +3386,8 @@ TEST(gtest, isotropic_tensor_function_second_derivative_distinct_eigenvalues) {
   EXPECT_LT((fd_error<sqrt_f, 3>(spectral<3>({1.5, 1.2, 0.8}))), 1e-7);
   EXPECT_LT((fd_error<log_f, 2>(spectral<2>({1.5, 0.8}))), 1e-7);
   EXPECT_LT((fd_error<sqrt_f, 2>(spectral<2>({1.5, 0.8}))), 1e-7);
+  EXPECT_LT((fd_error<exp_f, 3>(spectral<3>({-2.0, -0.5, 0.3}), 1e-4)), 1e-7);
+  EXPECT_LT((fd_error<exp_f, 3>(spectral<3>({1e-3, -1e-3, 0.0}), 1e-4)), 1e-7);
 }
 
 TEST(gtest, isotropic_tensor_function_second_derivative_repeated_pair) {
@@ -3390,6 +3396,23 @@ TEST(gtest, isotropic_tensor_function_second_derivative_repeated_pair) {
   EXPECT_LT((fd_error<log_f, 3>(spectral<3>({0.8, 1.5, 1.5}), 1e-4)), 1e-6);
   EXPECT_LT((fd_error<sqrt_f, 3>(spectral<3>({1.5, 1.5, 0.8}), 1e-4)), 1e-6);
   EXPECT_LT((fd_error<sqrt_f, 3>(spectral<3>({0.8, 1.5, 1.5}), 1e-4)), 1e-6);
+  EXPECT_LT((fd_error<exp_f, 3>(spectral<3>({-1.0, -1.0, 0.5}), 1e-4)), 1e-6);
+}
+
+TEST(gtest, isotropic_tensor_function_second_derivative_float_matches_double) {
+  using namespace second_derivative;
+  for (auto const &A : {spectral<3>({1.5, 1.2, 0.8}), spectral<3>({1.5, 1.5, 0.8}), spectral<3>({1.3, 1.3, 1.3})}) {
+    tmech::tensor<float, 3, 2> Af;
+    for (std::size_t i = 0; i < 3; ++i)
+      for (std::size_t j = 0; j < 3; ++j)
+        Af(i, j) = static_cast<float>(A(i, j));
+    tmech::tensor<float, 3, 6> const Df{tmech::log(Af).second_derivative()};
+    t6<3> const D{tmech::log(A).second_derivative()};
+    t6<3> diff;
+    for (std::size_t i = 0; i < D.size(); ++i)
+      diff.raw_data()[i] = D.raw_data()[i] - static_cast<double>(Df.raw_data()[i]);
+    EXPECT_LT(max_abs<3>(diff), 1e-4 * max_abs<3>(D));
+  }
 }
 
 TEST(gtest, isotropic_tensor_function_second_derivative_all_equal) {

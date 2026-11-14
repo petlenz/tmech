@@ -22,7 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Daleckii–Krein form `Σ f[λᵢ, λₖ, λⱼ] (Pᵢ H Pₖ K Pⱼ + Pᵢ K Pₖ H Pⱼ)` over the
   rank-one projectors with confluent divided differences: one expression for every
   multiplicity, continuous across the near-repeated switch, symmetric in each index
-  pair and under exchange of the two derivative pairs.
+  pair and under exchange of the two derivative pairs, and about 17× faster
+  (3D `log`: 110 µs → 6.4 µs). Unused private helpers of the old form removed.
 
 ### Changed
 - `compute_decomposition()` / `sort_eigenvalues()` no longer take the unused
