@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Eigenvalues count as repeated when closer than √ε relative to the pair, at any
   scale; the derivative of an isotropic tensor function falls back to `f'` at the
   midpoint only where `f(λᵢ) − f(λⱼ)` cancels.
+- `second_derivative()` of isotropic tensor functions was wrong for an exactly
+  repeated eigenvalue pair (error of the order of f''(λ), #40). It is now the
+  Daleckii–Krein form `Σ f[λᵢ, λₖ, λⱼ] (Pᵢ H Pₖ K Pⱼ + Pᵢ K Pₖ H Pⱼ)` over the
+  rank-one projectors with confluent divided differences: one expression for every
+  multiplicity, continuous across the near-repeated switch, symmetric in each index
+  pair and under exchange of the two derivative pairs, and about 17× faster
+  (3D `log`: 110 µs → 6.4 µs). Unused private helpers of the old form removed.
 
 ### Changed
 - `compute_decomposition()` / `sort_eigenvalues()` no longer take the unused

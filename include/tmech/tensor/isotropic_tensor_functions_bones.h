@@ -113,105 +113,48 @@ public:
 
     constexpr inline auto derivative()noexcept;
 
+    // Daleckii-Krein: d2f(A)[H, K] = sum_ijk f[l_i, l_k, l_j] (P_i H P_k K P_j + P_i K P_k H P_j) over the
+    // rank-one projectors P_i = e_i (x) e_i, with confluent divided differences: valid for any multiplicity.
     constexpr inline auto second_derivative()noexcept{
         _eigen_decomposition.decompose_eigenbasis();
-        const auto eig_values{_eigen_decomposition.eigenvalues()};
-        const auto eig_basis{_eigen_decomposition.eigenbasis()};
-        const auto non_repeated_eigenvalues{_eigen_decomposition.non_repeated_eigenvalues_index()};
-        const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
-        const auto pair_repeated_eigenvalues{_eigen_decomposition.pair_eigenvalues_repeated()};
-        tensor<value_type, Dim, 6> _deriv;
-        const size_type rows{(all_repeated_eigenvalues ? 1ul : (pair_repeated_eigenvalues ? 2ul : (dimension() == 3ul ? 3ul : 2ul)))};
-
-//        if(pair_repeated_eigenvalues){
-//            std::cout<<"pair_repeated_eigenvalues"<<std::endl;
-//        }else if(all_repeated_eigenvalues){
-//            std::cout<<"all_repeated_eigenvalues"<<std::endl;
-//        }else{
-//            std::cout<<"non_repeated_eigenvalues"<<std::endl;
-//        }
-
-        for(size_type i{0}; i<rows; ++i){
-            const auto eigI{eig_values[non_repeated_eigenvalues[i]]};
-            _Fi[non_repeated_eigenvalues[i]]   = Func::apply(eigI);
-            _dFi[non_repeated_eigenvalues[i]]  = Func::derivative(eigI);
-            _ddFi[non_repeated_eigenvalues[i]] = Func::second_derivative(eigI);
+        const auto l{_eigen_decomposition.eigenvalues()};
+        const auto& P{_eigen_decomposition.projectors()};
+        std::array<value_type, Dim> f, ddf;
+        for(size_type i{0}; i<Dim; ++i){
+            f[i] = Func::apply(l[i]);
+            ddf[i] = Func::second_derivative(l[i]);
         }
-
-        std::array<std::array<std::array<value_type, Dim>, Dim>, Dim> Gijk{0};
-        for(size_type i{0}; i<rows; ++i){
-            const auto I{non_repeated_eigenvalues[i]};
-            const auto eigI{eig_values[I]};
-            for(size_type j{0}; j<rows; ++j){
-                const auto J{non_repeated_eigenvalues[j]};
-                const auto eigJ{eig_values[J]};
-                for(size_type k{0}; k<rows; ++k){
-                    if(i == j && i == k && j == k){
-                        Gijk[i][j][k] = _ddFi[I];
-                    }else if (i != j && i == k && j != k){
-                        Gijk[i][j][k] = ((eigI-eigJ)*_dFi[I]-_Fi[I]+_Fi[J])/((eigI-eigJ)*(eigI-eigJ));
-                    }else if (i != j && i != k && j == k){
-                        Gijk[i][j][k] = ((eigJ-eigI)*_dFi[J]+_Fi[I]-_Fi[J])/((eigI-eigJ)*(eigI-eigJ));
-                    }
-                }
+        // f[l_a, l_b, l_c] with the widest pair in the denominator; where that cancels (relative eps^1/4),
+        // the mean of f''/2 at the nodes, exact for a linear f'' (accuracy ~1e-8 next to the switch)
+        auto divided_difference_3 = [&](size_type a, size_type b, size_type c){
+            if(std::fabs(l[a] - l[b]) > std::fabs(l[a] - l[c]) && std::fabs(l[a] - l[b]) > std::fabs(l[b] - l[c])){
+                std::swap(b, c);
+            }else if(std::fabs(l[b] - l[c]) > std::fabs(l[a] - l[c])){
+                std::swap(a, b);
             }
-        }
-
-        auto sym_f = [](auto const& Ei, auto const Ej){
-            using I = eye<value_type, Dim, 2>;
-            return (outer_product<sequence<1,3,5,6>,sequence<2,4>>((otimesu(I(),I()) + otimesl(I(),I())), Ej)
-                   +outer_product<sequence<1,3>,sequence<2,4,5,6>>(Ei, (otimesu(I(),I()) + otimesl(I(),I())))
-                   +outer_product<sequence<1,4,5,6>,sequence<2,3>>((otimesu(I(),I()) + otimesl(I(),I())), Ej)
-                   +outer_product<sequence<1,4>,sequence<2,3,5,6>>(Ei, (otimesu(I(),I()) + otimesl(I(),I()))))*0.5;
+            const auto f_ab{divided_difference(l[a], l[b], f[a], f[b])}, f_bc{divided_difference(l[b], l[c], f[b], f[c])};
+            const auto tol{std::pow(std::numeric_limits<value_type>::epsilon(), value_type(0.25))};
+            if(std::fabs(l[a] - l[c]) <= tol*std::max(std::fabs(l[a]), std::fabs(l[c])) ||
+               std::fabs(f_ab - f_bc) <= tol*std::max(std::fabs(f_ab), std::fabs(f_bc))){
+                return (ddf[a] + ddf[b] + ddf[c])/6;
+            }
+            return (f_ab - f_bc)/(l[a] - l[c]);
         };
-
-
-        std::array<tensor<value_type,Dim,4>,Dim> dEidA;
-        for(size_type i{0}; i<rows; ++i){
-            const auto I{non_repeated_eigenvalues[i]};
-            const auto& _Ei = eig_basis[I];
-            const auto lambda_i = eig_values[I];
-            for(size_type j{0}; j<rows; ++j){
-                const auto J{non_repeated_eigenvalues[j]};
-                const auto& _Ej = eig_basis[J];
-                const auto lambda_j = eig_values[J];
-                if(i!=j){
-                    dEidA[I] += (otimesu(_Ei,_Ej) + otimesl(_Ei,_Ej))/((lambda_i-lambda_j));
+        tensor<value_type, Dim, 6> G;
+        for(size_type i{0}; i<Dim; ++i){
+            for(size_type j{0}; j<Dim; ++j){
+                tensor<value_type, Dim, 2> M;
+                for(size_type k{0}; k<Dim; ++k){
+                    M += divided_difference_3(i, k, j)*P[k];
                 }
+                // G_abcdef = (P_i)_ac (M_ij)_de (P_j)_fb
+                G += outer_product<sequence<1,3>, sequence<4,5,6,2>>(P[i], otimes(M, P[j]));
             }
         }
-
-        evaluate_Gij();
-
-        eye<value_type, Dim, 2> I;
-        auto IIs2 = otimesu(I,I) + otimesl(I,I);
-        if(rows == 1){
-            const auto& _Ei = eig_basis[non_repeated_eigenvalues[0]];
-            _deriv = Gijk[0][0][0]*sym_f(_Ei,_Ei)*0.25;
-        }else{
-            for(size_type i{0}; i<rows; ++i){
-                const auto I{non_repeated_eigenvalues[i]};
-                const auto& _Ei = eig_basis[I];
-                for(size_type j{0}; j<rows; ++j){
-                    const auto J{non_repeated_eigenvalues[j]};
-                    const auto& _Ej = eig_basis[J];
-                    for(size_type k{0}; k<rows; ++k){
-                        const auto K{non_repeated_eigenvalues[k]};
-                        const auto& _Ek = eig_basis[K];
-                        if(Gijk[i][j][k] != 0)
-                            _deriv += Gijk[i][j][k]*otimes((otimesu(_Ei,_Ej) + otimesl(_Ei,_Ej)),_Ek)*0.5;
-                    }
-                    auto Eiji = outer_product<sequence<1,3,5,6>,sequence<2,4>>(IIs2, _Ej)
-                               +outer_product<sequence<1,4,5,6>,sequence<2,3>>(IIs2, _Ej);
-                    auto Eijj = outer_product<sequence<1,3>,sequence<2,4,5,6>>(_Ei, IIs2)
-                               +outer_product<sequence<1,4>,sequence<2,3,5,6>>(_Ei, IIs2);
-
-                    if(_Gij[i][j] != 0)
-                        _deriv += 0.5*_Gij[i][j]*0.5*(dcontract(Eiji, dEidA[I]) + dcontract(Eijj, dEidA[J]));
-                }
-            }
-        }
-
+        // both orders of H and K, symmetric in each
+        const tensor<value_type, Dim, 6> GK{G + basis_change<sequence<1,2,5,6,3,4>>(G)};
+        const tensor<value_type, Dim, 6> GKs{0.5*(GK + basis_change<sequence<1,2,4,3,5,6>>(GK))};
+        tensor<value_type, Dim, 6> _deriv{0.5*(GKs + basis_change<sequence<1,2,3,4,6,5>>(GKs))};
         return _deriv;
     }
 
@@ -223,142 +166,13 @@ public:
 
 private:
 
-    template<typename EigBasis>
-    constexpr inline auto otimes_special(EigBasis const& _Ei, EigBasis const& _Ej){
-        using I = eye<value_type, Dim, 2>;
-        return outer_product<sequence<1,4,5,6,2,3>>(0.5*(otimesu(I(),I()) + otimesl(I(),I())), _Ej) + outer_product<sequence<1,3,5,6,2,4>>(0.5*(otimesu(I(),I()) + otimesl(I(),I())), _Ej)
-               + outer_product<sequence<1,4,2,3,5,6>>(_Ei, 0.5*(otimesu(I(),I()) + otimesl(I(),I()))) + outer_product<sequence<1,3,2,4,5,6>>(_Ei, 0.5*(otimesu(I(),I()) + otimesl(I(),I())));
-    }
-
-    constexpr inline auto K_iijjkk(size_type const i, size_type const j, size_type const k){
-        const eye<value_type, Dim, 2> I;
-        return 4*_ddFi[i]*I(i,j)*I(i,k);
-    }
-
-    constexpr inline auto K_ijijkk(size_type const i, size_type const j, size_type const k){
-        const auto eig_values{_eigen_decomposition.eigenvalues()};
-        const eye<value_type, Dim, 2> I;
-        if(std::fabs(eig_values[i] - eig_values[j]) <= std::numeric_limits<value_type>::epsilon()*std::max(eig_values[i], eig_values[j])){
-            return _ddFi[i];
-        }else{
-            return gamma_iij(i,j)*I(i,k) + gamma_iij(j,i)*I(j,k);
+    // f[a, b] from f_a = f(a), f_b = f(b); f' at the midpoint where f_a - f_b cancels (e.g. exp near 0,
+    // where the eigenvalues are distinct but the values are not)
+    static constexpr inline value_type divided_difference(value_type const a, value_type const b, value_type const f_a, value_type const f_b)noexcept{
+        if(std::fabs(f_a - f_b) <= std::sqrt(std::numeric_limits<value_type>::epsilon())*std::max(std::fabs(f_a), std::fabs(f_b))){
+            return Func::derivative((a + b)/2);
         }
-    }
-
-    constexpr inline auto K_iijkjk([[maybe_unused]] size_type const i,
-                                   [[maybe_unused]] size_type const j,
-                                   [[maybe_unused]] size_type const k) {
-      //        const auto eig_values{_eigen_decomposition.eigenvalues()};
-      //        const eye<value_type, Dim, 2> I;
-      //        if(std::fabs(eig_values[i] - eig_values[l]) <=
-      //        std::numeric_limits<value_type>::epsilon()*std::max(eig_values[i],
-      //        eig_values[k])){
-      //            return _ddFi[j];
-      //        }else{
-      //            return gamma_iij(i,k)*I(i,j) + gamma_iij(i,j)*I(i,k);
-      //        }
-    }
-
-    constexpr inline auto K_ijjkki([[maybe_unused]] size_type const i,
-                                   [[maybe_unused]] size_type const j,
-                                   [[maybe_unused]] size_type const k) {
-      const auto eig_values{_eigen_decomposition.eigenvalues()};
-      const auto all_repeated_eigenvalues{
-          _eigen_decomposition.all_eigenvalues_repeated()};
-      const auto pair_repeated_eigenvalues{
-          _eigen_decomposition.pair_eigenvalues_repeated()};
-
-      if (all_repeated_eigenvalues) {
-        return 0.5 * _ddFi[i];
-      }
-
-      if constexpr (Dim == 3) {
-
-      } else {
-        if (all_repeated_eigenvalues) {
-
-        } else {
-        }
-      }
-
-      const eye<value_type, Dim, 2> I;
-      //        if(std::fabs(eig_values[i] - eig_values[l]) <=
-      //        std::numeric_limits<value_type>::epsilon()*std::max(eig_values[i],
-      //        eig_values[k])){
-      //            return _ddFi[j];
-      //        }else{
-      //            return gamma_iij(i,k)*I(i,j) + gamma_iij(i,j)*I(i,k);
-      //        }
-    }
-
-    constexpr inline auto gamma()const{
-//        const auto eig_values{_eigen_decomposition.eigenvalues()};
-//        return (eig_values[0]*(_F[1]-_F[2]) + eig_values[1]*(_F[2]-_F[0]) + eig_values[2]*(_F[0]-_F[1]))
-//                /((eig_values[0]-eig_values[1])*(eig_values[1]-eig_values[2])*(eig_values[2]-eig_values[0]));
-    }
-
-    constexpr inline auto gamma_iij([[maybe_unused]] size_type const i,
-                                    [[maybe_unused]] size_type const j) const {
-      //        const auto eig_values{_eigen_decomposition.eigenvalues()};
-      //        return (2*_dF[i]*(eig_values[i] - eig_values[j]) - 2*(_Fi[i] -
-      //        _Fi[j]))
-      //                /((eig_values[i] - eig_values[j]) * (eig_values[i] -
-      //                eig_values[j]));
-    }
-
-//    constexpr inline auto setup_equal_eigvals(){
-//        const auto non_repeated_eigenvalues{_eigen_decomposition.non_repeated_eigenvalues_index()};
-//        const auto all_repeated_eigenvalues{_eigen_decomposition.all_eigenvalues_repeated()};
-//        const auto pair_repeated_eigenvalues{_eigen_decomposition.pair_eigenvalues_repeated()};
-
-
-//        if(all_repeated_eigenvalues){
-//            for(size_type i{0}; i<Dim; ++i){
-//                for(size_type j{0}; j<Dim; ++j){
-//                    _equal_eigvals[i][j] = true;
-//                }
-//            }
-//            return ;
-//        }
-
-//        //only for 3D
-//        if constexpr (Dim == 3){
-//            if(pair_repeated_eigenvalues){
-
-//                return ;
-//            }
-//        }
-
-
-
-//        for(size_type i{0}; i<Dim; ++i){
-//            for(size_type j{0}; j<Dim; ++j){
-//                _equal_eigvals[i][j] = false;
-//            }
-//        }
-//        return ;
-//    }
-
-    template<typename EigBasis>
-    constexpr inline auto H_tensor(EigBasis const& basis_i, EigBasis const& basis_j, EigBasis const& basis_k){
-        using Seq1 = sequence<1,3,2,5,4,6>;
-        using Seq2 = sequence<1,3,2,6,4,5>;
-        using Seq3 = sequence<1,4,2,5,3,6>;
-        using Seq4 = sequence<1,4,2,6,3,5>;
-        using Seq5 = sequence<2,3,1,5,4,6>;
-        using Seq6 = sequence<2,3,1,6,4,5>;
-        using Seq7 = sequence<2,4,1,5,3,6>;
-        using Seq8 = sequence<2,4,1,6,3,5>;
-
-
-        return basis_change<Seq1>(otimes(basis_i,otimes(basis_j, basis_k)))
-                + basis_change<Seq2>(otimes(basis_i,otimes(basis_j, basis_k)))
-                + basis_change<Seq3>(otimes(basis_i,otimes(basis_j, basis_k)))
-                + basis_change<Seq4>(otimes(basis_i,otimes(basis_j, basis_k)))
-                + basis_change<Seq5>(otimes(basis_i,otimes(basis_j, basis_k)))
-                + basis_change<Seq6>(otimes(basis_i,otimes(basis_j, basis_k)))
-                + basis_change<Seq7>(otimes(basis_i,otimes(basis_j, basis_k)))
-                + basis_change<Seq8>(otimes(basis_i,otimes(basis_j, basis_k)));
+        return (f_a - f_b)/(a - b);
     }
 
     constexpr inline auto evaluate_Gij()noexcept;
@@ -366,10 +180,6 @@ private:
     tensor<value_type, Dim, 2> _data;
     tensor<value_type, Dim, 4> _deriv;
     std::array<std::array<value_type, Dim>, Dim> _Gij;
-    std::array<value_type, Dim> _Fi;
-    std::array<value_type, Dim> _dFi;
-    std::array<value_type, Dim> _ddFi;
-    //std::array<std::array<bool, Dim>, Dim> _equal_eigvals;
     eigen_decomposition_wrapper<Tensor> _eigen_decomposition;
 };
 
