@@ -25,6 +25,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   pair and under exchange of the two derivative pairs, and about 17× faster
   (3D `log`: 110 µs → 6.4 µs). Unused private helpers of the old form removed.
 
+### Added
+- `isotropic_tensor_function(A, f)` takes a functor object, so the scalar function can
+  carry parameters (for example the Seth–Hill strain `(x^(m/2) − 1)/m` with a runtime
+  `m`). The object is copied into the expression and used for the value, `derivative()`
+  and `second_derivative()`; its member functions need not be static. The
+  `isotropic_tensor_function<F>(A)` form is unchanged.
+
 ### Changed
 - `compute_decomposition()` / `sort_eigenvalues()` no longer take the unused
   `eigenvectors` flag (internal `detail` API).

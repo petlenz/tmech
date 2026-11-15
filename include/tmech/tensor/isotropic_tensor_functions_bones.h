@@ -103,6 +103,9 @@ public:
 
     constexpr isotropic_tensor_function(Tensor data)noexcept;
 
+    // a functor object with parameters, e.g. the Seth-Hill strain (x^(m/2) - 1)/m with a runtime m
+    constexpr isotropic_tensor_function(Tensor data, Func func)noexcept;
+
     constexpr isotropic_tensor_function(isotropic_tensor_function const& data)noexcept;
 
     constexpr inline auto operator()(size_type const i, size_type const j)const noexcept;
@@ -121,8 +124,8 @@ public:
         const auto& P{_eigen_decomposition.projectors()};
         std::array<value_type, Dim> f, ddf;
         for(size_type i{0}; i<Dim; ++i){
-            f[i] = Func::apply(l[i]);
-            ddf[i] = Func::second_derivative(l[i]);
+            f[i] = _func.apply(l[i]);
+            ddf[i] = _func.second_derivative(l[i]);
         }
         // f[l_a, l_b, l_c] with the widest pair in the denominator; where that cancels (relative eps^1/4),
         // the mean of f''/2 at the nodes, exact for a linear f'' (accuracy ~1e-8 next to the switch)
@@ -168,9 +171,9 @@ private:
 
     // f[a, b] from f_a = f(a), f_b = f(b); f' at the midpoint where f_a - f_b cancels (e.g. exp near 0,
     // where the eigenvalues are distinct but the values are not)
-    static constexpr inline value_type divided_difference(value_type const a, value_type const b, value_type const f_a, value_type const f_b)noexcept{
+    constexpr inline value_type divided_difference(value_type const a, value_type const b, value_type const f_a, value_type const f_b)const noexcept{
         if(std::fabs(f_a - f_b) <= std::sqrt(std::numeric_limits<value_type>::epsilon())*std::max(std::fabs(f_a), std::fabs(f_b))){
-            return Func::derivative((a + b)/2);
+            return _func.derivative((a + b)/2);
         }
         return (f_a - f_b)/(a - b);
     }
@@ -181,6 +184,7 @@ private:
     tensor<value_type, Dim, 4> _deriv;
     std::array<std::array<value_type, Dim>, Dim> _Gij;
     eigen_decomposition_wrapper<Tensor> _eigen_decomposition;
+    Func _func;
 };
 
 } // NAMESPACE DETAIL
