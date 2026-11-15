@@ -1281,10 +1281,10 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     const ValueType a{2};                                                      \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
       for (std::size_t j{0}; j < Dim; ++j) {                                   \
-        B(i, j) = (a * A(i, j) + a * A(j, i)) * static_cast<ValueType>(0.5);   \
+        B(i, j) = (a * A(i, j) - a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \
-    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(a *A), B, test_rel_tol_v<ValueType>));           \
+    EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::skew(a *A), B, test_rel_tol_v<ValueType>));           \
   }
 
 // deviatoric — deterministic input to avoid platform-specific randomness
