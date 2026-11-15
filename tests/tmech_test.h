@@ -1228,11 +1228,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     tmech::tensor<ValueType, Dim, 2> A, B;                                     \
     A.randn();                                                                 \
     const ValueType a{2};                                                      \
-    /* a*A first: GCC 15 -O3 -march=x86-64-v3 miscompiles the fused loop */    \
-    tmech::tensor<ValueType, Dim, 2> const aA{a * A};                          \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
       for (std::size_t j{0}; j < Dim; ++j) {                                   \
-        B(i, j) = (aA(i, j) + aA(j, i)) * static_cast<ValueType>(0.5);         \
+        B(i, j) = (a * A(i, j) + a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::sym(a *A), B, 5e-7));           \
@@ -1281,11 +1279,9 @@ template <typename T, std::size_t Dim> inline auto well_conditioned_defgrad() {
     auto A = test_helpers::well_conditioned_nonsym_rank2<ValueType, Dim>();    \
     tmech::tensor<ValueType, Dim, 2> B;                                         \
     const ValueType a{2};                                                      \
-    /* a*A first: GCC 15 -O3 -march=x86-64-v3 miscompiles the fused loop */    \
-    tmech::tensor<ValueType, Dim, 2> const aA{a * A};                          \
     for (std::size_t i{0}; i < Dim; ++i) {                                     \
       for (std::size_t j{0}; j < Dim; ++j) {                                   \
-        B(i, j) = (aA(i, j) - aA(j, i)) * static_cast<ValueType>(0.5);         \
+        B(i, j) = (a * A(i, j) - a * A(j, i)) * static_cast<ValueType>(0.5);   \
       }                                                                        \
     }                                                                          \
     EXPECT_EQ(true, almost_equal_tensor_scaled(tmech::skew(a *A), B, test_rel_tol_v<ValueType>));           \

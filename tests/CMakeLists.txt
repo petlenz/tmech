@@ -49,3 +49,9 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     target_compile_options(tmech_test PRIVATE /WX /bigobj)
 endif()
+
+# GCC 15 at -O3 with FMA (e.g. -march=x86-64-v3, the Ubuntu 26.04 default)
+# miscompiles complex 2x2 loops in this TU under FP contraction plus SLP.
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 15)
+    target_compile_options(tmech_test PRIVATE -ffp-contract=off)
+endif()
