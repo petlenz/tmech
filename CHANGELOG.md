@@ -30,10 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `eigenvectors` flag (internal `detail` API).
 
 ### Tests
-- `symmetricPartEvaluate` / `skewSymmetricPartEvaluate`: the reference loop takes
-  `a*A` precomputed, since GCC 15 at `-O3 -march=x86-64-v3` (FMA + SLP)
-  miscompiled the fused loop for 2×2 complex tensors; the skew test now checks
-  `skew()` instead of `sym()`.
+- GCC 15 builds the test executable with `-ffp-contract=off`: at `-O3` with FMA
+  (`-march=x86-64-v3`, the Ubuntu 26.04 default) it miscompiled the reference
+  loops of the 2×2 complex `sym`/`skew` tests. `skewSymmetricPartEvaluate` now
+  checks `skew()` instead of `sym()`.
 
 ## [1.2.0] - 2026-10-01
 
