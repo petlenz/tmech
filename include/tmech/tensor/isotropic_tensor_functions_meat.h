@@ -22,7 +22,17 @@ constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(Ten
     _data(),
     _deriv(),
     _Gij(),
-    _eigen_decomposition(data)
+    _eigen_decomposition(data),
+    _func()
+{}
+
+template <typename Tensor, typename Func>
+constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(Tensor data, Func func)noexcept:
+    _data(),
+    _deriv(),
+    _Gij(),
+    _eigen_decomposition(data),
+    _func(func)
 {}
 
 /**
@@ -34,7 +44,8 @@ constexpr isotropic_tensor_function<Tensor, Func>::isotropic_tensor_function(iso
     _data(),
     _deriv(),
     _Gij(),
-    _eigen_decomposition(data._eigen_decomposition)
+    _eigen_decomposition(data._eigen_decomposition),
+    _func(data._func)
 {}
 //@}
 
@@ -99,9 +110,9 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate()noexcep
     _eigen_decomposition.decompose_eigenbasis();
     const auto eig_values{_eigen_decomposition.eigenvalues()};
     const auto& projectors{_eigen_decomposition.projectors()};
-    _data = Func::apply(eig_values[0])*projectors[0];
+    _data = _func.apply(eig_values[0])*projectors[0];
     for(size_type i{1}; i<dimension(); ++i){
-        _data += Func::apply(eig_values[i])*projectors[i];
+        _data += _func.apply(eig_values[i])*projectors[i];
     }
 }
 
@@ -117,10 +128,10 @@ constexpr inline auto isotropic_tensor_function<Tensor, Func>::evaluate_Gij()noe
     for(size_type i{0}; i<rows; ++i){
         for(size_type j{0}; j<rows; ++j){
             if(i == j){
-                _Gij[i][j] = Func::derivative(eig_values[non_repeated_eigenvalues[i]]);
+                _Gij[i][j] = _func.derivative(eig_values[non_repeated_eigenvalues[i]]);
             }else{
                 const auto lambda_i{eig_values[non_repeated_eigenvalues[i]]}, lambda_j{eig_values[non_repeated_eigenvalues[j]]};
-                _Gij[i][j] = divided_difference(lambda_i, lambda_j, Func::apply(lambda_i), Func::apply(lambda_j));
+                _Gij[i][j] = divided_difference(lambda_i, lambda_j, _func.apply(lambda_i), _func.apply(lambda_j));
             }
         }
     }

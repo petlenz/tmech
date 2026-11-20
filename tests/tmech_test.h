@@ -3445,6 +3445,66 @@ TEST(gtest, isotropic_tensor_function_second_derivative_symmetries) {
   }
 }
 
+// --- isotropic tensor functions of a functor object with parameters ---
+namespace stateful_function {
+using second_derivative::t2;
+using second_derivative::t4;
+using second_derivative::t6;
+
+// Seth-Hill strain of the eigenvalues x of C: (x^(m/2) - 1)/m, ln(x)/2 for m = 0
+struct seth_hill {
+  double m;
+  double apply(double x) const { return m == 0 ? std::log(x) / 2 : (std::pow(x, m / 2) - 1) / m; }
+  double derivative(double x) const { return std::pow(x, m / 2 - 1) / 2; }
+  double second_derivative(double x) const { return (m / 2 - 1) * std::pow(x, m / 2 - 2) / 2; }
+};
+
+template <int TwiceM> struct seth_hill_f {
+  template <typename A> static auto apply(A const &a) { return tmech::isotropic_tensor_function(a, seth_hill{TwiceM / 2.0}); }
+  static double second(double x) { return seth_hill{TwiceM / 2.0}.second_derivative(x); }
+};
+
+template <std::size_t Dim> double rel(t2<Dim> const &a, t2<Dim> const &b) { return tmech::norm(t2<Dim>{a - b}) / tmech::norm(b); }
+template <std::size_t Dim> double rel(t4<Dim> const &a, t4<Dim> const &b) { return tmech::norm(t4<Dim>{a - b}) / tmech::norm(b); }
+} // namespace stateful_function
+
+TEST(gtest, isotropic_tensor_function_functor_object_values) {
+  using namespace stateful_function;
+  t2<3> const A{second_derivative::spectral<3>({1.5, 1.2, 0.8})}, I{tmech::eye<double, 3, 2>()};
+  EXPECT_LT(rel<3>(t2<3>{tmech::isotropic_tensor_function(A, seth_hill{0})}, t2<3>{0.5 * tmech::log(A)}), 1e-14);
+  EXPECT_LT(rel<3>(t2<3>{tmech::isotropic_tensor_function(A, seth_hill{1})}, t2<3>{tmech::sqrt(A) - I}), 1e-14);
+  EXPECT_LT(rel<3>(t2<3>{tmech::isotropic_tensor_function(A, seth_hill{2})}, t2<3>{0.5 * (A - I)}), 1e-14);
+  EXPECT_LT(rel<3>(t2<3>{tmech::isotropic_tensor_function(A, seth_hill{-2})}, t2<3>{0.5 * (I - tmech::inv(A))}), 1e-14);
+  // a copy keeps the parameter
+  auto const f{tmech::isotropic_tensor_function(A, seth_hill{1})};
+  auto g{f};
+  EXPECT_LT(rel<3>(t2<3>{g}, t2<3>{tmech::sqrt(A) - I}), 1e-14);
+}
+
+TEST(gtest, isotropic_tensor_function_functor_object_derivatives) {
+  using namespace stateful_function;
+  using second_derivative::fd_error;
+  using second_derivative::spectral;
+  for (auto const &A : {spectral<3>({1.5, 1.2, 0.8}), spectral<3>({1.5, 1.5, 0.8}), spectral<3>({1.3, 1.3, 1.3})}) {
+    auto ln{tmech::log(A)};
+    auto e0{tmech::isotropic_tensor_function(A, seth_hill{0})};
+    EXPECT_LT(rel<3>(t4<3>{e0.derivative()}, t4<3>{0.5 * ln.derivative()}), 1e-14);
+    t6<3> const d2{e0.second_derivative()}, d2_ln{0.5 * ln.second_derivative()};
+    EXPECT_LT(second_derivative::max_abs<3>(t6<3>{d2 - d2_ln}), 1e-14 * second_derivative::max_abs<3>(d2_ln));
+    // Green-Lagrange: derivative I^sym/2, no second derivative
+    auto e2{tmech::isotropic_tensor_function(A, seth_hill{2})};
+    t4<3> const Is{0.5 * (tmech::otimesu(tmech::eye<double, 3, 2>(), tmech::eye<double, 3, 2>()) +
+                          tmech::otimesl(tmech::eye<double, 3, 2>(), tmech::eye<double, 3, 2>()))};
+    EXPECT_LT(rel<3>(t4<3>{e2.derivative()}, t4<3>{0.5 * Is}), 1e-14);
+    EXPECT_LT(second_derivative::max_abs<3>(t6<3>{e2.second_derivative()}), 1e-14);
+  }
+  EXPECT_LT((fd_error<seth_hill_f<3>, 3>(spectral<3>({1.5, 1.2, 0.8}))), 1e-7);
+  EXPECT_LT((fd_error<seth_hill_f<-4>, 3>(spectral<3>({1.5, 1.2, 0.8}))), 1e-7);
+  EXPECT_LT((fd_error<seth_hill_f<1>, 3>(spectral<3>({1.5, 1.5, 0.8}), 1e-4)), 1e-6);
+  EXPECT_LT((fd_error<seth_hill_f<6>, 2>(spectral<2>({1.5, 0.8}))), 1e-7);
+  EXPECT_LT((second_derivative::isotropic_point_error<seth_hill_f<3>, 3>(1.3)), 1e-12);
+}
+
 // --- symdiff end-to-end: a constitutive stress -> consistent tangent ---
 // Differentiate a linear-elastic stress law symbolically and check the
 // resulting fourth-order tangent against the closed-form modulus

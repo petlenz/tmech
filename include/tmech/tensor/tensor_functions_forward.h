@@ -570,12 +570,29 @@ constexpr inline auto sign(_Tensor && __tensor, typename std::decay<_Tensor>::ty
  * B = tmech::isotropic_tensor_function<sqrt>(A);
  * \endcode
  *
+ * The second overload takes a functor object, so the scalar function may carry parameters
+ * (its member functions need not be static):
+ * \code{.cpp}
+ * struct seth_hill{
+ * double m;
+ * double apply(double x)const{return (std::pow(x, m/2) - 1)/m;}
+ * double derivative(double x)const{return std::pow(x, m/2 - 1)/2;}
+ * double second_derivative(double x)const{return (m/2 - 1)*std::pow(x, m/2 - 2)/2;}
+ * };
+ *
+ * B = tmech::isotropic_tensor_function(A, seth_hill{1.0});
+ * \endcode
+ *
  * @tparam _Function
  * @tparam _Tensor Tensor object
  * @param __tensor Tensor expression
+ * @param __function Functor object (second overload)
 */
 template<typename _Function, typename _Tensor, typename >
 constexpr inline auto isotropic_tensor_function(_Tensor && __tensor);
+
+template<typename _Function, typename _Tensor, typename >
+constexpr inline auto isotropic_tensor_function(_Tensor && __tensor, _Function const& __function);
 
 
 /**

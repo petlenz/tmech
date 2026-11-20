@@ -430,6 +430,17 @@ constexpr inline auto isotropic_tensor_function(_Tensor && __tensor){
     }
 }
 
+template<typename _Function, typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
+constexpr inline auto isotropic_tensor_function(_Tensor && __tensor, _Function const& __function){
+    using TensorType = typename std::decay<_Tensor>::type;
+    static_assert(TensorType::rank() == 2, "isotropic_tensor_function: only valid for second order tensors");
+    if constexpr (std::is_lvalue_reference_v<_Tensor>){
+        return detail::isotropic_tensor_function<TensorType const&, _Function>(std::forward<_Tensor>(__tensor), __function);
+    }else{
+        return detail::isotropic_tensor_function<TensorType, _Function>(std::forward<_Tensor>(__tensor), __function);
+    }
+}
+
 template<typename _Tensor, std::enable_if_t<is_tensor_type<typename std::decay<_Tensor>::type>::value> * = nullptr>
 constexpr inline auto sqrt(_Tensor && __tensor){
     return isotropic_tensor_function<detail::sqrt_>(std::forward<_Tensor>(__tensor));
